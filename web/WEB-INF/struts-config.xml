@@ -9,6 +9,7 @@
     <form-beans>
         <form-bean name="Carrera" type="com.myapp.struts.Carrera"/>
         <form-bean name="Decanato" type="com.myapp.struts.Decanato"/>
+        <form-bean name="Coordinacion" type="com.myapp.struts.Coordinacion"/>
         <form-bean name="EliminarInfoPForm" type="EliminarInfoPForm"/>
         <form-bean name="guardarModificarInfoPForm" type="com.myapp.struts.guardarModificarInfoPForm"/>
         <form-bean name="ModificarInfoPForm" type="com.myapp.struts.ModificarInfoPForm"/>
@@ -83,6 +84,14 @@
         </action>
         <action input="/AgregaDecanato.jsp" name="Decanato" path="/registrarDecanato" scope="request" type="com.myapp.struts.RegistrarDecanato" validate="false">
             <forward name="success" path="/AdminDecanatoRegistrarSuccess.jsp"/>
+            <forward name="failure" path="/AgregaDecanatoFail.jsp"/>
+            <forward name="yaregistrada" path="/AdminDecanatoRegistrarFailure.jsp"/>
+        </action>
+        <action input="/VistaAdministrador.jsp" path="/agregaCoordinacionA" scope="request" type="com.myapp.struts.AgregaCoordinacionA">
+            <forward name="success" path="/AgregaCoordinacion.jsp"/>
+        </action>
+        <action input="/AgregaCoordinacion.jsp" name="Coordinacion" path="/registrarCoordinacion" scope="request" type="com.myapp.struts.RegistrarCoordinacion" validate="false">
+            <forward name="success" path="/AdminCoordinacionRegistrarSuccess.jsp"/>
             <forward name="failure" path="/AgregaDecanatoFail.jsp"/>
             <forward name="yaregistrada" path="/AdminDecanatoRegistrarFailure.jsp"/>
         </action>

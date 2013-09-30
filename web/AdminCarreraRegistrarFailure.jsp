@@ -37,7 +37,7 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        Bienvenidos, administrador.
+                                        Bienvenido, administrador
                                         <html:link action="/perfil">Perfil</html:link> |
                                         <html:link href="VistaAdministrador.jsp">
                                             Inicio

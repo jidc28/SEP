@@ -37,7 +37,7 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        Bienvenidos, administrador.
+                                        Bienvenido, administrador
                                         <html:link action="/perfil">Perfil</html:link> |
                                         <html:link href="VistaAdministrador.jsp">
                                             Inicio
@@ -93,7 +93,7 @@
                 </div>
                 <div id="contenido-der">
                     <h1>Gestión de Coordinaciones</h1>
-                    <html:link action="/createUserA" >
+                    <html:link action="/agregaCoordinacionA" >
                         <p align ="center">Agregar Coordinación</p>
                     </html:link>
                     <html:link action="/showUserA" >

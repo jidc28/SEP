@@ -331,6 +331,24 @@ public class DBMS {
         }
     }
     
+    public boolean registrarCoordinacion(Coordinacion c) {
+        PreparedStatement psAgregar = null;
+        
+        try {
+            psAgregar = conexion.prepareStatement("INSERT INTO COORDINACION(codigo, nombre) VALUES (?, ?);");
+            psAgregar.setString(1, c.getCodigo());
+            psAgregar.setString(2, c.getNombre());
+            
+            Integer i = psAgregar.executeUpdate();
+            
+            return i > 0;
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
     public boolean actualizarStatusCarrera(Carrera u) {
             PreparedStatement ps = null;
         try {
