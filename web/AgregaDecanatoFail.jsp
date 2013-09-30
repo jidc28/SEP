@@ -40,7 +40,7 @@
                                     <td>
                                         Bienvenidos, administrador.
                                         <html:link action="/perfil">Perfil</html:link> |
-                                        <html:link href="/sistema2/VistaAdministrador.jsp">
+                                        <html:link href="VistaAdministrador.jsp">
                                             Inicio
                                         </html:link> |
                                         <html:link action="/contactenos">
@@ -70,6 +70,7 @@
                             <div id="welcome">
                                 <table border="0">
                                     <tbody>
+                                        
                                         <tr>
                                             <td colspan="2">
                                                 <bean:write name="Decanato" property="errorCodigo" filter="false"/>

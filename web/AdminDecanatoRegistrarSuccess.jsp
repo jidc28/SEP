@@ -39,7 +39,7 @@
                                     <td>
                                         Bienvenidos, administrador.
                                         <html:link action="/perfil">Perfil</html:link> |
-                                        <html:link href="/sistema2/VistaAdministrador.jsp">
+                                        <html:link href="VistaAdministrador.jsp">
                                             Inicio
                                         </html:link> |
                                         <html:link action="/contactenos">

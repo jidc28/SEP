@@ -35,9 +35,9 @@ public class DBMS {
         try {
             Class.forName("org.postgresql.Driver");
             conexion = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/evalprof",
-                    "jidc28",
-                    "20304670");
+                    "jdbc:postgresql://localhost:5432/dbjava",
+                    "postgres",
+                    "POSTGRES");
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
