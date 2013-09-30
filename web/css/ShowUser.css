@@ -1,0 +1,121 @@
+/* 
+    Document   : VistaProfesor
+    Created on : 06/06/2013, 10:19:27 PM
+    Author     : admin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body 
+{
+	margin: 0px;
+	font-family: verdana, arial;
+	font-size:12px;
+	text-align:center;
+	padding: 0px;
+}
+
+input { 
+border-radius:6px; 
+-moz-border-radius:6px; /* Firefox */ 
+-webkit-border-radius:6px; /* Safari y Chrome */
+}
+
+#contenedor {
+	width: 900px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+#encabezado {
+	width: 900px;
+	
+}
+
+#encabezado img {
+	height: 250px;	
+}
+
+#menu-principal {
+	width: 900px;
+	height: 35px;
+	background-color: #DEF0F6;
+}
+
+#menu-principal ul {
+list-style: none;
+border: none;
+text-align: right;
+font-weight: bold;
+}
+
+#menu {
+list-style: none;
+border: none;
+text-align: right;
+font-weight: bold;
+padding: 10px;
+text-decoration: none;
+}
+
+#cuerpo-principal {
+	text-align: center;
+}
+
+#contenido-der {
+	width : 896px;
+        text-align: center;
+}
+
+h1 {
+	font-size:12px;
+}
+
+a:link {
+	text-decoration: none;
+	color: #346574;
+}
+
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+	color: #000;
+        cursor:  pointer;
+}
+a:active {
+	text-decoration: none;
+}
+
+#welcome table {
+display: table;
+border-collapse: separate;
+border-spacing: 2px;
+border-color: gray;
+margin-left: auto;
+margin-right: auto;
+width: 330px;
+font-size: 12px;
+}
+
+#welcome {
+margin-left: auto;
+margin-right: auto;
+padding: 15px;
+position: relative;
+text-align: left;
+}
+
+#content {
+width: 750px;
+margin-left: auto;
+margin-right: auto;
+left: 50%;
+}
+
+#welcome p {
+padding: 0;
+margin-top: 0;
+font-size: 12px;
+}

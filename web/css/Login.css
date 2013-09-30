@@ -1,0 +1,103 @@
+/* 
+    Document   : Login
+    Created on : 01/06/2013, 09:23:50 PM
+    Author     : admin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+body 
+{
+	margin: 0px;
+	font-family: verdana, arial;
+}
+
+input { 
+border-radius:6px; 
+-moz-border-radius:6px; /* Firefox */ 
+-webkit-border-radius:6px; /* Safari y Chrome */
+}
+	
+#encabezado {
+	width: 900px;
+	
+}
+
+#encabezado img {
+	height: 250px;	
+}
+
+#contenedor {
+	clear: left;
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+	left: 50%;
+}
+
+div {
+display: block;
+}
+
+#welcome table {
+display: table;
+border-collapse: separate;
+border-spacing: 2px;
+border-color: gray;
+margin-left: auto;
+margin-right: auto;
+width: 190px;
+font-size: 12px;
+}
+
+#contenedor table {
+display: table;
+border-collapse: separate;
+border-spacing: 2px;
+border-color: gray;
+margin-left: auto;
+margin-right: auto;
+width: 750px;
+font-size: 12px;
+}
+
+#welcome {
+margin-left: auto;
+margin-right: auto;
+padding: 15px;
+background: #eee url("../images/key-point_back.gif") right repeat-y;
+position: relative;
+text-align: left;
+}
+
+#content {
+width: 750px;
+margin-left: auto;
+margin-right: auto;
+left: 50%;
+}
+
+#welcome p {
+padding: 0;
+margin-top: 0;
+font-size: 12px;
+}
+
+p {
+line-height: 1.5em;
+}
+
+#copyright {
+font-size: .9em;
+color: #999;
+padding-top: 3px;
+text-align: center;
+}
+p {
+display: block;
+-webkit-margin-before: 1em;
+-webkit-margin-after: 1em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+}

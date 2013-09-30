@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+
+<struts-config>
+    <form-beans>
+        <form-bean name="Carrera" type="com.myapp.struts.Carrera"/>
+        <form-bean name="Decanato" type="com.myapp.struts.Decanato"/>
+        <form-bean name="EliminarInfoPForm" type="EliminarInfoPForm"/>
+        <form-bean name="guardarModificarInfoPForm" type="com.myapp.struts.guardarModificarInfoPForm"/>
+        <form-bean name="ModificarInfoPForm" type="com.myapp.struts.ModificarInfoPForm"/>
+        <form-bean name="EliminarUserForm" type="com.myapp.struts.EliminarUserForm"/>
+        <form-bean name="CreateUserForm" type="com.myapp.struts.CreateUserForm"/>
+        <form-bean name="Profesor" type="com.myapp.struts.Profesor"/>
+        <form-bean name="Usuario" type="com.myapp.struts.Usuario"/>
+    
+    </form-beans>
+    
+    <global-exceptions>
+    
+    </global-exceptions>
+
+    <global-forwards>
+        <forward name="welcome"  path="/Welcome.do"/>
+    </global-forwards>
+
+    <action-mappings>
+        <action input="/Login.jsp" name="Usuario" path="/login" scope="request" type="com.myapp.struts.LoginAction" validate="false">
+            <forward name="profesor" path="/VistaProfesor.jsp"/>
+            <forward name="administrador" path="/VistaAdministrador.jsp"/>
+            <forward name="failure" path="/LoginFail.jsp"/>
+        </action>
+        <action scope="request" input="/" path="/cerrarSesion" type="com.myapp.struts.CerrarSesion" validate="false">
+            <forward name="success" path="/Login.jsp"/>
+        </action>
+        <action input="/VistaAdministrador.jsp" path="/createUserA" scope="request" type="com.myapp.struts.CreateUserA" validate="false">
+            <forward name="success" path="/CreateUser.jsp"/>
+            <forward name="failure" path="/Login.jsp"/>
+        </action>
+        <action input="/CreateUser.jsp" name="CreateUserForm" path="/createUser" scope="request" type="com.myapp.struts.CreateUserAction" validate="false">
+            <forward name="failure" path="/CreateUserFail.jsp"/>
+            <forward name="yaregistrado" path="/AdminUserCreateFail.jsp"/>
+            <forward name="success" path="/AdminUserCreateSuccess.jsp"/>
+        </action>
+        <action input="/VistaAdministrador.jsp" path="/showUserA" scope="request" type="com.myapp.struts.ShowUserA" validate="false">
+            <forward name="success" path="/ShowUser.jsp"/>
+        </action>
+        <action input="/ShowUser.jsp" name="EliminarUserForm" path="/eliminarUser" scope="request" type="com.myapp.struts.EliminarUserAction" validate="false">
+            <forward name="success" path="/ShowUserSuccess.jsp"/>
+            <forward name="failure" path="/Login.jsp"/>
+        </action>
+        <action input="/VistaProfesor.jsp" name="ModificarInfoPForm" path="/modificarInfoP" scope="request" type="com.myapp.struts.modificarInfoP" validate="false">
+            <forward name="success" path="/ModificarInfoP.jsp"/>
+            <forward name="failure" path="/VistaProfesor.jsp"/>
+        </action>
+        <action input="/ModificarInfoP.jsp" name="Profesor" path="/guardarModificarInfoP" scope="request" type="com.myapp.struts.GuardarModificarInfoP" validate="false">
+            <forward name="success" path="/VistaProfesorModificarSuccess.jsp"/>
+            <forward name="failure" path="/ModificarInfoPFail.jsp"/>
+        </action>
+        <action input="/VistaProfesor.jsp" name="Profesor" path="/eliminarInfoP" scope="request" type="com.myapp.struts.EliminarInfoP" validate="false">
+            <forward name="success" path="/VistaProfesorEliminarSuccess.jsp"/>
+        </action>
+        <action input="/ShowUser.jsp" name="EliminarUserForm" path="/editarUser" scope="request" type="com.myapp.struts.EditarUserAction" validate="false">
+            <forward name="success" path="/EditarUserRol.jsp"/>
+        </action>
+        <action input="/EditarUserRol.jsp" name="EliminarUserForm" path="/cambiarRolUser" scope="request" type="com.myapp.struts.CambiarRolUserA" validate="false">
+            <forward name="success" path="/ShowUserEditarSuccess.jsp"/>
+            <forward name="failure" path="/Login.jsp"/>
+        </action>
+        <action input="/VistaAdministrador.jsp" path="/agregaCarreraA" scope="request" type="com.myapp.struts.AgregaCarreraA">
+            <forward name="success" path="/AgregaCarrera.jsp"/>
+        </action>
+        <action input="/VistaAdministrador.jsp" path="/agregaDecanatoA" scope="request" type="com.myapp.struts.AgregaDecanatoA">
+            <forward name="success" path="/AgregaDecanato.jsp"/>
+        </action>
+        <action input="/AgregaCarrera.jsp" name="Carrera" path="/registrarCarrera" scope="request" type="com.myapp.struts.RegistrarCarrera" validate="false">
+            <forward name="success" path="/AdminCarreraRegistrarSuccess.jsp"/>
+            <forward name="failure" path="/AgregaCarreraFail.jsp"/>
+            <forward name="yaregistrada" path="/AdminCarreraRegistrarFailure.jsp"/>
+        </action>
+        <action input="/AgregaDecanato.jsp" name="Decanato" path="/registrarDecanato" scope="request" type="com.myapp.struts.RegistrarDecanato" validate="false">
+            <forward name="success" path="/AdminDecanatoRegistrarSuccess.jsp"/>
+            <forward name="failure" path="/AgregaDecanatoFail.jsp"/>
+            <forward name="yaregistrada" path="/AdminDecanatoRegistrarFailure.jsp"/>
+        </action>
+        <action input="/VistaAdministrador.jsp" path="/consultaCarreraA" scope="request" type="com.myapp.struts.ConsultaCarreraA" validate="false">
+            <forward name="success" path="/ConsultaCarrera.jsp"/>
+        </action>
+        <action input="/VistaAdministrador.jsp" path="/consultaDecanatoA" scope="request" type="com.myapp.struts.ConsultaDecanatoA" validate="false">
+            <forward name="success" path="/ConsultaDecanato.jsp"/>
+        </action>
+        
+        <action input="/ConsultaCarrera.jsp" name="Carrera" path="/cambiarStatus" scope="request" type="com.myapp.struts.cambiarStatusCarrera" validate="false">
+            <forward name="success" path="/EditarStatusCarrera.jsp"/>
+        </action>
+        <action input="/ConsultaDecanato.jsp" name="Decanato" path="/cambiarStatus" scope="request" type="com.myapp.struts.cambiarStatusDecanato" validate="false">
+            <forward name="success" path="/EditarStatusDecanato.jsp"/>
+        </action>
+        
+        <action input="/ConsultaCarrera.jsp" name="Carrera" path="/cambiarStatusCarreraA" scope="request" type="com.myapp.struts.CambiarStatusCarreraA" validate="false">
+            <forward name="success" path="/ConsultaCarreraSuccess.jsp"/>
+        </action>
+        <action input="/ConsultaDecanato.jsp" name="Decanato" path="/cambiarStatusDecanatoA" scope="request" type="com.myapp.struts.CambiarStatusDecanatoA" validate="false">
+            <forward name="success" path="/ConsultaDecanatoSuccess.jsp"/>
+        </action>
+        
+        <action input="/ConsultaCarrera.jsp" name="Carrera" path="/editarStatus" scope="request" type="com.myapp.struts.EditarStatusCarrera" validate="false">
+            <forward name="success" path="/EditarNombreCarrera.jsp"/>
+        </action>
+        <action input="/ConsultaDecanato.jsp" name="Decanato" path="/editarStatus" scope="request" type="com.myapp.struts.EditarStatusDecanato" validate="false">
+            <forward name="success" path="/EditarNombreDecanato.jsp"/>
+        </action>
+        
+        <action input="/EditarNombreCarrera.jsp" name="Carrera" path="/cambiarNombreCarreraA" scope="request" type="com.myapp.struts.CambiarNombreCarreraA" validate="false">
+            <forward name="success" path="/ConsultaCarreraNameSuccess.jsp"/>
+            <forward name="failure" path="/EditarNombreCarreraFail.jsp"/>
+        </action>
+        <action input="/EditarNombreDecanato.jsp" name="Decanato" path="/cambiarNombreDecanatoA" scope="request" type="com.myapp.struts.CambiarNombreDecanatoA" validate="false">
+            <forward name="success" path="/ConsultaDecanatoNameSuccess.jsp"/>
+            <forward name="failure" path="/EditarNombreDecanatoFail.jsp"/>
+        </action>
+        
+        <action input="/VistaProfesor.jsp" name="ModificarInfoPForm" path="/agregarInfoP" scope="request" type="com.myapp.struts.AgregarInfoP" validate="false">
+            <forward name="success" path="/AgregarInfoP.jsp"/>
+            <forward name="failure" path="/VistaProfesor.jsp"/>
+        </action>
+        
+        <action path="/Welcome" forward="/welcomeStruts.jsp"/>
+    </action-mappings>
+    
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+
+    <message-resources parameter="com/myapp/struts/ApplicationResource"/>    
+    
+    <!-- ========================= Tiles plugin ===============================-->
+    <!--
+    This plugin initialize Tiles definition factory. This later can takes some
+    parameters explained here after. The plugin first read parameters from
+    web.xml, thenoverload them with parameters defined here. All parameters
+    are optional.
+    The plugin should be declared in each struts-config file.
+    - definitions-config: (optional)
+    Specify configuration file names. There can be several comma
+    separated file names (default: ?? )
+    - moduleAware: (optional - struts1.1)
+    Specify if the Tiles definition factory is module aware. If true
+    (default), there will be one factory for each Struts module.
+    If false, there will be one common factory for all module. In this
+    later case, it is still needed to declare one plugin per module.
+    The factory will be initialized with parameters found in the first
+    initialized plugin (generally the one associated with the default
+    module).
+    true : One factory per module. (default)
+    false : one single shared factory for all modules
+    - definitions-parser-validate: (optional)
+    Specify if xml parser should validate the Tiles configuration file.
+    true : validate. DTD should be specified in file header (default)
+    false : no validation
+
+    Paths found in Tiles definitions are relative to the main context.
+    -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />      
+        <set-property property="moduleAware" value="true" />
+    </plug-in>
+    
+    <!-- ========================= Validator plugin ================================= -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames"
+            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+  
+</struts-config>
