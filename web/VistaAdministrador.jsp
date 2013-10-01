@@ -1,5 +1,5 @@
 <%-- 
-    Document   : VistaProfesor
+    Document   : VistaAdministrador
     Created on : 06/06/2013, 10:04:58 PM
     Author     : Langtech
 --%>
@@ -96,7 +96,7 @@
                     <html:link action="/agregaCoordinacionA" >
                         <p align ="center">Agregar Coordinación</p>
                     </html:link>
-                    <html:link action="/showUserA" >
+                    <html:link action="/consultaCoordinacionA" >
                         <p align ="center">Consultar Coordinación</p>
                     </html:link>
 

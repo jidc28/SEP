@@ -1,5 +1,5 @@
 <%-- 
-    Document   : CreateUser
+    Document   : AgregarCoordinacionFail
     Created on : 10/06/2013, 07:43:54 PM
     Author     : admin
 --%>
@@ -66,29 +66,29 @@
                     <h1>Registro de Decanatos</h1>
                     <div id="content">
 
-                        <html:form action="/registrarDecanato">
+                        <html:form action="/registrarCoordinacion">
                             <div id="welcome">
                                 <table border="0">
                                     <tbody>
                                         
                                         <tr>
                                             <td colspan="2">
-                                                <bean:write name="Decanato" property="errorCodigo" filter="false"/>
+                                                <bean:write name="Coordinacion" property="errorCodigo" filter="false"/>
                                                 &nbsp;</td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">
-                                                <bean:write name="Decanato" property="errorCodigoFormato" filter="false"/>
+                                                <bean:write name="Coordinacion" property="errorCodigoFormato" filter="false"/>
                                                 &nbsp;</td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">
-                                                <bean:write name="Decanato" property="errorNombre" filter="false"/>
+                                                <bean:write name="Coordinacion" property="errorNombre" filter="false"/>
                                                 &nbsp;</td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">
-                                                <bean:write name="Decanato" property="errorNombreFormato" filter="false"/>
+                                                <bean:write name="Coordinacion" property="errorNombreFormato" filter="false"/>
                                                 &nbsp;</td>
                                         </tr>
                                         <tr>

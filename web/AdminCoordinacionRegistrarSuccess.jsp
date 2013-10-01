@@ -1,5 +1,5 @@
 <%-- 
-    Document   : AdminUserCreateSuccess
+    Document   : AdminCoordinacionRegistrarSuccess
     Created on : 06/06/2013, 10:04:58 PM
     Author     : Langtech
 --%>
@@ -99,7 +99,7 @@
                 </div>
                 <div id="contenido-der">
                     <h1>Gestión de Coordinaciones</h1>
-                    <html:link action="/createUserA" >
+                    <html:link action="/agregaCoordinacionA" >
                         <p align ="center">Agregar Coordinación</p>
                     </html:link>
                     <html:link action="/showUserA" >

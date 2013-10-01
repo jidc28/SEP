@@ -1,5 +1,5 @@
 <%-- 
-    Document   : AdminUserCreateSuccess
+    Document   : AdminDecanatoRegistrarFailure
     Created on : 06/06/2013, 10:04:58 PM
     Author     : Langtech
 --%>
@@ -65,7 +65,7 @@
 
                     <p align ="center" style="background-color: red;
                        width: 300px; margin-left: auto; margin-right: auto">
-                        El decanato ya se encuentra registrado.
+                        El Decanato ya se encuentra registrado.
                     </p>
 
                     <h1>Gestión de Usuario</h1>
@@ -99,7 +99,7 @@
                 </div>
                 <div id="contenido-der">
                     <h1>Gestión de Coordinaciones</h1>
-                    <html:link action="/createUserA" >
+                    <html:link action="/agregaCoordinacionA" >
                         <p align ="center">Agregar Coordinación</p>
                     </html:link>
                     <html:link action="/showUserA" >

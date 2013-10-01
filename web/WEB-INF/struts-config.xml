@@ -74,13 +74,13 @@
         <action input="/VistaAdministrador.jsp" path="/agregaCarreraA" scope="request" type="com.myapp.struts.AgregaCarreraA">
             <forward name="success" path="/AgregaCarrera.jsp"/>
         </action>
-        <action input="/VistaAdministrador.jsp" path="/agregaDecanatoA" scope="request" type="com.myapp.struts.AgregaDecanatoA">
-            <forward name="success" path="/AgregaDecanato.jsp"/>
-        </action>
         <action input="/AgregaCarrera.jsp" name="Carrera" path="/registrarCarrera" scope="request" type="com.myapp.struts.RegistrarCarrera" validate="false">
             <forward name="success" path="/AdminCarreraRegistrarSuccess.jsp"/>
             <forward name="failure" path="/AgregaCarreraFail.jsp"/>
             <forward name="yaregistrada" path="/AdminCarreraRegistrarFailure.jsp"/>
+        </action>
+        <action input="/VistaAdministrador.jsp" path="/agregaDecanatoA" scope="request" type="com.myapp.struts.AgregaDecanatoA">
+            <forward name="success" path="/AgregaDecanato.jsp"/>
         </action>
         <action input="/AgregaDecanato.jsp" name="Decanato" path="/registrarDecanato" scope="request" type="com.myapp.struts.RegistrarDecanato" validate="false">
             <forward name="success" path="/AdminDecanatoRegistrarSuccess.jsp"/>
@@ -92,14 +92,17 @@
         </action>
         <action input="/AgregaCoordinacion.jsp" name="Coordinacion" path="/registrarCoordinacion" scope="request" type="com.myapp.struts.RegistrarCoordinacion" validate="false">
             <forward name="success" path="/AdminCoordinacionRegistrarSuccess.jsp"/>
-            <forward name="failure" path="/AgregaDecanatoFail.jsp"/>
-            <forward name="yaregistrada" path="/AdminDecanatoRegistrarFailure.jsp"/>
+            <forward name="failure" path="/AgregaCoordinacionFail.jsp"/>
+            <forward name="yaregistrada" path="/AdminCoordinacionRegistrarFailure.jsp"/>
         </action>
         <action input="/VistaAdministrador.jsp" path="/consultaCarreraA" scope="request" type="com.myapp.struts.ConsultaCarreraA" validate="false">
             <forward name="success" path="/ConsultaCarrera.jsp"/>
         </action>
         <action input="/VistaAdministrador.jsp" path="/consultaDecanatoA" scope="request" type="com.myapp.struts.ConsultaDecanatoA" validate="false">
             <forward name="success" path="/ConsultaDecanato.jsp"/>
+        </action>
+        <action input="/VistaAdministrador.jsp" path="/consultaCoordinacionA" scope="request" type="com.myapp.struts.ConsultaCoordinacionA" validate="false">
+            <forward name="success" path="/ConsultaCoordinacion.jsp"/>
         </action>
         
         <action input="/ConsultaCarrera.jsp" name="Carrera" path="/cambiarStatus" scope="request" type="com.myapp.struts.cambiarStatusCarrera" validate="false">

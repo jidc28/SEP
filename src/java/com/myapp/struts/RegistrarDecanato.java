@@ -67,11 +67,6 @@ public class RegistrarDecanato extends org.apache.struts.action.Action {
             } else {
                 return mapping.findForward(YAREGISTRADA);
             }
-        }
-        
-        
-        
-        
-        
+        } 
     }
 }

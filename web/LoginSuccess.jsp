@@ -1,5 +1,5 @@
 <%-- 
-    Document   : success
+    Document   : LoginSuccess
     Created on : 30/05/2013, 01:00:49 PM
     Author     : Langtech
 --%>

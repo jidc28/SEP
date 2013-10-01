@@ -1,5 +1,5 @@
 <%-- 
-    Document   : VistaProfesor
+    Document   : VistaProfesorModificarSuccess
     Created on : 06/06/2013, 10:04:58 PM
     Author     : Langtech
 --%>

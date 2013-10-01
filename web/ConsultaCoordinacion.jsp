@@ -1,14 +1,14 @@
 <%-- 
-    Document   : ConsultaDecanato
-    Created on : 10/06/2013, 07:43:54 PM
-    Author     : admin
+    Document   : ConsultaCoordinacion
+    Created on : 01/10/2013, 12:16:56 AM
+    Author     : Langtech
 --%>
 
-<%@page import="com.myapp.struts.Decanato"%>
+<%@page import="com.myapp.struts.Coordinacion"%>
 <%@page import="java.util.ArrayList"%>
 <%
     Object usbid = session.getAttribute("usbid");
-    ArrayList<Decanato> users = (ArrayList<Decanato>) session.getAttribute("decanatos");
+    ArrayList<Coordinacion> users = (ArrayList<Coordinacion>) session.getAttribute("coordinaciones");
     if (usbid != "") {%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
@@ -66,7 +66,7 @@
             <div id="cuerpo-principal">
 
                 <div id="contenido-der">
-                    <h1 style="background-color: cornflowerblue;width: 140px;margin-left: auto; margin-right: auto">Lista de Decanatos</h1>
+                    <h1 style="background-color: cornflowerblue;width: 140px;margin-left: auto; margin-right: auto">Lista de Coordinaciones</h1>
                     <div id="content">
 
                         <%if (users.size() != 0) {%>
@@ -81,10 +81,10 @@
                                             <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Codigo</h1>	
                                         </td>
                                         <td>
-                                            <h1 style="width: 220px;margin-left: auto; margin-right: auto;color: darkblue">Nombre de Decanato</h1>	
+                                            <h1 style="width: 220px;margin-left: auto; margin-right: auto;color: darkblue">Nombre Coordinacion</h1>	
                                         </td>
                                         <td>
-                                            <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Status de Decanato</h1>	
+                                            <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Estatus Coordinacion</h1>	
                                         </td>
                                     </tr>
                                     <%for (int i = 0; i < users.size(); i++) {%>
@@ -117,7 +117,7 @@
 
 
                             <%} else {%>
-                            No hay Decanatos En el Sistema para Mostrar
+                            No hay Coordinaciones En el Sistema para Mostrar
                             <%}%>
 
                         </div>
@@ -138,4 +138,5 @@
     <title> hello</title>
 </html>
 <% }%>
+
 

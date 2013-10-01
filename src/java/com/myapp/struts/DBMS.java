@@ -165,6 +165,27 @@ public class DBMS {
         return usrs;
     }
     
+    public ArrayList<Coordinacion> listarCoordinaciones() {
+
+        ArrayList<Coordinacion> usrs = new ArrayList<Coordinacion>(0);
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT * FROM COORDINACION");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Coordinacion u = new Coordinacion();
+                u.setCodigo(rs.getString("codigo"));
+                u.setNombre(rs.getString("nombre"));
+                u.setStatus(rs.getString("status"));
+                usrs.add(u);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return usrs;
+    }
+    
     
     public Profesor obtenerInfoProfesor(String usbid){
 

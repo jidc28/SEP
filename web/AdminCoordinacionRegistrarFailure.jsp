@@ -1,5 +1,5 @@
 <%-- 
-    Document   : AdminDecanatoRegistrarSuccess
+    Document   : AdminCoordinacionRegistrarFailure
     Created on : 06/06/2013, 10:04:58 PM
     Author     : Langtech
 --%>
@@ -63,9 +63,9 @@
 
                 <div id="contenido-der">
 
-                    <p align ="center" style="background-color: springgreen;
+                    <p align ="center" style="background-color: red;
                        width: 300px; margin-left: auto; margin-right: auto">
-                        Decanato registrado exitosamente.
+                        La Coordinacion ya se encuentra registrada.
                     </p>
 
                     <h1>Gestión de Usuario</h1>

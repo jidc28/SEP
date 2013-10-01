@@ -1,5 +1,5 @@
 <%-- 
-    Document   : CreateUser
+    Document   : EditarNombreDecanatoFail
     Created on : 10/06/2013, 07:43:54 PM
     Author     : admin
 --%>

@@ -68,10 +68,5 @@ public class RegistrarCoordinacion extends org.apache.struts.action.Action {
                 return mapping.findForward(YAREGISTRADA);
             }
         }
-        
-        
-        
-        
-        
     }
 }
