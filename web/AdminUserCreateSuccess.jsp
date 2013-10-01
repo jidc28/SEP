@@ -82,7 +82,7 @@
                     <html:link action="/agregaCarreraA" >
                         <p align ="center">Agregar Carrera</p>
                     </html:link>
-                    <html:link action="/showUserA" >
+                    <html:link action="/consultaCarreraA" >
                         <p align ="center">Consultar Carrera</p>
                     </html:link>
 
@@ -92,7 +92,7 @@
                     <html:link action="/createUserA" >
                         <p align ="center">Agregar Decanato</p>
                     </html:link>
-                    <html:link action="/showUserA" >
+                    <html:link action="/consultaDecanatoA" >
                         <p align ="center">Consultar Decanato</p>
                     </html:link>
 
@@ -102,7 +102,7 @@
                     <html:link action="/agregaCoordinacionA" >
                         <p align ="center">Agregar Coordinación</p>
                     </html:link>
-                    <html:link action="/showUserA" >
+                    <html:link action="/consultaCoordinacionA" >
                         <p align ="center">Consultar Coordinación</p>
                     </html:link>
 

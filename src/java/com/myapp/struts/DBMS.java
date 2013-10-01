@@ -107,7 +107,7 @@ public class DBMS {
         ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
         PreparedStatement ps = null;
         try {
-            ps = conexion.prepareStatement("SELECT * FROM usuario");
+            ps = conexion.prepareStatement("SELECT * FROM usuario ORDER BY usbid");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Usuario u = new Usuario();
@@ -128,7 +128,7 @@ public class DBMS {
         ArrayList<Carrera> usrs = new ArrayList<Carrera>(0);
         PreparedStatement ps = null;
         try {
-            ps = conexion.prepareStatement("SELECT * FROM carrera");
+            ps = conexion.prepareStatement("SELECT * FROM carrera ORDER BY codigo");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Carrera u = new Carrera();
@@ -149,7 +149,7 @@ public class DBMS {
         ArrayList<Decanato> usrs = new ArrayList<Decanato>(0);
         PreparedStatement ps = null;
         try {
-            ps = conexion.prepareStatement("SELECT * FROM decanato");
+            ps = conexion.prepareStatement("SELECT * FROM decanato ORDER BY codigo");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Decanato u = new Decanato();
@@ -170,7 +170,7 @@ public class DBMS {
         ArrayList<Coordinacion> usrs = new ArrayList<Coordinacion>(0);
         PreparedStatement ps = null;
         try {
-            ps = conexion.prepareStatement("SELECT * FROM COORDINACION");
+            ps = conexion.prepareStatement("SELECT * FROM COORDINACION ORDER BY CODIGO");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Coordinacion u = new Coordinacion();
@@ -370,6 +370,26 @@ public class DBMS {
         }
     }
     
+    public boolean actualizarStatusCoordinacion(Coordinacion u) {
+            PreparedStatement ps = null;
+        try {
+
+            ps = conexion.prepareStatement( "UPDATE COORDINACION SET status = ? WHERE ( codigo = ? )");
+            
+            ps.setString(1, u.getStatus());
+            ps.setString(2, u.getCodigo());
+            Integer s = ps.executeUpdate();
+
+            return s > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        
+    }
+ 
+    
     public boolean actualizarStatusCarrera(Carrera u) {
             PreparedStatement ps = null;
         try {
@@ -470,6 +490,29 @@ public class DBMS {
     }
     
     public Decanato obtenerNombreDecanato(Decanato u){
+
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT * FROM decanato WHERE codigo = ?");
+            ps.setString(1, u.getCodigo());
+            
+            ResultSet rs = ps.executeQuery();
+            
+            
+            
+            while (rs.next()) {
+                u.setNombre(rs.getString("nombre"));
+            }
+
+             return u;
+             
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return u;
+    }
+    
+        public Coordinacion obtenerNombreCoordinacion(Coordinacion u){
 
         PreparedStatement ps = null;
         try {

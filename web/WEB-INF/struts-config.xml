@@ -105,7 +105,8 @@
             <forward name="success" path="/ConsultaCoordinacion.jsp"/>
         </action>
         
-        <action input="/ConsultaCarrera.jsp" name="Carrera" path="/cambiarStatus" scope="request" type="com.myapp.struts.cambiarStatusCarrera" validate="false">
+        
+        <action input="/ConsultaCarrera.jsp" name="Carrera" path="/cambiarStatusCarrera" scope="request" type="com.myapp.struts.cambiarStatusCarrera" validate="false">
             <forward name="success" path="/EditarStatusCarrera.jsp"/>
         </action>
         <action input="/ConsultaDecanato.jsp" name="Decanato" path="/cambiarStatus" scope="request" type="com.myapp.struts.cambiarStatusDecanato" validate="false">
@@ -119,6 +120,9 @@
             <forward name="success" path="/ConsultaDecanatoSuccess.jsp"/>
         </action>
         
+        <action input="/ConsultaCarrera.jsp" name="Carrera" path="/editarStatus" scope="request" type="com.myapp.struts.EditarStatusCoordinacion" validate="false">
+            <forward name="success" path="/EditarNombreCoordinacion.jsp"/>
+        </action>
         <action input="/ConsultaCarrera.jsp" name="Carrera" path="/editarStatus" scope="request" type="com.myapp.struts.EditarStatusCarrera" validate="false">
             <forward name="success" path="/EditarNombreCarrera.jsp"/>
         </action>

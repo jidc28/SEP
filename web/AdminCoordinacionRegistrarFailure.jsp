@@ -102,7 +102,7 @@
                     <html:link action="/agregaCoordinacionA" >
                         <p align ="center">Agregar Coordinación</p>
                     </html:link>
-                    <html:link action="/showUserA" >
+                    <html:link action="/consultaCoordinacionA" >
                         <p align ="center">Consultar Coordinación</p>
                     </html:link>
 

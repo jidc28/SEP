@@ -1,14 +1,14 @@
 <%-- 
-    Document   : ConsultaCarrera
-    Created on : 10/06/2013, 07:43:54 PM
-    Author     : admin
+    Document   : consultaCoordinacionSuccess
+    Created on : 01/10/2013, 01:53:33 AM
+    Author     : Langtech
 --%>
 
-<%@page import="com.myapp.struts.Carrera"%>
+<%@page import="com.myapp.struts.Coordinacion"%>
 <%@page import="java.util.ArrayList"%>
 <%
     Object usbid = session.getAttribute("usbid");
-    ArrayList<Carrera> users = (ArrayList<Carrera>) session.getAttribute("carreras");
+    ArrayList<Coordinacion> users = (ArrayList<Coordinacion>) session.getAttribute("coordinaciones");
     if (usbid != "") {%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
@@ -64,9 +64,14 @@
             </div>
 
             <div id="cuerpo-principal">
+                
+                    <p align ="center" style="background-color: springgreen;
+                       width: 300px; margin-left: auto; margin-right: auto">
+                        Status de Coordinacion modificado exitosamente.
+                    </p>
 
                 <div id="contenido-der">
-                    <h1 style="background-color: cornflowerblue;width: 140px;margin-left: auto; margin-right: auto">Lista de Carreras</h1>
+                    <h1 style="background-color: cornflowerblue;width: 140px;margin-left: auto; margin-right: auto">Lista de Coordinaciones</h1>
                     <div id="content">
 
                         <%if (users.size() != 0) {%>
@@ -81,10 +86,10 @@
                                             <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Codigo</h1>	
                                         </td>
                                         <td>
-                                            <h1 style="width: 220px;margin-left: auto; margin-right: auto;color: darkblue">Nombre de Carrera</h1>	
+                                            <h1 style="width: 220px;margin-left: auto; margin-right: auto;color: darkblue">Nombre de Coordinacion</h1>	
                                         </td>
                                         <td>
-                                            <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Status de Carrera</h1>	
+                                            <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Status de Coordinacion</h1>	
                                         </td>
                                     </tr>
                                     <%for (int i = 0; i < users.size(); i++) {%>
@@ -100,12 +105,14 @@
                                         </td>
                                         <td>
                                             <html:form  action="/editarStatus">
+                                                <html:hidden property="usbid" value="<%=usbid.toString()%>"/>
                                                 <html:hidden property="codigo" value="<%=users.get(i).getCodigo()%>"/>
                                                 <html:submit value="Editar"/>
                                             </html:form>
                                         </td>
                                         <td>
-                                            <html:form  action="/cambiarStatusCarrera">
+                                            <html:form  action="/cambiarStatus">
+                                                <html:hidden property="usbid" value="<%=usbid.toString()%>"/>
                                                 <html:hidden property="codigo" value="<%=users.get(i).getCodigo()%>"/>
                                                 <html:submit value="Cambiar Status"/>
                                             </html:form>	                                        
@@ -117,7 +124,7 @@
 
 
                             <%} else {%>
-                            No hay Carreras En el Sistema para Mostrar
+                            No hay Coordinaciones En el Sistema para Mostrar
                             <%}%>
 
                         </div>

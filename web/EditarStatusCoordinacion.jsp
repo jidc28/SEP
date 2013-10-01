@@ -1,15 +1,15 @@
 <%-- 
-    Document   : ConsultaCarrera
-    Created on : 10/06/2013, 07:43:54 PM
-    Author     : admin
+    Document   : EditarStatusCoordinacion
+    Created on : 01/10/2013, 01:33:04 AM
+    Author     : Langtech
 --%>
 
-<%@page import="com.myapp.struts.Carrera"%>
+<%@page import="com.myapp.struts.Usuario"%>
 <%@page import="java.util.ArrayList"%>
 <%
-    Object usbid = session.getAttribute("usbid");
-    ArrayList<Carrera> users = (ArrayList<Carrera>) session.getAttribute("carreras");
-    if (usbid != "") {%>
+    Object codigo = session.getAttribute("codigo");
+    Object status = session.getAttribute("status");
+    if (codigo != "") {%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>  
@@ -20,7 +20,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <link rel="stylesheet" type="text/css" href="css/CreateUser.css">
+        <link rel="stylesheet" type="text/css" href="css/ShowUser.css">
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
@@ -66,13 +66,10 @@
             <div id="cuerpo-principal">
 
                 <div id="contenido-der">
-                    <h1 style="background-color: cornflowerblue;width: 140px;margin-left: auto; margin-right: auto">Lista de Carreras</h1>
+                    <h1 style="background-color: cornflowerblue;width: 200px;margin-left: auto; margin-right: auto">Cambiar status de Coordinacion</h1>
                     <div id="content">
 
-                        <%if (users.size() != 0) {%>
-                        <div style="width: 700px;margin-left: auto; margin-right: auto;">
-
-
+                        <div style="width: 404px;margin-left: auto; margin-right: auto;">
 
                             <table>
                                 <tbody>
@@ -81,49 +78,34 @@
                                             <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Codigo</h1>	
                                         </td>
                                         <td>
-                                            <h1 style="width: 220px;margin-left: auto; margin-right: auto;color: darkblue">Nombre de Carrera</h1>	
-                                        </td>
-                                        <td>
-                                            <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Status de Carrera</h1>	
+                                            <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Status de Coordinacion</h1>	
                                         </td>
                                     </tr>
-                                    <%for (int i = 0; i < users.size(); i++) {%>
+
                                     <tr>
                                         <td>
-                                            <p style="color: brown"> <%=users.get(i).getCodigo()%></p>	
+                                            <p style="color: brown"> <%=codigo.toString()%></p>	
                                         </td>
                                         <td>
-                                            <p style="color: brown"> <%=users.get(i).getNombre()%></p>	
-                                        </td>
-                                        <td>
-                                            <p style="color: brown"> <%=users.get(i).getStatus()%></p>	
-                                        </td>
-                                        <td>
-                                            <html:form  action="/editarStatus">
-                                                <html:hidden property="codigo" value="<%=users.get(i).getCodigo()%>"/>
-                                                <html:submit value="Editar"/>
-                                            </html:form>
-                                        </td>
-                                        <td>
-                                            <html:form  action="/cambiarStatusCarrera">
-                                                <html:hidden property="codigo" value="<%=users.get(i).getCodigo()%>"/>
+                                            <html:form  action="/cambiarStatusCoordinacionA">
+                                                <html:hidden property="codigo" value="<%=codigo.toString()%>"/>
+
+                                                <html:select property="status">
+                                                    <html:option value="visible">Visible</html:option>
+                                                    <html:option value="oculta">Oculta</html:option>                                                  
+                                                </html:select>
+
                                                 <html:submit value="Cambiar Status"/>
-                                            </html:form>	                                        
+                                            </html:form>	
                                         </td>
+
                                     </tr>
-                                    <%}%>
+
                                 </tbody>
                             </table>
-
-
-                            <%} else {%>
-                            No hay Carreras En el Sistema para Mostrar
-                            <%}%>
-
                         </div>
 
-
-                    </div>                    
+                    </div>
                 </div>
             </div>
 
