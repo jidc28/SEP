@@ -4,6 +4,7 @@
  */
 package com.myapp.struts;
 
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,10 +17,12 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Langtech
  */
-public class EditarNombreCoordinacion extends org.apache.struts.action.Action {
+public class CambiarNombreNucleoUniversitarioA extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
+    private static final String FAILURE = "failure";
+    private static final String ERRORUPDATE = "errorupdate";
 
     /**
      * This is the action called from the Struts framework.
@@ -36,18 +39,39 @@ public class EditarNombreCoordinacion extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        Coordinacion u = (Coordinacion) form;
+        NucleoUniversitario u = (NucleoUniversitario) form;
         HttpSession session = request.getSession(true);
 
         ActionErrors error = new ActionErrors();
+
+        //valido los campos de formulario
+        error = u.validate(mapping, request);
+        boolean huboError = false;
+
         
-        Coordinacion c = DBMS.getInstance().obtenerNombreCoordinacion(u);
+        if (error.size() != 0) {
+            huboError = true;
+        }
 
-        //si existen usuarios registrados
+        //si los campos no son validos
+        if (huboError) {
+            return mapping.findForward(FAILURE);
+            //si los campos son validos
+        } else {
 
-        //retorno a pagina de exito
-        session.setAttribute("codigo", c.getCodigo());
-        session.setAttribute("nombre", c.getNombre());
-        return mapping.findForward(SUCCESS);
+            //elimina usuario del sistema 
+            boolean actualizo = DBMS.getInstance().actualizarNombreNucleoUniversitario(u);
+
+            if (actualizo) {
+                
+                ArrayList<NucleoUniversitario> nucleos = DBMS.getInstance().listarNucleosUniversitarios();
+                session.setAttribute("nucleos", nucleos);
+
+
+                return mapping.findForward(SUCCESS);
+            } else {
+                return mapping.findForward(ERRORUPDATE);
+            }
+        }
     }
 }

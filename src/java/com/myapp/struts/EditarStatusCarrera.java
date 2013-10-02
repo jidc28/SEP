@@ -46,7 +46,7 @@ public class EditarStatusCarrera extends org.apache.struts.action.Action {
         //si existen usuarios registrados
 
         //retorno a pagina de exito
-        session.setAttribute("codigo", u.getCodigo());
+        session.setAttribute("codigo", c.getCodigo());
         session.setAttribute("nombre", c.getNombre());
         return mapping.findForward(SUCCESS);
     }

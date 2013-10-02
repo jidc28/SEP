@@ -73,34 +73,38 @@
             <forward name="failure" path="/AgregaNucleoUniv.jsp"/>
             <forward name="yaregistrada" path="/AgregaNucleoUniv.jsp"/>
         </action>
-        <action input="/ConsultaNucleoUniversitario.jsp" name="NucleoUniversitario" path="/editarNombreNucleoUniversitario" scope="request" type="com.myapp.struts.cambiarNombreNucleoUniversitario" validate="false">
-            <forward name="success" path="/EditarNombreNucleoUniversitario"/>
+        <action input="/ConsultaNucleoUniversitario.jsp" name="NucleoUniversitario" path="/editarNombreNucleoUniversitario" scope="request" type="com.myapp.struts.EditarNombreNucleoUniversitario" validate="false">
+            <forward name="success" path="/EditarNombreNucleoUniversitario.jsp"/>
         </action>
-        <action input="/ConsultaNucleoUniversitario.jsp" name="NucleoUniversitario" path="/cambiarStatusNucleoUniversitario" scope="request" type="com.myapp.struts.cambiarNombreNucleoUniversitario" validate="false">
-            <forward name="success" path="/EditarStatusNucleoUniversitario"/>
+        <action input="/EditarNombreNucleoUniversitario.jsp" name="NucleoUniversitario" path="/cambiarNombreNucleoUniversitarioA" scope="request" type="com.myapp.struts.CambiarNombreNucleoUniversitarioA" validate="false">
+            <forward name="success" path="/ConsultaNucleoUniversitario.jsp"/>
+            <forward name="failure" path="/EditarNombreCoordinacion.jsp"/>
         </action>
-        <action input="/ConsultaNucleoUniversitario.jsp" name="NucleoUniversitario" path="/cambiarStatusNucleoUniversitarioA" scope="request" type="com.myapp.struts.CambiarNombreNucleoUniversitarioA" validate="false">
-            <forward name="success" path="/ConsultaCoordinacionSuccess.jsp"/>
+        <action input="/ConsultaNucleoUniversitario.jsp" name="NucleoUniversitario" path="/cambiarStatusNucleoUniversitario" scope="request" type="com.myapp.struts.cambiarStatusNucleoUniversitario" validate="false">
+            <forward name="success" path="/EditarStatusNucleoUniversitario.jsp"/>
+        </action>
+        <action input="/ConsultaNucleoUniversitario.jsp" name="NucleoUniversitario" path="/cambiarStatusNucleoUniversitarioA" scope="request" type="com.myapp.struts.CambiarStatusNucleoUniversitarioA" validate="false">
+            <forward name="success" path="/ConsultaNucleoUniversitario.jsp"/>
         </action>
         
         <!--       DECANATOS        -->
         <action input="/AgregaDecanato.jsp" name="Decanato" path="/registrarDecanato" scope="request" type="com.myapp.struts.RegistrarDecanato" validate="false">
             <forward name="success" path="/AdminDecanatoRegistrarSuccess.jsp"/>
-            <forward name="failure" path="/AgregaDecanatoFail.jsp"/>
-            <forward name="yaregistrada" path="/AdminDecanatoRegistrarFailure.jsp"/>
+            <forward name="failure" path="/AgregaDecanatoFail.jsp"/> <!--MODIFICAR-->
+            <forward name="yaregistrada" path="/AdminDecanatoRegistrarFailure.jsp"/> <!--MODIFICAR-->
         </action>
-        <action input="/ConsultaDecanato.jsp" name="Decanato" path="/cambiarStatus" scope="request" type="com.myapp.struts.cambiarStatusDecanato" validate="false">
+        <action input="/ConsultaDecanato.jsp" name="Decanato" path="/cambiarStatusDecanato" scope="request" type="com.myapp.struts.cambiarStatusDecanato" validate="false">
             <forward name="success" path="/EditarStatusDecanato.jsp"/>
         </action>
         <action input="/ConsultaDecanato.jsp" name="Decanato" path="/cambiarStatusDecanatoA" scope="request" type="com.myapp.struts.CambiarStatusDecanatoA" validate="false">
-            <forward name="success" path="/ConsultaDecanatoSuccess.jsp"/>
+            <forward name="success" path="/ConsultaDecanato.jsp"/>
         </action>
-        <action input="/ConsultaDecanato.jsp" name="Decanato" path="/editarStatus" scope="request" type="com.myapp.struts.EditarStatusDecanato" validate="false">
-            <forward name="success" path="/EditarNombreDecanato.jsp"/>
+        <action input="/ConsultaDecanato.jsp" name="Decanato" path="/editarStatusDecanato" scope="request" type="com.myapp.struts.EditarStatusDecanato" validate="false">
+            <forward name="success" path="/ConsultaDecanato.jsp"/>
         </action>
         <action input="/EditarNombreDecanato.jsp" name="Decanato" path="/cambiarNombreDecanatoA" scope="request" type="com.myapp.struts.CambiarNombreDecanatoA" validate="false">
-            <forward name="success" path="/ConsultaDecanatoNameSuccess.jsp"/>
-            <forward name="failure" path="/EditarNombreDecanatoFail.jsp"/>
+            <forward name="success" path="/ConsultaDecanato.jsp"/>
+            <forward name="failure" path="/EditarNombreDecanatoFail.jsp"/> <!--MODIFICAR-->
         </action>
         
         <!--     COORDINACIONES     -->
@@ -125,8 +129,8 @@
         <!--       CARRERAS         -->
         <action input="/AgregaCarrera.jsp" name="Carrera" path="/registrarCarrera" scope="request" type="com.myapp.struts.RegistrarCarrera" validate="false">
             <forward name="success" path="/AdminCarreraRegistrarSuccess.jsp"/>
-            <forward name="failure" path="/AgregaCarreraFail.jsp"/>
-            <forward name="yaregistrada" path="/AdminCarreraRegistrarFailure.jsp"/>
+            <forward name="failure" path="/AgregaCarreraFail.jsp"/> <!--MODIFICAR-->
+            <forward name="yaregistrada" path="/AdminCarreraRegistrarFailure.jsp"/> <!--MODIFICAR-->
         </action>
         <action input="/ConsultaCarrera.jsp" name="Carrera" path="/cambiarStatusCarrera" scope="request" type="com.myapp.struts.cambiarStatusCarrera" validate="false">
             <forward name="success" path="/EditarStatusCarrera.jsp"/>
@@ -139,7 +143,7 @@
         </action>
         <action input="/EditarNombreCarrera.jsp" name="Carrera" path="/cambiarNombreCarreraA" scope="request" type="com.myapp.struts.CambiarNombreCarreraA" validate="false">
             <forward name="success" path="/ConsultaCarreraNameSuccess.jsp"/>
-            <forward name="failure" path="/EditarNombreCarreraFail.jsp"/>
+            <forward name="failure" path="/EditarNombreCarreraFail.jsp"/> <!--MODIFICAR-->
         </action>        
         
         <!--                        -->
@@ -154,7 +158,7 @@
        
         <action input="/CreateUser.jsp" name="CreateUserForm" path="/createUser" scope="request" type="com.myapp.struts.CreateUserAction" validate="false">
             <forward name="failure" path="/CreateUser.jsp"/>
-            <forward name="yaregistrado" path="/AdminUserCreateFail.jsp"/>
+            <forward name="yaregistrado" path="/AdminUserCreateFail.jsp"/> <!--MODIFICAR-->
             <forward name="success" path="/AdminUserCreateSuccess.jsp"/>
         </action>
         
@@ -168,7 +172,7 @@
         </action>
         <action input="/ModificarInfoP.jsp" name="Profesor" path="/guardarModificarInfoP" scope="request" type="com.myapp.struts.GuardarModificarInfoP" validate="false">
             <forward name="success" path="/VistaProfesorModificarSuccess.jsp"/>
-            <forward name="failure" path="/ModificarInfoPFail.jsp"/>
+            <forward name="failure" path="/ModificarInfoPFail.jsp"/> <!--MODIFICAR-->
         </action>
         <action input="/VistaProfesor.jsp" name="Profesor" path="/eliminarInfoP" scope="request" type="com.myapp.struts.EliminarInfoP" validate="false">
             <forward name="success" path="/VistaProfesorEliminarSuccess.jsp"/>

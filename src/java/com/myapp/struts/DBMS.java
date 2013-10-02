@@ -470,7 +470,7 @@ public class DBMS {
             PreparedStatement ps = null;
         try {
 
-            ps = conexion.prepareStatement( "UPDATE NUCLEOUNIV SET status = ? WHERE ( codigo = ? )");
+            ps = conexion.prepareStatement("UPDATE NUCLEOUNIV SET status = ? WHERE ( codigo = ? )");
             
             ps.setString(1, u.getStatus());
             ps.setString(2, u.getCodigo());
@@ -540,6 +540,24 @@ public class DBMS {
         } 
     }
     
+        public boolean actualizarNombreNucleoUniversitario(NucleoUniversitario u) {
+            PreparedStatement ps = null;
+        try {
+
+            ps = conexion.prepareStatement( "UPDATE NUCLEOUNIV SET nombre = ? WHERE ( codigo = ? )");
+            
+            ps.setString(1, u.getNombre());
+            ps.setString(2, u.getCodigo());
+            Integer s = ps.executeUpdate();
+
+            return s > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } 
+    }
+    
     public Carrera obtenerNombreCarrera(Carrera u){
 
         PreparedStatement ps = null;
@@ -591,6 +609,29 @@ public class DBMS {
         PreparedStatement ps = null;
         try {
             ps = conexion.prepareStatement("SELECT * FROM COORDINACION WHERE codigo = ?");
+            ps.setString(1, u.getCodigo());
+            
+            ResultSet rs = ps.executeQuery();
+            
+            
+            
+            while (rs.next()) {
+                u.setNombre(rs.getString("nombre"));
+            }
+
+             return u;
+             
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return u;
+    }
+        
+    public NucleoUniversitario obtenerNombreNucleoUniversitario(NucleoUniversitario u){
+
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT * FROM NUCLEOUNIV WHERE codigo = ?");
             ps.setString(1, u.getCodigo());
             
             ResultSet rs = ps.executeQuery();

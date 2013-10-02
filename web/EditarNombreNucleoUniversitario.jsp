@@ -1,14 +1,14 @@
 <%-- 
-    Document   : EditarStatusCoordinacion
-    Created on : 01/10/2013, 01:33:04 AM
-    Author     : Langtech
+    Document   : EditarNombreNucleoUniversitario
+    Created on : 02/10/2013, 01:40:38 AM
+    Author     : jidc28
 --%>
 
-<%@page import="com.myapp.struts.Coordinacion"%>
+<%@page import="com.myapp.struts.NucleoUniversitario"%>
 <%@page import="java.util.ArrayList"%>
 <%
     Object codigo = session.getAttribute("codigo");
-    Object status = session.getAttribute("status");
+    Object nombre = session.getAttribute("nombre");
     if (codigo != "") {%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
@@ -66,36 +66,32 @@
             <div id="cuerpo-principal">
 
                 <div id="contenido-der">
-                    <h1 style="background-color: cornflowerblue;width: 200px;margin-left: auto; margin-right: auto">Cambiar status de Coordinacion</h1>
+                    <h1 style="background-color: cornflowerblue;width: 200px;margin-left: auto; margin-right: auto">Cambiar Nombre de Nucleo Universitario</h1>
                     <div id="content">
 
                         <div style="width: 404px;margin-left: auto; margin-right: auto;">
 
                             <table>
                                 <tbody>
+                                    
                                     <tr>
                                         <td>
                                             <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Codigo</h1>	
                                         </td>
                                         <td>
-                                            <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Status de Coordinacion</h1>	
+                                            <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Nombre del Nucleo Universitario</h1>	
                                         </td>
                                     </tr>
 
                                     <tr>
                                         <td>
-                                            <p style="color: brown"> <%=codigo.toString()%></p>	
+                                            <p style="color: green"> <%=codigo.toString()%></p>	
                                         </td>
                                         <td>
-                                            <html:form  action="/cambiarStatusCoordinacionA">
+                                            <html:form  action="/cambiarNombreNucleoUniversitarioA">
                                                 <html:hidden property="codigo" value="<%=codigo.toString()%>"/>
-
-                                                <html:select property="status">
-                                                    <html:option value="visible">Visible</html:option>
-                                                    <html:option value="oculta">Oculta</html:option>                                                  
-                                                </html:select>
-
-                                                <html:submit value="Cambiar Status"/>
+                                                <html:text property="nombre" value="<%=nombre.toString()%>"/>
+                                                <html:submit value="Guardar"/>
                                             </html:form>	
                                         </td>
 

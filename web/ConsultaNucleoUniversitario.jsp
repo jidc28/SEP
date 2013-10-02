@@ -106,7 +106,7 @@
                                         </td>
                                         <td>
                                             <html:form  action="/cambiarStatusNucleoUniversitario">
-                                                <html:hidden property="status" value="<%=nucleos.get(i).getCodigo()%>"/>
+                                                <html:hidden property="codigo" value="<%=nucleos.get(i).getCodigo()%>"/>
                                                 <html:submit value="Cambiar Status"/>
                                             </html:form>	                                        
                                         </td>

@@ -73,11 +73,5 @@ public class CambiarNombreCoordinacionA extends org.apache.struts.action.Action 
                 return mapping.findForward(ERRORUPDATE);
             }
         }
-
-
-
-
-
-
     }
 }

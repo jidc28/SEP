@@ -109,10 +109,10 @@
                 </div>
                 <div id="contenido-der">
                     <h1>Gestión de Núcleos Universitarios</h1>
-                    <html:link action="/createUserA" >
+                    <html:link action="/NucleoUnivA" >
                         <p align ="center">Agregar Núcleo Universitario</p>
                     </html:link>
-                    <html:link action="/showUserA" >
+                    <html:link action="/consultaNucleoUniversitarioA" >
                         <p align ="center">Consultar Núcleo Universitario</p>
                     </html:link>
 

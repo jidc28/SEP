@@ -99,13 +99,13 @@
                                             <p style="color: brown"> <%=decans.get(i).getStatus()%></p>	
                                         </td>
                                         <td>
-                                            <html:form  action="/editarStatus">
+                                            <html:form  action="/editarStatusDecanato">
                                                 <html:hidden property="codigo" value="<%=decans.get(i).getCodigo()%>"/>
                                                 <html:submit value="Editar"/>
                                             </html:form>
                                         </td>
                                         <td>
-                                            <html:form  action="/cambiarStatus">
+                                            <html:form  action="/cambiarStatusDecanato">
                                                 <html:hidden property="codigo" value="<%=decans.get(i).getCodigo()%>"/>
                                                 <html:submit value="Cambiar Status"/>
                                             </html:form>	                                        

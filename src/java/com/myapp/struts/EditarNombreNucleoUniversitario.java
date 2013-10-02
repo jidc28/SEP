@@ -16,7 +16,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Langtech
  */
-public class EditarNombreCoordinacion extends org.apache.struts.action.Action {
+public class EditarNombreNucleoUniversitario extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -36,18 +36,18 @@ public class EditarNombreCoordinacion extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        Coordinacion u = (Coordinacion) form;
+        NucleoUniversitario u = (NucleoUniversitario) form;
         HttpSession session = request.getSession(true);
 
         ActionErrors error = new ActionErrors();
         
-        Coordinacion c = DBMS.getInstance().obtenerNombreCoordinacion(u);
+        NucleoUniversitario nuc = DBMS.getInstance().obtenerNombreNucleoUniversitario(u);
 
         //si existen usuarios registrados
 
         //retorno a pagina de exito
-        session.setAttribute("codigo", c.getCodigo());
-        session.setAttribute("nombre", c.getNombre());
+        session.setAttribute("codigo", nuc.getCodigo());
+        session.setAttribute("nombre", nuc.getNombre());
         return mapping.findForward(SUCCESS);
     }
 }
