@@ -125,7 +125,7 @@ public class DBMS {
     
     public ArrayList<Carrera> listarCarreras() {
 
-        ArrayList<Carrera> usrs = new ArrayList<Carrera>(0);
+        ArrayList<Carrera> carreras = new ArrayList<Carrera>(0);
         PreparedStatement ps = null;
         try {
             ps = conexion.prepareStatement("SELECT * FROM carrera ORDER BY codigo");
@@ -135,18 +135,18 @@ public class DBMS {
                 u.setCodigo(rs.getString("codigo"));
                 u.setNombre(rs.getString("nombre"));
                 u.setStatus(rs.getString("status"));
-                usrs.add(u);
+                carreras.add(u);
             }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return usrs;
+        return carreras;
     }
     
     public ArrayList<Decanato> listarDecanatos() {
 
-        ArrayList<Decanato> usrs = new ArrayList<Decanato>(0);
+        ArrayList<Decanato> dcnto = new ArrayList<Decanato>(0);
         PreparedStatement ps = null;
         try {
             ps = conexion.prepareStatement("SELECT * FROM decanato ORDER BY codigo");
@@ -156,18 +156,18 @@ public class DBMS {
                 u.setCodigo(rs.getString("codigo"));
                 u.setNombre(rs.getString("nombre"));
                 u.setStatus(rs.getString("status"));
-                usrs.add(u);
+                dcnto.add(u);
             }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return usrs;
+        return dcnto;
     }
     
     public ArrayList<Coordinacion> listarCoordinaciones() {
 
-        ArrayList<Coordinacion> usrs = new ArrayList<Coordinacion>(0);
+        ArrayList<Coordinacion> coords = new ArrayList<Coordinacion>(0);
         PreparedStatement ps = null;
         try {
             ps = conexion.prepareStatement("SELECT * FROM COORDINACION ORDER BY CODIGO");
@@ -177,15 +177,35 @@ public class DBMS {
                 u.setCodigo(rs.getString("codigo"));
                 u.setNombre(rs.getString("nombre"));
                 u.setStatus(rs.getString("status"));
-                usrs.add(u);
+                coords.add(u);
             }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return usrs;
+        return coords;
     }
     
+    public ArrayList<NucleoUniversitario> listarNucleosUniversitarios() {
+
+        ArrayList<NucleoUniversitario> nucleos = new ArrayList<NucleoUniversitario>(0);
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT * FROM NUCLEOUNIV ORDER BY CODIGO");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                NucleoUniversitario u = new NucleoUniversitario();
+                u.setCodigo(rs.getString("codigo"));
+                u.setNombre(rs.getString("nombre"));
+                u.setStatus(rs.getString("status"));
+                nucleos.add(u);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return nucleos;
+    }    
     
     public Profesor obtenerInfoProfesor(String usbid){
 
@@ -432,6 +452,25 @@ public class DBMS {
         try {
 
             ps = conexion.prepareStatement( "UPDATE decanato SET status = ? WHERE ( codigo = ? )");
+            
+            ps.setString(1, u.getStatus());
+            ps.setString(2, u.getCodigo());
+            Integer s = ps.executeUpdate();
+
+            return s > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        
+    }
+    
+    public boolean actualizarStatusNucleoUniversitario(NucleoUniversitario u) {
+            PreparedStatement ps = null;
+        try {
+
+            ps = conexion.prepareStatement( "UPDATE NUCLEOUNIV SET status = ? WHERE ( codigo = ? )");
             
             ps.setString(1, u.getStatus());
             ps.setString(2, u.getCodigo());

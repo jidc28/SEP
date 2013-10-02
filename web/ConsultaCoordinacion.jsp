@@ -8,7 +8,7 @@
 <%@page import="java.util.ArrayList"%>
 <%
     Object usbid = session.getAttribute("usbid");
-    ArrayList<Coordinacion> users = (ArrayList<Coordinacion>) session.getAttribute("coordinaciones");
+    ArrayList<Coordinacion> coords = (ArrayList<Coordinacion>) session.getAttribute("coordinaciones");
     if (usbid != "") {%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
@@ -69,7 +69,7 @@
                     <h1 style="background-color: cornflowerblue;width: 140px;margin-left: auto; margin-right: auto">Lista de Coordinaciones</h1>
                     <div id="content">
 
-                        <%if (users.size() != 0) {%>
+                        <%if (coords.size() != 0) {%>
                         <div style="width: 700px;margin-left: auto; margin-right: auto;">
 
 
@@ -87,26 +87,26 @@
                                             <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Estatus Coordinacion</h1>	
                                         </td>
                                     </tr>
-                                    <%for (int i = 0; i < users.size(); i++) {%>
+                                    <%for (int i = 0; i < coords.size(); i++) {%>
                                     <tr>
                                         <td>
-                                            <p style="color: green"> <%=users.get(i).getCodigo()%></p>	
+                                            <p style="color: green"> <%=coords.get(i).getCodigo()%></p>	
                                         </td>
                                         <td>
-                                            <p style="color: green"> <%=users.get(i).getNombre()%></p>	
+                                            <p style="color: green"> <%=coords.get(i).getNombre()%></p>	
                                         </td>
                                         <td>
-                                            <p style="color: green"> <%=users.get(i).getStatus()%></p>	
+                                            <p style="color: green"> <%=coords.get(i).getStatus()%></p>	
                                         </td>
                                         <td>
                                             <html:form  action="/editarNombreCoordinacion">
-                                                <html:hidden property="codigo" value="<%=users.get(i).getCodigo()%>"/>
+                                                <html:hidden property="codigo" value="<%=coords.get(i).getCodigo()%>"/>
                                                 <html:submit value="Editar"/>
                                             </html:form>
                                         </td>
                                         <td>
                                             <html:form  action="/cambiarStatusCoordinacion">
-                                                <html:hidden property="status" value="<%=users.get(i).getCodigo()%>"/>
+                                                <html:hidden property="codigo" value="<%=coords.get(i).getCodigo()%>"/>
                                                 <html:submit value="Cambiar Status"/>
                                             </html:form>	                                        
                                         </td>

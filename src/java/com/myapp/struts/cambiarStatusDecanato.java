@@ -42,9 +42,7 @@ public class cambiarStatusDecanato extends org.apache.struts.action.Action {
 
         ActionErrors error = new ActionErrors();
 
-        //si existen usuarios registrados
-
-        //retorno a pagina de exito
+       
         session.setAttribute("codigo", u.getCodigo());
         session.setAttribute("status", u.getStatus());
         return mapping.findForward(SUCCESS);

@@ -38,13 +38,13 @@ public class ConsultaCarreraA extends org.apache.struts.action.Action {
         
         HttpSession session = request.getSession(true);
 
-        //obtengo una lista de usuarios registrados
-        ArrayList<Carrera> users = DBMS.getInstance().listarCarreras();
+        //obtengo una lista de carreras registradas
+        ArrayList<Carrera> carreras = DBMS.getInstance().listarCarreras();
 
-        //si existen usuarios registrados
+        //si existen carreras registradas
 
             //retorno a pagina de exito
-            session.setAttribute("carreras", users);
+            session.setAttribute("carreras", carreras);
             return mapping.findForward(SUCCESS);
     }
 }

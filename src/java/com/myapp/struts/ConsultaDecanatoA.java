@@ -38,13 +38,13 @@ public class ConsultaDecanatoA extends org.apache.struts.action.Action {
         
         HttpSession session = request.getSession(true);
 
-        //obtengo una lista de usuarios registrados
-        ArrayList<Decanato> users = DBMS.getInstance().listarDecanatos();
+        //obtengo una lista de decanatos registrados
+        ArrayList<Decanato> dcnto = DBMS.getInstance().listarDecanatos();
 
-        //si existen usuarios registrados
+        //si existen decanatos registrados
 
             //retorno a pagina de exito
-            session.setAttribute("decanatos", users);
+            session.setAttribute("decanatos", dcnto);
             return mapping.findForward(SUCCESS);
     }
 }

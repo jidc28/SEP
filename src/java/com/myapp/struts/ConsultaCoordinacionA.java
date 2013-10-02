@@ -38,10 +38,10 @@ public class ConsultaCoordinacionA extends org.apache.struts.action.Action {
         
         HttpSession session = request.getSession(true);
 
-        //obtengo una lista de usuarios registrados
+        //obtengo una lista de coords registradas
         ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
 
-        //si existen usuarios registrados
+        //si existen coords registradas
 
             //retorno a pagina de exito
             session.setAttribute("coordinaciones", coords);

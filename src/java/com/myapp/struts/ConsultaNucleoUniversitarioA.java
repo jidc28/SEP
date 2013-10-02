@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -17,7 +16,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Langtech
  */
-public class cambiarStatusCoordinacion extends org.apache.struts.action.Action {
+public class ConsultaNucleoUniversitarioA extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -37,15 +36,11 @@ public class cambiarStatusCoordinacion extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         
-        Coordinacion u = (Coordinacion) form;
         HttpSession session = request.getSession(true);
 
-        ActionErrors error = new ActionErrors();
+        ArrayList<NucleoUniversitario> nucleos = DBMS.getInstance().listarNucleosUniversitarios();
 
-
-        //retorno a pagina de exito
-        session.setAttribute("codigo", u.getCodigo());
-        session.setAttribute("status", u.getStatus());
-        return mapping.findForward(SUCCESS);
+            session.setAttribute("nucleos", nucleos);
+            return mapping.findForward(SUCCESS);
     }
 }

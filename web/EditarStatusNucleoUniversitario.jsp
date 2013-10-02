@@ -1,10 +1,10 @@
 <%-- 
-    Document   : EditarStatusCoordinacion
-    Created on : 01/10/2013, 01:33:04 AM
+    Document   : EditarStatusNucleoUniversitario
+    Created on : 02/10/2013, 12:28:50 AM
     Author     : Langtech
 --%>
 
-<%@page import="com.myapp.struts.Coordinacion"%>
+<%@page import="com.myapp.struts.NucleoUniversitario"%>
 <%@page import="java.util.ArrayList"%>
 <%
     Object codigo = session.getAttribute("codigo");
@@ -66,7 +66,7 @@
             <div id="cuerpo-principal">
 
                 <div id="contenido-der">
-                    <h1 style="background-color: cornflowerblue;width: 200px;margin-left: auto; margin-right: auto">Cambiar status de Coordinacion</h1>
+                    <h1 style="background-color: cornflowerblue;width: 200px;margin-left: auto; margin-right: auto">Cambiar status de Nucleo Universitario</h1>
                     <div id="content">
 
                         <div style="width: 404px;margin-left: auto; margin-right: auto;">
@@ -78,7 +78,7 @@
                                             <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Codigo</h1>	
                                         </td>
                                         <td>
-                                            <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Status de Coordinacion</h1>	
+                                            <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Status de Nucleo Universitario</h1>	
                                         </td>
                                     </tr>
 
@@ -87,7 +87,7 @@
                                             <p style="color: brown"> <%=codigo.toString()%></p>	
                                         </td>
                                         <td>
-                                            <html:form  action="/cambiarStatusCoordinacionA">
+                                            <html:form  action="/cambiarStatusNucleoUniversitarioA">
                                                 <html:hidden property="codigo" value="<%=codigo.toString()%>"/>
 
                                                 <html:select property="status">
@@ -120,4 +120,3 @@
     <title> hello</title>
 </html>
 <% }%>
-

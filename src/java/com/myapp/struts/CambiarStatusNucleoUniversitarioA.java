@@ -15,9 +15,9 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author Langtech
+ * @author jidc28
  */
-public class cambiarStatusCoordinacion extends org.apache.struts.action.Action {
+public class CambiarStatusNucleoUniversitarioA extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -36,16 +36,23 @@ public class cambiarStatusCoordinacion extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
-        Coordinacion u = (Coordinacion) form;
+
+        NucleoUniversitario u = (NucleoUniversitario) form;
         HttpSession session = request.getSession(true);
 
         ActionErrors error = new ActionErrors();
 
 
+        //elimina usuario del sistema 
+        boolean actualizo = DBMS.getInstance().actualizarStatusNucleoUniversitario(u);
+        
+        //obtengo una lista 
+        ArrayList<NucleoUniversitario> nucleos = DBMS.getInstance().listarNucleosUniversitarios();
+
+        //si existen
+
         //retorno a pagina de exito
-        session.setAttribute("codigo", u.getCodigo());
-        session.setAttribute("status", u.getStatus());
+        session.setAttribute("nucleos", nucleos);
         return mapping.findForward(SUCCESS);
     }
 }

@@ -73,6 +73,15 @@
             <forward name="failure" path="/AgregaNucleoUniv.jsp"/>
             <forward name="yaregistrada" path="/AgregaNucleoUniv.jsp"/>
         </action>
+        <action input="/ConsultaNucleoUniversitario.jsp" name="NucleoUniversitario" path="/editarNombreNucleoUniversitario" scope="request" type="com.myapp.struts.cambiarNombreNucleoUniversitario" validate="false">
+            <forward name="success" path="/EditarNombreNucleoUniversitario"/>
+        </action>
+        <action input="/ConsultaNucleoUniversitario.jsp" name="NucleoUniversitario" path="/cambiarStatusNucleoUniversitario" scope="request" type="com.myapp.struts.cambiarNombreNucleoUniversitario" validate="false">
+            <forward name="success" path="/EditarStatusNucleoUniversitario"/>
+        </action>
+        <action input="/ConsultaNucleoUniversitario.jsp" name="NucleoUniversitario" path="/cambiarStatusNucleoUniversitarioA" scope="request" type="com.myapp.struts.CambiarNombreNucleoUniversitarioA" validate="false">
+            <forward name="success" path="/ConsultaCoordinacionSuccess.jsp"/>
+        </action>
         
         <!--       DECANATOS        -->
         <action input="/AgregaDecanato.jsp" name="Decanato" path="/registrarDecanato" scope="request" type="com.myapp.struts.RegistrarDecanato" validate="false">
