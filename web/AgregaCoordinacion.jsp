@@ -1,7 +1,7 @@
 <%-- 
     Document   : AgregarCoordinacion
     Created on : 10/06/2013, 07:43:54 PM
-    Author     : admin
+    Author     : Langtech
 --%>
 
 <%
@@ -77,15 +77,24 @@
                                             <td><html:text property="codigo" /><span style="color: red"> *</span></td>
                                         </tr>
                                         <tr>
+                                            <td style="color:red">
+                                                <html:errors property="codigo" />
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td>Nombre</td>
                                             <td><html:text property="nombre" /><span style="color: red"> *</span></td>
+                                        </tr><tr>
+                                            <td style="color:red" >
+                                                <html:errors property="nombre" />
+                                            </td>
                                         </tr>
 
                                         <tr>
                                             <td>
                                                 <html:submit value="Registrar" /></td>
                                             <td>
-                                                <html:reset value="Limpiar" />
+                                                <html:reset value="Limpiar" onclick="this.form.reset()" />
                                             </td>
                                         </tr>                                         
                                     </tbody>

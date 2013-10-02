@@ -47,12 +47,12 @@ public class CambiarStatusDecanatoA extends org.apache.struts.action.Action {
         boolean actualizo = DBMS.getInstance().actualizarStatusDecanato(u);
         
         //obtengo una lista de usuarios registrados
-        ArrayList<Decanato> users = DBMS.getInstance().listarDecanatos();
+        ArrayList<Decanato> decan = DBMS.getInstance().listarDecanatos();
 
         //si existen usuarios registrados
 
         //retorno a pagina de exito
-        session.setAttribute("decanatos", users);
+        session.setAttribute("decanatos", decan);
         return mapping.findForward(SUCCESS);
     }
 }

@@ -90,23 +90,23 @@
                                     <%for (int i = 0; i < users.size(); i++) {%>
                                     <tr>
                                         <td>
-                                            <p style="color: brown"> <%=users.get(i).getCodigo()%></p>	
+                                            <p style="color: green"> <%=users.get(i).getCodigo()%></p>	
                                         </td>
                                         <td>
-                                            <p style="color: brown"> <%=users.get(i).getNombre()%></p>	
+                                            <p style="color: green"> <%=users.get(i).getNombre()%></p>	
                                         </td>
                                         <td>
-                                            <p style="color: brown"> <%=users.get(i).getStatus()%></p>	
+                                            <p style="color: green"> <%=users.get(i).getStatus()%></p>	
                                         </td>
                                         <td>
-                                            <html:form  action="/editarStatus">
+                                            <html:form  action="/editarNombreCoordinacion">
                                                 <html:hidden property="codigo" value="<%=users.get(i).getCodigo()%>"/>
                                                 <html:submit value="Editar"/>
                                             </html:form>
                                         </td>
                                         <td>
-                                            <html:form  action="/cambiarStatus">
-                                                <html:hidden property="codigo" value="<%=users.get(i).getCodigo()%>"/>
+                                            <html:form  action="/cambiarStatusCoordinacion">
+                                                <html:hidden property="status" value="<%=users.get(i).getCodigo()%>"/>
                                                 <html:submit value="Cambiar Status"/>
                                             </html:form>	                                        
                                         </td>
@@ -138,5 +138,3 @@
     <title> hello</title>
 </html>
 <% }%>
-
-

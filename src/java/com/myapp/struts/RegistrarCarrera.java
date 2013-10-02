@@ -48,7 +48,7 @@ public class RegistrarCarrera extends org.apache.struts.action.Action {
         error = u.validate(mapping, request);
         boolean huboError = false;
 
-        //sino los campos no son validos
+        
         if (error.size()!=0) {
             huboError = true;
         }

@@ -48,13 +48,14 @@ public class CreateUserAction extends org.apache.struts.action.Action {
         error = u.validate(mapping, request);
         boolean huboError = false;
 
-        //sino los campos no son validos
+        
         if (error.size() != 0) {
             huboError = true;
         }
 
         //si los campos no son validos
         if (huboError) {
+            saveErrors(request, error);
             return mapping.findForward(FAILURE);
             //si los campos son validos
         } else {

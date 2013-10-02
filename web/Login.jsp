@@ -16,7 +16,7 @@
     </head>
     <body>     
         <div id="contenedor">
-            
+
             <div id="encabezado">
                 <a title="Inicio" rel="home">
                     <img src="imagenes/logo.jpg" alt="Inicio">
@@ -26,7 +26,7 @@
             <table border="0" width="750px">
                 <tbody><tr>
                         <td align="center">
-                            
+
                             <h2>Bienvenidos al Servicio Centralizado de Autenticación</h2>
                         </td>
                     </tr>
@@ -42,23 +42,33 @@
                     <p style="text-align: center"><strong>Introduzca su USBID y Contraseña</strong></p>
                     <table border="0">
                         <tbody>
-                                <td>USBID:</td>
-                            </tr>
-                            <tr>
-                                <td><html:text property="usbid" /></td>
-                            </tr>
-                            <tr>
-                                <td>Contraseña:</td>
-                            </tr>
-                            <tr>
-                                <td><html:password property="contrasena" /></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                        <html:submit value="Login" />
-                                        <html:reset value="Limpiar" />
-                                </td>
-                            </tr>
+                        <td>USBID:</td>
+                        </tr>
+                        <tr>
+                            <td><html:text property="usbid" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <html:errors property="usbid" /> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Contraseña:</td>
+                        </tr>
+                        <tr>
+                            <td><html:password property="contrasena" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <html:errors property="contrasena" /> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <html:submit value="Login" />
+                                <html:reset value="Limpiar" />
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
 

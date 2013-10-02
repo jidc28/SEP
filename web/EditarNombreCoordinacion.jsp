@@ -1,15 +1,15 @@
 <%-- 
-    Document   : consultaCoordinacionSuccess
-    Created on : 01/10/2013, 01:53:33 AM
+    Document   : EditarNombreCoordinacion
+    Created on : 01/10/2013, 06:16:42 PM
     Author     : Langtech
 --%>
 
 <%@page import="com.myapp.struts.Coordinacion"%>
 <%@page import="java.util.ArrayList"%>
 <%
-    Object usbid = session.getAttribute("usbid");
-    ArrayList<Coordinacion> users = (ArrayList<Coordinacion>) session.getAttribute("coordinaciones");
-    if (usbid != "") {%>
+    Object codigo = session.getAttribute("codigo");
+    Object nombre = session.getAttribute("nombre");
+    if (codigo != "") {%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>  
@@ -20,7 +20,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <link rel="stylesheet" type="text/css" href="css/CreateUser.css">
+        <link rel="stylesheet" type="text/css" href="css/ShowUser.css">
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
@@ -64,71 +64,44 @@
             </div>
 
             <div id="cuerpo-principal">
-                
-                    <p align ="center" style="background-color: springgreen;
-                       width: 300px; margin-left: auto; margin-right: auto">
-                        Status de Coordinacion modificado exitosamente.
-                    </p>
 
                 <div id="contenido-der">
-                    <h1 style="background-color: cornflowerblue;width: 140px;margin-left: auto; margin-right: auto">Lista de Coordinaciones</h1>
+                    <h1 style="background-color: cornflowerblue;width: 200px;margin-left: auto; margin-right: auto">Cambiar Nombre de Coordinacion</h1>
                     <div id="content">
 
-                        <%if (users.size() != 0) {%>
-                        <div style="width: 700px;margin-left: auto; margin-right: auto;">
-
-
+                        <div style="width: 404px;margin-left: auto; margin-right: auto;">
 
                             <table>
                                 <tbody>
+                                    
                                     <tr>
                                         <td>
                                             <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Codigo</h1>	
                                         </td>
                                         <td>
-                                            <h1 style="width: 220px;margin-left: auto; margin-right: auto;color: darkblue">Nombre de Coordinacion</h1>	
-                                        </td>
-                                        <td>
-                                            <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Status de Coordinacion</h1>	
+                                            <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Nombre de Coordinacion</h1>	
                                         </td>
                                     </tr>
-                                    <%for (int i = 0; i < users.size(); i++) {%>
+
                                     <tr>
                                         <td>
-                                            <p style="color: brown"> <%=users.get(i).getCodigo()%></p>	
+                                            <p style="color: green"> <%=codigo.toString()%></p>	
                                         </td>
                                         <td>
-                                            <p style="color: brown"> <%=users.get(i).getNombre()%></p>	
+                                            <html:form  action="/cambiarNombreCoordinacionA">
+                                                <html:hidden property="codigo" value="<%=codigo.toString()%>"/>
+                                                <html:text property="nombre" value="<%=nombre.toString()%>"/>
+                                                <html:submit value="Guardar"/>
+                                            </html:form>	
                                         </td>
-                                        <td>
-                                            <p style="color: brown"> <%=users.get(i).getStatus()%></p>	
-                                        </td>
-                                        <td>
-                                            <html:form  action="/editarNombreCoordinacion">
-                                                <html:hidden property="codigo" value="<%=users.get(i).getCodigo()%>"/>
-                                                <html:submit value="Editar"/>
-                                            </html:form>
-                                        </td>
-                                        <td>
-                                            <html:form  action="/cambiarStatusCoordinacion">
-                                                <html:hidden property="codigo" value="<%=users.get(i).getCodigo()%>"/>
-                                                <html:submit value="Cambiar Status"/>
-                                            </html:form>                                        
-                                        </td>
+
                                     </tr>
-                                    <%}%>
+
                                 </tbody>
                             </table>
-
-
-                            <%} else {%>
-                            No hay Coordinaciones En el Sistema para Mostrar
-                            <%}%>
-
                         </div>
 
-
-                    </div>                    
+                    </div>
                 </div>
             </div>
 
@@ -143,4 +116,3 @@
     <title> hello</title>
 </html>
 <% }%>
-

@@ -4,10 +4,8 @@
  */
 package com.myapp.struts;
 
-import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -16,7 +14,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Langtech
  */
-public class ConsultaCoordinacionA extends org.apache.struts.action.Action {
+public class NucleoUnivA extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -36,15 +34,6 @@ public class ConsultaCoordinacionA extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         
-        HttpSession session = request.getSession(true);
-
-        //obtengo una lista de usuarios registrados
-        ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
-
-        //si existen usuarios registrados
-
-            //retorno a pagina de exito
-            session.setAttribute("coordinaciones", coords);
-            return mapping.findForward(SUCCESS);
+        return mapping.findForward(SUCCESS);
     }
 }

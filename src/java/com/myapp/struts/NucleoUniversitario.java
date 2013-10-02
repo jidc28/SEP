@@ -16,7 +16,7 @@ import org.apache.struts.action.ActionMessage;
  *
  * @author Langtech
  */
-public class Coordinacion extends org.apache.struts.action.ActionForm {
+public class NucleoUniversitario extends org.apache.struts.action.ActionForm {
     
     private static final String patronCodigo = "^[0-9]+$";
     private static final String patronNombre = "[a-zA-Z]*$";
@@ -61,12 +61,7 @@ public class Coordinacion extends org.apache.struts.action.ActionForm {
     }
 
     public void setErrorCodigo(String errorCodigo) {
-        if (errorCodigo.equals("")) {
-            this.errorCodigo = "";
-        } else {
-            this.errorCodigo = "<span style='color:red'>Por favor introduzca su Codigo de Coordinacion</span>";
-
-        }
+        this.errorCodigo = errorCodigo;
     }
 
     public String getErrorNombre() {
@@ -74,12 +69,7 @@ public class Coordinacion extends org.apache.struts.action.ActionForm {
     }
 
     public void setErrorNombre(String errorNombre) {
-        if (errorNombre.equals("")) {
-            this.errorNombre = "";
-        } else {
-            this.errorNombre = "<span style='color:red'>Por favor introduzca el Nombre de la Coordinacion</span>";
-
-        }
+        this.errorNombre = errorNombre;
     }
 
     public String getErrorStatus() {
@@ -87,12 +77,7 @@ public class Coordinacion extends org.apache.struts.action.ActionForm {
     }
 
     public void setErrorStatus(String errorStatus) {
-        if (errorStatus.equals("")) {
-            this.errorStatus = "";
-        } else {
-            this.errorStatus = "<span style='color:red'>Por favor introduzca el Status de la Coordinacion</span>";
-
-        }
+        this.errorStatus = errorStatus;
     }
 
     public String getErrorCodigoFormato() {
@@ -100,12 +85,7 @@ public class Coordinacion extends org.apache.struts.action.ActionForm {
     }
 
     public void setErrorCodigoFormato(String errorCodigoFormato) {
-        if (errorCodigoFormato.equals("")) {
-            this.errorCodigoFormato = "";
-        } else {
-            this.errorCodigoFormato = "<span style='color:red'>Campo Codigo formato incorrecto (Sugerencia: Solo Numeros).</span>";
-
-        }
+        this.errorCodigoFormato = errorCodigoFormato;
     }
 
     public String getErrorNombreFormato() {
@@ -113,15 +93,10 @@ public class Coordinacion extends org.apache.struts.action.ActionForm {
     }
 
     public void setErrorNombreFormato(String errorNombreFormato) {
-        if (errorNombreFormato.equals("")) {
-            this.errorNombreFormato = "";
-        } else {
-            this.errorNombreFormato = "<span style='color:red'>Campo Nombre formato incorrecto (Sugerencia: sólo letras).</span>";
-
-        }
+        this.errorNombreFormato = errorNombreFormato;
     }
     
-    public Coordinacion(){
+    public NucleoUniversitario(){
         patron = Pattern.compile(patronCodigo);
         patron2 = Pattern.compile(patronNombre);
     }
@@ -135,7 +110,7 @@ public class Coordinacion extends org.apache.struts.action.ActionForm {
         match = patron2.matcher(val);
         return match.matches();
     }
-
+    
     /**
      * This is the action called from the Struts framework.
      *
@@ -162,10 +137,7 @@ public class Coordinacion extends org.apache.struts.action.ActionForm {
             this.setErrorNombre("error");
             errors.add("nombre", new ActionMessage("error.nombre.required"));
             // TODO: add 'error.name.required' key to your resources
-        }
-        
-        
-        
+        }   
         return errors;
     }
 }

@@ -76,6 +76,11 @@
                                             <td>USBID:</td>
                                             <td><html:text property="usbid" /><span style="color: red"> *</span></td>
                                         </tr>
+                                            <tr>
+                                                <td style="color: red">
+                                                    <html:errors property="usbid" /> 
+                                                </td>
+                                            </tr>
                                         <tr>
                                             <td>Contraseña:</td>
                                             <td><html:password property="contrasena1" /><span style="color: red"> *</span></td>
@@ -83,6 +88,16 @@
                                         <tr>
                                             <td>Repetir Contraseña:</td>
                                             <td><html:password property="contrasena2" /><span style="color: red"> *</span></td>
+                                        </tr>
+                                        <tr>
+                                           <td style="color: red">
+                                           <html:errors property="difierePass" /> 
+                                           </td>
+                                        </tr>
+                                        <tr>
+                                           <td style="color: red">
+                                           <html:errors property="contrasena" /> 
+                                           </td>
                                         </tr>
                                         <tr>
                                             <td>

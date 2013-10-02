@@ -15,7 +15,7 @@ import org.apache.struts.action.ActionMessage;
 
 /**
  *
- * @author admin
+ * @author Langtech
  */
 public class RegistrarCoordinacion extends org.apache.struts.action.Action {
 
@@ -41,20 +41,21 @@ public class RegistrarCoordinacion extends org.apache.struts.action.Action {
         
         Coordinacion u = (Coordinacion) form;
         HttpSession session = request.getSession(true);
-        
         ActionErrors error = new ActionErrors();
-        
+                
         //valido los campos de formulario
         error = u.validate(mapping, request);
         boolean huboError = false;
 
-        //sino los campos no son validos
+        
         if (error.size()!=0) {
             huboError = true;
         }
         
         //si los campos no son validos
         if (huboError) {
+           
+            saveErrors(request, error);
             return mapping.findForward(FAILURE);
         //si los campos son validos
         } else {
@@ -65,6 +66,8 @@ public class RegistrarCoordinacion extends org.apache.struts.action.Action {
 
             return mapping.findForward(SUCCESS);
             } else {
+                error.add("nombre", new ActionMessage("error.codigoexistente"));
+                saveErrors(request, error);
                 return mapping.findForward(YAREGISTRADA);
             }
         }

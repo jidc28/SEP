@@ -16,7 +16,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Langtech
  */
-public class EditarStatusCoordinacion extends org.apache.struts.action.Action {
+public class EditarNombreCoordinacion extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";

@@ -158,7 +158,7 @@ public class CreateUserForm extends org.apache.struts.action.ActionForm {
         
         if (!(getContrasena1().equals(getContrasena2()))) {
             this.setErrorDifierePass("error");
-            errors.add("difierePass", new ActionMessage("error.difierePass.required"));
+            errors.add("difierePass", new ActionMessage("error.contrasenasNoCoinciden"));
             // TODO: add 'error.name.required' key to your resources
         }
         return errors;

@@ -370,6 +370,24 @@ public class DBMS {
         }
     }
     
+    public boolean registrarNucleoUniv(NucleoUniversitario n) {
+        PreparedStatement psAgregar = null;
+        
+        try {
+            psAgregar = conexion.prepareStatement("INSERT INTO NUCLEOUNIV(codigo, nombre) VALUES (?, ?);");
+            psAgregar.setString(1, n.getCodigo());
+            psAgregar.setString(2, n.getNombre());
+            
+            Integer i = psAgregar.executeUpdate();
+            
+            return i > 0;
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
     public boolean actualizarStatusCoordinacion(Coordinacion u) {
             PreparedStatement ps = null;
         try {
@@ -462,8 +480,25 @@ public class DBMS {
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        }
-        
+        } 
+    }
+    
+    public boolean actualizarNombreCoordinacion(Coordinacion u) {
+            PreparedStatement ps = null;
+        try {
+
+            ps = conexion.prepareStatement( "UPDATE COORDINACION SET nombre = ? WHERE ( codigo = ? )");
+            
+            ps.setString(1, u.getNombre());
+            ps.setString(2, u.getCodigo());
+            Integer s = ps.executeUpdate();
+
+            return s > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } 
     }
     
     public Carrera obtenerNombreCarrera(Carrera u){
@@ -516,7 +551,7 @@ public class DBMS {
 
         PreparedStatement ps = null;
         try {
-            ps = conexion.prepareStatement("SELECT * FROM decanato WHERE codigo = ?");
+            ps = conexion.prepareStatement("SELECT * FROM COORDINACION WHERE codigo = ?");
             ps.setString(1, u.getCodigo());
             
             ResultSet rs = ps.executeQuery();

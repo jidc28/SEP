@@ -1,10 +1,11 @@
 <%-- 
-    Document   : VistaAdministrador
-    Created on : 06/06/2013, 10:04:58 PM
+    Document   : AgregaNucleoUniv
+    Created on : 01/10/2013, 04:15:23 PM
     Author     : Langtech
 --%>
 
-<% Object usbid = session.getAttribute("usbid");
+<%
+    Object usbid = session.getAttribute("usbid");
     if (usbid != "") {%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
@@ -16,7 +17,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <link rel="stylesheet" type="text/css" href="css/VistaAdministrador.css">
+        <link rel="stylesheet" type="text/css" href="css/CreateUser.css">
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
@@ -62,54 +63,48 @@
             <div id="cuerpo-principal">
 
                 <div id="contenido-der">
-                    <h1>Gestión de Usuario</h1>
-                    <html:link action="/createUserA" >
-                        <p align ="center">Crear Usuario</p>
-                    </html:link>
-                    <html:link action="/showUserA" >
-                        <p align ="center">Mostrar Usuarios</p>
-                    </html:link>
+                    <h1>Registro de Nucleos Universitarios</h1>
+                    <div id="content">
 
-                </div>
-                <div id="contenido-der">
-                    <h1>Gestión de Carreras</h1>
-                    <html:link action="/agregaCarreraA" >
-                        <p align ="center">Agregar Carrera</p>
-                    </html:link>
-                    <html:link action="/consultaCarreraA" >
-                        <p align ="center">Consultar Carrera</p>
-                    </html:link>
+                        <html:form action="/registrarNucleoUniv">
+                            <div id="welcome">
+                                <table border="0">
+                                    <tbody>
 
-                </div>
-                <div id="contenido-der">
-                    <h1>Gestión de Decanatos</h1>
-                    <html:link action="/agregaDecanatoA" >
-                        <p align ="center">Agregar Decanato</p>
-                    </html:link>
-                    <html:link action="/consultaDecanatoA" >
-                        <p align ="center">Consultar Decanato</p>
-                    </html:link>
 
-                </div>
-                <div id="contenido-der">
-                    <h1>Gestión de Coordinaciones</h1>
-                    <html:link action="/agregaCoordinacionA" >
-                        <p align ="center">Agregar Coordinación</p>
-                    </html:link>
-                    <html:link action="/consultaCoordinacionA" >
-                        <p align ="center">Consultar Coordinación</p>
-                    </html:link>
+                                        <tr>
+                                            <td>Codigo:</td>
+                                            <td><html:text property="codigo" /><span style="color: red"> *</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color:red">
+                                                <html:errors property="codigo" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nombre</td>
+                                            <td><html:text property="nombre" /><span style="color: red"> *</span></td>
+                                        </tr><tr>
+                                            <td style="color:red" >
+                                                <html:errors property="nombre" />
+                                            </td>
+                                        </tr>
 
-                </div>
-                <div id="contenido-der">
-                    <h1>Gestión de Núcleos Universitarios</h1>
-                    <html:link action="/NucleoUnivA" >
-                        <p align ="center">Agregar Núcleo Universitario</p>
-                    </html:link>
-                    <html:link action="/consultaNucleoUniversitarioA" >
-                        <p align ="center">Consultar Núcleo Universitario</p>
-                    </html:link>
+                                        <tr>
+                                            <td>
+                                                <html:submit value="Registrar" /></td>
+                                            <td>
+                                                <html:reset value="Limpiar" onclick="this.form.reset()" />
+                                            </td>
+                                        </tr>                                         
+                                    </tbody>
+                                </table>
+                                <p style="text-align: right">Nota:<span style="color: red"> * </span>Campos obligatorios.</p>
+                            </div>
+                        </html:form>
 
+
+                    </div>
                 </div>
             </div>
 
@@ -124,4 +119,3 @@
     <title> hello</title>
 </html>
 <% }%>
-
