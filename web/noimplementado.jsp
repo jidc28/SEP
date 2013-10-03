@@ -1,12 +1,9 @@
 <%-- 
-    Document   : AgregaCarrera
-    Created on : 10/06/2013, 07:43:54 PM
-    Author     : admin
+    Document   : noimplementado
+    Created on : 02/10/2013, 07:03:13 PM
+    Author     : jidc28
 --%>
 
-<%
-    Object usbid = session.getAttribute("usbid");
-    if (usbid != "") {%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>  
@@ -17,7 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <link rel="stylesheet" type="text/css" href="css/CreateUser.css">
+        <link rel="stylesheet" type="text/css" href="css/VistaAdministrador.css">
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
@@ -38,7 +35,6 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        Bienvenido, administrador
                                         <html:link action="/noImplementado">Perfil</html:link> |
                                         <html:link href="VistaAdministrador.jsp">
                                             Inicio
@@ -60,54 +56,14 @@
                 </div>
             </div>
 
-            <div id="cuerpo-principal">
-
-                <div id="contenido-der">
-                    <h1>Registro de Carreras</h1>
-                    <div id="content">
-
-                        <html:form action="/registrarCarrera">
-                            <div id="welcome">
-                                <table border="0">
-                                    <tbody>
-
-
-                                        <tr>
-                                            <td>Codigo:</td>
-                                            <td><html:text property="codigo" /><span style="color: red"> *</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Nombre</td>
-                                            <td><html:text property="nombre" /><span style="color: red"> *</span></td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <html:submit value="Registrar" /></td>
-                                            <td>
-                                                <html:reset value="Limpiar" />
-                                            </td>
-                                        </tr>                                         
-                                    </tbody>
-                                </table>
-                                <p style="text-align: right">Nota:<span style="color: red"> * </span>Campos obligatorios.</p>
-                            </div>
-                        </html:form>
-
-
-                    </div>
-                </div>
+            <div id="cuerpo-principal">                
+                    <p align ="center" style="background-color: red;
+                       width: 300px; margin-left: auto; margin-right: auto">
+                        AREA EN CONSTRUCCION.
+                    </p>
             </div>
 
         </div>
 
     </body>
 </html>
-
-<%} else {%>
-<html>
-
-    <title> hello</title>
-</html>
-<% }%>
-

@@ -42,14 +42,14 @@
                                 <tr>
                                     <td>
                                         Bienvenido, administrador
-                                        <html:link action="/perfil">Perfil</html:link> |
+                                        <html:link action="/noImplementado">Perfil</html:link> |
                                         <html:link href="VistaAdministrador.jsp">
                                             Inicio
                                         </html:link> |
-                                        <html:link action="/contactenos">
+                                        <html:link action="/noImplementado">
                                             Contáctenos
                                         </html:link> |
-                                        <html:link action="/ayuda">
+                                        <html:link action="/noImplementado">
                                             Ayuda
                                         </html:link> |
                                         <html:link action="/cerrarSesion" onclick="return confirm('¿Está seguro que desea cerrar sesión?')">
@@ -67,7 +67,7 @@
                 
                     <p align ="center" style="background-color: springgreen;
                        width: 300px; margin-left: auto; margin-right: auto">
-                        Status de Carrera modificado exitosamente.
+                        Carrera modificada exitosamente.
                     </p>
 
                 <div id="contenido-der">
@@ -111,7 +111,7 @@
                                             </html:form>
                                         </td>
                                         <td>
-                                            <html:form  action="/cambiarStatus">
+                                            <html:form  action="/cambiarStatusCarrera">
                                                 <html:hidden property="usbid" value="<%=usbid.toString()%>"/>
                                                 <html:hidden property="codigo" value="<%=carreras.get(i).getCodigo()%>"/>
                                                 <html:submit value="Cambiar Status"/>

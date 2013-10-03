@@ -42,14 +42,14 @@
                                 <tr>
                                     <td>
                                         Bienvenido, administrador
-                                        <html:link action="/perfil">Perfil</html:link> |
+                                        <html:link action="/noImplementado">Perfil</html:link> |
                                         <html:link href="VistaAdministrador.jsp">
                                             Inicio
                                         </html:link> |
-                                        <html:link action="/contactenos">
+                                        <html:link action="/noImplementado">
                                             Contáctenos
                                         </html:link> |
-                                        <html:link action="/ayuda">
+                                        <html:link action="/noImplementado">
                                             Ayuda
                                         </html:link> |
                                         <html:link action="/cerrarSesion" onclick="return confirm('¿Está seguro que desea cerrar sesión?')">
@@ -76,7 +76,7 @@
                     <div id="content">
 
                         <%if (users.size() != 0) {%>
-                        <div style="width: 404px;margin-left: auto; margin-right: auto;">
+                        <div style="width: 604px;margin-left: auto; margin-right: auto;">
 
 
 
@@ -89,6 +89,9 @@
                                         <td>
                                             <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Tipo de Usuario</h1>	
                                         </td>
+                                        <td>
+                                            <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Departamento</h1>	
+                                        </td>
                                     </tr>
                                     <%for (int i = 0; i < users.size(); i++) {%>
                                     <tr>
@@ -99,9 +102,13 @@
                                             <p style="color: brown"> <%=users.get(i).getTipousuario()%></p>	
                                         </td>
                                         <td>
-                                            <html:form  action="/login">
+                                            <p style="color: brown"> <%=users.get(i).getDepartamento()%></p>	
+                                        </td>
+                                        <td>
+                                            <html:form  action="/editarUser">
                                                 <html:hidden property="usbid" value="<%=users.get(i).getUsbid()%>"/>
                                                 <html:hidden property="tipousuario" value="<%=users.get(i).getTipousuario()%>"/>
+                                                <html:hidden property="departamento" value="<%=users.get(i).getDepartamento()%>"/>
                                                 <html:submit value="Editar"/>
                                             </html:form>
                                         </td>
@@ -109,6 +116,7 @@
                                             <html:form  action="/eliminarUser">
                                                 <html:hidden property="usbid" value="<%=users.get(i).getUsbid()%>"/>
                                                 <html:hidden property="tipousuario" value="<%=users.get(i).getTipousuario()%>"/>
+                                                <html:hidden property="departamento" value="<%=users.get(i).getDepartamento()%>"/>
                                                 <html:submit value="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar este usuario?')"/>
                                             </html:form>	                                        
                                         </td>

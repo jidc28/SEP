@@ -126,6 +126,8 @@
             <forward name="success" path="/ConsultaCoordinacion.jsp"/>
             <forward name="failure" path="/EditarNombreCoordinacion.jsp"/>
         </action>
+        
+        
         <!--       CARRERAS         -->
         <action input="/AgregaCarrera.jsp" name="Carrera" path="/registrarCarrera" scope="request" type="com.myapp.struts.RegistrarCarrera" validate="false">
             <forward name="success" path="/AdminCarreraRegistrarSuccess.jsp"/>
@@ -142,7 +144,7 @@
             <forward name="success" path="/EditarNombreCarrera.jsp"/>
         </action>
         <action input="/EditarNombreCarrera.jsp" name="Carrera" path="/cambiarNombreCarreraA" scope="request" type="com.myapp.struts.CambiarNombreCarreraA" validate="false">
-            <forward name="success" path="/ConsultaCarreraNameSuccess.jsp"/>
+            <forward name="success" path="/ConsultaCarreraSuccess.jsp"/>
             <forward name="failure" path="/EditarNombreCarreraFail.jsp"/> <!--MODIFICAR-->
         </action>        
         
@@ -184,26 +186,14 @@
             <forward name="success" path="/ShowUserEditarSuccess.jsp"/>
             <forward name="failure" path="/Login.jsp"/>
         </action>
-       
-        
-        
-                
-        
-        
-        
-        
-
-
-        
-        
-        
-        
-        
-        
-        
         <action input="/VistaProfesor.jsp" name="ModificarInfoPForm" path="/agregarInfoP" scope="request" type="com.myapp.struts.AgregarInfoP" validate="false">
             <forward name="success" path="/AgregarInfoP.jsp"/>
             <forward name="failure" path="/VistaProfesor.jsp"/>
+        </action>
+        
+        
+        <action name="NoImplementado" path="/noImplementado" scope="request" type="com.myapp.struts.noimplementadoAction" validate="false">
+            <fordward name="success" path="/noimplementado.jsp"/>
         </action>
         
         <action path="/Welcome" forward="/welcomeStruts.jsp"/>
