@@ -38,14 +38,14 @@
                                 <tr>
                                     <td>
                                         Bienvenido, administrador
-                                        <html:link action="/noImplementado">Perfil</html:link> |
+                                        <html:link href="noimplementado.jsp">Perfil</html:link> |
                                         <html:link href="VistaAdministrador.jsp">
                                             Inicio
                                         </html:link> |
-                                        <html:link action="/noImplementado">
+                                        <html:link href="noimplementado.jsp">
                                             Contáctenos
                                         </html:link> |
-                                        <html:link action="/noImplementado">
+                                        <html:link href="noimplementado.jsp">
                                             Ayuda
                                         </html:link> |
                                         <html:link action="/cerrarSesion" onclick="return confirm('¿Está seguro que desea cerrar sesión?')">
@@ -68,6 +68,9 @@
                     </html:link>
                     <html:link action="/showUserA" >
                         <p align ="center">Mostrar Usuarios</p>
+                    </html:link>
+                    <html:link action="/listarProfesores" >
+                        <p align ="center">Mostrar Profesores</p>
                     </html:link>
 
                 </div>

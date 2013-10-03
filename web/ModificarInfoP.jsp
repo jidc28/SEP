@@ -47,14 +47,14 @@
                                 <tr>
                                     <td>
                                         Bienvenidos, profesor <%=usbid.toString()%>.
-                                        <html:link action="/noImplementado">Perfil</html:link> |
-                                        <html:link href="/sistema2/VistaProfesor.jsp">
+                                        <html:link href="noimplementado.jsp">Perfil</html:link> |
+                                        <html:link href="VistaProfesor.jsp">
                                             Inicio
                                         </html:link> |
-                                        <html:link action="/noImplementado">
+                                        <html:link href="noimplementado.jsp">
                                             Contáctenos
                                         </html:link> |
-                                        <html:link action="/noImplementado">
+                                        <html:link href="noimplementado.jsp">
                                             Ayuda
                                         </html:link> |
                                         <html:link action="/cerrarSesion" onclick="return confirm('¿Está seguro que desea cerrar sesión?')">

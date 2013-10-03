@@ -39,14 +39,14 @@
                                 <tr>
                                     <td>
                                         Bienvenidos, profesor <%=usbid.toString()%>.
-                                        <html:link action="/noImplementado">Perfil</html:link> |
-                                        <html:link href="/sistema2/VistaProfesor.jsp">
+                                        <html:link href="noimplementado.jsp">Perfil</html:link> |
+                                        <html:link href="VistaProfesor.jsp">
                                             Inicio
                                         </html:link> |
-                                        <html:link action="/noImplementado">
+                                        <html:link href="noimplementado.jsp">
                                             Contáctenos
                                         </html:link> |
-                                        <html:link action="/noImplementado">
+                                        <html:link href="noimplementado.jsp">
                                             Ayuda
                                         </html:link> |
                                         <html:link action="/cerrarSesion" onclick="return confirm('¿Está seguro que desea cerrar sesión?')">
@@ -72,7 +72,7 @@
                                 <td><html:hidden property="usbid" value="<%=usbid.toString()%>"/></td>
                                 <tr>
                                     <td>USBID:</td>
-                                    <td><html:text disabled="true" property="nada" value="<%=usbid.toString()%>"/></td>
+                                    <td><html:text disabled="true" property="usbid" value="<%=usbid.toString()%>"/></td>
                                 </tr>
                             </table>
                         </div>
@@ -85,11 +85,27 @@
 
                                     <td>Período a evaluar</td> 
                                     <td>
-                                        <html:select value="" disabled="true" property="trimestre">
-                                            <html:option value="abr-jul">Abril-Julio</html:option>
+                                        <html:select value="trimestre" disabled="true" property="trimestre">
+                                            <html:option value="EM">Enero-Marzo</html:option>
+                                            <html:option value="AJ">Abril-Julio</html:option>
+                                            <html:option value="INT">Intensivo</html:option>
+                                            <html:option value="SD">Abril-Julio</html:option>
                                         </html:select>
-                                        <html:select  value="" disabled="true" property="trimestreAno">
-                                            <html:option value="2014">2014</html:option>                                                          
+                                        <html:select  value="ano" disabled="true" property="trimestreAno">
+                                            <html:option value="2013">2013</html:option> 
+                                            <html:option value="2014">2014</html:option> 
+                                            <html:option value="2015">2015</html:option> 
+                                            <html:option value="2016">2016</html:option> 
+                                            <html:option value="2017">2017</html:option> 
+                                            <html:option value="2018">2018</html:option> 
+                                            <html:option value="2019">2019</html:option> 
+                                            <html:option value="2020">2020</html:option> 
+                                            <html:option value="2021">2021</html:option> 
+                                            <html:option value="2022">2022</html:option> 
+                                            <html:option value="2023">2023</html:option> 
+                                            <html:option value="2024">2024</html:option> 
+                                            <html:option value="2025">2025</html:option> 
+                                            <html:option value="2026">2026</html:option> 
                                         </html:select>
                                     </td>
 

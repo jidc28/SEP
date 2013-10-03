@@ -42,8 +42,8 @@
         <action input="/VistaAdministrador.jsp" path="/showUserA" scope="request" type="com.myapp.struts.ShowUserA" validate="false">
             <forward name="success" path="/ShowUser.jsp"/>
         </action>
-        <action input="/VistaAdministrador.jsp" path="/showUserA" scope="request" type="com.myapp.struts.ShowUserA" validate="false">
-            <forward name="success" path="/ShowUser.jsp"/>
+        <action input="/VistaAdministrador.jsp" path="/listarProfesores" scope="request" type="com.myapp.struts.ListaProfesorAction" validate="false">
+            <forward name="success" path="/ListaProfesores.jsp"/>
         </action>
         <action input="/VistaAdministrador.jsp" path="/agregaCarreraA" scope="request" type="com.myapp.struts.AgregaCarreraA">
             <forward name="success" path="/AgregaCarrera.jsp"/>
@@ -148,6 +148,33 @@
             <forward name="failure" path="/EditarNombreCarreraFail.jsp"/> <!--MODIFICAR-->
         </action>        
         
+        <!--         USUARIOS       -->
+        <action input="/CreateUser.jsp" name="CreateUserForm" path="/createUser" scope="request" type="com.myapp.struts.CreateUserAction" validate="false">
+            <forward name="failure" path="/CreateUser.jsp"/>
+            <forward name="yaregistrado" path="/AdminUserCreateFail.jsp"/> <!--MODIFICAR-->
+            <forward name="success" path="/AdminUserCreateSuccess.jsp"/>
+        </action>
+        <action input="/ShowUser.jsp" name="EliminarUserForm" path="/eliminarUser" scope="request" type="com.myapp.struts.EliminarUserAction" validate="false">
+            <forward name="success" path="/ShowUserSuccess.jsp"/>
+            <forward name="failure" path="/Login.jsp"/>
+        </action>
+        <action input="/EditarUserRol.jsp" name="EliminarUserForm" path="/cambiarRolUser" scope="request" type="com.myapp.struts.CambiarRolUserA" validate="false">
+            <forward name="success" path="/ShowUserEditarSuccess.jsp"/>
+            <forward name="failure" path="/Login.jsp"/>
+        </action>
+        <action input="/ShowUser.jsp" name="EliminarUserForm" path="/editarUser" scope="request" type="com.myapp.struts.EditarUserAction" validate="false">
+            <forward name="success" path="/EditarUserRol.jsp"/>
+        </action>
+        <action input="/ListaProfesores.jsp" name="EliminarUserForm" path="/eliminarProfesor" scope="request" type="com.myapp.struts.EliminarProfesorAction" validate="false">
+            <forward name="success" path="/ListaProfesoresSuccess.jsp"/>
+        </action>
+        <action input="/ListaProfesores.jsp" name="EliminarUserForm" path="/editarProfesor" scope="request" type="com.myapp.struts.EditarProfesorAction" validate="false">
+            <forward name="success" path="/EditarProfesorRol.jsp"/>
+        </action>
+        <action input="/EditarProfesorRol.jsp" name="EliminarUserForm" path="/cambiarRolProfesor" scope="request" type="com.myapp.struts.CambiarRolProfesorA" validate="false">
+            <forward name="success" path="/ListaProfesoresSuccess.jsp"/>
+        </action>
+        
         <!--                        -->
         <action input="/Login.jsp" name="Usuario" path="/login" scope="request" type="com.myapp.struts.LoginAction" validate="false">
             <forward name="profesor" path="/VistaProfesor.jsp"/>
@@ -158,16 +185,7 @@
             <forward name="success" path="/Login.jsp"/>
         </action>
        
-        <action input="/CreateUser.jsp" name="CreateUserForm" path="/createUser" scope="request" type="com.myapp.struts.CreateUserAction" validate="false">
-            <forward name="failure" path="/CreateUser.jsp"/>
-            <forward name="yaregistrado" path="/AdminUserCreateFail.jsp"/> <!--MODIFICAR-->
-            <forward name="success" path="/AdminUserCreateSuccess.jsp"/>
-        </action>
         
-        <action input="/ShowUser.jsp" name="EliminarUserForm" path="/eliminarUser" scope="request" type="com.myapp.struts.EliminarUserAction" validate="false">
-            <forward name="success" path="/ShowUserSuccess.jsp"/>
-            <forward name="failure" path="/Login.jsp"/>
-        </action>
         <action input="/VistaProfesor.jsp" name="ModificarInfoPForm" path="/modificarInfoP" scope="request" type="com.myapp.struts.modificarInfoP" validate="false">
             <forward name="success" path="/ModificarInfoP.jsp"/>
             <forward name="failure" path="/VistaProfesor.jsp"/>
@@ -179,13 +197,8 @@
         <action input="/VistaProfesor.jsp" name="Profesor" path="/eliminarInfoP" scope="request" type="com.myapp.struts.EliminarInfoP" validate="false">
             <forward name="success" path="/VistaProfesorEliminarSuccess.jsp"/>
         </action>
-        <action input="/ShowUser.jsp" name="EliminarUserForm" path="/editarUser" scope="request" type="com.myapp.struts.EditarUserAction" validate="false">
-            <forward name="success" path="/EditarUserRol.jsp"/>
-        </action>
-        <action input="/EditarUserRol.jsp" name="EliminarUserForm" path="/cambiarRolUser" scope="request" type="com.myapp.struts.CambiarRolUserA" validate="false">
-            <forward name="success" path="/ShowUserEditarSuccess.jsp"/>
-            <forward name="failure" path="/Login.jsp"/>
-        </action>
+        
+        
         <action input="/VistaProfesor.jsp" name="ModificarInfoPForm" path="/agregarInfoP" scope="request" type="com.myapp.struts.AgregarInfoP" validate="false">
             <forward name="success" path="/AgregarInfoP.jsp"/>
             <forward name="failure" path="/VistaProfesor.jsp"/>

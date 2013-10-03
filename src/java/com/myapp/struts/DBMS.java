@@ -123,6 +123,27 @@ public class DBMS {
         return usrs;
     }
     
+    public ArrayList<Usuario> listarProfesores() {
+
+        ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT * FROM usuario WHERE TIPOUSUARIO = 'profesor' ORDER BY usbid");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Usuario u = new Usuario();
+                u.setUsbid(rs.getString("usbid"));
+                u.setTipousuario(rs.getString("tipousuario"));
+                u.setDepartamento(rs.getString("departamento"));
+                usrs.add(u);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return usrs;
+    }
+    
     public ArrayList<Carrera> listarCarreras() {
 
         ArrayList<Carrera> carreras = new ArrayList<Carrera>(0);
