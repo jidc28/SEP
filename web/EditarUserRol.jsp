@@ -88,7 +88,7 @@
 
                                     <tr>
                                         <td>
-                                            <p style="color: brown"> <%=usbid.toString()%></p>	
+                                            <p style="color: green"> <%=usbid.toString()%></p>	
                                         </td>
                                         <td>
                                             <html:form  action="/cambiarRolUser">

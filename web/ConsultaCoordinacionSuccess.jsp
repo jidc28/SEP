@@ -95,13 +95,13 @@
                                     <%for (int i = 0; i < coords.size(); i++) {%>
                                     <tr>
                                         <td>
-                                            <p style="color: brown"> <%=coords.get(i).getCodigo()%></p>	
+                                            <p style="color: green"> <%=coords.get(i).getCodigo()%></p>	
                                         </td>
                                         <td>
-                                            <p style="color: brown"> <%=coords.get(i).getNombre()%></p>	
+                                            <p style="color: green"> <%=coords.get(i).getNombre()%></p>	
                                         </td>
                                         <td>
-                                            <p style="color: brown"> <%=coords.get(i).getStatus()%></p>	
+                                            <p style="color: green"> <%=coords.get(i).getStatus()%></p>	
                                         </td>
                                         <td>
                                             <html:form  action="/editarNombreCoordinacion">

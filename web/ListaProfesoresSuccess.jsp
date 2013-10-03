@@ -95,13 +95,13 @@
                                     <%for (int i = 0; i < users.size(); i++) {%>
                                     <tr>
                                         <td>
-                                            <p style="color: brown"> <%=users.get(i).getUsbid()%></p>	
+                                            <p style="color: green"> <%=users.get(i).getUsbid()%></p>	
                                         </td>
                                         <td>
-                                            <p style="color: brown"> <%=users.get(i).getTipousuario()%></p>	
+                                            <p style="color: green"> <%=users.get(i).getTipousuario()%></p>	
                                         </td>
                                         <td>
-                                            <p style="color: brown"> <%=users.get(i).getDepartamento()%></p>	
+                                            <p style="color: green"> <%=users.get(i).getDepartamento()%></p>	
                                         </td>
                                         <td>
                                             <html:form  action="/editarProfesor">

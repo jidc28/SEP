@@ -81,6 +81,7 @@ public class LoginAction extends org.apache.struts.action.Action {
 
             } else {
                 error.add("contrasena", new ActionMessage("error.contrasena.missmatch"));
+                saveErrors(request, error);
                 return mapping.findForward(FAILURE);
             }
 

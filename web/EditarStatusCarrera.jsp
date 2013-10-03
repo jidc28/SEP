@@ -84,7 +84,7 @@
 
                                     <tr>
                                         <td>
-                                            <p style="color: brown"> <%=codigo.toString()%></p>	
+                                            <p style="color: green"> <%=codigo.toString()%></p>	
                                         </td>
                                         <td>
                                             <html:form  action="/cambiarStatusCarreraA">

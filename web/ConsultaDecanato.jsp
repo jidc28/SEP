@@ -90,13 +90,13 @@
                                     <%for (int i = 0; i < decans.size(); i++) {%>
                                     <tr>
                                         <td>
-                                            <p style="color: brown"> <%=decans.get(i).getCodigo()%></p>	
+                                            <p style="color: green"> <%=decans.get(i).getCodigo()%></p>	
                                         </td>
                                         <td>
-                                            <p style="color: brown"> <%=decans.get(i).getNombre()%></p>	
+                                            <p style="color: green"> <%=decans.get(i).getNombre()%></p>	
                                         </td>
                                         <td>
-                                            <p style="color: brown"> <%=decans.get(i).getStatus()%></p>	
+                                            <p style="color: green"> <%=decans.get(i).getStatus()%></p>	
                                         </td>
                                         <td>
                                             <html:form  action="/editarStatusDecanato">

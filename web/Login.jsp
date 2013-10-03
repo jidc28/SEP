@@ -48,7 +48,7 @@
                             <td><html:text property="usbid" /></td>
                         </tr>
                         <tr>
-                            <td>
+                            <td style="color: red">
                                 <html:errors property="usbid" /> 
                             </td>
                         </tr>
@@ -59,7 +59,7 @@
                             <td><html:password property="contrasena" /></td>
                         </tr>
                         <tr>
-                            <td>
+                            <td style="color: red">
                                 <html:errors property="contrasena" /> 
                             </td>
                         </tr>

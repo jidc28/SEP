@@ -95,13 +95,13 @@
                                     <%for (int i = 0; i < carreras.size(); i++) {%>
                                     <tr>
                                         <td>
-                                            <p style="color: brown"> <%=carreras.get(i).getCodigo()%></p>	
+                                            <p style="color: green"> <%=carreras.get(i).getCodigo()%></p>	
                                         </td>
                                         <td>
-                                            <p style="color: brown"> <%=carreras.get(i).getNombre()%></p>	
+                                            <p style="color: green"> <%=carreras.get(i).getNombre()%></p>	
                                         </td>
                                         <td>
-                                            <p style="color: brown"> <%=carreras.get(i).getStatus()%></p>	
+                                            <p style="color: green"> <%=carreras.get(i).getStatus()%></p>	
                                         </td>
                                         <td>
                                             <html:form  action="/editarStatus">
