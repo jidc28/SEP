@@ -36,6 +36,12 @@ body
 	background-color: #DEF0F6;
 }
 
+#menu-principal2 {
+	width: 300px;
+	height: 20px;
+	background-color: #DEF0F6;
+}
+
 #menu-principal ul {
 list-style: none;
 border: none;
@@ -59,6 +65,7 @@ text-decoration: none;
 #contenido-der {
 	width : 896px;
 	float : right;
+        text-align: center;
 }
 
 h1 {
@@ -76,6 +83,7 @@ a:visited {
 a:hover {
 	text-decoration: none;
 	color: #000;
+        cursor:  pointer;
 }
 a:active {
 	text-decoration: none;
@@ -95,6 +103,38 @@ a:active {
 	width : 80px;
 	height: 20px;
 	cursor:  pointer;
+}
+
+#welcome table {
+display: table;
+border-collapse: separate;
+border-spacing: 2px;
+border-color: gray;
+margin-left: auto;
+margin-right: auto;
+width: 330px;
+font-size: 12px;
+}
+
+#welcome {
+margin-left: auto;
+margin-right: auto;
+padding: 15px;
+position: relative;
+text-align: left;
+}
+
+#content {
+width: 750px;
+margin-left: auto;
+margin-right: auto;
+left: 50%;
+}
+
+#welcome p {
+padding: 0;
+margin-top: 0;
+font-size: 12px;
 }
 
 input { 
