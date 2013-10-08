@@ -73,7 +73,7 @@
 
                             <table>
                                 <tbody>
-                                    
+
                                     <tr>
                                         <td>
                                             <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Codigo</h1>	
@@ -94,6 +94,11 @@
                                                 <html:submit value="Guardar"/>
                                             </html:form>	
                                         </td>
+                                        <tr>
+                                            <td style="color: firebrick">
+                                                <html:errors property="decanato"/>
+                                            </td>
+                                        </tr>
 
                                     </tr>
 

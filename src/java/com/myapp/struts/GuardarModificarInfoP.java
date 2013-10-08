@@ -53,6 +53,7 @@ public class GuardarModificarInfoP extends org.apache.struts.action.Action {
 
         //si los campos no son validos
         if (huboError) {
+            saveErrors(request, error);
             return mapping.findForward(FAILURE);
             //si los campos son validos
         } else {

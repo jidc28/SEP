@@ -17,19 +17,18 @@ import org.apache.struts.action.ActionMessage;
  * @author admin
  */
 public class Profesor extends org.apache.struts.action.ActionForm {
-    
+
     private static final String patronEmail = "^([a-zA-Z0-9]+(-|_)*[a-zA-Z0-9]*@[a-zA-Z]+.[a-zA-Z]+)*$";
     private String usbid;
     private String nombre;
     private String apellido;
     private String cedula;
     private String genero;
-    private String email;    
+    private String email;
     private String nivel;
     private String jubilado;
     private String lapso_contractual;
     private String errorEmailFormato;
-    
     private Pattern patron;
     private Matcher match;
 
@@ -45,7 +44,7 @@ public class Profesor extends org.apache.struts.action.ActionForm {
 
         }
     }
-    
+
     public Profesor() {
         patron = Pattern.compile(patronEmail);
     }
@@ -127,11 +126,6 @@ public class Profesor extends org.apache.struts.action.ActionForm {
     public void setLapso_contractual(String lapso_contractual) {
         this.lapso_contractual = lapso_contractual;
     }
-    
-
-    
-
-    
 
     /**
      * This is the action called from the Struts framework.
@@ -142,17 +136,22 @@ public class Profesor extends org.apache.struts.action.ActionForm {
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
-        
-        
+
+
         this.setErrorEmailFormato("");
 
-        
+        try {
+            Integer.parseInt(getCedula());
+        } catch (Exception e) {
+            e.printStackTrace();
+            errors.add("cedula", new ActionMessage("error.cedula.malformulada"));
+
+        }
 
         if (!validate(getEmail())) {
-            this.setErrorEmailFormato("error");
-            errors.add("usbid", new ActionMessage("error.usbid.malformulado"));
+            errors.add("email", new ActionMessage("error.email.malformulado"));
         }
-        
+
         return errors;
     }
 }

@@ -90,8 +90,8 @@
         <!--       DECANATOS        -->
         <action input="/AgregaDecanato.jsp" name="Decanato" path="/registrarDecanato" scope="request" type="com.myapp.struts.RegistrarDecanato" validate="false">
             <forward name="success" path="/AdminDecanatoRegistrarSuccess.jsp"/>
-            <forward name="failure" path="/AgregaDecanatoFail.jsp"/> <!--MODIFICAR-->
-            <forward name="yaregistrada" path="/AdminDecanatoRegistrarFailure.jsp"/> <!--MODIFICAR-->
+            <forward name="failure" path="/AgregaDecanato.jsp"/> 
+            <forward name="yaregistrada" path="/AgregaDecanato.jsp"/> 
         </action>
         <action input="/ConsultaDecanato.jsp" name="Decanato" path="/cambiarStatusDecanato" scope="request" type="com.myapp.struts.cambiarStatusDecanato" validate="false">
             <forward name="success" path="/EditarStatusDecanato.jsp"/>
@@ -100,7 +100,7 @@
             <forward name="success" path="/ConsultaDecanato.jsp"/>
         </action>
         <action input="/ConsultaDecanato.jsp" name="Decanato" path="/editarStatusDecanato" scope="request" type="com.myapp.struts.EditarStatusDecanato" validate="false">
-            <forward name="success" path="/ConsultaDecanato.jsp"/>
+            <forward name="success" path="/EditarNombreDecanato.jsp"/>
         </action>
         <action input="/EditarNombreDecanato.jsp" name="Decanato" path="/cambiarNombreDecanatoA" scope="request" type="com.myapp.struts.CambiarNombreDecanatoA" validate="false">
             <forward name="success" path="/ConsultaDecanato.jsp"/>
@@ -192,7 +192,7 @@
         </action>
         <action input="/ModificarInfoP.jsp" name="Profesor" path="/guardarModificarInfoP" scope="request" type="com.myapp.struts.GuardarModificarInfoP" validate="false">
             <forward name="success" path="/VistaProfesorModificarSuccess.jsp"/>
-            <forward name="failure" path="/ModificarInfoPFail.jsp"/> <!--MODIFICAR-->
+            <forward name="failure" path="/ModificarInfoP.jsp"/> <!--MODIFICAR-->
         </action>
         <action input="/VistaProfesor.jsp" name="Profesor" path="/eliminarInfoP" scope="request" type="com.myapp.struts.EliminarInfoP" validate="false">
             <forward name="success" path="/VistaProfesorEliminarSuccess.jsp"/>

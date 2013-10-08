@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
 
 /**
  *
@@ -22,7 +23,6 @@ public class CambiarNombreDecanatoA extends org.apache.struts.action.Action {
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
     private static final String FAILURE = "failure";
-    private static final String ERRORUPDATE = "errorupdate";
 
     /**
      * This is the action called from the Struts framework.
@@ -59,29 +59,25 @@ public class CambiarNombreDecanatoA extends org.apache.struts.action.Action {
             //si los campos son validos
         } else {
 
-            //elimina usuario del sistema 
+            //cambia el nombre del decanato del sistema 
             boolean actualizo = DBMS.getInstance().actualizarNombreDecanato(u);
 
             if (actualizo) {
-                //obtengo una lista de usuarios registrados
-                ArrayList<Decanato> users = DBMS.getInstance().listarDecanatos();
+                //obtengo una lista de decanatos registrados
+                ArrayList<Decanato> decan = DBMS.getInstance().listarDecanatos();
 
-                //si existen usuarios registrados
+                //si existen decanato registrados
 
                 //retorno a pagina de exito
-                session.setAttribute("decanatos", users);
+                session.setAttribute("decanatos", decan);
 
 
                 return mapping.findForward(SUCCESS);
             } else {
-                return mapping.findForward(ERRORUPDATE);
+                error.add("decanato", new ActionMessage("error.actualizacion"));
+                saveErrors(request, error);
+                return mapping.findForward(FAILURE);
             }
         }
-
-
-
-
-
-
     }
 }

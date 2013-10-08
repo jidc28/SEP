@@ -86,6 +86,9 @@
                                     <td>Cedula:</td>
                                     <td><html:text property="cedula" value="<%=cedula.toString()%>"/></td>
                                 </tr>
+                                <tr><td style="color:firebrick">
+                                        <html:errors property="cedula"/>
+                                    </td></tr>
                                 <tr>
                                     <td>Nombre:</td>
                                     <td><html:text property="nombre" value="<%=nombre.toString()%>"/></td>
@@ -115,6 +118,9 @@
                                     </td>
 
                                 </tr>
+                                <tr><td style="color:firebrick">
+                                        <html:errors property="email"/>
+                                    </td></tr>
 
 
 
@@ -130,7 +136,7 @@
                                             <html:option value="3">3</html:option>
                                             <html:option value="1">1</html:option>
                                             <html:option value="5">5</html:option>
-                                            <%} else  {%>
+                                            <%} else {%>
                                             <html:option value="5">5</html:option>
                                             <html:option value="1">1</html:option>
                                             <html:option value="3">3</html:option>
@@ -166,7 +172,7 @@
                                             <html:option value="asistente">Asistente</html:option>
                                             <html:option value="agregado">Agregado</html:option>
                                             <html:option value="titular">Titular</html:option>
-                                            <%} else  {%>
+                                            <%} else {%>
                                             <html:option value="titular">Titular</html:option>
                                             <html:option value="ayudanteAcad">Ayudante Académico</html:option>
                                             <html:option value="asistente">Asistente</html:option>

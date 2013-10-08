@@ -65,6 +65,8 @@ public class RegistrarDecanato extends org.apache.struts.action.Action {
 
             return mapping.findForward(SUCCESS);
             } else {
+                error.add("codigo", new ActionMessage("error.codigoexistente"));
+                saveErrors(request, error);
                 return mapping.findForward(YAREGISTRADA);
             }
         } 
