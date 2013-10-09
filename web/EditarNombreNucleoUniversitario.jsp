@@ -1,10 +1,10 @@
 <%-- 
     Document   : EditarNombreNucleoUniversitario
     Created on : 02/10/2013, 01:40:38 AM
-    Author     : jidc28
+    Author     : Langtech
 --%>
 
-<%@page import="com.myapp.struts.NucleoUniversitario"%>
+<%@page import="Clases.NucleoUniversitario"%>
 <%@page import="java.util.ArrayList"%>
 <%
     Object codigo = session.getAttribute("codigo");

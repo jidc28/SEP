@@ -4,8 +4,8 @@
  */
 package Actions.Usuario;
 
-import com.myapp.struts.CreateUserForm;
-import com.myapp.struts.DBMS;
+import Forms.CreateUserForm;
+import DBMS.DBMS;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

@@ -7,17 +7,15 @@
 
 <struts-config>
     <form-beans>
-        <form-bean name="Carrera" type="com.myapp.struts.Carrera"/>
-        <form-bean name="Decanato" type="com.myapp.struts.Decanato"/>
-        <form-bean name="Coordinacion" type="com.myapp.struts.Coordinacion"/>
-        <form-bean name="NucleoUniversitario" type="com.myapp.struts.NucleoUniversitario"/>
-        <form-bean name="EliminarInfoPForm" type="EliminarInfoPForm"/>
-        <form-bean name="guardarModificarInfoPForm" type="com.myapp.struts.guardarModificarInfoPForm"/>
-        <form-bean name="ModificarInfoPForm" type="com.myapp.struts.ModificarInfoPForm"/>
-        <form-bean name="EliminarUserForm" type="com.myapp.struts.EliminarUserForm"/>
-        <form-bean name="CreateUserForm" type="com.myapp.struts.CreateUserForm"/>
-        <form-bean name="Profesor" type="com.myapp.struts.Profesor"/>
-        <form-bean name="Usuario" type="com.myapp.struts.Usuario"/>
+        <form-bean name="Carrera" type="Clases.Carrera"/>
+        <form-bean name="Coordinacion" type="Clases.Coordinacion"/>
+        <form-bean name="CreateUserForm" type="Forms.CreateUserForm"/>
+        <form-bean name="Decanato" type="Clases.Decanato"/>
+        <form-bean name="EliminarUserForm" type="Forms.EliminarUserForm"/>
+        <form-bean name="ModificarInfoPForm" type="Forms.ModificarInfoPForm"/>
+        <form-bean name="NucleoUniversitario" type="Clases.NucleoUniversitario"/>
+        <form-bean name="Profesor" type="Clases.Profesor"/>
+        <form-bean name="Usuario" type="Clases.Usuario"/>
     
     </form-beans>
     
@@ -151,7 +149,7 @@
         <!--         USUARIOS       -->
         <action input="/CreateUser.jsp" name="CreateUserForm" path="/createUser" scope="request" type="Actions.Usuario.CreateUserAction" validate="false">
             <forward name="failure" path="/CreateUser.jsp"/>
-            <forward name="yaregistrado" path="/AdminUserCreateFail.jsp"/> <!--ELIMINAAAAAR-->
+            <forward name="yaregistrado" path="/CreateUser.jsp"/> <!-- TRABAJO DOBLEEEEEEEEEE PENDIENTEEE-->
             <forward name="success" path="/AdminUserCreateSuccess.jsp"/>
         </action>
         <action input="/ShowUser.jsp" name="EliminarUserForm" path="/eliminarUser" scope="request" type="Actions.Usuario.EliminarUserAction" validate="false">
@@ -176,12 +174,12 @@
         </action>
         
         <!--                        -->
-        <action input="/Login.jsp" name="Usuario" path="/login" scope="request" type="com.myapp.struts.LoginAction" validate="false">
+        <action input="/Login.jsp" name="Usuario" path="/login" scope="request" type="Session.LoginAction" validate="false">
             <forward name="profesor" path="/VistaProfesor.jsp"/>
             <forward name="administrador" path="/VistaAdministrador.jsp"/>
             <forward name="failure" path="/Login.jsp"/>
         </action>
-        <action scope="request" input="/" path="/cerrarSesion" type="com.myapp.struts.CerrarSesion" validate="false">
+        <action scope="request" input="/" path="/cerrarSesion" type="Session.CerrarSesion" validate="false">
             <forward name="success" path="/Login.jsp"/>
         </action>
        
@@ -202,7 +200,7 @@
             <forward name="failure" path="/VistaProfesor.jsp"/>
         </action>
  
-        <action name="NoImplementado" path="/noImplementado" scope="request" type="com.myapp.struts.noimplementadoAction" validate="false">
+        <action name="NoImplementado" path="/noImplementado" scope="request" type="Otros.noimplementadoAction" validate="false">
             <fordward name="success" path="/noimplementado.jsp"/>
         </action>
         

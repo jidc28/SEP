@@ -4,8 +4,8 @@
  */
 package Actions.Carrera;
 
-import com.myapp.struts.Carrera;
-import com.myapp.struts.DBMS;
+import Clases.Carrera;
+import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

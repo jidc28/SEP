@@ -4,7 +4,7 @@
  */
 package Actions.NucleoUniversitario;
 
-import com.myapp.struts.NucleoUniversitario;
+import Clases.NucleoUniversitario;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

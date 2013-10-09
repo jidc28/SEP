@@ -4,7 +4,7 @@
     Author     : admin
 --%>
 
-<%@page import="com.myapp.struts.Usuario"%>
+<%@page import="Clases.Carrera"%>
 <%@page import="java.util.ArrayList"%>
 <%
     Object codigo = session.getAttribute("codigo");

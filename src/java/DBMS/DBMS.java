@@ -1,5 +1,13 @@
-package com.myapp.struts;
+package DBMS;
 
+import Clases.Carrera;
+import Clases.Coordinacion;
+import Forms.CreateUserForm;
+import Clases.Decanato;
+import Forms.EliminarUserForm;
+import Clases.NucleoUniversitario;
+import Clases.Profesor;
+import Clases.Usuario;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.myapp.struts;
+package Forms;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,27 +14,9 @@ import org.apache.struts.action.ActionMessage;
  *
  * @author admin
  */
-public class EliminarUserForm extends org.apache.struts.action.ActionForm {
+public class ModificarInfoPForm extends org.apache.struts.action.ActionForm {
     
     private String usbid;
-    private String tipousuario;
-    private String departamento;
-
-    public String getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;
-    }
-
-    public String getTipousuario() {
-        return tipousuario;
-    }
-
-    public void setTipousuario(String tipousuario) {
-        this.tipousuario = tipousuario;
-    }
 
     public String getUsbid() {
         return usbid;
@@ -43,13 +25,13 @@ public class EliminarUserForm extends org.apache.struts.action.ActionForm {
     public void setUsbid(String usbid) {
         this.usbid = usbid;
     }
-    
 
     
+
     /**
      *
      */
-    public EliminarUserForm() {
+    public ModificarInfoPForm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -63,7 +45,7 @@ public class EliminarUserForm extends org.apache.struts.action.ActionForm {
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
-        if (getUsbid() == null || getUsbid().length() < 1) {
+        if (getUsbid() == null) {
             errors.add("usbid", new ActionMessage("error.usbid.required"));
             // TODO: add 'error.name.required' key to your resources
         }

@@ -4,9 +4,9 @@
  */
 package Actions.Usuario;
 
-import com.myapp.struts.EliminarUserForm;
-import com.myapp.struts.DBMS;
-import com.myapp.struts.Usuario;
+import Forms.EliminarUserForm;
+import DBMS.DBMS;
+import Clases.Usuario;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

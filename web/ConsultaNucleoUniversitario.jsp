@@ -4,7 +4,7 @@
     Author     : Langtech
 --%>
 
-<%@page import="com.myapp.struts.NucleoUniversitario"%>
+<%@page import="Clases.NucleoUniversitario"%>
 <%@page import="java.util.ArrayList"%>
 <%
     Object usbid = session.getAttribute("usbid");

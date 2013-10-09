@@ -4,8 +4,8 @@
  */
 package Actions.Decanato;
 
-import com.myapp.struts.DBMS;
-import com.myapp.struts.Decanato;
+import DBMS.DBMS;
+import Clases.Decanato;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

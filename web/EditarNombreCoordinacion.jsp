@@ -4,7 +4,7 @@
     Author     : Langtech
 --%>
 
-<%@page import="com.myapp.struts.Coordinacion"%>
+<%@page import="Clases.Coordinacion"%>
 <%@page import="java.util.ArrayList"%>
 <%
     Object codigo = session.getAttribute("codigo");

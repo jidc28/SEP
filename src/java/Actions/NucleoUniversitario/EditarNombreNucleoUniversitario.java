@@ -4,8 +4,8 @@
  */
 package Actions.NucleoUniversitario;
 
-import com.myapp.struts.NucleoUniversitario;
-import com.myapp.struts.DBMS;
+import Clases.NucleoUniversitario;
+import DBMS.DBMS;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

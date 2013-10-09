@@ -4,7 +4,7 @@
  */
 package Actions.Coordinacion;
 
-import com.myapp.struts.Coordinacion;
+import Clases.Coordinacion;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

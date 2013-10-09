@@ -4,9 +4,9 @@
  */
 package Actions.Profesor;
 
-import com.myapp.struts.DBMS;
-import com.myapp.struts.EliminarUserForm;
-import com.myapp.struts.Usuario;
+import DBMS.DBMS;
+import Forms.EliminarUserForm;
+import Clases.Usuario;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

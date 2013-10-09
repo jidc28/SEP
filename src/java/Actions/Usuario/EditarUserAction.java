@@ -4,7 +4,7 @@
  */
 package Actions.Usuario;
 
-import com.myapp.struts.EliminarUserForm;
+import Forms.EliminarUserForm;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

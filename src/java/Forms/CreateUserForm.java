@@ -2,9 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.myapp.struts;
+package Forms;
 
-import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
@@ -15,26 +14,16 @@ import org.apache.struts.action.ActionMessage;
 
 /**
  *
- * @author Langtech
+ * @author admin
  */
-public class Usuario extends org.apache.struts.action.ActionForm {
+public class CreateUserForm extends org.apache.struts.action.ActionForm {
 
     private static final String patronUsbid = "^[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9]$";
     private String usbid;
-    private String tipousuario;
-    private String contrasena;
-    private String departamento;
-
-    public String getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;
-    }
+    private String contrasena1;
+    private String contrasena2;
     // error message
     private String errorUsbid;
-    private String errorContrasena;
     private String errorUsbidFormato;
     private Pattern patron;
     private Matcher match;
@@ -51,8 +40,10 @@ public class Usuario extends org.apache.struts.action.ActionForm {
 
         }
     }
-    
-    public Usuario() {
+    private String errorContrasena;
+    private String errorDifierePass;
+
+    public CreateUserForm() {
         patron = Pattern.compile(patronUsbid);
     }
 
@@ -60,24 +51,6 @@ public class Usuario extends org.apache.struts.action.ActionForm {
 
         match = patron.matcher(carnet);
         return match.matches();
-    }
-
-    @Override
-    public String toString() {
-        return "" + "Usbid: " + usbid + ", Tipo de Usuario: " + tipousuario ;
-    }
-
-    public String getErrorContrasena() {
-        return errorContrasena;
-    }
-
-    public void setErrorContrasena(String errorContrasena) {
-        if (errorContrasena.equals("")) {
-            this.errorContrasena = "";
-        } else {
-            this.errorContrasena = "<span style='color:red'>Por favor introduzca su Contrasena</span>";
-
-        }
     }
 
     public String getErrorUsbid() {
@@ -88,7 +61,34 @@ public class Usuario extends org.apache.struts.action.ActionForm {
         if (errorUsbid.equals("")) {
             this.errorUsbid = "";
         } else {
-            this.errorUsbid = "<span style='color:red'>Por favor introduzca su Usbid</span>";
+            this.errorUsbid = "<span style='color:red'>Campo USBID obligatorio.</span>";
+
+        }
+    }
+
+    public String getErrorContrasena() {
+        return errorContrasena;
+    }
+
+    public void setErrorContrasena(String errorContrasena) {
+        if (errorContrasena.equals("")) {
+            this.errorContrasena = "";
+        } else {
+            this.errorContrasena = "<span style='color:red'>Campo Contrasena obligatorio.</span>";
+
+        }
+    }
+
+    public String getErrorDifierePass() {
+        return errorDifierePass;
+    }
+
+    public void setErrorDifierePass(String errorDifierePass) {
+        if (errorDifierePass.equals("")) {
+            this.errorDifierePass = "";
+        } else {
+            this.errorDifierePass = "<span style='color:red'>Las Contrasenas no coinciden.</span>";
+
         }
     }
 
@@ -100,42 +100,58 @@ public class Usuario extends org.apache.struts.action.ActionForm {
         this.usbid = usbid;
     }
 
-    public String getTipousuario() {
-        return tipousuario;
+    public String getContrasena1() {
+        return contrasena1;
     }
 
-    public void setTipousuario(String tipousuario) {
-        this.tipousuario = tipousuario;
+    public void setContrasena1(String contrasena1) {
+        this.contrasena1 = contrasena1;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    public String getContrasena2() {
+        return contrasena2;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setContrasena2(String contrasena2) {
+        this.contrasena2 = contrasena2;
     }
 
+    /**
+     * This is the action called from the Struts framework.
+     *
+     * @param mapping The ActionMapping used to select this instance.
+     * @param request The HTTP Request we are processing.
+     * @return
+     */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
         this.setErrorContrasena("");
         this.setErrorUsbid("");
         this.setErrorUsbidFormato("");
+        this.setErrorDifierePass("");
 
         if (getUsbid() == null || getUsbid().length() < 1) {
             this.setErrorUsbid("error");
             errors.add("usbid", new ActionMessage("error.usbid.required"));
             // TODO: add 'error.name.required' key to your resources
+        } else {
+
+            if (!validate(getUsbid())) {
+                this.setErrorUsbidFormato("error");
+                errors.add("usbid", new ActionMessage("error.usbid.malformulado"));
+            }
         }
 
-        if (!validate(getUsbid())) {
-            this.setErrorUsbidFormato("error");
-            errors.add("usbid", new ActionMessage("error.usbid.malformulado"));
-        }
-        
-        if (getContrasena() == null || getContrasena().length() < 1) {
+        if (getContrasena1() == null || getContrasena1().length() < 1
+                || getContrasena2() == null || getContrasena2().length() < 1) {
             this.setErrorContrasena("error");
             errors.add("contrasena", new ActionMessage("error.contrasena.required"));
+            // TODO: add 'error.name.required' key to your resources
+        }
+
+        if (!(getContrasena1().equals(getContrasena2()))) {
+            this.setErrorDifierePass("error");
+            errors.add("difierePass", new ActionMessage("error.contrasenasNoCoinciden"));
             // TODO: add 'error.name.required' key to your resources
         }
         return errors;

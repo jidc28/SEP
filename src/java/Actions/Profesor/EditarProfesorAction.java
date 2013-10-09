@@ -4,7 +4,7 @@
  */
 package Actions.Profesor;
 
-import com.myapp.struts.EliminarUserForm;
+import Forms.EliminarUserForm;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

@@ -4,7 +4,7 @@
     Author     : admin
 --%>
 
-<%@page import="com.myapp.struts.Decanato"%>
+<%@page import="Clases.Decanato"%>
 <%@page import="java.util.ArrayList"%>
 <%
     Object usbid = session.getAttribute("usbid");

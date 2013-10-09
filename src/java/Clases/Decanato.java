@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.myapp.struts;
+package Clases;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,7 +16,7 @@ import org.apache.struts.action.ActionMessage;
  *
  * @author admin
  */
-public class Carrera extends org.apache.struts.action.ActionForm {
+public class Decanato extends org.apache.struts.action.ActionForm {
     
     private static final String patronCodigo = "^[0-9]+$";
     private static final String patronNombre = "[a-zA-Z]*$";
@@ -41,7 +41,7 @@ public class Carrera extends org.apache.struts.action.ActionForm {
         if (errorCodigo.equals("")) {
             this.errorCodigo = "";
         } else {
-            this.errorCodigo = "<span style='color:red'>Por favor introduzca su Codigo de carrera</span>";
+            this.errorCodigo = "<span style='color:red'>Por favor introduzca su Codigo de decanato</span>";
 
         }
     }
@@ -54,7 +54,7 @@ public class Carrera extends org.apache.struts.action.ActionForm {
         if (errorNombre.equals("")) {
             this.errorNombre = "";
         } else {
-            this.errorNombre = "<span style='color:red'>Por favor introduzca el Nombre de la carrera</span>";
+            this.errorNombre = "<span style='color:red'>Por favor introduzca el Nombre de la decanato</span>";
 
         }
     }
@@ -67,7 +67,7 @@ public class Carrera extends org.apache.struts.action.ActionForm {
         if (errorStatus.equals("")) {
             this.errorStatus = "";
         } else {
-            this.errorStatus = "<span style='color:red'>Por favor introduzca el Status de la carrera</span>";
+            this.errorStatus = "<span style='color:red'>Por favor introduzca el Status de la decanato</span>";
 
         }
     }
@@ -126,7 +126,7 @@ public class Carrera extends org.apache.struts.action.ActionForm {
         }
     }
     
-    public Carrera() {
+    public Decanato() {
         patron = Pattern.compile(patronCodigo);
         patron2 = Pattern.compile(patronNombre);
     }
@@ -166,6 +166,11 @@ public class Carrera extends org.apache.struts.action.ActionForm {
             errors.add("codigo", new ActionMessage("error.codigo.required"));
             // TODO: add 'error.name.required' key to your resources
         }
+        
+       /* if (!validate(getCodigo())) {
+            this.setErrorCodigoFormato("error");
+            errors.add("usbid", new ActionMessage("error.usbid.malformulado"));
+        }*/
         
         if (getNombre() == null || getNombre().length() < 1) {
             this.setErrorNombre("error");

@@ -4,9 +4,9 @@
  */
 package Actions.Profesor;
 
-import com.myapp.struts.DBMS;
-import com.myapp.struts.ModificarInfoPForm;
-import com.myapp.struts.Profesor;
+import DBMS.DBMS;
+import Forms.ModificarInfoPForm;
+import Clases.Profesor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
