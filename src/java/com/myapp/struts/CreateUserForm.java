@@ -17,7 +17,7 @@ import org.apache.struts.action.ActionMessage;
  * @author admin
  */
 public class CreateUserForm extends org.apache.struts.action.ActionForm {
-    
+
     private static final String patronUsbid = "^[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9]$";
     private String usbid;
     private String contrasena1;
@@ -42,10 +42,7 @@ public class CreateUserForm extends org.apache.struts.action.ActionForm {
     }
     private String errorContrasena;
     private String errorDifierePass;
-    
-    
-    
-    
+
     public CreateUserForm() {
         patron = Pattern.compile(patronUsbid);
     }
@@ -55,7 +52,6 @@ public class CreateUserForm extends org.apache.struts.action.ActionForm {
         match = patron.matcher(carnet);
         return match.matches();
     }
-    
 
     public String getErrorUsbid() {
         return errorUsbid;
@@ -95,7 +91,6 @@ public class CreateUserForm extends org.apache.struts.action.ActionForm {
 
         }
     }
-    
 
     public String getUsbid() {
         return usbid;
@@ -121,9 +116,6 @@ public class CreateUserForm extends org.apache.struts.action.ActionForm {
         this.contrasena2 = contrasena2;
     }
 
-
-    
-
     /**
      * This is the action called from the Struts framework.
      *
@@ -137,25 +129,26 @@ public class CreateUserForm extends org.apache.struts.action.ActionForm {
         this.setErrorUsbid("");
         this.setErrorUsbidFormato("");
         this.setErrorDifierePass("");
-        
+
         if (getUsbid() == null || getUsbid().length() < 1) {
             this.setErrorUsbid("error");
             errors.add("usbid", new ActionMessage("error.usbid.required"));
             // TODO: add 'error.name.required' key to your resources
+        } else {
+
+            if (!validate(getUsbid())) {
+                this.setErrorUsbidFormato("error");
+                errors.add("usbid", new ActionMessage("error.usbid.malformulado"));
+            }
         }
-            
-        if (!validate(getUsbid())) {
-            this.setErrorUsbidFormato("error");
-            errors.add("usbid", new ActionMessage("error.usbid.malformulado"));
-        }
-        
-        if (getContrasena1() == null || getContrasena1().length() < 1 || 
-            getContrasena2() == null || getContrasena2().length() < 1) {
+
+        if (getContrasena1() == null || getContrasena1().length() < 1
+                || getContrasena2() == null || getContrasena2().length() < 1) {
             this.setErrorContrasena("error");
             errors.add("contrasena", new ActionMessage("error.contrasena.required"));
             // TODO: add 'error.name.required' key to your resources
         }
-        
+
         if (!(getContrasena1().equals(getContrasena2()))) {
             this.setErrorDifierePass("error");
             errors.add("difierePass", new ActionMessage("error.contrasenasNoCoinciden"));

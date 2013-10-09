@@ -73,7 +73,11 @@
 
                             <table>
                                 <tbody>
-                                    
+                                    <tr>
+                                        <td style="color:firebrick">
+                                            <html:errors property="actualizacion"/>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td>
                                             <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Codigo</h1>	
@@ -82,7 +86,6 @@
                                             <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Nombre de Carrera</h1>	
                                         </td>
                                     </tr>
-
                                     <tr>
                                         <td>
                                             <p style="color: green"> <%=codigo.toString()%></p>	
@@ -94,9 +97,7 @@
                                                 <html:submit value="Guardar"/>
                                             </html:form>	
                                         </td>
-
                                     </tr>
-
                                 </tbody>
                             </table>
                         </div>

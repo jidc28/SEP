@@ -88,7 +88,8 @@
                                 </tr>
                                 <tr><td style="color:firebrick">
                                         <html:errors property="cedula"/>
-                                    </td></tr>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td>Nombre:</td>
                                     <td><html:text property="nombre" value="<%=nombre.toString()%>"/></td>

@@ -167,11 +167,6 @@ public class Carrera extends org.apache.struts.action.ActionForm {
             // TODO: add 'error.name.required' key to your resources
         }
         
-       /* if (!validate(getCodigo())) {
-            this.setErrorCodigoFormato("error");
-            errors.add("usbid", new ActionMessage("error.usbid.malformulado"));
-        }*/
-        
         if (getNombre() == null || getNombre().length() < 1) {
             this.setErrorNombre("error");
             errors.add("nombre", new ActionMessage("error.nombre.required"));

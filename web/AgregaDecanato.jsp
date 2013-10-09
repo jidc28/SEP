@@ -77,14 +77,19 @@
                                             <td><html:text property="codigo" /><span style="color: red"> *</span></td>
                                         </tr>
                                         <tr>
+                                            <td style="color: firebrick">
+                                                <html:errors property="codigo"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td>Nombre</td>
                                             <td><html:text property="nombre" /><span style="color: red"> *</span></td>
                                         </tr>
-                                    <tr>
-                                        <td style="color: firebrick">
-                                            <html:errors property="codigo"/>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td style="color: firebrick">
+                                                <html:errors property="nombre"/>
+                                            </td>
+                                        </tr>
 
                                         <tr>
                                             <td>

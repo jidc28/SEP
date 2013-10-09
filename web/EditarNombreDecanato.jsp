@@ -96,7 +96,7 @@
                                         </td>
                                         <tr>
                                             <td style="color: firebrick">
-                                                <html:errors property="decanato"/>
+                                                <html:errors property="actualizacion"/>
                                             </td>
                                         </tr>
 
