@@ -4,7 +4,7 @@
     Author     : admin
 --%>
 
-<%@page import="com.myapp.struts.Usuario"%>
+<%@page import="Clases.Usuario"%>
 <%@page import="java.util.ArrayList"%>
 <%
     Object usbid = session.getAttribute("usbid");
