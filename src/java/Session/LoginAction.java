@@ -15,7 +15,6 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMessage;
 
-
 /**
  *
  * @author Langtech
@@ -26,6 +25,9 @@ public class LoginAction extends org.apache.struts.action.Action {
     private static final String FAILURE = "failure";
     private static final String PROFESOR = "profesor";
     private static final String ADMINISTRADOR = "administrador";
+    private static final String DECANATO = "decanato";
+    private static final String COORDINACION = "coordinacion";
+    private static final String DEPARTAMENTO = "departamento";
 
     /**
      * This is the action called from the Struts framework.
@@ -46,21 +48,21 @@ public class LoginAction extends org.apache.struts.action.Action {
         HttpSession session = request.getSession(true);
 
         ActionErrors error = new ActionErrors();
-        
+
         //valido los campos de formulario
         error = u.validate(mapping, request);
         boolean huboError = false;
 
-        
-        if (error.size()!=0) {
+
+        if (error.size() != 0) {
             huboError = true;
         }
-        
+
         //si los campos no son validos
         if (huboError) {
             saveErrors(request, error);
             return mapping.findForward(FAILURE);
-        //si los campos son validos
+            //si los campos son validos
         } else {
             //verifica un usuario en el sistema CAS
             Usuario tmp = DBMS.getInstance().verificarCas(u);
@@ -71,12 +73,23 @@ public class LoginAction extends org.apache.struts.action.Action {
                     request.setAttribute("usuario", tmp);
                     session.setAttribute("usbid", tmp.getUsbid());
                     return mapping.findForward(PROFESOR);
-                //si un usuario es administrador
+                    //si un usuario es administrador
                 } else if (tmp.getTipousuario().equals("administrador")) {
                     request.setAttribute("usuario", tmp);
                     session.setAttribute("usbid", tmp.getUsbid());
                     return mapping.findForward(ADMINISTRADOR);
-                //sino no se posee un tipo de usuario especifico
+                } else if (tmp.getTipousuario().equals("decanato")) {
+                    request.setAttribute("usuario", tmp);
+                    session.setAttribute("usbid", tmp.getUsbid());
+                    return mapping.findForward(DECANATO);
+                } else if (tmp.getTipousuario().equals("departamento")) {
+                    request.setAttribute("usuario", tmp);
+                    session.setAttribute("usbid", tmp.getUsbid());
+                    return mapping.findForward(DEPARTAMENTO);
+                } else if (tmp.getTipousuario().equals("coordinacion")) {
+                    request.setAttribute("usuario", tmp);
+                    session.setAttribute("usbid", tmp.getUsbid());
+                    return mapping.findForward(COORDINACION);
                 } else {
                     return mapping.findForward(FAILURE);
                 }
