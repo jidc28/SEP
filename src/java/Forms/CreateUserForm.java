@@ -18,79 +18,9 @@ import org.apache.struts.action.ActionMessage;
  */
 public class CreateUserForm extends org.apache.struts.action.ActionForm {
 
-    private static final String patronUsbid = "^[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9]$";
     private String usbid;
     private String contrasena1;
     private String contrasena2;
-    // error message
-    private String errorUsbid;
-    private String errorUsbidFormato;
-    private Pattern patron;
-    private Matcher match;
-
-    public String getErrorUsbidFormato() {
-        return errorUsbidFormato;
-    }
-
-    public void setErrorUsbidFormato(String errorUsbidFormato) {
-        if (errorUsbidFormato.equals("")) {
-            this.errorUsbidFormato = "";
-        } else {
-            this.errorUsbidFormato = "<span style='color:red'>Campo USBID formato incorrecto (Sugerencia: 09-10927).</span>";
-
-        }
-    }
-    private String errorContrasena;
-    private String errorDifierePass;
-
-    public CreateUserForm() {
-        patron = Pattern.compile(patronUsbid);
-    }
-
-    public boolean validate(final String carnet) {
-
-        match = patron.matcher(carnet);
-        return match.matches();
-    }
-
-    public String getErrorUsbid() {
-        return errorUsbid;
-    }
-
-    public void setErrorUsbid(String errorUsbid) {
-        if (errorUsbid.equals("")) {
-            this.errorUsbid = "";
-        } else {
-            this.errorUsbid = "<span style='color:red'>Campo USBID obligatorio.</span>";
-
-        }
-    }
-
-    public String getErrorContrasena() {
-        return errorContrasena;
-    }
-
-    public void setErrorContrasena(String errorContrasena) {
-        if (errorContrasena.equals("")) {
-            this.errorContrasena = "";
-        } else {
-            this.errorContrasena = "<span style='color:red'>Campo Contrasena obligatorio.</span>";
-
-        }
-    }
-
-    public String getErrorDifierePass() {
-        return errorDifierePass;
-    }
-
-    public void setErrorDifierePass(String errorDifierePass) {
-        if (errorDifierePass.equals("")) {
-            this.errorDifierePass = "";
-        } else {
-            this.errorDifierePass = "<span style='color:red'>Las Contrasenas no coinciden.</span>";
-
-        }
-    }
 
     public String getUsbid() {
         return usbid;
@@ -125,32 +55,19 @@ public class CreateUserForm extends org.apache.struts.action.ActionForm {
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
-        this.setErrorContrasena("");
-        this.setErrorUsbid("");
-        this.setErrorUsbidFormato("");
-        this.setErrorDifierePass("");
-
+        
         if (getUsbid() == null || getUsbid().length() < 1) {
-            this.setErrorUsbid("error");
             errors.add("usbid", new ActionMessage("error.usbid.required"));
             // TODO: add 'error.name.required' key to your resources
-        } else {
-
-            if (!validate(getUsbid())) {
-                this.setErrorUsbidFormato("error");
-                errors.add("usbid", new ActionMessage("error.usbid.malformulado"));
-            }
-        }
+        } 
 
         if (getContrasena1() == null || getContrasena1().length() < 1
                 || getContrasena2() == null || getContrasena2().length() < 1) {
-            this.setErrorContrasena("error");
             errors.add("contrasena", new ActionMessage("error.contrasena.required"));
             // TODO: add 'error.name.required' key to your resources
         }
 
         if (!(getContrasena1().equals(getContrasena2()))) {
-            this.setErrorDifierePass("error");
             errors.add("difierePass", new ActionMessage("error.contrasenasNoCoinciden"));
             // TODO: add 'error.name.required' key to your resources
         }
