@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Actions.Decanato;
+package Actions.Carrera;
 
+import Clases.Carrera;
 import DBMS.DBMS;
-import Clases.Decanato;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,7 +18,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author admin
  */
-public class EditarStatusDecanato extends org.apache.struts.action.Action {
+public class EditarNombreCarrera extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -38,16 +38,13 @@ public class EditarStatusDecanato extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        Decanato u = (Decanato) form;
+        Carrera u = (Carrera) form;
         HttpSession session = request.getSession(true);
 
         ActionErrors error = new ActionErrors();
         
-        Decanato c = DBMS.getInstance().obtenerNombreDecanato(u);
+        Carrera c = DBMS.getInstance().obtenerNombreCarrera(u);
 
-        //si existen usuarios registrados
-
-        //retorno a pagina de exito
         session.setAttribute("codigo", c.getCodigo());
         session.setAttribute("nombre", c.getNombre());
         return mapping.findForward(SUCCESS);

@@ -4,12 +4,6 @@
     Author     : admin
 --%>
 
-<%@page import="Clases.Carrera"%>
-<%@page import="java.util.ArrayList"%>
-<%
-    Object codigo = session.getAttribute("codigo");
-    Object status = session.getAttribute("status");
-    if (codigo != "") {%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>  
@@ -20,104 +14,87 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <link rel="stylesheet" type="text/css" href="css/StylesheetEvalProf.css">
+        <link rel="stylesheet" type="text/css" href="css/estilo.css">
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
-        <div id="contenedor">
+        <div id="body-content">
 
-            <div id="encabezado">
-                <a title="Inicio" rel="home">
-                    <img src="imagenes/logo.jpg" alt="Inicio">
+            <div >
+                <div >
+                    <img id="banner" src="imagenes/logo.jpg" alt="Inicio">
+                </div>
+            </div>
+
+            <div id="sidebarL">
+                <div class="glossymenu" style="width: 190px">
+                    <a style="border-bottom: none;"/>
+                    <a class="menuitem" href="noimplementado.jsp">
+                        Perfil
+                    </a>
+                    <a class="menuitem" href="VistaAdministrador.jsp">
+                        Inicio
+                    </a>
+                    <a class="menuitem" href="noimplementado.jsp">
+                        Contáctenos
+                    </a>
+                    <a class="menuitem" href="noimplementado.jsp">
+                        Ayuda
+                    </a>
+                    <a class="menuitem" href="cerrarSesion.do" onclick="return confirm('¿Está seguro que desea cerrar sesión?')" >
+                        Cerrar Sesión
+                    </a>
+
+                </div>
+            </div>
+
+            <div id="sidebarR">
+                <a href="http://www.usb.ve/">
+                    <img width="150" height="50" src="imagenes/somosusb.gif"/>
                 </a>
             </div>
 
-
-            <div id="encabezado">
-                <div id="menu-principal">          
-                    <ul id="menu">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        Bienvenido, administrador
-                                        <html:link href="noimplementado.jsp">Perfil</html:link> |
-                                        <html:link href="VistaAdministrador.jsp">
-                                            Inicio
-                                        </html:link> |
-                                        <html:link href="noimplementado.jsp">
-                                            Contáctenos
-                                        </html:link> |
-                                        <html:link href="noimplementado.jsp">
-                                            Ayuda
-                                        </html:link> |
-                                        <html:link action="/cerrarSesion" onclick="return confirm('¿Está seguro que desea cerrar sesión?')">
-                                            Cerrar Sesión
-                                        </html:link> 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </ul>
-                </div>
-            </div>
-
-            <div id="cuerpo-principal">
-
-                <div id="contenido-der">
-                    <h1 style="background-color: cornflowerblue;width: 200px;margin-left: auto; margin-right: auto">Cambiar status de carrera</h1>
-                    <div id="content">
-
-                        <div style="width: 404px;margin-left: auto; margin-right: auto;">
-
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Codigo</h1>	
-                                        </td>
-                                        <td>
-                                            <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Status de Carrera</h1>	
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <p style="color: green"> <%=codigo.toString()%></p>	
-                                        </td>
-                                        <td>
-                                            <html:form  action="/cambiarStatusCarreraA">
-                                                <html:hidden property="codigo" value="<%=codigo.toString()%>"/>
-
-                                                <html:select property="status">
-                                                    <html:option value="visible">Visible</html:option>
-                                                    <html:option value="oculta">Oculta</html:option>                                                  
-                                                </html:select>
-
-                                                <html:submit value="Cambiar Status"/>
-                                            </html:form>	
-                                        </td>
-
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-                </div>
+            <div id="testTable">
+                <table border="0" style="margin: auto" class="altrowstable" id="alternatecolor">
+                    <thead>
+                        <tr>
+                            <th width="155px" align="center">
+                                Codigo
+                            </th>
+                            <th width="155px" align="center">
+                                Estado
+                            </th>
+                            <th width="155px" align="center">
+                                Modificar
+                            </th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <html:form action="/cambiarStatusCarreraA" acceptCharset="ISO-8859-1" onsubmit="return(this)">
+                            <td width="155px" align="center">
+                                <html:hidden name="Carrera" property="codigo"/>
+                                <bean:write name="Carrera" property="codigo"/>
+                            </td>
+                            <td width="155px" align="center">
+                                <html:select property="status">
+                                    <html:option value="visible">Visible</html:option>
+                                    <html:option value="oculta">Oculta</html:option>                                                  
+                                </html:select>
+                            </td>
+                            <td>
+                                <p style="text-align: center">
+                                    <html:submit>
+                                        Modificar
+                                    </html:submit>
+                                </p>
+                            </td>
+                        </html:form>
+                    </tr>
+                </table>
             </div>
 
         </div>
 
     </body>
 </html>
-
-<%} else {%>
-<html>
-
-    <title> hello</title>
-</html>
-<% }%>
-

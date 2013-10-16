@@ -4,142 +4,130 @@
     Author     : admin
 --%>
 
-<%@page import="Clases.Usuario"%>
-<%@page import="java.util.ArrayList"%>
-<%
-    Object usbid = session.getAttribute("usbid");
-    ArrayList<Usuario> users = (ArrayList<Usuario>) session.getAttribute("usuarios");
-    if (usbid != "") {%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>  
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+
+<script type="text/javascript">
+    function altRows(id) {
+        if (document.getElementsByTagName) {
+
+            var table = document.getElementById(id);
+            var rows = table.getElementsByTagName("tr");
+
+            for (i = 0; i < rows.length; i++) {
+                if (i % 2 == 0) {
+                    rows[i].className = "evenrowcolor";
+                } else {
+                    rows[i].className = "oddrowcolor";
+                }
+            }
+        }
+    }
+    $(document).ready(function() {
+        $('table').tablePagination({});
+    });
+    window.onload = function() {
+        altRows('alternatecolor');
+    }
+</script>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <link rel="stylesheet" type="text/css" href="css/StylesheetEvalProf.css">
-        <title>Gestion de Planillas de Evaluacion</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/estilo.css">
+        <title>SEP - Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
-        <div id="contenedor">
+        <div id="body-content">
 
-            <div id="encabezado">
-                <a title="Inicio" rel="home">
-                    <img src="imagenes/logo.jpg" alt="Inicio">
+            <div >
+                <div >
+                    <img id="banner" src="imagenes/logo.jpg" alt="Inicio">
+                </div>
+            </div>
+
+            <div id="sidebarL">
+                <div class="glossymenu" style="width: 190px">
+                    <a style="border-bottom: none;"/>
+                    <a class="menuitem" href="noimplementado.jsp">
+                        Perfil
+                    </a>
+                    <a class="menuitem" href="VistaAdministrador.jsp">
+                        Inicio
+                    </a>
+                    <a class="menuitem" href="noimplementado.jsp">
+                        Contáctenos
+                    </a>
+                    <a class="menuitem" href="noimplementado.jsp">
+                        Ayuda
+                    </a>
+                    <a class="menuitem" href="cerrarSesion.do" onclick="return confirm('¿Está seguro que desea cerrar sesión?')" >
+                        Cerrar Sesión
+                    </a>
+
+                </div>
+            </div>
+
+            <div id="sidebarR">
+                <a href="http://www.usb.ve/">
+                    <img width="150" height="50" src="imagenes/somosusb.gif"/>
                 </a>
             </div>
 
-
-            <div id="encabezado">
-                <div id="menu-principal">          
-                    <ul id="menu">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        Bienvenido, administrador
-                                        <html:link href="noimplementado.jsp">Perfil</html:link> |
-                                        <html:link href="VistaAdministrador.jsp">
-                                            Inicio
-                                        </html:link> |
-                                        <html:link href="noimplementado.jsp">
-                                            Contáctenos
-                                        </html:link> |
-                                        <html:link href="noimplementado.jsp">
-                                            Ayuda
-                                        </html:link> |
-                                        <html:link action="/cerrarSesion" onclick="return confirm('¿Está seguro que desea cerrar sesión?')">
-                                            Cerrar Sesión
-                                        </html:link> 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </ul>
-                </div>
+            <h4>Lista de usuarios del sistema:</h4>
+            <div id ="testTable">
+                <table border="0" style="margin: auto" class="altrowstable" id="alternatecolor">
+                    <thead>
+                        <tr>
+                            <th width="155px" align="center">
+                                UsbID
+                            </th>
+                            <th width="155px" align="center">
+                                Tipo de Usuario
+                            </th>
+                            <th width="155px" align="center">
+                                Departamento
+                            </th>
+                            <th width="155px" align="center">
+                                Visibilidad
+                            </th>
+                            <th width="155px" align="center">
+                                Modificar
+                            </th>
+                        </tr>
+                    </thead>
+                    
+                    <logic:iterate name="usuarios" id="Usuarios">
+                        <tr>
+                            <td width="150px" align="center">
+                                <bean:write name="Usuarios" property="usbid"/>
+                            </td>
+                            <td width="150px" align="center">
+                                <bean:write name="Usuarios" property="tipousuario"/>
+                            </td>
+                            <td width="150px" align="center">
+                                <bean:write name="Usuarios" property="departamento"/>
+                            </td>
+                            <td width="150px" align="center">
+                                Visible
+                            </td>
+                            <td width="150px" align="center">
+                                <html:form action="/editarUser" onsubmit="return(this)">
+                                    <html:hidden name="Usuarios" property="usbid"/>
+                                    <html:image src="imagenes/edit.png" value="" property=""/>
+                                </html:form>
+                            </td>
+                        </tr>
+                    </logic:iterate>
+                </table>
             </div>
-
-            <div id="cuerpo-principal">
-
-                <div id="contenido-der">
-                    <h1 style="background-color: cornflowerblue;width: 140px;margin-left: auto; margin-right: auto">Lista de usuarios</h1>
-                    <div id="content">
-
-                        <%if (users.size() != 0) {%>
-                        <div style="width: 604px;margin-left: auto; margin-right: auto;">
-
-
-
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Usbid</h1>	
-                                        </td>
-                                        <td>
-                                            <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Tipo de Usuario</h1>	
-                                        </td>
-                                        <td>
-                                            <h1 style="width: 150px;margin-left: auto; margin-right: auto;color: darkblue">Departamento</h1>	
-                                        </td>
-                                    </tr>
-                                    <%for (int i = 0; i < users.size(); i++) {%>
-                                    <tr>
-                                        <td>
-                                            <p style="color: green"> <%=users.get(i).getUsbid()%></p>	
-                                        </td>
-                                        <td>
-                                            <p style="color: green"> <%=users.get(i).getTipousuario()%></p>	
-                                        </td>
-                                        <td>
-                                            <p style="color: green"> <%=users.get(i).getDepartamento()%></p>	
-                                        </td>
-                                        <td>
-                                            <html:form  action="/editarUser">
-                                                <html:hidden property="usbid" value="<%=users.get(i).getUsbid()%>"/>
-                                                <html:hidden property="tipousuario" value="<%=users.get(i).getTipousuario()%>"/>
-                                                <html:hidden property="departamento" value="<%=users.get(i).getDepartamento()%>"/>
-                                                <html:submit value="Editar"/>
-                                            </html:form>
-                                        </td>
-                                        <td>
-                                            <html:form  action="/eliminarUser">
-                                                <html:hidden property="usbid" value="<%=users.get(i).getUsbid()%>"/>
-                                                <html:hidden property="tipousuario" value="<%=users.get(i).getTipousuario()%>"/>
-                                                <html:hidden property="departamento" value="<%=users.get(i).getDepartamento()%>"/>
-                                                <html:submit value="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar este usuario?')"/>
-                                            </html:form>	                                        
-                                        </td>
-                                    </tr>
-                                    <%}%>
-                                </tbody>
-                            </table>
-
-
-                            <%} else {%>
-                            No hay Usuarios En el Sistema para Mostrar
-                            <%}%>
-
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-
         </div>
-
     </body>
 </html>
-
-<%} else {%>
-<html>
-
-    <title> hello</title>
-</html>
-<% }%>
-

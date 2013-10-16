@@ -11,32 +11,20 @@
 
 <tiles-definitions>
 
-    <!-- sample tiles definitions
-    <definition name=".mainLayout" path="/common/layouts/classicLayout.jsp">
-        <put name="title"  value="Sample Page Title" />
-        <put name="header" value="/common/header.jsp" />
-        <put name="menu"   value=".mainMenu" />
-        <put name="footer" value="/common/footer.jsp" />
-        <put name="body"   value=".portal.body" />
+    <definition name="base" path="/Plantilla/plantilla.jsp">
+        <put name="banner" value="/Plantilla/banner.jsp"/>
+        <put name="body" value="/Plantilla/body.jsp"/>
+        <put name="sidebarR" value="/Plantilla/sidebarR.jsp"/>
+        <put name="sidebarL" value="/Plantilla/sidebarL.jsp"/>
+        <put name="footer" value="/Plantilla/footer.jsp"/>
     </definition>
 
-    <definition name=".mainMenu" path="/common/layouts/vboxLayout.jsp" >
-        <putList name="list" >
-            <add value=".menu.links" />
-            <add value=".menu.taglib.references" />
-            <add value=".menu.printer.friendly" />
-            <add value=".menu.old.documents" />
-      </putList>
+    <!-- ADMIN -->
+    
+    <definition name="baseAdmin" extendes="base">
+       <put name="sidebarL" value="/Plantillas/sidebarsL/sideLAdmin.jsp"/>
     </definition>
 
-    <definition name="aPage" extends=".mainLayout">
-        <put name="title"  value="Another Title" />
-        <put name="body"   value=".aPage.body" />
-    </definition>
-
-    end samples -->
-
-    <definition name="${YOUR_DEFINITION_HERE}">
-    </definition>
+    <definition name="footer" path="/Plantillas/footer.jsp"/>
 
 </tiles-definitions>

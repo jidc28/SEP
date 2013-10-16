@@ -25,7 +25,6 @@ public class CambiarNombreCarreraA extends org.apache.struts.action.Action {
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
     private static final String FAILURE = "failure";
-    private static final String ERRORUPDATE = "errorupdate";
 
     /**
      * This is the action called from the Struts framework.
@@ -63,17 +62,11 @@ public class CambiarNombreCarreraA extends org.apache.struts.action.Action {
             //si los campos son validos
         } else {
 
-            //elimina usuario del sistema 
             boolean actualizo = DBMS.getInstance().actualizarNombreCarrera(u);
 
             if (actualizo) {
-                //obtengo una lista de usuarios registrados
-                ArrayList<Carrera> users = DBMS.getInstance().listarCarreras();
-
-                //si existen usuarios registrados
-
-                //retorno a pagina de exito
-                session.setAttribute("carreras", users);
+                ArrayList<Carrera> carreras = DBMS.getInstance().listarCarreras();
+                session.setAttribute("carreras", carreras);
 
 
                 return mapping.findForward(SUCCESS);

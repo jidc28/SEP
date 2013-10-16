@@ -1,9 +1,8 @@
 <%-- 
-    Document   : consultaCoordinacionSuccess
-    Created on : 01/10/2013, 01:53:33 AM
-    Author     : Langtech
+    Document   : ConsultaNucleoUniversitarioSuccess
+    Created on : 15/10/2013, 10:39:37 PM
+    Author     : jidc28
 --%>
-
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>  
@@ -26,7 +25,7 @@
                     <img id="banner" src="imagenes/logo.jpg" alt="Inicio">
                 </div>
             </div>
-
+            
             <div id="sidebarL">
                 <div class="glossymenu" style="width: 190px">
                     <a style="border-bottom: none;"/>
@@ -45,10 +44,10 @@
                     <a class="menuitem" href="cerrarSesion.do" onclick="return confirm('¿Está seguro que desea cerrar sesión?')" >
                         Cerrar Sesión
                     </a>
-
+                    
                 </div>
             </div>
-
+            
             <div id="sidebarR">
                 <a href="http://www.usb.ve/">
                     <img width="150" height="50" src="imagenes/somosusb.gif"/>
@@ -57,10 +56,10 @@
 
             <p align ="center" style="background-color: springgreen;
                width: 300px; margin-left: auto; margin-right: auto">
-                Coordinacion modificada exitosamente.
+                Nucleo Universitario modificado exitosamente.
             </p>
-
-            <h4> Lista de Coordinaciones en el sistema:</h4>
+            
+            <h4> Lista de Nucleos Universitarios en el sistema:</h4>
             <div id="testTable">
                 <table border="0" style="margin: auto" class="altrowstable" id="alternatecolor">
                     <thead>
@@ -69,7 +68,7 @@
                                 Codigo
                             </th>
                             <th width="155px" align="center">
-                                Nombre Coordinacion
+                                Nombre Nucleo
                             </th>
                             <th width="155px" align="center">
                                 Estado
@@ -82,26 +81,26 @@
                             </th>
                         </tr>
                     </thead>
-                    <logic:iterate name="coordinaciones" id="Coordinaciones">
+                    <logic:iterate name="nucleos" id="Nucleos">
                         <tr>
                             <td width="150px" align="center">
-                                <bean:write name="Coordinaciones" property="codigo"/>
+                                <bean:write name="Nucleos" property="codigo"/>
                             </td>
                             <td width="150px" align="center">
-                                <bean:write name="Coordinaciones" property="nombre"/>
+                                <bean:write name="Nucleos" property="nombre"/>
                             </td>
                             <td width="150px" align="center">
-                                <bean:write name="Coordinaciones" property="status"/>
+                                <bean:write name="Nucleos" property="status"/>
                             </td>
                             <td width="150px" align="center">
-                                <html:form action="/editarNombreCoordinacion" onsubmit="return(this)">
-                                    <html:hidden name="Coordinaciones" property="codigo"/>
+                                <html:form action="/editarNombreNucleoUniversitario" onsubmit="return(this)">
+                                    <html:hidden name="Nucleos" property="codigo"/>
                                     <html:image src="imagenes/edit.png" value="" property=""/>
                                 </html:form>
                             </td>
                             <td width="150px" align="center">
-                                <html:form action="/cambiarStatusCoordinacion" onsubmit="return(this)">
-                                    <html:hidden name="Coordinaciones" property="codigo"/>
+                                <html:form action="/cambiarStatusNucleoUniversitario" onsubmit="return(this)">
+                                    <html:hidden name="Nucleos" property="codigo"/>
                                     <html:image src="imagenes/visibilidad.png" value="" property=""/>
                                 </html:form>
                             </td>

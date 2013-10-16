@@ -67,7 +67,7 @@
         
         <!-- NUCLEOS UNIVERSITARIOS -->
         <action input="/AgregaNucleoUniv.jsp" name="NucleoUniversitario" path="/registrarNucleoUniv" scope="request" type="Actions.NucleoUniversitario.RegistrarNucleoUniv" validate="false">
-            <forward name="success" path="/AdminCoordinacionRegistrarSuccess.jsp"/>
+            <forward name="success" path="/AdminNucleoRegistrarSuccess.jsp"/>
             <forward name="failure" path="/AgregaNucleoUniv.jsp"/>
             <forward name="yaregistrada" path="/AgregaNucleoUniv.jsp"/>
         </action>
@@ -75,14 +75,14 @@
             <forward name="success" path="/EditarNombreNucleoUniversitario.jsp"/>
         </action>
         <action input="/EditarNombreNucleoUniversitario.jsp" name="NucleoUniversitario" path="/cambiarNombreNucleoUniversitarioA" scope="request" type="Actions.NucleoUniversitario.CambiarNombreNucleoUniversitarioA" validate="false">
-            <forward name="success" path="/ConsultaNucleoUniversitario.jsp"/>
+            <forward name="success" path="/ConsultaNucleoUniversitarioSuccess.jsp"/>
             <forward name="failure" path="/EditarNombreCoordinacion.jsp"/>
         </action>
         <action input="/ConsultaNucleoUniversitario.jsp" name="NucleoUniversitario" path="/cambiarStatusNucleoUniversitario" scope="request" type="Actions.NucleoUniversitario.cambiarStatusNucleoUniversitario" validate="false">
             <forward name="success" path="/EditarStatusNucleoUniversitario.jsp"/>
         </action>
-        <action input="/ConsultaNucleoUniversitario.jsp" name="NucleoUniversitario" path="/cambiarStatusNucleoUniversitarioA" scope="request" type="Actions.NucleoUniversitario.CambiarStatusNucleoUniversitarioA" validate="false">
-            <forward name="success" path="/ConsultaNucleoUniversitario.jsp"/>
+        <action input="/EditarStatusNucleoUniversitario.jsp" name="NucleoUniversitario" path="/cambiarStatusNucleoUniversitarioA" scope="request" type="Actions.NucleoUniversitario.CambiarStatusNucleoUniversitarioA" validate="false">
+            <forward name="success" path="/ConsultaNucleoUniversitarioSuccess.jsp"/>
         </action>
         
         <!--       DECANATOS        -->
@@ -97,7 +97,7 @@
         <action input="/ConsultaDecanato.jsp" name="Decanato" path="/cambiarStatusDecanatoA" scope="request" type="Actions.Decanato.CambiarStatusDecanatoA" validate="false">
             <forward name="success" path="/ConsultaDecanato.jsp"/>
         </action>
-        <action input="/ConsultaDecanato.jsp" name="Decanato" path="/editarStatusDecanato" scope="request" type="Actions.Decanato.EditarStatusDecanato" validate="false">
+        <action input="/ConsultaDecanato.jsp" name="Decanato" path="/editarNombreDecanato" scope="request" type="Actions.Decanato.EditarNombreDecanato" validate="false">
             <forward name="success" path="/EditarNombreDecanato.jsp"/>
         </action>
         <action input="/EditarNombreDecanato.jsp" name="Decanato" path="/cambiarNombreDecanatoA" scope="request" type="Actions.Decanato.CambiarNombreDecanatoA" validate="false">
@@ -138,7 +138,7 @@
         <action input="/ConsultaCarrera.jsp" name="Carrera" path="/cambiarStatusCarreraA" scope="request" type="Actions.Carrera.CambiarStatusCarreraA" validate="false">
             <forward name="success" path="/ConsultaCarreraSuccess.jsp"/>
         </action>
-        <action input="/ConsultaCarrera.jsp" name="Carrera" path="/editarStatus" scope="request" type="Actions.Carrera.EditarStatusCarrera" validate="false">
+        <action input="/ConsultaCarrera.jsp" name="Carrera" path="/editarNombre" scope="request" type="Actions.Carrera.EditarNombreCarrera" validate="false">
             <forward name="success" path="/EditarNombreCarrera.jsp"/>
         </action>
         <action input="/EditarNombreCarrera.jsp" name="Carrera" path="/cambiarNombreCarreraA" scope="request" type="Actions.Carrera.CambiarNombreCarreraA" validate="false">

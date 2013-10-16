@@ -47,6 +47,7 @@ public class cambiarStatusCarrera extends org.apache.struts.action.Action {
 
         //retorno a pagina de exito
         session.setAttribute("codigo", u.getCodigo());
+        session.setAttribute("nombre", u.getNombre());
         session.setAttribute("status", u.getStatus());
         return mapping.findForward(SUCCESS);
     }

@@ -5,6 +5,8 @@
 --%>
 
 <% Object usbid = session.getAttribute("usbid");
+   Object nombre = session.getAttribute("nombre");
+   Object apellido = session.getAttribute("apellido");
     if (usbid != "") {%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
@@ -16,49 +18,47 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <link rel="stylesheet" type="text/css" href="css/StylesheetEvalProf.css">
+        <link rel="stylesheet" type="text/css" href="css/estilo.css">
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
-        <div id="contenedor">
+        <div id="body-content">
 
-            <div id="encabezado">
-                <a title="Inicio" rel="home">
-                    <img src="imagenes/logo.jpg" alt="Inicio">
-                </a>
-            </div>
-
-
-            <div id="encabezado">
-                <div id="menu-principal">          
-                    <ul id="menu">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        Bienvenidos, profesor <%=usbid.toString()%>.
-                                        <html:link href="noimplementado.jsp">Perfil</html:link> |
-                                        <html:link href="VistaProfesor.jsp">
-                                            Inicio
-                                        </html:link> |
-                                        <html:link href="noimplementado.jsp">
-                                            Contáctenos
-                                        </html:link> |
-                                        <html:link href="noimplementado.jsp">
-                                            Ayuda
-                                        </html:link> |
-                                        <html:link action="/cerrarSesion" onclick="return confirm('¿Está seguro que desea cerrar sesión?')">
-                                            Cerrar Sesión
-                                        </html:link>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </ul>
+            <div >
+                <div >
+                    <img id="banner" src="imagenes/logo.jpg" alt="Inicio">
                 </div>
             </div>
-
+            
+            <div id="sidebarL">
+                <div class="glossymenu" style="width: 190px">
+                    <a style="border-bottom: none;"/>
+                    <a class="menuitem" href="noimplementado.jsp">
+                        Perfil
+                    </a>
+                    <a class="menuitem" href="VistaAdministrador.jsp">
+                        Inicio
+                    </a>
+                    <a class="menuitem" href="noimplementado.jsp">
+                        Contáctenos
+                    </a>
+                    <a class="menuitem" href="noimplementado.jsp">
+                        Ayuda
+                    </a>
+                    <a class="menuitem" href="cerrarSesion.do" onclick="return confirm('¿Está seguro que desea cerrar sesión?')" >
+                        Cerrar Sesión
+                    </a>
+                    
+                </div>
+            </div>
+            
+            <div id="sidebarR">
+                <a href="http://www.usb.ve/">
+                    <img width="150" height="50" src="imagenes/somosusb.gif"/>
+                </a>
+            </div>
+                
             <div id="cuerpo-principal">
 
                 <div id="contenido-der">

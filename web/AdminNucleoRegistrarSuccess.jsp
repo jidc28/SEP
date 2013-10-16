@@ -1,7 +1,7 @@
 <%-- 
-    Document   : AdminCoordinacionRegistrarSuccess
-    Created on : 06/06/2013, 10:04:58 PM
-    Author     : Langtech
+    Document   : AdminNucleoRegistrarSuccess
+    Created on : 15/10/2013, 10:42:49 PM
+    Author     : jidc28
 --%>
 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -61,7 +61,7 @@
 
                     <p align ="center" style="background-color: springgreen;
                        width: 300px; margin-left: auto; margin-right: auto">
-                        Coordinacion registrada exitosamente.
+                        Nucleo Universitario registrado exitosamente.
                     </p>
 
                     <h1>Gestión de Usuario</h1>
@@ -122,4 +122,3 @@
 
     </body>
 </html>
-

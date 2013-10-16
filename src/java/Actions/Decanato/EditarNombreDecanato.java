@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Actions.Carrera;
+package Actions.Decanato;
 
-import Clases.Carrera;
 import DBMS.DBMS;
+import Clases.Decanato;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,7 +18,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author admin
  */
-public class EditarStatusCarrera extends org.apache.struts.action.Action {
+public class EditarNombreDecanato extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -38,12 +38,12 @@ public class EditarStatusCarrera extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        Carrera u = (Carrera) form;
+        Decanato u = (Decanato) form;
         HttpSession session = request.getSession(true);
 
         ActionErrors error = new ActionErrors();
         
-        Carrera c = DBMS.getInstance().obtenerNombreCarrera(u);
+        Decanato c = DBMS.getInstance().obtenerNombreDecanato(u);
 
         //si existen usuarios registrados
 

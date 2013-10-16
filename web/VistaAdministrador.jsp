@@ -16,101 +16,100 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <link rel="stylesheet" type="text/css" href="css/StylesheetEvalProf.css">
+        <link rel="stylesheet" type="text/css" href="css/estilo.css">
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
-        <div id="contenedor">
+        <div id="body-content">
 
-            <div id="encabezado">
-                <a title="Inicio" rel="home">
-                    <img src="imagenes/logo.jpg" alt="Inicio">
+            <div >
+                <div >
+                    <img id="banner" src="imagenes/logo.jpg" alt="Inicio">
+                </div>
+            </div>
+
+            <div id="sidebarL">
+                <div class="glossymenu" style="width: 190px">
+                    <a style="border-bottom: none;"/>
+                    <a class="menuitem" href="noimplementado.jsp">
+                        Perfil
+                    </a>
+                    <a class="menuitem" href="VistaAdministrador.jsp">
+                        Inicio
+                    </a>
+                    <a class="menuitem" href="noimplementado.jsp">
+                        Contáctenos
+                    </a>
+                    <a class="menuitem" href="noimplementado.jsp">
+                        Ayuda
+                    </a>
+                    <a class="menuitem" href="cerrarSesion.do" onclick="return confirm('¿Está seguro que desea cerrar sesión?')" >
+                        Cerrar Sesión
+                    </a>
+
+                </div>
+            </div>
+
+            <div id="sidebarR">
+                <a href="http://www.usb.ve/">
+                    <img width="150" height="50" src="imagenes/somosusb.gif"/>
                 </a>
             </div>
 
 
-            <div id="encabezado">
-                <div id="menu-principal">          
-                    <ul id="menu">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        Bienvenido, administrador
-                                        <html:link href="noimplementado.jsp">Perfil</html:link> |
-                                        <html:link href="VistaAdministrador.jsp">
-                                            Inicio
-                                        </html:link> |
-                                        <html:link href="noimplementado.jsp">
-                                            Contáctenos
-                                        </html:link> |
-                                        <html:link href="noimplementado.jsp">
-                                            Ayuda
-                                        </html:link> |
-                                        <html:link action="/cerrarSesion" onclick="return confirm('¿Está seguro que desea cerrar sesión?')">
-                                            Cerrar Sesión
-                                        </html:link> 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </ul>
-                </div>
-            </div>
+            <div style="width:760px;margin-left:auto;margin-right:auto;">
 
-            <div id="cuerpo-principal">
-
-                <div id="contenido-der">
-                    <h1>Gestión de Usuario</h1>
+                <div >
+                    <h1 align="center">Gestión de Usuario</h1>
                     <html:link action="/createUserA" >
-                        <p align ="center">Crear Usuario</p>
+                        <h5 align ="center">Crear Usuario</h5>
                     </html:link>
                     <html:link action="/showUserA" >
-                        <p align ="center">Mostrar Usuarios</p>
+                        <h5 align ="center">Mostrar Usuarios</h5>
                     </html:link>
                     <html:link action="/listarProfesores" >
-                        <p align ="center">Mostrar Profesores</p>
+                        <h5 align ="center">Mostrar Profesores</h5>
                     </html:link>
 
                 </div>
-                <div id="contenido-der">
-                    <h1>Gestión de Carreras</h1>
+                <div >
+                    <h1 align="center">Gestión de Carreras</h1>
                     <html:link action="/agregaCarreraA" >
-                        <p align ="center">Agregar Carrera</p>
+                        <h5 align ="center">Agregar Carrera</h5>
                     </html:link>
                     <html:link action="/consultaCarreraA" >
-                        <p align ="center">Consultar Carrera</p>
+                        <h5 align ="center">Consultar Carrera</h5>
                     </html:link>
 
                 </div>
-                <div id="contenido-der">
-                    <h1>Gestión de Decanatos</h1>
+                <div >
+                    <h1 align="center">Gestión de Decanatos</h1>
                     <html:link action="/agregaDecanatoA" >
-                        <p align ="center">Agregar Decanato</p>
+                        <h5 align ="center">Agregar Decanato</h5>
                     </html:link>
                     <html:link action="/consultaDecanatoA" >
-                        <p align ="center">Consultar Decanato</p>
+                        <h5 align ="center">Consultar Decanato</h5>
                     </html:link>
 
                 </div>
-                <div id="contenido-der">
-                    <h1>Gestión de Coordinaciones</h1>
+                <div >
+                    <h1 align="center">Gestión de Coordinaciones</h1>
                     <html:link action="/agregaCoordinacionA" >
-                        <p align ="center">Agregar Coordinación</p>
+                        <h5 align ="center">Agregar Coordinación</h5>
                     </html:link>
                     <html:link action="/consultaCoordinacionA" >
-                        <p align ="center">Consultar Coordinación</p>
+                        <h5 align ="center">Consultar Coordinación</h5>
                     </html:link>
 
                 </div>
-                <div id="contenido-der">
-                    <h1>Gestión de Núcleos Universitarios</h1>
+                <div >
+                    <h1 align="center">Gestión de Núcleos Universitarios</h1>
                     <html:link action="/NucleoUnivA" >
-                        <p align ="center">Agregar Núcleo Universitario</p>
+                        <h5 align ="center">Agregar Núcleo Universitario</h5>
                     </html:link>
                     <html:link action="/consultaNucleoUniversitarioA" >
-                        <p align ="center">Consultar Núcleo Universitario</p>
+                        <h5 align ="center">Consultar Núcleo Universitario</h5>
                     </html:link>
 
                 </div>
