@@ -95,7 +95,7 @@
                                 Departamento
                             </th>
                             <th width="155px" align="center">
-                                Visibilidad
+                                Estado
                             </th>
                             <th width="155px" align="center">
                                 Modificar
@@ -117,10 +117,12 @@
                                 Visible
                             </td>
                             <td width="150px" align="center">
+                                <!--
                                 <html:form action="/editarUser" onsubmit="return(this)">
                                     <html:hidden name="Usuarios" property="usbid"/>
                                     <html:image src="imagenes/edit.png" value="" property=""/>
                                 </html:form>
+                                -->
                             </td>
                         </tr>
                     </logic:iterate>

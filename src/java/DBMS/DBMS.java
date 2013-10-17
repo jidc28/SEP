@@ -320,16 +320,12 @@ public class DBMS {
         PreparedStatement psAgregar1 = null;
 
         try {
-            psAgregar1 = conexion.prepareStatement("UPDATE profesor SET nombre = ?, apellido = ?, cedula = ?, genero = ?, email = ?, nivel = ?, jubilado = ?, lapso_contractual = ? WHERE usbid = ? ");
+            psAgregar1 = conexion.prepareStatement("UPDATE profesor SET email = ?, nivel = ?, jubilado = ?, lapso_contractual = ? WHERE usbid = ? ");
             psAgregar1.setString(1, "");
             psAgregar1.setString(2, "");
             psAgregar1.setString(3, "");
             psAgregar1.setString(4, "");
-            psAgregar1.setString(5, "");
-            psAgregar1.setString(6, "");
-            psAgregar1.setString(7, "");
-            psAgregar1.setString(8, "");
-            psAgregar1.setString(9, u.getUsbid());
+            psAgregar1.setString(5, u.getUsbid());
             
             
             Integer i = psAgregar1.executeUpdate();

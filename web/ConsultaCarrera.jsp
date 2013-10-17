@@ -67,7 +67,7 @@
                                 Nombre Carrera
                             </th>
                             <th width="155px" align="center">
-                                Estatus
+                                Estado
                             </th>
                             <th width="155px" align="center">
                                 Editar Nombre

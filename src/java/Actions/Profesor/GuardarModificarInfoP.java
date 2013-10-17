@@ -50,7 +50,7 @@ public class GuardarModificarInfoP extends org.apache.struts.action.Action {
 
         
         if (error.size() != 0) {
-            huboError = true;
+             huboError = true;
         }
 
         //si los campos no son validos

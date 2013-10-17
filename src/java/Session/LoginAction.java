@@ -68,26 +68,24 @@ public class LoginAction extends org.apache.struts.action.Action {
             Usuario tmp = DBMS.getInstance().verificarCas(u);
 
             if (tmp.getUsbid() != null) {
-                //si un usuario es profesor
                 if (tmp.getTipousuario().equals("profesor")) {
-                    request.setAttribute("usuario", tmp);
+                    session.setAttribute("usuario", tmp);
                     session.setAttribute("usbid", tmp.getUsbid());
                     return mapping.findForward(PROFESOR);
-                    //si un usuario es administrador
                 } else if (tmp.getTipousuario().equals("administrador")) {
-                    request.setAttribute("usuario", tmp);
+                    session.setAttribute("usuario", tmp);
                     session.setAttribute("usbid", tmp.getUsbid());
                     return mapping.findForward(ADMINISTRADOR);
                 } else if (tmp.getTipousuario().equals("decanato")) {
-                    request.setAttribute("usuario", tmp);
+                    session.setAttribute("usuario", tmp);
                     session.setAttribute("usbid", tmp.getUsbid());
                     return mapping.findForward(DECANATO);
                 } else if (tmp.getTipousuario().equals("departamento")) {
-                    request.setAttribute("usuario", tmp);
+                    session.setAttribute("usuario", tmp);
                     session.setAttribute("usbid", tmp.getUsbid());
                     return mapping.findForward(DEPARTAMENTO);
                 } else if (tmp.getTipousuario().equals("coordinacion")) {
-                    request.setAttribute("usuario", tmp);
+                    session.setAttribute("usuario", tmp);
                     session.setAttribute("usbid", tmp.getUsbid());
                     return mapping.findForward(COORDINACION);
                 } else {

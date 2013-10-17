@@ -3,9 +3,6 @@
     Created on : 06/06/2013, 10:04:58 PM
     Author     : Langtech
 --%>
-
-<% Object usbid = session.getAttribute("usbid");
-    if (usbid != "") {%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>  
@@ -32,11 +29,11 @@
             <div id="sidebarL">
                 <div class="glossymenu" style="width: 190px">
                     <a style="border-bottom: none;"/>
-                    <a class="menuitem" href="noimplementado.jsp">
-                        Perfil
-                    </a>
                     <a class="menuitem" href="VistaAdministrador.jsp">
                         Inicio
+                    </a>
+                    <a class="menuitem" href="noimplementado.jsp">
+                        Perfil
                     </a>
                     <a class="menuitem" href="noimplementado.jsp">
                         Contáctenos
@@ -62,9 +59,11 @@
 
                 <div >
                     <h1 align="center">Gestión de Usuario</h1>
+                    <!--
                     <html:link action="/createUserA" >
                         <h5 align ="center">Crear Usuario</h5>
                     </html:link>
+                    -->
                     <html:link action="/showUserA" >
                         <h5 align ="center">Mostrar Usuarios</h5>
                     </html:link>
@@ -119,11 +118,3 @@
 
     </body>
 </html>
-
-<%} else {%>
-<html>
-
-    <title> hello</title>
-</html>
-<% }%>
-

@@ -85,6 +85,8 @@ public class modificarInfoP extends org.apache.struts.action.Action {
         } else {
             session.setAttribute("lapso", info.getLapso_contractual());
         }
+        
+        session.setAttribute("profesor", info);
 
         return mapping.findForward(SUCCESS);
     }
