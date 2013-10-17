@@ -60,6 +60,66 @@
 
                 <div align="center" >
                     <h1 >Gestión de información del profesor</h1>
+                    <table border="0">
+                        <tbody>
+                            <tr>
+                                <td>UsbID</td>
+                                <td>
+                                    <html:text disabled="true" name="usuario" property="usbid"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Cédula</td>
+                                <td>
+                                    <html:text disabled="true" name="profesor" property="cedula"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Nombre</td>
+                                <td>
+                                    <html:text disabled="true" name="profesor" property="nombre"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Apellido</td>
+                                <td>
+                                    <html:text disabled="true" name="profesor" property="apellido"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Género</td>
+                                <td>
+                                    <html:text disabled="true" name="profesor" property="genero"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Correo Electrónico</td>
+                                <td>
+                                    <html:text disabled="true" name="profesor" property="email"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Lapso Contractual [Año(s)]</td>
+                                <td>
+                                    <html:text disabled="true" name="profesor" property="lapso_contractual"/>
+                                     
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Nivel</td>
+                                <td>
+                                    <html:text disabled="true" name="profesor" property="nivel"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Jubilacíon</td>
+                                <td>
+                                    <html:text disabled="true" name="profesor" property="jubilado"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                                
                     <html:form  action="/modificarInfoP" method="POST" enctype="multipart/form-data" onsubmit="return(this)" >
                         <html:hidden name="usuario" property="usbid"/>
                         <html:submit  value="Modificar información"/>

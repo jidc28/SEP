@@ -42,9 +42,10 @@ public class EliminarInfoP extends org.apache.struts.action.Action {
 
         //elimino informacion del profesor actual del sistema
         boolean elimino = DBMS.getInstance().resetInfoProfesor(u);
-
+        u = DBMS.getInstance().obtenerInfoProfesor(u.getUsbid());
         //retorno a pagina de exito
         session.setAttribute("usbid", u.getUsbid());
+        session.setAttribute("profesor", u);
         return mapping.findForward(SUCCESS);
     }
 }

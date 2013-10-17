@@ -60,11 +60,9 @@ public class modificarInfoP extends org.apache.struts.action.Action {
         } else {
             session.setAttribute("apellido", info.getApellido());
         }
-        if (info.getCedula() == null) {
-            session.setAttribute("cedula", "");
-        } else {
+       
             session.setAttribute("cedula", info.getCedula());
-        }
+        
         if (info.getGenero() == null) {
             session.setAttribute("genero", "");
         } else {
@@ -80,11 +78,8 @@ public class modificarInfoP extends org.apache.struts.action.Action {
         } else {
             session.setAttribute("jubilado", info.getJubilado());
         }
-        if (info.getLapso_contractual() == null) {
-            session.setAttribute("lapso", "");
-        } else {
             session.setAttribute("lapso", info.getLapso_contractual());
-        }
+        
         
         session.setAttribute("profesor", info);
 

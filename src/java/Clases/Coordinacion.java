@@ -22,10 +22,10 @@ public class Coordinacion extends org.apache.struts.action.ActionForm {
     private static final String patronNombre = "[a-zA-Z]*$";
     private String codigo;
     private String nombre;
-    private String status;
+    private String Estado;
     private String errorCodigo;
     private String errorNombre;
-    private String errorStatus;
+    private String errorEstado;
     private String errorCodigoFormato;
     private String errorNombreFormato;
     private Pattern patron;
@@ -48,12 +48,12 @@ public class Coordinacion extends org.apache.struts.action.ActionForm {
         this.nombre = nombre;
     }
 
-    public String getStatus() {
-        return status;
+    public String getEstado() {
+        return Estado;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setEstado(String Estado) {
+        this.Estado = Estado;
     }
 
     public String getErrorCodigo() {
@@ -82,15 +82,15 @@ public class Coordinacion extends org.apache.struts.action.ActionForm {
         }
     }
 
-    public String getErrorStatus() {
-        return errorStatus;
+    public String getErrorEstado() {
+        return errorEstado;
     }
 
-    public void setErrorStatus(String errorStatus) {
-        if (errorStatus.equals("")) {
-            this.errorStatus = "";
+    public void setErrorEstado(String errorEstado) {
+        if (errorEstado.equals("")) {
+            this.errorEstado = "";
         } else {
-            this.errorStatus = "<span style='color:red'>Por favor introduzca el Status de la Coordinacion</span>";
+            this.errorEstado = "<span style='color:red'>Por favor introduzca el Estado de la Coordinacion</span>";
 
         }
     }
@@ -147,7 +147,7 @@ public class Coordinacion extends org.apache.struts.action.ActionForm {
         ActionErrors errors = new ActionErrors();
         this.setErrorCodigo("");
         this.setErrorNombre("");
-        this.setErrorStatus("");
+        this.setErrorEstado("");
         this.setErrorCodigoFormato("");
         this.setErrorNombreFormato("");
 

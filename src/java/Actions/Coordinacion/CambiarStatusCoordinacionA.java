@@ -46,7 +46,7 @@ public class CambiarStatusCoordinacionA extends org.apache.struts.action.Action 
 
 
         //elimina usuario del sistema 
-        boolean actualizo = DBMS.getInstance().actualizarStatusCoordinacion(u);
+        boolean actualizo = DBMS.getInstance().actualizarEstadoCoordinacion(u);
         
         //obtengo una lista 
         ArrayList<Coordinacion> coordis = DBMS.getInstance().listarCoordinaciones();

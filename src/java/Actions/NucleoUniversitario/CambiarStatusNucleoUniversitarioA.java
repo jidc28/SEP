@@ -44,7 +44,7 @@ public class CambiarStatusNucleoUniversitarioA extends org.apache.struts.action.
 
         ActionErrors error = new ActionErrors();
 
-        boolean actualizo = DBMS.getInstance().actualizarStatusNucleoUniversitario(u);
+        boolean actualizo = DBMS.getInstance().actualizarEstadoNucleoUniversitario(u);
         
         //obtengo una lista 
         ArrayList<NucleoUniversitario> nucleos = DBMS.getInstance().listarNucleosUniversitarios();

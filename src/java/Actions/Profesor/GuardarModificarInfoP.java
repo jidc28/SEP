@@ -65,6 +65,7 @@ public class GuardarModificarInfoP extends org.apache.struts.action.Action {
 
             //retorno a pagina de exito
             session.setAttribute("usbid", u.getUsbid());
+            session.setAttribute("profesor",u);
 
             if (actualizar) {
                 return mapping.findForward(SUCCESS);

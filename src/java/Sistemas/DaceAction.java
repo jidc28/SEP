@@ -2,25 +2,27 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Actions.Coordinacion;
+package Sistemas;
 
-import Clases.Coordinacion;
+import Clases.Carrera;
+import DBMS.DBMS;
+import Forms.ModificarInfoPForm;
+import Clases.Profesor;
+import Sistemas.CCT;
+import Sistemas.SINAI;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-
 /**
  *
- * @author Langtech
+ * @author jidc28
  */
-public class cambiarStatusCoordinacion extends org.apache.struts.action.Action {
-
-    /* forward name="success" path="" */
+public class DaceAction extends org.apache.struts.action.Action {
+     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
 
     /**
@@ -37,16 +39,13 @@ public class cambiarStatusCoordinacion extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
-        Coordinacion u = (Coordinacion) form;
+
+        DACE u = (DACE) form;
         HttpSession session = request.getSession(true);
-
-        ActionErrors error = new ActionErrors();
-
-
-        //retorno a pagina de exito
-        session.setAttribute("codigo", u.getCodigo());
-        session.setAttribute("Estado", u.getEstado());
+        ArrayList<DACE> dace = DBMS.getInstance().listarDACE(u.getUsbid(),u.getAno(),u.getTrimestre());
+        
+     
+        session.setAttribute("dace", dace);
         return mapping.findForward(SUCCESS);
     }
 }

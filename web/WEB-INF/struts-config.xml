@@ -16,6 +16,7 @@
         <form-bean name="NucleoUniversitario" type="Clases.NucleoUniversitario"/>
         <form-bean name="Profesor" type="Clases.Profesor"/>
         <form-bean name="Usuario" type="Clases.Usuario"/>
+        <form-bean name="DACE" type="Sistemas.DACE"/>
     
     </form-beans>
     
@@ -181,6 +182,10 @@
         </action>
         <action scope="request" input="/" path="/cerrarSesion" type="Session.CerrarSesion" validate="false">
             <forward name="success" path="/Login.jsp"/>
+        </action>
+        
+        <action input="/AgregarInfoP.jsp" name="DACE" path="/consultaDace" scope="request" type="Sistemas.DaceAction" validate="false">
+            <forward name="success" path="/AgregarInfoPDace.jsp"/>
         </action>
        
         

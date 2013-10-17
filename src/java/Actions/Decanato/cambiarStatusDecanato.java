@@ -45,7 +45,7 @@ public class cambiarStatusDecanato extends org.apache.struts.action.Action {
 
        
         session.setAttribute("codigo", u.getCodigo());
-        session.setAttribute("status", u.getStatus());
+        session.setAttribute("Estado", u.getEstado());
         return mapping.findForward(SUCCESS);
     }
 }

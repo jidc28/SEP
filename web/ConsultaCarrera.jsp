@@ -85,7 +85,7 @@
                                 <bean:write name="Carreras" property="nombre"/>
                             </td>
                             <td width="150px" align="center">
-                                <bean:write name="Carreras" property="status"/>
+                                <bean:write name="Carreras" property="estado"/>
                             </td>
                             <td>
                                 <html:form  action="/editarNombre" onsubmit="return(this)">

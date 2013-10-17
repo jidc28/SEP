@@ -46,7 +46,7 @@ public class CambiarStatusDecanatoA extends org.apache.struts.action.Action {
 
 
         //elimina usuario del sistema 
-        boolean actualizo = DBMS.getInstance().actualizarStatusDecanato(u);
+        boolean actualizo = DBMS.getInstance().actualizarEstadoDecanato(u);
         
         //obtengo una lista de usuarios registrados
         ArrayList<Decanato> decan = DBMS.getInstance().listarDecanatos();

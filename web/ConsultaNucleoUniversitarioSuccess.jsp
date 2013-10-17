@@ -90,7 +90,7 @@
                                 <bean:write name="Nucleos" property="nombre"/>
                             </td>
                             <td width="150px" align="center">
-                                <bean:write name="Nucleos" property="status"/>
+                                <bean:write name="Nucleos" property="estado"/>
                             </td>
                             <td width="150px" align="center">
                                 <html:form action="/editarNombreNucleoUniversitario" onsubmit="return(this)">

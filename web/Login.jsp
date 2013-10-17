@@ -36,7 +36,7 @@
 
         <div id="content">
 
-            <html:form action="/login">
+            <html:form action="/login" acceptCharset="ISO=8859-1" onsubmit="return(this)">
                 <div id="welcome">
                     <p>Por razones de seguridad, por favor cierre la sesión y su navegador web cuando haya terminado de acceder a los servicios que requieren autenticación.</p>
                     <p style="text-align: center"><strong>Introduzca su USBID y Contraseña</strong></p>

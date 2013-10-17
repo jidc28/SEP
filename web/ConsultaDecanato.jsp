@@ -111,7 +111,7 @@
                                 <bean:write name="Decanatos" property="nombre"/>
                             </td>
                             <td width="150px" align="center">
-                                <bean:write name="Decanatos" property="status"/>
+                                <bean:write name="Decanatos" property="estado"/>
                             </td>
                             <td width="150px" align="center">
                                 <html:form action="/editarNombreDecanato" onsubmit="return(this)">

@@ -1,8 +1,9 @@
 <%-- 
-    Document   : AgregarInfoP
-    Created on : 06/06/2013, 10:04:58 PM
-    Author     : Langtech
+    Document   : AgregarInfoPDace
+    Created on : 17/10/2013, 06:19:38 AM
+    Author     : jidc28
 --%>
+
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>  
@@ -141,13 +142,14 @@
                     <tr>
                         <td>Período a evaluar</td> 
                         <td>
-                            <html:form action="/consultaDace" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form_data" onsubmit="return(this)">
-                            <html:select disabled="false" property="trimestre">
+                            <html:form action="/consultaDace">
+                                <html:select disabled="false" property="trimestre">
                                 <html:option value="EM">Enero-Marzo</html:option>
                                 <html:option value="AJ">Abril-Julio</html:option>
                                 <html:option value="SD">Septiembre-Diciembre</html:option>
                             </html:select>
                             <html:select disabled="false" property="ano">
+                                <html:option value="2003">2003</html:option> 
                                 <html:option value="2004">2004</html:option> 
                                 <html:option value="2005">2005</html:option> 
                                 <html:option value="2006">2006</html:option> 
@@ -177,6 +179,62 @@
                             </html:form>
                         </td>
                     </tr>
+                </table>
+                <table border ="0" >
+                    <thead>
+                        <tr>
+                            <th width="155px" align="center">
+                                Codigo
+                            </th>
+                            <th width="155px" align="center">
+                                Nombre
+                            </th>
+                            <th width="155px" align="center">
+                                Uno
+                            </th>
+                            <th width="155px" align="center">
+                                Dos
+                            </th>
+                            <th width="155px" align="center">
+                                Tres
+                            </th>
+                            <th width="155px" align="center">
+                                Cuatro
+                            </th>
+                            <th width="155px" align="center">
+                                Cinco
+                            </th>
+                            <th width="155px" align="center">
+                                Retirados
+                            </th>
+                        </tr>
+                    </thead>
+                    <logic:iterate name="dace" id="DACE">
+                        <td width="150px" align="center">
+                            <bean:write name="DACE" property="codigo"/>
+                        </td>
+                        <td width="150px" align="center">
+                            <bean:write name="DACE" property="nombre"/>
+                        </td>
+                        <td width="150px" align="center">
+                            <bean:write name="DACE" property="uno"/>
+                        </td>
+                        <td width="150px" align="center">
+                            <bean:write name="DACE" property="dos"/>
+                        </td>
+                        <td width="150px" align="center">
+                            <bean:write name="DACE" property="tres"/>
+                        </td>
+                        <td width="150px" align="center">
+                            <bean:write name="DACE" property="cuatro"/>
+                        </td>
+                        <td width="150px" align="center">
+                            <bean:write name="DACE" property="cinco"/>
+                        </td>
+                        <td width="150px" align="center">
+                            <bean:write name="DACE" property="retirados"/>
+                        </td>
+                    </logic:iterate>
                 </table>
             </div>
 

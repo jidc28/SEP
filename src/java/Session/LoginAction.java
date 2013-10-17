@@ -4,6 +4,7 @@
  */
 package Session;
 
+import Clases.Profesor;
 import Clases.Usuario;
 import DBMS.DBMS;
 import javax.servlet.http.HttpServletRequest;
@@ -69,7 +70,9 @@ public class LoginAction extends org.apache.struts.action.Action {
 
             if (tmp.getUsbid() != null) {
                 if (tmp.getTipousuario().equals("profesor")) {
+                    Profesor profe = DBMS.getInstance().obtenerInfoProfesor(tmp.getUsbid());
                     session.setAttribute("usuario", tmp);
+                    session.setAttribute("profesor", profe);
                     session.setAttribute("usbid", tmp.getUsbid());
                     return mapping.findForward(PROFESOR);
                 } else if (tmp.getTipousuario().equals("administrador")) {

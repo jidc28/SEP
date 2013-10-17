@@ -77,7 +77,7 @@
                                 <bean:write name="NucleoUniversitario" property="codigo"/>
                             </td>
                             <td width="155px" align="center">
-                                <html:select property="status">
+                                <html:select property="estado">
                                     <html:option value="visible">Visible</html:option>
                                     <html:option value="oculta">Oculta</html:option>                                                  
                                 </html:select>
