@@ -40,6 +40,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="css/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
         <title>SEP - Gestion de Planillas de Evaluacion</title>
     </head>
@@ -103,7 +104,7 @@
                             </th>
                         </tr>
                     </thead>
-                    
+
                     <logic:iterate name="usuarios" id="Usuarios">
                         <tr>
                             <td width="150px" align="center">
@@ -118,7 +119,7 @@
                             <td width="150px" align="center">
                                 Visible
                             </td>
-                            
+
                             <td width="150px" align="center">
                                 <!--
                                 <html:form action="/editarUser" onsubmit="return(this)">

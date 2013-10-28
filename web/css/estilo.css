@@ -226,6 +226,7 @@ table.altrowstable th {
     border-collapse: collapse;
     color: #000000;
     font-weight: bold;
+    text-align: center;
 }
 
 table.altrowstable {

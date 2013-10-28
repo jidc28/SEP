@@ -29,6 +29,7 @@
                 <tiles:insert attribute="body"/>
             </div>
             
+            <br><br><br>
             <div>
                 <tiles:insert attribute="footer"/> 
             </div>

@@ -30,11 +30,27 @@
 
     <action-mappings>
         
+        <action path="/VistaAdministrador.jsp"
+            type="org.apache.struts.actions.ForwardAction"
+            scope="request"
+            validate="false"
+            parameter="vistaAdmin"
+            >
+        </action>
+        
+        <!--       LOGIN         -->
+        <action input="/Login.jsp" name="Usuario" path="/login" scope="request" type="Session.LoginAction" validate="false">
+            <forward name="profesor" path="/VistaProfesor.jsp"/>
+            <forward name="administrador" path="vistaAdmin"/>
+            <forward name="failure" path="/Login.jsp"/>
+        </action>
+        
         <!-- VISTA ADMINISTRADOR -->
         <action input="/VistaAdministrador.jsp" path="/createUserA" scope="request" type="Actions.Usuario.CreateUserA" validate="false">
             <forward name="success" path="/CreateUser.jsp"/>
             <forward name="failure" path="/Login.jsp"/>
         </action>
+
         <action input="/VistaAdministrador.jsp" path="/NucleoUnivA" scope="request" type="Actions.NucleoUniversitario.NucleoUnivA" validate="false">
             <forward name="success" path="/AgregaNucleoUniv.jsp"/>
         </action>
@@ -174,12 +190,12 @@
             <forward name="success" path="/ListaProfesoresSuccess.jsp"/>
         </action>
         
-        <!--                        -->
-        <action input="/Login.jsp" name="Usuario" path="/login" scope="request" type="Session.LoginAction" validate="false">
-            <forward name="profesor" path="/VistaProfesor.jsp"/>
-            <forward name="administrador" path="/VistaAdministrador.jsp"/>
-            <forward name="failure" path="/Login.jsp"/>
-        </action>
+        
+        
+        
+        
+        
+        
         <action scope="request" input="/" path="/cerrarSesion" type="Session.CerrarSesion" validate="false">
             <forward name="success" path="/Login.jsp"/>
         </action>

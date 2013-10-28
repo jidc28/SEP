@@ -4,25 +4,27 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
        "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
 
-
-<!--
-     This is a blank Tiles definition file with a commented example.
--->
-
 <tiles-definitions>
 
     <definition name="base" path="/Plantilla/plantilla.jsp">
         <put name="banner" value="/Plantilla/banner.jsp"/>
         <put name="body" value="/Plantilla/body.jsp"/>
         <put name="sidebarR" value="/Plantilla/sidebarR.jsp"/>
-        <put name="sidebarL" value="/Plantilla/sidebarL.jsp"/>
+<!--        <put name="sidebarL" value="/Plantilla/sidebarL.jsp"/>-->
         <put name="footer" value="/Plantilla/footer.jsp"/>
     </definition>
 
     <!-- ADMIN -->
     
-    <definition name="baseAdmin" extendes="base">
-       <put name="sidebarL" value="/Plantillas/sidebarsL/sideLAdmin.jsp"/>
+    <definition name="baseAdmin" extends="base"> <!-- BASE PARA ADMIN -->
+        <put name="sidebarL" value="/Plantilla/sidebarsL/sideLAdmin.jsp"/>
+    </definition>
+    
+    <definition name="vistaAdmin" extends="baseAdmin"> <!-- Vista administrador -->
+        <put name="body" value="/VistaAdministrador.jsp"/>
+    </definition>
+    
+    <definition name="crearUsuario" extends="baseAdmin"> <!-- Crear Usuario -->
     </definition>
 
     <definition name="footer" path="/Plantillas/footer.jsp"/>
