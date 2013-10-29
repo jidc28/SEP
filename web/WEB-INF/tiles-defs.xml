@@ -10,9 +10,10 @@
         <put name="banner" value="/Plantilla/banner.jsp"/>
         <put name="body" value="/Plantilla/body.jsp"/>
         <put name="sidebarR" value="/Plantilla/sidebarR.jsp"/>
-<!--        <put name="sidebarL" value="/Plantilla/sidebarL.jsp"/>-->
         <put name="footer" value="/Plantilla/footer.jsp"/>
     </definition>
+    
+    <definition name="footer" path="/Plantillas/footer.jsp"/>
 
     <!-- ADMIN -->
     
@@ -25,8 +26,122 @@
     </definition>
     
     <definition name="crearUsuario" extends="baseAdmin"> <!-- Crear Usuario -->
+        <put name="body" value="/CreateUser.jsp"/>
+    </definition>
+    
+    <definition name="agregaNucleoUniv" extends="baseAdmin"> <!-- Agrega Nucleo Univ -->
+        <put name="body" value="/AgregaNucleoUniv.jsp"/>
+    </definition>
+    
+    <definition name="showUser" extends="baseAdmin"> <!-- Mostrar Usuarios -->
+        <put name="body" value="/ShowUser.jsp"/>
+    </definition>
+    
+    <definition name="listaProfesores" extends="baseAdmin"> <!-- Listar Profesores -->
+        <put name="body" value="/ListaProfesores.jsp"/>
     </definition>
 
-    <definition name="footer" path="/Plantillas/footer.jsp"/>
+    <definition name="agregaDecanato" extends="baseAdmin"> <!-- Agregar Decanato -->
+        <put name="body" value="/AgregaDecanato.jsp"/>
+    </definition>
+
+    <definition name="agregaCoordinacion" extends="baseAdmin"> <!-- Agregar Coordinacion -->
+        <put name="body" value="/AgregaCoordinacion.jsp"/>
+    </definition>
+
+    <definition name="consultaCarrera" extends="baseAdmin"> <!-- Consultar Carreras -->
+        <put name="body" value="/ConsultaCarrera.jsp"/>
+    </definition>
+
+    <definition name="consultaDecanato" extends="baseAdmin"> <!-- Consultar Decanato -->
+        <put name="body" value="/ConsultaDecanato.jsp"/>
+    </definition>
+
+    <definition name="consultaCoordinacion" extends="baseAdmin"> <!-- Consulta Coordinacion -->
+        <put name="body" value="/ConsultaCoordinacion.jsp"/>
+    </definition>
+
+    <definition name="adminNucleoRegistrarSuccess" extends="baseAdmin"> <!-- Success Registrar Nucleo Universitario -->
+        <put name="body" value="/AdminNucleoRegistrarSuccess.jsp"/>
+    </definition>
+    
+    <definition name="editarNombreNucleoUniversitario" extends="baseAdmin"> <!-- Editar Nombre Nucleo Universitario -->
+        <put name="body" value="/EditarNombreNucleoUniversitario.jsp"/>
+    </definition>
+    
+    <definition name="consultaNucleoUniversitarioSuccess" extends="baseAdmin"> <!-- Consulta Nucleo Universitario -->
+        <put name="body" value="/AdminDecanatoRegistrarSuccess.jsp"/>
+    </definition>
+    
+    <definition name="adminDecanatoRegistrarSuccess.jsp" extends="baseAdmin"> <!-- Success Registrar -->
+        <put name="body" value="/AdminDecanatoRegistrarSuccess.jsp"/>
+    </definition>
+    
+    <definition name="editarNombreDecanato" extends="baseAdmin"> <!-- Editar Nombre Decanato -->
+        <put name="body" value="/EditarNombreDecanato.jsp"/>
+    </definition>
+    
+    <definition name="adminCoordinacionRegistrarSuccess" extends="baseAdmin"> <!-- Registrar Coordinacion Success -->
+        <put name="body" value="/AdminCoordinacionRegistrarSuccess.jsp"/>
+    </definition>
+    
+    <definition name="editarStatusCoordinacion" extends="baseAdmin"> <!-- Editar Estatus Coordinacion -->
+        <put name="body" value="/EditarStatusCoordinacion.jsp"/>
+    </definition>
+    
+    <definition name="consultaCoordinacionSuccess" extends="baseAdmin"> <!-- Consulta Coordinacion Success -->
+        <put name="body" value="/ConsultaCoordinacionSuccess.jsp"/>
+    </definition>
+    
+    <definition name="editarNombreCoordinacion" extends="baseAdmin"> <!-- Editar Nombre Coordinacion -->
+        <put name="body" value="/EditarNombreCoordinacion.jsp"/>
+    </definition>
+    
+    <definition name="editarStatusCarrera" extends="baseAdmin"> <!-- Editar Estatus Carrera -->
+        <put name="body" value="/EditarStatusCarrera.jsp"/>
+    </definition>
+    
+    <definition name="consultaCarreraSuccess" extends="baseAdmin"> <!-- Consulta Carrera Success -->
+        <put name="body" value="/ConsultaCarreraSuccess.jsp"/>
+    </definition>
+    
+    <definition name="editarNombreCarrera" extends="baseAdmin"> <!-- Editar Nombre Carrera -->
+        <put name="body" value="/EditarNombreCarrera.jsp"/>
+    </definition>
+    
+    <definition name="showUserEditarSuccess" extends="baseAdmin"> <!-- Editar User Success -->
+        <put name="body" value="/ShowUserEditarSuccess.jsp"/>
+    </definition>
+    
+    <!-- PROFESOR -->
+    
+    <definition name="baseProfesor" extends="base"> <!-- BASE PARA PROFESOR -->
+        <put name="sidebarL" value="/Plantilla/sidebarsL/sideLProfesor.jsp"/>
+    </definition>
+    
+    <definition name="vistaProfesor" extends="baseProfesor"> <!-- Vista Profesor -->
+        <put name="body" value="/VistaProfesor.jsp"/>
+    </definition>
+    
+    <definition name="agregarInfoPDace" extends="baseProfesor"> <!-- Info Dace -->
+        <put name="body" value="/AgregarInfoPDace.jsp"/>
+    </definition>
+    
+    <definition name="modificarInfoP" extends="baseProfesor"> <!-- Info Profesor -->
+        <put name="body" value="/ModificarInfoP.jsp"/>
+    </definition>
+    
+    <definition name="vistaProfesorModificarSuccess" extends="baseProfesor"> <!-- Vista Profesor Modificar Success-->
+        <put name="body" value="/VistaProfesorModificarSuccess.jsp"/>
+    </definition>
+    
+    <definition name="vistaProfesorEliminarSuccess" extends="baseProfesor"> <!-- Vista Profesor Eliminar Success-->
+        <put name="body" value="/VistaProfesorEliminarSuccess.jsp"/>
+    </definition>
+    
+    <definition name="agregarInfoP" extends="baseProfesor"> <!-- Agregar Info Profesor-->
+        <put name="body" value="/AgregarInfoP.jsp"/>
+    </definition>
+
 
 </tiles-definitions>
