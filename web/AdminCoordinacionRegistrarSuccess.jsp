@@ -19,71 +19,72 @@
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
-        
-            <div style="width:760px;margin-left:auto;margin-right:auto;">
 
+        <div style="width:760px;margin-left:auto;margin-right:auto;">
 
+            <logic:present name="mensaje">
                 <p align ="center" style="background-color: springgreen;
                    width: 300px; margin-left: auto; margin-right: auto">
                     Coordinacion registrada exitosamente.
                 </p>
+            </logic:present>
 
-                <div >
-                    <h1 align="center">Gestión de Usuario</h1>
-                    <!--
-                    <html:link action="/createUserA" >
-                        <h5 align ="center">Crear Usuario</h5>
-                    </html:link>
-                    -->
-                    <html:link action="/showUserA" >
-                        <h5 align ="center">Mostrar Usuarios</h5>
-                    </html:link>
-                    <html:link action="/listarProfesores" >
-                        <h5 align ="center">Mostrar Profesores</h5>
-                    </html:link>
+            <div >
+                <h1 align="center">Gestión de Usuario</h1>
+                <!--
+                <html:link action="/createUserA" >
+                    <h5 align ="center">Crear Usuario</h5>
+                </html:link>
+                -->
+                <html:link action="/showUserA" >
+                    <h5 align ="center">Mostrar Usuarios</h5>
+                </html:link>
+                <html:link action="/listarProfesores" >
+                    <h5 align ="center">Mostrar Profesores</h5>
+                </html:link>
 
-                </div>
-                <div >
-                    <h1 align="center">Gestión de Carreras</h1>
-                    <html:link action="/agregaCarreraA" >
-                        <h5 align ="center">Agregar Carrera</h5>
-                    </html:link>
-                    <html:link action="/consultaCarreraA" >
-                        <h5 align ="center">Consultar Carrera</h5>
-                    </html:link>
-
-                </div>
-                <div >
-                    <h1 align="center">Gestión de Decanatos</h1>
-                    <html:link action="/agregaDecanatoA" >
-                        <h5 align ="center">Agregar Decanato</h5>
-                    </html:link>
-                    <html:link action="/consultaDecanatoA" >
-                        <h5 align ="center">Consultar Decanato</h5>
-                    </html:link>
-
-                </div>
-                <div >
-                    <h1 align="center">Gestión de Coordinaciones</h1>
-                    <html:link action="/agregaCoordinacionA" >
-                        <h5 align ="center">Agregar Coordinación</h5>
-                    </html:link>
-                    <html:link action="/consultaCoordinacionA" >
-                        <h5 align ="center">Consultar Coordinación</h5>
-                    </html:link>
-
-                </div>
-                <div >
-                    <h1 align="center">Gestión de Núcleos Universitarios</h1>
-                    <html:link action="/NucleoUnivA" >
-                        <h5 align ="center">Agregar Núcleo Universitario</h5>
-                    </html:link>
-                    <html:link action="/consultaNucleoUniversitarioA" >
-                        <h5 align ="center">Consultar Núcleo Universitario</h5>
-                    </html:link>
-
-                </div>
             </div>
+            <div >
+                <h1 align="center">Gestión de Carreras</h1>
+                <html:link action="/agregaCarreraA" >
+                    <h5 align ="center">Agregar Carrera</h5>
+                </html:link>
+                <html:link action="/consultaCarreraA" >
+                    <h5 align ="center">Consultar Carrera</h5>
+                </html:link>
+
+            </div>
+            <div >
+                <h1 align="center">Gestión de Decanatos</h1>
+                <html:link action="/agregaDecanatoA" >
+                    <h5 align ="center">Agregar Decanato</h5>
+                </html:link>
+                <html:link action="/consultaDecanatoA" >
+                    <h5 align ="center">Consultar Decanato</h5>
+                </html:link>
+
+            </div>
+            <div >
+                <h1 align="center">Gestión de Coordinaciones</h1>
+                <html:link action="/agregaCoordinacionA" >
+                    <h5 align ="center">Agregar Coordinación</h5>
+                </html:link>
+                <html:link action="/consultaCoordinacionA" >
+                    <h5 align ="center">Consultar Coordinación</h5>
+                </html:link>
+
+            </div>
+            <div >
+                <h1 align="center">Gestión de Núcleos Universitarios</h1>
+                <html:link action="/NucleoUnivA" >
+                    <h5 align ="center">Agregar Núcleo Universitario</h5>
+                </html:link>
+                <html:link action="/consultaNucleoUniversitarioA" >
+                    <h5 align ="center">Consultar Núcleo Universitario</h5>
+                </html:link>
+
+            </div>
+        </div>
 
     </body>
 </html>

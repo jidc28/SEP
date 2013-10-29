@@ -42,6 +42,9 @@ h5 {
     font-weight: normal;
     text-align: center;
     font-family: sans-serif;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 0.83em;
 }
 
 h6 {

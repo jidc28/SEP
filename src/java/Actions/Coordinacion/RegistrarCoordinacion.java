@@ -44,6 +44,7 @@ public class RegistrarCoordinacion extends org.apache.struts.action.Action {
         Coordinacion u = (Coordinacion) form;
         HttpSession session = request.getSession(true);
         ActionErrors error = new ActionErrors();
+        String mensaje = "Agregado correctamente";
                 
         //valido los campos de formulario
         error = u.validate(mapping, request);
@@ -65,7 +66,7 @@ public class RegistrarCoordinacion extends org.apache.struts.action.Action {
             boolean registro = DBMS.getInstance().registrarCoordinacion(u);
             
             if(registro){
-
+                request.setAttribute("mensaje", mensaje);
             return mapping.findForward(SUCCESS);
             } else {
                 error.add("nombre", new ActionMessage("error.codigoexistente"));
