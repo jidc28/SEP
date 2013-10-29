@@ -269,6 +269,10 @@ table.altrowstable td {
     margin-right: auto; 
 }
 
+#testTable th {
+    color: white;
+}
+
 #tablePagination { 
     background-color: #DCDCDC; 
     font-size: 0.8em; 

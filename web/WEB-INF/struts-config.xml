@@ -120,13 +120,13 @@
             <forward name="success" path="editarStatusDecanato"/>
         </action>
         <action input="/ConsultaDecanato.jsp" name="Decanato" path="/cambiarStatusDecanatoA" scope="request" type="Actions.Decanato.CambiarStatusDecanatoA" validate="false">
-            <forward name="success" path="consultaDecanato"/>
+            <forward name="success" path="consultaDecanatoSuccess"/>
         </action>
         <action input="/ConsultaDecanato.jsp" name="Decanato" path="/editarNombreDecanato" scope="request" type="Actions.Decanato.EditarNombreDecanato" validate="false">
             <forward name="success" path="editarNombreDecanato"/>
         </action>
         <action input="/EditarNombreDecanato.jsp" name="Decanato" path="/cambiarNombreDecanatoA" scope="request" type="Actions.Decanato.CambiarNombreDecanatoA" validate="false">
-            <forward name="success" path="consultaDecanato"/>
+            <forward name="success" path="consultaDecanatoSuccess"/>
             <forward name="failure" path="editarNombreDecanato"/> 
         </action>
         
@@ -146,7 +146,7 @@
             <forward name="success" path="editarNombreCoordinacion"/>
         </action>
         <action input="/EditarNombreCoordinacion.jsp" name="Coordinacion" path="/cambiarNombreCoordinacionA" scope="request" type="Actions.Coordinacion.CambiarNombreCoordinacionA" validate="false">
-            <forward name="success" path="consultaCoordinacion"/>
+            <forward name="success" path="consultaCoordinacionSuccess"/>
             <forward name="failure" path="editarNombreCoordinacion"/>
         </action>
         

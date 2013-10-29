@@ -10,6 +10,31 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+    function altRows(id) {
+        if (document.getElementsByTagName) {
+
+            var table = document.getElementById(id);
+            var rows = table.getElementsByTagName("tr");
+
+            for (i = 0; i < rows.length; i++) {
+                if (i % 2 === 0) {
+                    rows[i].className = "evenrowcolor";
+                } else {
+                    rows[i].className = "oddrowcolor";
+                }
+            }
+        }
+    }
+    $(document).ready(function() {
+        $('table').tablePagination({});
+    });
+    window.onload = function() {
+        altRows('alternatecolor');
+    }
+</script>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,7 +43,6 @@
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
-        <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
        
             <p align ="center" style="background-color: springgreen;
                width: 300px; margin-left: auto; margin-right: auto">

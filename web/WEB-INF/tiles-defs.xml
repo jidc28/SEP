@@ -48,6 +48,14 @@
     <definition name="agregaCoordinacion" extends="baseAdmin"> <!-- Agregar Coordinacion -->
         <put name="body" value="/AgregaCoordinacion.jsp"/>
     </definition>
+    
+    <definition name="agregaCarrera" extends="baseAdmin"> <!-- Agregar Carreras -->
+        <put name="body" value="/AgregaCarrera.jsp"/>
+    </definition>
+    
+    <definition name="adminCarreraRegistrarSuccess" extends="baseAdmin"> <!-- Agregar Carreras Success -->
+        <put name="body" value="/AdminCarreraRegistrarSuccess.jsp"/>
+    </definition>
 
     <definition name="consultaCarrera" extends="baseAdmin"> <!-- Consultar Carreras -->
         <put name="body" value="/ConsultaCarrera.jsp"/>
@@ -55,6 +63,10 @@
 
     <definition name="consultaDecanato" extends="baseAdmin"> <!-- Consultar Decanato -->
         <put name="body" value="/ConsultaDecanato.jsp"/>
+    </definition>
+
+    <definition name="consultaDecanatoSuccess" extends="baseAdmin"> <!-- Consultar Decanato Success -->
+        <put name="body" value="/ConsultaDecanatoSuccess.jsp"/>
     </definition>
 
     <definition name="consultaCoordinacion" extends="baseAdmin"> <!-- Consulta Coordinacion -->
@@ -69,11 +81,15 @@
         <put name="body" value="/EditarNombreNucleoUniversitario.jsp"/>
     </definition>
     
-    <definition name="consultaNucleoUniversitarioSuccess" extends="baseAdmin"> <!-- Consulta Nucleo Universitario -->
-        <put name="body" value="/AdminDecanatoRegistrarSuccess.jsp"/>
+    <definition name="consultaNucleoUniversitarioSuccess" extends="baseAdmin"> <!-- Consulta Nucleo Universitario Success -->
+        <put name="body" value="/ConsultaNucleoUniversitarioSuccess.jsp"/>
     </definition>
     
-    <definition name="adminDecanatoRegistrarSuccess.jsp" extends="baseAdmin"> <!-- Success Registrar -->
+    <definition name="consultaNucleoUniversitario" extends="baseAdmin"> <!-- Consulta Nucleo Universitario -->
+        <put name="body" value="/ConsultaNucleoUniversitario.jsp"/>
+    </definition>
+    
+    <definition name="adminDecanatoRegistrarSuccess" extends="baseAdmin"> <!-- Success Registrar Decanato -->
         <put name="body" value="/AdminDecanatoRegistrarSuccess.jsp"/>
     </definition>
     
@@ -83,6 +99,14 @@
     
     <definition name="adminCoordinacionRegistrarSuccess" extends="baseAdmin"> <!-- Registrar Coordinacion Success -->
         <put name="body" value="/AdminCoordinacionRegistrarSuccess.jsp"/>
+    </definition>
+    
+    <definition name="editarStatusNucleoUniversitario" extends="baseAdmin"> <!-- Editar Estatus Coordinacion -->
+        <put name="body" value="/EditarStatusNucleoUniversitario.jsp"/>
+    </definition>
+    
+    <definition name="editarStatusDecanato" extends="baseAdmin"> <!-- Editar Estatus Coordinacion -->
+        <put name="body" value="/EditarStatusDecanato.jsp"/>
     </definition>
     
     <definition name="editarStatusCoordinacion" extends="baseAdmin"> <!-- Editar Estatus Coordinacion -->
