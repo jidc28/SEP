@@ -4,6 +4,7 @@
     Author     : jidc28
 --%>
 
+
 <div id="footer">
     <p>Copyright Langtech</p>
 </div>
