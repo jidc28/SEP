@@ -143,10 +143,6 @@
         <put name="body" value="/JSP/profesor/VistaProfesorModificarSuccess.jsp"/>
     </definition>
     
-    <definition name="vistaProfesorEliminarSuccess" extends="baseProfesor"> <!-- Vista Profesor Eliminar Success-->
-        <put name="body" value="/JSP/profesor/VistaProfesorEliminarSuccess.jsp"/>
-    </definition>
-    
     <definition name="agregarInfoP" extends="baseProfesor"> <!-- Agregar Info Profesor-->
         <put name="body" value="/JSP/profesor/AgregarInfoP.jsp"/>
     </definition>

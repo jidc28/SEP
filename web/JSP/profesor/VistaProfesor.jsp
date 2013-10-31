@@ -22,6 +22,20 @@
 
         <div style="width:760px;margin-left:auto;margin-right:auto;">
 
+            <logic:present name="actualizacion">
+                <p align ="center" style="background-color: springgreen;
+                   width: 300px; margin-left: auto; margin-right: auto">
+                    Información actualizada exitosamente.
+                </p>
+            </logic:present>
+            <logic:present name="eliminacion">
+                <p align ="center" style="background-color: springgreen;
+                   width: 300px; margin-left: auto; margin-right: auto">
+                    Información eliminada exitosamente.
+                </p>
+            </logic:present>
+
+
             <div align="center" >
                 <h1 >Gestión de información del profesor</h1>
                 <table border="0">

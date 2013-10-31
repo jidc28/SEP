@@ -64,10 +64,11 @@ public class GuardarModificarInfoP extends org.apache.struts.action.Action {
             boolean actualizar = DBMS.getInstance().actualizarInfoProfesor(u);
 
             //retorno a pagina de exito
-            session.setAttribute("usbid", u.getUsbid());
-            session.setAttribute("profesor",u);
+            request.setAttribute("usbid", u.getUsbid());
+            request.setAttribute("profesor",u);
 
             if (actualizar) {
+                request.setAttribute("actualizacion", SUCCESS);
                 return mapping.findForward(SUCCESS);
             } else {
                 return mapping.findForward(FAILURE);

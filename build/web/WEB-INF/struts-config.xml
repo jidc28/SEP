@@ -196,11 +196,11 @@
             <forward name="failure" path="vistaProfesor"/>
         </action>
         <action input="/ModificarInfoP.jsp" name="Profesor" path="/guardarModificarInfoP" scope="request" type="Actions.Profesor.GuardarModificarInfoP" validate="false">
-            <forward name="success" path="vistaProfesorModificarSuccess"/>
+            <forward name="success" path="vistaProfesor"/>
             <forward name="failure" path="modificarInfoP"/> 
         </action>
         <action input="/VistaProfesor.jsp" name="Profesor" path="/eliminarInfoP" scope="request" type="Actions.Profesor.EliminarInfoP" validate="false">
-            <forward name="success" path="vistaProfesorEliminarSuccess"/>
+            <forward name="success" path="vistaProfesor"/>
         </action>        
         <action input="/VistaProfesor.jsp" name="ModificarInfoPForm" path="/agregarInfoP" scope="request" type="Actions.Profesor.AgregarInfoP" validate="false">
             <forward name="success" path="agregarInfoP"/>
