@@ -50,7 +50,7 @@ public class CambiarNombreDecanatoA extends org.apache.struts.action.Action {
         error = u.validate(mapping, request);
         boolean huboError = false;
 
-        
+
         if (error.size() != 0) {
             huboError = true;
         }
@@ -71,7 +71,8 @@ public class CambiarNombreDecanatoA extends org.apache.struts.action.Action {
                 //si existen decanato registrados
 
                 //retorno a pagina de exito
-                session.setAttribute("decanatos", decan);
+                request.setAttribute("decanatos", decan);
+                request.setAttribute("modificacion", SUCCESS);
 
 
                 return mapping.findForward(SUCCESS);

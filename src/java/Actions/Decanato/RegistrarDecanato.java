@@ -6,6 +6,7 @@ package Actions.Decanato;
 
 import DBMS.DBMS;
 import Clases.Decanato;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -40,38 +41,41 @@ public class RegistrarDecanato extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
+
         Decanato u = (Decanato) form;
         HttpSession session = request.getSession(true);
-        
+
         ActionErrors error = new ActionErrors();
-        
+
         //valido los campos de formulario
         error = u.validate(mapping, request);
         boolean huboError = false;
 
-        
-        if (error.size()!=0) {
+
+        if (error.size() != 0) {
             huboError = true;
         }
-        
+
         //si los campos no son validos
         if (huboError) {
             saveErrors(request, error);
             return mapping.findForward(FAILURE);
-        //si los campos son validos
+            //si los campos son validos
         } else {
-            
-            boolean registro = DBMS.getInstance().registrarDecanato(u);
-            
-            if(registro){
 
-            return mapping.findForward(SUCCESS);
+            boolean registro = DBMS.getInstance().registrarDecanato(u);
+
+            if (registro) {
+
+                ArrayList<Decanato> dcnto = DBMS.getInstance().listarDecanatos();
+                request.setAttribute("decanatos", dcnto);
+                request.setAttribute("success", SUCCESS);
+                return mapping.findForward(SUCCESS);
             } else {
                 error.add("registro", new ActionMessage("error.codigoexistente"));
                 saveErrors(request, error);
                 return mapping.findForward(YAREGISTRADA);
             }
-        } 
+        }
     }
 }

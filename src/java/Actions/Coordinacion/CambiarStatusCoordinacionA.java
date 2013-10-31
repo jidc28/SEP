@@ -44,17 +44,16 @@ public class CambiarStatusCoordinacionA extends org.apache.struts.action.Action 
 
         ActionErrors error = new ActionErrors();
 
-
-        //elimina usuario del sistema 
         boolean actualizo = DBMS.getInstance().actualizarEstadoCoordinacion(u);
         
         //obtengo una lista 
-        ArrayList<Coordinacion> coordis = DBMS.getInstance().listarCoordinaciones();
+        ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
 
         //si existen
 
         //retorno a pagina de exito
-        session.setAttribute("coordinaciones", coordis);
+        request.setAttribute("coordinaciones", coords);
+        request.setAttribute("modificacion", SUCCESS);
         return mapping.findForward(SUCCESS);
     }
 }

@@ -46,6 +46,21 @@
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
+        <logic:present name="success">
+            <br>
+            <p align ="center" style="background-color: springgreen;
+               width: 300px; margin-left: auto; margin-right: auto">
+                Decanato registrado exitosamente.
+            </p>
+        </logic:present>
+        <logic:present name="modificacion">
+            <br>
+            <p align ="center" style="background-color: springgreen;
+               width: 300px; margin-left: auto; margin-right: auto">
+                Decanato modificado exitosamente.
+            </p>
+        </logic:present>
+        
         <h4> Lista de Decanatos en el sistema:</h4>
         <div id="testTable">
             <table border="0" style="margin: auto" class="altrowstable" id="alternatecolor">

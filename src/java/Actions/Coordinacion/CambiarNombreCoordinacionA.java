@@ -50,7 +50,7 @@ public class CambiarNombreCoordinacionA extends org.apache.struts.action.Action 
         error = u.validate(mapping, request);
         boolean huboError = false;
 
-        
+
         if (error.size() != 0) {
             huboError = true;
         }
@@ -65,10 +65,10 @@ public class CambiarNombreCoordinacionA extends org.apache.struts.action.Action 
             boolean actualizo = DBMS.getInstance().actualizarNombreCoordinacion(u);
 
             if (actualizo) {
-                
-                ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
-                session.setAttribute("coordinaciones", coords);
 
+                ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
+                request.setAttribute("coordinaciones", coords);
+                request.setAttribute("modificacion", SUCCESS);
 
                 return mapping.findForward(SUCCESS);
             } else {

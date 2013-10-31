@@ -1,11 +1,10 @@
 <%-- 
-    Document   : ConsultaDecanato
-    Created on : 10/06/2013, 07:43:54 PM
-    Author     : admin
+    Document   : ConsultaCoordinacion
+    Created on : 01/10/2013, 12:16:56 AM
+    Author     : Langtech
 --%>
 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>  
 
@@ -35,7 +34,6 @@
         altRows('alternatecolor');
     }
 </script>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -44,9 +42,24 @@
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
-        <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
-        <h4> Lista de Decanatos en el sistema:</h4>
+        <logic:present name="success">
+            <br>
+            <p align ="center" style="background-color: springgreen;
+               width: 300px; margin-left: auto; margin-right: auto">
+                Coordinación registrada exitosamente.
+            </p>
+        </logic:present>
+
+        <logic:present name="modificacion">
+            <br>
+            <p align ="center" style="background-color: springgreen;
+               width: 300px; margin-left: auto; margin-right: auto">
+                Coordinacion modificada exitosamente.
+            </p>
+        </logic:present>
+
+        <h4> Lista de Coordinaciones en el sistema:</h4>
         <div id="testTable">
             <table border="0" style="margin: auto" class="altrowstable" id="alternatecolor">
                 <thead>
@@ -55,7 +68,7 @@
                             Codigo
                         </th>
                         <th width="20%" align="center">
-                            Nombre Decanato
+                            Nombre Coordinacion
                         </th>
                         <th width="20%" align="center">
                             Estado
@@ -68,26 +81,26 @@
                         </th>
                     </tr>
                 </thead>
-                <logic:iterate name="decanatos" id="Decanatos">
+                <logic:iterate name="coordinaciones" id="Coordinaciones">
                     <tr>
                         <td width="20%" align="center">
-                            <bean:write name="Decanatos" property="codigo"/>
+                            <bean:write name="Coordinaciones" property="codigo"/>
                         </td>
                         <td width="20%" align="center">
-                            <bean:write name="Decanatos" property="nombre"/>
+                            <bean:write name="Coordinaciones" property="nombre"/>
                         </td>
                         <td width="20%" align="center">
-                            <bean:write name="Decanatos" property="estado"/>
+                            <bean:write name="Coordinaciones" property="estado"/>
                         </td>
                         <td width="20%" align="center">
-                            <html:form action="/editarNombreDecanato" onsubmit="return(this)">
-                                <html:hidden name="Decanatos" property="codigo"/>
+                            <html:form action="/editarNombreCoordinacion" onsubmit="return(this)">
+                                <html:hidden name="Coordinaciones" property="codigo"/>
                                 <html:image src="imagenes/edit.png" value="" property=""/>
                             </html:form>
                         </td>
                         <td width="20%" align="center">
-                            <html:form action="/cambiarStatusDecanato" onsubmit="return(this)">
-                                <html:hidden name="Decanatos" property="codigo"/>
+                            <html:form action="/cambiarStatusCoordinacion" onsubmit="return(this)">
+                                <html:hidden name="Coordinaciones" property="codigo"/>
                                 <html:image src="imagenes/visibilidad.png" value="" property=""/>
                             </html:form>
                         </td>
@@ -96,6 +109,5 @@
             </table>
         </div>
 
-</body>
+    </body>
 </html>
-

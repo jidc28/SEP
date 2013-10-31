@@ -50,7 +50,7 @@ public class CambiarNombreNucleoUniversitarioA extends org.apache.struts.action.
         error = u.validate(mapping, request);
         boolean huboError = false;
 
-        
+
         if (error.size() != 0) {
             huboError = true;
         }
@@ -65,9 +65,10 @@ public class CambiarNombreNucleoUniversitarioA extends org.apache.struts.action.
             boolean actualizo = DBMS.getInstance().actualizarNombreNucleoUniversitario(u);
 
             if (actualizo) {
-                
+
                 ArrayList<NucleoUniversitario> nucleos = DBMS.getInstance().listarNucleosUniversitarios();
-                session.setAttribute("nucleos", nucleos);
+                request.setAttribute("nucleos", nucleos);
+                request.setAttribute("modificacion", SUCCESS);
 
 
                 return mapping.findForward(SUCCESS);

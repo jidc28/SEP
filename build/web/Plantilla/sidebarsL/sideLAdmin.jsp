@@ -12,14 +12,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <div class="glossymenu" style="width: 190px">
+    <div class="glossymenu" >
         <a style="border-bottom: none;"/>
+        <a class="menuitem" href="vistaAdmin.do">
+            Inicio
+        </a>
         <a class="menuitem" href="noimplementado.jsp">
             Perfil
         </a>
-        <html:link action="/vistaAdmin">
-            Inicio
-        </html:link>
         <a class="menuitem" href="noimplementado.jsp">
             Contáctenos
         </a>

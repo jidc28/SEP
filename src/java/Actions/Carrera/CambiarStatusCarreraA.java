@@ -47,14 +47,15 @@ public class CambiarStatusCarreraA extends org.apache.struts.action.Action {
 
         //elimina usuario del sistema 
         boolean actualizo = DBMS.getInstance().actualizarEstadoCarrera(u);
-        
+
         //obtengo una lista de usuarios registrados
-        ArrayList<Carrera> users = DBMS.getInstance().listarCarreras();
+        ArrayList<Carrera> carreras = DBMS.getInstance().listarCarreras();
 
         //si existen usuarios registrados
 
         //retorno a pagina de exito
-        session.setAttribute("carreras", users);
+        request.setAttribute("carreras", carreras);
+        request.setAttribute("modificacion", SUCCESS);
         return mapping.findForward(SUCCESS);
     }
 }

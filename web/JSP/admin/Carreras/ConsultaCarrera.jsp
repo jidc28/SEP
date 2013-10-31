@@ -1,7 +1,7 @@
 <%-- 
-    Document   : ConsultaCoordinacion
-    Created on : 01/10/2013, 12:16:56 AM
-    Author     : Langtech
+    Document   : ConsultaCarrera
+    Created on : 10/06/2013, 07:43:54 PM
+    Author     : admin
 --%>
 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -42,8 +42,24 @@
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
+        <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
-        <h4> Lista de Coordinaciones en el sistema:</h4>
+        <logic:present name="registro">
+            <br>
+            <p align ="center" style="background-color: springgreen;
+               width: 300px; margin-left: auto; margin-right: auto">
+                Carrera registrada exitosamente.
+            </p>
+        </logic:present>
+        <logic:present name="modificacion">
+            <br>
+            <p align ="center" style="background-color: springgreen;
+               width: 300px; margin-left: auto; margin-right: auto">
+                Carrera modificada exitosamente.
+            </p>
+        </logic:present>
+
+        <h4> Lista de Carreras en el sistema:</h4>
         <div id="testTable">
             <table border="0" style="margin: auto" class="altrowstable" id="alternatecolor">
                 <thead>
@@ -52,46 +68,46 @@
                             Codigo
                         </th>
                         <th width="20%" align="center">
-                            Nombre Coordinacion
+                            Nombre Carrera
                         </th>
                         <th width="20%" align="center">
                             Estado
                         </th>
                         <th width="20%" align="center">
-                            Modificar Nombre
+                            Editar Nombre
                         </th>
                         <th width="20%" align="center">
-                            Modificar Estado
+                            Cambiar Estado
                         </th>
-                    </tr>
                 </thead>
-                <logic:iterate name="coordinaciones" id="Coordinaciones">
+                <logic:iterate name="carreras" id="Carreras">
                     <tr>
                         <td width="20%" align="center">
-                            <bean:write name="Coordinaciones" property="codigo"/>
+                            <bean:write name="Carreras" property="codigo"/>
                         </td>
                         <td width="20%" align="center">
-                            <bean:write name="Coordinaciones" property="nombre"/>
+                            <bean:write name="Carreras" property="nombre"/>
                         </td>
                         <td width="20%" align="center">
-                            <bean:write name="Coordinaciones" property="estado"/>
+                            <bean:write name="Carreras" property="estado"/>
                         </td>
-                        <td width="20%" align="center">
-                            <html:form action="/editarNombreCoordinacion" onsubmit="return(this)">
-                                <html:hidden name="Coordinaciones" property="codigo"/>
+                        <td>
+                            <html:form  action="/editarNombre" onsubmit="return(this)">
+                                <html:hidden name="Carreras" property="codigo" />
                                 <html:image src="imagenes/edit.png" value="" property=""/>
                             </html:form>
                         </td>
-                        <td width="20%" align="center">
-                            <html:form action="/cambiarStatusCoordinacion" onsubmit="return(this)">
-                                <html:hidden name="Coordinaciones" property="codigo"/>
+                        <td>
+                            <html:form  action="/cambiarStatusCarrera" onsubmit="return(this)">
+                                <html:hidden name="Carreras" property="codigo" />
                                 <html:image src="imagenes/visibilidad.png" value="" property=""/>
-                            </html:form>
+                            </html:form>	                                        
                         </td>
                     </tr>
                 </logic:iterate>
             </table>
         </div>
+
 
     </body>
 </html>

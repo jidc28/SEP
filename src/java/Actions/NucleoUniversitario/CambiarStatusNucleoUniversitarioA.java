@@ -52,7 +52,8 @@ public class CambiarStatusNucleoUniversitarioA extends org.apache.struts.action.
         //si existen
 
         //retorno a pagina de exito
-        session.setAttribute("nucleos", nucleos);
+        request.setAttribute("nucleos", nucleos);
+        request.setAttribute("modificacion", SUCCESS);
         return mapping.findForward(SUCCESS);
     }
 }

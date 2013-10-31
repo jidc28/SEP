@@ -6,6 +6,7 @@ package Actions.Carrera;
 
 import Clases.Carrera;
 import DBMS.DBMS;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -66,6 +67,9 @@ public class RegistrarCarrera extends org.apache.struts.action.Action {
 
             if (registro) {
 
+                ArrayList<Carrera> carreras = DBMS.getInstance().listarCarreras();
+                request.setAttribute("carreras", carreras);
+                request.setAttribute("registro",SUCCESS);
                 return mapping.findForward(SUCCESS);
             } else {
                 error.add("registro", new ActionMessage("error.codigoexistente"));

@@ -4,8 +4,10 @@
  */
 package Actions.Coordinacion;
 
+import Clases.Carrera;
 import Clases.Coordinacion;
 import DBMS.DBMS;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -44,7 +46,6 @@ public class RegistrarCoordinacion extends org.apache.struts.action.Action {
         Coordinacion u = (Coordinacion) form;
         HttpSession session = request.getSession(true);
         ActionErrors error = new ActionErrors();
-        String mensaje = "Agregado correctamente";
                 
         //valido los campos de formulario
         error = u.validate(mapping, request);
@@ -66,7 +67,9 @@ public class RegistrarCoordinacion extends org.apache.struts.action.Action {
             boolean registro = DBMS.getInstance().registrarCoordinacion(u);
             
             if(registro){
-                request.setAttribute("mensaje", mensaje);
+                ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
+                request.setAttribute("coordinaciones", coords);
+                request.setAttribute("success", SUCCESS);
             return mapping.findForward(SUCCESS);
             } else {
                 error.add("nombre", new ActionMessage("error.codigoexistente"));

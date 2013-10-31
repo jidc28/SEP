@@ -66,8 +66,8 @@ public class CambiarNombreCarreraA extends org.apache.struts.action.Action {
 
             if (actualizo) {
                 ArrayList<Carrera> carreras = DBMS.getInstance().listarCarreras();
-                session.setAttribute("carreras", carreras);
-
+                request.setAttribute("carreras", carreras);
+                request.setAttribute("modificacion",SUCCESS);
 
                 return mapping.findForward(SUCCESS);
             } else {
