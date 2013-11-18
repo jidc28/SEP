@@ -58,7 +58,23 @@
                 Coordinacion modificada exitosamente.
             </p>
         </logic:present>
-
+            
+        <logic:present name="eliminado">
+            <br>
+            <p align ="center" style="background-color: springgreen;
+               width: 300px; margin-left: auto; margin-right: auto"> 
+               Coordinacion eliminada exitosamente.
+            </p>
+        </logic:present>
+            
+        <logic:present name="noEliminado">
+            <br>
+            <p align ="center" style="background-color: springgreen;
+               width: 300px; margin-left: auto; margin-right: auto"> 
+               La coordinacion no pudo ser eliminada exitosamente.
+            </p>
+        </logic:present>
+          
         <h4> Lista de Coordinaciones en el sistema:</h4>
         <div id="testTable">
             <table border="0" style="margin: auto" class="altrowstable" id="alternatecolor">
@@ -78,6 +94,9 @@
                         </th>
                         <th width="20%" align="center">
                             Modificar Estado
+                        </th>
+                        <th width="20%" align="center">
+                            Eliminar
                         </th>
                     </tr>
                 </thead>
@@ -102,6 +121,14 @@
                             <html:form action="/cambiarStatusCoordinacion" onsubmit="return(this)">
                                 <html:hidden name="Coordinaciones" property="codigo"/>
                                 <html:image src="imagenes/visibilidad.png" value="" property=""/>
+                            </html:form>
+                        </td>
+                        <td>
+                            <html:form action="/eliminaCoordinacionA" onsubmit="return(this)">
+                                <html:hidden name="Coordinaciones" property="codigo"/>
+                                <html:submit>
+                                    Eliminar
+                                </html:submit>
                             </html:form>
                         </td>
                     </tr>

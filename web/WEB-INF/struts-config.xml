@@ -149,6 +149,10 @@
             <forward name="success" path="consultaCoordinacion"/>
             <forward name="failure" path="editarNombreCoordinacion"/>
         </action>
+        <action input="/ConsultarCoordinacion.jsp" name="Coordinacion" path="/eliminaCoordinacionA" scope="request" type="Actions.Coordinacion.EliminaCoordinacionA" validate="false">
+            <forward name="success" path="consultaCoordinacion"/>
+            <forward name="failure" path="consultaCoordinacion"/>
+        </action> 
         
         
         <!--       CARRERAS         -->
