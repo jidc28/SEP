@@ -169,7 +169,11 @@
         <action input="/EditarNombreCarrera.jsp" name="Carrera" path="/cambiarNombreCarreraA" scope="request" type="Actions.Carrera.CambiarNombreCarreraA" validate="false">
             <forward name="success" path="consultaCarrera"/>
             <forward name="failure" path="editarNombreCarrera"/> 
-        </action>        
+        </action>  
+        <action input="/ConsultarCarrera.jsp" name="Carrera" path="/eliminaCarreraA" scope="request" type="Actions.Carrera.EliminaCarreraA" validate="false">
+            <forward name="success" path="consultaCarrera"/>
+            <forward name="failure" path="consultaCarrera"/>
+        </action>      
         
         <!--         USUARIOS       -->
         <action input="/CreateUser.jsp" name="CreateUserForm" path="/createUser" scope="request" type="Actions.Usuario.CreateUserAction" validate="false">

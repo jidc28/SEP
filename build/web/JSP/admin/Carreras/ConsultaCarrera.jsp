@@ -39,6 +39,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
+        
+        <!-- NO ME AGARRA BOOTSTRAP 
+        <link rel="stylesheet" type="text/css" href="css/ccs/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/ccs/bootstrap.min.css"> -->
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
@@ -58,7 +62,22 @@
                 Carrera modificada exitosamente.
             </p>
         </logic:present>
-
+            
+        <logic:present name="eliminado">
+            <br>
+            <p align ="center" style="background-color: springgreen;
+               width: 300px; margin-left: auto; margin-right: auto"> 
+               Carrera eliminada exitosamente.
+            </p>
+        </logic:present>
+        <logic:present name="noEliminado">
+            <br>
+            <p align ="center" style="background-color: springgreen;
+               width: 300px; margin-left: auto; margin-right: auto"> 
+               La carrera no pudo ser eliminada exitosamente.
+            </p>
+        </logic:present>
+            
         <h4> Lista de Carreras en el sistema:</h4>
         <div id="testTable">
             <table border="0" style="margin: auto" class="altrowstable" id="alternatecolor">
@@ -78,6 +97,9 @@
                         </th>
                         <th width="20%" align="center">
                             Cambiar Estado
+                        </th>
+                        <th width="20%" align="center">
+                            Eliminar
                         </th>
                 </thead>
                 <logic:iterate name="carreras" id="Carreras">
@@ -102,6 +124,14 @@
                                 <html:hidden name="Carreras" property="codigo" />
                                 <html:image src="imagenes/visibilidad.png" value="" property=""/>
                             </html:form>	                                        
+                        </td>
+                        <td>
+                            <html:form action="/eliminaCarreraA" onsubmit="return(this)">
+                                <html:hidden name="Carreras" property="codigo"/>
+                                <html:submit>
+                                    Eliminar
+                                </html:submit>
+                            </html:form>
                         </td>
                     </tr>
                 </logic:iterate>

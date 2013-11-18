@@ -374,6 +374,23 @@ public class DBMS {
         }
     }
 
+    public boolean eliminarCarrera(Carrera u){
+    
+        PreparedStatement psEliminar1 = null;
+        try{
+            psEliminar1 = conexion.prepareStatement("DELETE FROM carrera AS c WHERE (c.codigo = ?);");
+            psEliminar1.setString(1,u.getCodigo());
+            
+            Integer i = psEliminar1.executeUpdate();
+            
+            System.out.println("retorna: " + (i>0));
+            return i > 0;
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
     public boolean registrarDecanato(Decanato u) {
 
         PreparedStatement psAgregar1 = null;

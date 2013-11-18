@@ -1,3 +1,5 @@
+INSERT INTO USUARIO VALUES ('admin','administrador','admin','admin');
+
 INSERT INTO COORDINACION VALUES ('C-0001','Coordinacion de Administracion de Turismo y Hoteleria');
 INSERT INTO COORDINACION VALUES ('C-0002','Coordinacion de Alimentos');
 INSERT INTO COORDINACION VALUES ('C-0003','Coordinacion de Arquitectura');
