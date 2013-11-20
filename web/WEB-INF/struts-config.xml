@@ -42,14 +42,27 @@
             type="org.apache.struts.actions.ForwardAction"
             scope="request"
             validate="false"
-            parameter="vistaProfesor"
-            >
+            parameter="vistaProfesor">
+        </action>
+        
+        <action path="/vistaDecanato"
+            type="org.apache.struts.actions.ForwardAction"
+            scope="request"
+            validate="false"
+            parameter="vistaDecanato">
+        </action>
+        
+        <action name="Usuario" path="/irInicio" scope="request" type="Otros.Inicio" validate="false">
+            <forward name="profesor" path="vistaProfesor"/>
+            <forward name="administrador" path="vistaAdmin"/>
+            <forward name="decanato" path="vistaDecanato"/>
         </action>
         
         <!--       LOGIN         -->
         <action input="/Login.jsp" name="Usuario" path="/login" scope="request" type="Session.LoginAction" validate="false">
             <forward name="profesor" path="vistaProfesor"/>
             <forward name="administrador" path="vistaAdmin"/>
+            <forward name="decanato" path="vistaDecanato"></forward>
             <forward name="failure" path="/Login.jsp"/>
         </action>
         

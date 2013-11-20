@@ -147,5 +147,15 @@
         <put name="body" value="/JSP/profesor/AgregarInfoP.jsp"/>
     </definition>
 
+    <!-- DECANATO -->
+    
+    <definition name="baseDecanato" extends="base"> <!-- BASE PARA DECANATO -->
+    <!-- No estoy segura de si hay que modificar el sidebar izquierdo -->
+        <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDecanato.jsp"/>
+    </definition>
+    
+    <definition name="vistaDecanato" extends="baseDecanato"> <!-- Vista administrador -->
+        <put name="body" value="/JSP/decanato/VistaDecanato.jsp"/>
+    </definition>
 
 </tiles-definitions>

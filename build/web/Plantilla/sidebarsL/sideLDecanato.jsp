@@ -14,7 +14,7 @@
 <html>
     <div class="glossymenu" >
         <a style="border-bottom: none;"/>
-        <a class="menuitem" href="irInicio.do">
+        <a class="menuitem" href="IrInicio.do">
             Inicio
         </a>
         <a class="menuitem" href="noimplementado.jsp">
