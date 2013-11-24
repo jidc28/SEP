@@ -1,5 +1,7 @@
 INSERT INTO USUARIO VALUES ('admin','administrador','admin','admin');
 INSERT INTO USUARIO VALUES ('decanato','decanato','decanato','decanato');
+INSERT INTO USUARIO VALUES ('coordinacion','coordinacion','coordinacion','coordinacion');
+INSERT INTO USUARIO VALUES ('departamento','departamento','departamento','departamento');
 
 INSERT INTO COORDINACION VALUES ('C-0001','Coordinacion de Administracion de Turismo y Hoteleria');
 INSERT INTO COORDINACION VALUES ('C-0002','Coordinacion de Alimentos');
@@ -62,8 +64,8 @@ INSERT INTO DECANATO VALUES (1005,'Decanato de Extension Universitaria');
 INSERT INTO DECANATO VALUES (1006,'Decanato de Investigacion y Desarrollo');
 
 
-INSERT INTO NUCLEOUNIV VALUES ('CCS-001','USB - Caracas, Sede Sartenejas');
-INSERT INTO NUCLEOUNIV VALUES ('LGU-001','USB - La Guaira, Sede Camurí Grande');
+INSERT INTO NUCLEOUNIV VALUES ('Sartenejas','USB - Caracas, Sede Sartenejas');
+INSERT INTO NUCLEOUNIV VALUES ('La Guaira','USB - La Guaira, Sede Camurí Grande');
 
 INSERT INTO CARRERA VALUES ('0100','Ingeniería Eléctrica');
 INSERT INTO CARRERA VALUES ('0200','Ingeniería Mecánica');

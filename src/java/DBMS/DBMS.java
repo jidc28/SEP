@@ -133,6 +133,44 @@ public class DBMS {
         return usrs;
     }
 
+    public ArrayList[] mostrarUsuarios() {
+
+        ArrayList[] total = new ArrayList[4];
+        ArrayList<Usuario> profesores = new ArrayList<Usuario>(0);
+        ArrayList<Usuario> decanatos = new ArrayList<Usuario>(0);
+        ArrayList<Usuario> departamentos = new ArrayList<Usuario>(0);
+        ArrayList<Usuario> coordinaciones = new ArrayList<Usuario>(0);
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT * FROM usuario ORDER BY usbid");
+            ResultSet rs = ps.executeQuery();
+            String tipousuario = null;
+            while (rs.next()) {
+                Usuario u = new Usuario();
+                u.setUsbid(rs.getString("usbid"));
+                u.setDepartamento(rs.getString("departamento"));
+                tipousuario = rs.getString("tipousuario");
+                if (tipousuario.equals("profesor")){
+                    profesores.add(u);
+                } else if (tipousuario.equals("decanato")) {
+                    decanatos.add(u);
+                } else if (tipousuario.equals("departamento")) {
+                    departamentos.add(u);
+                } else if (tipousuario.equals("coordinacion")) {
+                    coordinaciones.add(u);
+                }
+            }
+            total[0] = profesores;
+            total[1] = decanatos;
+            total[2] = departamentos;
+            total[3] = coordinaciones;
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return total;
+    }
+    
     public ArrayList<Usuario> listarProfesores() {
 
         ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);

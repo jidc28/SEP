@@ -42,12 +42,15 @@ public class ShowUserA extends org.apache.struts.action.Action {
         HttpSession session = request.getSession(true);
 
         //obtengo una lista de usuarios registrados
-        ArrayList<Usuario> users = DBMS.getInstance().listarUsuarios();
+        ArrayList[] users = DBMS.getInstance().mostrarUsuarios();
 
         //si existen usuarios registrados
 
             //retorno a pagina de exito
-            session.setAttribute("usuarios", users);
+            session.setAttribute("profesores", users[0]);
+            session.setAttribute("decanatos", users[1]);
+            session.setAttribute("departamentos", users[2]);
+            session.setAttribute("coordinaciones", users[3]);
             return mapping.findForward(SUCCESS);
 
 

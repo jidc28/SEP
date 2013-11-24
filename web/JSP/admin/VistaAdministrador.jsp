@@ -38,11 +38,13 @@
                     </html:link>
                     -->
                     <html:link action="/showUserA" >
-                        <h5 align ="center">Mostrar Usuarios</h5>
+                        <h5 align ="center">Consultar Usuarios</h5>
                     </html:link>
+                    <!--
                     <html:link action="/listarProfesores" >
                         <h5 align ="center">Mostrar Profesores</h5>
                     </html:link>
+                    -->
                     </div>
                 </div>
             </div>

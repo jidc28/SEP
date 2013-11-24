@@ -65,7 +65,7 @@
                 <thead>
                     <tr>
                         <th width="20%" align="center">
-                            Codigo
+                            Localización
                         </th>
                         <th width="20%" align="center">
                             Nombre Nucleo
