@@ -5,6 +5,7 @@
 package Actions.Carrera;
 
 import Clases.Carrera;
+import Clases.Usuario;
 import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -39,6 +40,8 @@ public class EliminaCarreraA extends org.apache.struts.action.Action {
 
         Carrera u = (Carrera) form;
         HttpSession session = request.getSession(true);
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
         ActionErrors error = new ActionErrors();
         //obtengo una lista de carreras registradas
 
@@ -65,9 +68,13 @@ public class EliminaCarreraA extends org.apache.struts.action.Action {
                 return mapping.findForward(SUCCESS);
             } else {
                 request.setAttribute("eliminado",SUCCESS);
-
-                ArrayList<Carrera> carreras = DBMS.getInstance().listarCarreras();
-
+                ArrayList<Carrera> carreras = null;
+                
+                if (tipousuario.equals("administrador")) {
+                    carreras = DBMS.getInstance().listarCarreras();
+                } else if (tipousuario.equals("decanato")){
+                    carreras = DBMS.getInstance().listarCarrerasDecanato(usuario.getUsbid());
+                }
                 //si existen carreras registradas
 
                 //retorno a pagina de exito

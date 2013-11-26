@@ -102,12 +102,6 @@
         <action input="/VistaAdministrador.jsp" path="/consultaNucleoUniversitarioA" scope="request" type="Actions.NucleoUniversitario.ConsultaNucleoUniversitarioA" validate="false">
             <forward name="success" path="consultaNucleoUniversitario"/>
         </action>
-        
-        <!-- VISTA DECANATO -->
-        
-        <action input="/VistaDecanato.jsp" path="/consultaCarreraDec" scope="request" type="Actions.Carrera.ConsultarCarreraDec" validate="false">
-            <forward name="success" path="consultaCarrera"/>
-        </action>
             
         <!-- NUCLEOS UNIVERSITARIOS -->
         <action input="/AgregaNucleoUniv.jsp" name="NucleoUniversitario" path="/registrarNucleoUniv" scope="request" type="Actions.NucleoUniversitario.RegistrarNucleoUniv" validate="false">

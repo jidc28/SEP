@@ -34,7 +34,7 @@
                     <html:link action="/agregaCarreraA" >
                         <h5 align ="center">Agregar Carrera</h5>
                     </html:link>
-                    <html:link action="/consultaCarreraDec" >
+                    <html:link action="/consultaCarreraA" >
                         <h5 align ="center">Consultar Carrera</h5>
                     </html:link>
                     </div>

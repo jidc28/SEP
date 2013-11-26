@@ -158,4 +158,8 @@
         <put name="body" value="/JSP/decanato/VistaDecanato.jsp"/>
     </definition>
 
+    <definition name="consultaCarreraDec" extends="baseDecanato"> <!-- Agregar Carreras -->
+        <put name="body" value="/JSP/admin/Carreras/ConsultaCarrera.jsp"/>
+    </definition>
+
 </tiles-definitions>

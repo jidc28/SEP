@@ -436,6 +436,30 @@ public class DBMS {
         }
     }
 
+    public boolean registrarCarreraDec(Carrera u,String decanato) {
+
+        PreparedStatement psAgregar1 = null;
+        PreparedStatement psAgregar2 = null;
+        
+        try {
+            psAgregar1 = conexion.prepareStatement("INSERT INTO carrera(codigo, nombre) VALUES (?, ?);");
+            psAgregar1.setString(1, u.getCodigo());
+            psAgregar1.setString(2, u.getNombre());
+            Integer i = psAgregar1.executeUpdate();
+            
+            psAgregar2 = conexion.prepareStatement("INSERT INTO incluye VALUES (?,?);");
+            psAgregar2.setString(2, u.getCodigo());
+            psAgregar2.setString(1, decanato);
+            Integer j = psAgregar2.executeUpdate();
+            
+            return i > 0 && j > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
     public boolean eliminarCarrera(Carrera u){
     
         PreparedStatement psEliminar1 = null;

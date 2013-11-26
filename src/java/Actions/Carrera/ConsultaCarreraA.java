@@ -5,6 +5,7 @@
 package Actions.Carrera;
 
 import Clases.Carrera;
+import Clases.Usuario;
 import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,6 @@ public class ConsultaCarreraA extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
-
     /**
      * This is the action called from the Struts framework.
      *
@@ -39,14 +39,20 @@ public class ConsultaCarreraA extends org.apache.struts.action.Action {
             throws Exception {
         
         HttpSession session = request.getSession(true);
-
+        ArrayList<Carrera> carreras = null;
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
         //obtengo una lista de carreras registradas
-        ArrayList<Carrera> carreras = DBMS.getInstance().listarCarreras();
+        if (tipousuario.equals("administrador")){
+            carreras = DBMS.getInstance().listarCarreras();
+        } else if (tipousuario.equals("decanato")){
+            carreras = DBMS.getInstance().listarCarrerasDecanato(usuario.getUsbid());
+        }
 
         //si existen carreras registradas
 
             //retorno a pagina de exito
-            session.setAttribute("carreras", carreras);
-            return mapping.findForward(SUCCESS);
+         session.setAttribute("carreras", carreras);
+         return mapping.findForward(SUCCESS);
     }
 }

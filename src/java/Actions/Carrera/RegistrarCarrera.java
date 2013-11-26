@@ -5,6 +5,7 @@
 package Actions.Carrera;
 
 import Clases.Carrera;
+import Clases.Usuario;
 import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +45,8 @@ public class RegistrarCarrera extends org.apache.struts.action.Action {
 
         Carrera u = (Carrera) form;
         HttpSession session = request.getSession(true);
-
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
         ActionErrors error = new ActionErrors();
 
         //valido los campos de formulario
@@ -62,25 +64,38 @@ public class RegistrarCarrera extends org.apache.struts.action.Action {
             return mapping.findForward(FAILURE);
             //si los campos son validos
         } else {
+            ArrayList<Carrera> carreras = null;
+            
+            if (tipousuario.equals("administrador")) {
+                boolean registro = DBMS.getInstance().registrarCarrera(u);
 
-            boolean registro = DBMS.getInstance().registrarCarrera(u);
+                if (registro) {
 
-            if (registro) {
+                    carreras = DBMS.getInstance().listarCarreras();
+                    request.setAttribute("carreras", carreras);
+                    request.setAttribute("registro",SUCCESS);
+                    return mapping.findForward(SUCCESS);
+                } else {
+                    error.add("registro", new ActionMessage("error.codigoexistente"));
+                    saveErrors(request, error);
+                    return mapping.findForward(YAREGISTRADA);
+                }
+            } else if (tipousuario.equals("decanato")) {
+                boolean registro = DBMS.getInstance().registrarCarreraDec(u,usuario.getUsbid());
 
-                ArrayList<Carrera> carreras = DBMS.getInstance().listarCarreras();
-                request.setAttribute("carreras", carreras);
-                request.setAttribute("registro",SUCCESS);
-                return mapping.findForward(SUCCESS);
-            } else {
-                error.add("registro", new ActionMessage("error.codigoexistente"));
-                saveErrors(request, error);
-                return mapping.findForward(YAREGISTRADA);
+                if (registro) {
+
+                    carreras = DBMS.getInstance().listarCarrerasDecanato(usuario.getUsbid());
+                    request.setAttribute("carreras", carreras);
+                    request.setAttribute("registro",SUCCESS);
+                    return mapping.findForward(SUCCESS);
+                } else {
+                    error.add("registro", new ActionMessage("error.codigoexistente"));
+                    saveErrors(request, error);
+                    return mapping.findForward(YAREGISTRADA);
+                }
             }
         }
-
-
-
-
-
+        return mapping.findForward(FAILURE);
     }
 }
