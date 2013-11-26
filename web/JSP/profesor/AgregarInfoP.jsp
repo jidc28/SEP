@@ -129,11 +129,12 @@
                     <tr>
                         <td>Período a evaluar</td> 
                         <td>
-                            <html:form action="/consultaDace" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form_data" onsubmit="return(this)">
+                            <html:form action="/consultaDace" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form_data" onsubmit="return(this)" style="margin-bottom:0px">
                             <html:select disabled="false" property="trimestre">
                                 <html:option value="EM">Enero-Marzo</html:option>
                                 <html:option value="AJ">Abril-Julio</html:option>
                                 <html:option value="SD">Septiembre-Diciembre</html:option>
+                                <html:option value="SD">Intensivo</html:option>
                             </html:select>
                             <html:select disabled="false" property="ano">
                                 <html:option value="2004">2004</html:option> 

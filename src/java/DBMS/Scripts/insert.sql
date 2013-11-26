@@ -1,7 +1,13 @@
 INSERT INTO USUARIO VALUES ('admin','administrador','admin','admin');
-INSERT INTO USUARIO VALUES ('decanato','decanato','decanato','decanato');
+INSERT INTO USUARIO VALUES (1003,'decanato','decanato','decanato');
 INSERT INTO USUARIO VALUES ('coordinacion','coordinacion','coordinacion','coordinacion');
 INSERT INTO USUARIO VALUES ('departamento','departamento','departamento','departamento');
+INSERT INTO incluye VALUES (1003,'0100');
+INSERT INTO incluye VALUES (1003,'0200');
+INSERT INTO incluye VALUES (1003,'0300');
+INSERT INTO incluye VALUES (1003,'0600');
+INSERT INTO incluye VALUES (1003,'1500');
+
 
 INSERT INTO COORDINACION VALUES ('C-0001','Coordinacion de Administracion de Turismo y Hoteleria');
 INSERT INTO COORDINACION VALUES ('C-0002','Coordinacion de Alimentos');

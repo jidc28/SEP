@@ -212,6 +212,30 @@ public class DBMS {
         }
         return carreras;
     }
+    
+    public ArrayList<Carrera> listarCarrerasDecanato(String d) {
+    
+        ArrayList<Carrera> carreras = new ArrayList<Carrera>(0);
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT codigo, nombre, estado FROM incluye, CARRERA "
+                    + "WHERE codigo_decanato = ? AND codigo_carrera = codigo "
+                    + "ORDER BY codigo_carrera");
+            ps.setString(1,d);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Carrera u = new Carrera();
+                u.setCodigo(rs.getString("codigo"));
+                u.setNombre(rs.getString("nombre"));
+                u.setEstado(rs.getString("Estado"));
+                carreras.add(u);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return carreras;
+    }
 
     public ArrayList<Decanato> listarDecanatos() {
 
