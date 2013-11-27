@@ -5,6 +5,7 @@
 package Actions.Carrera;
 
 import Clases.Carrera;
+import Clases.Decanato;
 import Clases.Usuario;
 import DBMS.DBMS;
 import java.util.ArrayList;
@@ -68,17 +69,21 @@ public class EliminaCarreraA extends org.apache.struts.action.Action {
                 return mapping.findForward(SUCCESS);
             } else {
                 request.setAttribute("eliminado",SUCCESS);
-                ArrayList<Carrera> carreras = null;
+                ArrayList<Carrera> [] carreras = null;
                 
                 if (tipousuario.equals("administrador")) {
-                    carreras = DBMS.getInstance().listarCarreras();
+                    Decanato d = (Decanato) form;
+                    carreras = DBMS.getInstance().listarCarrerasDecanato(d.getCodigo());
+                    d = DBMS.getInstance().obtenerNombreDecanato(d);
+                    request.setAttribute("decanato",d);
                 } else if (tipousuario.equals("decanato")){
                     carreras = DBMS.getInstance().listarCarrerasDecanato(usuario.getUsbid());
                 }
                 //si existen carreras registradas
 
                 //retorno a pagina de exito
-                session.setAttribute("carreras", carreras);
+                 session.setAttribute("carreras_visibles", carreras[0]);
+                 session.setAttribute("carreras_ocultas", carreras[1]);
                 return mapping.findForward(SUCCESS);
             }
         // }

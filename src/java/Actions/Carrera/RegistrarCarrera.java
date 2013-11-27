@@ -65,7 +65,7 @@ public class RegistrarCarrera extends org.apache.struts.action.Action {
             return mapping.findForward(FAILURE);
             //si los campos son validos
         } else {
-            ArrayList<Carrera> carreras = null;
+            ArrayList<Carrera> [] carreras = null;
             
             if (tipousuario.equals("administrador")) {
                 Decanato d = (Decanato) session.getAttribute("decanato_actual");
@@ -74,7 +74,8 @@ public class RegistrarCarrera extends org.apache.struts.action.Action {
                 if (registro) {
 
                     carreras = DBMS.getInstance().listarCarrerasDecanato(d.getCodigo());
-                    request.setAttribute("carreras", carreras);
+                    session.setAttribute("carreras_visibles", carreras[0]);
+                    session.setAttribute("carreras_ocultas", carreras[1]);
                     request.setAttribute("registro",SUCCESS);
                     return mapping.findForward(SUCCESS);
                 } else {
@@ -88,7 +89,8 @@ public class RegistrarCarrera extends org.apache.struts.action.Action {
                 if (registro) {
 
                     carreras = DBMS.getInstance().listarCarrerasDecanato(usuario.getUsbid());
-                    request.setAttribute("carreras", carreras);
+                    session.setAttribute("carreras_visibles", carreras[0]);
+                    session.setAttribute("carreras_ocultas", carreras[1]);
                     request.setAttribute("registro",SUCCESS);
                     return mapping.findForward(SUCCESS);
                 } else {

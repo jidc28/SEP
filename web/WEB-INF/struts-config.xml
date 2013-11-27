@@ -206,7 +206,15 @@
         <action input="/ConsultarCarrera.jsp" name="Carrera" path="/eliminaCarreraA" scope="request" type="Actions.Carrera.EliminaCarreraA" validate="false">
             <forward name="success" path="consultaCarrera"/>
             <forward name="failure" path="consultaCarrera"/>
-        </action>      
+        </action>   
+        <action input="/ConsultaCarrera.jsp" name="Carrera" path="/ocultarCarrera" scope="request" type="Actions.Carrera.ocultarCarrera" validate="false">
+            <forward name="success" path="consultaCarrera"/>
+            <forward name="failure" path="consultaCarrera"/>
+        </action>
+        <action input="/ConsultaCarrera.jsp" name="Carrera" path="/mostrarCarrera" scope="request" type="Actions.Carrera.mostrarCarrera" validate="false">
+            <forward name="success" path="consultaCarrera"/>
+            <forward name="failure" path="consultaCarrera"/>
+        </action>   
         
         <!--         USUARIOS       -->
         <action input="/CreateUser.jsp" name="CreateUserForm" path="/createUser" scope="request" type="Actions.Usuario.CreateUserAction" validate="false">

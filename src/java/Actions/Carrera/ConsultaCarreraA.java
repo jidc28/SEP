@@ -40,7 +40,7 @@ public class ConsultaCarreraA extends org.apache.struts.action.Action {
             throws Exception {
         
         HttpSession session = request.getSession(true);
-        ArrayList<Carrera> carreras = null;
+        ArrayList<Carrera> [] carreras = null;
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         String tipousuario = usuario.getTipousuario();
         //obtengo una lista de carreras registradas
@@ -56,7 +56,8 @@ public class ConsultaCarreraA extends org.apache.struts.action.Action {
         //si existen carreras registradas
 
             //retorno a pagina de exito
-         session.setAttribute("carreras", carreras);
+         session.setAttribute("carreras_visibles", carreras[0]);
+         session.setAttribute("carreras_ocultas", carreras[1]);
          return mapping.findForward(SUCCESS);
     }
 }

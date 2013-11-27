@@ -213,9 +213,11 @@ public class DBMS {
         return carreras;
     }
     
-    public ArrayList<Carrera> listarCarrerasDecanato(String d) {
+    public ArrayList<Carrera> [] listarCarrerasDecanato(String d) {
     
-        ArrayList<Carrera> carreras = new ArrayList<Carrera>(0);
+        ArrayList<Carrera> [] carreras = new ArrayList[2];
+        ArrayList<Carrera> visibles = new ArrayList(0);
+        ArrayList<Carrera> ocultas = new ArrayList(0);
         PreparedStatement ps = null;
         try {
             ps = conexion.prepareStatement("SELECT codigo, nombre, estado FROM incluye, CARRERA "
@@ -228,9 +230,14 @@ public class DBMS {
                 u.setCodigo(rs.getString("codigo"));
                 u.setNombre(rs.getString("nombre"));
                 u.setEstado(rs.getString("Estado"));
-                carreras.add(u);
+                if (u.getEstado().equals("visible")) {
+                    visibles.add(u);
+                } else {
+                    ocultas.add(u);
+                }
             }
-
+            carreras[0] = visibles;
+            carreras[1] = ocultas;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
