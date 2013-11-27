@@ -15,12 +15,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
-        <div id="testTable">
+        <div id="testTable" style="margin-top: 50px;">
             <table border="0" style="margin: auto" class="altrowstable" id="alternatecolor">
                 <thead>
                     <tr>
@@ -53,9 +55,18 @@
                                 </html:submit>
                             </p>
                         </td>
-                    </html:form>                 
+                    </html:form>
                 </tr>
             </table>
         </div>
+        <br>
+        <center>
+            <html:form action="/consultaCarreraDec" onsubmit="return(this)">
+                <html:hidden name="Decanato" property="codigo"/>
+                <html:submit styleClass="btn btn-primary">
+                    Listar Carrera
+                </html:submit>
+            </html:form>
+        </center>
     </body>
 </html>

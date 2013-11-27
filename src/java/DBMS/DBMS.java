@@ -319,9 +319,11 @@ public class DBMS {
                 u.setCedula(rs.getString("cedula"));
                 u.setGenero(rs.getString("genero"));
                 u.setEmail(rs.getString("email"));
+                u.setEmail_personal(rs.getString("email_personal"));
                 u.setNivel(rs.getString("nivel"));
                 u.setJubilado(rs.getString("jubilado"));
-                u.setLapso_contractual(rs.getString("lapso_contractual"));
+                u.setLapso_contractual_inicio(rs.getString("lapso_contractual_inicio"));
+                u.setLapso_contractual_fin(rs.getString("lapso_contractual_fin"));
             }
 
             return u;
@@ -355,12 +357,14 @@ public class DBMS {
         PreparedStatement psAgregar1 = null;
 
         try {
-            psAgregar1 = conexion.prepareStatement("UPDATE profesor SET email = ?, nivel = ?, jubilado = ?, lapso_contractual = ? WHERE usbid = ? ");
+            psAgregar1 = conexion.prepareStatement("UPDATE profesor SET email = ?, email_personal = ?, nivel = ?, jubilado = ?, lapso_contractual_inicio = ?, lapso_contractual_fin = ? WHERE usbid = ? ");
             psAgregar1.setString(1, u.getEmail());
-            psAgregar1.setString(2, u.getNivel());
-            psAgregar1.setString(3, u.getJubilado());
-            psAgregar1.setString(4, u.getLapso_contractual());
-            psAgregar1.setString(5, u.getUsbid());
+            psAgregar1.setString(2, u.getEmail_personal());
+            psAgregar1.setString(3, u.getNivel());
+            psAgregar1.setString(4, u.getJubilado());
+            psAgregar1.setString(5, u.getLapso_contractual_inicio());
+            psAgregar1.setString(6, u.getLapso_contractual_fin());
+            psAgregar1.setString(7, u.getUsbid());
 
 
             Integer i = psAgregar1.executeUpdate();

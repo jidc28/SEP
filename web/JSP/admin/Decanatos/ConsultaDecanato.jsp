@@ -76,10 +76,13 @@
                             Estado
                         </th>
                         <th width="20%" align="center">
-                            Modificar Nombre
+                            Modificar
                         </th>
                         <th width="20%" align="center">
                             Modificar Estado
+                        </th>
+                        <th>
+                            
                         </th>
                     </tr>
                 </thead>

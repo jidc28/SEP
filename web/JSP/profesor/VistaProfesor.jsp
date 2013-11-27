@@ -43,56 +43,63 @@
                         <tr>
                             <td>UsbID</td>
                             <td>
-                                <html:text disabled="true" name="usuario" property="usbid"/>
+                                <html:text style="width: 184px" disabled="true" name="usuario" property="usbid"/>
                             </td>
                         </tr>
                         <tr>
                             <td>Cédula</td>
                             <td>
-                                <html:text disabled="true" name="profesor" property="cedula"/>
+                                <html:text style="width: 184px" disabled="true" name="profesor" property="cedula"/>
                             </td>
                         </tr>
                         <tr>
                             <td>Nombre</td>
                             <td>
-                                <html:text disabled="true" name="profesor" property="nombre"/>
+                                <html:text style="width: 184px" disabled="true" name="profesor" property="nombre"/>
                             </td>
                         </tr>
                         <tr>
                             <td>Apellido</td>
                             <td>
-                                <html:text disabled="true" name="profesor" property="apellido"/>
+                                <html:text style="width: 184px" disabled="true" name="profesor" property="apellido"/>
                             </td>
                         </tr>
                         <tr>
                             <td>Género</td>
                             <td>
-                                <html:text disabled="true" name="profesor" property="genero"/>
+                                <html:text style="width: 184px" disabled="true" name="profesor" property="genero"/>
                             </td>
                         </tr>
                         <tr>
-                            <td>Correo Electrónico</td>
+                            <td>Correo electrónico institucional</td>
                             <td>
-                                <html:text disabled="true" name="profesor" property="email"/>
+                                <html:text style="width: 184px" disabled="true" name="profesor" property="email"/>
+                            </td>
+                        </tr>
+                                                </tr>
+                        <tr>
+                            <td>Correo electrónico personal</td>
+                            <td>
+                                <html:text style="width: 184px" disabled="true" name="profesor" property="email_personal"/>
                             </td>
                         </tr>
                         <tr>
-                            <td>Lapso Contractual [Año(s)]</td>
+                            <td>Lapso Contractual</td>
                             <td>
-                                <html:text disabled="true" name="profesor" property="lapso_contractual"/>
-
+                                <html:text style="width: 90px" disabled="true" name="profesor" property="lapso_contractual_inicio"/>
+                                <html:text style="width: 90px" disabled="true" name="profesor" property="lapso_contractual_fin"/>
                             </td>
                         </tr>
                         <tr>
                             <td>Nivel</td>
                             <td>
-                                <html:text disabled="true" name="profesor" property="nivel"/>
+                                <html:text style="width: 184px" disabled="true" name="profesor" property="nivel"/>
                             </td>
                         </tr>
                         <tr>
                             <td>Jubilacíon</td>
                             <td>
-                                <html:text disabled="true" name="profesor" property="jubilado"/>
+                                <html:text style="width: 184px" disabled="true" name="profesor" property="jubilado"/>
                             </td>
                         </tr>
                     </tbody>

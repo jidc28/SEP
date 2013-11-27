@@ -48,7 +48,7 @@
                     </div>
                 </div>
             </div>
-            <div class="panel panel-default">
+<!--            <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
@@ -66,7 +66,7 @@
                     </html:link>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">

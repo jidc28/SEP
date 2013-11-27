@@ -126,8 +126,8 @@ a:hover {
 
 .nav li a:hover{
     color: white;
-    background-color: #42a142;
-    text-decoration: none
+    background-color: #eee;
+    color: #4684b0;
 }
 
 .nav > li{

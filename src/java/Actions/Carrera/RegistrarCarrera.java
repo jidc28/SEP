@@ -6,6 +6,7 @@ package Actions.Carrera;
 
 import Clases.Carrera;
 import Clases.Usuario;
+import Clases.Decanato;
 import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -67,11 +68,12 @@ public class RegistrarCarrera extends org.apache.struts.action.Action {
             ArrayList<Carrera> carreras = null;
             
             if (tipousuario.equals("administrador")) {
-                boolean registro = DBMS.getInstance().registrarCarrera(u);
+                Decanato d = (Decanato) session.getAttribute("decanato_actual");
+                boolean registro = DBMS.getInstance().registrarCarreraDec(u,d.getCodigo());
 
                 if (registro) {
 
-                    carreras = DBMS.getInstance().listarCarreras();
+                    carreras = DBMS.getInstance().listarCarrerasDecanato(d.getCodigo());
                     request.setAttribute("carreras", carreras);
                     request.setAttribute("registro",SUCCESS);
                     return mapping.findForward(SUCCESS);

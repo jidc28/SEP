@@ -78,7 +78,8 @@ public class modificarInfoP extends org.apache.struts.action.Action {
         } else {
             session.setAttribute("jubilado", info.getJubilado());
         }
-            session.setAttribute("lapso", info.getLapso_contractual());
+            session.setAttribute("lapso_ini", info.getLapso_contractual_inicio());
+            session.setAttribute("lapso_fin", info.getLapso_contractual_fin());
         
         
         session.setAttribute("profesor", info);

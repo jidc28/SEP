@@ -6,6 +6,7 @@ package Actions.Carrera;
 
 import Clases.Carrera;
 import Clases.Usuario;
+import Clases.Decanato;
 import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +45,10 @@ public class ConsultaCarreraA extends org.apache.struts.action.Action {
         String tipousuario = usuario.getTipousuario();
         //obtengo una lista de carreras registradas
         if (tipousuario.equals("administrador")){
-            carreras = DBMS.getInstance().listarCarreras();
+            Decanato d = (Decanato) form;
+            carreras = DBMS.getInstance().listarCarrerasDecanato(d.getCodigo());
+            d = DBMS.getInstance().obtenerNombreDecanato(d);
+            request.setAttribute("decanato",d);
         } else if (tipousuario.equals("decanato")){
             carreras = DBMS.getInstance().listarCarrerasDecanato(usuario.getUsbid());
         }

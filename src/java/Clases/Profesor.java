@@ -25,9 +25,11 @@ public class Profesor extends org.apache.struts.action.ActionForm {
     private String cedula;
     private String genero;
     private String email;
+    private String email_personal;
     private String nivel;
     private String jubilado;
-    private String lapso_contractual;
+    private String lapso_contractual_inicio;
+    private String lapso_contractual_fin;
     private String errorEmailFormato;
     private Pattern patron;
     private Matcher match;
@@ -45,6 +47,14 @@ public class Profesor extends org.apache.struts.action.ActionForm {
         }
     }
 
+    public String getEmail_personal() {
+        return email_personal;
+    }
+
+    public void setEmail_personal(String email_personal) {
+        this.email_personal = email_personal;
+    }
+    
     public Profesor() {
         patron = Pattern.compile(patronEmail);
     }
@@ -119,14 +129,22 @@ public class Profesor extends org.apache.struts.action.ActionForm {
         this.jubilado = jubilado;
     }
 
-    public String getLapso_contractual() {
-        return lapso_contractual;
+        public String getLapso_contractual_inicio() {
+        return lapso_contractual_inicio;
     }
 
-    public void setLapso_contractual(String lapso_contractual) {
-        this.lapso_contractual = lapso_contractual;
+    public void setLapso_contractual_inicio(String lapso_contractual_inicio) {
+        this.lapso_contractual_inicio = lapso_contractual_inicio;
     }
 
+    public String getLapso_contractual_fin() {
+        return lapso_contractual_fin;
+    }
+
+    public void setLapso_contractual_fin(String lapso_contractual_fin) {
+        this.lapso_contractual_fin = lapso_contractual_fin;
+    }
+    
     /**
      * This is the action called from the Struts framework.
      *
@@ -134,6 +152,7 @@ public class Profesor extends org.apache.struts.action.ActionForm {
      * @param request The HTTP Request we are processing.
      * @return
      */
+    @Override
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
 

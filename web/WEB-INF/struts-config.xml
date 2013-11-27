@@ -81,7 +81,7 @@
         <action input="/VistaAdministrador.jsp" path="/listarProfesores" scope="request" type="Actions.Profesor.ListaProfesorAction" validate="false">
             <forward name="success" path="listaProfesores"/>
         </action>
-        <action input="/VistaAdministrador.jsp" path="/agregaCarreraA" scope="request" type="Actions.Carrera.AgregaCarreraA">
+        <action input="/VistaAdministrador.jsp" path="/agregaCarreraA" scope="request" type="Actions.Carrera.AgregaCarreraA" name="Decanato" validate="false">
             <forward name="success" path="agregaCarrera"/>
         </action>
         <action input="/VistaAdministrador.jsp" path="/agregaDecanatoA" scope="request" type="Actions.Decanato.AgregaDecanatoA">
@@ -102,7 +102,15 @@
         <action input="/VistaAdministrador.jsp" path="/consultaNucleoUniversitarioA" scope="request" type="Actions.NucleoUniversitario.ConsultaNucleoUniversitarioA" validate="false">
             <forward name="success" path="consultaNucleoUniversitario"/>
         </action>
-            
+        <action input="/EditarNombreDecanato.jsp" path="/consultaCarreraDec" name="Decanato" scope="request" type="Actions.Carrera.ConsultaCarreraA" validate="false">
+            <forward name="success" path="consultaCarreraDec"/>
+        </action>
+        <action input="/ConsultaCarreraDecanato.jsp" path="/agregaCarreraD" scope="request" type="Actions.Carrera.AgregarCarreraDec" name="Decanato" validate="false">
+            <forward name="success" path="agregaCarrera"/>
+        </action>
+        
+              
+                                  
         <!-- NUCLEOS UNIVERSITARIOS -->
         <action input="/AgregaNucleoUniv.jsp" name="NucleoUniversitario" path="/registrarNucleoUniv" scope="request" type="Actions.NucleoUniversitario.RegistrarNucleoUniv" validate="false">
             <forward name="success" path="consultaNucleoUniversitario"/>
@@ -198,10 +206,6 @@
             <forward name="yaregistrado" path="crearUsuario"/> <!-- TRABAJO DOBLEEEEEEEEEE PENDIENTEEE-->
             <forward name="success" path="vistaAdmin"/>
         </action>
-
-        
-                
-                        
                                         
         <action scope="request" input="/" path="/cerrarSesion" type="Session.CerrarSesion" validate="false">
             <forward name="success" path="/Login.jsp"/>
@@ -229,7 +233,7 @@
         </action>
  
         <action name="NoImplementado" path="/noImplementado" scope="request" type="Otros.noimplementadoAction" validate="false">
-            <fordward name="success" path="/noimplementado.jsp"/>
+            <forward name="success" path="/noimplementado.jsp"/>
         </action>
         
         <action path="/Welcome" forward="/welcomeStruts.jsp"/>

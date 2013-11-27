@@ -159,7 +159,7 @@
     </definition>
 
     <definition name="consultaCarreraDec" extends="baseDecanato"> <!-- Agregar Carreras -->
-        <put name="body" value="/JSP/admin/Carreras/ConsultaCarrera.jsp"/>
+        <put name="body" value="/JSP/admin/Carreras/ConsultaCarreraDecanato.jsp"/>
     </definition>
 
 </tiles-definitions>

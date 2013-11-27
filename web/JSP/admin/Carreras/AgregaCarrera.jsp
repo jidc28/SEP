@@ -20,7 +20,11 @@
     <body onload="clearForms()" onunload="clearForms()">
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
-        <h4>Registro de Carreras</h4>
+        <h4>
+            <bean:write name="decanato_actual" property="nombre"/>: 
+            <br>
+            Registro de Carreras
+        </h4>
 
         <html:form action="/registrarCarrera" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
             <table border="0">

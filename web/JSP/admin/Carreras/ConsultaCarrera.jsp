@@ -39,7 +39,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
-        
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
         <!-- NO ME AGARRA BOOTSTRAP 
         <link rel="stylesheet" type="text/css" href="css/ccs/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/ccs/bootstrap.min.css"> -->
@@ -126,18 +127,20 @@
                             </html:form>	                                        
                         </td>
                         <td>
-                            <html:form action="/eliminaCarreraA" onsubmit="return(this)">
+                            <html:form action="/eliminaCarreraA" onsubmit="return(this)" style="margin: 0px;">
                                 <html:hidden name="Carreras" property="codigo"/>
-                                <html:submit>
-                                    Eliminar
-                                </html:submit>
+                                <center>
+                                    <html:submit styleClass="btn btn-danger" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea eliminar la carrera?')">
+                                        Eliminar
+                                    </html:submit>
+                                </center>
                             </html:form>
                         </td>
                     </tr>
                 </logic:iterate>
             </table>
         </div>
-
-
+        <br>
     </body>
 </html>

@@ -50,6 +50,7 @@ public class EditarNombreDecanato extends org.apache.struts.action.Action {
         //retorno a pagina de exito
         session.setAttribute("codigo", c.getCodigo());
         session.setAttribute("nombre", c.getNombre());
+        session.setAttribute("decanato",c);
         return mapping.findForward(SUCCESS);
     }
 }
