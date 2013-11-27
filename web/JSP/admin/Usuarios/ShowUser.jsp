@@ -211,15 +211,15 @@
                                 Departamento
                             <font/>
                         </th>
-                        <th width="155px" align="center">
+                        <!--<th width="155px" align="center">
                             <font color = "white">
                                 Estado
                             <font/>
-                        </th>
+                        </th>-->
                         <th width="155px" align="center">
                             <font color = "white">
                                 Modificar
-                            <font/>
+                            </font>
                         </th>
                     </tr>
                 </thead>
@@ -235,9 +235,9 @@
                         <td width="150px" align="center">
                             <bean:write name="Profesores" property="departamento"/>
                         </td>
-                        <td width="150px" align="center">
+                        <!--<td width="150px" align="center">
                             Visible
-                        </td>
+                        </td>-->
                         <td width="150px" align="center">
                             
                         </td>

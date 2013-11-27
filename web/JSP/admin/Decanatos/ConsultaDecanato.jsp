@@ -41,6 +41,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
@@ -60,7 +62,13 @@
                 Decanato modificado exitosamente.
             </p>
         </logic:present>
-        
+        <logic:present name="falla">
+            <br>
+            <p align ="center" style="background-color: springgreen;
+               width: 300px; margin-left: auto; margin-right: auto">
+                Decanato no fue modificado exitosamente.
+            </p>
+        </logic:present>
         <h4> Lista de Decanatos en el sistema:</h4>
         <div id="testTable">
             <table border="0" style="margin: auto" class="altrowstable" id="alternatecolor">
@@ -78,35 +86,81 @@
                         <th width="20%" align="center">
                             Modificar
                         </th>
-                        <th width="20%" align="center">
-                            Modificar Estado
-                        </th>
                         <th>
-                            
+                            Carreras
                         </th>
                     </tr>
                 </thead>
-                <logic:iterate name="decanatos" id="Decanatos">
+                <logic:iterate name="visibles" id="DecV">
                     <tr>
                         <td width="20%" align="center">
-                            <bean:write name="Decanatos" property="codigo"/>
+                            <bean:write name="DecV" property="codigo"/>
                         </td>
                         <td width="20%" align="center">
-                            <bean:write name="Decanatos" property="nombre"/>
+                            <bean:write name="DecV" property="nombre"/>
                         </td>
                         <td width="20%" align="center">
-                            <bean:write name="Decanatos" property="estado"/>
+                            <html:form action="/ocultarDecanato" onsubmit="return(this)" style="margin: 0px;">
+                                <center>
+                                    <html:hidden name="DecV" property="codigo"/>
+                                    <html:submit styleClass="btn btn-warning" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea ocultar el decanato?')">
+                                        Ocultar
+                                    </html:submit>
+                                </center>
+                            </html:form>
                         </td>
                         <td width="20%" align="center">
                             <html:form action="/editarNombreDecanato" onsubmit="return(this)">
-                                <html:hidden name="Decanatos" property="codigo"/>
+                                <html:hidden name="DecV" property="codigo"/>
                                 <html:image src="imagenes/edit.png" value="" property=""/>
                             </html:form>
                         </td>
                         <td width="20%" align="center">
-                            <html:form action="/cambiarStatusDecanato" onsubmit="return(this)">
-                                <html:hidden name="Decanatos" property="codigo"/>
-                                <html:image src="imagenes/visibilidad.png" value="" property=""/>
+                            <html:form action="/consultaCarreraDec" onsubmit="return(this)" style="margin: 0px;">
+                                <center>
+                                    <html:hidden name="DecV" property="codigo"/>
+                                    <html:submit styleClass="btn btn-default" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                        Listar
+                                    </html:submit>
+                                </center>
+                            </html:form>
+                        </td>
+                    </tr>
+                </logic:iterate>
+                <logic:iterate name="ocultos" id="DecO">
+                    <tr>
+                        <td width="20%" align="center">
+                            <bean:write name="DecO" property="codigo"/>
+                        </td>
+                        <td width="20%" align="center">
+                            <bean:write name="DecO" property="nombre"/>
+                        </td>
+                        <td width="20%" align="center">
+                            <html:form action="/mostrarDecanato" onsubmit="return(this)" style="margin: 0px;">
+                                <center>
+                                    <html:hidden name="DecO" property="codigo"/>
+                                    <html:submit styleClass="btn btn-success" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea mostrar el decanato?')">
+                                        Mostrar
+                                    </html:submit>
+                                </center>
+                            </html:form>
+                        </td>
+                        <td width="20%" align="center">
+                            <html:form action="/editarNombreDecanato" onsubmit="return(this)">
+                                <html:hidden name="DecO" property="codigo"/>
+                                <html:image src="imagenes/edit.png" value="" property=""/>
+                            </html:form>
+                        </td>
+                        <td width="20%" align="center">
+                            <html:form action="/consultaCarreraDec" onsubmit="return(this)" style="margin: 0px;">
+                                <center>
+                                    <html:hidden name="DecV" property="codigo"/>
+                                    <html:submit styleClass="btn btn-default" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                        Listar
+                                    </html:submit>
+                                </center>
                             </html:form>
                         </td>
                     </tr>

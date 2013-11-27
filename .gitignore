@@ -1,6 +1,6 @@
 /dist/
 /nbproject/private/
 *.properties
-build*
+/build/
 *~
 *.class

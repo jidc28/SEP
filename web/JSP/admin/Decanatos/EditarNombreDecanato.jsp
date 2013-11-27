@@ -60,13 +60,5 @@
             </table>
         </div>
         <br>
-        <center>
-            <html:form action="/consultaCarreraDec" onsubmit="return(this)">
-                <html:hidden name="Decanato" property="codigo"/>
-                <html:submit styleClass="btn btn-primary">
-                    Listar Carrera
-                </html:submit>
-            </html:form>
-        </center>
     </body>
 </html>

@@ -140,15 +140,23 @@
         <action input="/ConsultaDecanato.jsp" name="Decanato" path="/cambiarStatusDecanato" scope="request" type="Actions.Decanato.cambiarStatusDecanato" validate="false">
             <forward name="success" path="editarStatusDecanato"/>
         </action>
-        <action input="/ConsultaDecanato.jsp" name="Decanato" path="/cambiarStatusDecanatoA" scope="request" type="Actions.Decanato.CambiarStatusDecanatoA" validate="false">
+        <!-- <action input="/ConsultaDecanato.jsp" name="Decanato" path="/cambiarStatusDecanatoA" scope="request" type="Actions.Decanato.CambiarStatusDecanatoA" validate="false">
             <forward name="success" path="consultaDecanato"/>
-        </action>
+        </action> -->
         <action input="/ConsultaDecanato.jsp" name="Decanato" path="/editarNombreDecanato" scope="request" type="Actions.Decanato.EditarNombreDecanato" validate="false">
             <forward name="success" path="editarNombreDecanato"/>
         </action>
         <action input="/EditarNombreDecanato.jsp" name="Decanato" path="/cambiarNombreDecanatoA" scope="request" type="Actions.Decanato.CambiarNombreDecanatoA" validate="false">
             <forward name="success" path="consultaDecanato"/>
             <forward name="failure" path="editarNombreDecanato"/> 
+        </action>
+        <action input="/ConsultaDecanato.jsp" name="Decanato" path="/ocultarDecanato" scope="request" type="Actions.Decanato.ocultarDecanato" validate="false">
+            <forward name="success" path="consultaDecanato"/>
+            <forward name="failure" path="consultaDecanato"/>
+        </action>
+        <action input="/ConsultaDecanato.jsp" name="Decanato" path="/mostrarDecanato" scope="request" type="Actions.Decanato.mostrarDecanato" validate="false">
+            <forward name="success" path="consultaDecanato"/>
+            <forward name="failure" path="consultaDecanato"/>
         </action>
         
         <!--     COORDINACIONES     -->

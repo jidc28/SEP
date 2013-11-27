@@ -237,9 +237,11 @@ public class DBMS {
         return carreras;
     }
 
-    public ArrayList<Decanato> listarDecanatos() {
+    public ArrayList<Decanato> [] listarDecanatos() {
 
-        ArrayList<Decanato> dcnto = new ArrayList<Decanato>(0);
+        ArrayList<Decanato> [] dcnto = new ArrayList[2];
+        ArrayList<Decanato> visibles = new ArrayList(0);
+        ArrayList<Decanato> ocultos = new ArrayList(0);
         PreparedStatement ps = null;
         try {
             ps = conexion.prepareStatement("SELECT * FROM decanato ORDER BY codigo");
@@ -249,8 +251,14 @@ public class DBMS {
                 u.setCodigo(rs.getString("codigo"));
                 u.setNombre(rs.getString("nombre"));
                 u.setEstado(rs.getString("Estado"));
-                dcnto.add(u);
+                if (u.getEstado().equals("visible")) {
+                    visibles.add(u);
+                } else {
+                    ocultos.add(u);
+                }
             }
+            dcnto[0] = visibles;
+            dcnto[1] = ocultos;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
