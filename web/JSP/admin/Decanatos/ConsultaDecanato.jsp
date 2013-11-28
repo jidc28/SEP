@@ -74,19 +74,19 @@
             <table border="0" style="margin: auto" class="altrowstable" id="alternatecolor">
                 <thead>
                     <tr>
-                        <th width="20%" align="center">
+                        <th align="center">
                             Codigo
                         </th>
-                        <th width="20%" align="center">
+                        <th width="38%" align="center">
                             Nombre Decanato
                         </th>
-                        <th width="20%" align="center">
+                        <th align="center">
                             Estado
                         </th>
-                        <th width="20%" align="center">
+                        <th align="center">
                             Modificar
                         </th>
-                        <th>
+                        <th align="center">
                             Carreras
                         </th>
                     </tr>
@@ -111,9 +111,12 @@
                             </html:form>
                         </td>
                         <td width="20%" align="center">
-                            <html:form action="/editarNombreDecanato" onsubmit="return(this)">
+                            <html:form action="/editarNombreDecanato" onsubmit="return(this)" style="margin: 0px;">
                                 <html:hidden name="DecV" property="codigo"/>
-                                <html:image src="imagenes/edit.png" value="" property=""/>
+                                <button type="button" class="btn btn-primary" 
+                                        style="padding-bottom: 1px; padding-top: 1px; padding-left: 2px; padding-right: 2px;">
+                                    <html:image src="imagenes/edit-img.png" value="" property="" style="height: 27px;"/>
+                                </button>
                             </html:form>
                         </td>
                         <td width="20%" align="center">
@@ -148,9 +151,12 @@
                             </html:form>
                         </td>
                         <td width="20%" align="center">
-                            <html:form action="/editarNombreDecanato" onsubmit="return(this)">
+                            <html:form action="/editarNombreDecanato" onsubmit="return(this)" style="margin: 0px">
                                 <html:hidden name="DecO" property="codigo"/>
-                                <html:image src="imagenes/edit.png" value="" property=""/>
+                                <button type="button" class="btn btn-primary" 
+                                        style="padding-bottom: 1px; padding-top: 1px; padding-left: 2px; padding-right: 2px;">
+                                    <html:image src="imagenes/edit-img.png" value="" property="" style="height: 27px;"/>
+                                </button>
                             </html:form>
                         </td>
                         <td width="20%" align="center">

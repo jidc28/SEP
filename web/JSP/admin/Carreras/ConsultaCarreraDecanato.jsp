@@ -92,7 +92,7 @@
                         <th width="20%" align="center">
                             Codigo
                         </th>
-                        <th width="20%" align="center">
+                        <th width="38%" align="center">
                             Nombre Carrera
                         </th>
                         <th width="20%" align="center">
@@ -125,9 +125,12 @@
                             </html:form>
                         </td>
                         <td>
-                            <html:form  action="/editarNombre" onsubmit="return(this)">
+                            <html:form  action="/editarNombre" onsubmit="return(this)" style="margin: 0px;">
                                 <html:hidden name="CarV" property="codigo" />
-                                <html:image src="imagenes/edit.png" value="" property=""/>
+                                <button type="button" class="btn btn-primary" 
+                                        style="padding-bottom: 1px; padding-top: 1px; padding-left: 2px; padding-right: 2px;">
+                                    <html:image src="imagenes/edit-img.png" value="" property="" style="height: 27px;"/>
+                                </button>
                             </html:form>
                         </td>
                         <td>
@@ -163,9 +166,12 @@
                             </html:form>
                         </td>
                         <td>
-                            <html:form  action="/editarNombre" onsubmit="return(this)">
+                            <html:form  action="/editarNombre" onsubmit="return(this)" style="margin: 0px">
                                 <html:hidden name="CarV" property="codigo" />
-                                <html:image src="imagenes/edit.png" value="" property=""/>
+                                <button type="button" class="btn btn-primary" 
+                                        style="padding-bottom: 1px; padding-top: 1px; padding-left: 2px; padding-right: 2px;">
+                                    <html:image src="imagenes/edit-img.png" value="" property="" style="height: 27px;"/>
+                                </button>
                             </html:form>
                         </td>
                         <td>
@@ -188,7 +194,7 @@
             <html:form action="/agregaCarreraD" onsubmit="return(this)">
                 <html:hidden name="Decanato" property="codigo"/>
                 <html:hidden name="Decanato" property="nombre"/>
-                <html:submit styleClass="btn btn-primary">
+                <html:submit styleClass="btn btn-info">
                     Agregar Carrera
                 </html:submit>
             </html:form>
