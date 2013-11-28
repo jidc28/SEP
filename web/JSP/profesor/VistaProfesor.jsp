@@ -39,69 +39,69 @@
 
 
             <div align="center" >
-                <h1 >Gestión de información del profesor</h1>
+                <h4>Gestión de información del profesor</h4>
                 <table border="0">
                     <tbody>
-                        <tr>
+                        <tr style="height: 35px;">
                             <td>UsbID</td>
                             <td>
-                                <html:text style="width: 258px; height 20px;" disabled="true" name="usuario" property="usbid"/>
+                                <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="usuario" property="usbid"/>
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="height: 35px;">
                             <td>Cédula</td>
                             <td>
-                                <html:text style="width: 258px; height 20px;" disabled="true" name="profesor" property="cedula"/>
+                                <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="cedula"/>
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="height: 35px;">
                             <td>Nombre</td>
                             <td>
-                                <html:text style="width: 258px; height 20px;" disabled="true" name="profesor" property="nombre"/>
+                                <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="nombre"/>
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="height: 35px;">
                             <td>Apellido</td>
                             <td>
-                                <html:text style="width: 258px; height 20px;" disabled="true" name="profesor" property="apellido"/>
+                                <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="apellido"/>
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="height: 35px;">
                             <td>Género</td>
                             <td>
-                                <html:text style="width: 258px; height 20px;" disabled="true" name="profesor" property="genero"/>
+                                <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="genero"/>
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="height: 35px;">
                             <td>Correo electrónico institucional</td>
                             <td>
-                                <html:text style="width: 258px; height 20px;" disabled="true" name="profesor" property="email"/>
+                                <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="email"/>
                             </td>
                         </tr>
                                                 </tr>
-                        <tr>
+                        <tr style="height: 35px;">
                             <td>Correo electrónico personal</td>
                             <td>
-                                <html:text style="width: 258px; height 20px;" disabled="true" name="profesor" property="email_personal"/>
+                                <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="email_personal"/>
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="height: 35px;">
                             <td>Lapso Contractual</td>
                             <td>
-                                <html:text style="width: 127px; height 20px;" disabled="true" name="profesor" property="lapso_contractual_inicio"/>
-                                <html:text style="width: 127px; height 20px;" disabled="true" name="profesor" property="lapso_contractual_fin"/>
+                                <html:text style="width: 127px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="lapso_contractual_inicio"/>
+                                <html:text style="width: 127px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="lapso_contractual_fin"/>
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="height: 35px;">
                             <td>Nivel</td>
                             <td>
-                                <html:text style="width: 258px; height 20px;" disabled="true" name="profesor" property="nivel"/>
+                                <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="nivel"/>
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="height: 35px;">
                             <td>Jubilación</td>
                             <td>
-                                <html:text style="width: 258px; height: 20px;" disabled="true" name="profesor" property="jubilado"/>
+                                <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="jubilado"/>
                             </td>
                         </tr>
                     </tbody>

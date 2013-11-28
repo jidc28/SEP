@@ -44,50 +44,50 @@
         <html:form action="/guardarModificarInfoP" acceptCharset="ISO=8859-1" onsubmit="return(this)">
             <table border="0">
                 <tbody>
-                    <tr>
+                    <tr style="height: 35px;">
                         <td>UsbID</td>
                         <td>
-                            <html:text style="width: 258px;" disabled="true" name="profesor" property="usbid" errorStyleClass="error"
+                            <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="usbid" errorStyleClass="error"
                                        errorKey="org.apache.struts.action.ERROR"></html:text>
                             <html:hidden name="profesor" property="usbid" />
                         </td>
                     </tr>
-                    <tr>
+                    <tr style="height: 35px;">
                         <td>Cédula</td>
                         <td>
-                            <html:text style="width: 258px;" disabled="true" name="profesor" property="cedula" errorStyleClass="error"
+                            <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="cedula" errorStyleClass="error"
                                        errorKey="org.apache.struts.action.ERROR"></html:text>
                             <html:hidden name="profesor" property="cedula" />
                         </td>
                     </tr>
-                    <tr>
+                    <tr style="height: 35px;">
                         <td>Nombre</td>
                         <td>
-                            <html:text style="width: 258px;" disabled="true" name="profesor" property="nombre" errorStyleClass="error"
+                            <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="nombre" errorStyleClass="error"
                                        errorKey="org.apache.struts.action.ERROR"></html:text>
                             <html:hidden name="profesor" property="nombre" />
                         </td>
                     </tr>
-                    <tr>
+                    <tr style="height: 35px;">
                         <td>Apellido</td>
                         <td>
-                            <html:text style="width: 258px;" disabled="true" name="profesor" property="apellido" errorStyleClass="error"
+                            <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="apellido" errorStyleClass="error"
                                        errorKey="org.apache.struts.action.ERROR"></html:text>
                             <html:hidden name="profesor" property="apellido" />
                         </td>
                     </tr>
-                    <tr>
+                    <tr style="height: 35px;">
                         <td>Género</td>
                         <td>
-                            <html:text style="width: 258px;" disabled="true" name="profesor" property="genero" errorStyleClass="error"
+                            <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="genero" errorStyleClass="error"
                                        errorKey="org.apache.struts.action.ERROR"></html:text>
                             <html:hidden name="profesor" property="genero" />
                         </td>
                     </tr>
-                    <tr>
+                    <tr style="height: 35px;">
                         <td>Correo electrónico institucional</td>
                         <td>
-                            <html:text style="width: 258px;" disabled="true" name="profesor" property="email" errorStyleClass="error"
+                            <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="email" errorStyleClass="error"
                                        errorKey="org.apache.struts.action.ERROR"></html:text>
                             <html:hidden name="profesor" property="email" />
                         </td>
@@ -97,19 +97,14 @@
                             <html:errors property="email"/>
                         </td>
                     </tr>
-                    <tr>
+                    <tr style="height: 35px;">
                         <td>Correo electrónico personal</td>
                         <td>
-                            <html:text style="width: 258px;" disabled="false" name="profesor" property="email_personal" errorStyleClass="error"
+                            <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="false" name="profesor" property="email_personal" errorStyleClass="error"
                                        errorKey="org.apache.struts.action.ERROR"></html:text>
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="2" style="color: firebrick">
-                            <html:errors property="email"/>
-                        </td>
-                    </tr>
-                    <tr>
+                    <tr style="height: 35px;">
                         <td>Lapso Contractual</td>
                         <td colspan="2" style="color: firebrick">
                             <p style="font-size: 12px;">Formato: mm/dd/aaaa</p>
