@@ -80,7 +80,7 @@
         </logic:present>
             
         <h4 style="margin-top: 50px;"> Lista de Carreras del 
-            <bean:write name="decanato" property="nombre"/>:
+            <bean:write name="decanato_actual" property="nombre"/>:
         </h4>
         <br>
         <div id="testTable">
@@ -100,38 +100,75 @@
                             Editar Nombre
                         </th>
                         <th width="20%" align="center">
-                            Cambiar Estado
-                        </th>
-                        <th width="20%" align="center">
                             Eliminar
                         </th>
                 </thead>
-                <logic:iterate name="carreras" id="Carreras">
+                <logic:iterate name="carreras_visibles" id="CarV">
                     <tr>
                         <td width="20%" align="center">
-                            <bean:write name="Carreras" property="codigo"/>
+                            <bean:write name="CarV" property="codigo"/>
                         </td>
                         <td width="20%" align="center">
-                            <bean:write name="Carreras" property="nombre"/>
+                            <bean:write name="CarV" property="nombre"/>
                         </td>
                         <td width="20%" align="center">
-                            <bean:write name="Carreras" property="estado"/>
+                            <html:form action="/ocultarCarrera" onsubmit="return(this)" style="margin: 0px;">
+                                <center>
+                                    <html:hidden name="CarV" property="codigo"/>
+                                    <html:submit styleClass="btn btn-warning" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea ocultar el decanato?')">
+                                        Ocultar
+                                    </html:submit>
+                                </center>
+                            </html:form>
                         </td>
                         <td>
                             <html:form  action="/editarNombre" onsubmit="return(this)">
-                                <html:hidden name="Carreras" property="codigo" />
+                                <html:hidden name="CarV" property="codigo" />
                                 <html:image src="imagenes/edit.png" value="" property=""/>
                             </html:form>
                         </td>
                         <td>
-                            <html:form  action="/cambiarStatusCarrera" onsubmit="return(this)">
-                                <html:hidden name="Carreras" property="codigo" />
-                                <html:image src="imagenes/visibilidad.png" value="" property=""/>
-                            </html:form>	                                        
+                            <html:form action="/eliminaCarreraA" onsubmit="return(this)" style="margin: 0px;">
+                                <html:hidden name="CarV" property="codigo"/>
+                                <center>
+                                    <html:submit styleClass="btn btn-danger" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea eliminar la carrera?')">
+                                        Eliminar
+                                    </html:submit>
+                                </center>
+                            </html:form>
+                        </td>
+                    </tr>
+                </logic:iterate>
+                <logic:iterate name="carreras_ocultas" id="CarO">
+                    <tr>
+                        <td width="20%" align="center">
+                            <bean:write name="CarO" property="codigo"/>
+                        </td>
+                        <td width="20%" align="center">
+                            <bean:write name="CarO" property="nombre"/>
+                        </td>
+                        <td width="20%" align="center">
+                            <html:form action="/mostrarCarrera" onsubmit="return(this)" style="margin: 0px;">
+                                <center>
+                                    <html:hidden name="CarO" property="codigo"/>
+                                    <html:submit styleClass="btn btn-success" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea ocultar el decanato?')">
+                                        Mostrar
+                                    </html:submit>
+                                </center>
+                            </html:form>
+                        </td>
+                        <td>
+                            <html:form  action="/editarNombre" onsubmit="return(this)">
+                                <html:hidden name="CarV" property="codigo" />
+                                <html:image src="imagenes/edit.png" value="" property=""/>
+                            </html:form>
                         </td>
                         <td>
                             <html:form action="/eliminaCarreraA" onsubmit="return(this)" style="margin: 0px;">
-                                <html:hidden name="Carreras" property="codigo"/>
+                                <html:hidden name="CarO" property="codigo"/>
                                 <center>
                                     <html:submit styleClass="btn btn-danger" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
                                                  onclick="javascript: return confirm('¿Está seguro de que desea eliminar la carrera?')">

@@ -72,10 +72,9 @@ public class EliminaCarreraA extends org.apache.struts.action.Action {
                 ArrayList<Carrera> [] carreras = null;
                 
                 if (tipousuario.equals("administrador")) {
-                    Decanato d = (Decanato) form;
+                    Decanato d = (Decanato) session.getAttribute("decanato_actual");
                     carreras = DBMS.getInstance().listarCarrerasDecanato(d.getCodigo());
                     d = DBMS.getInstance().obtenerNombreDecanato(d);
-                    request.setAttribute("decanato",d);
                 } else if (tipousuario.equals("decanato")){
                     carreras = DBMS.getInstance().listarCarrerasDecanato(usuario.getUsbid());
                 }
@@ -84,7 +83,7 @@ public class EliminaCarreraA extends org.apache.struts.action.Action {
                 //retorno a pagina de exito
                  session.setAttribute("carreras_visibles", carreras[0]);
                  session.setAttribute("carreras_ocultas", carreras[1]);
-                return mapping.findForward(SUCCESS);
+                 return mapping.findForward(tipousuario);
             }
         // }
     }

@@ -186,8 +186,8 @@
         
         <!--       CARRERAS         -->
         <action input="/AgregaCarrera.jsp" name="Carrera" path="/registrarCarrera" scope="request" type="Actions.Carrera.RegistrarCarrera" validate="false">
-            <forward name="success" path="consultaCarrera"/>
-            <forward name="failure" path="agregaCarrera"/>
+            <forward name="administrador" path="consultaCarreraDec"/>
+            <forward name="decanato" path="agregaCarrera"/>
             <forward name="yaregistrada" path="agregaCarrera"/> 
         </action>
         <action input="/ConsultaCarrera.jsp" name="Carrera" path="/cambiarStatusCarrera" scope="request" type="Actions.Carrera.cambiarStatusCarrera" validate="false">
@@ -204,15 +204,18 @@
             <forward name="failure" path="editarNombreCarrera"/> 
         </action>  
         <action input="/ConsultarCarrera.jsp" name="Carrera" path="/eliminaCarreraA" scope="request" type="Actions.Carrera.EliminaCarreraA" validate="false">
-            <forward name="success" path="consultaCarrera"/>
+            <forward name="administrador" path="consultaCarreraDec"/>
+            <forward name="decanato" path="consultaCarrera"/>
             <forward name="failure" path="consultaCarrera"/>
         </action>   
         <action input="/ConsultaCarrera.jsp" name="Carrera" path="/ocultarCarrera" scope="request" type="Actions.Carrera.ocultarCarrera" validate="false">
-            <forward name="success" path="consultaCarrera"/>
+            <forward name="administrador" path="consultaCarreraDec"/>
+            <forward name="decanato" path="consultaCarrera"/>
             <forward name="failure" path="consultaCarrera"/>
         </action>
         <action input="/ConsultaCarrera.jsp" name="Carrera" path="/mostrarCarrera" scope="request" type="Actions.Carrera.mostrarCarrera" validate="false">
-            <forward name="success" path="consultaCarrera"/>
+            <forward name="administrador" path="consultaCarreraDec"/>
+            <forward name="decanato" path="consultaCarrera"/>
             <forward name="failure" path="consultaCarrera"/>
         </action>   
         

@@ -48,7 +48,7 @@ public class ConsultaCarreraA extends org.apache.struts.action.Action {
             Decanato d = (Decanato) form;
             carreras = DBMS.getInstance().listarCarrerasDecanato(d.getCodigo());
             d = DBMS.getInstance().obtenerNombreDecanato(d);
-            request.setAttribute("decanato",d);
+            session.setAttribute("decanato_actual",d);
         } else if (tipousuario.equals("decanato")){
             carreras = DBMS.getInstance().listarCarrerasDecanato(usuario.getUsbid());
         }

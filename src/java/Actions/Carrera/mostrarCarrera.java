@@ -5,6 +5,8 @@
 package Actions.Carrera;
 
 import Clases.Carrera;
+import Clases.Usuario;
+import Clases.Decanato;
 import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -41,16 +43,21 @@ public class mostrarCarrera extends org.apache.struts.action.Action {
 
         Carrera u = (Carrera) form;
         HttpSession session = request.getSession(true);
-        String usuario = (String) session.getAttribute("usbid");
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
         ActionErrors error = new ActionErrors();
-
+        ArrayList<Carrera> [] carreras = null;
 
         //elimina usuario del sistema 
         u.setEstado("visible");
         boolean actualizo = DBMS.getInstance().actualizarEstadoCarrera(u);
 
         //obtengo una lista de usuarios registrados
-        ArrayList<Carrera> [] carreras = DBMS.getInstance().listarCarrerasDecanato(usuario);
+        if (usuario.getTipousuario().equals("decanato")) {
+            carreras = DBMS.getInstance().listarCarrerasDecanato(usuario.getUsbid());
+        } else if (usuario.getTipousuario().equals("administrador")){
+            Decanato decanato = (Decanato) session.getAttribute("decanato_actual");
+            carreras = DBMS.getInstance().listarCarrerasDecanato(decanato.getCodigo());
+        }
 
         //si existen usuarios registrados
 
@@ -58,6 +65,6 @@ public class mostrarCarrera extends org.apache.struts.action.Action {
         session.setAttribute("carreras_visibles", carreras[0]);
         session.setAttribute("carreras_ocultas", carreras[1]);
         request.setAttribute("modificacion", SUCCESS);
-        return mapping.findForward(SUCCESS);
+        return mapping.findForward(usuario.getTipousuario());
     }
 }

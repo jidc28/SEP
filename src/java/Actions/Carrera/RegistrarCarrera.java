@@ -26,6 +26,8 @@ public class RegistrarCarrera extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
+    private static final String DECANATO = "decanato";
+    private static final String ADMINISTRADOR = "administrador";
     private static final String FAILURE = "failure";
     private static final String YAREGISTRADA = "yaregistrada";
 
@@ -77,7 +79,8 @@ public class RegistrarCarrera extends org.apache.struts.action.Action {
                     session.setAttribute("carreras_visibles", carreras[0]);
                     session.setAttribute("carreras_ocultas", carreras[1]);
                     request.setAttribute("registro",SUCCESS);
-                    return mapping.findForward(SUCCESS);
+                    request.setAttribute("decanato",d);
+                    return mapping.findForward(ADMINISTRADOR);
                 } else {
                     error.add("registro", new ActionMessage("error.codigoexistente"));
                     saveErrors(request, error);
@@ -92,7 +95,7 @@ public class RegistrarCarrera extends org.apache.struts.action.Action {
                     session.setAttribute("carreras_visibles", carreras[0]);
                     session.setAttribute("carreras_ocultas", carreras[1]);
                     request.setAttribute("registro",SUCCESS);
-                    return mapping.findForward(SUCCESS);
+                    return mapping.findForward(DECANATO);
                 } else {
                     error.add("registro", new ActionMessage("error.codigoexistente"));
                     saveErrors(request, error);
