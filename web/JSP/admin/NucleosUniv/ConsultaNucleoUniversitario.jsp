@@ -39,6 +39,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
@@ -68,40 +70,66 @@
                             Localización
                         </th>
                         <th width="20%" align="center">
-                            Nombre Nucleo
+                            Nombre
                         </th>
                         <th width="20%" align="center">
                             Estado
                         </th>
                         <th width="20%" align="center">
-                            Modificar Nombre
-                        </th>
-                        <th width="20%" align="center">
-                            Modificar Estado
+                            Modificar
                         </th>
                     </tr>
                 </thead>
-                <logic:iterate name="nucleos" id="Nucleos">
+                <logic:iterate name="nucleos_visibles" id="NucV">
                     <tr>
                         <td width="20%" align="center">
-                            <bean:write name="Nucleos" property="codigo"/>
+                            <bean:write name="NucV" property="codigo"/>
                         </td>
                         <td width="20%" align="center">
-                            <bean:write name="Nucleos" property="nombre"/>
+                            <bean:write name="NucV" property="nombre"/>
                         </td>
                         <td width="20%" align="center">
-                            <bean:write name="Nucleos" property="estado"/>
-                        </td>
-                        <td width="20%" align="center">
-                            <html:form action="/editarNombreNucleoUniversitario" onsubmit="return(this)">
-                                <html:hidden name="Nucleos" property="codigo"/>
-                                <html:image src="imagenes/edit.png" value="" property=""/>
+                            <html:form action="/ocultarNucleoUniversitario" onsubmit="return(this)" style="margin: 0px;">
+                                <center>
+                                    <html:hidden name="NucV" property="codigo"/>
+                                    <html:submit styleClass="btn btn-warning" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea ocultar el núcleo universitario?')">
+                                        Ocultar
+                                    </html:submit>
+                                </center>
                             </html:form>
                         </td>
                         <td width="20%" align="center">
-                            <html:form action="/cambiarStatusNucleoUniversitario" onsubmit="return(this)">
-                                <html:hidden name="Nucleos" property="codigo"/>
-                                <html:image src="imagenes/visibilidad.png" value="" property=""/>
+                            <html:form action="/editarNombreNucleoUniversitario" onsubmit="return(this)">
+                                <html:hidden name="NucV" property="codigo"/>
+                                <html:image src="imagenes/edit.png" value="" property=""/>
+                            </html:form>
+                        </td>
+                    </tr>
+                </logic:iterate>
+                <logic:iterate name="nucleos_ocultos" id="NucO">
+                    <tr>
+                        <td width="20%" align="center">
+                            <bean:write name="NucO" property="codigo"/>
+                        </td>
+                        <td width="20%" align="center">
+                            <bean:write name="NucO" property="nombre"/>
+                        </td>
+                        <td width="20%" align="center">
+                            <html:form action="/mostrarNucleoUniversitario" onsubmit="return(this)" style="margin: 0px;">
+                                <center>
+                                    <html:hidden name="NucO" property="codigo"/>
+                                    <html:submit styleClass="btn btn-success" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea ocultar el decanato?')">
+                                        Mostrar
+                                    </html:submit>
+                                </center>
+                            </html:form>
+                        </td>
+                        <td width="20%" align="center">
+                            <html:form action="/editarNombreNucleoUniversitario" onsubmit="return(this)">
+                                <html:hidden name="NucO" property="codigo"/>
+                                <html:image src="imagenes/edit.png" value="" property=""/>
                             </html:form>
                         </td>
                     </tr>

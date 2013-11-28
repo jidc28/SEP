@@ -5,6 +5,7 @@
 package Actions.NucleoUniversitario;
 
 import Clases.NucleoUniversitario;
+import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,9 +17,9 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author Langtech
+ * @author jidc28
  */
-public class cambiarStatusNucleoUniversitario extends org.apache.struts.action.Action {
+public class ocultarNucleoUniversitario extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -37,17 +38,24 @@ public class cambiarStatusNucleoUniversitario extends org.apache.struts.action.A
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
+
         NucleoUniversitario u = (NucleoUniversitario) form;
         HttpSession session = request.getSession(true);
 
         ActionErrors error = new ActionErrors();
 
+        u.setEstado("oculto");
+        boolean actualizo = DBMS.getInstance().actualizarEstadoNucleoUniversitario(u);
+        
+        //obtengo una lista 
+        ArrayList<NucleoUniversitario> [] nucleos = DBMS.getInstance().listarNucleosUniversitarios();
+
+        //si existen
 
         //retorno a pagina de exito
-        session.setAttribute("codigo", u.getCodigo());
-        session.setAttribute("Estado", u.getEstado());
+        session.setAttribute("nucleos_visibles", nucleos[0]);
+        session.setAttribute("nucleos_ocultos", nucleos[1]);
+        request.setAttribute("modificacion", SUCCESS);
         return mapping.findForward(SUCCESS);
     }
 }
-

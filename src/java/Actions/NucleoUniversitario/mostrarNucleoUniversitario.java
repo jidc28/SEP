@@ -19,7 +19,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author jidc28
  */
-public class CambiarStatusNucleoUniversitarioA extends org.apache.struts.action.Action {
+public class mostrarNucleoUniversitario extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -44,15 +44,17 @@ public class CambiarStatusNucleoUniversitarioA extends org.apache.struts.action.
 
         ActionErrors error = new ActionErrors();
 
+        u.setEstado("visible");
         boolean actualizo = DBMS.getInstance().actualizarEstadoNucleoUniversitario(u);
         
         //obtengo una lista 
-        ArrayList<NucleoUniversitario> nucleos = DBMS.getInstance().listarNucleosUniversitarios();
+        ArrayList<NucleoUniversitario> [] nucleos = DBMS.getInstance().listarNucleosUniversitarios();
 
         //si existen
 
         //retorno a pagina de exito
-        request.setAttribute("nucleos", nucleos);
+        session.setAttribute("nucleos_visibles", nucleos[0]);
+        session.setAttribute("nucleos_ocultos", nucleos[1]);
         request.setAttribute("modificacion", SUCCESS);
         return mapping.findForward(SUCCESS);
     }

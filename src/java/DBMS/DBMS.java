@@ -301,9 +301,11 @@ public class DBMS {
         return coords;
     }
 
-    public ArrayList<NucleoUniversitario> listarNucleosUniversitarios() {
+    public ArrayList<NucleoUniversitario> [] listarNucleosUniversitarios() {
 
-        ArrayList<NucleoUniversitario> nucleos = new ArrayList<NucleoUniversitario>(0);
+        ArrayList<NucleoUniversitario> [] nucleos = new ArrayList[2];
+        ArrayList<NucleoUniversitario> visibles = new ArrayList<NucleoUniversitario>(0);
+        ArrayList<NucleoUniversitario> ocultos = new ArrayList<NucleoUniversitario>(0);
         PreparedStatement ps = null;
         try {
             ps = conexion.prepareStatement("SELECT * FROM NUCLEOUNIV ORDER BY CODIGO");
@@ -313,8 +315,14 @@ public class DBMS {
                 u.setCodigo(rs.getString("codigo"));
                 u.setNombre(rs.getString("nombre"));
                 u.setEstado(rs.getString("Estado"));
-                nucleos.add(u);
+                if (u.getEstado().equals("visible")) {
+                    visibles.add(u);
+                } else {
+                    ocultos.add(u);
+                }
             }
+            nucleos[0] = visibles;
+            nucleos[1] = ocultos;
 
         } catch (SQLException ex) {
             ex.printStackTrace();

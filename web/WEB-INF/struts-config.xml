@@ -130,6 +130,14 @@
         <action input="/EditarStatusNucleoUniversitario.jsp" name="NucleoUniversitario" path="/cambiarStatusNucleoUniversitarioA" scope="request" type="Actions.NucleoUniversitario.CambiarStatusNucleoUniversitarioA" validate="false">
             <forward name="success" path="consultaNucleoUniversitario"/>
         </action>
+        <action input="/ConsultaNucleoUniversitario.jsp" name="NucleoUniversitario" path="/ocultarNucleoUniversitario" scope="request" type="Actions.NucleoUniversitario.ocultarNucleoUniversitario" validate="false">
+            <forward name="success" path="consultaNucleoUniversitario"/>
+            <forward name="failure" path="consultaNucleoUniversitario"/>
+        </action>
+        <action input="/ConsultaNucleoUniversitario.jsp" name="NucleoUniversitario" path="/mostrarNucleoUniversitario" scope="request" type="Actions.NucleoUniversitario.mostrarNucleoUniversitario" validate="false">
+            <forward name="success" path="consultaNucleoUniversitario"/>
+            <forward name="failure" path="consultaNucleoUniversitario"/>
+        </action>
         
         <!--       DECANATOS        -->
         <action input="/AgregaDecanato.jsp" name="Decanato" path="/registrarDecanato" scope="request" type="Actions.Decanato.RegistrarDecanato" validate="false">
