@@ -66,7 +66,7 @@ public class EliminaCarreraA extends org.apache.struts.action.Action {
             //retorno a pagina de exito
             if (!eliminado) {
                 request.setAttribute("noEliminado",FAILURE);
-                return mapping.findForward(SUCCESS);
+                return mapping.findForward(FAILURE);
             } else {
                 request.setAttribute("eliminado",SUCCESS);
                 ArrayList<Carrera> [] carreras = null;

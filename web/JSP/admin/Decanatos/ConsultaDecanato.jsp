@@ -49,25 +49,19 @@
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
         <logic:present name="success">
-            <br>
-            <p align ="center" style="background-color: springgreen;
-               width: 300px; margin-left: auto; margin-right: auto">
+            <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
                 Decanato registrado exitosamente.
-            </p>
+            </div>
         </logic:present>
         <logic:present name="modificacion">
-            <br>
-            <p align ="center" style="background-color: springgreen;
-               width: 300px; margin-left: auto; margin-right: auto">
+            <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
                 Decanato modificado exitosamente.
-            </p>
+            </div>
         </logic:present>
         <logic:present name="falla">
-            <br>
-            <p align ="center" style="background-color: springgreen;
-               width: 300px; margin-left: auto; margin-right: auto">
+            <div class="alert alert-danger" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
                 Decanato no fue modificado exitosamente.
-            </p>
+            </div>
         </logic:present>
         <h4> Lista de Decanatos en el sistema:</h4>
         <div id="testTable">

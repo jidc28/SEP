@@ -27,16 +27,14 @@
         <div style="width:760px;margin-left:auto;margin-right:auto;">
 
             <logic:present name="actualizacion">
-                <p align ="center" style="background-color: springgreen;
-                   width: 300px; margin-left: auto; margin-right: auto">
+                <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
                     Información actualizada exitosamente.
-                </p>
+                </div>
             </logic:present>
             <logic:present name="eliminacion">
-                <p align ="center" style="background-color: springgreen;
-                   width: 300px; margin-left: auto; margin-right: auto">
+                <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
                     Información eliminada exitosamente.
-                </p>
+                </div>
             </logic:present>
 
 

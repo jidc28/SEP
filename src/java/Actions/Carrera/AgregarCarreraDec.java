@@ -37,6 +37,11 @@ public class AgregarCarreraDec extends org.apache.struts.action.Action {
             throws Exception {
         HttpSession session = request.getSession(true);
         Decanato d = (Decanato) form;
+        System.out.println(d.getNombre().equals(""));
+        // No se trajo el decanato desde el form.
+        if (d.getNombre().equals("")) {
+            d = (Decanato) session.getAttribute("decanato_actual");
+        }
         System.out.println("Decanato: "+d.getNombre());
         System.out.println("Decanato: "+d.getCodigo());
         session.setAttribute("decanato_actual",d);

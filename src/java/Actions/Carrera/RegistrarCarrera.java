@@ -71,6 +71,7 @@ public class RegistrarCarrera extends org.apache.struts.action.Action {
             
             if (tipousuario.equals("administrador")) {
                 Decanato d = (Decanato) session.getAttribute("decanato_actual");
+                System.out.println("decanato_actual: "+d.getNombre());
                 boolean registro = DBMS.getInstance().registrarCarreraDec(u,d.getCodigo());
 
                 if (registro) {
