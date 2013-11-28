@@ -45,20 +45,20 @@ public class GuardarModificarInfoP extends org.apache.struts.action.Action {
         ActionErrors error = new ActionErrors();
 
         //valido los campos de formulario
-        error = u.validate(mapping, request);
-        boolean huboError = false;
+        //error = u.validate(mapping, request);
+        //boolean huboError = false;
 
         
-        if (error.size() != 0) {
-             huboError = true;
-        }
+        //if (error.size() != 0) {
+        //     huboError = true;
+        //}
 
         //si los campos no son validos
-        if (huboError) {
-            saveErrors(request, error);
-            return mapping.findForward(FAILURE);
+        //if (huboError) {
+        //    saveErrors(request, error);
+        //    return mapping.findForward(FAILURE);
             //si los campos son validos
-        } else {
+        //} else {
 
             //obtengo informacion del profesor actual del sistema
             boolean actualizar = DBMS.getInstance().actualizarInfoProfesor(u);
@@ -75,4 +75,4 @@ public class GuardarModificarInfoP extends org.apache.struts.action.Action {
             }
         }
     }
-}
+//}

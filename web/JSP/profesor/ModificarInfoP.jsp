@@ -17,6 +17,8 @@
         <link rel="stylesheet" type="text/css" href="css/datetimepicker/css/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
@@ -87,6 +89,7 @@
                         <td>
                             <html:text style="width: 258px;" disabled="true" name="profesor" property="email" errorStyleClass="error"
                                        errorKey="org.apache.struts.action.ERROR"></html:text>
+                            <html:hidden name="profesor" property="email" />
                         </td>
                     </tr>
                     <tr>
@@ -97,7 +100,7 @@
                     <tr>
                         <td>Correo electrónico personal</td>
                         <td>
-                            <html:text style="width: 258px;" disabled="false" name="profesor" property="email" errorStyleClass="error"
+                            <html:text style="width: 258px;" disabled="false" name="profesor" property="email_personal" errorStyleClass="error"
                                        errorKey="org.apache.struts.action.ERROR"></html:text>
                         </td>
                     </tr>
@@ -109,17 +112,17 @@
                     <tr>
                         <td>Lapso Contractual</td>
                         <td colspan="2" style="color: firebrick">
-                            
+                            <p style="font-size: 12px;">Formato: mm/dd/aaaa</p>
                                 <div id="datetimepicker1" class="input-append">
-                                  <input data-format="dd-MM-yyyy" type="text" style="height: 30px; width: 100px;"></input>
-                                  <span class="add-on">
+                                  <html:text name="profesor" property="lapso_contractual_inicio" style="height: 30px; width: 100px;"></html:text>
+                                  <span class="add-on" style="height: 30px">
                                     <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                     </i>
                                   </span>
                                 </div>
                                 <div id="datetimepicker2" class="input-append">
-                                  <input data-format="dd-MM-yyyy" type="text" style="height: 30px; width: 100px;"></input>
-                                  <span class="add-on">
+                                  <html:text name="profesor" property="lapso_contractual_fin" style="height: 30px; width: 100px;"></html:text>
+                                  <span class="add-on" style="height: 30px">
                                     <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                     </i>
                                   </span>
@@ -130,11 +133,11 @@
                         <td>Nivel</td>
                         <td>
                             <html:select style="width: 258px;" property="nivel">
-                                <html:option value="ayudanteAcad">Ayudante Académico</html:option>
-                                <html:option value="asistente">Asistente</html:option>
-                                <html:option value="agregado">Agregado</html:option>
-                                <html:option value="asociado">Asociado</html:option>
-                                <html:option value="titular">Titular</html:option>
+                                <html:option value="Ayudante Academico">Ayudante Académico</html:option>
+                                <html:option value="Asistente">Asistente</html:option>
+                                <html:option value="Agregado">Agregado</html:option>
+                                <html:option value="Asociado">Asociado</html:option>
+                                <html:option value="Titular">Titular</html:option>
                             </html:select>
                         </td>
                     </tr>
@@ -150,7 +153,7 @@
             </table>
             <br>
             <p style="text-align: center">
-                <html:submit> Guardar Datos </html:submit></p>
+                <html:submit styleClass="btn btn-success"> Guardar Datos </html:submit></p>
             </html:form>
             
     </body>

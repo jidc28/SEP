@@ -38,6 +38,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
@@ -67,7 +71,9 @@
                             </th>
                         </tr>
                     </thead>
+                    <tbody>
                     <logic:iterate name="sinai" id="Sinai">
+                        <tr>
                         <td width="150px" align="center">
                             <bean:write name="Sinai" property="nombre"/>
                         </td>
@@ -77,7 +83,9 @@
                         <td width="150px" align="center">
                             <bean:write name="Sinai" property="fecha_fin"/>
                         </td>
+                        </tr>
                     </logic:iterate>
+                    </tbody>
                 </table>
                 <h4>CCT</h4>
                 <table border="0" style="margin: auto" class="altrowstable" id="alternatecolor" >
@@ -103,7 +111,9 @@
                             </th>
                         </tr>
                     </thead>
+                    <tbody>
                     <logic:iterate name="cct" id="CCT">
+                    <tr>
                         <td width="150px" align="center">
                             <bean:write name="CCT" property="ident"/>
                         </td>
@@ -122,21 +132,23 @@
                         <td width="150px" align="center">
                             <bean:write name="CCT" property="tipo"/>
                         </td>
+                    </tr>
                     </logic:iterate>
+                    </tbody>
                 </table>
                 <h4>DACE</h4>
-                <table border ="0" >
+                <table border ="0" style="margin-bottom: 50px;">
                     <tr>
-                        <td>Período a evaluar</td> 
+                        <td>Período a evaluar: </td> 
                         <td>
                             <html:form action="/consultaDace" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form_data" onsubmit="return(this)" style="margin-bottom:0px">
-                            <html:select disabled="false" property="trimestre">
+                            <html:select disabled="false" property="trimestre" style="width: 200px; margin-left: 10px;">
                                 <html:option value="EM">Enero-Marzo</html:option>
                                 <html:option value="AJ">Abril-Julio</html:option>
                                 <html:option value="SD">Septiembre-Diciembre</html:option>
                                 <html:option value="SD">Intensivo</html:option>
                             </html:select>
-                            <html:select disabled="false" property="ano">
+                            <html:select disabled="false" property="ano" style="width: 100px;">
                                 <html:option value="2004">2004</html:option> 
                                 <html:option value="2005">2005</html:option> 
                                 <html:option value="2006">2006</html:option> 
@@ -162,7 +174,9 @@
                                 <html:option value="2026">2026</html:option> 
                             </html:select>
                             <html:hidden name="profesor" property="usbid"/>
-                                <html:submit> Consultar </html:submit>
+                                <html:submit styleClass="btn btn-primary" style="padding-bottom: 3px; padding-top: 4px; margin-left: 10px;">
+                                    Consultar 
+                                </html:submit>
                             </html:form>
                         </td>
                     </tr>

@@ -15,6 +15,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
@@ -43,80 +47,90 @@
                         <tr>
                             <td>UsbID</td>
                             <td>
-                                <html:text style="width: 184px" disabled="true" name="usuario" property="usbid"/>
+                                <html:text style="width: 258px; height 20px;" disabled="true" name="usuario" property="usbid"/>
                             </td>
                         </tr>
                         <tr>
                             <td>Cédula</td>
                             <td>
-                                <html:text style="width: 184px" disabled="true" name="profesor" property="cedula"/>
+                                <html:text style="width: 258px; height 20px;" disabled="true" name="profesor" property="cedula"/>
                             </td>
                         </tr>
                         <tr>
                             <td>Nombre</td>
                             <td>
-                                <html:text style="width: 184px" disabled="true" name="profesor" property="nombre"/>
+                                <html:text style="width: 258px; height 20px;" disabled="true" name="profesor" property="nombre"/>
                             </td>
                         </tr>
                         <tr>
                             <td>Apellido</td>
                             <td>
-                                <html:text style="width: 184px" disabled="true" name="profesor" property="apellido"/>
+                                <html:text style="width: 258px; height 20px;" disabled="true" name="profesor" property="apellido"/>
                             </td>
                         </tr>
                         <tr>
                             <td>Género</td>
                             <td>
-                                <html:text style="width: 184px" disabled="true" name="profesor" property="genero"/>
+                                <html:text style="width: 258px; height 20px;" disabled="true" name="profesor" property="genero"/>
                             </td>
                         </tr>
                         <tr>
                             <td>Correo electrónico institucional</td>
                             <td>
-                                <html:text style="width: 184px" disabled="true" name="profesor" property="email"/>
+                                <html:text style="width: 258px; height 20px;" disabled="true" name="profesor" property="email"/>
                             </td>
                         </tr>
                                                 </tr>
                         <tr>
                             <td>Correo electrónico personal</td>
                             <td>
-                                <html:text style="width: 184px" disabled="true" name="profesor" property="email_personal"/>
+                                <html:text style="width: 258px; height 20px;" disabled="true" name="profesor" property="email_personal"/>
                             </td>
                         </tr>
                         <tr>
                             <td>Lapso Contractual</td>
                             <td>
-                                <html:text style="width: 90px" disabled="true" name="profesor" property="lapso_contractual_inicio"/>
-                                <html:text style="width: 90px" disabled="true" name="profesor" property="lapso_contractual_fin"/>
+                                <html:text style="width: 127px; height 20px;" disabled="true" name="profesor" property="lapso_contractual_inicio"/>
+                                <html:text style="width: 127px; height 20px;" disabled="true" name="profesor" property="lapso_contractual_fin"/>
                             </td>
                         </tr>
                         <tr>
                             <td>Nivel</td>
                             <td>
-                                <html:text style="width: 184px" disabled="true" name="profesor" property="nivel"/>
+                                <html:text style="width: 258px; height 20px;" disabled="true" name="profesor" property="nivel"/>
                             </td>
                         </tr>
                         <tr>
-                            <td>Jubilacíon</td>
+                            <td>Jubilación</td>
                             <td>
-                                <html:text style="width: 184px" disabled="true" name="profesor" property="jubilado"/>
+                                <html:text style="width: 258px; height: 20px;" disabled="true" name="profesor" property="jubilado"/>
                             </td>
                         </tr>
                     </tbody>
                 </table>
 
-                <html:form  action="/modificarInfoP" method="POST" enctype="multipart/form-data" onsubmit="return(this)" >
-                    <html:hidden name="usuario" property="usbid"/>
-                    <html:submit  value="Modificar información"/>
-                </html:form>
-                <html:form  action="/eliminarInfoP" >
-                    <html:hidden name="usuario" property="usbid"/>
-                    <html:submit value="Eliminar información"/>
-                </html:form>
-                <html:form  action="/agregarInfoP" >
-                    <html:hidden name="usuario" property="usbid"/>
-                    <html:submit value="Agregar información"/>
-                </html:form>
+                <table style="margin-top: 5px;">
+                        <tbody>
+                            <td>
+                                <html:form  action="/modificarInfoP" method="POST" enctype="multipart/form-data" onsubmit="return(this)" >
+                                    <html:hidden name="usuario" property="usbid"/>
+                                    <html:submit style="margin: 2.5px;" styleClass="btn btn-info" value="Modificar"/>
+                                </html:form>
+                            </td>
+                            <td>
+                                <html:form  action="/agregarInfoP" >
+                                    <html:hidden name="usuario" property="usbid"/>
+                                    <html:submit style="margin: 2.5px;" styleClass="btn btn-default" value="Agregar información"/>
+                                </html:form>
+                            </td>
+                            <td>
+                                <html:form  action="/eliminarInfoP" >
+                                    <html:hidden name="usuario" property="usbid"/>
+                                    <html:submit style="margin: 2.5px;" styleClass="btn btn-danger" value="Eliminar"/>
+                                </html:form>
+                            </td>
+                    </tbody>
+                </table>
             </div>
         </div>
     </body>
