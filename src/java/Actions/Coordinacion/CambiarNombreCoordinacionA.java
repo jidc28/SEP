@@ -66,8 +66,9 @@ public class CambiarNombreCoordinacionA extends org.apache.struts.action.Action 
 
             if (actualizo) {
 
-                ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
-                request.setAttribute("coordinaciones", coords);
+                ArrayList<Coordinacion> [] coords = DBMS.getInstance().listarCoordinaciones();
+                session.setAttribute("coordinaciones_visibles", coords[0]);
+                session.setAttribute("coordinaciones_ocultas", coords[1]);
                 request.setAttribute("modificacion", SUCCESS);
 
                 return mapping.findForward(SUCCESS);

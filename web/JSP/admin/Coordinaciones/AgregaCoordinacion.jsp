@@ -23,7 +23,7 @@
         <h4>Registro de Coordinaciones</h4>
 
         <html:form action="/registrarCoordinacion" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
-            <table border="0">
+            <table border="0" style="margin-top: 50px;">
                 <tbody>
                     <tr>
                         <td style="color: black">Codigo de la Coordinacion</td>

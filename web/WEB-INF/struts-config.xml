@@ -137,10 +137,10 @@
             <forward name="failure" path="agregaDecanato"/> 
             <forward name="yaregistrada" path="agregaDecanato"/> 
         </action>
-        <action input="/ConsultaDecanato.jsp" name="Decanato" path="/cambiarStatusDecanato" scope="request" type="Actions.Decanato.cambiarStatusDecanato" validate="false">
+        <!--<action input="/ConsultaDecanato.jsp" name="Decanato" path="/cambiarStatusDecanato" scope="request" type="Actions.Decanato.cambiarStatusDecanato" validate="false">
             <forward name="success" path="editarStatusDecanato"/>
         </action>
-        <!-- <action input="/ConsultaDecanato.jsp" name="Decanato" path="/cambiarStatusDecanatoA" scope="request" type="Actions.Decanato.CambiarStatusDecanatoA" validate="false">
+        <action input="/ConsultaDecanato.jsp" name="Decanato" path="/cambiarStatusDecanatoA" scope="request" type="Actions.Decanato.CambiarStatusDecanatoA" validate="false">
             <forward name="success" path="consultaDecanato"/>
         </action> -->
         <action input="/ConsultaDecanato.jsp" name="Decanato" path="/editarNombreDecanato" scope="request" type="Actions.Decanato.EditarNombreDecanato" validate="false">
@@ -165,12 +165,12 @@
             <forward name="failure" path="agregaCoordinacion"/>
             <forward name="yaregistrada" path="agregaCoordinacion"/>
         </action>
-        <action input="/ConsultaCoordinacion.jsp" name="Coordinacion" path="/cambiarStatusCoordinacion" scope="request" type="Actions.Coordinacion.cambiarStatusCoordinacion" validate="false">
+        <!--<action input="/ConsultaCoordinacion.jsp" name="Coordinacion" path="/cambiarStatusCoordinacion" scope="request" type="Actions.Coordinacion.cambiarStatusCoordinacion" validate="false">
             <forward name="success" path="editarStatusCoordinacion"/>
         </action>
         <action input="/ConsultaCoordinacion.jsp" name="Coordinacion" path="/cambiarStatusCoordinacionA" scope="request" type="Actions.Coordinacion.CambiarStatusCoordinacionA" validate="false">
             <forward name="success" path="consultaCoordinacion"/>
-        </action>
+        </action> -->
         <action input="/ConsultaCoordinacion.jsp" name="Coordinacion" path="/editarNombreCoordinacion" scope="request" type="Actions.Coordinacion.EditarNombreCoordinacion" validate="false">
             <forward name="success" path="editarNombreCoordinacion"/>
         </action>
@@ -182,6 +182,14 @@
             <forward name="success" path="consultaCoordinacion"/>
             <forward name="failure" path="consultaCoordinacion"/>
         </action> 
+        <action input="/ConsultaCoordinacion.jsp" name="Coordinacion" path="/ocultarCoordinacion" scope="request" type="Actions.Coordinacion.ocultarCoordinacion" validate="false">
+            <forward name="success" path="consultaCoordinacion"/>
+            <forward name="failure" path="consultaCoordinacion"/>
+        </action>
+        <action input="/ConsultaCoordinacion.jsp" name="Coordinacion" path="/mostrarCoordinacion" scope="request" type="Actions.Coordinacion.mostrarCoordinacion" validate="false">
+            <forward name="success" path="consultaCoordinacion"/>
+            <forward name="failure" path="consultaCoordinacion"/>
+        </action>
         
         
         <!--       CARRERAS         -->
@@ -190,12 +198,12 @@
             <forward name="decanato" path="agregaCarrera"/>
             <forward name="yaregistrada" path="agregaCarrera"/> 
         </action>
-        <action input="/ConsultaCarrera.jsp" name="Carrera" path="/cambiarStatusCarrera" scope="request" type="Actions.Carrera.cambiarStatusCarrera" validate="false">
+        <!--<action input="/ConsultaCarrera.jsp" name="Carrera" path="/cambiarStatusCarrera" scope="request" type="Actions.Carrera.cambiarStatusCarrera" validate="false">
             <forward name="success" path="editarStatusCarrera"/>
         </action>
         <action input="/ConsultaCarrera.jsp" name="Carrera" path="/cambiarStatusCarreraA" scope="request" type="Actions.Carrera.CambiarStatusCarreraA" validate="false">
             <forward name="success" path="consultaCarrera"/>
-        </action>
+        </action>-->
         <action input="/ConsultaCarrera.jsp" name="Carrera" path="/editarNombre" scope="request" type="Actions.Carrera.EditarNombreCarrera" validate="false">
             <forward name="success" path="editarNombreCarrera"/>
         </action>

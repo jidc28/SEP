@@ -25,7 +25,7 @@
             
             <tiles:insert attribute="sidebarR"/>
             
-            <div style="width:760px; margin-left: auto;margin-right: auto;">
+            <div style="width:760px; margin-left: auto; margin-right: auto; margin-top: 50px;">
                 <tiles:insert attribute="body"/>
             </div>
             

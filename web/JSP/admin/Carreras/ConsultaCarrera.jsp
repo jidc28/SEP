@@ -41,9 +41,6 @@
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
-        <!-- NO ME AGARRA BOOTSTRAP 
-        <link rel="stylesheet" type="text/css" href="css/ccs/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="css/ccs/bootstrap.min.css"> -->
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>

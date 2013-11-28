@@ -21,8 +21,10 @@
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
         <h4>
-            <bean:write name="decanato_actual" property="nombre"/>: 
-            <br>
+            <logic:present name="decanato_actual">
+                <bean:write name="decanato_actual" property="nombre"/>:
+                <br>
+            </logic:present>
             Registro de Carreras
         </h4>
 

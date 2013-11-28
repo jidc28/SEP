@@ -273,9 +273,11 @@ public class DBMS {
         return dcnto;
     }
 
-    public ArrayList<Coordinacion> listarCoordinaciones() {
+    public ArrayList<Coordinacion> [] listarCoordinaciones() {
 
-        ArrayList<Coordinacion> coords = new ArrayList<Coordinacion>(0);
+        ArrayList<Coordinacion> [] coords = new ArrayList[2];
+        ArrayList<Coordinacion> visibles = new ArrayList<Coordinacion>(0);
+        ArrayList<Coordinacion> ocultos = new ArrayList<Coordinacion>(0);
         PreparedStatement ps = null;
         try {
             ps = conexion.prepareStatement("SELECT * FROM COORDINACION ORDER BY CODIGO");
@@ -285,9 +287,14 @@ public class DBMS {
                 u.setCodigo(rs.getString("codigo"));
                 u.setNombre(rs.getString("nombre"));
                 u.setEstado(rs.getString("Estado"));
-                coords.add(u);
+                if (u.getEstado().equals("visible")) {
+                    visibles.add(u);
+                } else {
+                    ocultos.add(u);
+                }
             }
-
+            coords[0] = visibles;
+            coords[1] = ocultos;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

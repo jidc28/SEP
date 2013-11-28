@@ -80,7 +80,9 @@
         </logic:present>
             
         <h4 style="margin-top: 50px;"> Lista de Carreras del 
-            <bean:write name="decanato_actual" property="nombre"/>:
+            <logic:present name="decanato_actual">
+                <bean:write name="decanato_actual" property="nombre"/>:
+            </logic:present>
         </h4>
         <br>
         <div id="testTable">

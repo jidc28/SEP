@@ -19,7 +19,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Langtech
  */
-public class CambiarStatusCoordinacionA extends org.apache.struts.action.Action {
+public class mostrarCoordinacion extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -44,15 +44,17 @@ public class CambiarStatusCoordinacionA extends org.apache.struts.action.Action 
 
         ActionErrors error = new ActionErrors();
 
+        u.setEstado("visible");
         boolean actualizo = DBMS.getInstance().actualizarEstadoCoordinacion(u);
         
         //obtengo una lista 
-        ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
+        ArrayList<Coordinacion> [] coords = DBMS.getInstance().listarCoordinaciones();
 
         //si existen
 
         //retorno a pagina de exito
-        request.setAttribute("coordinaciones", coords);
+        session.setAttribute("coordinaciones_visibles", coords[0]);
+        session.setAttribute("coordinaciones_ocultas", coords[1]);
         request.setAttribute("modificacion", SUCCESS);
         return mapping.findForward(SUCCESS);
     }

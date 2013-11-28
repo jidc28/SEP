@@ -48,12 +48,13 @@ public class EliminaCoordinacionA extends org.apache.struts.action.Action {
             } else {
                 request.setAttribute("eliminado",SUCCESS);
 
-                ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
+                ArrayList<Coordinacion> [] coords = DBMS.getInstance().listarCoordinaciones();
 
                 //si existen carreras registradas
 
                 //retorno a pagina de exito
-                session.setAttribute("coordinaciones", coords);
+                session.setAttribute("coordinaciones_visibles", coords[0]);
+                session.setAttribute("coordinaciones_ocultas", coords[1]);
                 return mapping.findForward(SUCCESS);
             }
         // }

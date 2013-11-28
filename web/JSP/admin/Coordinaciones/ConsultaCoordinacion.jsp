@@ -39,6 +39,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
@@ -93,40 +95,76 @@
                             Modificar Nombre
                         </th>
                         <th width="20%" align="center">
-                            Modificar Estado
-                        </th>
-                        <th width="20%" align="center">
                             Eliminar
                         </th>
                     </tr>
                 </thead>
-                <logic:iterate name="coordinaciones" id="Coordinaciones">
+                <logic:iterate name="coordinaciones_visibles" id="CoordV">
                     <tr>
                         <td width="20%" align="center">
-                            <bean:write name="Coordinaciones" property="codigo"/>
+                            <bean:write name="CoordV" property="codigo"/>
                         </td>
                         <td width="20%" align="center">
-                            <bean:write name="Coordinaciones" property="nombre"/>
+                            <bean:write name="CoordV" property="nombre"/>
                         </td>
                         <td width="20%" align="center">
-                            <bean:write name="Coordinaciones" property="estado"/>
+                            <html:form action="/ocultarCoordinacion" onsubmit="return(this)" style="margin: 0px;">
+                                <center>
+                                    <html:hidden name="CoordV" property="codigo"/>
+                                    <html:submit styleClass="btn btn-warning" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea ocultar la coordinacion?')">
+                                        Ocultar
+                                    </html:submit>
+                                </center>
+                            </html:form>
                         </td>
                         <td width="20%" align="center">
                             <html:form action="/editarNombreCoordinacion" onsubmit="return(this)">
-                                <html:hidden name="Coordinaciones" property="codigo"/>
+                                <html:hidden name="CoordV" property="codigo"/>
                                 <html:image src="imagenes/edit.png" value="" property=""/>
                             </html:form>
                         </td>
+                        <td>
+                            <html:form action="/eliminaCoordinacionA" onsubmit="return(this)" style="margin: 0px;">
+                                <html:hidden name="CoordV" property="codigo"/>
+                                <html:submit styleClass="btn btn-danger" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea eliminar la coordinacion?')">
+                                    Eliminar
+                                </html:submit>
+                            </html:form>
+                        </td>
+                    </tr>
+                </logic:iterate>
+                <logic:iterate name="coordinaciones_ocultas" id="CoordO">
+                    <tr>
                         <td width="20%" align="center">
-                            <html:form action="/cambiarStatusCoordinacion" onsubmit="return(this)">
-                                <html:hidden name="Coordinaciones" property="codigo"/>
-                                <html:image src="imagenes/visibilidad.png" value="" property=""/>
+                            <bean:write name="CoordO" property="codigo"/>
+                        </td>
+                        <td width="20%" align="center">
+                            <bean:write name="CoordO" property="nombre"/>
+                        </td>
+                        <td width="20%" align="center">
+                            <html:form action="/mostrarCoordinacion" onsubmit="return(this)" style="margin: 0px;">
+                                <center>
+                                    <html:hidden name="CoordO" property="codigo"/>
+                                    <html:submit styleClass="btn btn-success" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea ocultar la coordinacion?')">
+                                        Mostrar
+                                    </html:submit>
+                                </center>
+                            </html:form>
+                        </td>
+                        <td width="20%" align="center">
+                            <html:form action="/editarNombreCoordinacion" onsubmit="return(this)">
+                                <html:hidden name="CoordO" property="codigo"/>
+                                <html:image src="imagenes/edit.png" value="" property=""/>
                             </html:form>
                         </td>
                         <td>
-                            <html:form action="/eliminaCoordinacionA" onsubmit="return(this)">
-                                <html:hidden name="Coordinaciones" property="codigo"/>
-                                <html:submit>
+                            <html:form action="/eliminaCoordinacionA" onsubmit="return(this)" style="margin: 0px;">
+                                <html:hidden name="CoordO" property="codigo"/>
+                                <html:submit styleClass="btn btn-danger" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea eliminar la coordinacion?')">
                                     Eliminar
                                 </html:submit>
                             </html:form>
