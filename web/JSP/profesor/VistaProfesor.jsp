@@ -124,7 +124,8 @@
                             <td>
                                 <html:form  action="/eliminarInfoP" >
                                     <html:hidden name="usuario" property="usbid"/>
-                                    <html:submit style="margin: 2.5px;" styleClass="btn btn-danger" value="Eliminar"/>
+                                    <html:submit style="margin: 2.5px;" styleClass="btn btn-danger" value="Eliminar" 
+                                                 onclick="javascript: return confirm('¿Está seguro que desea eliminar su información?')"/>
                                 </html:form>
                             </td>
                     </tbody>

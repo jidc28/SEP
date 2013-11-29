@@ -5,6 +5,8 @@
 package Actions.Carrera;
 
 import Clases.Carrera;
+import Clases.Decanato;
+import Clases.Usuario;
 import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -65,11 +67,20 @@ public class CambiarNombreCarreraA extends org.apache.struts.action.Action {
             boolean actualizo = DBMS.getInstance().actualizarNombreCarrera(u);
 
             if (actualizo) {
-                ArrayList<Carrera> carreras = DBMS.getInstance().listarCarreras();
-                request.setAttribute("carreras", carreras);
-                request.setAttribute("modificacion",SUCCESS);
+                ArrayList<Carrera>[] carreras = null;
+                Usuario usuario = (Usuario) session.getAttribute("usuario");
 
-                return mapping.findForward(SUCCESS);
+                if (usuario.getTipousuario().equals("decanato")) {
+                    carreras = DBMS.getInstance().listarCarrerasDecanato(usuario.getUsbid());
+                } else if (usuario.getTipousuario().equals("administrador")) {
+                    Decanato decanato = (Decanato) session.getAttribute("decanato_actual");
+                    carreras = DBMS.getInstance().listarCarrerasDecanato(decanato.getCodigo());
+                }
+
+                session.setAttribute("carreras_visibles", carreras[0]);
+                session.setAttribute("carreras_ocultas", carreras[1]);
+                request.setAttribute("modificacion", SUCCESS);
+                return mapping.findForward(usuario.getTipousuario());
             } else {
                 error.add("actualizacion", new ActionMessage("error.actualizacion.errada"));
                 saveErrors(request, error);

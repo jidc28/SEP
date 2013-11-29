@@ -147,8 +147,11 @@
                 </tbody>
             </table>
             <br>
-            <p style="text-align: center">
-                <html:submit styleClass="btn btn-success"> Guardar Datos </html:submit></p>
+            <center>
+                <html:submit styleClass="btn btn-success" onclick="javascript: return confirm('¿Los datos ingresados son correctos?')"> 
+                    Guardar Datos 
+                </html:submit>
+            </center>
             </html:form>
             
     </body>

@@ -53,9 +53,10 @@
                     <tr>
                         <td style="color: black">Nombre de la Carrera</td>
                         <td>
-                            <html:text name="Carrera" property="nombre" maxlength="50" value="" errorStyleClass="error"
-                                       style="margin-bottom: 0px;height: 30px;"
-                                       errorKey="org.apache.struts.action.ERROR"></html:text>
+                            <html:textarea name="Carrera" property="nombre" errorStyleClass="error"
+                                       style="margin-bottom: 0px;"
+                                       rows="5"
+                                       errorKey="org.apache.struts.action.ERROR"/>
                             </td>
                         </tr>
                         <tr>
@@ -72,7 +73,7 @@
             <p style="text-align: center; margin-top: 10px;">
                 <html:submit styleClass="btn btn-success"
                     onclick="javascript: return confirm('¿Está seguro de que los datos son correctos?')">
-                    Agregar Carrera
+                    Agregar
                 </html:submit>
                 <html:reset styleClass="btn btn-default" value="Limpiar"/>
             </p>
