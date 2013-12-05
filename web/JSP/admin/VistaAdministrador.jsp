@@ -58,7 +58,7 @@
                             <h5 align ="center">Consultar Decanato</h5>
                         </html:link>
                     </div>
-                </div>
+                    </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">

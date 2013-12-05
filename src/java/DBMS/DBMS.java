@@ -193,63 +193,9 @@ public class DBMS {
         return usrs;
     }
 
-    public ArrayList<Carrera> listarCarreras() {
+    public ArrayList<Decanato> listarDecanatos() {
 
-        ArrayList<Carrera> carreras = new ArrayList<Carrera>(0);
-        PreparedStatement ps = null;
-        try {
-            ps = conexion.prepareStatement("SELECT * FROM carrera ORDER BY codigo");
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Carrera u = new Carrera();
-                u.setCodigo(rs.getString("codigo"));
-                u.setNombre(rs.getString("nombre"));
-                u.setEstado(rs.getString("Estado"));
-                carreras.add(u);
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return carreras;
-    }
-    
-    public ArrayList<Carrera> [] listarCarrerasDecanato(String d) {
-    
-        ArrayList<Carrera> [] carreras = new ArrayList[2];
-        ArrayList<Carrera> visibles = new ArrayList(0);
-        ArrayList<Carrera> ocultas = new ArrayList(0);
-        PreparedStatement ps = null;
-        try {
-            ps = conexion.prepareStatement("SELECT codigo, nombre, estado FROM incluye, CARRERA "
-                    + "WHERE codigo_decanato = ? AND codigo_carrera = codigo "
-                    + "ORDER BY codigo_carrera");
-            ps.setString(1,d);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Carrera u = new Carrera();
-                u.setCodigo(rs.getString("codigo"));
-                u.setNombre(rs.getString("nombre"));
-                u.setEstado(rs.getString("Estado"));
-                if (u.getEstado().equals("visible")) {
-                    visibles.add(u);
-                } else {
-                    ocultas.add(u);
-                }
-            }
-            carreras[0] = visibles;
-            carreras[1] = ocultas;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return carreras;
-    }
-
-    public ArrayList<Decanato> [] listarDecanatos() {
-
-        ArrayList<Decanato> [] dcnto = new ArrayList[2];
-        ArrayList<Decanato> visibles = new ArrayList(0);
-        ArrayList<Decanato> ocultos = new ArrayList(0);
+        ArrayList<Decanato> dcnto = new ArrayList(0);
         PreparedStatement ps = null;
         try {
             ps = conexion.prepareStatement("SELECT * FROM decanato ORDER BY codigo");
@@ -259,14 +205,8 @@ public class DBMS {
                 u.setCodigo(rs.getString("codigo"));
                 u.setNombre(rs.getString("nombre"));
                 u.setEstado(rs.getString("Estado"));
-                if (u.getEstado().equals("visible")) {
-                    visibles.add(u);
-                } else {
-                    ocultos.add(u);
-                }
+                dcnto.add(u);
             }
-            dcnto[0] = visibles;
-            dcnto[1] = ocultos;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -274,11 +214,9 @@ public class DBMS {
         return dcnto;
     }
 
-    public ArrayList<Coordinacion> [] listarCoordinaciones() {
+    public ArrayList<Coordinacion> listarCoordinaciones() {
 
-        ArrayList<Coordinacion> [] coords = new ArrayList[2];
-        ArrayList<Coordinacion> visibles = new ArrayList<Coordinacion>(0);
-        ArrayList<Coordinacion> ocultos = new ArrayList<Coordinacion>(0);
+        ArrayList<Coordinacion> coords = new ArrayList<Coordinacion>(0);
         PreparedStatement ps = null;
         try {
             ps = conexion.prepareStatement("SELECT * FROM COORDINACION ORDER BY CODIGO");
@@ -288,14 +226,8 @@ public class DBMS {
                 u.setCodigo(rs.getString("codigo"));
                 u.setNombre(rs.getString("nombre"));
                 u.setEstado(rs.getString("Estado"));
-                if (u.getEstado().equals("visible")) {
-                    visibles.add(u);
-                } else {
-                    ocultos.add(u);
-                }
+                coords.add(u);
             }
-            coords[0] = visibles;
-            coords[1] = ocultos;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -887,84 +819,6 @@ public class DBMS {
             ex.printStackTrace();
         }
         return u;
-    }
-
-    
-    public ArrayList<Departamento> [] listarDepartamentosDecanato(String d) {
-    
-        ArrayList<Departamento> [] departamentos = new ArrayList[2];
-        ArrayList<Departamento> visibles = new ArrayList(0);
-        ArrayList<Departamento> ocultas = new ArrayList(0);
-        PreparedStatement ps = null;
-        try {
-            ps = conexion.prepareStatement("SELECT codigo, nombre, estado FROM suscribe, DEPARTAMENTO "
-                    + "WHERE codigo_decanato = ? AND codigo_departamento = codigo "
-                    + "ORDER BY codigo_departamento");
-            ps.setString(1,d);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Departamento u = new Departamento();
-                u.setCodigo(rs.getString("codigo"));
-                u.setNombre(rs.getString("nombre"));
-                u.setEstado(rs.getString("Estado"));
-                if (u.getEstado().equals("visible")) {
-                    visibles.add(u);
-                } else {
-                    ocultas.add(u);
-                }
-            }
-            departamentos[0] = visibles;
-            departamentos[1] = ocultas;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return departamentos;
-    }    
-    
-    public boolean desvincularDepartamentoDecanato(Departamento d){
-        PreparedStatement psDesvincular = null;
-        try{
-            psDesvincular = conexion.prepareStatement("DELETE FROM suscribe WHERE codigo_departamento = ?;");
-            psDesvincular.setString(1,d.getCodigo());
-            
-            Integer i = psDesvincular.executeUpdate();
-            
-            return i>0;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
-    
-    public ArrayList<Coordinacion> [] listarCoordinacionesDepartamento(String d) {
-    
-        ArrayList<Coordinacion> [] coordinaciones = new ArrayList[2];
-        ArrayList<Coordinacion> visibles = new ArrayList(0);
-        ArrayList<Coordinacion> ocultas = new ArrayList(0);
-        PreparedStatement ps = null;
-        try {
-            ps = conexion.prepareStatement("SELECT codigo, nombre, estado FROM se_adscribe, DEPARTAMENTO "
-                    + "WHERE codigo_departamento = ? AND codigo_coordinacion = codigo "
-                    + "ORDER BY codigo_coordinacion");
-            ps.setString(1,d);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Coordinacion u = new Coordinacion();
-                u.setCodigo(rs.getString("codigo"));
-                u.setNombre(rs.getString("nombre"));
-                u.setEstado(rs.getString("Estado"));
-                if (u.getEstado().equals("visible")) {
-                    visibles.add(u);
-                } else {
-                    ocultas.add(u);
-                }
-            }
-            coordinaciones[0] = visibles;
-            coordinaciones[1] = ocultas;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return coordinaciones;
     }
 
     public ArrayList<SINAI> listarSINAI(String usbid) {

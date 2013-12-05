@@ -41,13 +41,12 @@ public class ConsultaCoordinacionA extends org.apache.struts.action.Action {
         HttpSession session = request.getSession(true);
 
         //obtengo una lista de coords registradas
-        ArrayList<Coordinacion> [] coords = DBMS.getInstance().listarCoordinaciones();
+        ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
 
         //si existen coords registradas
 
             //retorno a pagina de exito
-            session.setAttribute("coordinaciones_visibles", coords[0]);
-            session.setAttribute("coordinaciones_ocultas", coords[1]);
+            session.setAttribute("coordinaciones", coords);
             return mapping.findForward(SUCCESS);
     }
 }

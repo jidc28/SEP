@@ -24,26 +24,6 @@
         <title>Gestion de Planillas de Evaluación</title>
     </head>
     <body>
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                            Gestión de Carreras
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="panel-body">
-                    <html:link action="/agregaCarreraA" >
-                        <h5 align ="center">Agregar Carrera</h5>
-                    </html:link>
-                    <html:link action="/consultaCarreraA" >
-                        <h5 align ="center">Consultar Carrera</h5>
-                    </html:link>
-                    </div>
-                </div>
-            </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">

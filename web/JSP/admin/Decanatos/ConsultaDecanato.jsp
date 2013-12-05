@@ -79,36 +79,17 @@
                         </th>
                     </tr>
                 </thead>
-                <logic:iterate name="visibles" id="DecV">
+                <logic:iterate name="decanatos" id="Dec">
                     <tr>
                         <td width="20%" align="center">
-                            <bean:write name="DecV" property="codigo"/>
+                            <bean:write name="Dec" property="codigo"/>
                         </td>
                         <td width="20%" align="center">
-                            <bean:write name="DecV" property="nombre"/>
+                            <bean:write name="Dec" property="nombre"/>
                         </td>
                         <td width="20%" align="center">
                             <html:form action="/editarNombreDecanato" onsubmit="return(this)" style="margin: 0px;">
-                                <html:hidden name="DecV" property="codigo"/>
-                                <button type="button" class="btn btn-primary" 
-                                        style="padding-bottom: 1px; padding-top: 1px; padding-left: 2px; padding-right: 2px;">
-                                    <html:image src="imagenes/edit-img.png" value="" property="" style="height: 27px;"/>
-                                </button>
-                            </html:form>
-                        </td>
-                    </tr>
-                </logic:iterate>
-                <logic:iterate name="ocultos" id="DecO">
-                    <tr>
-                        <td width="20%" align="center">
-                            <bean:write name="DecO" property="codigo"/>
-                        </td>
-                        <td width="20%" align="center">
-                            <bean:write name="DecO" property="nombre"/>
-                        </td>
-                        <td width="20%" align="center">
-                            <html:form action="/editarNombreDecanato" onsubmit="return(this)" style="margin: 0px">
-                                <html:hidden name="DecO" property="codigo"/>
+                                <html:hidden name="Dec" property="codigo"/>
                                 <button type="button" class="btn btn-primary" 
                                         style="padding-bottom: 1px; padding-top: 1px; padding-left: 2px; padding-right: 2px;">
                                     <html:image src="imagenes/edit-img.png" value="" property="" style="height: 27px;"/>

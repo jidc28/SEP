@@ -66,13 +66,12 @@ public class CambiarNombreDecanatoA extends org.apache.struts.action.Action {
 
             if (actualizo) {
                 //obtengo una lista de decanatos registrados
-                ArrayList<Decanato> [] dcnto = DBMS.getInstance().listarDecanatos();
+                ArrayList<Decanato> dcnto = DBMS.getInstance().listarDecanatos();
 
         //si existen decanatos registrados
 
             //retorno a pagina de exito
-                session.setAttribute("visibles", dcnto[0]);
-                session.setAttribute("ocultos", dcnto[1]);
+                session.setAttribute("decanatos", dcnto);
                 request.setAttribute("modificacion", SUCCESS);
 
 
