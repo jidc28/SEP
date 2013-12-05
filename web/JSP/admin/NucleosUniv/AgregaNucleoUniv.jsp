@@ -48,10 +48,13 @@
                     <tr>
                         <td style="color: black">Nombre del Nucleo Universitario</td>
                         <td>
+                            <html:text property="nombre" name="NucleoUniversitario" maxlength="50" errorKey="org.apache.struts.action.ERROR"/>
+                            <!--
                             <html:textarea name="NucleoUniversitario" property="nombre" value="" errorStyleClass="error"
                                        style="margin-bottom: 0px;"
                                        rows="5"
                                        errorKey="org.apache.struts.action.ERROR"/>
+                            -->
                         </td>
                     </tr>
                     <tr>

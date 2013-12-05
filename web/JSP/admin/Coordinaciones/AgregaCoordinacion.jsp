@@ -47,10 +47,13 @@
                     <tr>
                         <td style="color: black">Nombre de la Coordinación</td>
                         <td>
+                            <html:text property="nombre" name="Coordinacion" maxlength="50" errorKey="org.apache.struts.action.ERROR"/>
+                            <!--
                             <html:textarea name="Coordinacion" property="nombre" errorStyleClass="error"
                                        rows="5"
                                        style="margin-bottom: 0px;"
                                        errorKey="org.apache.struts.action.ERROR"/>
+                            -->
                             </td>
                         </tr>
                         <tr>

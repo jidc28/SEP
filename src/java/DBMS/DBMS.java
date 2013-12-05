@@ -4,6 +4,7 @@ import Clases.Carrera;
 import Clases.Coordinacion;
 import Forms.CreateUserForm;
 import Clases.Decanato;
+import Clases.Departamento;
 import Forms.EliminarUserForm;
 import Clases.NucleoUniversitario;
 import Clases.Profesor;
@@ -531,6 +532,24 @@ public class DBMS {
         }
     }
     
+    public boolean eliminarDepartamento(Departamento u){
+    
+        PreparedStatement psEliminar1 = null;
+        try{
+            psEliminar1 = conexion.prepareStatement("DELETE FROM DEPARTAMENTO AS d WHERE (d.codigo = ?);");
+            psEliminar1.setString(1,u.getCodigo());
+            
+            Integer i = psEliminar1.executeUpdate();
+            
+            System.out.println("retorna: " + (i>0));
+            return i > 0;
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
     public boolean registrarDecanato(Decanato u) {
 
         PreparedStatement psAgregar1 = null;
@@ -661,6 +680,26 @@ public class DBMS {
         }
 
     }
+    
+    public boolean actualizarEstadoDepartamento(Departamento u) {
+        PreparedStatement ps = null;
+        try {
+
+            ps = conexion.prepareStatement("UPDATE DEPARTAMENTO SET Estado = ? WHERE ( codigo = ? )");
+
+            ps.setString(1, u.getEstado());
+            ps.setString(2, u.getCodigo());
+            Integer s = ps.executeUpdate();
+
+            return s > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+
+    }
+
 
     public boolean actualizarNombreCarrera(Carrera u) {
         PreparedStatement ps = null;
@@ -825,6 +864,107 @@ public class DBMS {
             ex.printStackTrace();
         }
         return u;
+    }
+    
+    public Departamento obtenerNombreDepartamento(Departamento u) {
+
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT * FROM departamento WHERE codigo = ?");
+            ps.setString(1, u.getCodigo());
+
+            ResultSet rs = ps.executeQuery();
+
+
+
+            while (rs.next()) {
+                u.setNombre(rs.getString("nombre"));
+            }
+
+            return u;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return u;
+    }
+
+    
+    public ArrayList<Departamento> [] listarDepartamentosDecanato(String d) {
+    
+        ArrayList<Departamento> [] departamentos = new ArrayList[2];
+        ArrayList<Departamento> visibles = new ArrayList(0);
+        ArrayList<Departamento> ocultas = new ArrayList(0);
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT codigo, nombre, estado FROM suscribe, DEPARTAMENTO "
+                    + "WHERE codigo_decanato = ? AND codigo_departamento = codigo "
+                    + "ORDER BY codigo_departamento");
+            ps.setString(1,d);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Departamento u = new Departamento();
+                u.setCodigo(rs.getString("codigo"));
+                u.setNombre(rs.getString("nombre"));
+                u.setEstado(rs.getString("Estado"));
+                if (u.getEstado().equals("visible")) {
+                    visibles.add(u);
+                } else {
+                    ocultas.add(u);
+                }
+            }
+            departamentos[0] = visibles;
+            departamentos[1] = ocultas;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return departamentos;
+    }    
+    
+    public boolean desvincularDepartamentoDecanato(Departamento d){
+        PreparedStatement psDesvincular = null;
+        try{
+            psDesvincular = conexion.prepareStatement("DELETE FROM suscribe WHERE codigo_departamento = ?;");
+            psDesvincular.setString(1,d.getCodigo());
+            
+            Integer i = psDesvincular.executeUpdate();
+            
+            return i>0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
+    public ArrayList<Coordinacion> [] listarCoordinacionesDepartamento(String d) {
+    
+        ArrayList<Coordinacion> [] coordinaciones = new ArrayList[2];
+        ArrayList<Coordinacion> visibles = new ArrayList(0);
+        ArrayList<Coordinacion> ocultas = new ArrayList(0);
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT codigo, nombre, estado FROM se_adscribe, DEPARTAMENTO "
+                    + "WHERE codigo_departamento = ? AND codigo_coordinacion = codigo "
+                    + "ORDER BY codigo_coordinacion");
+            ps.setString(1,d);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Coordinacion u = new Coordinacion();
+                u.setCodigo(rs.getString("codigo"));
+                u.setNombre(rs.getString("nombre"));
+                u.setEstado(rs.getString("Estado"));
+                if (u.getEstado().equals("visible")) {
+                    visibles.add(u);
+                } else {
+                    ocultas.add(u);
+                }
+            }
+            coordinaciones[0] = visibles;
+            coordinaciones[1] = ocultas;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return coordinaciones;
     }
 
     public ArrayList<SINAI> listarSINAI(String usbid) {

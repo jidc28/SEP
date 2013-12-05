@@ -46,10 +46,13 @@
                     <tr>
                         <td style="color: black">Nombre del Decanato</td>
                         <td>
+                            <html:text property="nombre" name="Decanato" maxlength="50" errorKey="org.apache.struts.action.ERROR"/>
+                            <!--
                             <html:textarea name="Decanato" property="nombre" errorStyleClass="error"
                                        style="margin-bottom: 0px;"
                                        rows="5"
                                        errorKey="org.apache.struts.action.ERROR"/>
+                            -->
                         </td>
                     </tr>
                     <tr>

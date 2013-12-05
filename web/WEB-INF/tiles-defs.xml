@@ -158,8 +158,19 @@
         <put name="body" value="/JSP/decanato/VistaDecanato.jsp"/>
     </definition>
 
-    <definition name="consultaCarreraDec" extends="baseDecanato"> <!-- Agregar Carreras -->
+    <definition name="consultaCarreraDec" extends="baseDecanato"> <!-- Consultar Carreras -->
         <put name="body" value="/JSP/admin/Carreras/ConsultaCarreraDecanato.jsp"/>
+    </definition>
+    
+    <definition name="consultaDepartamentoDec" extends="baseDecanato"> <!-- Consultar Carreras -->
+        <put name="body" value="/JSP/admin/Departamentos/ConsultaDepartamentoDecanato.jsp"/>
+    </definition>
+    
+    <definition name="consultaDepartamento" extends="baseDecanato"> <!-- Consulta Departamentos -->
+        <put name="body" value="/JSP/admin/Departamentos/ConsultaDepartamentoDecanato.jsp"/>
+    </definition>
+    <definition name="editarNombreDepartamento" extends="baseDecanato"> <!-- Consulta Departamentos -->
+        <put name="body" value="/JSP/admin/Departamentos/ConsultaDepartamentoDecanato.jsp"/>
     </definition>
 
 </tiles-definitions>

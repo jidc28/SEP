@@ -53,10 +53,13 @@
                     <tr>
                         <td style="color: black">Nombre de la Carrera</td>
                         <td>
+                            <html:text property="nombre" name="Carrera" maxlength="50" errorKey="org.apache.struts.action.ERROR"/>
+                            <!--
                             <html:textarea name="Carrera" property="nombre" errorStyleClass="error"
                                        style="margin-bottom: 0px;"
                                        rows="5"
-                                       errorKey="org.apache.struts.action.ERROR"/>
+                                       errorKey="org.apache.struts.action.ERROR" />
+                            -->
                             </td>
                         </tr>
                         <tr>

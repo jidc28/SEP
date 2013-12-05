@@ -89,7 +89,7 @@
                                 <center>
                                     <html:hidden name="NucV" property="codigo"/>
                                     <html:submit styleClass="btn btn-warning" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
-                                                 onclick="javascript: return confirm('¿Está seguro de que desea ocultar el núcleo universitario?')">
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea ocultar el Núcleo Universitario?')">
                                         Ocultar
                                     </html:submit>
                                 </center>
@@ -119,7 +119,7 @@
                                 <center>
                                     <html:hidden name="NucO" property="codigo"/>
                                     <html:submit styleClass="btn btn-success" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
-                                                 onclick="javascript: return confirm('¿Está seguro de que desea ocultar el decanato?')">
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea ocultar el Núcleo Universitario?')">
                                         Mostrar
                                     </html:submit>
                                 </center>

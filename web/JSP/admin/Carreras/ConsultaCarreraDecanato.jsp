@@ -151,7 +151,7 @@
                                 <center>
                                     <html:hidden name="CarO" property="codigo"/>
                                     <html:submit styleClass="btn btn-success" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
-                                                 onclick="javascript: return confirm('¿Está seguro de que desea ocultar el decanato?')">
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea mostrar el decanato?')">
                                         Mostrar
                                     </html:submit>
                                 </center>
