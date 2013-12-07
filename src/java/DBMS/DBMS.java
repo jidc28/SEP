@@ -5,6 +5,7 @@ import Clases.Coordinacion;
 import Forms.CreateUserForm;
 import Clases.Decanato;
 import Clases.Departamento;
+import Clases.Materia;
 import Forms.EliminarUserForm;
 import Clases.NucleoUniversitario;
 import Clases.Profesor;
@@ -151,7 +152,7 @@ public class DBMS {
                 u.setUsbid(rs.getString("usbid"));
                 u.setDepartamento(rs.getString("departamento"));
                 tipousuario = rs.getString("tipousuario");
-                if (tipousuario.equals("profesor")){
+                if (tipousuario.equals("profesor")) {
                     profesores.add(u);
                 } else if (tipousuario.equals("decanato")) {
                     decanatos.add(u);
@@ -165,13 +166,13 @@ public class DBMS {
             total[1] = decanatos;
             total[2] = departamentos;
             total[3] = coordinaciones;
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return total;
     }
-    
+
     public ArrayList<Usuario> listarProfesores() {
 
         ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
@@ -234,9 +235,9 @@ public class DBMS {
         return coords;
     }
 
-    public ArrayList<NucleoUniversitario> [] listarNucleosUniversitarios() {
+    public ArrayList<NucleoUniversitario>[] listarNucleosUniversitarios() {
 
-        ArrayList<NucleoUniversitario> [] nucleos = new ArrayList[2];
+        ArrayList<NucleoUniversitario>[] nucleos = new ArrayList[2];
         ArrayList<NucleoUniversitario> visibles = new ArrayList<NucleoUniversitario>(0);
         ArrayList<NucleoUniversitario> ocultos = new ArrayList<NucleoUniversitario>(0);
         PreparedStatement ps = null;
@@ -404,22 +405,22 @@ public class DBMS {
         }
     }
 
-    public boolean registrarCarreraDec(Carrera u,String decanato) {
+    public boolean registrarCarreraDec(Carrera u, String decanato) {
 
         PreparedStatement psAgregar1 = null;
         PreparedStatement psAgregar2 = null;
-        
+
         try {
             psAgregar1 = conexion.prepareStatement("INSERT INTO carrera(codigo, nombre) VALUES (?, ?);");
             psAgregar1.setString(1, u.getCodigo());
             psAgregar1.setString(2, u.getNombre());
             Integer i = psAgregar1.executeUpdate();
-            
+
             psAgregar2 = conexion.prepareStatement("INSERT INTO incluye VALUES (?,?);");
             psAgregar2.setString(2, u.getCodigo());
             psAgregar2.setString(1, decanato);
             Integer j = psAgregar2.executeUpdate();
-            
+
             return i > 0 && j > 0;
 
         } catch (SQLException ex) {
@@ -427,61 +428,61 @@ public class DBMS {
             return false;
         }
     }
-    
-    public boolean eliminarCarrera(Carrera u){
-    
+
+    public boolean eliminarCarrera(Carrera u) {
+
         PreparedStatement psEliminar1 = null;
-        try{
+        try {
             psEliminar1 = conexion.prepareStatement("DELETE FROM carrera AS c WHERE (c.codigo = ?);");
-            psEliminar1.setString(1,u.getCodigo());
-            
+            psEliminar1.setString(1, u.getCodigo());
+
             Integer i = psEliminar1.executeUpdate();
-            
-            System.out.println("retorna: " + (i>0));
+
+            System.out.println("retorna: " + (i > 0));
             return i > 0;
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
         }
     }
-    
-    public boolean eliminarCoordinacion(Coordinacion u){
-    
+
+    public boolean eliminarCoordinacion(Coordinacion u) {
+
         PreparedStatement psEliminar1 = null;
-        try{
+        try {
             psEliminar1 = conexion.prepareStatement("DELETE FROM coordinacion AS c WHERE (c.codigo = ?);");
-            psEliminar1.setString(1,u.getCodigo());
-            
+            psEliminar1.setString(1, u.getCodigo());
+
             Integer i = psEliminar1.executeUpdate();
-            
-            System.out.println("retorna: " + (i>0));
+
+            System.out.println("retorna: " + (i > 0));
             return i > 0;
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
         }
     }
-    
-    public boolean eliminarDepartamento(Departamento u){
-    
+
+    public boolean eliminarDepartamento(Departamento u) {
+
         PreparedStatement psEliminar1 = null;
-        try{
+        try {
             psEliminar1 = conexion.prepareStatement("DELETE FROM DEPARTAMENTO AS d WHERE (d.codigo = ?);");
-            psEliminar1.setString(1,u.getCodigo());
-            
+            psEliminar1.setString(1, u.getCodigo());
+
             Integer i = psEliminar1.executeUpdate();
-            
-            System.out.println("retorna: " + (i>0));
+
+            System.out.println("retorna: " + (i > 0));
             return i > 0;
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
         }
     }
-    
+
     public boolean registrarDecanato(Decanato u) {
 
         PreparedStatement psAgregar1 = null;
@@ -612,7 +613,7 @@ public class DBMS {
         }
 
     }
-    
+
     public boolean actualizarEstadoDepartamento(Departamento u) {
         PreparedStatement ps = null;
         try {
@@ -631,7 +632,6 @@ public class DBMS {
         }
 
     }
-
 
     public boolean actualizarNombreCarrera(Carrera u) {
         PreparedStatement ps = null;
@@ -797,7 +797,7 @@ public class DBMS {
         }
         return u;
     }
-    
+
     public Departamento obtenerNombreDepartamento(Departamento u) {
 
         PreparedStatement ps = null;
@@ -867,8 +867,8 @@ public class DBMS {
         }
         return cct;
     }
-        
-        public ArrayList<DACE> listarDACE(String usbid, int ano, String trim) {
+
+    public ArrayList<DACE> listarDACE(String usbid, int ano, String trim) {
 
         ArrayList<DACE> dace = new ArrayList<DACE>(0);
         PreparedStatement ps = null;
@@ -895,5 +895,49 @@ public class DBMS {
             ex.printStackTrace();
         }
         return dace;
+    }
+
+    public ArrayList<Materia> listarMateriasOfertadas(String id_departamento) {
+
+        ArrayList<Materia> materias = new ArrayList<Materia>(0);
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT codigo, nombre, estado FROM oferta, materia WHERE codigo_departamento = ? AND codigo_materia = codigo;");
+            ps.setString(1, id_departamento);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Materia m = new Materia();
+                m.setCodigo(rs.getString("codigo"));
+                m.setNombre(rs.getString("nombre"));
+                m.setEstado(rs.getString("estado"));
+                materias.add(m);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return materias;
+    }
+    
+    public ArrayList<Profesor> listarProfesoresDepartamento(String id_departamento) {
+
+        ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT usbid, nombre, apellido FROM pertenece, profesor WHERE codigo_departamento = ? AND usbid_profesor = usbid;");
+            ps.setString(1, id_departamento);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Profesor p = new Profesor();
+                p.setUsbid(rs.getString("usbid"));
+                p.setNombre(rs.getString("nombre"));
+                p.setApellido(rs.getString("apellido"));
+                profesores.add(p);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return profesores;
     }
 }

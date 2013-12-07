@@ -28,18 +28,34 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                            Gestión de Coordinaciones
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMaterias">
+                            Gestión de Materias
                         </a>
                     </h4>
                 </div>
-                <div id="collapseFour" class="panel-collapse collapse">
+                <div id="collapseMaterias" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <html:link action="/agregaCoordinacionA" >
-                            <h5 align ="center">Agregar Coordinación</h5>
+                        <html:link href="#">
+                            <h5 align ="center">Agregar Materia</h5>
                         </html:link>
-                        <html:link action="/consultaCoordinacionA" >
-                            <h5 align ="center">Consultar Coordinación</h5>
+                        <html:link action="/consultaMateria">
+                            <h5 align ="center">Consultar Materias</h5>
+                        </html:link>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseProfesor">
+                            Gestión de Profesores
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseProfesor" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <html:link action="/consultaProfesor">
+                            <h5 align ="center">Evaluar Profesores</h5>
                         </html:link>
                     </div>
                 </div>

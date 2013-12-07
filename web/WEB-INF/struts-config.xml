@@ -19,7 +19,6 @@
         <form-bean name="Profesor" type="Clases.Profesor"/>
         <form-bean name="Usuario" type="Clases.Usuario"/>
         <form-bean name="DACE" type="Sistemas.DACE"/>
-    
     </form-beans>
     
     <global-exceptions>
@@ -54,17 +53,26 @@
             parameter="vistaDecanato">
         </action>
         
+        <action path="/vistaDepartamento"
+            type="org.apache.struts.actions.ForwardAction"
+            scope="request"
+            validate="false"
+            parameter="vistaDepartamento">
+        </action>
+        
         <action name="Usuario" path="/irInicio" scope="request" type="Otros.Inicio" validate="false">
             <forward name="profesor" path="vistaProfesor"/>
             <forward name="administrador" path="vistaAdmin"/>
             <forward name="decanato" path="vistaDecanato"/>
+            <forward name="departamento" path="vistaDepartamento"/>
         </action>
         
         <!--       LOGIN         -->
         <action input="/Login.jsp" name="Usuario" path="/login" scope="request" type="Session.LoginAction" validate="false">
             <forward name="profesor" path="vistaProfesor"/>
             <forward name="administrador" path="vistaAdmin"/>
-            <forward name="decanato" path="vistaDecanato"></forward>
+            <forward name="decanato" path="vistaDecanato"/>
+            <forward name="departamento" path="vistaDepartamento"/>
             <forward name="failure" path="/Login.jsp"/>
         </action>
         
@@ -138,8 +146,18 @@
             <forward name="failure" path="consultaDepartamento"/>
         </action>
         
-        <!--         OTROS       -->
-                                        
+        <!-- ACCIONES JEFE DE DEPARTAMENTO -->
+        <action input="/VistaDepartamento.jsp" name="Departamento" path="/consultaMateria" scope="request" type="Actions.Materia.ConsultaMateria" validate="false">
+            <forward name="success" path="consultaMateria"/>
+            <forward name="failure" path="consultaMateria"/>
+        </action>
+        
+        <action input="/VistaDepartamento.jsp" name="MultiBox" path="/consultaProfesor" scope="request" type="Actions.Profesor.ConsultaProfesor" validate="false">
+            <forward name="success" path="consultaProfesor"/>
+            <forward name="failure" path="consultaProfesor"/>
+        </action>
+        
+        <!--         OTROS       -->               
         <action scope="request" input="/" path="/cerrarSesion" type="Session.CerrarSesion" validate="false">
             <forward name="success" path="/Login.jsp"/>
         </action>
