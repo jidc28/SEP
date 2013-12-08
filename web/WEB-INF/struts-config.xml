@@ -123,6 +123,14 @@
             <forward name="failure" path="consultaCoordinacion"/>
         </action>
         
+        <action input="/VistaCoordinacion.jsp" name="Departamentos" path="/listarDepartamentos" scope="request" type="Actions.Departamento.ConsultaDepartamentoA" validate="false">
+            <forward name="success" path="consultaDepartamentoCoordinacion"/>
+        </action>
+        <action input="/ConsultaDepartamento.jsp" name="Materia" path="/listarMateriasDepto" scope="request" type="Actions.Materia.ConsultaMateria" validate="false">
+            <forward name="success" path="consultaDepartamentoCoordinacion"/>
+        </action>
+        
+        
         <!--     DEPARTAMENTOS      --> 
         
         <action input="/ConsultaDepartamentoDecanato.jsp" name="Departamento" path="/ocultarDepartamento" scope="request" type="Actions.Departamento.ocultarDepartamento" validate="false">

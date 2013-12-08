@@ -263,6 +263,25 @@ public class DBMS {
         }
         return nucleos;
     }
+    
+    public ArrayList<Departamento> listarDepartamentos() {
+
+        ArrayList<Departamento> dptos = new ArrayList<Departamento>(0);
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT * FROM DEPARTAMENTO ORDER BY CODIGO");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Departamento u = new Departamento();
+                u.setCodigo(rs.getString("codigo"));
+                u.setNombre(rs.getString("nombre"));
+                dptos.add(u);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return dptos;
+    }
 
     public Profesor obtenerInfoProfesor(String usbid) {
 

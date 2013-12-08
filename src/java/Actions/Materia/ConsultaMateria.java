@@ -5,7 +5,7 @@
 package Actions.Materia;
 
 import DBMS.DBMS;
-import Clases.Materia;
+import Clases.*;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,9 +39,19 @@ public class ConsultaMateria extends org.apache.struts.action.Action {
             throws Exception {
         
         HttpSession session = request.getSession(true);
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
         String id_decanato = (String) session.getAttribute("usbid");
+        ArrayList<Materia> materias = null;
         //obtengo una lista de decanatos registrados
-        ArrayList<Materia> materias = DBMS.getInstance().listarMateriasOfertadas(id_decanato);
+        if (tipousuario.equals("decanato")) {
+            materias = DBMS.getInstance().listarMateriasOfertadas(id_decanato);
+        } else if (tipousuario.equals("coordinacion")) {
+            String id_dpto = (String) session.getAttribute("codigo");
+            materias = DBMS.getInstance().listarMateriasOfertadas(id_dpto);
+        }
+            
+        
 
         //si existen decanatos registrados
 

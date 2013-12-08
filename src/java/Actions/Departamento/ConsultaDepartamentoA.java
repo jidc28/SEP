@@ -38,24 +38,20 @@ public class ConsultaDepartamentoA extends org.apache.struts.action.Action {
             throws Exception {
         
         HttpSession session = request.getSession(true);
-        ArrayList<Departamento> [] departamentos = null;
+        ArrayList<Departamento> departamentos = null;
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         String tipousuario = usuario.getTipousuario();
         //obtengo una lista de departamentos registrados
         if (tipousuario.equals("administrador")){
-            Decanato d = (Decanato) form;
-            departamentos = DBMS.getInstance().listarDepartamentosDecanato(d.getCodigo());
-            d = DBMS.getInstance().obtenerNombreDecanato(d);
-            session.setAttribute("decanato_actual",d);
         } else if (tipousuario.equals("decanato")){
-            departamentos = DBMS.getInstance().listarDepartamentosDecanato(usuario.getUsbid());
+        } else if (tipousuario.equals("coordinacion")){
+            departamentos = DBMS.getInstance().listarDepartamentos();
         }
 
         //si existen departamentos registrados
 
             //retorno a pagina de exito
-         session.setAttribute("departamentos_visibles", departamentos[0]);
-         session.setAttribute("departamentos_ocultos", departamentos[1]);
+         session.setAttribute("departamentos", departamentos);
          return mapping.findForward(SUCCESS);
     }
 }
