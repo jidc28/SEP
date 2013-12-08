@@ -19,8 +19,17 @@ import org.apache.struts.action.ActionMessage;
 public class Materia extends org.apache.struts.action.ActionForm {
     
     private String codigo;
+    private String viejoCodigo;
     private String nombre;
     private String estado;
+    
+    public String getViejoCodigo() {
+        return viejoCodigo;
+    }
+
+    public void setViejoCodigo(String viejoCodigo) {
+        this.viejoCodigo = viejoCodigo;
+    }
 
     public String getCodigo() {
         return codigo;

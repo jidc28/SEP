@@ -263,7 +263,7 @@ public class DBMS {
         }
         return nucleos;
     }
-    
+
     public ArrayList<Departamento> listarDepartamentos() {
 
         ArrayList<Departamento> dptos = new ArrayList<Departamento>(0);
@@ -929,13 +929,13 @@ public class DBMS {
                 m.setEstado(rs.getString("estado"));
                 materias.add(m);
             }
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return materias;
     }
-    
+
     public ArrayList<Profesor> listarProfesoresDepartamento(String id_departamento) {
 
         ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
@@ -951,14 +951,14 @@ public class DBMS {
                 p.setApellido(rs.getString("apellido"));
                 profesores.add(p);
             }
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return profesores;
     }
-    
-    public void enviarMemoEvaluarProfesor(String usbid_prof){
+
+    public void enviarMemoEvaluarProfesor(String usbid_prof) {
         PreparedStatement ps = null;
         PreparedStatement ps2 = null;
         try {
@@ -970,18 +970,18 @@ public class DBMS {
                 String profesor = rs.getString("usbid_profesor");
                 String coordinacion = rs.getString("codigo_coordinacion");
                 ps2 = conexion.prepareStatement("INSERT INTO evaluar VALUES (?,?,?);");
-                ps2.setString(1,coordinacion);
-                ps2.setString(2,profesor);
-                ps2.setString(3,materia);
+                ps2.setString(1, coordinacion);
+                ps2.setString(2, profesor);
+                ps2.setString(3, materia);
                 ps2.executeUpdate();
             }
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
-    
-    public void enviarMemoEvaluar(String id_departamento){
+
+    public void enviarMemoEvaluar(String id_departamento) {
         PreparedStatement ps = null;
         PreparedStatement ps2 = null;
         try {
@@ -992,9 +992,69 @@ public class DBMS {
                 String profesor = rs.getString("usbid_profesor");
                 enviarMemoEvaluarProfesor(profesor);
             }
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public boolean eliminarMateria(String id_materia) {
+        PreparedStatement ps = null;
+
+        try {
+            ps = conexion.prepareStatement("DELETE FROM MATERIA WHERE (codigo = ?);");
+            ps.setString(1, id_materia);
+
+            Integer i = ps.executeUpdate();
+
+            return i > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean modificarMateria(Materia materia) {
+        PreparedStatement ps = null;
+
+        try {
+            ps = conexion.prepareStatement("UPDATE MATERIA SET codigo = ?, nombre = ? WHERE ( codigo = ? );");
+            ps.setString(1, materia.getViejoCodigo());
+            ps.setString(2, materia.getNombre());
+            ps.setString(3, materia.getViejoCodigo());
+
+            Integer i = ps.executeUpdate();
+
+            return i > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public Materia obtenerDatosMateria(Materia materia) {
+        PreparedStatement ps = null;
+
+        try {
+            ps = conexion.prepareStatement("SELECT * FROM MATERIA WHERE codigo = ?;");
+            ps.setString(1, materia.getCodigo());
+
+            ResultSet rs = ps.executeQuery();
+            Materia m = null;
+            
+            while (rs.next()) {
+                m = new Materia();
+                m.setCodigo(rs.getString("codigo"));
+                m.setNombre(rs.getString("nombre"));
+            }
+            
+            return m;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 }

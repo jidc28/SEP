@@ -26,17 +26,11 @@
 
         <h4>Registro de Materias</h4>
 
-        <html:form action="/registrarCoordinacion" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
+        <html:form action="/modificaMateria" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
             <table border="0" style="margin-top: 50px;">
                 <tbody>
                     <tr style="height: 35px;">
                         <td style="color: black" colspan="7">Codigo de la Materia</td>
-                        <!--<td>
-                        <html:text name="Coordinacion" property="codigo" maxlength="10" value="" errorStyleClass="error"
-                                   style="margin-bottom: 0px;height: 30px;"
-                                   errorKey="org.apache.struts.action.ERROR"></html:text>
-
-                        </td>-->
                     </tr>
                     <tr>
                         <td style="padding-bottom: 55px; padding-left: 5px;">
@@ -119,13 +113,7 @@
                     </tr>
                     <tr  style="height: 35px;">
                         <td colspan="7">
-                            <html:text property="nombre" name="Coordinacion" style="width: 100%; height: 100%;" maxlength="50" errorKey="org.apache.struts.action.ERROR"/>
-                            <!--
-                            <html:textarea name="Coordinacion" property="nombre" errorStyleClass="error"
-                                           rows="5"
-                                           style="margin-bottom: 0px;"
-                                           errorKey="org.apache.struts.action.ERROR"/>
-                            -->
+                            <html:text property="nombre" name="materia" style="width: 100%; height: 100%;" maxlength="50" errorKey="org.apache.struts.action.ERROR"/>
                         </td>
                     </tr>
                     <tr>
@@ -140,9 +128,10 @@
                 </tbody>
             </table>
             <p style="text-align: center; margin-top: 10px;">
-                <button class="btn btn-success" disabled="disables">
-                    Agregar
-                </button>
+                <html:hidden name="materia" property="viejoCodigo"/>
+                <html:submit styleClass="btn btn-success">
+                    Modificar
+                </html:submit>
                 <html:reset styleClass="btn btn-default" value="Limpiar"/>
             </p>
         </html:form>

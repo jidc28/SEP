@@ -18,7 +18,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author admin
  */
-public class ConsultaMateria extends org.apache.struts.action.Action {
+public class ModificaMateria extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -37,26 +37,25 @@ public class ConsultaMateria extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
+
         HttpSession session = request.getSession(true);
-        Usuario usuario = (Usuario) session.getAttribute("usuario");
-        String tipousuario = usuario.getTipousuario();
+        Materia materia = (Materia) form;
+
+        boolean modificada = false;
+
         String id_departamento = (String) session.getAttribute("usbid");
         ArrayList<Materia> materias = null;
-        //obtengo una lista de decanatos registrados
-        if (tipousuario.equals("departamento")) {
-            materias = DBMS.getInstance().listarMateriasOfertadas(id_departamento);
-        } else if (tipousuario.equals("coordinacion")) {
-            String id_dpto = (String) session.getAttribute("codigo");
-            materias = DBMS.getInstance().listarMateriasOfertadas(id_dpto);
-        }
-            
+
+        modificada = DBMS.getInstance().modificarMateria(materia);
         
+        if (modificada) {
+            request.setAttribute("materia_modificada", SUCCESS);
+        } else {
+            request.setAttribute("materia_no_modificada", SUCCESS);
+        }
+        materias = DBMS.getInstance().listarMateriasOfertadas(id_departamento);
 
-        //si existen decanatos registrados
-
-            //retorno a pagina de exito
-            session.setAttribute("materias", materias);
-            return mapping.findForward(SUCCESS);
+        request.setAttribute("materias", materias);
+        return mapping.findForward(SUCCESS);
     }
 }
