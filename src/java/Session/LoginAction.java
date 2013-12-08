@@ -90,6 +90,11 @@ public class LoginAction extends org.apache.struts.action.Action {
                 } else if (tmp.getTipousuario().equals("coordinacion")) {
                     session.setAttribute("usuario", tmp);
                     session.setAttribute("usbid", tmp.getUsbid());
+                    int evaluaciones_pendientes = DBMS.getInstance().contarEvaluacionesPendientes(tmp.getUsbid());
+                    System.out.println(evaluaciones_pendientes);
+                    if (evaluaciones_pendientes != 0) {
+                        request.setAttribute("evaluaciones_pendientes",evaluaciones_pendientes);
+                    }
                     return mapping.findForward(COORDINACION);
                 } else {
                     return mapping.findForward(FAILURE);
