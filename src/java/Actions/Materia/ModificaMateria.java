@@ -47,8 +47,9 @@ public class ModificaMateria extends org.apache.struts.action.Action {
         ArrayList<Materia> materias = null;
 
         modificada = DBMS.getInstance().modificarMateria(materia);
+        
         if (modificada) {
-            request.setAttribute("materia_modficada", SUCCESS);
+            request.setAttribute("materia_modificada", SUCCESS);
         } else {
             request.setAttribute("materia_no_modificada", SUCCESS);
         }
