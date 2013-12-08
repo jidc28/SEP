@@ -22,25 +22,10 @@
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
         <title>Gestion de Planillas de Evaluacion</title>
-    </head>
     <body>
 
         <div class="panel-group" id="accordion">
-            
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                            Gestión de Departamentos
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <a> TEXTO </a>
-                    </div>
-                </div>
-            </div>
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
@@ -58,7 +43,21 @@
                             <h5 align ="center">Consultar Decanato</h5>
                         </html:link>
                     </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                            Gestión de Departamentos
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <a> TEXTO </a>
                     </div>
+                </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">

@@ -73,6 +73,7 @@
             <forward name="administrador" path="vistaAdmin"/>
             <forward name="decanato" path="vistaDecanato"/>
             <forward name="departamento" path="vistaDepartamento"/>
+            <forward name="coordinacion" path="vistaCoordinacion"/>
             <forward name="failure" path="/Login.jsp"/>
         </action>
         

@@ -195,4 +195,13 @@
         <put name="body" value="/JSP/departamento/Materias/AgregaMateria.jsp"/>
     </definition>
     
+    <!-- COORDINACION -->
+    <definition name="baseCoordinacion" extends="base"> <!-- BASE PARA COORDINACION -->
+        <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDecanato.jsp"/>
+    </definition>
+    
+    <definition name="vistaCoordinacion" extends="baseCoordinacion">
+        <put name="body" value="/JSP/coordinacion/VistaCoordinacion.jsp"/>
+    </definition>
+    
 </tiles-definitions>
