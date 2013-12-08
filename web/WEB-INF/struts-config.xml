@@ -152,7 +152,24 @@
             <forward name="failure" path="consultaMateria"/>
         </action>
         
-        <action input="/VistaDepartamento.jsp" name="MultiBox" path="/consultaProfesor" scope="request" type="Actions.Profesor.ConsultaProfesor" validate="false">
+        <action input="/VistaDepartamento.jsp" name="Departamento" path="/consultaProfesor" scope="request" type="Actions.Profesor.ConsultaProfesor" validate="false">
+            <forward name="success" path="consultaProfesor"/>
+            <forward name="failure" path="consultaProfesor"/>
+        </action>
+        
+        <action path="/vistaAgregaMateria"
+            type="org.apache.struts.actions.ForwardAction"
+            scope="request"
+            validate="false"
+            parameter="agregaMateria">
+        </action>
+        
+        <action input="/ConsultarProfesor.jsp" name="Profesor" path="/enviarMemoEvaluarProfesor" scope="request" type="Actions.Profesor.EnviarMemoEvaluarProfesor" validate="false">
+            <forward name="success" path="consultaProfesor"/>
+            <forward name="failure" path="consultaProfesor"/>
+        </action>
+        
+        <action input="/ConsultarProfesor.jsp" name="Profesor" path="/enviarMemoEvaluar" scope="request" type="Actions.Profesor.EnviarMemoEvaluar" validate="false">
             <forward name="success" path="consultaProfesor"/>
             <forward name="failure" path="consultaProfesor"/>
         </action>

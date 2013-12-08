@@ -191,4 +191,8 @@
         <put name="body" value="/JSP/departamento/Profesores/ConsultaProfesor.jsp"/>
     </definition>
     
+    <definition name="agregaMateria" extends="baseDepartamento"> <!-- Consulta Materias -->
+        <put name="body" value="/JSP/departamento/Materias/AgregaMateria.jsp"/>
+    </definition>
+    
 </tiles-definitions>

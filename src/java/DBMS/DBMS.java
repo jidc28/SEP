@@ -274,8 +274,6 @@ public class DBMS {
 
             ResultSet rs = ps.executeQuery();
 
-
-
             while (rs.next()) {
                 u.setUsbid(rs.getString("usbid"));
                 u.setNombre(rs.getString("nombre"));
@@ -939,5 +937,45 @@ public class DBMS {
             ex.printStackTrace();
         }
         return profesores;
+    }
+    
+    public void enviarMemoEvaluarProfesor(String usbid_prof){
+        PreparedStatement ps = null;
+        PreparedStatement ps2 = null;
+        try {
+            ps = conexion.prepareStatement("SELECT dicta.codigo_materia, usbid_profesor, codigo_coordinacion FROM dicta, maneja WHERE usbid_profesor = ? AND dicta.codigo_materia = maneja.codigo_materia;");
+            ps.setString(1, usbid_prof);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String materia = rs.getString("codigo_materia");
+                String profesor = rs.getString("usbid_profesor");
+                String coordinacion = rs.getString("codigo_coordinacion");
+                ps2 = conexion.prepareStatement("INSERT INTO evaluar VALUES (?,?,?);");
+                ps2.setString(1,coordinacion);
+                ps2.setString(2,profesor);
+                ps2.setString(3,materia);
+                ps2.executeUpdate();
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void enviarMemoEvaluar(String id_departamento){
+        PreparedStatement ps = null;
+        PreparedStatement ps2 = null;
+        try {
+            ps = conexion.prepareStatement("SELECT usbid_profesor FROM pertenece WHERE codigo_departamento = ?;");
+            ps.setString(1, id_departamento);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String profesor = rs.getString("usbid_profesor");
+                enviarMemoEvaluarProfesor(profesor);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }

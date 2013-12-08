@@ -35,7 +35,7 @@
                 </div>
                 <div id="collapseMaterias" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <html:link href="#">
+                        <html:link action="/vistaAgregaMateria">
                             <h5 align ="center">Agregar Materia</h5>
                         </html:link>
                         <html:link action="/consultaMateria">

@@ -52,37 +52,36 @@
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
-        <logic:present name="success">
+        <logic:present name="enviado_memo_profesor">
             <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
-                Decanato registrado exitosamente.
+                Se ha enviado la solicitud para evaluar a 
+                <bean:write name="enviado_memo_profesor" property="nombre"/>
+                <bean:write name="enviado_memo_profesor" property="apellido"/>
             </div>
         </logic:present>
-        <logic:present name="modificacion">
+
+        <logic:present name="enviado_memo">
             <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
-                Decanato modificado exitosamente.
-            </div>
-        </logic:present>
-        <logic:present name="falla">
-            <div class="alert alert-danger" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
-                Decanato no fue modificado exitosamente.
+                Se ha enviado la solicitud para evaluar a los profesores.
             </div>
         </logic:present>
 
         <h4> Evaluar Profesores:</h4>
 
         <div style="margin-top: 20px;">
+            <html:form action="/enviarMemoEvaluar" style="margin-bottom: 0px;">
                 Si desea evaluar todos los profesores seleccione: 
-                <button type="button" class="btn btn-info" disabled="disabled">
+                <html:submit styleClass="btn btn-primary">
                     Evaluar Profesores
-                </button>
-                <br>
-                <br>
-                Si desea evaluar uno en particular seleccione: 
-                <button type="button" class="btn btn-success"
-                        style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
-                    Evaluar
-                </button>
-                en el profesor que le interesa evaluar en la siguente lista:
+                </html:submit>
+            </html:form>
+            <br>
+            Si desea evaluar uno en particular seleccione: 
+            <button type="button" class="btn btn-success"
+                    style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                Evaluar
+            </button>
+            en el profesor que le interesa evaluar en la siguente lista:
         </div>
         <div class="table-responsive">
             <table border="0" style="width: 98%;" class="table table-striped">
@@ -103,6 +102,11 @@
                     Evaluar
                 </center>
                 </th>
+                <th>
+                <center>
+                    Evaluacion
+                </center>
+                </th>
                 </tr>
                 </thead>
                 <logic:iterate name="profesores" id="Prof">
@@ -115,9 +119,18 @@
                             <bean:write name="Prof" property="apellido"/>
                         </td>
                         <td align="center">
-                            <button type="button" class="btn btn-success" disabled="disabled"
+                            <html:form action="/enviarMemoEvaluarProfesor">
+                                <html:hidden name="Prof" property="usbid"/>
+                                <html:submit styleClass="btn btn-success" 
+                                             style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                                    Evaluar
+                                </html:submit>
+                            </html:form>
+                        </td>
+                        <td align="center">
+                            <button type="button" class="btn btn-info" disabled="disabled"
                                     style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
-                                Evaluar
+                                Ver evaluacion
                             </button>
                         </td>
                     </tr>
