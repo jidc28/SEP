@@ -150,7 +150,7 @@
     <!-- DECANATO -->
     
     <definition name="baseDecanato" extends="base"> <!-- BASE PARA DECANATO -->
-    <!-- No estoy segura de si hay que modificar el sidebar izquierdo -->
+        <!-- No estoy segura de si hay que modificar el sidebar izquierdo -->
         <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDecanato.jsp"/>
     </definition>
     
@@ -193,6 +193,10 @@
     
     <definition name="agregaMateria" extends="baseDepartamento"> <!-- Consulta Materias -->
         <put name="body" value="/JSP/departamento/Materias/AgregaMateria.jsp"/>
+    </definition>
+    
+    <definition name="modificaMateria" extends="baseDepartamento"> <!-- Consulta Materias -->
+        <put name="body" value="/JSP/departamento/Materias/ModificaMateria.jsp"/>
     </definition>
     
     <!-- COORDINACION -->

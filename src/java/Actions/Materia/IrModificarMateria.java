@@ -18,7 +18,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author admin
  */
-public class ConsultaMateria extends org.apache.struts.action.Action {
+public class IrModificarMateria extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -37,26 +37,14 @@ public class ConsultaMateria extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
+
         HttpSession session = request.getSession(true);
-        Usuario usuario = (Usuario) session.getAttribute("usuario");
-        String tipousuario = usuario.getTipousuario();
-        String id_departamento = (String) session.getAttribute("usbid");
-        ArrayList<Materia> materias = null;
-        //obtengo una lista de decanatos registrados
-        if (tipousuario.equals("departamento")) {
-            materias = DBMS.getInstance().listarMateriasOfertadas(id_departamento);
-        } else if (tipousuario.equals("coordinacion")) {
-            String id_dpto = (String) session.getAttribute("codigo");
-            materias = DBMS.getInstance().listarMateriasOfertadas(id_dpto);
-        }
-            
+        Materia materia = (Materia) form;
+
+        materia = DBMS.getInstance().obtenerDatosMateria(materia);
+        materia.setViejoCodigo(materia.getCodigo());
         
-
-        //si existen decanatos registrados
-
-            //retorno a pagina de exito
-            session.setAttribute("materias", materias);
-            return mapping.findForward(SUCCESS);
+        request.setAttribute("materia",materia);
+        return mapping.findForward(SUCCESS);
     }
 }

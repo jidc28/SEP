@@ -183,6 +183,18 @@
             <forward name="failure" path="consultaProfesor"/>
         </action>
         
+        <action input="/ConsultaMateria.jsp" name="Materia" path="/eliminaMateria" scope="request" type="Actions.Materia.EliminaMateria" validate="false">
+            <forward name="success" path="consultaMateria"/>
+        </action>
+
+        <action input="/ConsultaMateria.jsp" name="Materia" path="/irModificarMateria" scope="request" type="Actions.Materia.IrModificarMateria" validate="false">
+            <forward name="success" path="modificaMateria"/>
+        </action>
+
+        <action input="/ConsultaMateria.jsp" name="Materia" path="/modificaMateria" scope="request" type="Actions.Materia.ModificaMateria" validate="false">
+            <forward name="success" path="consultaMateria"/>
+        </action>
+                
         <!--         OTROS       -->               
         <action scope="request" input="/" path="/cerrarSesion" type="Session.CerrarSesion" validate="false">
             <forward name="success" path="/Login.jsp"/>

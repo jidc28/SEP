@@ -45,8 +45,8 @@
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
-<!--        <link rel="stylesheet" type="text/css" href="css/css/bootstrap-theme.css">
-        <link rel="stylesheet" type="text/css" href="css/css/bootstrap-theme.min.css"> -->
+        <!--        <link rel="stylesheet" type="text/css" href="css/css/bootstrap-theme.css">
+                <link rel="stylesheet" type="text/css" href="css/css/bootstrap-theme.min.css"> -->
         <title>Gestion de Materias</title>
     </head>
     <body>
@@ -57,44 +57,44 @@
                 Decanato registrado exitosamente.
             </div>
         </logic:present>
-        <logic:present name="modificacion">
+        <logic:present name="materia_eliminada">
             <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
-                Decanato modificado exitosamente.
+                La materia fue eliminada exitosamente.
             </div>
         </logic:present>
-        <logic:present name="falla">
+        <logic:present name="materia_no_eliminada">
             <div class="alert alert-danger" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
-                Decanato no fue modificado exitosamente.
+                La materia no pudo ser eliminada, intentelo mas tarde.
             </div>
         </logic:present>
-        
+
         <h4> Lista de Materias en el sistema:</h4>
-        
+
         <div class="table-responsive">
             <table border="0" style="width: 98%;" class="table table-striped">
                 <thead>
                     <tr>
                         <th>
-                            <center>
-                                Codigo
-                            </center>
-                        </th>
-                        <th width="38%">
-                            <center>
-                                Nombre Materia
-                            </center>
-                        </th>
-                        <th>
-                            <center>
-                                Modificar
-                            </center>
-                        </th>
-                        <th>
-                            <center>
-                                Eliminar
-                            </center>
-                        </th>
-                    </tr>
+                <center>
+                    Codigo
+                </center>
+                </th>
+                <th width="38%">
+                <center>
+                    Nombre Materia
+                </center>
+                </th>
+                <th>
+                <center>
+                    Modificar
+                </center>
+                </th>
+                <th>
+                <center>
+                    Eliminar
+                </center>
+                </th>
+                </tr>
                 </thead>
                 <logic:iterate name="materias" id="Mat">
                     <tr>
@@ -105,16 +105,22 @@
                             <bean:write name="Mat" property="nombre"/>
                         </td>
                         <td align="center">
-                            <button type="button" class="btn btn-info" disabled="disabled"
-                                    style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
-                                Modificar
-                            </button>
+                            <html:form action="/irModificarMateria">
+                                <html:hidden name="Mat" property="codigo"/>
+                                <html:submit styleClass="btn btn-info"
+                                             style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                                    Modificar
+                                </html:submit>
+                            </html:form>
                         </td>
                         <td align="center">
-                            <button type="button" class="btn btn-danger" disabled="disabled"
-                                    style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
-                                Eliminar
-                            </button>
+                            <html:form action="/eliminaMateria">
+                                <html:hidden name="Mat" property="codigo"/>
+                                <html:submit styleClass="btn btn-danger"
+                                             style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                                    Eliminar
+                                </html:submit>
+                            </html:form>
                         </td>
                     </tr>
                 </logic:iterate>
