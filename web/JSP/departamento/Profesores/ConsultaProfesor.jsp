@@ -36,6 +36,9 @@
     window.onload = function() {
         altRows('alternatecolor');
     }
+    $(function () {
+        $('#todos').tooltip();
+    });
 </script>
 
 <!DOCTYPE html>
@@ -68,20 +71,13 @@
 
         <h4> Evaluar Profesores:</h4>
 
-        <div style="margin-top: 20px;">
-            <html:form action="/enviarMemoEvaluar" style="margin-bottom: 0px;">
-                Si desea evaluar todos los profesores seleccione: 
-                <html:submit styleClass="btn btn-primary">
-                    Evaluar Profesores
-                </html:submit>
-            </html:form>
+        <div style="margin-top: 20px;" align="center">
+                <button id="todos" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Evaluar a todos los profesores del departamento" >
+                    <html:link action="/enviarMemoEvaluar" style="text-decoration:none; color: #FFFFFF">
+                        Evaluar Profesores
+                    </html:link>
+                </button>
             <br>
-            Si desea evaluar uno en particular seleccione: 
-            <button type="button" class="btn btn-success"
-                    style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
-                Evaluar
-            </button>
-            en el profesor que le interesa evaluar en la siguente lista:
         </div>
         <div class="table-responsive">
             <table border="0" style="width: 98%;" class="table table-striped">
