@@ -1057,4 +1057,21 @@ public class DBMS {
         }
         return null;
     }
+    
+    public boolean vincularMateriaCoordinacion(String cod_coord, String cod_materia) {
+        PreparedStatement ps = null;
+
+        try {
+            ps = conexion.prepareStatement("INSERT INTO maneja VALUES (?,?)");
+            ps.setString(1, cod_coord);
+            ps.setString(2, cod_materia);
+            Integer i = ps.executeUpdate();
+
+            return i > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }    
 }
