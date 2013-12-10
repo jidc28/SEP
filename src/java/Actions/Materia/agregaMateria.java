@@ -47,6 +47,10 @@ public class agregaMateria extends org.apache.struts.action.Action {
             Materia m = (Materia) form;
             boolean vincular = DBMS.getInstance().vincularMateriaCoordinacion(usuario.getUsbid(),m.getCodigo());
             if (vincular) {
+                request.setAttribute("vinculado", SUCCESS);
+                session.removeAttribute("dpto_seleccionado");
+                ArrayList<Materia> materias = DBMS.getInstance().listarMateriasCoordinacion(usuario.getUsbid());
+                request.setAttribute("materias", materias);
                 return mapping.findForward(SUCCESS);
             }
         }

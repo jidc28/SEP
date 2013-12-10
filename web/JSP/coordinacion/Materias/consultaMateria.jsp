@@ -54,47 +54,89 @@
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
-        <h4> Lista de Materias del 
+        <h4> Lista de Materias  
             <logic:present name="dpto_seleccionado">
-                <bean:write name="dpto_seleccionado" property="nombre"/>:
+                del <bean:write name="dpto_seleccionado" property="nombre"/>:
             </logic:present>
+            <logic:notPresent name="dpto_seleccionado">
+                Vinculadas
+            </logic:notPresent>
         </h4>
         <div class="table-responsive">
             <table border="0" style="margin: auto" class="table-striped">
-                <thead>
-                    <tr>
-                        <th>
-                <center>Codigo</center>
-                </th>
-                <th width="30%">
-                <center>Nombre de la Materia</center>
-                </th>
-                <th>
-                <center>Vincular</center>
-                </th>
-                </thead>
-                <tbody>
-                    <logic:iterate name="materias" id="mat">
+                
+                <logic:notPresent name="vinculado">
+                    <thead>
                         <tr>
-                            <td width="20%" align="center">
-                                <bean:write name="mat" property="codigo"/>
-                            </td>
-                            <td width="20%" align="center">
-                                <bean:write name="mat" property="nombre"/>
-                            </td>
-                            <td>
-                                <html:form action="/vincularMateriaCoordinacion" onsubmit="return(this)" style="margin: 0px;">
-                                    <html:hidden name="mat" property="codigo" />
-                                    <center>
-                                        <html:submit styleClass="btn btn-default" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;">
-                                            Vincular
-                                        </html:submit>
-                                    </center>
-                              </html:form>
-                            </td>
-                        </tr>
-                    </logic:iterate>
-                </tbody>
+                            <th>
+                    <center>Codigo</center>
+                    </th>
+                    <th width="30%">
+                    <center>Nombre de la Materia</center>
+                    </th>
+                    <th>
+                    <center>Vincular</center>
+                    </th>
+                    </thead>
+                    <tbody>
+                        <logic:iterate name="materias" id="mat">
+                            <tr>
+                                <td width="20%" align="center">
+                                    <bean:write name="mat" property="codigo"/>
+                                </td>
+                                <td width="20%" align="center">
+                                    <bean:write name="mat" property="nombre"/>
+                                </td>
+                                <td>
+                                    <html:form action="/vincularMateriaCoordinacion" onsubmit="return(this)" style="margin: 0px;">
+                                        <html:hidden name="mat" property="codigo" />
+                                        <center>
+                                            <html:submit styleClass="btn btn-default" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                                Vincular
+                                            </html:submit>
+                                        </center>
+                                  </html:form>
+                                </td>
+                            </tr>
+                        </logic:iterate>
+                    </tbody>
+                </logic:notPresent>
+                <logic:present name="vinculado">
+                    <thead>
+                        <tr>
+                            <th>
+                    <center>Codigo</center>
+                    </th>
+                    <th width="30%">
+                    <center>Nombre de la Materia</center>
+                    </th>
+                    <th>
+                    <center>Desvincular</center>
+                    </th>
+                    </thead>
+                    <tbody>
+                        <logic:iterate name="materias" id="mat">
+                            <tr>
+                                <td width="20%" align="center">
+                                    <bean:write name="mat" property="codigo"/>
+                                </td>
+                                <td width="20%" align="center">
+                                    <bean:write name="mat" property="nombre"/>
+                                </td>
+                                <td>
+                                    <html:form action="/vincularMateriaCoordinacion" onsubmit="return(this)" style="margin: 0px;">
+                                        <html:hidden name="mat" property="codigo" />
+                                        <center>
+                                            <html:submit styleClass="btn btn-default" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                                Desvincular
+                                            </html:submit>
+                                        </center>
+                                  </html:form>
+                                </td>
+                            </tr>
+                        </logic:iterate>
+                    </tbody>
+                </logic:present>
             </table>
         </div>
     </body>
