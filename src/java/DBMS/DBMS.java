@@ -1014,7 +1014,7 @@ public class DBMS {
         }
         return false;
     }
-    
+
     public boolean modificarMateria(Materia materia) {
         PreparedStatement ps = null;
 
@@ -1033,7 +1033,7 @@ public class DBMS {
         }
         return false;
     }
-    
+
     public Materia obtenerDatosMateria(Materia materia) {
         PreparedStatement ps = null;
 
@@ -1043,13 +1043,13 @@ public class DBMS {
 
             ResultSet rs = ps.executeQuery();
             Materia m = null;
-            
+
             while (rs.next()) {
                 m = new Materia();
                 m.setCodigo(rs.getString("codigo"));
                 m.setNombre(rs.getString("nombre"));
             }
-            
+
             return m;
 
         } catch (SQLException ex) {
@@ -1068,10 +1068,26 @@ public class DBMS {
             Integer i = ps.executeUpdate();
 
             return i > 0;
-
-        } catch (SQLException ex) {
+        }catch (SQLException ex) {
             ex.printStackTrace();
         }
         return false;
     }    
+
+    public int contarEvaluacionesPendientes(String id_coordinacion) {
+
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT Count(usbid_profesor) FROM evaluar WHERE codigo_coordinacion = ?;");
+            ps.setString(1, id_coordinacion);
+
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            return Integer.parseInt(rs.getString("count"));
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
 }
