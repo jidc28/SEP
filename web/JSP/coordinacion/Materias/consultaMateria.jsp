@@ -50,11 +50,15 @@
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
         <!--        <link rel="stylesheet" type="text/css" href="css/css/bootstrap-theme.css">
                 <link rel="stylesheet" type="text/css" href="css/css/bootstrap-theme.min.css"> -->
-        <title>Gestion de Departamentos</title>
+        <title>Gestion de Materias</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
-        <h4> Lista de Departamentos </h4>
+        <h4> Lista de Materias del 
+            <logic:present name="dpto_seleccionado">
+                <bean:write name="dpto_seleccionado" property="nombre"/>:
+            </logic:present>
+        </h4>
         <div class="table-responsive">
             <table border="0" style="margin: auto" class="table-striped">
                 <thead>
@@ -62,29 +66,28 @@
                         <th>
                 <center>Codigo</center>
                 </th>
-                <th width='30%'>
-                <center>Nombre Departamento</center>
+                <th width="30%">
+                <center>Nombre de la Materia</center>
                 </th>
                 <th>
-                <center>Materias</center>
+                <center>Vincular</center>
                 </th>
                 </thead>
                 <tbody>
-                    <logic:iterate name="departamentos" id="dep">
+                    <logic:iterate name="materias" id="mat">
                         <tr>
                             <td width="20%" align="center">
-                                <bean:write name="dep" property="codigo"/>
+                                <bean:write name="mat" property="codigo"/>
                             </td>
                             <td width="20%" align="center">
-                                <bean:write name="dep" property="nombre"/>
+                                <bean:write name="mat" property="nombre"/>
                             </td>
                             <td>
-                                <html:form action="/listarMateriasDepto" onsubmit="return(this)" style="margin: 0px;">
-                                    <html:hidden name="dep" property="codigo" />
-                                    <html:hidden name="dep" property="nombre" />
+                                <html:form action="/vincularMateriaCoordinacion" onsubmit="return(this)" style="margin: 0px;">
+                                    <html:hidden name="mat" property="codigo" />
                                     <center>
                                         <html:submit styleClass="btn btn-default" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;">
-                                            Listar
+                                            Vincular
                                         </html:submit>
                                     </center>
                               </html:form>

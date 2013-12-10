@@ -212,4 +212,8 @@
         <put name="body" value="/JSP/coordinacion/Departamentos/consultaDepartamento.jsp"/>
     </definition>
     
+    <definition name="consultaMateriasDepartamento" extends="baseCoordinacion">
+        <put name="body" value="/JSP/coordinacion/Materias/consultaMateria.jsp"/>
+    </definition>
+    
 </tiles-definitions>

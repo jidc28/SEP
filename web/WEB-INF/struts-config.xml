@@ -126,10 +126,12 @@
         <action input="/VistaCoordinacion.jsp" name="Departamentos" path="/listarDepartamentos" scope="request" type="Actions.Departamento.ConsultaDepartamentoA" validate="false">
             <forward name="success" path="consultaDepartamentoCoordinacion"/>
         </action>
-        <action input="/ConsultaDepartamento.jsp" name="Materia" path="/listarMateriasDepto" scope="request" type="Actions.Materia.ConsultaMateria" validate="false">
-            <forward name="success" path="consultaDepartamentoCoordinacion"/>
+        <action input="/ConsultaDepartamento.jsp" name="Departamento" path="/listarMateriasDepto" scope="request" type="Actions.Materia.ConsultaMateria" validate="false">
+            <forward name="success" path="consultaMateriasDepartamento"/>
         </action>
-        
+        <action input="/ConsultaDepartamento.jsp" name="Materia" path="/vincularMateriaCoordinacion" scope="request" type="Actions.Materia.agregarMateria" validate="false">
+            <forward name="success" path="vistaCoordinacion"/>
+        </action>
         
         <!--     DEPARTAMENTOS      --> 
         
