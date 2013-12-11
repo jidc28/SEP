@@ -16,13 +16,12 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author smaf
+ * @author admin
  */
-public class agregaMateria extends org.apache.struts.action.Action {
+public class ConsultaMateriasCoordinacion extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
-    private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -41,26 +40,13 @@ public class agregaMateria extends org.apache.struts.action.Action {
         
         HttpSession session = request.getSession(true);
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-        String tipousuario = usuario.getTipousuario();
+        ArrayList<Materia> materias = null;
         
-        if (tipousuario.equals("coordinacion")){
-            Materia m = (Materia) form;
-            boolean vincular = DBMS.getInstance().vincularMateriaCoordinacion(usuario.getUsbid(),m.getCodigo());
-            ArrayList<Materia> materias = DBMS.getInstance().listarMateriasCoordinacion(usuario.getUsbid());
-            if (vincular) {
-                session.removeAttribute("dpto_seleccionado");
-                request.setAttribute("materias", materias);
-                request.setAttribute("materias_vinculadas", SUCCESS);
-                request.setAttribute("materia_vinculada", SUCCESS);
-                return mapping.findForward(SUCCESS);
-            } else {
-                request.setAttribute("materias", materias);
-                request.setAttribute("materias_vinculadas", SUCCESS);
-                request.setAttribute("materia_falla_vinculado", FAILURE);
-                return mapping.findForward(FAILURE);
-            }
-        }
         
-        return mapping.findForward(FAILURE);
+        materias = DBMS.getInstance().listarMateriasCoordinacion(usuario.getUsbid());
+
+        request.setAttribute("materias_vinculadas",SUCCESS);
+        session.setAttribute("materias", materias);
+        return mapping.findForward(SUCCESS);
     }
 }

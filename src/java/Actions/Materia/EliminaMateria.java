@@ -22,6 +22,7 @@ public class EliminaMateria extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
+    private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -53,15 +54,21 @@ public class EliminaMateria extends org.apache.struts.action.Action {
             if (eliminado) {
                 request.setAttribute("materia_eliminada",SUCCESS);
             } else {
-                request.setAttribute("materia_no_eliminada",SUCCESS);
+                request.setAttribute("materia_no_eliminada",FAILURE);
             }
             materias = DBMS.getInstance().listarMateriasOfertadas(id_departamento);
         } else if (tipousuario.equals("coordinacion")) {
-            // PORQUE PASA ESTO? NO DEBERIA SER UN FORM?
-            String id_dpto = (String) session.getAttribute("codigo");
-            materias = DBMS.getInstance().listarMateriasOfertadas(id_dpto);
+            String cod_coord = usuario.getUsbid();
+            eliminado = DBMS.getInstance().desvincularMateriaCoordinacion(cod_coord,id_materia.getCodigo());
+            materias = DBMS.getInstance().listarMateriasCoordinacion(cod_coord);
+            if (eliminado) {
+                request.setAttribute("materia_desvinculada",SUCCESS);
+            } else {
+                request.setAttribute("materia_falla_desvinculado",FAILURE);
+            }
         }
 
+        request.setAttribute("materias_vinculadas", SUCCESS);
         request.setAttribute("materias", materias);
         return mapping.findForward(SUCCESS);
     }

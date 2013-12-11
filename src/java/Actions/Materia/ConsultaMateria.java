@@ -43,20 +43,16 @@ public class ConsultaMateria extends org.apache.struts.action.Action {
         String tipousuario = usuario.getTipousuario();
         String id_departamento = (String) session.getAttribute("usbid");
         ArrayList<Materia> materias = null;
-        //obtengo una lista de decanatos registrados
+        
         if (tipousuario.equals("departamento")) {
             materias = DBMS.getInstance().listarMateriasOfertadas(id_departamento);
         } else if (tipousuario.equals("coordinacion")) {
             Departamento dpto = (Departamento) form;
             materias = DBMS.getInstance().listarMateriasOfertadas(dpto.getCodigo());
             request.setAttribute("dpto_seleccionado",dpto);
+            session.removeAttribute("materias_vinculadas");
         }
             
-        
-
-        //si existen decanatos registrados
-
-            //retorno a pagina de exito
             session.setAttribute("materias", materias);
             return mapping.findForward(SUCCESS);
     }

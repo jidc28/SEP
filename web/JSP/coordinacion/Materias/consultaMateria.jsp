@@ -54,18 +54,40 @@
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
+        
+        <logic:present name="materia_vinculada">
+            <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+                Materia vinculada exitosamente.
+            </div>
+        </logic:present>
+        <logic:present name="materia_desvinculada">
+            <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+                Materia desvinculada exitosamente.
+            </div>
+        </logic:present>
+        <logic:present name="materia_falla_vinculado">
+            <div class="alert alert-danger" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+                Materia no fue vinculada exitosamente.
+            </div>
+        </logic:present>
+        <logic:present name="materia_falla_desvinculado">
+            <div class="alert alert-danger" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+                Materia no fue desvinculada exitosamente.
+            </div>
+        </logic:present>
+        
         <h4> Lista de Materias  
             <logic:present name="dpto_seleccionado">
                 del <bean:write name="dpto_seleccionado" property="nombre"/>:
             </logic:present>
             <logic:notPresent name="dpto_seleccionado">
-                Vinculadas
+                Vinculadas:
             </logic:notPresent>
         </h4>
         <div class="table-responsive">
             <table border="0" style="margin: auto" class="table-striped">
                 
-                <logic:notPresent name="vinculado">
+                <logic:notPresent name="materias_vinculadas">
                     <thead>
                         <tr>
                             <th>
@@ -101,7 +123,7 @@
                         </logic:iterate>
                     </tbody>
                 </logic:notPresent>
-                <logic:present name="vinculado">
+                <logic:present name="materias_vinculadas">
                     <thead>
                         <tr>
                             <th>
@@ -124,7 +146,7 @@
                                     <bean:write name="mat" property="nombre"/>
                                 </td>
                                 <td>
-                                    <html:form action="/vincularMateriaCoordinacion" onsubmit="return(this)" style="margin: 0px;">
+                                    <html:form action="/desvincularMateriaCoordinacion" onsubmit="return(this)" style="margin: 0px;">
                                         <html:hidden name="mat" property="codigo" />
                                         <center>
                                             <html:submit styleClass="btn btn-default" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;">
