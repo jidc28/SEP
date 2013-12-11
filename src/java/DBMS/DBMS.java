@@ -1073,7 +1073,30 @@ public class DBMS {
             ex.printStackTrace();
         }
         return false;
-    }
+
+    }    
+    
+    public ArrayList<Materia> listarMateriasCoordinacion(String cod_coord) {
+        PreparedStatement ps = null;
+        ArrayList<Materia> materias = new ArrayList<Materia>(0);
+
+        try {
+            ps = conexion.prepareStatement("SELECT codigo, nombre FROM maneja, materia WHERE codigo_coordinacion = ? and codigo_materia = codigo");
+            ps.setString(1, cod_coord);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Materia m = new Materia();
+                m.setCodigo(rs.getString("codigo"));
+                m.setNombre(rs.getString("nombre"));
+                materias.add(m);
+            }
+            return materias;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }    
 
     public int contarEvaluacionesPendientes(String id_coordinacion) {
 

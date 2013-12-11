@@ -49,7 +49,7 @@ public class ConsultaMateria extends org.apache.struts.action.Action {
         } else if (tipousuario.equals("coordinacion")) {
             Departamento dpto = (Departamento) form;
             materias = DBMS.getInstance().listarMateriasOfertadas(dpto.getCodigo());
-            session.setAttribute("dpto_seleccionado",dpto);
+            request.setAttribute("dpto_seleccionado",dpto);
         }
             
         
