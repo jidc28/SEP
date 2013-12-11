@@ -55,14 +55,6 @@
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
-        <logic:present name="enviado_memo_profesor">
-            <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
-                Se ha enviado la solicitud para evaluar a 
-                <bean:write name="enviado_memo_profesor" property="nombre"/>
-                <bean:write name="enviado_memo_profesor" property="apellido"/>
-            </div>
-        </logic:present>
-
         <logic:present name="enviado_memo">
             <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
                 Se ha enviado la solicitud para evaluar a los profesores.
@@ -71,21 +63,20 @@
 
         <h4> Evaluar Profesores:</h4>
 
-        <div style="margin-top: 20px;" align="center">
-                <button id="todos" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Evaluar a todos los profesores del departamento" >
-                    <html:link action="/enviarMemoEvaluar" style="text-decoration:none; color: #FFFFFF">
-                        Evaluar Profesores
-                    </html:link>
-                </button>
-            <br>
-        </div>
         <div class="table-responsive">
             <table border="0" style="width: 98%;" class="table table-striped">
                 <thead>
                     <tr>
                         <th>
+                        </th>
+                        <th>
                 <center>
                     usbid
+                </center>
+                </th>
+                <th>
+                <center>
+                    Lapso contractual inicio
                 </center>
                 </th>
                 <th width="38%">
@@ -93,46 +84,41 @@
                     Profesor
                 </center>
                 </th>
-                <th>
-                <center>
-                    Evaluar
-                </center>
-                </th>
-                <th>
-                <center>
-                    Evaluacion
-                </center>
-                </th>
                 </tr>
                 </thead>
-                <logic:iterate name="profesores" id="Prof">
-                    <tr>
-                        <td align="center">
-                            <bean:write name="Prof" property="usbid"/>
+                <html:form action="/multibox">
+                    <logic:iterate id="profesor" name="profesores" property="profesores">
+                        <tr>
+                            <td>
+                        <center>
+                            <html:multibox  property="profesoresSeleccionados">
+                                <bean:write name="profesor" property="usbid"/>
+                            </html:multibox>
+                            </td>
+                        </center>
+                        <td>
+                        <center>
+                            <bean:write name="profesor" property="usbid"/>
+                        </center>
                         </td>
                         <td>
-                            <bean:write name="Prof" property="nombre"/>,
-                            <bean:write name="Prof" property="apellido"/>
+                        <center>
+                            <bean:write name="profesor" property="lapso_contractual_inicio"/> 
+                        </center>
                         </td>
-                        <td align="center">
-                            <html:form action="/enviarMemoEvaluarProfesor">
-                                <html:hidden name="Prof" property="usbid"/>
-                                <html:submit styleClass="btn btn-success" 
-                                             style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
-                                    Evaluar
-                                </html:submit>
-                            </html:form>
+                        <td>
+                            <bean:write name="profesor" property="apellido"/>, 
+                            <bean:write name="profesor" property="nombre"/>
                         </td>
-                        <td align="center">
-                            <button type="button" class="btn btn-info" disabled="disabled"
-                                    style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
-                                Ver evaluacion
-                            </button>
-                        </td>
-                    </tr>
-                </logic:iterate>
-            </table>
+                        </tr>
+                    </logic:iterate>
+                </table>
+                <center>
+                    <html:submit styleClass="btn btn-primary">
+                        Evaluar profesores seleccionados
+                    </html:submit>
+                </center>
+            </html:form>
         </div>
-
     </body>
 </html>

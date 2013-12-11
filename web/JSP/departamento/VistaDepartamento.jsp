@@ -54,7 +54,7 @@
                 </div>
                 <div id="collapseProfesor" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <html:link action="/consultaProfesor">
+                        <html:link action="/irMultibox">
                             <h5 align ="center">Evaluar Profesores</h5>
                         </html:link>
                     </div>

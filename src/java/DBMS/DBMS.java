@@ -942,7 +942,7 @@ public class DBMS {
         ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
         PreparedStatement ps = null;
         try {
-            ps = conexion.prepareStatement("SELECT usbid, nombre, apellido FROM pertenece, profesor WHERE codigo_departamento = ? AND usbid_profesor = usbid;");
+            ps = conexion.prepareStatement("SELECT usbid, lapso_contractual_inicio, nombre, apellido FROM pertenece, profesor WHERE codigo_departamento = ? AND usbid_profesor = usbid ORDER BY lapso_contractual_inicio;");
             ps.setString(1, id_departamento);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -950,6 +950,7 @@ public class DBMS {
                 p.setUsbid(rs.getString("usbid"));
                 p.setNombre(rs.getString("nombre"));
                 p.setApellido(rs.getString("apellido"));
+                p.setLapso_contractual_inicio(rs.getString("lapso_contractual_inicio"));
                 profesores.add(p);
             }
 
@@ -982,20 +983,9 @@ public class DBMS {
         }
     }
 
-    public void enviarMemoEvaluar(String id_departamento) {
-        PreparedStatement ps = null;
-        PreparedStatement ps2 = null;
-        try {
-            ps = conexion.prepareStatement("SELECT usbid_profesor FROM pertenece WHERE codigo_departamento = ?;");
-            ps.setString(1, id_departamento);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                String profesor = rs.getString("usbid_profesor");
-                enviarMemoEvaluarProfesor(profesor);
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+    public void enviarMemoEvaluar(String[] id_profesores) {
+        for (int i = 0; i < id_profesores.length; i++) {
+            enviarMemoEvaluarProfesor(id_profesores[i]);
         }
     }
 
@@ -1133,14 +1123,14 @@ public class DBMS {
                 d.setCodigoMateria(codigoMateria);
 
                 System.out.println(codigoMateria + " " + d.getNumeroMateria());
-                
+
                 ps2 = conexion.prepareStatement("SELECT codigo_materia, usbid, nombre, apellido FROM evaluar, profesor WHERE codigo_coordinacion = ? AND usbid = usbid_profesor AND codigo_materia= ?;");
-                ps2.setString(1,id_coordinacion);
-                ps2.setString(2,codigoMateria);
-                
+                ps2.setString(1, id_coordinacion);
+                ps2.setString(2, codigoMateria);
+
                 ResultSet rs2 = ps2.executeQuery();
-                
-                while(rs2.next()){
+
+                while (rs2.next()) {
                     Profesor p = new Profesor();
                     p.setUsbid(rs2.getString("usbid"));
                     p.setNombre(rs2.getString("nombre"));
@@ -1148,7 +1138,7 @@ public class DBMS {
                     d.addProfesor(p);
                 }
                 d.setPrimerProfesor();
-                System.out.println("primer profesor: "+ d.getPrimerProfesor().getNombre());
+                System.out.println("primer profesor: " + d.getPrimerProfesor().getNombre());
                 dicta_materia.add(d);
             }
             return dicta_materia;

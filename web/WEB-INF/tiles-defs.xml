@@ -188,7 +188,11 @@
     </definition>
     
     <definition name="consultaProfesor" extends="baseDepartamento"> <!-- Consulta Materias -->
-        <put name="body" value="/JSP/departamento/Profesores/ConsultaProfesor.jsp"/>
+        <put name="body" value="/JSP/departamento/Profesores/ConsultaProfesores.jsp"/>
+    </definition>
+    
+    <definition name="consultaProfesores" extends="baseDepartamento"> <!-- Consulta Materias -->
+        <put name="body" value="/ConsultaProfesores.jsp"/>
     </definition>
     
     <definition name="agregaMateria" extends="baseDepartamento"> <!-- Consulta Materias -->
