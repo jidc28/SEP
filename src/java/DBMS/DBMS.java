@@ -1074,8 +1074,8 @@ public class DBMS {
         }
         return false;
 
-    }    
-    
+    }
+
     public ArrayList<Materia> listarMateriasCoordinacion(String cod_coord) {
         PreparedStatement ps = null;
         ArrayList<Materia> materias = new ArrayList<Materia>(0);
@@ -1096,7 +1096,7 @@ public class DBMS {
             ex.printStackTrace();
         }
         return null;
-    }    
+    }
 
     public int contarEvaluacionesPendientes(String id_coordinacion) {
 
@@ -1120,36 +1120,35 @@ public class DBMS {
         PreparedStatement ps = null;
         PreparedStatement ps2 = null;
         ArrayList<dicta> dicta_materia = new ArrayList(0);
+        String codigoMateria = "";
         try {
-            ps = conexion.prepareStatement("SELECT usbid, nombre, apellido, codigo_materia FROM evaluar, profesor WHERE codigo_coordinacion = ? and usbid_profesor = usbid ORDER BY codigo_materia;");
+            ps = conexion.prepareStatement("SELECT DISTINCT codigo_materia, count(codigo_materia) FROM evaluar WHERE codigo_coordinacion = ? GROUP BY codigo_materia;");
             ps.setString(1, id_coordinacion);
 
             ResultSet rs = ps.executeQuery();
-            String codigoMateria = null;
             while (rs.next()) {
                 dicta d = new dicta();
-                d.setCodigoMateria(rs.getString("codigo_materia"));
-                d.setUsbidProfesor(rs.getString("usbid"));
-                d.setNombreProfesor(rs.getString("nombre"));
-                d.setApellidoProfesor(rs.getString("apellido"));
+                d.setNumeroMateria(rs.getString("count"));
+                codigoMateria = rs.getString("codigo_materia");
+                d.setCodigoMateria(codigoMateria);
 
-                /*if (codigoMateria == null) {
-                    ps2 = conexion.prepareStatement("select codigo_materia, count(codigo_materia) from evaluar, profesor where codigo_coordinacion = ? and usbid = usbid_profesor and codigo_materia = ? group by codigo_materia;");
-                    ps2.setString(1, id_coordinacion);
-                    ps2.setString(2, d.getCodigoMateria());
-                    ResultSet rs2 = ps2.executeQuery();
-                    d.setNumeroMateria(rs2.getString("count"));
-                } else if (codigoMateria != null && codigoMateria.equals(d.getCodigoMateria())) {
-                    ps2 = conexion.prepareStatement("select codigo_materia, count(codigo_materia) from evaluar, profesor where codigo_coordinacion = ? and usbid = usbid_profesor and codigo_materia = ? group by codigo_materia;");
-                    ps2.setString(1, id_coordinacion);
-                    ps2.setString(2, d.getCodigoMateria());
-                    ResultSet rs2 = ps2.executeQuery();
-                    d.setNumeroMateria(rs2.getString("count"));
-                } else {
-                    d.setNumeroMateria("0");
+                System.out.println(codigoMateria + " " + d.getNumeroMateria());
+                
+                ps2 = conexion.prepareStatement("SELECT codigo_materia, usbid, nombre, apellido FROM evaluar, profesor WHERE codigo_coordinacion = ? AND usbid = usbid_profesor AND codigo_materia= ?;");
+                ps2.setString(1,id_coordinacion);
+                ps2.setString(2,codigoMateria);
+                
+                ResultSet rs2 = ps2.executeQuery();
+                
+                while(rs2.next()){
+                    Profesor p = new Profesor();
+                    p.setUsbid(rs2.getString("usbid"));
+                    p.setNombre(rs2.getString("nombre"));
+                    p.setApellido(rs2.getString("apellido"));
+                    d.addProfesor(p);
                 }
-
-                codigoMateria = d.getCodigoMateria(); */
+                d.setPrimerProfesor();
+                System.out.println("primer profesor: "+ d.getPrimerProfesor().getNombre());
                 dicta_materia.add(d);
             }
             return dicta_materia;
