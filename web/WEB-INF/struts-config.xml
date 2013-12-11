@@ -65,6 +65,7 @@
             <forward name="administrador" path="vistaAdmin"/>
             <forward name="decanato" path="vistaDecanato"/>
             <forward name="departamento" path="vistaDepartamento"/>
+            <forward name="coordinacion" path="vistaCoordinacion"/>
         </action>
         
         <!--       LOGIN         -->
@@ -148,14 +149,6 @@
         <action input="/ConsultaDepartamentoDecanato.jsp" name="Departamento" path="/editarNombreDepartamento" scope="request" type="Actions.Departamento.editarNombreDepartamento" validate="false">
             <forward name="success" path="editarNombreDepartamento"/>
         </action>
-        <action input="/ConsultaDepartamentoDecanato.jsp" name="Departamento" path="/eliminarDepartamento" scope="request" type="Actions.Departamento.eliminarDepartamento" validate="false">
-            <forward name="success" path="editarNombreDepartamento"/>
-        </action>
-        <action input="/ConsultaDepartamentoDecanato.jsp" name="Departamento" path="/desvincularDepDec" scope="request" type="Actions.Departamento.desvincularDepartamentoDecanato" validate="false">
-            <forward name="administrador" path="consultaDepartamentoDec"/>
-            <forward name="decanato" path="consultaDepartamento"/>
-            <forward name="failure" path="consultaDepartamento"/>
-        </action>
         
         <!-- ACCIONES JEFE DE DEPARTAMENTO -->
         <action input="/VistaDepartamento.jsp" name="Departamento" path="/consultaMateria" scope="request" type="Actions.Materia.ConsultaMateria" validate="false">
@@ -197,6 +190,11 @@
             <forward name="success" path="consultaMateria"/>
         </action>
                 
+        <!-- ACCIONES COORDINADOR -->
+        <action input="/VistaCoordinacion.jsp" name="Coordinacion" path="/listarEvaluacionesPendientes" scope="request" type="Actions.Evaluaciones.ListarEvaluacionesPendientes" validate="false">
+            <forward name="success" path="listarEvaluacionesPendientes"/>
+        </action>
+        
         <!--         OTROS       -->               
         <action scope="request" input="/" path="/cerrarSesion" type="Session.CerrarSesion" validate="false">
             <forward name="success" path="/Login.jsp"/>

@@ -23,6 +23,7 @@
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
         <title>Sistema de Evaluación de Profesores</title>
+    </head>
     <body>
 
         <logic:present name="evaluaciones_pendientes">
@@ -63,13 +64,13 @@
                     </div>
                     <div id="collapseEvaluaciones" class="panel-collapse collapse">
                         <div class="panel-body">
-                            <a href="#">
-                                <h5 align ="center">Listar profesores a evaluar                                
+                            <html:link action="/listarEvaluacionesPendientes">
+                                <h5 align ="center">Listar evaluaciones pendientes                                
                                     <span class="badge">
                                         <bean:write name="evaluaciones_pendientes"/>
                                     </span>
                                 </h5>
-                            </a>
+                            </html:link>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,5 @@
 INSERT INTO USUARIO VALUES ('admin','administrador','admin','admin');
 INSERT INTO USUARIO VALUES (1003,'decanato','decanato','decanato');
-INSERT INTO USUARIO VALUES ('coordinacion','coordinacion','coordinacion','coordinacion');
 INSERT INTO USUARIO VALUES ('C-0039','coordinacion','coordinacion','coordinacion');
 INSERT INTO USUARIO VALUES ('C-0003','coordinacion','coordinacion','coordinacion');
 INSERT INTO USUARIO VALUES ('D-2022','departamento','departamento','departamento');

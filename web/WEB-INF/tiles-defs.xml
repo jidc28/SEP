@@ -216,4 +216,8 @@
         <put name="body" value="/JSP/coordinacion/Materias/consultaMateria.jsp"/>
     </definition>
     
+    <definition name="listarEvaluacionesPendientes" extends="baseCoordinacion">
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/listarEvaluacionesPendientes.jsp"/>
+    </definition>
+    
 </tiles-definitions>

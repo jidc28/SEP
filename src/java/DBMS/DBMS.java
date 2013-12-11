@@ -6,6 +6,7 @@ import Forms.CreateUserForm;
 import Clases.Decanato;
 import Clases.Departamento;
 import Clases.Materia;
+import Clases.dicta;
 import Forms.EliminarUserForm;
 import Clases.NucleoUniversitario;
 import Clases.Profesor;
@@ -1057,7 +1058,7 @@ public class DBMS {
         }
         return null;
     }
-    
+
     public boolean vincularMateriaCoordinacion(String cod_coord, String cod_materia) {
         PreparedStatement ps = null;
 
@@ -1068,11 +1069,11 @@ public class DBMS {
             Integer i = ps.executeUpdate();
 
             return i > 0;
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return false;
-    }    
+    }
 
     public int contarEvaluacionesPendientes(String id_coordinacion) {
 
@@ -1089,5 +1090,50 @@ public class DBMS {
             ex.printStackTrace();
         }
         return 0;
+    }
+
+    public ArrayList<dicta> listarEvaluacionesPendientes(String id_coordinacion) {
+
+        PreparedStatement ps = null;
+        PreparedStatement ps2 = null;
+        ArrayList<dicta> dicta_materia = new ArrayList(0);
+        try {
+            ps = conexion.prepareStatement("SELECT usbid, nombre, apellido, codigo_materia FROM evaluar, profesor WHERE codigo_coordinacion = ? and usbid_profesor = usbid ORDER BY codigo_materia;");
+            ps.setString(1, id_coordinacion);
+
+            ResultSet rs = ps.executeQuery();
+            String codigoMateria = null;
+            while (rs.next()) {
+                dicta d = new dicta();
+                d.setCodigoMateria(rs.getString("codigo_materia"));
+                d.setUsbidProfesor(rs.getString("usbid"));
+                d.setNombreProfesor(rs.getString("nombre"));
+                d.setApellidoProfesor(rs.getString("apellido"));
+
+                /*if (codigoMateria == null) {
+                    ps2 = conexion.prepareStatement("select codigo_materia, count(codigo_materia) from evaluar, profesor where codigo_coordinacion = ? and usbid = usbid_profesor and codigo_materia = ? group by codigo_materia;");
+                    ps2.setString(1, id_coordinacion);
+                    ps2.setString(2, d.getCodigoMateria());
+                    ResultSet rs2 = ps2.executeQuery();
+                    d.setNumeroMateria(rs2.getString("count"));
+                } else if (codigoMateria != null && codigoMateria.equals(d.getCodigoMateria())) {
+                    ps2 = conexion.prepareStatement("select codigo_materia, count(codigo_materia) from evaluar, profesor where codigo_coordinacion = ? and usbid = usbid_profesor and codigo_materia = ? group by codigo_materia;");
+                    ps2.setString(1, id_coordinacion);
+                    ps2.setString(2, d.getCodigoMateria());
+                    ResultSet rs2 = ps2.executeQuery();
+                    d.setNumeroMateria(rs2.getString("count"));
+                } else {
+                    d.setNumeroMateria("0");
+                }
+
+                codigoMateria = d.getCodigoMateria(); */
+                dicta_materia.add(d);
+            }
+            return dicta_materia;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 }
