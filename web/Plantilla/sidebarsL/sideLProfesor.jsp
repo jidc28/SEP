@@ -12,7 +12,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <div class="glossymenu" style="width: 190px">
+    <div class="glossymenu">
         <a style="border-bottom: none;"/>
         <a class="menuitem" href="noimplementado.jsp">
             Perfil

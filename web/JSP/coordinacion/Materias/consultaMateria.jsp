@@ -56,14 +56,15 @@
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
         <h4> Lista de Materias  
             <logic:present name="dpto_seleccionado">
-                del <bean:write name="dpto_seleccionado" property="nombre"/>:
+                <br> 
+                <bean:write name="dpto_seleccionado" property="nombre"/>
             </logic:present>
             <logic:notPresent name="dpto_seleccionado">
                 Vinculadas
             </logic:notPresent>
         </h4>
-        <div class="table-responsive">
-            <table border="0" style="margin: auto" class="table-striped">
+        <div id="tabla" class="table-responsive">
+            <table class="table table-striped">
                 
                 <logic:notPresent name="vinculado">
                     <thead>
@@ -71,7 +72,7 @@
                             <th>
                     <center>Codigo</center>
                     </th>
-                    <th width="30%">
+                    <th>
                     <center>Nombre de la Materia</center>
                     </th>
                     <th>
@@ -81,10 +82,10 @@
                     <tbody>
                         <logic:iterate name="materias" id="mat">
                             <tr>
-                                <td width="20%" align="center">
+                                <td align="center">
                                     <bean:write name="mat" property="codigo"/>
                                 </td>
-                                <td width="20%" align="center">
+                                <td  align="center">
                                     <bean:write name="mat" property="nombre"/>
                                 </td>
                                 <td>

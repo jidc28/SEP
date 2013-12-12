@@ -49,17 +49,17 @@
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
         <logic:present name="success">
-            <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+            <div class="alert alert-success" id="alert">
                 Decanato registrado exitosamente.
             </div>
         </logic:present>
         <logic:present name="modificacion">
-            <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+            <div class="alert alert-success" id="alert">
                 Decanato modificado exitosamente.
             </div>
         </logic:present>
         <logic:present name="falla">
-            <div class="alert alert-danger" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+            <div class="alert alert-danger" id="alert">
                 Decanato no fue modificado exitosamente.
             </div>
         </logic:present>

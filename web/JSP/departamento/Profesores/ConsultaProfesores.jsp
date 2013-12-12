@@ -56,15 +56,16 @@
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
         <logic:present name="enviado_memo">
-            <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+            <div class="alert alert-success" id="alert">
                 Se ha enviado la solicitud para evaluar a los profesores.
             </div>
         </logic:present>
 
         <h4> Evaluar Profesores:</h4>
 
-        <div class="table-responsive">
-            <table border="0" style="width: 98%;" class="table table-striped">
+    <center>
+        <div id="tabla" class="table-responsive">
+            <table id="tabla" class="table table-striped">
                 <thead>
                     <tr>
                         <th>
@@ -120,5 +121,6 @@
                 </center>
             </html:form>
         </div>
-    </body>
+    </center>
+</body>
 </html>

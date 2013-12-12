@@ -46,57 +46,65 @@
     <body>
 
         <logic:present name="success">
-            <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+            <div class="alert alert-success" id="alert">
                 Coordinación registrada exitosamente.
             </div>
         </logic:present>
 
         <logic:present name="modificacion">
-            <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+            <div class="alert alert-success" id="alert">
                 Coordinacion modificada exitosamente.
             </div>
         </logic:present>
             
         <logic:present name="eliminado">
-            <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+            <div class="alert alert-success" id="alert">
                Coordinacion eliminada exitosamente.
             </div>
         </logic:present>
             
         <logic:present name="noEliminado">
-            <div class="alert alert-danger" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+            <div class="alert alert-danger" id="alert">
                La coordinacion no pudo ser eliminada exitosamente.
             </div>
         </logic:present>
           
         <h4> Lista de Coordinaciones en el sistema:</h4>
-        <div id="testTable">
-            <table border="0" style="margin: auto" class="altrowstable" id="alternatecolor">
+        <div id="tabla" class="table-responsive">
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th width="20%" align="center">
+                        <th>
+                            <center>
                             Codigo
+                            </center>
                         </th>
-                        <th width="38%" align="center">
+                        <th>
+                            <center>
                             Nombre Coordinacion
+                            </center>
                         </th>
-                        <th width="20%" align="center">
+                        <th>
+                            <center>
                             Modificar Nombre
+                            </center>
                         </th>
-                        <th width="20%" align="center">
+                        <th>
+                            <center>
                             Eliminar
+                            </center>
                         </th>
                     </tr>
                 </thead>
                 <logic:iterate name="coordinaciones" id="Coord">
                     <tr>
-                        <td width="20%" align="center">
+                        <td align="center">
                             <bean:write name="Coord" property="codigo"/>
                         </td>
-                        <td width="20%" align="center">
+                        <td>
                             <bean:write name="Coord" property="nombre"/>
                         </td>
-                        <td width="20%" align="center">
+                        <td align="center">
                             <html:form action="/editarNombreCoordinacion" onsubmit="return(this)" style="margin: 0px;">
                                 <html:hidden name="Coord" property="codigo"/>
                                 <button type="button" class="btn btn-primary" 

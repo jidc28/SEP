@@ -28,11 +28,13 @@
 
         <logic:present name="evaluaciones_pendientes">
             <div class="alert alert-info alert-dismissable" 
-                 style="width: 760px; margin-bottom: 0px; margin-right: 0px; margin-left: 10px;">
+                 id="alert-coord">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>Atención: </strong> <br> 
-                Se solicitó evaluación de profesores. Para más información
-                seleccionar <em>Gestionar Evaluaciones</em>.
+                <p>
+                    <strong>Atención: </strong> <br> 
+                    Se solicitó evaluación de profesores. Para más información
+                    seleccionar <em>Gestionar Evaluaciones</em>.
+                </p>
             </div>
         </logic:present>
 

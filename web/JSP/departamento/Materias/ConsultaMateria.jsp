@@ -53,22 +53,22 @@
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
         <logic:present name="materia_eliminada">
-            <div class="alert alert-success" style="width: 760px; margin-bottom: 0px; margin-right: 0px; margin-left: 10px;">
+            <div class="alert alert-success" id="alert">
                 La materia fue eliminada exitosamente.
             </div>
         </logic:present>
         <logic:present name="materia_no_eliminada">
-            <div class="alert alert-danger" style="width: 760px;margin-bottom: 0px; margin-right: 0px; margin-left: 10px;">
+            <div class="alert alert-danger" id="alert">
                 La materia no pudo ser eliminada, intentelo mas tarde.
             </div>
         </logic:present>
         <logic:present name="materia_modificada">
-            <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px; margin-left: 10px;">
+            <div class="alert alert-success" id="alert">
                 La materia fue modificada exitosamente.
             </div>
         </logic:present>
         <logic:present name="materia_no_modificada">
-            <div class="alert alert-danger" style="width: 760px;margin-bottom: 0px; margin-right: 0px; margin-left: 10px;">
+            <div class="alert alert-danger" id="alert">
                 La materia no pudo ser modificada, intentelo mas tarde.
             </div>
         </logic:present>

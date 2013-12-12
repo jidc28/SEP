@@ -49,33 +49,39 @@
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
         <logic:present name="success">
-            <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+            <div class="alert alert-success" id="alert">
                 Decanato registrado exitosamente.
             </div>
         </logic:present>
         <logic:present name="modificacion">
-            <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+            <div class="alert alert-success" id="alert">
                 Decanato modificado exitosamente.
             </div>
         </logic:present>
         <logic:present name="falla">
-            <div class="alert alert-danger" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+            <div class="alert alert-danger" id="alert">
                 Decanato no fue modificado exitosamente.
             </div>
         </logic:present>
         <h4> Lista de Decanatos en el sistema:</h4>
-        <div id="testTable">
-            <table border="0" style="margin: auto" class="altrowstable" id="alternatecolor">
+        <div id="tabla" class="table-responsive">
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th align="center">
+                        <th>
+                            <center>
                             Codigo
+                            </center>
                         </th>
-                        <th width="38%" align="center">
+                        <th>
+                            <center>
                             Nombre Decanato
+                            </center>
                         </th>
-                        <th align="center">
+                        <th>
+                            <center>
                             Modificar
+                            </center>
                         </th>
                     </tr>
                 </thead>
@@ -84,7 +90,7 @@
                         <td width="20%" align="center">
                             <bean:write name="Dec" property="codigo"/>
                         </td>
-                        <td width="20%" align="center">
+                        <td>
                             <bean:write name="Dec" property="nombre"/>
                         </td>
                         <td width="20%" align="center">

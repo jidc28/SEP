@@ -54,28 +54,36 @@
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
+        
         <h4> Lista de Departamentos </h4>
-        <div class="table-responsive">
-            <table border="0" style="margin: auto" class="table-striped">
+        
+        <div id="tabla" class="table-responsive">
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>
-                <center>Codigo</center>
-                </th>
-                <th width='30%'>
-                <center>Nombre Departamento</center>
+                        <th width="15%">
+                <center>
+                    Codigo
+                </center>
                 </th>
                 <th>
-                <center>Materias</center>
+                <center>
+                    Nombre Departamento
+                </center>
+                </th>
+                <th width="15%">
+                <center>
+                    Materias
+                </center>
                 </th>
                 </thead>
                 <tbody>
                     <logic:iterate name="departamentos" id="dep">
                         <tr>
-                            <td width="20%" align="center">
+                            <td align="center">
                                 <bean:write name="dep" property="codigo"/>
                             </td>
-                            <td width="20%" align="center">
+                            <td>
                                 <bean:write name="dep" property="nombre"/>
                             </td>
                             <td>
