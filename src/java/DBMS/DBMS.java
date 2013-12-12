@@ -1065,6 +1065,23 @@ public class DBMS {
         return false;
 
     }
+    
+    public boolean desvincularMateriaCoordinacion(String cod_coord, String cod_materia) {
+        PreparedStatement ps = null;
+
+        try {
+            ps = conexion.prepareStatement("DELETE FROM maneja WHERE codigo_coordinacion = ? AND codigo_materia = ?");
+            ps.setString(1, cod_coord);
+            ps.setString(2, cod_materia);
+            Integer i = ps.executeUpdate();
+
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+
+    }
 
     public ArrayList<Materia> listarMateriasCoordinacion(String cod_coord) {
         PreparedStatement ps = null;
