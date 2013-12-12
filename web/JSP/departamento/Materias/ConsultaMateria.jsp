@@ -75,8 +75,8 @@
 
         <h4> Lista de Materias en el sistema:</h4>
 
-        <div class="table-responsive">
-            <table border="0" style="width: 98%;" class="table table-striped">
+        <div id="tabla" class="table-responsive">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>

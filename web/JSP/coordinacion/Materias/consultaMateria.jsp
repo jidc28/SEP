@@ -56,22 +56,22 @@
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
         
         <logic:present name="materia_vinculada">
-            <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+            <div class="alert alert-success" id="alert">
                 Materia vinculada exitosamente.
             </div>
         </logic:present>
         <logic:present name="materia_desvinculada">
-            <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+            <div class="alert alert-success" id="alert">
                 Materia desvinculada exitosamente.
             </div>
         </logic:present>
         <logic:present name="materia_falla_vinculado">
-            <div class="alert alert-danger" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+            <div class="alert alert-danger" id="alert">
                 Materia no fue vinculada exitosamente.
             </div>
         </logic:present>
         <logic:present name="materia_falla_desvinculado">
-            <div class="alert alert-danger" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
+            <div class="alert alert-danger" id="alert">
                 Materia no fue desvinculada exitosamente.
             </div>
         </logic:present>
