@@ -133,6 +133,14 @@
         </action>
         <action input="/ConsultaMateriasDepartamento.jsp" name="Materia" path="/vincularMateriaCoordinacion" scope="request" type="Actions.Materia.agregaMateria" validate="false">
             <forward name="success" path="consultaMaterias"/>
+            <forward name="failure" path="consultaMaterias"/>
+        </action>
+        <action input="/ConsultaMaterias.jsp" name="Materia" path="/desvincularMateriaCoordinacion" scope="request" type="Actions.Materia.EliminaMateria" validate="false">
+            <forward name="success" path="consultaMaterias"/>
+            <forward name="failure" path="consultaMaterias"/>
+        </action>
+        <action input="/VistaCoordinacion.jsp" name="Materia" path="/listarMaterias" scope="request" type="Actions.Materia.ConsultaMateriasCoordinacion" validate="false">
+            <forward name="success" path="consultaMaterias"/>
         </action>
         
         <!--     DEPARTAMENTOS      --> 

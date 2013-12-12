@@ -43,15 +43,18 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseDepartamentos">
-                            Gestión de Materias por Departamento
+                            Gestión de Materias
                         </a>
                     </h4>
                 </div>
                 <div id="collapseDepartamentos" class="panel-collapse collapse">
                     <div class="panel-body">
+                        <html:link action="/listarMaterias" >
+                            <h5 align ="center">Listar Materias Vinculadas</h5>
+                        </html:link>
                         <html:link action="/listarDepartamentos" >
                             <h5 align ="center">Listar Departamentos</h5>
-                        </html:link>
+                        </html:link>  
                     </div>
                 </div>
             </div>
