@@ -18,7 +18,7 @@ import org.apache.struts.action.ActionMessage;
  */
 public class Profesor extends org.apache.struts.action.ActionForm {
 
-    private static final String patronEmail = "^([a-zA-Z0-9]+(-|_)*[a-zA-Z0-9]*@[a-zA-Z]+.[a-zA-Z]+)*$";
+    private static final String patronEmail = "^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private String usbid;
     private String nombre;
     private String apellido;
@@ -31,25 +31,11 @@ public class Profesor extends org.apache.struts.action.ActionForm {
     private String jubilado;
     private String lapso_contractual_inicio;
     private String lapso_contractual_fin;
-    private String errorEmailFormato;
     private Pattern patron;
     private Matcher match;
 
     public String[] getNiveles() {
         return niveles;
-    }
-
-    public String getErrorEmailFormato() {
-        return errorEmailFormato;
-    }
-
-    public void setErrorEmailFormato(String errorEmailFormato) {
-        if (errorEmailFormato.equals("")) {
-            this.errorEmailFormato = "";
-        } else {
-            this.errorEmailFormato = "<span style='color:red'>Campo Email con formato incorrecto (Sugerencia: nombre@dominio.com).</span>";
-
-        }
     }
 
     public String getEmail_personal() {
@@ -61,12 +47,12 @@ public class Profesor extends org.apache.struts.action.ActionForm {
     }
 
     public Profesor() {
-        patron = Pattern.compile(patronEmail);
+        
     }
 
-    public boolean validate(final String carnet) {
-
-        match = patron.matcher(carnet);
+    public boolean validarEmail(final String email) {
+        patron = Pattern.compile(patronEmail);
+        match = patron.matcher(email);
         return match.matches();
     }
 
@@ -161,9 +147,6 @@ public class Profesor extends org.apache.struts.action.ActionForm {
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
 
-
-        this.setErrorEmailFormato("");
-
         try {
             Integer.parseInt(getCedula());
         } catch (Exception e) {
@@ -172,11 +155,11 @@ public class Profesor extends org.apache.struts.action.ActionForm {
 
         }
 
-        if (!validate(getEmail())) {
+        if (!validarEmail(this.email)) {
             errors.add("email", new ActionMessage("error.email.malformulado"));
         }
 
-        if (!validate(getEmail_personal())) {
+        if (!validarEmail(this.email_personal)) {
             errors.add("email", new ActionMessage("error.email.malformulado"));
         }
 

@@ -3,6 +3,7 @@ INSERT INTO USUARIO VALUES (1003,'decanato','decanato','decanato');
 INSERT INTO USUARIO VALUES ('C-0039','coordinacion','coordinacion','coordinacion');
 INSERT INTO USUARIO VALUES ('C-0003','coordinacion','coordinacion','coordinacion');
 INSERT INTO USUARIO VALUES ('D-2022','departamento','departamento','departamento');
+INSERT INTO USUARIO VALUES ('C-0017','departamento','coord','null');
 
 INSERT INTO USUARIO VALUES ('22-90457','profesor','admin','X');
 INSERT INTO USUARIO VALUES ('28-63146','profesor','admin','X');
@@ -68,9 +69,6 @@ INSERT INTO DECANATO VALUES (1003,'Decanato de Estudios Profesionales');
 INSERT INTO DECANATO VALUES (1004,'Decanato de Estudios Tecnologicos');
 INSERT INTO DECANATO VALUES (1005,'Decanato de Extension Universitaria');
 INSERT INTO DECANATO VALUES (1006,'Decanato de Investigacion y Desarrollo');
-
-INSERT INTO NUCLEOUNIV VALUES ('Sartenejas','USB - Caracas, Sede Sartenejas');
-INSERT INTO NUCLEOUNIV VALUES ('La Guaira','USB - La Guaira, Sede Camurí Grande');
 
 INSERT INTO DEPARTAMENTO VALUES ('D-2001','Departamento de Administracion de Personal');
 INSERT INTO DEPARTAMENTO VALUES ('D-2002','Departamento de Administracion y Almacen');

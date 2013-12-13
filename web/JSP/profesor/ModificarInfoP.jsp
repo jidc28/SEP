@@ -79,8 +79,14 @@
                     <tr style="height: 35px;">
                         <td>Género</td>
                         <td>
-                            <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="genero" errorStyleClass="error"
-                                       errorKey="org.apache.struts.action.ERROR"></html:text>
+                            <logic:equal name="profesor" property="genero" value="M">
+                                <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="genero" value="Masculino"
+                                           errorStyleClass="error" errorKey="org.apache.struts.action.ERROR"></html:text>
+                            </logic:equal>
+                            <logic:equal name="profesor" property="genero" value="F">
+                                <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="genero" value="Femenino"
+                                           errorStyleClass="error" errorKey="org.apache.struts.action.ERROR"></html:text>
+                            </logic:equal>
                             <html:hidden name="profesor" property="genero" />
                         </td>
                     </tr>
@@ -92,16 +98,16 @@
                             <html:hidden name="profesor" property="email" />
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="2" style="color: firebrick">
-                            <html:errors property="email"/>
-                        </td>
-                    </tr>
                     <tr style="height: 35px;">
                         <td>Correo electrónico personal</td>
                         <td>
                             <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="false" name="profesor" property="email_personal" errorStyleClass="error"
                                        errorKey="org.apache.struts.action.ERROR"></html:text>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="color: firebrick">
+                            <html:errors property="email"/>
                         </td>
                     </tr>
                     <tr style="height: 35px;">
@@ -128,50 +134,56 @@
                         <td>Nivel</td>
                         <td>
                             <html:select style="width: 258px;" name="profesor" property="nivel">
-                                <option>
-                                    <bean:write name="profesor" property="nivel"/>
-                                </option>
-                                <logic:iterate name="niveles" id="nivel_i">
-                                    <option>
-                                        <bean:write name="nivel_i"/>
-                                    </option>
-                                </logic:iterate>
-                            </html:select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 280px;">¿Ha sido jubilado en el último año de una institución de la administración pública?</td>
-                        <td>
-                            <logic:equal name="profesor" property="nivel" value="Ayudante Academico">
-                                <html:select style="width: 258px;" property="jubilado" disabled="true">
-                                    <html:option value="N">No</html:option>
-                                </html:select>
-                                <html:hidden name="profesor" property="jubilado" value="N"/>
-                            </logic:equal>
-                            <logic:notEqual name="profesor" property="nivel" value="Ayudante Academico">
-                                <logic:equal name="profesor" property="jubilado" value="N">
-                                    <html:select style="width: 258px;" property="jubilado">
-                                        <html:option value="N">No</html:option>
-                                        <html:option value="S">Si</html:option>
-                                    </html:select>
-                                </logic:equal>
-                                <logic:equal name="profesor" property="jubilado" value="S">
-                                    <html:select style="width: 258px;" property="jubilado">
-                                        <html:option value="S">Si</html:option>
-                                        <html:option value="N">No</html:option>
-                                    </html:select>
-                                </logic:equal>
-                            </logic:notEqual>
-                        </td>
-                </tbody>
-            </table>
-            <br>
-        <center>
-            <html:submit styleClass="btn btn-success" onclick="javascript: return confirm('¿Los datos ingresados son correctos?')"> 
-                Guardar Datos 
-            </html:submit>
-        </center>
-    </html:form>
+                    <option>
+                        <bean:write name="profesor" property="nivel"/>
+                    </option>
+                    <logic:iterate name="niveles" id="nivel_i">
+                        <option>
+                            <bean:write name="nivel_i"/>
+                        </option>
+                    </logic:iterate>
+                </html:select>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 280px;">¿Ha sido jubilado en el último año de una institución de la administración pública?</td>
+            <td>
+                <logic:equal name="profesor" property="nivel" value="Ayudante Academico">
+                    <html:select style="width: 258px;" property="jubilado" disabled="true">
+                        <html:option value="N">No</html:option>
+                    </html:select>
+                    <html:hidden name="profesor" property="jubilado" value="N"/>
+                </logic:equal>
+                <logic:notEqual name="profesor" property="nivel" value="Ayudante Academico">
+                    <logic:equal name="profesor" property="jubilado" value="N">
+                        <html:select style="width: 258px;" property="jubilado">
+                            <html:option value="N">No</html:option>
+                            <html:option value="S">Si</html:option>
+                        </html:select>
+                    </logic:equal>
+                    <logic:equal name="profesor" property="jubilado" value="S">
+                        <html:select style="width: 258px;" property="jubilado">
+                            <html:option value="S">Si</html:option>
+                            <html:option value="N">No</html:option>
+                        </html:select>
+                    </logic:equal>
+                </logic:notEqual>
+                <logic:equal name="profesor" property="jubilado" value="">
+                    <html:select style="width: 258px;" property="jubilado">
+                        <html:option value="N">No</html:option>
+                        <html:option value="S">Si</html:option>
+                    </html:select>
+                </logic:equal>
+            </td>
+            </tbody>
+    </table>
+    <br>
+<center>
+    <html:submit styleClass="btn btn-success" onclick="javascript: return confirm('¿Los datos ingresados son correctos?')"> 
+        Guardar Datos 
+    </html:submit>
+</center>
+</html:form>
 
 </body>
 </html>

@@ -44,34 +44,11 @@ public class GuardarModificarInfoP extends org.apache.struts.action.Action {
 
         ActionErrors error = new ActionErrors();
 
-        if (u.getNivel().equals("Ayudante Academico"))
-            u.setJubilado("N");
-        //valido los campos de formulario
-        //error = u.validate(mapping, request);
-        //boolean huboError = false;
-
-
-        //if (error.size() != 0) {
-        //     huboError = true;
-        //}
-
-        //si los campos no son validos
-        //if (huboError) {
-        //    saveErrors(request, error);
-        //    return mapping.findForward(FAILURE);
-        //si los campos son validos
-        //} else {
-
-        //obtengo informacion del profesor actual del sistema
-        boolean actualizar = DBMS.getInstance().actualizarInfoProfesor(u);
-
-        //retorno a pagina de exito
-        request.setAttribute("usbid", u.getUsbid());
-        request.setAttribute("profesor", u);
         String[] niveles = new String[4];
         String[] niveles_existentes = u.getNiveles();
         String nivel = u.getNivel();
         int j = 0;
+
         for (int i = 0; i < 5; i++) {
             if (!nivel.equals(niveles_existentes[i])) {
                 System.out.println("entro");
@@ -79,15 +56,45 @@ public class GuardarModificarInfoP extends org.apache.struts.action.Action {
                 j++;
             }
         }
+
         request.setAttribute("niveles", niveles);
-        if (actualizar) {
-            request.setAttribute("actualizacion", SUCCESS);
-            System.out.println("SUCESS!");
-            return mapping.findForward(SUCCESS);
-        } else {
-            System.out.println("FAILURE!");
+
+        if (u.getNivel().equals("Ayudante Academico")) {
+            u.setJubilado("N");
+        }
+//        valido los campos de formulario
+        error = u.validate(mapping, request);
+        boolean huboError = false;
+
+
+        if (error.size() != 0) {
+            huboError = true;
+        }
+
+//        si los campos no son validos
+        if (huboError) {
+            saveErrors(request, error);
             return mapping.findForward(FAILURE);
+//        si los campos son validos
+        } else {
+
+//        obtengo informacion del profesor actual del sistema
+            boolean actualizar = DBMS.getInstance().actualizarInfoProfesor(u);
+
+            //retorno a pagina de exito
+            request.setAttribute("usbid", u.getUsbid());
+            request.setAttribute("profesor", u);
+
+
+            if (actualizar) {
+                request.setAttribute("actualizacion", SUCCESS);
+                System.out.println("SUCESS!");
+                return mapping.findForward(SUCCESS);
+            } else {
+                System.out.println("FAILURE!");
+                request.setAttribute("usuario", u);
+                return mapping.findForward(FAILURE);
+            }
         }
     }
 }
-//}

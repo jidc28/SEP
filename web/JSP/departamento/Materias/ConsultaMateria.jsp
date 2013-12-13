@@ -122,7 +122,8 @@
                             <html:form action="/eliminaMateria">
                                 <html:hidden name="Mat" property="codigo"/>
                                 <html:submit styleClass="btn btn-danger"
-                                             style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                                             style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;"
+                                             onclick="javascript: return confirm('¿Está seguro de que desea eliminar esta materia?')">
                                     Eliminar
                                 </html:submit>
                             </html:form>

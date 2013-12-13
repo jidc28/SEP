@@ -86,14 +86,18 @@ public class modificarInfoP extends org.apache.struts.action.Action {
         String[] niveles_existentes = info.getNiveles();
         String nivel = info.getNivel();
         int j = 0;
-        for (int i = 0; i < 5; i++) {
-            if (!nivel.equals(niveles_existentes[i])) {
-                System.out.println("entro");
-                niveles[j] = niveles_existentes[i];
-                j++;
+        if (!nivel.equals("")) {
+            for (int i = 0; i < 5; i++) {
+                if (!nivel.equals(niveles_existentes[i])) {
+                    System.out.println("entro");
+                    niveles[j] = niveles_existentes[i];
+                    j++;
+                }
             }
+            request.setAttribute("niveles", niveles);
+        } else {
+            request.setAttribute("niveles", niveles_existentes);
         }
-        request.setAttribute("niveles", niveles);
         session.setAttribute("profesor", info);
 
         return mapping.findForward(SUCCESS);
