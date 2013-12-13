@@ -27,12 +27,17 @@ public class Profesor extends org.apache.struts.action.ActionForm {
     private String email;
     private String email_personal;
     private String nivel;
+    private String[] niveles = {"Ayudante Academico", "Asistente", "Agregado", "Asociado", "Titular"};
     private String jubilado;
     private String lapso_contractual_inicio;
     private String lapso_contractual_fin;
     private String errorEmailFormato;
     private Pattern patron;
     private Matcher match;
+
+    public String[] getNiveles() {
+        return niveles;
+    }
 
     public String getErrorEmailFormato() {
         return errorEmailFormato;
@@ -54,7 +59,7 @@ public class Profesor extends org.apache.struts.action.ActionForm {
     public void setEmail_personal(String email_personal) {
         this.email_personal = email_personal;
     }
-    
+
     public Profesor() {
         patron = Pattern.compile(patronEmail);
     }
@@ -129,7 +134,7 @@ public class Profesor extends org.apache.struts.action.ActionForm {
         this.jubilado = jubilado;
     }
 
-        public String getLapso_contractual_inicio() {
+    public String getLapso_contractual_inicio() {
         return lapso_contractual_inicio;
     }
 
@@ -144,7 +149,7 @@ public class Profesor extends org.apache.struts.action.ActionForm {
     public void setLapso_contractual_fin(String lapso_contractual_fin) {
         this.lapso_contractual_fin = lapso_contractual_fin;
     }
-    
+
     /**
      * This is the action called from the Struts framework.
      *
@@ -174,7 +179,7 @@ public class Profesor extends org.apache.struts.action.ActionForm {
         if (!validate(getEmail_personal())) {
             errors.add("email", new ActionMessage("error.email.malformulado"));
         }
-        
+
         return errors;
     }
 }

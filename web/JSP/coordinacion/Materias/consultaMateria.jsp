@@ -114,7 +114,7 @@
                                     <html:form action="/vincularMateriaCoordinacion" onsubmit="return(this)" style="margin: 0px;">
                                         <html:hidden name="mat" property="codigo" />
                                         <center>
-                                            <html:submit styleClass="btn btn-default" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                            <html:submit styleClass="btn btn-success" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;">
                                                 Vincular
                                             </html:submit>
                                         </center>
@@ -150,7 +150,7 @@
                                     <html:form action="/desvincularMateriaCoordinacion" onsubmit="return(this)" style="margin: 0px;">
                                         <html:hidden name="mat" property="codigo" />
                                         <center>
-                                            <html:submit styleClass="btn btn-default" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                            <html:submit styleClass="btn btn-danger" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;">
                                                 Desvincular
                                             </html:submit>
                                         </center>

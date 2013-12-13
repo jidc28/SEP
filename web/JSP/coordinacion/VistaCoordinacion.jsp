@@ -53,7 +53,7 @@
                             <h5 align ="center">Listar Materias Vinculadas</h5>
                         </html:link>
                         <html:link action="/listarDepartamentos" >
-                            <h5 align ="center">Listar Departamentos</h5>
+                            <h5 align ="center">Vincular Materias por Departamento</h5>
                         </html:link>  
                     </div>
                 </div>

@@ -108,51 +108,70 @@
                         <td>Lapso Contractual</td>
                         <td colspan="2" style="color: firebrick">
                             <p style="font-size: 12px;">Formato: mm/dd/aaaa</p>
-                                <div id="datetimepicker1" class="input-append">
-                                  <html:text name="profesor" property="lapso_contractual_inicio" style="height: 30px; width: 100px;"></html:text>
-                                  <span class="add-on" style="height: 30px">
+                            <div id="datetimepicker1" class="input-append">
+                                <html:text name="profesor" property="lapso_contractual_inicio" style="height: 30px; width: 100px;"></html:text>
+                                <span class="add-on" style="height: 30px">
                                     <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                     </i>
-                                  </span>
-                                </div>
-                                <div id="datetimepicker2" class="input-append">
-                                  <html:text name="profesor" property="lapso_contractual_fin" style="height: 30px; width: 100px;"></html:text>
-                                  <span class="add-on" style="height: 30px">
+                                </span>
+                            </div>
+                            <div id="datetimepicker2" class="input-append">
+                                <html:text name="profesor" property="lapso_contractual_fin" style="height: 30px; width: 100px;"></html:text>
+                                <span class="add-on" style="height: 30px">
                                     <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                                     </i>
-                                  </span>
-                                </div>
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <td>Nivel</td>
                         <td>
-                            <html:select style="width: 258px;" property="nivel">
-                                <html:option value="Ayudante Academico">Ayudante Académico</html:option>
-                                <html:option value="Asistente">Asistente</html:option>
-                                <html:option value="Agregado">Agregado</html:option>
-                                <html:option value="Asociado">Asociado</html:option>
-                                <html:option value="Titular">Titular</html:option>
+                            <html:select style="width: 258px;" name="profesor" property="nivel">
+                                <option>
+                                    <bean:write name="profesor" property="nivel"/>
+                                </option>
+                                <logic:iterate name="niveles" id="nivel_i">
+                                    <option>
+                                        <bean:write name="nivel_i"/>
+                                    </option>
+                                </logic:iterate>
                             </html:select>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 280px;">¿Ha sido jubilado en el último año de una institución de la administración pública?</td>
                         <td>
-                            <html:select style="width: 258px;" property="jubilado">
-                                <html:option value="S">Si</html:option>
-                                <html:option value="N">No</html:option>
-                            </html:select>
+                            <logic:equal name="profesor" property="nivel" value="Ayudante Academico">
+                                <html:select style="width: 258px;" property="jubilado" disabled="true">
+                                    <html:option value="N">No</html:option>
+                                </html:select>
+                                <html:hidden name="profesor" property="jubilado" value="N"/>
+                            </logic:equal>
+                            <logic:notEqual name="profesor" property="nivel" value="Ayudante Academico">
+                                <logic:equal name="profesor" property="jubilado" value="N">
+                                    <html:select style="width: 258px;" property="jubilado">
+                                        <html:option value="N">No</html:option>
+                                        <html:option value="S">Si</html:option>
+                                    </html:select>
+                                </logic:equal>
+                                <logic:equal name="profesor" property="jubilado" value="S">
+                                    <html:select style="width: 258px;" property="jubilado">
+                                        <html:option value="S">Si</html:option>
+                                        <html:option value="N">No</html:option>
+                                    </html:select>
+                                </logic:equal>
+                            </logic:notEqual>
                         </td>
                 </tbody>
             </table>
             <br>
-            <center>
-                <html:submit styleClass="btn btn-success" onclick="javascript: return confirm('¿Los datos ingresados son correctos?')"> 
-                    Guardar Datos 
-                </html:submit>
-            </center>
-            </html:form>
-            
-    </body>
+        <center>
+            <html:submit styleClass="btn btn-success" onclick="javascript: return confirm('¿Los datos ingresados son correctos?')"> 
+                Guardar Datos 
+            </html:submit>
+        </center>
+    </html:form>
+
+</body>
 </html>

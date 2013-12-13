@@ -17,7 +17,7 @@
         <a class="menuitem" href="noimplementado.jsp">
             Perfil
         </a>
-        <html:link action="irInicio.do">
+        <html:link styleClass="menuitem" action="irInicio.do">
             Inicio
         </html:link>
         <a class="menuitem" href="noimplementado.jsp">

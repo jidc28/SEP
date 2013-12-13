@@ -60,7 +60,12 @@
                 Se ha enviado la solicitud para evaluar a los profesores.
             </div>
         </logic:present>
-
+        <logic:present name="no_seleccionado">
+            <div class="alert alert-danger" id="alert">
+                No ha seleccionado ningun profesor a evaluar.
+            </div>
+        </logic:present>
+        
         <h4> Evaluar Profesores:</h4>
 
     <center>
