@@ -39,24 +39,22 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
         <logic:present name="success">
-            <br>
-            <p align ="center" style="background-color: springgreen;
-               width: 300px; margin-left: auto; margin-right: auto">
+            <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
                 Núcleo universitario registrado exitosamente.
-            </p>
+            </div>
         </logic:present>
         <logic:present name="modificacion">
-            <br>
-            <p align ="center" style="background-color: springgreen;
-               width: 300px; margin-left: auto; margin-right: auto">
+            <div class="alert alert-success" style="width: 760px;margin-bottom: 0px; margin-right: 0px;">
                 Núcleo universitario modificado exitosamente.
-            </p>
+            </div>
         </logic:present>
         
         <h4> Lista de Nucleos Universitarios en el sistema:</h4>
@@ -67,41 +65,73 @@
                         <th width="20%" align="center">
                             Localización
                         </th>
-                        <th width="20%" align="center">
-                            Nombre Nucleo
+                        <th width="38%" align="center">
+                            Nombre
                         </th>
                         <th width="20%" align="center">
                             Estado
                         </th>
                         <th width="20%" align="center">
-                            Modificar Nombre
-                        </th>
-                        <th width="20%" align="center">
-                            Modificar Estado
+                            Modificar
                         </th>
                     </tr>
                 </thead>
-                <logic:iterate name="nucleos" id="Nucleos">
+                <logic:iterate name="nucleos_visibles" id="NucV">
                     <tr>
                         <td width="20%" align="center">
-                            <bean:write name="Nucleos" property="codigo"/>
+                            <bean:write name="NucV" property="codigo"/>
                         </td>
                         <td width="20%" align="center">
-                            <bean:write name="Nucleos" property="nombre"/>
+                            <bean:write name="NucV" property="nombre"/>
                         </td>
                         <td width="20%" align="center">
-                            <bean:write name="Nucleos" property="estado"/>
-                        </td>
-                        <td width="20%" align="center">
-                            <html:form action="/editarNombreNucleoUniversitario" onsubmit="return(this)">
-                                <html:hidden name="Nucleos" property="codigo"/>
-                                <html:image src="imagenes/edit.png" value="" property=""/>
+                            <html:form action="/ocultarNucleoUniversitario" onsubmit="return(this)" style="margin: 0px;">
+                                <center>
+                                    <html:hidden name="NucV" property="codigo"/>
+                                    <html:submit styleClass="btn btn-warning" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea ocultar el Núcleo Universitario?')">
+                                        Ocultar
+                                    </html:submit>
+                                </center>
                             </html:form>
                         </td>
                         <td width="20%" align="center">
-                            <html:form action="/cambiarStatusNucleoUniversitario" onsubmit="return(this)">
-                                <html:hidden name="Nucleos" property="codigo"/>
-                                <html:image src="imagenes/visibilidad.png" value="" property=""/>
+                            <html:form action="/editarNombreNucleoUniversitario" onsubmit="return(this)" style="margin:0px;">
+                                <html:hidden name="NucV" property="codigo"/>
+                                <button type="button" class="btn btn-primary" 
+                                        style="padding-bottom: 1px; padding-top: 1px; padding-left: 2px; padding-right: 2px;">
+                                    <html:image src="imagenes/edit-img.png" value="" property="" style="height: 27px;"/>
+                                </button>
+                            </html:form>
+                        </td>
+                    </tr>
+                </logic:iterate>
+                <logic:iterate name="nucleos_ocultos" id="NucO">
+                    <tr>
+                        <td width="20%" align="center">
+                            <bean:write name="NucO" property="codigo"/>
+                        </td>
+                        <td width="20%" align="center">
+                            <bean:write name="NucO" property="nombre"/>
+                        </td>
+                        <td width="20%" align="center">
+                            <html:form action="/mostrarNucleoUniversitario" onsubmit="return(this)" style="margin: 0px;">
+                                <center>
+                                    <html:hidden name="NucO" property="codigo"/>
+                                    <html:submit styleClass="btn btn-success" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea ocultar el Núcleo Universitario?')">
+                                        Mostrar
+                                    </html:submit>
+                                </center>
+                            </html:form>
+                        </td>
+                        <td width="20%" align="center">
+                            <html:form action="/editarNombreNucleoUniversitario" onsubmit="return(this)" style="margin:0px;">
+                                <html:hidden name="NucO" property="codigo"/>
+                                <button type="button" class="btn btn-primary" 
+                                        style="padding-bottom: 1px; padding-top: 1px; padding-left: 2px; padding-right: 2px;">
+                                    <html:image src="imagenes/edit-img.png" value="" property="" style="height: 27px;"/>
+                                </button>
                             </html:form>
                         </td>
                     </tr>

@@ -11,13 +11,15 @@
         <form-bean name="Coordinacion" type="Clases.Coordinacion"/>
         <form-bean name="CreateUserForm" type="Forms.CreateUserForm"/>
         <form-bean name="Decanato" type="Clases.Decanato"/>
+        <form-bean name="Departamento" type="Clases.Departamento"/>
         <form-bean name="EliminarUserForm" type="Forms.EliminarUserForm"/>
+        <form-bean name="Materia" type="Clases.Materia"/>
         <form-bean name="ModificarInfoPForm" type="Forms.ModificarInfoPForm"/>
         <form-bean name="NucleoUniversitario" type="Clases.NucleoUniversitario"/>
         <form-bean name="Profesor" type="Clases.Profesor"/>
         <form-bean name="Usuario" type="Clases.Usuario"/>
         <form-bean name="DACE" type="Sistemas.DACE"/>
-    
+        <form-bean name="MultiBox" type="Clases.MultiBox"/>
     </form-beans>
     
     <global-exceptions>
@@ -52,46 +54,37 @@
             parameter="vistaDecanato">
         </action>
         
+        <action path="/vistaDepartamento"
+            type="org.apache.struts.actions.ForwardAction"
+            scope="request"
+            validate="false"
+            parameter="vistaDepartamento">
+        </action>
+        
         <action name="Usuario" path="/irInicio" scope="request" type="Otros.Inicio" validate="false">
             <forward name="profesor" path="vistaProfesor"/>
             <forward name="administrador" path="vistaAdmin"/>
             <forward name="decanato" path="vistaDecanato"/>
+            <forward name="departamento" path="vistaDepartamento"/>
+            <forward name="coordinacion" path="vistaCoordinacion"/>
         </action>
         
         <!--       LOGIN         -->
         <action input="/Login.jsp" name="Usuario" path="/login" scope="request" type="Session.LoginAction" validate="false">
             <forward name="profesor" path="vistaProfesor"/>
             <forward name="administrador" path="vistaAdmin"/>
-            <forward name="decanato" path="vistaDecanato"></forward>
+            <forward name="decanato" path="vistaDecanato"/>
+            <forward name="departamento" path="vistaDepartamento"/>
+            <forward name="coordinacion" path="vistaCoordinacion"/>
             <forward name="failure" path="/Login.jsp"/>
         </action>
         
         <!-- VISTA ADMINISTRADOR -->
-        <action input="/VistaAdministrador.jsp" path="/createUserA" scope="request" type="Actions.Usuario.CreateUserA" validate="false">
-            <forward name="success" path="crearUsuario"/>
-            <forward name="failure" path="/Login.jsp"/>
-        </action>
-
-        <action input="/VistaAdministrador.jsp" path="/NucleoUnivA" scope="request" type="Actions.NucleoUniversitario.NucleoUnivA" validate="false">
-            <forward name="success" path="agregaNucleoUniv"/>
-        </action>
-        <action input="/VistaAdministrador.jsp" path="/showUserA" scope="request" type="Actions.Usuario.ShowUserA" validate="false">
-            <forward name="success" path="showUser"/>
-        </action>
-        <action input="/VistaAdministrador.jsp" path="/listarProfesores" scope="request" type="Actions.Profesor.ListaProfesorAction" validate="false">
-            <forward name="success" path="listaProfesores"/>
-        </action>
-        <action input="/VistaAdministrador.jsp" path="/agregaCarreraA" scope="request" type="Actions.Carrera.AgregaCarreraA">
-            <forward name="success" path="agregaCarrera"/>
-        </action>
         <action input="/VistaAdministrador.jsp" path="/agregaDecanatoA" scope="request" type="Actions.Decanato.AgregaDecanatoA">
             <forward name="success" path="agregaDecanato"/>
         </action>
         <action input="/VistaAdministrador.jsp" path="/agregaCoordinacionA" scope="request" type="Actions.Coordinacion.AgregaCoordinacionA">
             <forward name="success" path="agregaCoordinacion"/>
-        </action>
-        <action input="/VistaAdministrador.jsp" path="/consultaCarreraA" scope="request" type="Actions.Carrera.ConsultaCarreraA" validate="false">
-            <forward name="success" path="consultaCarrera"/>
         </action>
         <action input="/VistaAdministrador.jsp" path="/consultaDecanatoA" scope="request" type="Actions.Decanato.ConsultaDecanatoA" validate="false">
             <forward name="success" path="consultaDecanato"/>
@@ -99,41 +92,12 @@
         <action input="/VistaAdministrador.jsp" path="/consultaCoordinacionA" scope="request" type="Actions.Coordinacion.ConsultaCoordinacionA" validate="false">
             <forward name="success" path="consultaCoordinacion"/>
         </action>
-        <action input="/VistaAdministrador.jsp" path="/consultaNucleoUniversitarioA" scope="request" type="Actions.NucleoUniversitario.ConsultaNucleoUniversitarioA" validate="false">
-            <forward name="success" path="consultaNucleoUniversitario"/>
-        </action>
-        
-        <!-- NUCLEOS UNIVERSITARIOS -->
-        <action input="/AgregaNucleoUniv.jsp" name="NucleoUniversitario" path="/registrarNucleoUniv" scope="request" type="Actions.NucleoUniversitario.RegistrarNucleoUniv" validate="false">
-            <forward name="success" path="consultaNucleoUniversitario"/>
-            <forward name="failure" path="agregaNucleoUniv"/>
-            <forward name="yaregistrada" path="agregaNucleoUniv"/>
-        </action>
-        <action input="/ConsultaNucleoUniversitario.jsp" name="NucleoUniversitario" path="/editarNombreNucleoUniversitario" scope="request" type="Actions.NucleoUniversitario.EditarNombreNucleoUniversitario" validate="false">
-            <forward name="success" path="editarNombreNucleoUniversitario"/>
-        </action>
-        <action input="/EditarNombreNucleoUniversitario.jsp" name="NucleoUniversitario" path="/cambiarNombreNucleoUniversitarioA" scope="request" type="Actions.NucleoUniversitario.CambiarNombreNucleoUniversitarioA" validate="false">
-            <forward name="success" path="consultaNucleoUniversitario"/>
-            <forward name="failure" path="editarNombreNucleoUniversitario"/>
-        </action>
-        <action input="/ConsultaNucleoUniversitario.jsp" name="NucleoUniversitario" path="/cambiarStatusNucleoUniversitario" scope="request" type="Actions.NucleoUniversitario.cambiarStatusNucleoUniversitario" validate="false">
-            <forward name="success" path="editarStatusNucleoUniversitario"/>
-        </action>
-        <action input="/EditarStatusNucleoUniversitario.jsp" name="NucleoUniversitario" path="/cambiarStatusNucleoUniversitarioA" scope="request" type="Actions.NucleoUniversitario.CambiarStatusNucleoUniversitarioA" validate="false">
-            <forward name="success" path="consultaNucleoUniversitario"/>
-        </action>
         
         <!--       DECANATOS        -->
         <action input="/AgregaDecanato.jsp" name="Decanato" path="/registrarDecanato" scope="request" type="Actions.Decanato.RegistrarDecanato" validate="false">
             <forward name="success" path="consultaDecanato"/>
             <forward name="failure" path="agregaDecanato"/> 
             <forward name="yaregistrada" path="agregaDecanato"/> 
-        </action>
-        <action input="/ConsultaDecanato.jsp" name="Decanato" path="/cambiarStatusDecanato" scope="request" type="Actions.Decanato.cambiarStatusDecanato" validate="false">
-            <forward name="success" path="editarStatusDecanato"/>
-        </action>
-        <action input="/ConsultaDecanato.jsp" name="Decanato" path="/cambiarStatusDecanatoA" scope="request" type="Actions.Decanato.CambiarStatusDecanatoA" validate="false">
-            <forward name="success" path="consultaDecanato"/>
         </action>
         <action input="/ConsultaDecanato.jsp" name="Decanato" path="/editarNombreDecanato" scope="request" type="Actions.Decanato.EditarNombreDecanato" validate="false">
             <forward name="success" path="editarNombreDecanato"/>
@@ -149,12 +113,6 @@
             <forward name="failure" path="agregaCoordinacion"/>
             <forward name="yaregistrada" path="agregaCoordinacion"/>
         </action>
-        <action input="/ConsultaCoordinacion.jsp" name="Coordinacion" path="/cambiarStatusCoordinacion" scope="request" type="Actions.Coordinacion.cambiarStatusCoordinacion" validate="false">
-            <forward name="success" path="editarStatusCoordinacion"/>
-        </action>
-        <action input="/ConsultaCoordinacion.jsp" name="Coordinacion" path="/cambiarStatusCoordinacionA" scope="request" type="Actions.Coordinacion.CambiarStatusCoordinacionA" validate="false">
-            <forward name="success" path="consultaCoordinacion"/>
-        </action>
         <action input="/ConsultaCoordinacion.jsp" name="Coordinacion" path="/editarNombreCoordinacion" scope="request" type="Actions.Coordinacion.EditarNombreCoordinacion" validate="false">
             <forward name="success" path="editarNombreCoordinacion"/>
         </action>
@@ -165,53 +123,89 @@
         <action input="/ConsultarCoordinacion.jsp" name="Coordinacion" path="/eliminaCoordinacionA" scope="request" type="Actions.Coordinacion.EliminaCoordinacionA" validate="false">
             <forward name="success" path="consultaCoordinacion"/>
             <forward name="failure" path="consultaCoordinacion"/>
-        </action> 
+        </action>
         
+        <action input="/VistaCoordinacion.jsp" name="Departamentos" path="/listarDepartamentos" scope="request" type="Actions.Departamento.ConsultaDepartamentoA" validate="false">
+            <forward name="success" path="consultaDepartamentoCoordinacion"/>
+        </action>
+        <action input="/ConsultaDepartamento.jsp" name="Departamento" path="/listarMateriasDepto" scope="request" type="Actions.Materia.ConsultaMateria" validate="false">
+            <forward name="success" path="consultaMaterias"/>
+        </action>
+        <action input="/ConsultaMateriasDepartamento.jsp" name="Materia" path="/vincularMateriaCoordinacion" scope="request" type="Actions.Materia.agregaMateria" validate="false">
+            <forward name="success" path="consultaMaterias"/>
+            <forward name="failure" path="consultaMaterias"/>
+        </action>
+        <action input="/ConsultaMaterias.jsp" name="Materia" path="/desvincularMateriaCoordinacion" scope="request" type="Actions.Materia.EliminaMateria" validate="false">
+            <forward name="success" path="consultaMaterias"/>
+            <forward name="failure" path="consultaMaterias"/>
+        </action>
+        <action input="/VistaCoordinacion.jsp" name="Materia" path="/listarMaterias" scope="request" type="Actions.Materia.ConsultaMateriasCoordinacion" validate="false">
+            <forward name="success" path="consultaMaterias"/>
+        </action>
         
-        <!--       CARRERAS         -->
-        <action input="/AgregaCarrera.jsp" name="Carrera" path="/registrarCarrera" scope="request" type="Actions.Carrera.RegistrarCarrera" validate="false">
-            <forward name="success" path="consultaCarrera"/>
-            <forward name="failure" path="agregaCarrera"/>
-            <forward name="yaregistrada" path="agregaCarrera"/> 
-        </action>
-        <action input="/ConsultaCarrera.jsp" name="Carrera" path="/cambiarStatusCarrera" scope="request" type="Actions.Carrera.cambiarStatusCarrera" validate="false">
-            <forward name="success" path="editarStatusCarrera"/>
-        </action>
-        <action input="/ConsultaCarrera.jsp" name="Carrera" path="/cambiarStatusCarreraA" scope="request" type="Actions.Carrera.CambiarStatusCarreraA" validate="false">
-            <forward name="success" path="consultaCarrera"/>
-        </action>
-        <action input="/ConsultaCarrera.jsp" name="Carrera" path="/editarNombre" scope="request" type="Actions.Carrera.EditarNombreCarrera" validate="false">
-            <forward name="success" path="editarNombreCarrera"/>
-        </action>
-        <action input="/EditarNombreCarrera.jsp" name="Carrera" path="/cambiarNombreCarreraA" scope="request" type="Actions.Carrera.CambiarNombreCarreraA" validate="false">
-            <forward name="success" path="consultaCarrera"/>
-            <forward name="failure" path="editarNombreCarrera"/> 
-        </action>  
-        <action input="/ConsultarCarrera.jsp" name="Carrera" path="/eliminaCarreraA" scope="request" type="Actions.Carrera.EliminaCarreraA" validate="false">
-            <forward name="success" path="consultaCarrera"/>
-            <forward name="failure" path="consultaCarrera"/>
-        </action>      
+        <!--     DEPARTAMENTOS      --> 
         
-        <!--         USUARIOS       -->
-        <action input="/CreateUser.jsp" name="CreateUserForm" path="/createUser" scope="request" type="Actions.Usuario.CreateUserAction" validate="false">
-            <forward name="failure" path="crearUsuario"/>
-            <forward name="yaregistrado" path="crearUsuario"/> <!-- TRABAJO DOBLEEEEEEEEEE PENDIENTEEE-->
-            <forward name="success" path="vistaAdmin"/>
+        <action input="/ConsultaDepartamentoDecanato.jsp" name="Departamento" path="/ocultarDepartamento" scope="request" type="Actions.Departamento.ocultarDepartamento" validate="false">
+            <forward name="administrador" path="consultaDepartamentoDec"/>
+            <forward name="decanato" path="consultaDepartamento"/>
+            <forward name="failure" path="consultaDepartamento"/>
+        </action>
+        <action input="/ConsultaDepartamentoDecanato.jsp" name="Departamento" path="/mostrarDepartamento" scope="request" type="Actions.Departamento.mostrarDepartamento" validate="false">
+            <forward name="administrador" path="consultaDepartamentoDec"/>
+            <forward name="decanato" path="consultaDepartamento"/>
+            <forward name="failure" path="consultaDepartamento"/>
+        </action>
+        <action input="/ConsultaDepartamentoDecanato.jsp" name="Departamento" path="/editarNombreDepartamento" scope="request" type="Actions.Departamento.editarNombreDepartamento" validate="false">
+            <forward name="success" path="editarNombreDepartamento"/>
+        </action>
+        
+        <!-- ACCIONES JEFE DE DEPARTAMENTO -->
+        <action input="/VistaDepartamento.jsp" name="Departamento" path="/consultaMateria" scope="request" type="Actions.Materia.ConsultaMateria" validate="false">
+            <forward name="success" path="consultaMateria"/>
+            <forward name="failure" path="consultaMateria"/>
+        </action>
+        
+        <action input="/VistaDecanato.jsp" name="MultiBox" path="/irMultibox" validate="false" scope="request" type="Actions.Profesor.IrEvaluarProfesores">
+            <forward name="success" path="consultaProfesor"/>
+        </action>
+        
+        <action input="/ConsultaProfesores.jsp" name="MultiBox" path="/multibox" validate="false" scope="request" type="Actions.Profesor.EnviarMemoEvaluarProfesores">
+            <forward name="success" path="consultaProfesor"/>
+        </action>
+        
+        <action path="/vistaAgregaMateria"
+            type="org.apache.struts.actions.ForwardAction"
+            scope="request"
+            validate="false"
+            parameter="agregaMateria">
+        </action>
+        
+        <action input="/ConsultaMateria.jsp" name="Materia" path="/eliminaMateria" scope="request" type="Actions.Materia.EliminaMateria" validate="false">
+            <forward name="success" path="consultaMateria"/>
         </action>
 
-        
+        <action input="/ConsultaMateria.jsp" name="Materia" path="/irModificarMateria" scope="request" type="Actions.Materia.IrModificarMateria" validate="false">
+            <forward name="success" path="modificaMateria"/>
+        </action>
+
+        <action input="/ConsultaMateria.jsp" name="Materia" path="/modificaMateria" scope="request" type="Actions.Materia.ModificaMateria" validate="false">
+            <forward name="success" path="consultaMateria"/>
+        </action>
                 
-                        
-                                        
+        <!-- ACCIONES COORDINADOR -->
+        <action input="/VistaCoordinacion.jsp" name="Coordinacion" path="/listarEvaluacionesPendientes" scope="request" type="Actions.Evaluaciones.ListarEvaluacionesPendientes" validate="false">
+            <forward name="success" path="listarEvaluacionesPendientes"/>
+        </action>
+        
+        <!--         OTROS       -->               
         <action scope="request" input="/" path="/cerrarSesion" type="Session.CerrarSesion" validate="false">
             <forward name="success" path="/Login.jsp"/>
         </action>
         
+        
         <action input="/AgregarInfoP.jsp" name="DACE" path="/consultaDace" scope="request" type="Sistemas.DaceAction" validate="false">
             <forward name="success" path="agregarInfoPDace"/>
         </action>
-       
-        
         <action input="/VistaProfesor.jsp" name="ModificarInfoPForm" path="/modificarInfoP" scope="request" type="Actions.Profesor.modificarInfoP" validate="false">
             <forward name="success" path="modificarInfoP"/>
             <forward name="failure" path="vistaProfesor"/>
@@ -229,7 +223,7 @@
         </action>
  
         <action name="NoImplementado" path="/noImplementado" scope="request" type="Otros.noimplementadoAction" validate="false">
-            <fordward name="success" path="/noimplementado.jsp"/>
+            <forward name="success" path="/noimplementado.jsp"/>
         </action>
         
         <action path="/Welcome" forward="/welcomeStruts.jsp"/>

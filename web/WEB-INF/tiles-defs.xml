@@ -150,7 +150,7 @@
     <!-- DECANATO -->
     
     <definition name="baseDecanato" extends="base"> <!-- BASE PARA DECANATO -->
-    <!-- No estoy segura de si hay que modificar el sidebar izquierdo -->
+        <!-- No estoy segura de si hay que modificar el sidebar izquierdo -->
         <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDecanato.jsp"/>
     </definition>
     
@@ -158,4 +158,70 @@
         <put name="body" value="/JSP/decanato/VistaDecanato.jsp"/>
     </definition>
 
+    <definition name="consultaCarreraDec" extends="baseDecanato"> <!-- Consultar Carreras -->
+        <put name="body" value="/JSP/admin/Carreras/ConsultaCarreraDecanato.jsp"/>
+    </definition>
+    
+    <definition name="consultaDepartamentoDec" extends="baseDecanato"> <!-- Consultar Carreras -->
+        <put name="body" value="/JSP/admin/Departamentos/ConsultaDepartamentoDecanato.jsp"/>
+    </definition>
+    
+    <definition name="consultaDepartamento" extends="baseDecanato"> <!-- Consulta Departamentos -->
+        <put name="body" value="/JSP/admin/Departamentos/ConsultaDepartamentoDecanato.jsp"/>
+    </definition>
+    
+    <definition name="editarNombreDepartamento" extends="baseDecanato"> <!-- Consulta Departamentos -->
+        <put name="body" value="/JSP/admin/Departamentos/ConsultaDepartamentoDecanato.jsp"/>
+    </definition>
+
+    <!-- DEPARTAMENTO --> 
+    <definition name="baseDepartamento" extends="base"> 
+        <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDecanato.jsp"/>
+    </definition>
+
+    <definition name="vistaDepartamento" extends="baseDepartamento"> <!-- Vista Departamento -->
+        <put name="body" value="/JSP/departamento/VistaDepartamento.jsp"/>
+    </definition>
+    
+    <definition name="consultaMateria" extends="baseDepartamento"> <!-- Consulta Materias -->
+        <put name="body" value="/JSP/departamento/Materias/ConsultaMateria.jsp"/>
+    </definition>
+    
+    <definition name="consultaProfesor" extends="baseDepartamento"> <!-- Consulta Materias -->
+        <put name="body" value="/JSP/departamento/Profesores/ConsultaProfesores.jsp"/>
+    </definition>
+    
+    <definition name="consultaProfesores" extends="baseDepartamento"> <!-- Consulta Materias -->
+        <put name="body" value="/ConsultaProfesores.jsp"/>
+    </definition>
+    
+    <definition name="agregaMateria" extends="baseDepartamento"> <!-- Consulta Materias -->
+        <put name="body" value="/JSP/departamento/Materias/AgregaMateria.jsp"/>
+    </definition>
+    
+    <definition name="modificaMateria" extends="baseDepartamento"> <!-- Consulta Materias -->
+        <put name="body" value="/JSP/departamento/Materias/ModificaMateria.jsp"/>
+    </definition>
+    
+    <!-- COORDINACION -->
+    <definition name="baseCoordinacion" extends="base"> <!-- BASE PARA COORDINACION -->
+        <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDecanato.jsp"/>
+    </definition>
+    
+    <definition name="vistaCoordinacion" extends="baseCoordinacion">
+        <put name="body" value="/JSP/coordinacion/VistaCoordinacion.jsp"/>
+    </definition>
+    
+    <definition name="consultaDepartamentoCoordinacion" extends="baseCoordinacion">
+        <put name="body" value="/JSP/coordinacion/Departamentos/consultaDepartamento.jsp"/>
+    </definition>
+    
+    <definition name="consultaMaterias" extends="baseCoordinacion">
+        <put name="body" value="/JSP/coordinacion/Materias/consultaMateria.jsp"/>
+    </definition>
+    
+    <definition name="listarEvaluacionesPendientes" extends="baseCoordinacion">
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/listarEvaluacionesPendientes.jsp"/>
+    </definition>
+    
 </tiles-definitions>

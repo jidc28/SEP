@@ -15,6 +15,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
@@ -25,29 +29,34 @@
         <html:form action="/registrarDecanato" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
             <table border="0">
                 <tbody>
-                    <tr>
+                    <tr style="height: 35px;">
                         <td style="color: black">Codigo del Decanato</td>
                         <td>
                             <html:text name="Decanato" property="codigo" maxlength="10" value="" errorStyleClass="error"
+                                       style="margin-bottom: 0px;height: 30px;"
                                        errorKey="org.apache.struts.action.ERROR"></html:text>
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="color:firebrick">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="color:firebrick">
                             <html:errors property="codigo"/>
                         </td>
                     </tr>
-
                     <tr>
                         <td style="color: black">Nombre del Decanato</td>
                         <td>
-                            <html:text name="Decanato" property="nombre" maxlength="50" value="" errorStyleClass="error"
-                                       errorKey="org.apache.struts.action.ERROR"></html:text>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="color:firebrick">
+                            <html:text property="nombre" name="Decanato" maxlength="50" errorKey="org.apache.struts.action.ERROR"/>
+                            <!--
+                            <html:textarea name="Decanato" property="nombre" errorStyleClass="error"
+                                       style="margin-bottom: 0px;"
+                                       rows="5"
+                                       errorKey="org.apache.struts.action.ERROR"/>
+                            -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="color:firebrick">
                             <html:errors property="nombre"/>
                         </td>
                     <tr>
@@ -57,11 +66,12 @@
                     </tr>
                 </tbody>
             </table>
-            <p style="text-align: center">
-                <html:submit onclick="javascript: return confirm('¿Está seguro de que los datos son correctos?')">
-                    Agregar Decanato
+            <p style="text-align: center; margin-top: 10px;">
+                <html:submit styleClass="btn btn-success"
+                             onclick="javascript: return confirm('¿Está seguro de que los datos son correctos?')">
+                    Agregar
                 </html:submit>
-                <html:reset value="Limpiar"/>
+                <html:reset styleClass="btn btn-default" value="Limpiar"/>
             </p>
 
         </html:form>

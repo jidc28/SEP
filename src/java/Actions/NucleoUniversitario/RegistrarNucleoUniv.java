@@ -67,8 +67,9 @@ public class RegistrarNucleoUniv extends org.apache.struts.action.Action {
 
             if (registro) {
 
-                ArrayList<NucleoUniversitario> nucleos = DBMS.getInstance().listarNucleosUniversitarios();
-                request.setAttribute("nucleos", nucleos);
+                ArrayList<NucleoUniversitario> [] nucleos = DBMS.getInstance().listarNucleosUniversitarios();
+                session.setAttribute("nucleos_visibles", nucleos[0]);
+                session.setAttribute("nucleos_ocultos", nucleos[1]);
                 request.setAttribute("success", SUCCESS);
                 return mapping.findForward(SUCCESS);
             } else {

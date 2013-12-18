@@ -41,69 +41,65 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
-        <title>Gestion de Planillas de Evaluacion</title>
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
+        <title>Gestion de Decanatos</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
         <logic:present name="success">
-            <br>
-            <p align ="center" style="background-color: springgreen;
-               width: 300px; margin-left: auto; margin-right: auto">
+            <div class="alert alert-success" id="alert">
                 Decanato registrado exitosamente.
-            </p>
+            </div>
         </logic:present>
         <logic:present name="modificacion">
-            <br>
-            <p align ="center" style="background-color: springgreen;
-               width: 300px; margin-left: auto; margin-right: auto">
+            <div class="alert alert-success" id="alert">
                 Decanato modificado exitosamente.
-            </p>
+            </div>
         </logic:present>
-        
+        <logic:present name="falla">
+            <div class="alert alert-danger" id="alert">
+                Decanato no fue modificado exitosamente.
+            </div>
+        </logic:present>
         <h4> Lista de Decanatos en el sistema:</h4>
-        <div id="testTable">
-            <table border="0" style="margin: auto" class="altrowstable" id="alternatecolor">
+        <div id="tabla" class="table-responsive">
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th width="20%" align="center">
+                        <th>
+                            <center>
                             Codigo
+                            </center>
                         </th>
-                        <th width="20%" align="center">
+                        <th>
+                            <center>
                             Nombre Decanato
+                            </center>
                         </th>
-                        <th width="20%" align="center">
-                            Estado
-                        </th>
-                        <th width="20%" align="center">
-                            Modificar Nombre
-                        </th>
-                        <th width="20%" align="center">
-                            Modificar Estado
+                        <th>
+                            <center>
+                            Modificar
+                            </center>
                         </th>
                     </tr>
                 </thead>
-                <logic:iterate name="decanatos" id="Decanatos">
+                <logic:iterate name="decanatos" id="Dec">
                     <tr>
                         <td width="20%" align="center">
-                            <bean:write name="Decanatos" property="codigo"/>
+                            <bean:write name="Dec" property="codigo"/>
+                        </td>
+                        <td>
+                            <bean:write name="Dec" property="nombre"/>
                         </td>
                         <td width="20%" align="center">
-                            <bean:write name="Decanatos" property="nombre"/>
-                        </td>
-                        <td width="20%" align="center">
-                            <bean:write name="Decanatos" property="estado"/>
-                        </td>
-                        <td width="20%" align="center">
-                            <html:form action="/editarNombreDecanato" onsubmit="return(this)">
-                                <html:hidden name="Decanatos" property="codigo"/>
-                                <html:image src="imagenes/edit.png" value="" property=""/>
-                            </html:form>
-                        </td>
-                        <td width="20%" align="center">
-                            <html:form action="/cambiarStatusDecanato" onsubmit="return(this)">
-                                <html:hidden name="Decanatos" property="codigo"/>
-                                <html:image src="imagenes/visibilidad.png" value="" property=""/>
+                            <html:form action="/editarNombreDecanato" onsubmit="return(this)" style="margin: 0px;">
+                                <html:hidden name="Dec" property="codigo"/>
+                                <button type="button" class="btn btn-primary" 
+                                        style="padding-bottom: 1px; padding-top: 1px; padding-left: 2px; padding-right: 2px;">
+                                    <html:image src="imagenes/edit-img.png" value="" property="" style="height: 27px;"/>
+                                </button>
                             </html:form>
                         </td>
                     </tr>

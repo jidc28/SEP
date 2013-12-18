@@ -68,7 +68,7 @@ public class RegistrarCoordinacion extends org.apache.struts.action.Action {
             
             if(registro){
                 ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
-                request.setAttribute("coordinaciones", coords);
+                session.setAttribute("coordinaciones", coords);
                 request.setAttribute("success", SUCCESS);
             return mapping.findForward(SUCCESS);
             } else {

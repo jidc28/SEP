@@ -40,9 +40,10 @@ public class ConsultaNucleoUniversitarioA extends org.apache.struts.action.Actio
         
         HttpSession session = request.getSession(true);
 
-        ArrayList<NucleoUniversitario> nucleos = DBMS.getInstance().listarNucleosUniversitarios();
+        ArrayList<NucleoUniversitario> [] nucleos = DBMS.getInstance().listarNucleosUniversitarios();
 
-            session.setAttribute("nucleos", nucleos);
-            return mapping.findForward(SUCCESS);
+        session.setAttribute("nucleos_visibles", nucleos[0]);
+        session.setAttribute("nucleos_ocultos", nucleos[1]);
+        return mapping.findForward(SUCCESS);
     }
 }

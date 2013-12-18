@@ -1,7 +1,14 @@
 INSERT INTO USUARIO VALUES ('admin','administrador','admin','admin');
-INSERT INTO USUARIO VALUES ('decanato','decanato','decanato','decanato');
-INSERT INTO USUARIO VALUES ('coordinacion','coordinacion','coordinacion','coordinacion');
-INSERT INTO USUARIO VALUES ('departamento','departamento','departamento','departamento');
+INSERT INTO USUARIO VALUES (1003,'decanato','decanato','decanato');
+INSERT INTO USUARIO VALUES ('C-0039','coordinacion','coordinacion','coordinacion');
+INSERT INTO USUARIO VALUES ('C-0003','coordinacion','coordinacion','coordinacion');
+INSERT INTO USUARIO VALUES ('D-2022','departamento','departamento','departamento');
+INSERT INTO USUARIO VALUES ('C-0017','departamento','coord','null');
+
+INSERT INTO USUARIO VALUES ('22-90457','profesor','admin','X');
+INSERT INTO USUARIO VALUES ('28-63146','profesor','admin','X');
+INSERT INTO USUARIO VALUES ('84-73618','profesor','admin','X');
+INSERT INTO USUARIO VALUES ('43-62893','profesor','admin','X');
 
 INSERT INTO COORDINACION VALUES ('C-0001','Coordinacion de Administracion de Turismo y Hoteleria');
 INSERT INTO COORDINACION VALUES ('C-0002','Coordinacion de Alimentos');
@@ -62,30 +69,6 @@ INSERT INTO DECANATO VALUES (1003,'Decanato de Estudios Profesionales');
 INSERT INTO DECANATO VALUES (1004,'Decanato de Estudios Tecnologicos');
 INSERT INTO DECANATO VALUES (1005,'Decanato de Extension Universitaria');
 INSERT INTO DECANATO VALUES (1006,'Decanato de Investigacion y Desarrollo');
-
-
-INSERT INTO NUCLEOUNIV VALUES ('Sartenejas','USB - Caracas, Sede Sartenejas');
-INSERT INTO NUCLEOUNIV VALUES ('La Guaira','USB - La Guaira, Sede Camurí Grande');
-
-INSERT INTO CARRERA VALUES ('0100','Ingeniería Eléctrica');
-INSERT INTO CARRERA VALUES ('0200','Ingeniería Mecánica');
-INSERT INTO CARRERA VALUES ('0300','Ingeniería Química');
-INSERT INTO CARRERA VALUES ('0600','Ingeniería Electrónica');
-INSERT INTO CARRERA VALUES ('1500','Ingeniería de Materiales');
-INSERT INTO CARRERA VALUES ('0800','Ingeniería de la Computación');
-INSERT INTO CARRERA VALUES ('1200','Ingeniería Geofísica');
-INSERT INTO CARRERA VALUES ('1700','Ingeniería de Producción');
-INSERT INTO CARRERA VALUES ('9000','Ingeniería de Mantenimiento');
-INSERT INTO CARRERA VALUES ('9100','Ingeniería de Telecomunicaciones');
-INSERT INTO CARRERA VALUES ('0400','Licenciatura en Química');
-INSERT INTO CARRERA VALUES ('0500','Licenciatura en Matemáticas');
-INSERT INTO CARRERA VALUES ('1000','Licenciatura en Física');
-INSERT INTO CARRERA VALUES ('1900','Licenciatura en Biología');
-INSERT INTO CARRERA VALUES ('0700','Arquitectura');
-INSERT INTO CARRERA VALUES ('1100','Urbanismo');
-INSERT INTO CARRERA VALUES ('3200','Licenciatura en Comercio Internacional');
-INSERT INTO CARRERA VALUES ('3000','Licenciatura en Gestión de la Hospitalidad');
-
 
 INSERT INTO DEPARTAMENTO VALUES ('D-2001','Departamento de Administracion de Personal');
 INSERT INTO DEPARTAMENTO VALUES ('D-2002','Departamento de Administracion y Almacen');
@@ -161,3 +144,25 @@ INSERT INTO DEPARTAMENTO VALUES ('D-2071','Departamento de Tecnologia Informatic
 INSERT INTO DEPARTAMENTO VALUES ('D-2072','Departamento de Termodinamica y Fenomenos de Transferencia');
 INSERT INTO DEPARTAMENTO VALUES ('D-2073','Departamento de Tesoreria');
 INSERT INTO DEPARTAMENTO VALUES ('D-2074','Departamento de Urbanismo');
+
+INSERT INTO PROFESOR VALUES ('22-90457','Rebecca','Bolaffi','2530218','M','RebeccaBolaffi@usb.ve','RebeccaBolaffi@gmail.com','ayudanteAcad','no','11-11-2011','11-11-2013');
+INSERT INTO PROFESOR VALUES ('28-63146','Martin','Torino','9501558','F','MartinTorino@usb.ve','MartinTorino@gmail.com','asociado','no','11-11-2011','11-11-2013');
+INSERT INTO PROFESOR VALUES ('84-73618','Alberto','Riera','5370644','F','AlbertoRiera@usb.ve','AlbertoRiera@gmail.com','titular','no','11-11-2011','11-11-2013');
+INSERT INTO PROFESOR VALUES ('43-62893','Alejandra','Tovar','15326570','F','AlejandraTovar@usb.ve','AlejandraTovar@gmail.com','asistente','no','11-11-2011','11-11-2013');
+
+INSERT INTO MATERIA VALUES ('PS6116','Sistemas de informacion II');
+INSERT INTO MATERIA VALUES ('PS1115','Sistemas de informacion I');
+INSERT INTO MATERIA VALUES ('CI5311','Bases de Datos II');
+
+INSERT INTO oferta VALUES ('PS6116','D-2022');
+INSERT INTO oferta VALUES ('PS1115','D-2022');
+INSERT INTO oferta VALUES ('CI5311','D-2022');
+
+INSERT INTO pertenece VALUES ('22-90457','D-2022');
+INSERT INTO pertenece VALUES ('28-63146','D-2022');
+INSERT INTO pertenece VALUES ('84-73618','D-2022');
+INSERT INTO pertenece VALUES ('43-62893','D-2022');
+
+INSERT INTO maneja VALUES('C-0052','PS6116');
+INSERT INTO maneja VALUES('C-0043','PS6116');
+INSERT INTO maneja VALUES('C-0001','PS6116');

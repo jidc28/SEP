@@ -68,7 +68,11 @@ public class RegistrarDecanato extends org.apache.struts.action.Action {
             if (registro) {
 
                 ArrayList<Decanato> dcnto = DBMS.getInstance().listarDecanatos();
-                request.setAttribute("decanatos", dcnto);
+
+        //si existen decanatos registrados
+
+            //retorno a pagina de exito
+                session.setAttribute("dcnto", dcnto);
                 request.setAttribute("success", SUCCESS);
                 return mapping.findForward(SUCCESS);
             } else {

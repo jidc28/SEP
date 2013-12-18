@@ -39,94 +39,85 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
 
         <logic:present name="success">
-            <br>
-            <p align ="center" style="background-color: springgreen;
-               width: 300px; margin-left: auto; margin-right: auto">
+            <div class="alert alert-success" id="alert">
                 Coordinación registrada exitosamente.
-            </p>
+            </div>
         </logic:present>
 
         <logic:present name="modificacion">
-            <br>
-            <p align ="center" style="background-color: springgreen;
-               width: 300px; margin-left: auto; margin-right: auto">
+            <div class="alert alert-success" id="alert">
                 Coordinacion modificada exitosamente.
-            </p>
+            </div>
         </logic:present>
             
         <logic:present name="eliminado">
-            <br>
-            <p align ="center" style="background-color: springgreen;
-               width: 300px; margin-left: auto; margin-right: auto"> 
+            <div class="alert alert-success" id="alert">
                Coordinacion eliminada exitosamente.
-            </p>
+            </div>
         </logic:present>
             
         <logic:present name="noEliminado">
-            <br>
-            <p align ="center" style="background-color: springgreen;
-               width: 300px; margin-left: auto; margin-right: auto"> 
+            <div class="alert alert-danger" id="alert">
                La coordinacion no pudo ser eliminada exitosamente.
-            </p>
+            </div>
         </logic:present>
           
         <h4> Lista de Coordinaciones en el sistema:</h4>
-        <div id="testTable">
-            <table border="0" style="margin: auto" class="altrowstable" id="alternatecolor">
+        <div id="tabla" class="table-responsive">
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th width="20%" align="center">
+                        <th>
+                            <center>
                             Codigo
+                            </center>
                         </th>
-                        <th width="20%" align="center">
+                        <th>
+                            <center>
                             Nombre Coordinacion
+                            </center>
                         </th>
-                        <th width="20%" align="center">
-                            Estado
-                        </th>
-                        <th width="20%" align="center">
+                        <th>
+                            <center>
                             Modificar Nombre
+                            </center>
                         </th>
-                        <th width="20%" align="center">
-                            Modificar Estado
-                        </th>
-                        <th width="20%" align="center">
+                        <th>
+                            <center>
                             Eliminar
+                            </center>
                         </th>
                     </tr>
                 </thead>
-                <logic:iterate name="coordinaciones" id="Coordinaciones">
+                <logic:iterate name="coordinaciones" id="Coord">
                     <tr>
-                        <td width="20%" align="center">
-                            <bean:write name="Coordinaciones" property="codigo"/>
+                        <td align="center">
+                            <bean:write name="Coord" property="codigo"/>
                         </td>
-                        <td width="20%" align="center">
-                            <bean:write name="Coordinaciones" property="nombre"/>
+                        <td>
+                            <bean:write name="Coord" property="nombre"/>
                         </td>
-                        <td width="20%" align="center">
-                            <bean:write name="Coordinaciones" property="estado"/>
-                        </td>
-                        <td width="20%" align="center">
-                            <html:form action="/editarNombreCoordinacion" onsubmit="return(this)">
-                                <html:hidden name="Coordinaciones" property="codigo"/>
-                                <html:image src="imagenes/edit.png" value="" property=""/>
-                            </html:form>
-                        </td>
-                        <td width="20%" align="center">
-                            <html:form action="/cambiarStatusCoordinacion" onsubmit="return(this)">
-                                <html:hidden name="Coordinaciones" property="codigo"/>
-                                <html:image src="imagenes/visibilidad.png" value="" property=""/>
+                        <td align="center">
+                            <html:form action="/editarNombreCoordinacion" onsubmit="return(this)" style="margin: 0px;">
+                                <html:hidden name="Coord" property="codigo"/>
+                                <button type="button" class="btn btn-primary" 
+                                        style="padding-bottom: 1px; padding-top: 1px; padding-left: 2px; padding-right: 2px;">
+                                    <html:image src="imagenes/edit-img.png" value="" property="" style="height: 27px;"/>
+                                </button>
                             </html:form>
                         </td>
                         <td>
-                            <html:form action="/eliminaCoordinacionA" onsubmit="return(this)">
-                                <html:hidden name="Coordinaciones" property="codigo"/>
-                                <html:submit>
+                            <html:form action="/eliminaCoordinacionA" onsubmit="return(this)" style="margin: 0px;">
+                                <html:hidden name="Coord" property="codigo"/>
+                                <html:submit styleClass="btn btn-danger" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea eliminar la coordinacion?')">
                                     Eliminar
                                 </html:submit>
                             </html:form>

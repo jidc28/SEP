@@ -14,25 +14,27 @@
 <html:html lang="true">
     <body>
         <div id="body-content">
-            
+
             <div>
                 <tiles:insert attribute="banner"/>
             </div>
-            
+
             <div id="sidebarL">
                 <tiles:insert attribute="sidebarL"/>
             </div>
-            
+
             <tiles:insert attribute="sidebarR"/>
-            
-            <div style="width:760px; margin-left: auto;margin-right: auto;">
-                <tiles:insert attribute="body"/>
-            </div>
-            
+
+            <center>
+                <div id="content">
+                    <tiles:insert attribute="body"/>
+                </div>
+            </center>
+
             <div>
                 <tiles:insert attribute="footer"/> 
             </div>
-            
+
         </div>
     </body>
 </html:html>

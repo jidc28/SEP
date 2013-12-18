@@ -66,8 +66,9 @@ public class CambiarNombreNucleoUniversitarioA extends org.apache.struts.action.
 
             if (actualizo) {
 
-                ArrayList<NucleoUniversitario> nucleos = DBMS.getInstance().listarNucleosUniversitarios();
-                request.setAttribute("nucleos", nucleos);
+                ArrayList<NucleoUniversitario> [] nucleos = DBMS.getInstance().listarNucleosUniversitarios();
+                session.setAttribute("nucleos_visibles", nucleos[0]);
+                session.setAttribute("nucleos_ocultos", nucleos[1]);
                 request.setAttribute("modificacion", SUCCESS);
 
 

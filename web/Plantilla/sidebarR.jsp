@@ -14,7 +14,7 @@
 <html>
     <div id="sidebarR">
         <a href="http://www.usb.ve/">
-            <img width="150" height="50" src="imagenes/somosusb.gif"/>
+            <img width="100%" height="50" src="imagenes/somosusb.gif"/>
         </a>
     </div>
 </html>

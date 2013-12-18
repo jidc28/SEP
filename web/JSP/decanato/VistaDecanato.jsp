@@ -17,29 +17,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link href="css/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
         <title>Gestion de Planillas de Evaluación</title>
     </head>
     <body>
         <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                            Gestión de Carreras
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="panel-body">
-                    <html:link action="/agregaCarreraA" >
-                        <h5 align ="center">Agregar Carrera</h5>
-                    </html:link>
-                    <html:link action="/consultaCarreraA" >
-                        <h5 align ="center">Consultar Carrera</h5>
-                    </html:link>
-                    </div>
-                </div>
-            </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">

@@ -173,8 +173,6 @@ public class Carrera extends org.apache.struts.action.ActionForm {
             // TODO: add 'error.name.required' key to your resources
         }
         
-        
-        
         return errors;
     }
 }

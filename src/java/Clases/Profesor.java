@@ -18,40 +18,41 @@ import org.apache.struts.action.ActionMessage;
  */
 public class Profesor extends org.apache.struts.action.ActionForm {
 
-    private static final String patronEmail = "^([a-zA-Z0-9]+(-|_)*[a-zA-Z0-9]*@[a-zA-Z]+.[a-zA-Z]+)*$";
+    private static final String patronEmail = "^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private String usbid;
     private String nombre;
     private String apellido;
     private String cedula;
     private String genero;
     private String email;
+    private String email_personal;
     private String nivel;
+    private String[] niveles = {"Ayudante Academico", "Asistente", "Agregado", "Asociado", "Titular"};
     private String jubilado;
-    private String lapso_contractual;
-    private String errorEmailFormato;
+    private String lapso_contractual_inicio;
+    private String lapso_contractual_fin;
     private Pattern patron;
     private Matcher match;
 
-    public String getErrorEmailFormato() {
-        return errorEmailFormato;
+    public String[] getNiveles() {
+        return niveles;
     }
 
-    public void setErrorEmailFormato(String errorEmailFormato) {
-        if (errorEmailFormato.equals("")) {
-            this.errorEmailFormato = "";
-        } else {
-            this.errorEmailFormato = "<span style='color:red'>Campo Email con formato incorrecto (Sugerencia: nombre@dominio.com).</span>";
+    public String getEmail_personal() {
+        return email_personal;
+    }
 
-        }
+    public void setEmail_personal(String email_personal) {
+        this.email_personal = email_personal;
     }
 
     public Profesor() {
-        patron = Pattern.compile(patronEmail);
+        
     }
 
-    public boolean validate(final String carnet) {
-
-        match = patron.matcher(carnet);
+    public boolean validarEmail(final String email) {
+        patron = Pattern.compile(patronEmail);
+        match = patron.matcher(email);
         return match.matches();
     }
 
@@ -119,12 +120,20 @@ public class Profesor extends org.apache.struts.action.ActionForm {
         this.jubilado = jubilado;
     }
 
-    public String getLapso_contractual() {
-        return lapso_contractual;
+    public String getLapso_contractual_inicio() {
+        return lapso_contractual_inicio;
     }
 
-    public void setLapso_contractual(String lapso_contractual) {
-        this.lapso_contractual = lapso_contractual;
+    public void setLapso_contractual_inicio(String lapso_contractual_inicio) {
+        this.lapso_contractual_inicio = lapso_contractual_inicio;
+    }
+
+    public String getLapso_contractual_fin() {
+        return lapso_contractual_fin;
+    }
+
+    public void setLapso_contractual_fin(String lapso_contractual_fin) {
+        this.lapso_contractual_fin = lapso_contractual_fin;
     }
 
     /**
@@ -134,11 +143,9 @@ public class Profesor extends org.apache.struts.action.ActionForm {
      * @param request The HTTP Request we are processing.
      * @return
      */
+    @Override
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
-
-
-        this.setErrorEmailFormato("");
 
         try {
             Integer.parseInt(getCedula());
@@ -148,7 +155,11 @@ public class Profesor extends org.apache.struts.action.ActionForm {
 
         }
 
-        if (!validate(getEmail())) {
+        if (!validarEmail(this.email)) {
+            errors.add("email", new ActionMessage("error.email.malformulado"));
+        }
+
+        if (!validarEmail(this.email_personal)) {
             errors.add("email", new ActionMessage("error.email.malformulado"));
         }
 
