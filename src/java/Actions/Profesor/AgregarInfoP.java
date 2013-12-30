@@ -4,7 +4,6 @@
  */
 package Actions.Profesor;
 
-import Clases.Carrera;
 import DBMS.DBMS;
 import Forms.ModificarInfoPForm;
 import Clases.Profesor;

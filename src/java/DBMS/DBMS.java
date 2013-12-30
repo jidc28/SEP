@@ -1,6 +1,5 @@
 package DBMS;
 
-import Clases.Carrera;
 import Clases.Coordinacion;
 import Forms.CreateUserForm;
 import Clases.Decanato;
@@ -8,7 +7,6 @@ import Clases.Departamento;
 import Clases.Materia;
 import Clases.dicta;
 import Forms.EliminarUserForm;
-import Clases.NucleoUniversitario;
 import Clases.Profesor;
 import Clases.Usuario;
 import Sistemas.CCT;
@@ -48,7 +46,7 @@ public class DBMS {
         try {
             Class.forName("org.postgresql.Driver");
             conexion = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/evalproftemporal",
+                    "jdbc:postgresql://localhost:5432/evalprof",
                     "langtech",
                     "evalprof");
             return true;
@@ -206,7 +204,6 @@ public class DBMS {
                 Decanato u = new Decanato();
                 u.setCodigo(rs.getString("codigo"));
                 u.setNombre(rs.getString("nombre"));
-                u.setEstado(rs.getString("Estado"));
                 dcnto.add(u);
             }
 
@@ -227,42 +224,12 @@ public class DBMS {
                 Coordinacion u = new Coordinacion();
                 u.setCodigo(rs.getString("codigo"));
                 u.setNombre(rs.getString("nombre"));
-                u.setEstado(rs.getString("Estado"));
                 coords.add(u);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return coords;
-    }
-
-    public ArrayList<NucleoUniversitario>[] listarNucleosUniversitarios() {
-
-        ArrayList<NucleoUniversitario>[] nucleos = new ArrayList[2];
-        ArrayList<NucleoUniversitario> visibles = new ArrayList<NucleoUniversitario>(0);
-        ArrayList<NucleoUniversitario> ocultos = new ArrayList<NucleoUniversitario>(0);
-        PreparedStatement ps = null;
-        try {
-            ps = conexion.prepareStatement("SELECT * FROM NUCLEOUNIV ORDER BY CODIGO");
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                NucleoUniversitario u = new NucleoUniversitario();
-                u.setCodigo(rs.getString("codigo"));
-                u.setNombre(rs.getString("nombre"));
-                u.setEstado(rs.getString("Estado"));
-                if (u.getEstado().equals("visible")) {
-                    visibles.add(u);
-                } else {
-                    ocultos.add(u);
-                }
-            }
-            nucleos[0] = visibles;
-            nucleos[1] = ocultos;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return nucleos;
     }
 
     public ArrayList<Departamento> listarDepartamentos() {
@@ -404,67 +371,6 @@ public class DBMS {
 
     }
 
-    public boolean registrarCarrera(Carrera u) {
-
-        PreparedStatement psAgregar1 = null;
-
-        try {
-            psAgregar1 = conexion.prepareStatement("INSERT INTO carrera(codigo, nombre) VALUES (?, ?);");
-            psAgregar1.setString(1, u.getCodigo());
-            psAgregar1.setString(2, u.getNombre());
-
-            Integer i = psAgregar1.executeUpdate();
-
-            return i > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
-
-    public boolean registrarCarreraDec(Carrera u, String decanato) {
-
-        PreparedStatement psAgregar1 = null;
-        PreparedStatement psAgregar2 = null;
-
-        try {
-            psAgregar1 = conexion.prepareStatement("INSERT INTO carrera(codigo, nombre) VALUES (?, ?);");
-            psAgregar1.setString(1, u.getCodigo());
-            psAgregar1.setString(2, u.getNombre());
-            Integer i = psAgregar1.executeUpdate();
-
-            psAgregar2 = conexion.prepareStatement("INSERT INTO incluye VALUES (?,?);");
-            psAgregar2.setString(2, u.getCodigo());
-            psAgregar2.setString(1, decanato);
-            Integer j = psAgregar2.executeUpdate();
-
-            return i > 0 && j > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
-
-    public boolean eliminarCarrera(Carrera u) {
-
-        PreparedStatement psEliminar1 = null;
-        try {
-            psEliminar1 = conexion.prepareStatement("DELETE FROM carrera AS c WHERE (c.codigo = ?);");
-            psEliminar1.setString(1, u.getCodigo());
-
-            Integer i = psEliminar1.executeUpdate();
-
-            System.out.println("retorna: " + (i > 0));
-            return i > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
-
     public boolean eliminarCoordinacion(Coordinacion u) {
 
         PreparedStatement psEliminar1 = null;
@@ -538,138 +444,6 @@ public class DBMS {
         }
     }
 
-    public boolean registrarNucleoUniv(NucleoUniversitario n) {
-        PreparedStatement psAgregar = null;
-
-        try {
-            psAgregar = conexion.prepareStatement("INSERT INTO NUCLEOUNIV(codigo, nombre) VALUES (?, ?);");
-            psAgregar.setString(1, n.getCodigo());
-            psAgregar.setString(2, n.getNombre());
-
-            Integer i = psAgregar.executeUpdate();
-
-            return i > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
-
-    public boolean actualizarEstadoCoordinacion(Coordinacion u) {
-        PreparedStatement ps = null;
-        try {
-
-            ps = conexion.prepareStatement("UPDATE COORDINACION SET Estado = ? WHERE ( codigo = ? )");
-
-            ps.setString(1, u.getEstado());
-            ps.setString(2, u.getCodigo());
-            Integer s = ps.executeUpdate();
-
-            return s > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-
-    }
-
-    public boolean actualizarEstadoCarrera(Carrera u) {
-        PreparedStatement ps = null;
-        try {
-
-            ps = conexion.prepareStatement("UPDATE carrera SET Estado = ? WHERE ( codigo = ? )");
-
-            ps.setString(1, u.getEstado());
-            ps.setString(2, u.getCodigo());
-            Integer s = ps.executeUpdate();
-
-            return s > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-
-    }
-
-    public boolean actualizarEstadoDecanato(Decanato u) {
-        PreparedStatement ps = null;
-        try {
-
-            ps = conexion.prepareStatement("UPDATE decanato SET Estado = ? WHERE ( codigo = ? )");
-
-            ps.setString(1, u.getEstado());
-            ps.setString(2, u.getCodigo());
-            Integer s = ps.executeUpdate();
-
-            return s > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-
-    }
-
-    public boolean actualizarEstadoNucleoUniversitario(NucleoUniversitario u) {
-        PreparedStatement ps = null;
-        try {
-
-            ps = conexion.prepareStatement("UPDATE NUCLEOUNIV SET Estado = ? WHERE ( codigo = ? )");
-
-            ps.setString(1, u.getEstado());
-            ps.setString(2, u.getCodigo());
-            Integer s = ps.executeUpdate();
-
-            return s > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-
-    }
-
-    public boolean actualizarEstadoDepartamento(Departamento u) {
-        PreparedStatement ps = null;
-        try {
-
-            ps = conexion.prepareStatement("UPDATE DEPARTAMENTO SET Estado = ? WHERE ( codigo = ? )");
-
-            ps.setString(1, u.getEstado());
-            ps.setString(2, u.getCodigo());
-            Integer s = ps.executeUpdate();
-
-            return s > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-
-    }
-
-    public boolean actualizarNombreCarrera(Carrera u) {
-        PreparedStatement ps = null;
-        try {
-
-            ps = conexion.prepareStatement("UPDATE carrera SET nombre = ? WHERE ( codigo = ? )");
-
-            ps.setString(1, u.getNombre());
-            ps.setString(2, u.getCodigo());
-            Integer s = ps.executeUpdate();
-
-            return s > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-
-    }
-
     public boolean actualizarNombreDecanato(Decanato u) {
         PreparedStatement ps = null;
         try {
@@ -706,47 +480,6 @@ public class DBMS {
         }
     }
 
-    public boolean actualizarNombreNucleoUniversitario(NucleoUniversitario u) {
-        PreparedStatement ps = null;
-        try {
-
-            ps = conexion.prepareStatement("UPDATE NUCLEOUNIV SET nombre = ? WHERE ( codigo = ? )");
-
-            ps.setString(1, u.getNombre());
-            ps.setString(2, u.getCodigo());
-            Integer s = ps.executeUpdate();
-
-            return s > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
-
-    public Carrera obtenerNombreCarrera(Carrera u) {
-
-        PreparedStatement ps = null;
-        try {
-            ps = conexion.prepareStatement("SELECT * FROM carrera WHERE codigo = ?");
-            ps.setString(1, u.getCodigo());
-
-            ResultSet rs = ps.executeQuery();
-
-
-
-            while (rs.next()) {
-                u.setNombre(rs.getString("nombre"));
-            }
-
-            return u;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return u;
-    }
-
     public Decanato obtenerNombreDecanato(Decanato u) {
 
         PreparedStatement ps = null;
@@ -775,29 +508,6 @@ public class DBMS {
         PreparedStatement ps = null;
         try {
             ps = conexion.prepareStatement("SELECT * FROM COORDINACION WHERE codigo = ?");
-            ps.setString(1, u.getCodigo());
-
-            ResultSet rs = ps.executeQuery();
-
-
-
-            while (rs.next()) {
-                u.setNombre(rs.getString("nombre"));
-            }
-
-            return u;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return u;
-    }
-
-    public NucleoUniversitario obtenerNombreNucleoUniversitario(NucleoUniversitario u) {
-
-        PreparedStatement ps = null;
-        try {
-            ps = conexion.prepareStatement("SELECT * FROM NUCLEOUNIV WHERE codigo = ?");
             ps.setString(1, u.getCodigo());
 
             ResultSet rs = ps.executeQuery();

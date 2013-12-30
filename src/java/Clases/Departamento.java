@@ -20,7 +20,6 @@ public class Departamento extends org.apache.struts.action.ActionForm {
     
     private String codigo;
     private String nombre;
-    private String estado;
     private String codigo_materias;
 
     public String getCodigo_materias() {
@@ -46,15 +45,6 @@ public class Departamento extends org.apache.struts.action.ActionForm {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-    
     
     
     /**
