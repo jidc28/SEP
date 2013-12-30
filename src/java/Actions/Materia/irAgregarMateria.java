@@ -4,9 +4,8 @@
  */
 package Actions.Materia;
 
-import DBMS.DBMS;
 import Clases.*;
-import java.util.ArrayList;
+import DBMS.DBMS;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,7 +17,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author admin
  */
-public class IrModificarMateria extends org.apache.struts.action.Action {
+public class irAgregarMateria extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -42,13 +41,8 @@ public class IrModificarMateria extends org.apache.struts.action.Action {
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         
         String codigo_materias = DBMS.getInstance().obtenerDatosDepartamento(usuario.getUsbid());
-        Materia materia = (Materia) form;
-
-        materia = DBMS.getInstance().obtenerDatosMateria(materia);
-        materia.setViejoCodigo(materia.getCodigo());
         
         request.setAttribute("codigo_materias",codigo_materias);
-        request.setAttribute("materia",materia);
         return mapping.findForward(SUCCESS);
     }
 }

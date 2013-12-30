@@ -1039,9 +1039,28 @@ public class DBMS {
                 m = new Materia();
                 m.setCodigo(rs.getString("codigo"));
                 m.setNombre(rs.getString("nombre"));
+                m.setCreditos(rs.getString("creditos"));
             }
 
             return m;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    public String obtenerDatosDepartamento(String departamento) {
+        PreparedStatement ps = null;
+
+        try {
+            ps = conexion.prepareStatement("SELECT * FROM DEPARTAMENTO WHERE codigo = ?;");
+            ps.setString(1, departamento);
+
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            
+            return rs.getString("codigo_materias");
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -1164,5 +1183,33 @@ public class DBMS {
             ex.printStackTrace();
         }
         return null;
+    }
+    
+    public boolean registrarMateria(Materia m, String id_departamento) {
+        
+        PreparedStatement ps1 = null;
+        PreparedStatement ps2 = null;
+        
+        try {
+            ps1 = conexion.prepareStatement("INSERT INTO MATERIA(codigo, nombre, creditos, estado) VALUES (?, ?, ?, ?);");
+            ps1.setString(1, m.getCodigo());
+            ps1.setString(2, m.getNombre());
+            ps1.setString(3, m.getCreditos());
+            ps1.setString(4, "visible");
+            
+            ps2 = conexion.prepareStatement("INSERT INTO OFERTA(codigo_materia, codigo_departamento) VALUES (?, ?);");
+            ps2.setString(1, m.getCodigo());
+            ps2.setString(2, id_departamento);
+            
+            Integer i = ps1.executeUpdate();
+            Integer j = ps2.executeUpdate();
+            
+            
+            return i > 0 && j > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 }

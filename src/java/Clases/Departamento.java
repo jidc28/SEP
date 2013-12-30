@@ -21,6 +21,15 @@ public class Departamento extends org.apache.struts.action.ActionForm {
     private String codigo;
     private String nombre;
     private String estado;
+    private String codigo_materias;
+
+    public String getCodigo_materias() {
+        return codigo_materias;
+    }
+
+    public void setCodigo_materias(String codigo_materias) {
+        this.codigo_materias = codigo_materias;
+    }
 
     public String getCodigo() {
         return codigo;

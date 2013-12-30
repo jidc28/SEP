@@ -173,11 +173,12 @@
             <forward name="success" path="consultaProfesor"/>
         </action>
         
-        <action path="/vistaAgregaMateria"
-            type="org.apache.struts.actions.ForwardAction"
-            scope="request"
-            validate="false"
-            parameter="agregaMateria">
+        <action input="/AgregaMateria.jsp" name="Materia" path="/agregaMateria" validate="false" scope="request" type="Actions.Materia.agregaMateria">
+            <forward name="success" path="consultaMateria"/>
+        </action>
+        
+        <action input="/VistaDepartamento.jsp" name="Materia" path="/vistaAgregaMateria" validate="false" scope="request" type="Actions.Materia.irAgregarMateria">
+            <forward name="success" path="agregaMateria"/>
         </action>
         
         <action input="/ConsultaMateria.jsp" name="Materia" path="/eliminaMateria" scope="request" type="Actions.Materia.EliminaMateria" validate="false">
