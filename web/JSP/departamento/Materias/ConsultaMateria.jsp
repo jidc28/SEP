@@ -51,7 +51,16 @@
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
-
+        <logic:present name="materia_agregada">
+            <div class="alert alert-success" id="alert">
+                La materia fue agregada exitosamente.
+            </div>
+        </logic:present>
+        <logic:present name="materia_no_agregada">
+            <div class="alert alert-danger" id="alert">
+                La materia no pudo ser agregada, intentelo mas tarde.
+            </div>
+        </logic:present>
         <logic:present name="materia_eliminada">
             <div class="alert alert-success" id="alert">
                 La materia fue eliminada exitosamente.

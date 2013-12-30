@@ -1,5 +1,5 @@
 <%-- 
-    Document   : AgregarCoordinacion
+    Document   : AgregarMateria
     Created on : 10/06/2013, 07:43:54 PM
     Author     : Langtech
 --%>
@@ -26,109 +26,155 @@
 
         <h4>Registro de Materias</h4>
 
-        <html:form action="/registrarCoordinacion" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
+        <html:form action="/agregaMateria" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
             <table border="0" style="margin-top: 50px;">
                 <tbody>
                     <tr style="height: 35px;">
-                        <td style="color: black" colspan="7">Codigo de la Materia</td>
-                        <!--<td>
-                        <html:text name="Coordinacion" property="codigo" maxlength="10" value="" errorStyleClass="error"
-                                   style="margin-bottom: 0px;height: 30px;"
-                                   errorKey="org.apache.struts.action.ERROR"></html:text>
-
-                        </td>-->
-                    </tr>
-                    <tr>
-                        <td style="padding-bottom: 55px; padding-left: 5px;">
-                            <input type="radio" name="1"> A <br>
-                            <input type="radio" name="1"> B <br>
-                            <input type="radio" name="1"> C <br>
-                            <input type="radio" name="1"> D <br>
-                            <input type="radio" name="1"> E <br>
-                            <input type="radio" name="1"> F <br>
-                        </td>
-                        <td style="padding-bottom: 55px; padding-left: 5px;">
-                            <input type="radio" name="2"> A <br>
-                            <input type="radio" name="2"> B <br>
-                            <input type="radio" name="2"> C <br>
-                            <input type="radio" name="2"> D <br>
-                            <input type="radio" name="2"> E <br>
-                            <input type="radio" name="2"> F <br>
-                        </td>
-                        <td style="padding-bottom: 55px; padding-left: 5px;">
-                            <input type="radio" name="3"> A <br>
-                            <input type="radio" name="3"> B <br>
-                            <input type="radio" name="3"> C <br>
-                            <input type="radio" name="3"> D <br>
-                            <input type="radio" name="3"> E <br>
-                            <input type="radio" name="3"> F <br>
-                        </td>
-                        <td style="padding-left: 5px;">
-                            <input type="radio" name="4"> 1 <br>
-                            <input type="radio" name="4"> 2 <br>
-                            <input type="radio" name="4"> 3 <br>
-                            <input type="radio" name="4"> 4 <br>
-                            <input type="radio" name="4"> 5 <br>
-                            <input type="radio" name="4"> 6 <br>
-                            <input type="radio" name="4"> 7 <br>
-                            <input type="radio" name="4"> 8 <br>
-                            <input type="radio" name="4"> 9 <br>
-                        </td>
-                        <td style="padding-left: 5px;">
-                            <input type="radio" name="5"> 1 <br>
-                            <input type="radio" name="5"> 2 <br>
-                            <input type="radio" name="5"> 3 <br>
-                            <input type="radio" name="5"> 4 <br>
-                            <input type="radio" name="5"> 5 <br>
-                            <input type="radio" name="5"> 6 <br>
-                            <input type="radio" name="5"> 7 <br>
-                            <input type="radio" name="5"> 8 <br>
-                            <input type="radio" name="5"> 9 <br>
-                        </td>
-                        <td>
-                            <input type="radio" name="6"> 1 <br>
-                            <input type="radio" name="6"> 2 <br>
-                            <input type="radio" name="6"> 3 <br>
-                            <input type="radio" name="6"> 4 <br>
-                            <input type="radio" name="6"> 5 <br>
-                            <input type="radio" name="6"> 6 <br>
-                            <input type="radio" name="6"> 7 <br>
-                            <input type="radio" name="6"> 8 <br>
-                            <input type="radio" name="6"> 9 <br>
-                        </td>
-                        <td style="padding-left: 5px;">
-                            <input type="radio" name="4"> 1 <br>
-                            <input type="radio" name="4"> 2 <br>
-                            <input type="radio" name="4"> 3 <br>
-                            <input type="radio" name="4"> 4 <br>
-                            <input type="radio" name="4"> 5 <br>
-                            <input type="radio" name="4"> 6 <br>
-                            <input type="radio" name="4"> 7 <br>
-                            <input type="radio" name="4"> 8 <br>
-                            <input type="radio" name="4"> 9 <br>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="7" style="color:firebrick">
+                        <td style="color: black" colspan="4">Codigo de la Materia</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 3px;" colspan="4">
+                                <center>
+                                    <input class="form-control"
+                                           value="<bean:write name='codigo_materias'/>" 
+                                           disabled="true"
+                                           style="width: 40%; text-align: center; height: 30px;">
+                                </center>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td style="padding-left: 5px;">
+                                <html:radio property="num1" value="1">
+                                    1
+                                </html:radio><br>
+                                <html:radio property="num1" value="2">
+                                    2
+                                </html:radio><br>
+                                <html:radio property="num1" value="3">
+                                    3
+                                </html:radio><br>
+                                <html:radio property="num1" value="4">
+                                    4
+                                </html:radio><br>
+                                <html:radio property="num1" value="5">
+                                    5
+                                </html:radio><br>
+                                <html:radio property="num1" value="6">
+                                    6
+                                </html:radio><br>
+                                <html:radio property="num1" value="7">
+                                    7
+                                </html:radio><br>
+                                <html:radio property="num1" value="8">
+                                    8
+                                </html:radio><br>
+                                <html:radio property="num1" value="9">
+                                    9
+                                </html:radio><br>
+                            </td>
+                            <td style="padding-left: 5px;">
+                                <html:radio property="num2" value="1">
+                                    1
+                                </html:radio><br>
+                                <html:radio property="num2" value="2">
+                                    2
+                                </html:radio><br>
+                                <html:radio property="num2" value="3">
+                                    3
+                                </html:radio><br>
+                                <html:radio property="num2" value="4">
+                                    4
+                                </html:radio><br>
+                                <html:radio property="num2" value="5">
+                                    5
+                                </html:radio><br>
+                                <html:radio property="num2" value="6">
+                                    6
+                                </html:radio><br>
+                                <html:radio property="num2" value="7">
+                                    7
+                                </html:radio><br>
+                                <html:radio property="num2" value="8">
+                                    8
+                                </html:radio><br>
+                                <html:radio property="num2" value="9">
+                                    9
+                                </html:radio><br>
+                            </td>
+                            <td>
+                                <html:radio property="num3" value="1">
+                                    1
+                                </html:radio><br>
+                                <html:radio property="num3" value="2">
+                                    2
+                                </html:radio><br>
+                                <html:radio property="num3" value="3">
+                                    3
+                                </html:radio><br>
+                                <html:radio property="num3" value="4">
+                                    4
+                                </html:radio><br>
+                                <html:radio property="num3" value="5">
+                                    5
+                                </html:radio><br>
+                                <html:radio property="num3" value="6">
+                                    6
+                                </html:radio><br>
+                                <html:radio property="num3" value="7">
+                                    7
+                                </html:radio><br>
+                                <html:radio property="num3" value="8">
+                                    8
+                                </html:radio><br>
+                                <html:radio property="num3" value="9">
+                                    9
+                                </html:radio><br>
+                            </td>
+                            <td>
+                                <html:radio property="num4" value="1">
+                                    1
+                                </html:radio><br>
+                                <html:radio property="num4" value="2">
+                                    2
+                                </html:radio><br>
+                                <html:radio property="num4" value="3">
+                                    3
+                                </html:radio><br>
+                                <html:radio property="num4" value="4">
+                                    4
+                                </html:radio><br>
+                                <html:radio property="num4" value="5">
+                                    5
+                                </html:radio><br>
+                                <html:radio property="num4" value="6">
+                                    6
+                                </html:radio><br>
+                                <html:radio property="num4" value="7">
+                                    7
+                                </html:radio><br>
+                                <html:radio property="num4" value="8">
+                                    8
+                                </html:radio><br>
+                                <html:radio property="num4" value="9">
+                                    9
+                                </html:radio><br>         
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="color:firebrick">
                             <html:errors property="codigo"/>
                         </td>
                     </tr>
 
                     <tr  style="height: 35px;">
-                        <td style="color: black" colspan="7">Nombre de la Materia</td>
+                        <td style="color: black" colspan="4">Nombre de la Materia</td>
                     </tr>
                     <tr  style="height: 35px;">
-                        <td colspan="7">
-                            <html:text property="nombre" name="Coordinacion" style="width: 100%; height: 100%;" maxlength="50" errorKey="org.apache.struts.action.ERROR"/>
-                            <!--
-                            <html:textarea name="Coordinacion" property="nombre" errorStyleClass="error"
-                                           rows="5"
-                                           style="margin-bottom: 0px;"
-                                           errorKey="org.apache.struts.action.ERROR"/>
-                            -->
+                        <td colspan="4">
+                            <html:text property="nombre" name="Materia" style="width: 100%; height: 100%;" maxlength="50" errorKey="org.apache.struts.action.ERROR"/>
                         </td>
                     </tr>
-                    <tr>
+                    <!--<tr>
                         <td colspan="2" style="color:firebrick">
                             <html:errors property="nombre"/>
                         </td>
@@ -136,13 +182,26 @@
                         <td colspan="2" style="color:firebrick">
                             <html:errors property="registro"/>
                         </td>
+                    </tr>-->
+                    <tr style="height: 35px;">
+                        <td colspan="4">
+                            Número de créditos
+                        </td>
                     </tr>
+                    <tr style="height: 35px;">
+                        <td colspan="4">
+                        <center>
+                                <html:text property="creditos" style="width: 40%; height: 100%;" name="Materia" maxlength="2" errorKey="org.apache.struts.action.ERROR"/>
+                        </center>
+                        </td>
+                    </tr>                    
                 </tbody>
             </table>
             <p style="text-align: center; margin-top: 10px;">
-                <button class="btn btn-success" disabled="disables">
+                <html:submit styleClass="btn btn-success"
+                    onclick="javascript: return confirm('¿Está seguro de que los datos son correctos?')">
                     Agregar
-                </button>
+                </html:submit>
                 <html:reset styleClass="btn btn-default" value="Limpiar"/>
             </p>
         </html:form>

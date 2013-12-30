@@ -53,7 +53,7 @@ public class ConsultaMateria extends org.apache.struts.action.Action {
             session.removeAttribute("materias_vinculadas");
         }
             
-            session.setAttribute("materias", materias);
+            request.setAttribute("materias", materias);
             return mapping.findForward(SUCCESS);
     }
 }
