@@ -48,7 +48,7 @@ public class DBMS {
         try {
             Class.forName("org.postgresql.Driver");
             conexion = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/evalprof",
+                    "jdbc:postgresql://localhost:5432/evalproftemporal",
                     "langtech",
                     "evalprof");
             return true;
