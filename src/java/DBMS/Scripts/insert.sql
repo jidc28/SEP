@@ -1,14 +1,14 @@
-INSERT INTO USUARIO VALUES ('admin','administrador','admin','admin');
-INSERT INTO USUARIO VALUES (1003,'decanato','decanato','decanato');
-INSERT INTO USUARIO VALUES ('C-0039','coordinacion','coordinacion','coordinacion');
-INSERT INTO USUARIO VALUES ('C-0003','coordinacion','coordinacion','coordinacion');
-INSERT INTO USUARIO VALUES ('D-2022','departamento','departamento','departamento');
-INSERT INTO USUARIO VALUES ('C-0017','departamento','coord','null');
+INSERT INTO USUARIO VALUES ('admin','administrador','admin');
+INSERT INTO USUARIO VALUES (1003,'decanato','decanato');
+INSERT INTO USUARIO VALUES ('C-0039','coordinacion','coordinacion');
+INSERT INTO USUARIO VALUES ('C-0003','coordinacion','coordinacion');
+INSERT INTO USUARIO VALUES ('D-2022','departamento','departamento');
+INSERT INTO USUARIO VALUES ('C-0017','coordinacion','coordinacion');
 
-INSERT INTO USUARIO VALUES ('22-90457','profesor','admin','X');
-INSERT INTO USUARIO VALUES ('28-63146','profesor','admin','X');
-INSERT INTO USUARIO VALUES ('84-73618','profesor','admin','X');
-INSERT INTO USUARIO VALUES ('43-62893','profesor','admin','X');
+INSERT INTO USUARIO VALUES ('22-90457','profesor','admin');
+INSERT INTO USUARIO VALUES ('28-63146','profesor','admin');
+INSERT INTO USUARIO VALUES ('84-73618','profesor','admin');
+INSERT INTO USUARIO VALUES ('43-62893','profesor','admin');
 
 INSERT INTO COORDINACION VALUES ('C-0001','Coordinacion de Administracion de Turismo y Hoteleria');
 INSERT INTO COORDINACION VALUES ('C-0002','Coordinacion de Alimentos');
