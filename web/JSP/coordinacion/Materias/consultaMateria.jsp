@@ -1,7 +1,7 @@
 <%-- 
-    Document   : consultaDepartamento
+    Document   : consultaMateria
     Created on : 08/12/2013, 12:10:31 AM
-    Author     : jidc28
+    Author     : Langtech
 --%>
 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -14,33 +14,6 @@
 <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="scripts/bootstrap.js"></script>
 <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
-<script type="text/javascript">
-    function altRows(id) {
-        if (document.getElementsByTagName) {
-
-            var table = document.getElementById(id);
-            var rows = table.getElementsByTagName("tr");
-
-            for (i = 0; i < rows.length; i++) {
-                if (i % 2 === 0) {
-                    rows[i].className = "evenrowcolor";
-                } else {
-                    rows[i].className = "oddrowcolor";
-                }
-            }
-        }
-    }
-    $(document).ready(function() {
-        $('table').tablePagination({});
-    });
-    window.onload = function() {
-        altRows('alternatecolor');
-    }
-    $(function() {
-        $('#todos').tooltip();
-    });
-</script>
-
 <!DOCTYPE html>
 <html>
     <head>
