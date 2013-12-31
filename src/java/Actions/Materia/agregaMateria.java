@@ -66,8 +66,6 @@ public class agregaMateria extends org.apache.struts.action.Action {
             String codigo_materias = DBMS.getInstance().obtenerDatosDepartamento(usuario.getUsbid());
             materia.setCodigo(codigo_materias + materia.getNum1() + materia.getNum2() + materia.getNum3() + materia.getNum4());
             
-            System.out.println("largo: "+materia.getCodigo().length());
-            System.out.println("largo: "+materia.getCodigo());
             boolean registrar = DBMS.getInstance().registrarMateria(materia, usuario.getUsbid());
             
             if (registrar) {

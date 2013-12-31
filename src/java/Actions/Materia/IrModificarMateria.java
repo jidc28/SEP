@@ -44,8 +44,44 @@ public class IrModificarMateria extends org.apache.struts.action.Action {
         String codigo_materias = DBMS.getInstance().obtenerDatosDepartamento(usuario.getUsbid());
         Materia materia = (Materia) form;
 
+        //String radio_html = "";
+        
         materia = DBMS.getInstance().obtenerDatosMateria(materia);
         materia.setViejoCodigo(materia.getCodigo());
+        
+        
+        /*for (int i = 1; i < 5; i++) {
+        
+            radio_html = radio_html + "<td style='padding-left: 5px;'>";
+            
+            for (int j = 1; j < 10; j++) {
+                radio_html = radio_html + "<html:radio "
+                        + "property='num"+i+"' value="+j+"> "
+                        + j + "</html:radio><br>";
+            }
+            
+            radio_html = radio_html + "</td>";
+        }*/
+        
+        /*request.setAttribute("radio_html",radio_html);*/
+                
+        String [] caracteres = materia.getCodigo().split(codigo_materias);
+        
+        String [] nums = caracteres[1].split("");
+        
+        for (int i = 0; i < nums.length; i ++) {
+            if (!nums[i].equals("")) {
+                if (i == 1) {
+                    materia.setNum1(nums[i]);
+                } else if (i == 2) {
+                    materia.setNum2(nums[i]);
+                } else if (i == 3) {
+                    materia.setNum3(nums[i]);
+                } else {
+                    materia.setNum4(nums[i]);
+                }
+            }
+        }
         
         request.setAttribute("codigo_materias",codigo_materias);
         request.setAttribute("materia",materia);

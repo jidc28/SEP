@@ -720,10 +720,11 @@ public class DBMS {
         PreparedStatement ps = null;
 
         try {
-            ps = conexion.prepareStatement("UPDATE MATERIA SET codigo = ?, nombre = ? WHERE ( codigo = ? );");
-            ps.setString(1, materia.getViejoCodigo());
+            ps = conexion.prepareStatement("UPDATE MATERIA SET codigo = ?, nombre = ?, creditos = ? WHERE ( codigo = ? );");
+            ps.setString(1, materia.getCodigo());
             ps.setString(2, materia.getNombre());
-            ps.setString(3, materia.getViejoCodigo());
+            ps.setString(3, materia.getCreditos());
+            ps.setString(4, materia.getViejoCodigo());
 
             Integer i = ps.executeUpdate();
 

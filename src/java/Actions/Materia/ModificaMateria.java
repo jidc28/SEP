@@ -45,9 +45,12 @@ public class ModificaMateria extends org.apache.struts.action.Action {
 
         String id_departamento = (String) session.getAttribute("usbid");
         ArrayList<Materia> materias = null;
-
-        modificada = DBMS.getInstance().modificarMateria(materia);
         
+        String codigo_materias = DBMS.getInstance().obtenerDatosDepartamento(id_departamento);
+        materia.setCodigo(codigo_materias + materia.getNum1() + materia.getNum2() + materia.getNum3() + materia.getNum4());
+        
+        modificada = DBMS.getInstance().modificarMateria(materia);
+
         if (modificada) {
             request.setAttribute("materia_modificada", SUCCESS);
         } else {
