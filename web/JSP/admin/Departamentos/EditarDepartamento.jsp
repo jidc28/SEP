@@ -1,6 +1,6 @@
 <%-- 
-    Document   : EditarNombreNucleoUniversitario
-    Created on : 02/10/2013, 01:40:38 AM
+    Document   : EditarDepartamento
+    Created on : 10/06/2013, 07:43:54 PM
     Author     : Langtech
 --%>
 
@@ -19,27 +19,29 @@
         <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
-        <title>Gestion de Planillas de Evaluacion</title>
+        <title>Editar Departamento </title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
-    <center>
-        <html:form action="/cambiarNombreNucleoUniversitarioA" acceptCharset="ISO-8859-1" onsubmit="return(this)">
-            <html:hidden name="NucleoUniversitario" property="codigo"/>
-            <h4><bean:write name="NucleoUniversitario" property="codigo"/></h4>
+        <html:form action="/editarDepartamento" acceptCharset="ISO-8859-1" onsubmit="return(this)">
+            <html:hidden name="departamento" property="codigo"/>
+            <h4><bean:write name="departamento" property="nombre"/></h4>
+            <h4>(<bean:write name="departamento" property="codigo"/>)</h4>
             <br>
-            <html:textarea name="NucleoUniversitario" property="nombre" errorStyleClass="error"
-                           errorKey="org.apache.struts.action.ERROR" rows="5" style="width: 300px;"/>
-            <p style="text-align: center; margin-top: 10px;">
-                <html:submit styleClass="btn btn-success"
-                             onclick="javascript: return confirm('¿Está seguro de que los datos son correctos?')">
-                    Modificar
-                </html:submit>
-            </p>
-        </html:form>  
-    </center>
-
+        <center>
+            <html:textarea name="departamento" property="nombre" errorStyleClass="error"
+                       rows="5" style="width: 300px;"
+                       errorKey="org.apache.struts.action.ERROR">
+            </html:textarea>
+        </center>
+        <p style="text-align: center; margin-top: 10px;">
+            <html:submit styleClass="btn btn-success"
+                         onclick="javascript: return confirm('¿Está seguro de que los datos son correctos?')">
+                Modificar
+            </html:submit>
+        </p>
+    </html:form>
+    <br>
 </body>
 </html>
-

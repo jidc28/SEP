@@ -2,16 +2,9 @@ package DBMS;
 
 import Clases.Coordinacion;
 import Forms.CreateUserForm;
-import Clases.Decanato;
-import Clases.Departamento;
-import Clases.Materia;
-import Clases.dicta;
+import Clases.*;
 import Forms.EliminarUserForm;
-import Clases.Profesor;
-import Clases.Usuario;
-import Sistemas.CCT;
-import Sistemas.DACE;
-import Sistemas.SINAI;
+import Sistemas.*;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -898,8 +891,8 @@ public class DBMS {
     
     public boolean registrarMateria(Materia m, String id_departamento) {
         
-        PreparedStatement ps1 = null;
-        PreparedStatement ps2 = null;
+        PreparedStatement ps1;
+        PreparedStatement ps2;
         
         try {
             ps1 = conexion.prepareStatement("INSERT INTO MATERIA(codigo, nombre, creditos, estado) VALUES (?, ?, ?, ?);");
@@ -923,4 +916,40 @@ public class DBMS {
             return false;
         }
     }
+    
+    public boolean actualizarDepartamento(Departamento d) {
+        PreparedStatement ps = null;
+        try {
+
+            ps = conexion.prepareStatement("UPDATE departamento SET nombre = ? WHERE ( codigo = ? )");
+
+            ps.setString(1, d.getNombre());
+            ps.setString(2, d.getCodigo());
+            Integer s = ps.executeUpdate();
+
+            return s > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
+     public boolean registrarDepartamento(Departamento d) {
+        PreparedStatement ps;
+
+        try {
+            ps = conexion.prepareStatement("INSERT INTO departamento VALUES (?,?,?)");
+            ps.setString(1, d.getCodigo());
+            ps.setString(2, d.getNombre());
+            ps.setString(3, "XXX");
+            Integer i = ps.executeUpdate();
+
+            return i > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+
+    }   
 }

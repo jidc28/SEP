@@ -80,17 +80,33 @@
         </action>
         
         <!-- VISTA ADMINISTRADOR -->
+        
         <action input="/VistaAdministrador.jsp" path="/agregaDecanatoA" scope="request" type="Actions.Decanato.AgregaDecanatoA">
             <forward name="success" path="agregaDecanato"/>
         </action>
+        
         <action input="/VistaAdministrador.jsp" path="/agregaCoordinacionA" scope="request" type="Actions.Coordinacion.AgregaCoordinacionA">
             <forward name="success" path="agregaCoordinacion"/>
         </action>
+        
         <action input="/VistaAdministrador.jsp" path="/consultaDecanatoA" scope="request" type="Actions.Decanato.ConsultaDecanatoA" validate="false">
             <forward name="success" path="consultaDecanato"/>
         </action>
+        
         <action input="/VistaAdministrador.jsp" path="/consultaCoordinacionA" scope="request" type="Actions.Coordinacion.ConsultaCoordinacionA" validate="false">
             <forward name="success" path="consultaCoordinacion"/>
+        </action>
+        
+        <action path="/irAgregarDepartamento"
+            name="Departamento"
+            type="org.apache.struts.actions.ForwardAction"
+            scope="request"
+            validate="false"
+            parameter="agregarDepartamento">
+        </action>
+        
+        <action input="/AgregarDepartamento.jsp" name="Departamento" path="/agregarDepartamento" scope="request" type="Actions.Departamento.AgregarDepartamento" validate="false">
+            <forward name="success" path="consultaDepartamento"/>
         </action>
         
         <!--       DECANATOS        -->
@@ -126,8 +142,10 @@
         </action>
         
         <action input="/VistaCoordinacion.jsp" name="Departamentos" path="/listarDepartamentos" scope="request" type="Actions.Departamento.ConsultaDepartamentoA" validate="false">
-            <forward name="success" path="consultaDepartamentoCoordinacion"/>
+            <forward name="coordinacion" path="consultaDepartamentoCoordinacion"/>
+            <forward name="administrador" path="consultaDepartamento"/>
         </action>
+        
         <action input="/ConsultaDepartamento.jsp" name="Departamento" path="/listarMateriasDepto" scope="request" type="Actions.Materia.ConsultaMateria" validate="false">
             <forward name="success" path="consultaMaterias"/>
         </action>
@@ -145,20 +163,14 @@
         
         <!--     DEPARTAMENTOS      --> 
         
-        <action input="/ConsultaDepartamentoDecanato.jsp" name="Departamento" path="/ocultarDepartamento" scope="request" type="Actions.Departamento.ocultarDepartamento" validate="false">
-            <forward name="administrador" path="consultaDepartamentoDec"/>
-            <forward name="decanato" path="consultaDepartamento"/>
-            <forward name="failure" path="consultaDepartamento"/>
+        <action input="/ConsultaDepartamento.jsp" name="Departamento" path="/irEditarNombreDepartamento" scope="request" type="Actions.Departamento.irEditarNombreDepartamento" validate="false">
+            <forward name="success" path="editarDepartamento"/>
         </action>
-        <action input="/ConsultaDepartamentoDecanato.jsp" name="Departamento" path="/mostrarDepartamento" scope="request" type="Actions.Departamento.mostrarDepartamento" validate="false">
-            <forward name="administrador" path="consultaDepartamentoDec"/>
-            <forward name="decanato" path="consultaDepartamento"/>
-            <forward name="failure" path="consultaDepartamento"/>
+
+        <action input="/EditarDepartamento.jsp" name="Departamento" path="/editarDepartamento" scope="request" type="Actions.Departamento.EditarDepartamento" validate="false">
+            <forward name="success" path="consultaDepartamento"/>
         </action>
-        <action input="/ConsultaDepartamentoDecanato.jsp" name="Departamento" path="/editarNombreDepartamento" scope="request" type="Actions.Departamento.editarNombreDepartamento" validate="false">
-            <forward name="success" path="editarNombreDepartamento"/>
-        </action>
-        
+                
         <!-- ACCIONES JEFE DE DEPARTAMENTO -->
         <action input="/VistaDepartamento.jsp" name="Departamento" path="/consultaMateria" scope="request" type="Actions.Materia.ConsultaMateria" validate="false">
             <forward name="success" path="consultaMateria"/>

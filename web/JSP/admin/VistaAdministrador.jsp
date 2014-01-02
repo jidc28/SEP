@@ -55,12 +55,12 @@
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <a style="color: red;"> 
-                            <h5 style="color: red;"> Agregar Departamento (No implementado) </h5>
-                        </a>
-                        <a style="color: red;">
-                            <h5 style="color: red;"> Consultar Departamentos (No implementado) </h5>
-                        </a>
+                        <html:link action="/irAgregarDepartamento"> 
+                            <h5> Agregar Departamento </h5>
+                        </html:link>
+                        <html:link action="/listarDepartamentos">
+                            <h5>Consultar Departamentos</h5>
+                        </html:link>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : AgregaNucleoUniv
-    Created on : 01/10/2013, 04:15:23 PM
+    Document   : AgregarDepartamento
+    Created on : 10/06/2013, 07:43:54 PM
     Author     : Langtech
 --%>
 
@@ -19,38 +19,39 @@
         <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
-        <title>Gestion de Planillas de Evaluacion</title>
+        <title>Agregar Departamento</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
-        <h4>Registro de Nucleos Universitarios</h4>
+        <h4>Registro de Departamentos</h4>
 
-        <html:form action="/registrarNucleoUniv" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
+        <html:form action="/agregarDepartamento" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
             <table border="0">
                 <tbody>
                     <tr style="height: 35px;">
-                        <td style="color: black">Localización del Nucleo Universitario</td>
+                        <td style="color: black">Codigo del Departamento</td>
                         <td>
-                            <html:text name="NucleoUniversitario" property="codigo" maxlength="10" value="" errorStyleClass="error"
-                                       style="margin-bottom: 0px;height: 30px;"
-                                       errorKey="org.apache.struts.action.ERROR">
-                            </html:text>
+                            <html:text name="Departamento" property="codigo" maxlength="10" value="" errorStyleClass="error"
+                                       style="margin-bottom: 0px; height: 30px;"
+                                       errorKey="org.apache.struts.action.ERROR"></html:text>
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="color:firebrick">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="color:firebrick">
                             <html:errors property="codigo"/>
                         </td>
                     </tr>
-
                     <tr>
-                        <td style="color: black">Nombre del Nucleo Universitario</td>
+                        <td style="color: black">Nombre del Departamento</td>
                         <td>
-                            <html:text property="nombre" name="NucleoUniversitario" maxlength="50" errorKey="org.apache.struts.action.ERROR"/>
+                            <html:text property="nombre" name="Departamento" maxlength="50" 
+                                       style="margin-bottom: 0px; height: 30px;"
+                                       errorKey="org.apache.struts.action.ERROR">
+                            </html:text>
                             <!--
-                            <html:textarea name="NucleoUniversitario" property="nombre" value="" errorStyleClass="error"
+                            <html:textarea name="Departamento" property="nombre" errorStyleClass="error"
                                        style="margin-bottom: 0px;"
                                        rows="5"
                                        errorKey="org.apache.struts.action.ERROR"/>
@@ -68,9 +69,9 @@
                     </tr>
                 </tbody>
             </table>
-            <p style="text-align: center; margin-top: 10px">
+            <p style="text-align: center; margin-top: 10px;">
                 <html:submit styleClass="btn btn-success"
-                    onclick="javascript: return confirm('¿Está seguro de que los datos son correctos?')">
+                             onclick="javascript: return confirm('¿Está seguro de que los datos son correctos?')">
                     Agregar
                 </html:submit>
                 <html:reset styleClass="btn btn-default" value="Limpiar"/>

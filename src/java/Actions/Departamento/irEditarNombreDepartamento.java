@@ -18,7 +18,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author jidc28
  */
-public class editarNombreDepartamento extends org.apache.struts.action.Action {
+public class irEditarNombreDepartamento extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -48,8 +48,7 @@ public class editarNombreDepartamento extends org.apache.struts.action.Action {
         //si existen usuarios registrados
 
         //retorno a pagina de exito
-        session.setAttribute("codigo", d.getCodigo());
-        session.setAttribute("nombre", d.getNombre());
+        session.setAttribute("departamento", d);
         return mapping.findForward(SUCCESS);
     }
 }

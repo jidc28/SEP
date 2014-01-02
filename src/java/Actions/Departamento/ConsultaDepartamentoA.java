@@ -20,8 +20,6 @@ import org.apache.struts.action.ActionMapping;
  */
 public class ConsultaDepartamentoA extends org.apache.struts.action.Action {
 
-    /* forward name="success" path="" */
-    private static final String SUCCESS = "success";
     /**
      * This is the action called from the Struts framework.
      *
@@ -36,23 +34,17 @@ public class ConsultaDepartamentoA extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
+
         HttpSession session = request.getSession(true);
-        ArrayList<Departamento> departamentos = null;
+        ArrayList<Departamento> departamentos;
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         String tipousuario = usuario.getTipousuario();
         //obtengo una lista de departamentos registrados
-        if (tipousuario.equals("administrador")){
-        } else if (tipousuario.equals("decanato")){
-        } else if (tipousuario.equals("coordinacion")){
-            departamentos = DBMS.getInstance().listarDepartamentos();
-        }
-
         //si existen departamentos registrados
 
-            //retorno a pagina de exito
-         session.setAttribute("departamentos", departamentos);
-         return mapping.findForward(SUCCESS);
+        departamentos = DBMS.getInstance().listarDepartamentos();
+        session.setAttribute("departamentos", departamentos);
+        //retorno a pagina de exito
+        return mapping.findForward(tipousuario);
     }
 }
-
