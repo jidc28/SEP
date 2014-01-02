@@ -65,11 +65,11 @@
                 </tr>
                 </thead>
                 <html:form action="/multibox">
-                    <logic:iterate id="profesor" name="profesores" property="profesores">
+                    <logic:iterate id="profesor" name="profesores" property="items">
                         <tr>
                             <td>
                         <center>
-                            <html:multibox  property="profesoresSeleccionados">
+                            <html:multibox  property="itemsSeleccionados">
                                 <bean:write name="profesor" property="usbid"/>
                             </html:multibox>
                             </td>

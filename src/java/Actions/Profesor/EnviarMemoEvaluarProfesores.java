@@ -26,11 +26,13 @@ public class EnviarMemoEvaluarProfesores extends Action {
         String id_departamento = (String) session.getAttribute("usbid");
 
         MultiBox m = (MultiBox) form;
-        String[] profesores_seleccionados = m.getProfesoresSeleccionados();
-        /*System.out.println("Ahora vienen los profs");
-         for (int i=0; i < profesores_seleccionados.length; i++) {
-         System.out.println("usbid: "+profesores_seleccionados[i]);
-         }*/
+        String[] profesores_seleccionados = m.getItemsSeleccionados();
+        
+        System.out.println("Ahora vienen los profs");
+        for (int i = 0; i < profesores_seleccionados.length; i++) {
+            System.out.println("usbid: " + profesores_seleccionados[i]);
+        }
+        
         if (profesores_seleccionados.length == 0) {
             request.setAttribute("no_seleccionado", FAILURE);
         } else {
