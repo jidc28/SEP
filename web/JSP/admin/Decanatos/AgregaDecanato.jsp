@@ -1,7 +1,7 @@
 <%-- 
     Document   : AgregarDecanato
     Created on : 10/06/2013, 07:43:54 PM
-    Author     : admin
+    Author     : Langtech
 --%>
 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -36,10 +36,10 @@
                                        style="margin-bottom: 0px;height: 30px;"
                                        errorKey="org.apache.struts.action.ERROR"></html:text>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="color:firebrick">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="color:firebrick">
                             <html:errors property="codigo"/>
                         </td>
                     </tr>
@@ -49,9 +49,9 @@
                             <html:text property="nombre" name="Decanato" maxlength="50" errorKey="org.apache.struts.action.ERROR"/>
                             <!--
                             <html:textarea name="Decanato" property="nombre" errorStyleClass="error"
-                                       style="margin-bottom: 0px;"
-                                       rows="5"
-                                       errorKey="org.apache.struts.action.ERROR"/>
+                                           style="margin-bottom: 0px;"
+                                           rows="5"
+                                           errorKey="org.apache.struts.action.ERROR"/>
                             -->
                         </td>
                     </tr>
@@ -77,5 +77,5 @@
         </html:form>
 
 
-</body>
+    </body>
 </html>

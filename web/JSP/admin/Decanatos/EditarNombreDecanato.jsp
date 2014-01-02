@@ -1,7 +1,7 @@
 <%-- 
     Document   : EditarNombreDecanato
     Created on : 10/06/2013, 07:43:54 PM
-    Author     : admin
+    Author     : Langtech
 --%>
 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -19,7 +19,7 @@
         <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
-        <title>Gestion de Planillas de Evaluacion</title>
+        <title>Sistema de Evaluación de Profesores</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>

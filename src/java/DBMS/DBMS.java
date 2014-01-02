@@ -662,6 +662,33 @@ public class DBMS {
         }
         return profesores;
     }
+    
+    public ArrayList<Profesor> listarProfesoresPorMateriaCoordinacion(String codigo_mat, String codigo_coord) {
+
+        ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT usbid, nombre, apellido "
+                    + "FROM dicta, profesor, maneja "
+                    + "WHERE codigo_materia = ? "
+                    + "AND usbid_profesor = usbid AND codigo_coordinacion = ? "
+                    + "ORDER BY codigo_materia;");
+            ps.setString(1, codigo_mat);
+            ps.setString(2, codigo_coord);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Profesor p = new Profesor();
+                p.setUsbid(rs.getString("usbid"));
+                p.setNombre(rs.getString("nombre"));
+                p.setApellido(rs.getString("apellido"));
+                profesores.add(p);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return profesores;
+    }
 
     public void enviarMemoEvaluarProfesor(String usbid_prof) {
         PreparedStatement ps = null;

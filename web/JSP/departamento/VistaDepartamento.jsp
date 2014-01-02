@@ -21,7 +21,7 @@
         <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
-        <title>Gestion de Planillas de Evaluación</title>
+        <title>Sistema de Evaluación de Profesores</title>
     </head>
     <body>
         <div class="panel-group" id="accordion">

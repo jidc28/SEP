@@ -24,7 +24,7 @@
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
         <!--        <link rel="stylesheet" type="text/css" href="css/css/bootstrap-theme.css">
                 <link rel="stylesheet" type="text/css" href="css/css/bootstrap-theme.min.css"> -->
-        <title>Gestion de Profesores</title>
+        <title>Sistema de Evaluación de Profesores</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
