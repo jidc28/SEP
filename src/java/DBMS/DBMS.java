@@ -623,7 +623,7 @@ public class DBMS {
         ArrayList<Materia> materias = new ArrayList<Materia>(0);
         PreparedStatement ps = null;
         try {
-            ps = conexion.prepareStatement("SELECT codigo, nombre, estado FROM oferta, materia WHERE codigo_departamento = ? AND codigo_materia = codigo;");
+            ps = conexion.prepareStatement("SELECT codigo, nombre, estado FROM oferta, materia WHERE codigo_departamento = ? AND codigo_materia = codigo AND estado = 'activo';");
             ps.setString(1, id_departamento);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -723,7 +723,7 @@ public class DBMS {
         PreparedStatement ps = null;
 
         try {
-            ps = conexion.prepareStatement("DELETE FROM MATERIA WHERE (codigo = ?);");
+            ps = conexion.prepareStatement("UPDATE MATERIA SET estado = 'desactivado' WHERE (codigo = ?);");
             ps.setString(1, id_materia);
 
             Integer i = ps.executeUpdate();
@@ -838,7 +838,7 @@ public class DBMS {
         ArrayList<Materia> materias = new ArrayList<Materia>(0);
 
         try {
-            ps = conexion.prepareStatement("SELECT codigo, nombre FROM maneja, materia WHERE codigo_coordinacion = ? and codigo_materia = codigo");
+            ps = conexion.prepareStatement("SELECT codigo, nombre FROM maneja, materia WHERE codigo_coordinacion = ? AND codigo_materia = codigo AND estado = 'activo'");
             ps.setString(1, cod_coord);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
