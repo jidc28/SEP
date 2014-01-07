@@ -109,6 +109,10 @@
             <forward name="success" path="consultaDepartamento"/>
         </action>
         
+        <action input="/ConsultaDepartamento.jsp" name="Departamento" path="/desactivarDepartamento" scope="request" type="Actions.Departamento.DesactivarDepartamento" validate="false">
+            <forward name="success" path="consultaDepartamento"/>
+        </action>
+        
         <!--       DECANATOS        -->
         <action input="/AgregaDecanato.jsp" name="Decanato" path="/registrarDecanato" scope="request" type="Actions.Decanato.RegistrarDecanato" validate="false">
             <forward name="success" path="consultaDecanato"/>

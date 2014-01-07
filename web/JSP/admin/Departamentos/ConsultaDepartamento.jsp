@@ -38,7 +38,17 @@
                 Departamento no fue modificado exitosamente.
             </div>
         </logic:present>
-
+        <logic:present name="departamento_desactivado">
+            <div class="alert alert-success" id="alert">
+                Departamento desactivado exitosamente.
+            </div>
+        </logic:present>
+        <logic:present name="departamento_no_desactivado">
+            <div class="alert alert-danger" id="alert">
+                El departamento no fue desactivado exitosamente. Intente mas tarde.
+            </div>
+        </logic:present>
+        
         <h4 style="margin-top: 50px;"> Lista de Departamentos
             <logic:present name="decanato_actual">
                 del <bean:write name="decanato_actual" property="nombre"/>:
@@ -49,17 +59,17 @@
             <table border="0" style="margin: auto" class="table-striped">
                 <thead>
                     <tr>
-                        <th>
-                        <center>Usbid</center>
+                        <th style="font-size: 14px;">
+                        <center>USBID</center>
                         </th>
-                        <th width='30%'>
-                        <center>Nombre</center>
+                        <th width='30%' style="font-size: 14px;">
+                        <center>NOMBRE</center>
                         </th>
-                        <th>
-                        <center>Editar</center>
+                        <th style="font-size: 14px;">
+                        <center>EDITAR</center>
                         </th>
-                        <th>
-                        <center>Eliminar</center>
+                        <th style="font-size: 14px;">
+                        <center>DESACTIVAR</center>
                         </th>
                     </tr>
                 </thead>
@@ -84,13 +94,12 @@
                                 </html:form>
                             </td>
                             <td>
-                                <html:form action="/irEditarNombreDepartamento" onsubmit="return(this)" style="margin: 0px;">
+                                <html:form action="/desactivarDepartamento" onsubmit="return(this)" style="margin: 0px;">
                                     <html:hidden name="Dep" property="codigo"/>
                                     <center>
                                         <html:submit styleClass="btn btn-danger" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
-                                                     onclick="javascript: return confirm('¿Está seguro de que desea eliminar el departamento de este decanato?')"
-                                                     disabled="true">
-                                            Eliminar
+                                                     onclick="javascript: return confirm('¿Está seguro de que desea eliminar el departamento de este decanato?')">
+                                            Desactivar
                                         </html:submit>
                                     </center>
                                 </html:form>

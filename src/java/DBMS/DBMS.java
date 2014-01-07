@@ -236,7 +236,9 @@ public class DBMS {
         ArrayList<Departamento> dptos = new ArrayList<Departamento>(0);
         PreparedStatement ps = null;
         try {
-            ps = conexion.prepareStatement("SELECT * FROM DEPARTAMENTO ORDER BY CODIGO");
+            ps = conexion.prepareStatement("SELECT * FROM departamento "
+                    + "WHERE condicion = 'activo' "
+                    + "ORDER BY codigo");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Departamento u = new Departamento();
@@ -388,7 +390,7 @@ public class DBMS {
         }
     }
 
-    public boolean eliminarDepartamento(Departamento u) {
+    /*public boolean eliminarDepartamento(Departamento u) {
 
         PreparedStatement psEliminar1 = null;
         try {
@@ -404,7 +406,7 @@ public class DBMS {
             ex.printStackTrace();
             return false;
         }
-    }
+    }*/
 
     public boolean registrarDecanato(Decanato u) {
 
@@ -1035,7 +1037,6 @@ public class DBMS {
             ps = conexion.prepareStatement("INSERT INTO departamento VALUES (?,?,?)");
             ps.setString(1, d.getCodigo());
             ps.setString(2, d.getNombre());
-            ps.setString(3, "XXX");
             Integer i = ps.executeUpdate();
 
             return i > 0;
@@ -1064,5 +1065,22 @@ public class DBMS {
             return false;
         }
     }
-     
+ 
+    public boolean eliminarDepartamento(Departamento d) {
+        PreparedStatement ps;
+
+        try {
+            ps = conexion.prepareStatement("UPDATE DEPARTAMENTO SET condicion = 'desactivado' WHERE (codigo = ?);");
+            ps.setString(1, d.getCodigo());
+
+            Integer i = ps.executeUpdate();
+
+            return i > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }    
+    
 }

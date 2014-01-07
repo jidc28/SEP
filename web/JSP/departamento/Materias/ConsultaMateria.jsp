@@ -112,7 +112,8 @@
                                     <html:hidden name="Mat" property="estado" value="oculto"/>
                                     <html:hidden name="Mat" property="codigo"/>
                                     <html:submit styleClass="btn btn-warning"
-                                                 style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                                                 style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea ocultar esta materia?')">
                                         Ocultar
                                     </html:submit>
                                 </html:form>
@@ -123,7 +124,8 @@
                                     <html:hidden name="Mat" property="estado" value="visible"/>
                                     <html:hidden name="Mat" property="codigo"/>
                                     <html:submit styleClass="btn btn-success"
-                                                 style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                                                 style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea mostrar esta materia?')">
                                         Mostrar
                                     </html:submit>
                                 </html:form>
