@@ -30,6 +30,24 @@ public class Materia extends org.apache.struts.action.ActionForm {
     private String creditos;
     private String condicion;
     private String estado;
+    private String mensaje;
+    private String departamento;
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
 
     public String getCondicion() {
         return condicion;

@@ -100,7 +100,7 @@ public class agregaMateria extends org.apache.struts.action.Action {
                 return mapping.findForward(FAILURE);
             } else {
 
-                boolean registrar = DBMS.getInstance().registrarMateria(materia, usuario.getUsbid());
+                boolean registrar = DBMS.getInstance().registrarMateria(materia, usuario.getUsbid(),"no");
 
                 if (registrar) {
                     request.setAttribute("materia_agregada", SUCCESS);

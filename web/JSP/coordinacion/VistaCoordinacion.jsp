@@ -37,6 +37,12 @@
                 </p>
             </div>
         </logic:present>
+        
+        <logic:present name="solicitud_enviada">
+            <div class="alert alert-success" id="alert">
+                La solicitud de apertura de la materia ha sido enviada.
+            </div>
+        </logic:present>
 
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
@@ -54,7 +60,10 @@
                         </html:link>
                         <html:link action="/listarDepartamentos" >
                             <h5 align ="center">Vincular Materias por Departamento</h5>
-                        </html:link>  
+                        </html:link> 
+                        <html:link action="/irSolicitarAperturaMateria">
+                            <h5 align ="center">Solicitar Apertura de Materia</h5>
+                        </html:link>
                     </div>
                 </div>
             </div>

@@ -133,13 +133,16 @@
             <forward name="failure" path="agregaCoordinacion"/>
             <forward name="yaregistrada" path="agregaCoordinacion"/>
         </action>
+        
         <action input="/ConsultaCoordinacion.jsp" name="Coordinacion" path="/editarNombreCoordinacion" scope="request" type="Actions.Coordinacion.EditarNombreCoordinacion" validate="false">
             <forward name="success" path="editarNombreCoordinacion"/>
         </action>
+        
         <action input="/EditarNombreCoordinacion.jsp" name="Coordinacion" path="/cambiarNombreCoordinacionA" scope="request" type="Actions.Coordinacion.CambiarNombreCoordinacionA" validate="false">
             <forward name="success" path="consultaCoordinacion"/>
             <forward name="failure" path="editarNombreCoordinacion"/>
         </action>
+        
         <action input="/ConsultarCoordinacion.jsp" name="Coordinacion" path="/eliminaCoordinacionA" scope="request" type="Actions.Coordinacion.EliminaCoordinacionA" validate="false">
             <forward name="success" path="consultaCoordinacion"/>
             <forward name="failure" path="consultaCoordinacion"/>
@@ -153,18 +156,30 @@
         <action input="/ConsultaDepartamento.jsp" name="Departamento" path="/listarMateriasDepto" scope="request" type="Actions.Materia.ConsultaMateria" validate="false">
             <forward name="success" path="consultaMaterias"/>
         </action>
+        
         <action input="/ConsultaMateriasDepartamento.jsp" name="Materia" path="/vincularMateriaCoordinacion" scope="request" type="Actions.Materia.agregaMateria" validate="false">
             <forward name="success" path="consultaMaterias"/>
             <forward name="failure" path="consultaMaterias"/>
         </action>
+        
         <action input="/ConsultaMaterias.jsp" name="Materia" path="/desvincularMateriaCoordinacion" scope="request" type="Actions.Materia.EliminaMateria" validate="false">
             <forward name="success" path="consultaMaterias"/>
             <forward name="failure" path="consultaMaterias"/>
         </action>
+        
         <action input="/VistaCoordinacion.jsp" name="Materia" path="/listarMaterias" scope="request" type="Actions.Materia.ConsultaMateriasCoordinacion" validate="false">
             <forward name="success" path="consultaMaterias"/>
         </action>
         
+        <action input="VistaCoordinacion.jsp" path="/irSolicitarAperturaMateria" name="Materia" type="Actions.Materia.IrSolicitarAperturaMateria" scope="request" validate="false">
+            <forward name="success" path="solicitarApertura"/>
+        </action>
+
+        <action input="solicitarApertura.jsp" path="/solicitarAperturaMateria" name="Materia" type="Actions.Materia.solicitarAperturaMateria" scope="request" validate="false">
+            <forward name="failure" path="solicitarApertura"/>
+            <forward name="success" path="vistaCoordinacion"/>
+        </action>
+                
         <!--     DEPARTAMENTOS      --> 
         
         <action input="/ConsultaDepartamento.jsp" name="Departamento" path="/irEditarNombreDepartamento" scope="request" type="Actions.Departamento.irEditarNombreDepartamento" validate="false">

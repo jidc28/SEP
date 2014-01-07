@@ -46,7 +46,7 @@ public class Inicio extends org.apache.struts.action.Action {
         //Usuario u = (Usuario) form;
         HttpSession session = request.getSession(true);
         Usuario u = (Usuario) request.getSession().getAttribute("usuario");
-        System.out.println("--------------------> USUARIO: " + u.getUsbid() + "\n");
+        //System.out.println("--------------------> USUARIO: " + u.getUsbid() + "\n");
         
         ActionErrors error = new ActionErrors();
 

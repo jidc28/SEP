@@ -144,4 +144,8 @@
         <put name="body" value="/JSP/coordinacion/Evaluaciones/listarEvaluacionesPendientes.jsp"/>
     </definition>
     
+    <definition name="solicitarApertura" extends="baseCoordinacion"> <!-- Consulta Materias -->
+        <put name="body" value="/JSP/coordinacion/Materias/solicitarApertura.jsp"/>
+    </definition>
+    
 </tiles-definitions>
