@@ -22,7 +22,7 @@ public class ModificaMateria extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
-
+    private static final String FAILURE = "failure";
     /**
      * This is the action called from the Struts framework.
      *
@@ -45,20 +45,57 @@ public class ModificaMateria extends org.apache.struts.action.Action {
 
         String id_departamento = (String) session.getAttribute("usbid");
         ArrayList<Materia> materias = null;
-        
-        String codigo_materias = DBMS.getInstance().obtenerDatosDepartamento(id_departamento);
-        materia.setCodigo(codigo_materias + materia.getNum1() + materia.getNum2() + materia.getNum3() + materia.getNum4());
-        
-        modificada = DBMS.getInstance().modificarMateria(materia);
 
-        if (modificada) {
-            request.setAttribute("materia_modificada", SUCCESS);
-        } else {
-            request.setAttribute("materia_no_modificada", SUCCESS);
+        if (materia.getCod1() == null) {
+            materia.setCod1("");
         }
-        materias = DBMS.getInstance().listarMateriasOfertadas(id_departamento);
 
-        request.setAttribute("materias", materias);
-        return mapping.findForward(SUCCESS);
+        if (materia.getCod2() == null) {
+            materia.setCod2("");
+        }
+
+        if (materia.getNum1() == null) {
+            materia.setNum1("");
+        }
+
+        if (materia.getNum2() == null) {
+            materia.setNum2("");
+        }
+
+        if (materia.getNum3() == null) {
+            materia.setNum3("");
+        }
+
+        if (materia.getNum4() == null) {
+            materia.setNum4("");
+        }
+
+        materia.setCodigo(materia.getCod1() + materia.getCod2() + materia.getNum1() + materia.getNum2() + materia.getNum3() + materia.getNum4());
+
+        if (materia.getCodigo().length() > 6 || materia.getCodigo().length() < 6) {
+            request.setAttribute("materia",materia);
+            request.setAttribute("codigo_incorrecto", materia.getCodigo());
+            materia.setCod1(null);
+            materia.setCod2(null);
+            materia.setNum1(null);
+            materia.setNum2(null);
+            materia.setNum3(null);
+            materia.setNum4(null);
+            return mapping.findForward(FAILURE);
+            
+        } else {
+
+            modificada = DBMS.getInstance().modificarMateria(materia);
+
+            if (modificada) {
+                request.setAttribute("materia_modificada", SUCCESS);
+            } else {
+                request.setAttribute("materia_no_modificada", SUCCESS);
+            }
+            materias = DBMS.getInstance().listarMateriasOfertadas(id_departamento);
+
+            request.setAttribute("materias", materias);
+            return mapping.findForward(SUCCESS);
+        }
     }
 }

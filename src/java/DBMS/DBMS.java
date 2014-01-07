@@ -952,7 +952,7 @@ public class DBMS {
             ps1.setString(1, m.getCodigo());
             ps1.setString(2, m.getNombre());
             ps1.setString(3, m.getCreditos());
-            ps1.setString(4, "visible");
+            ps1.setString(4, "activo");
             
             ps2 = conexion.prepareStatement("INSERT INTO OFERTA(codigo_materia, codigo_departamento) VALUES (?, ?);");
             ps2.setString(1, m.getCodigo());

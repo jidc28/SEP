@@ -26,7 +26,25 @@ public class Materia extends org.apache.struts.action.ActionForm {
     private String num2;
     private String num3;
     private String num4;
+    private String cod1;
+    private String cod2;
     private String creditos;
+
+    public String getCod1() {
+        return cod1;
+    }
+
+    public void setCod1(String cod1) {
+        this.cod1 = cod1;
+    }
+
+    public String getCod2() {
+        return cod2;
+    }
+
+    public void setCod2(String cod2) {
+        this.cod2 = cod2;
+    }
 
     public String getCreditos() {
         return creditos;

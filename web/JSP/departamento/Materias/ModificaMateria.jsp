@@ -24,26 +24,213 @@
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
+        <logic:present name="codigo_incorrecto">
+            <div class="alert alert-danger" id="alert">
+                Codigo de materia <bean:write name="codigo_incorrecto"/> incorrecto intente de nuevo.
+            </div>
+        </logic:present>
+
         <h4>Registro de Materias</h4>
 
         <html:form action="/modificaMateria" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
             <table border="0" style="margin-top: 50px;">
                 <tbody>
                     <tr style="height: 35px;">
-                        <td style="color: black" colspan="7">Codigo de la Materia</td>
+                        <td style="color: black" colspan="11">Codigo de la Materia</td>
                     </tr>
                     <tr>
-                        <td style="padding: 3px;" colspan="4">
-                            <center>
-                                <input class="form-control"
-                                       value="<bean:write name='codigo_materias'/>" 
-                                       disabled="true"
-                                       style="width: 40%; text-align: center; height: 30px;">
-                            </center>
-                        </td>
-                    </tr>
-                    <tr>
+                            <td style="padding-left: 5px;">
+                                <html:radio name="materia" property="cod1" value="BC">
+                                    BC
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="BO">
+                                    BO
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="CC">
+                                    CC
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="CE">
+                                    CE
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="CI">
+                                    CI
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="CS">
+                                    CS
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="CT">
+                                    CT
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="DU">
+                                    DU
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="EA">
+                                    EA
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="EC">
+                                    EC
+                                </html:radio><br>
+                            </td>
+                            <td style="padding-left: 5px;">
+                                <html:radio name="materia" property="cod1" value="EG">
+                                    EG
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="EP">
+                                    EP
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="ID">
+                                    ID
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="FL">
+                                    FL
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="FS">
+                                    FS
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="LL">
+                                    LL
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="MA">
+                                    MA
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="MC">
+                                    MC
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="MT">
+                                    MT
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="PB">
+                                    PB
+                                </html:radio><br>
+                            </td>
+                            <td style="padding-left: 5px;">
+                                <html:radio name="materia" property="cod1" value="PS">
+                                    PS
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="QM">
+                                    QM
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="TF">
+                                    TF
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="EE">
+                                    EE
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="1">
+                                    1
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="GC">
+                                    GC
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="DA">
+                                    DA
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="PL">
+                                    PL
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="CM">
+                                    CM
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="CO">
+                                    CO
+                                </html:radio><br>
+                            </td>
+                            <td style="padding-left: 5px;">
+                                <html:radio name="materia" property="cod1" value="TS">
+                                    TS
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod1" value="8">
+                                    8
+                                </html:radio><br>
+                            </td>
+                            <td style="padding-left: 5px;">
+                                <html:radio name="materia" property="cod2" value="A">
+                                    A
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="B">
+                                    B
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="C">
+                                    C
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="D">
+                                    D
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="E">
+                                    E
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="F">
+                                    F
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="G">
+                                    G
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="H">
+                                    H
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="I">
+                                    I
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="J">
+                                    J
+                                </html:radio><br>
+                            </td>
+                            <td style="padding-left: 5px;">
+                                <html:radio name="materia" property="cod2" value="K">
+                                    K
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="L">
+                                    L
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="M">
+                                    M
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="N">
+                                    N
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="O">
+                                    O
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="P">
+                                    P
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="Q">
+                                    Q
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="R">
+                                    R
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="S">
+                                    S
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="T">
+                                    T
+                                </html:radio><br>
+                            </td>
+                            <td style="padding-left: 5px;">
+                                <html:radio name="materia" property="cod2" value="U">
+                                    U
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="V">
+                                    V
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="W">
+                                    W
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="X">
+                                    X
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="Y">
+                                    Y
+                                </html:radio><br>
+                                <html:radio name="materia" property="cod2" value="Z">
+                                    Z
+                                </html:radio><br>
+                            </td>
                         <td style="padding-left: 5px;">
+                                <html:radio name="materia" property="num1" value="0">
+                                    0
+                                </html:radio><br>
                                 <html:radio name="materia" property="num1" value="1">
                                     1
                                 </html:radio><br>
@@ -73,6 +260,9 @@
                                 </html:radio><br>
                             </td>
                             <td style="padding-left: 5px;">
+                                <html:radio name="materia" property="num2" value="0">
+                                    0
+                                </html:radio><br>
                                 <html:radio name="materia" property="num2" value="1">
                                     1
                                 </html:radio><br>
@@ -102,6 +292,9 @@
                                 </html:radio><br>
                             </td>
                             <td>
+                                <html:radio name="materia" property="num3" value="0">
+                                    0
+                                </html:radio><br>
                                 <html:radio name="materia" property="num3" value="1">
                                     1
                                 </html:radio><br>
@@ -131,6 +324,9 @@
                                 </html:radio><br>
                             </td>
                             <td>
+                                <html:radio name="materia" property="num4" value="0">
+                                    0
+                                </html:radio><br>
                                 <html:radio name="materia" property="num4" value="1">
                                     1
                                 </html:radio><br>
@@ -161,35 +357,35 @@
                             </td>
                     </tr>
                     <tr>
-                        <td colspan="7" style="color:firebrick">
+                        <td colspan="11" style="color:firebrick">
                             <html:errors property="codigo"/>
                         </td>
                     </tr>
 
                     <tr  style="height: 35px;">
-                        <td style="color: black" colspan="7">Nombre de la Materia</td>
+                        <td style="color: black" colspan="11">Nombre de la Materia</td>
                     </tr>
                     <tr  style="height: 35px;">
-                        <td colspan="7">
+                        <td colspan="11">
                             <html:text property="nombre" name="materia" style="width: 100%; height: 100%;" maxlength="50" errorKey="org.apache.struts.action.ERROR"/>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="color:firebrick">
+                        <td colspan="11" style="color:firebrick">
                             <html:errors property="nombre"/>
                         </td>
                     <tr>
-                        <td colspan="2" style="color:firebrick">
+                        <td colspan="11" style="color:firebrick">
                             <html:errors property="registro"/>
                         </td>
                     </tr>
                     <tr style="height: 35px;">
-                        <td colspan="4">
+                        <td colspan="11">
                             Número de créditos
                         </td>
                     </tr>
                     <tr style="height: 35px;">
-                        <td colspan="4">
+                        <td colspan="11">
                         <center>
                                 <html:text property="creditos" name="materia" style="width: 40%; height: 100%;" maxlength="2" errorKey="org.apache.struts.action.ERROR"/>
                         </center>

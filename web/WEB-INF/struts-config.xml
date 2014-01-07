@@ -187,10 +187,15 @@
         
         <action input="/AgregaMateria.jsp" name="Materia" path="/agregaMateria" validate="false" scope="request" type="Actions.Materia.agregaMateria">
             <forward name="success" path="consultaMateria"/>
+            <forward name="failure" path="agregaMateria"/>
         </action>
         
-        <action input="/VistaDepartamento.jsp" name="Materia" path="/vistaAgregaMateria" validate="false" scope="request" type="Actions.Materia.irAgregarMateria">
-            <forward name="success" path="agregaMateria"/>
+        <action path="/vistaAgregaMateria"
+            name="Materia"
+            type="org.apache.struts.actions.ForwardAction"
+            scope="request"
+            validate="false"
+            parameter="agregaMateria">
         </action>
         
         <action input="/ConsultaMateria.jsp" name="Materia" path="/eliminaMateria" scope="request" type="Actions.Materia.EliminaMateria" validate="false">
@@ -203,6 +208,7 @@
 
         <action input="/ConsultaMateria.jsp" name="Materia" path="/modificaMateria" scope="request" type="Actions.Materia.ModificaMateria" validate="false">
             <forward name="success" path="consultaMateria"/>
+            <forward name="failure" path="modificaMateria"/>
         </action>
                 
         <!-- ACCIONES COORDINADOR -->

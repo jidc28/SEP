@@ -40,51 +40,42 @@ public class IrModificarMateria extends org.apache.struts.action.Action {
 
         HttpSession session = request.getSession(true);
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-        
-        String codigo_materias = DBMS.getInstance().obtenerDatosDepartamento(usuario.getUsbid());
+
         Materia materia = (Materia) form;
 
         //String radio_html = "";
-        
+
         materia = DBMS.getInstance().obtenerDatosMateria(materia);
         materia.setViejoCodigo(materia.getCodigo());
-        
-        
-        /*for (int i = 1; i < 5; i++) {
-        
-            radio_html = radio_html + "<td style='padding-left: 5px;'>";
-            
-            for (int j = 1; j < 10; j++) {
-                radio_html = radio_html + "<html:radio "
-                        + "property='num"+i+"' value="+j+"> "
-                        + j + "</html:radio><br>";
-            }
-            
-            radio_html = radio_html + "</td>";
-        }*/
-        
-        /*request.setAttribute("radio_html",radio_html);*/
-                
-        String [] caracteres = materia.getCodigo().split(codigo_materias);
-        
-        String [] nums = caracteres[1].split("");
-        
-        for (int i = 0; i < nums.length; i ++) {
-            if (!nums[i].equals("")) {
-                if (i == 1) {
-                    materia.setNum1(nums[i]);
-                } else if (i == 2) {
-                    materia.setNum2(nums[i]);
-                } else if (i == 3) {
-                    materia.setNum3(nums[i]);
-                } else {
-                    materia.setNum4(nums[i]);
-                }
-            }
+
+        String[] caracteres = materia.getCodigo().split("");
+
+        for (int i = 1; i < caracteres.length; i++) {
+            System.out.println(caracteres[i]);
         }
+
+        materia.setCod1(caracteres[1] + caracteres[2]);
         
-        request.setAttribute("codigo_materias",codigo_materias);
-        request.setAttribute("materia",materia);
+        if (caracteres[3].equals("0") || caracteres[3].equals("1")
+                || caracteres[3].equals("2") || caracteres[3].equals("3")
+                || caracteres[3].equals("4") || caracteres[3].equals("5")
+                || caracteres[3].equals("6") || caracteres[3].equals("7")
+                || caracteres[3].equals("8") || caracteres[3].equals("9")) {
+            
+            materia.setNum1(caracteres[3]);
+            materia.setNum2(caracteres[4]);
+            materia.setNum3(caracteres[5]);
+            materia.setNum4(caracteres[6]);
+            
+        } else {
+            
+            materia.setCod2(caracteres[3]);
+            materia.setNum1(caracteres[4]);
+            materia.setNum2(caracteres[5]);
+            materia.setNum3(caracteres[6]);
+        }
+
+        request.setAttribute("materia", materia);
         return mapping.findForward(SUCCESS);
     }
 }
