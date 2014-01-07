@@ -15,6 +15,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Set;
+import java.lang.String;
+import java.util.AbstractSet;
+import java.util.HashSet;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * @author Langtech
@@ -690,32 +696,52 @@ public class DBMS {
         return profesores;
     }
 
-    public void enviarMemoEvaluarProfesor(String usbid_prof) {
+    public void enviarMemoEvaluarProfesor(String[] id_profesores) {
         PreparedStatement ps = null;
         PreparedStatement ps2 = null;
+        Correo email = new Correo();
+        Set<String> coords = new TreeSet<String>();
+        
         try {
-            ps = conexion.prepareStatement("SELECT dicta.codigo_materia, usbid_profesor, codigo_coordinacion FROM dicta, maneja WHERE usbid_profesor = ? AND dicta.codigo_materia = maneja.codigo_materia;");
-            ps.setString(1, usbid_prof);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                String materia = rs.getString("codigo_materia");
-                String profesor = rs.getString("usbid_profesor");
-                String coordinacion = rs.getString("codigo_coordinacion");
-                ps2 = conexion.prepareStatement("INSERT INTO evaluar VALUES (?,?,?);");
-                ps2.setString(1, coordinacion);
-                ps2.setString(2, profesor);
-                ps2.setString(3, materia);
-                ps2.executeUpdate();
+            for (int A = 0; A<id_profesores.length; A++){
+                String usbid_prof = id_profesores[A];
+                ps = conexion.prepareStatement("SELECT dicta.codigo_materia, usbid_profesor, codigo_coordinacion FROM dicta, maneja WHERE usbid_profesor = ? AND dicta.codigo_materia = maneja.codigo_materia;");
+                ps.setString(1, usbid_prof);
+                ResultSet rs = ps.executeQuery();
+
+
+                while (rs.next()) {
+                    String materia = rs.getString("codigo_materia");
+                    String profesor = rs.getString("usbid_profesor");
+                    String coordinacion = rs.getString("codigo_coordinacion");
+                    coords.add(coordinacion);
+
+                    ps2 = conexion.prepareStatement("INSERT INTO evaluar VALUES (?,?,?);");
+                    ps2.setString(1, coordinacion);
+                    ps2.setString(2, profesor);
+                    ps2.setString(3, materia);
+                    ps2.executeUpdate();
+                }
+            }
+            
+            String[] arregloCoords = coords.toArray(new String[0]);
+            
+            
+            
+            email.setAsunto("SEP - Evaluación de Profesores");
+            email.setMensaje("Se ha solicitado la evaluacion de uno o más profesores a través del"
+                    + "\n Sistema de Evaluación de Profesores de la Universidad Simón Bolívar."
+                    + "\n\n Por favor, ingrese al sistema mediante el siguiente link:"
+                    + "\n\n LINK \n\n");
+            System.out.println(arregloCoords.length);
+            for(int i = 0; i<arregloCoords.length; i++){
+                email.enviarNotificacion(arregloCoords[i]+"@usb.ve");
+                System.out.println(arregloCoords[i]+" "+ i);
+                
             }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }
-    }
-
-    public void enviarMemoEvaluar(String[] id_profesores) {
-        for (int i = 0; i < id_profesores.length; i++) {
-            enviarMemoEvaluarProfesor(id_profesores[i]);
         }
     }
 

@@ -4,12 +4,15 @@ INSERT INTO USUARIO VALUES ('C-0039','coordinacion','coordinacion');
 INSERT INTO USUARIO VALUES ('C-0003','coordinacion','coordinacion');
 INSERT INTO USUARIO VALUES ('D-2022','departamento','departamento');
 INSERT INTO USUARIO VALUES ('C-0017','coordinacion','coordinacion');
+INSERT INTO USUARIO VALUES ('09-10219','departamento','departamento');
+INSERT INTO USUARIO VALUES ('09-10020','coordinacion','coordinacion');
 
 INSERT INTO USUARIO VALUES ('22-90457','profesor','admin');
 INSERT INTO USUARIO VALUES ('28-63146','profesor','admin');
 INSERT INTO USUARIO VALUES ('84-73618','profesor','admin');
 INSERT INTO USUARIO VALUES ('43-62893','profesor','admin');
 
+INSERT INTO COORDINACION VALUES ('09-10020','Coordinacion de Administración de Email');
 INSERT INTO COORDINACION VALUES ('C-0001','Coordinacion de Administracion de Turismo y Hoteleria');
 INSERT INTO COORDINACION VALUES ('C-0002','Coordinacion de Alimentos');
 INSERT INTO COORDINACION VALUES ('C-0003','Coordinacion de Arquitectura');
@@ -70,6 +73,7 @@ INSERT INTO DECANATO VALUES (1004,'Decanato de Estudios Tecnologicos');
 INSERT INTO DECANATO VALUES (1005,'Decanato de Extension Universitaria');
 INSERT INTO DECANATO VALUES (1006,'Decanato de Investigacion y Desarrollo');
 
+INSERT INTO DEPARTAMENTO VALUES ('09-10219','Departamento de pruebas de Email','EM');
 INSERT INTO DEPARTAMENTO VALUES ('D-2001','Departamento de Administracion de Personal','C1');
 INSERT INTO DEPARTAMENTO VALUES ('D-2002','Departamento de Administracion y Almacen','C2');
 INSERT INTO DEPARTAMENTO VALUES ('D-2003','Departamento de Admision y Control de Estudios','C3');
@@ -158,11 +162,16 @@ INSERT INTO oferta VALUES ('CI6116','D-2022');
 INSERT INTO oferta VALUES ('CI1115','D-2022');
 INSERT INTO oferta VALUES ('CI5311','D-2022');
 
-INSERT INTO pertenece VALUES ('22-90457','D-2022');
-INSERT INTO pertenece VALUES ('28-63146','D-2022');
-INSERT INTO pertenece VALUES ('84-73618','D-2022');
-INSERT INTO pertenece VALUES ('43-62893','D-2022');
+INSERT INTO pertenece VALUES ('22-90457','09-10219');
+INSERT INTO pertenece VALUES ('28-63146','09-10219');
+INSERT INTO pertenece VALUES ('84-73618','09-10219');
+INSERT INTO pertenece VALUES ('43-62893','09-10219');
 
-INSERT INTO maneja VALUES('C-0052','CI6116');
+INSERT INTO maneja VALUES('09-10020','CI6116');
 INSERT INTO maneja VALUES('C-0043','CI6116');
 INSERT INTO maneja VALUES('C-0001','CI6116');
+
+INSERT INTO dicta VALUES('22-90457','CI6116');
+INSERT INTO dicta VALUES('28-63146','CI6116');
+INSERT INTO dicta VALUES('84-73618','CI1115');
+INSERT INTO dicta VALUES('43-62893','CI5311');
