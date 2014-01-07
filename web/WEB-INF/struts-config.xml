@@ -210,6 +210,10 @@
             <forward name="success" path="consultaMateria"/>
             <forward name="failure" path="modificaMateria"/>
         </action>
+        
+        <action input="/ConsultaMateria.jsp" name="Materia" path="/modificaStatusMateria" scope="request" type="Actions.Materia.ModificaStatusMateria" validate="false">
+            <forward name="success" path="consultaMateria"/>
+        </action>        
                 
         <!-- ACCIONES COORDINADOR -->
         <action input="/VistaCoordinacion.jsp" name="Coordinacion" path="/listarEvaluacionesPendientes" scope="request" type="Actions.Evaluaciones.ListarEvaluacionesPendientes" validate="false">

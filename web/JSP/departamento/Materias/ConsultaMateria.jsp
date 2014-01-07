@@ -62,24 +62,29 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>
+                        <th  style="font-size: 14px;">
                 <center>
-                    Codigo
+                    CODIGO
                 </center>
                 </th>
-                <th width="38%">
+                <th width="38%"  style="font-size: 14px;">
                 <center>
-                    Nombre Materia
+                    NOMBRE
                 </center>
                 </th>
-                <th>
+                <th  style="font-size: 14px;">
                 <center>
-                    Modificar
+                    MODIFICAR
                 </center>
                 </th>
-                <th>
+                <th  style="font-size: 14px;">
                 <center>
-                    Eliminar
+                    CAMBIAR ESTADO
+                </center>
+                </th>
+                <th  style="font-size: 14px;">
+                <center>
+                    DESACTIVAR
                 </center>
                 </th>
                 </tr>
@@ -100,6 +105,29 @@
                                     Modificar
                                 </html:submit>
                             </html:form>
+                        </td>
+                        <td align="center">
+                            <logic:equal name="Mat" property="estado" value="visible">
+                                <html:form action="/modificaStatusMateria">
+                                    <html:hidden name="Mat" property="estado" value="oculto"/>
+                                    <html:hidden name="Mat" property="codigo"/>
+                                    <html:submit styleClass="btn btn-warning"
+                                                 style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                                        Ocultar
+                                    </html:submit>
+                                </html:form>
+                            </logic:equal>
+                            
+                            <logic:equal name="Mat" property="estado" value="oculto">
+                                <html:form action="/modificaStatusMateria">
+                                    <html:hidden name="Mat" property="estado" value="visible"/>
+                                    <html:hidden name="Mat" property="codigo"/>
+                                    <html:submit styleClass="btn btn-success"
+                                                 style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                                        Mostrar
+                                    </html:submit>
+                                </html:form>
+                            </logic:equal>
                         </td>
                         <td align="center">
                             <html:form action="/eliminaMateria">

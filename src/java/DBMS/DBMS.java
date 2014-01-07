@@ -629,13 +629,19 @@ public class DBMS {
         ArrayList<Materia> materias = new ArrayList<Materia>(0);
         PreparedStatement ps = null;
         try {
-            ps = conexion.prepareStatement("SELECT codigo, nombre, estado FROM oferta, materia WHERE codigo_departamento = ? AND codigo_materia = codigo AND estado = 'activo';");
+            ps = conexion.prepareStatement("SELECT codigo, nombre, condicion, estado "
+                    + "FROM oferta, materia "
+                    + "WHERE codigo_departamento = ? AND "
+                    + "codigo_materia = codigo AND "
+                    + "condicion = 'activo' "
+                    + "ORDER BY estado;");
             ps.setString(1, id_departamento);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Materia m = new Materia();
                 m.setCodigo(rs.getString("codigo"));
                 m.setNombre(rs.getString("nombre"));
+                m.setCondicion(rs.getString("condicion"));
                 m.setEstado(rs.getString("estado"));
                 materias.add(m);
             }
@@ -646,6 +652,35 @@ public class DBMS {
         return materias;
     }
 
+    public ArrayList<Materia> listarMateriasOfertadasDepartamento(String id_departamento) {
+
+        ArrayList<Materia> materias = new ArrayList<Materia>(0);
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT codigo, nombre, condicion, estado "
+                    + "FROM oferta, materia "
+                    + "WHERE codigo_departamento = ? "
+                    + "AND codigo_materia = codigo "
+                    + "AND condicion = 'activo' "
+                    + "AND estado = 'visible' "
+                    + "ORDER BY estado;");
+            ps.setString(1, id_departamento);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Materia m = new Materia();
+                m.setCodigo(rs.getString("codigo"));
+                m.setNombre(rs.getString("nombre"));
+                m.setCondicion(rs.getString("condicion"));
+                m.setEstado(rs.getString("estado"));
+                materias.add(m);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return materias;
+    }
+    
     public ArrayList<Profesor> listarProfesoresDepartamento(String id_departamento) {
 
         ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
@@ -749,7 +784,7 @@ public class DBMS {
         PreparedStatement ps = null;
 
         try {
-            ps = conexion.prepareStatement("UPDATE MATERIA SET estado = 'desactivado' WHERE (codigo = ?);");
+            ps = conexion.prepareStatement("UPDATE MATERIA SET condicion = 'desactivado' WHERE (codigo = ?);");
             ps.setString(1, id_materia);
 
             Integer i = ps.executeUpdate();
@@ -864,7 +899,12 @@ public class DBMS {
         ArrayList<Materia> materias = new ArrayList<Materia>(0);
 
         try {
-            ps = conexion.prepareStatement("SELECT codigo, nombre FROM maneja, materia WHERE codigo_coordinacion = ? AND codigo_materia = codigo AND estado = 'activo'");
+            ps = conexion.prepareStatement("SELECT codigo, nombre "
+                    + "FROM maneja, materia "
+                    + "WHERE codigo_coordinacion = ? "
+                    + "AND codigo_materia = codigo "
+                    + "AND condicion = 'activo' "
+                    + "AND estado = 'visible'");
             ps.setString(1, cod_coord);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -948,7 +988,7 @@ public class DBMS {
         PreparedStatement ps2;
         
         try {
-            ps1 = conexion.prepareStatement("INSERT INTO MATERIA(codigo, nombre, creditos, estado) VALUES (?, ?, ?, ?);");
+            ps1 = conexion.prepareStatement("INSERT INTO MATERIA(codigo, nombre, creditos, condicion) VALUES (?, ?, ?, ?);");
             ps1.setString(1, m.getCodigo());
             ps1.setString(2, m.getNombre());
             ps1.setString(3, m.getCreditos());
@@ -1004,5 +1044,25 @@ public class DBMS {
         }
         return false;
 
-    }   
+    }
+     
+    public boolean cambiarStatusMateria(Materia m) {
+        
+        PreparedStatement ps;
+        try {
+
+            ps = conexion.prepareStatement("UPDATE materia SET estado = ? WHERE ( codigo = ? )");
+
+            ps.setString(1, m.getEstado());
+            ps.setString(2, m.getCodigo());
+            Integer s = ps.executeUpdate();
+
+            return s > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+     
 }
