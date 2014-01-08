@@ -4,8 +4,8 @@
  */
 package Actions.Materia;
 
-import DBMS.DBMS;
 import Clases.*;
+import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +23,7 @@ public class ModificaMateria extends org.apache.struts.action.Action {
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
     private static final String FAILURE = "failure";
+
     /**
      * This is the action called from the Struts framework.
      *
@@ -73,7 +74,7 @@ public class ModificaMateria extends org.apache.struts.action.Action {
         materia.setCodigo(materia.getCod1() + materia.getCod2() + materia.getNum1() + materia.getNum2() + materia.getNum3() + materia.getNum4());
 
         if (materia.getCodigo().length() > 6 || materia.getCodigo().length() < 6) {
-            request.setAttribute("materia",materia);
+            request.setAttribute("materia", materia);
             request.setAttribute("codigo_incorrecto", materia.getCodigo());
             materia.setCod1(null);
             materia.setCod2(null);
@@ -82,19 +83,23 @@ public class ModificaMateria extends org.apache.struts.action.Action {
             materia.setNum3(null);
             materia.setNum4(null);
             return mapping.findForward(FAILURE);
-            
+
         } else {
 
-            modificada = DBMS.getInstance().modificarMateria(materia);
+            if (materia.getComentarios().equals("null")) {
+                modificada = DBMS.getInstance().modificarMateria(materia);
 
-            if (modificada) {
-                request.setAttribute("materia_modificada", SUCCESS);
-            } else {
-                request.setAttribute("materia_no_modificada", SUCCESS);
+                if (modificada) {
+                    request.setAttribute("materia_modificada", SUCCESS);
+                } else {
+                    request.setAttribute("materia_no_modificada", SUCCESS);
+                }
+                materias = DBMS.getInstance().listarMateriasOfertadas(id_departamento);
+
+                request.setAttribute("materias", materias);
+                return mapping.findForward(SUCCESS);
             }
-            materias = DBMS.getInstance().listarMateriasOfertadas(id_departamento);
-
-            request.setAttribute("materias", materias);
+            
             return mapping.findForward(SUCCESS);
         }
     }

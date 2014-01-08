@@ -18,7 +18,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author admin
  */
-public class IrModificarMateria extends org.apache.struts.action.Action {
+public class ConsultarSolicitudesApertura extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -37,40 +37,16 @@ public class IrModificarMateria extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-
+        
         HttpSession session = request.getSession(true);
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-
-        Materia materia = (Materia) form;
-
-        materia = DBMS.getInstance().obtenerDatosMateria(materia);
-        materia.setViejoCodigo(materia.getCodigo());
-
-        String[] caracteres = materia.getCodigo().split("");
-
-        materia.setCod1(caracteres[1] + caracteres[2]);
+        ArrayList<Materia> materias;
         
-        if (caracteres[3].equals("0") || caracteres[3].equals("1")
-                || caracteres[3].equals("2") || caracteres[3].equals("3")
-                || caracteres[3].equals("4") || caracteres[3].equals("5")
-                || caracteres[3].equals("6") || caracteres[3].equals("7")
-                || caracteres[3].equals("8") || caracteres[3].equals("9")) {
-            
-            materia.setNum1(caracteres[3]);
-            materia.setNum2(caracteres[4]);
-            materia.setNum3(caracteres[5]);
-            materia.setNum4(caracteres[6]);
-            
-        } else {
-            
-            materia.setCod2(caracteres[3]);
-            materia.setNum1(caracteres[4]);
-            materia.setNum2(caracteres[5]);
-            materia.setNum3(caracteres[6]);
-        }
+        
+        materias = DBMS.getInstance().listarMateriasSolicitadasDepartamento(usuario.getUsbid());
 
-        request.setAttribute("modificar","modificar");
-        request.setAttribute("materia", materia);
+        //request.setAttribute("materias_vinculadas",SUCCESS);
+        session.setAttribute("materias", materias);
         return mapping.findForward(SUCCESS);
     }
 }

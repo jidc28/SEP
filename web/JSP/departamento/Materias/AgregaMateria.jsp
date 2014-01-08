@@ -394,6 +394,7 @@
                 </tbody>
             </table>
             <p style="text-align: center; margin-top: 10px;">
+                <html:hidden name="materia" property="comentarios" value="null"/>
                 <html:submit styleClass="btn btn-success"
                     onclick="javascript: return confirm('¿Está seguro de que los datos son correctos?')">
                     Agregar

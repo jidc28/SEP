@@ -18,7 +18,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author admin
  */
-public class IrModificarMateria extends org.apache.struts.action.Action {
+public class VerMateria extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -37,9 +37,6 @@ public class IrModificarMateria extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-
-        HttpSession session = request.getSession(true);
-        Usuario usuario = (Usuario) session.getAttribute("usuario");
 
         Materia materia = (Materia) form;
 
@@ -69,7 +66,7 @@ public class IrModificarMateria extends org.apache.struts.action.Action {
             materia.setNum3(caracteres[6]);
         }
 
-        request.setAttribute("modificar","modificar");
+        request.setAttribute("aprobar","aprobar");
         request.setAttribute("materia", materia);
         return mapping.findForward(SUCCESS);
     }
