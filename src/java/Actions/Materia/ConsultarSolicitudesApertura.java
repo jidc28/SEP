@@ -40,7 +40,7 @@ public class ConsultarSolicitudesApertura extends org.apache.struts.action.Actio
         
         HttpSession session = request.getSession(true);
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-        ArrayList<Materia> materias = null;
+        ArrayList<Materia> materias;
         
         
         materias = DBMS.getInstance().listarMateriasSolicitadasDepartamento(usuario.getUsbid());

@@ -25,24 +25,15 @@
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
-        <logic:present name="materia_agregada">
+        <logic:present name="solicitud_procesada">
             <div class="alert alert-success" id="alert">
-                La materia fue agregada exitosamente.
+                La solicitud de apertura de materia ha sido procesada exitosamente.
             </div>
         </logic:present>
-        <logic:present name="materia_no_agregada">
+        <logic:present name="solicitud_no_procesada">
             <div class="alert alert-danger" id="alert">
-                La materia no pudo ser agregada, intentelo mas tarde.
-            </div>
-        </logic:present>
-        <logic:present name="materia_eliminada">
-            <div class="alert alert-success" id="alert">
-                La materia fue eliminada exitosamente.
-            </div>
-        </logic:present>
-        <logic:present name="materia_no_eliminada">
-            <div class="alert alert-danger" id="alert">
-                La materia no pudo ser eliminada, intentelo mas tarde.
+                La solicitud de apertura de materia no pudo ser procesada exitosamente.
+                Intente más tarde.
             </div>
         </logic:present>
 
@@ -78,11 +69,10 @@
                             <bean:write name="Mat" property="nombre"/>
                         </td>
                         <td align="center">
-                            <html:form action="/irModificarMateria">
+                            <html:form action="/verSolicitudApertura">
                                 <html:hidden name="Mat" property="codigo"/>
                                 <html:submit styleClass="btn btn-info"
-                                             style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;"
-                                             disabled="true">
+                                             style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
                                     Ver detalles
                                 </html:submit>
                             </html:form>

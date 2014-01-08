@@ -1,7 +1,7 @@
 <%-- 
-    Document   : AgregarCoordinacion
-    Created on : 10/06/2013, 07:43:54 PM
-    Author     : Langtech
+    Document   : ModificaSolicitudApertura
+    Created on : Jan 8, 2014, 4:12:14 PM
+    Author     : smaf
 --%>
 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -30,8 +30,9 @@
             </div>
         </logic:present>
 
+
         <h4>Registro de Materias</h4>
-         <html:form action="/modificaMateria" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
+         <html:form action="/finalizarSolicitudApertura" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
             <table border="0" style="margin-top: 50px;">
                 <tbody>
                     <tr style="height: 35px;">
@@ -393,16 +394,40 @@
                         </center>
                         </td>
                     </tr>
+                    <tr style="height: 35px;">
+                        <td colspan="11">
+                            Comentarios:
+                        </td>
+                    </tr>
+                    <tr style="height: 35px;">
+                        <td colspan="11">
+                        <center>
+                            <html:textarea name="materia" property="comentarios"
+                                       rows="5" style="width: 100%;">
+                            </html:textarea>
+                        </center>
+                        <td>
+                    </tr>
+                    <tr style="height: 35px;">
+                        <td colspan="11">
+                        <center>
+                            <html:radio name="materia" property="solicitud" value="no"
+                                        style="margin: 3px; margin-top: 0px;">
+                                Aprobada
+                            </html:radio>
+                            <html:radio name="materia" property="solicitud" value="si"
+                                        style="margin: 3px; margin-top: 0px;">
+                                Negada
+                            </html:radio><br> 
+                        </center>
+                        <td>
+                    </tr>
                 </tbody>
             </table>
-            <p style="text-align: center; margin-top: 10px;">
-                    <html:hidden name="materia" property="viejoCodigo"/>
-                    <html:hidden name="materia" property="comentarios" value="null"/>
-                    <html:submit styleClass="btn btn-success">
-                        Modificar
-                    </html:submit>
-                    <html:reset styleClass="btn btn-default" value="Limpiar"/>
-            </html:form>
-            </p>
+            <html:hidden name="materia" property="viejoCodigo"/>
+            <html:submit styleClass="btn btn-info">
+                Finalizar
+            </html:submit>
+         </html:form>
     </body>
 </html>

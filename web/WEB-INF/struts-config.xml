@@ -229,6 +229,10 @@
             <forward name="success" path="consultaMateria"/>
             <forward name="failure" path="modificaMateria"/>
         </action>
+
+        <action input="/ConsultaMateria.jsp" name="Materia" path="/verSolicitudApertura" scope="request" type="Actions.Materia.VerMateria" validate="false">
+            <forward name="success" path="modificaSolicitudApertura"/>
+        </action>        
         
         <action input="/ConsultaMateria.jsp" name="Materia" path="/modificaStatusMateria" scope="request" type="Actions.Materia.ModificaStatusMateria" validate="false">
             <forward name="success" path="consultaMateria"/>
@@ -237,7 +241,12 @@
         <action input="/VistaDepartamento.jsp" name="Materia" path="/consultaSolicitudesApertura" scope="request" type="Actions.Materia.ConsultarSolicitudesApertura" validate="false">
             <forward name="success" path="consultaSolicitudesApertura"/>
         </action>    
-                                
+
+        <action input="/ModificaMateria.jsp" name="Materia" path="/finalizarSolicitudApertura" scope="request" type="Actions.Materia.FinalizarSolicitudApertura" validate="false">
+            <forward name="success" path="consultaSolicitudesApertura"/>
+            <forward name="failure" path="modificaSolicitudApertura"/>
+        </action>    
+                                                                
         <!-- ACCIONES COORDINADOR -->
         <action input="/VistaCoordinacion.jsp" name="Coordinacion" path="/listarEvaluacionesPendientes" scope="request" type="Actions.Evaluaciones.ListarEvaluacionesPendientes" validate="false">
             <forward name="success" path="listarEvaluacionesPendientes"/>

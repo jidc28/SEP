@@ -835,6 +835,7 @@ public class DBMS {
                 m.setCodigo(rs.getString("codigo"));
                 m.setNombre(rs.getString("nombre"));
                 m.setCreditos(rs.getString("creditos"));
+                m.setSolicitud(rs.getString("solicitud"));
             }
 
             return m;
@@ -1143,7 +1144,7 @@ public class DBMS {
         ArrayList<Materia> materias = new ArrayList<Materia>(0);
         PreparedStatement ps = null;
         try {
-            ps = conexion.prepareStatement("SELECT m.nombre, c.nombre, sa.mensaje "
+            ps = conexion.prepareStatement("SELECT m.codigo, m.nombre, c.nombre, sa.mensaje "
                     + "FROM solicita_apertura AS sa, materia AS m, coordinacion AS c "
                     + "WHERE sa.codigo_departamento = ? "
                     + "AND sa.codigo_materia = m.codigo "
@@ -1154,9 +1155,10 @@ public class DBMS {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Materia m = new Materia();
-                m.setNombre(rs.getString(1));
-                m.setCoordinacion(rs.getString(2));
-                m.setMensaje(rs.getString(3));
+                m.setCodigo(rs.getString(1));
+                m.setNombre(rs.getString(2));
+                m.setCoordinacion(rs.getString(3));
+                m.setMensaje(rs.getString(4));
                 materias.add(m);
             }
 
@@ -1164,5 +1166,46 @@ public class DBMS {
             ex.printStackTrace();
         }
         return materias;
+    }
+
+    public boolean aprobarSolicitudMateria(Materia m) {
+
+        PreparedStatement ps1;
+        PreparedStatement ps2;
+        
+        try {
+            ps1 = conexion.prepareStatement("UPDATE MATERIA SET solicitud = 'no' WHERE codigo = ?;");
+            ps1.setString(1, m.getCodigo());
+
+            ps2 = conexion.prepareStatement("DELETE FROM solicita_apertura WHERE codigo_materia = ?;");
+            ps2.setString(1, m.getCodigo());
+            
+            Integer i = ps1.executeUpdate();
+            Integer j = ps2.executeUpdate();
+            
+            return i > 0 && j > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean negarSolicitudMateria(Materia m) {
+
+        PreparedStatement ps;
+
+        try {
+            ps = conexion.prepareStatement("DELETE FROM MATERIA WHERE codigo = ?;");
+            ps.setString(1, m.getCodigo());
+
+            Integer i = ps.executeUpdate();
+
+            return i > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 }
