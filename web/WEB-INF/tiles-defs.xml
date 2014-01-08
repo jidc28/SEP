@@ -123,6 +123,10 @@
         <put name="body" value="/JSP/departamento/Materias/ModificaMateria.jsp"/>
     </definition>
     
+    <definition name="consultaSolicitudesApertura" extends="baseDepartamento"> <!-- Consulta Solicitudes de apertura de materias -->
+        <put name="body" value="/JSP/departamento/Materias/ConsultarSolicitudesApertura.jsp"/>
+    </definition>
+    
     <!-- COORDINACION -->
     <definition name="baseCoordinacion" extends="base"> <!-- BASE PARA COORDINACION -->
         <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDecanato.jsp"/>

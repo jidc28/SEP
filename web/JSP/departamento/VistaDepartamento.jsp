@@ -24,6 +24,18 @@
         <title>Sistema de Evaluación de Profesores</title>
     </head>
     <body>
+        <logic:present name="solicitud_apertura_materia">
+            <div class="alert alert-info alert-dismissable" 
+                 id="alert-coord">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <p>
+                    <strong>Atención: </strong> <br> 
+                    Se solicitó la apertura de materias. Para más información
+                    seleccionar <em>Gestionar Materias, Listar solicitudes pendientes</em>.
+                </p>
+            </div>
+        </logic:present>
+        
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -41,6 +53,15 @@
                         <html:link action="/consultaMateria">
                             <h5 align ="center">Consultar Materias</h5>
                         </html:link>
+                        <logic:present name="solicitud_apertura_materia">
+                            <html:link action="/consultaSolicitudesApertura"> 
+                                <h5 align ="center"> Listar Solicitudes Pendientes                                
+                                    <span class="badge">
+                                        <bean:write name="solicitud_apertura_materia"/>
+                                    </span>
+                                </h5>
+                            </html:link>
+                        </logic:present>
                     </div>
                 </div>
             </div>

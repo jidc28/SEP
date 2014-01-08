@@ -903,11 +903,10 @@ public class DBMS {
 
         try {
             ps = conexion.prepareStatement("SELECT codigo, nombre "
-                    + "FROM maneja, materia "
-                    + "WHERE codigo_coordinacion = ? "
-                    + "AND codigo_materia = codigo "
+                    + "FROM maneja, materia, oferta "
+                    + "WHERE maneja.codigo_coordinacion = ? "
+                    + "AND maneja.codigo_materia = codigo "
                     + "AND condicion = 'activo' "
-                    + "AND solicitud = 'no' "
                     + "AND estado = 'visible'");
             ps.setString(1, cod_coord);
             ResultSet rs = ps.executeQuery();
@@ -986,27 +985,23 @@ public class DBMS {
         return null;
     }
 
-    public boolean registrarMateria(Materia m, String id_departamento, String solicitado) {
+    public boolean registrarMateria(Materia m, String id_departamento) {
 
         PreparedStatement ps1;
         PreparedStatement ps2;
 
         try {
-            ps1 = conexion.prepareStatement("INSERT INTO MATERIA(codigo, nombre, creditos, condicion, mensaje) VALUES (?, ?, ?, ?, ?);");
+            ps1 = conexion.prepareStatement("INSERT INTO MATERIA(codigo, nombre, creditos) "
+                    + "VALUES (?, ?, ?);");
             ps1.setString(1, m.getCodigo());
             ps1.setString(2, m.getNombre());
             ps1.setString(3, m.getCreditos());
-            ps1.setString(4, "activo");
-            if (m.getMensaje() != null) {
-                ps1.setString(5, m.getMensaje());
-            } else {
-                ps1.setString(5, "");
-            }
 
-            ps2 = conexion.prepareStatement("INSERT INTO OFERTA(codigo_materia, codigo_departamento, solicitud) VALUES (?, ?, ?);");
+            ps2 = conexion.prepareStatement("INSERT INTO OFERTA"
+                    + "(codigo_materia, codigo_departamento) "
+                    + "VALUES (?, ?);");
             ps2.setString(1, m.getCodigo());
             ps2.setString(2, id_departamento);
-            ps2.setString(3, solicitado);
 
             Integer i = ps1.executeUpdate();
             Integer j = ps2.executeUpdate();
@@ -1089,5 +1084,85 @@ public class DBMS {
             ex.printStackTrace();
         }
         return false;
+    }
+
+    public int contarSolicitudesPendientesDepartamento(String id_departamento) {
+
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT Count(codigo_materia) "
+                    + "FROM solicita_apertura "
+                    + "WHERE codigo_departamento = ?;");
+            ps.setString(1, id_departamento);
+
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            return Integer.parseInt(rs.getString("count"));
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public boolean solicitudRegistrarMateria(Materia m, String id_departamento, String id_coordinacion) {
+
+        PreparedStatement ps1;
+        PreparedStatement ps2;
+
+        try {
+            ps1 = conexion.prepareStatement("INSERT INTO MATERIA(codigo, nombre, creditos, solicitud) "
+                    + "VALUES (?, ?, ?, ?);");
+            ps1.setString(1, m.getCodigo());
+            ps1.setString(2, m.getNombre());
+            ps1.setString(3, m.getCreditos());
+            ps1.setString(4, "si");
+
+            ps2 = conexion.prepareStatement("INSERT INTO solicita_apertura"
+                    + "(codigo_materia, codigo_coordinacion, codigo_departamento, mensaje) "
+                    + "VALUES (?, ?, ?, ?);");
+            ps2.setString(1, m.getCodigo());
+            ps2.setString(2, id_coordinacion);
+            ps2.setString(3, id_departamento);
+            ps2.setString(4, m.getMensaje());
+
+            Integer i = ps1.executeUpdate();
+            Integer j = ps2.executeUpdate();
+
+
+            return i > 0 && j > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public ArrayList<Materia> listarMateriasSolicitadasDepartamento(String id_departamento) {
+
+        ArrayList<Materia> materias = new ArrayList<Materia>(0);
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT m.nombre, c.nombre, sa.mensaje "
+                    + "FROM solicita_apertura AS sa, materia AS m, coordinacion AS c "
+                    + "WHERE sa.codigo_departamento = ? "
+                    + "AND sa.codigo_materia = m.codigo "
+                    + "AND m.solicitud = 'si' "
+                    + "AND sa.codigo_coordinacion = c.codigo "
+                    + "ORDER BY sa.codigo_coordinacion;");
+            ps.setString(1, id_departamento);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Materia m = new Materia();
+                m.setNombre(rs.getString(1));
+                m.setCoordinacion(rs.getString(2));
+                m.setMensaje(rs.getString(3));
+                materias.add(m);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return materias;
     }
 }

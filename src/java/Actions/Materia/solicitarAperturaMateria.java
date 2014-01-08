@@ -82,7 +82,7 @@ public class solicitarAperturaMateria extends org.apache.struts.action.Action {
         } else {
 
             String id_departamento = DBMS.getInstance().obtenerDatosDepartamento(materia.getDepartamento());
-            boolean registrada = DBMS.getInstance().registrarMateria(materia, id_departamento, "si");
+            boolean registrada = DBMS.getInstance().solicitudRegistrarMateria(materia, id_departamento, usuario.getUsbid());
 
             if (registrada) {
                 request.setAttribute("solicitud_enviada", SUCCESS);

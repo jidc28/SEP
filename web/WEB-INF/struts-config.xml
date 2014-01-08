@@ -233,7 +233,11 @@
         <action input="/ConsultaMateria.jsp" name="Materia" path="/modificaStatusMateria" scope="request" type="Actions.Materia.ModificaStatusMateria" validate="false">
             <forward name="success" path="consultaMateria"/>
         </action>        
-                
+
+        <action input="/VistaDepartamento.jsp" name="Materia" path="/consultaSolicitudesApertura" scope="request" type="Actions.Materia.ConsultarSolicitudesApertura" validate="false">
+            <forward name="success" path="consultaSolicitudesApertura"/>
+        </action>    
+                                
         <!-- ACCIONES COORDINADOR -->
         <action input="/VistaCoordinacion.jsp" name="Coordinacion" path="/listarEvaluacionesPendientes" scope="request" type="Actions.Evaluaciones.ListarEvaluacionesPendientes" validate="false">
             <forward name="success" path="listarEvaluacionesPendientes"/>
