@@ -26,6 +26,7 @@
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
 
         <logic:present name="enviado_memo">
             <div class="alert alert-success" id="alert">
@@ -37,7 +38,7 @@
                 No ha seleccionado ningun profesor a evaluar.
             </div>
         </logic:present>
-        
+
         <h4> Evaluar Profesores:</h4>
 
     <center>
@@ -92,9 +93,12 @@
                     </logic:iterate>
                 </table>
                 <center>
-                    <html:submit styleClass="btn btn-primary">
+                    <html:submit styleClass="btn btn-primary" style="type: button; data-loading-text: cargando;">
                         Evaluar profesores seleccionados
                     </html:submit>
+                    <button type="button" data-loading-text="Loading..." class="btn btn-primary">
+                        Loading state
+                    </button>
                 </center>
             </html:form>
         </div>
