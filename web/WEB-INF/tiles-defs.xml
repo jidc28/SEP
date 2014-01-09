@@ -87,6 +87,9 @@
         <put name="body" value="/JSP/profesor/Materias/resultadosMaterias.jsp"/>
     </definition>
 
+    <definition name="agregarRendimientoProfesor" extends="baseProfesor"> <!-- ir Agregar Rendimiento Profesor-->
+        <put name="body" value="/JSP/profesor/Materias/agregarRendimientoMateria.jsp"/>
+    </definition>
     <!-- DECANATO -->
     
     <definition name="baseDecanato" extends="base"> <!-- BASE PARA DECANATO -->

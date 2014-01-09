@@ -280,6 +280,12 @@
         <action input="/VistaProfesor.jsp" name="rendimientoProf" path="/irConsultarRendimiento" scope="request" type="Actions.Profesor.irRendimientoProfesor" validate="false">
             <forward name="success" path="rendimientoProfesor"/>
         </action>      
+        <action input="/resultadosMaterias.jsp" name="Materia" path="/irAgregarRendimiento" scope="request" type="Actions.Profesor.irAgregarRendimiento" validate="false">
+            <forward name="success" path="agregarRendimientoProfesor"/>
+        </action>      
+        <action input="/agregarRendimientoProfesor.jsp" name="rendimientoProf" path="/agregarRendimiento" scope="request" type="Actions.Profesor.agregarRendimientoProfesor" validate="false">
+            <forward name="success" path="rendimientoProfesor"/>
+        </action>      
  
         <action name="NoImplementado" path="/noImplementado" scope="request" type="Otros.noimplementadoAction" validate="false">
             <forward name="success" path="/noimplementado.jsp"/>
