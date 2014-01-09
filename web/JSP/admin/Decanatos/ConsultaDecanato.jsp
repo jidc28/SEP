@@ -44,19 +44,19 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>
+                        <th style="font-size: 14px;">
                             <center>
-                            Codigo
+                            CODIGO
                             </center>
                         </th>
-                        <th>
+                        <th style="font-size: 14px;">
                             <center>
-                            Nombre Decanato
+                            NOMBRE
                             </center>
                         </th>
-                        <th>
+                        <th style="font-size: 14px;">
                             <center>
-                            Modificar
+                            MODIFICAR
                             </center>
                         </th>
                     </tr>

@@ -61,15 +61,21 @@
                 
                 <logic:notPresent name="materias_vinculadas">
                     <thead>
-                        <tr>
-                            <th>
-                    <center>Codigo</center>
+                    <tr>
+                    <th style="font-size: 14px;">
+                        <center>
+                            CODIGO
+                        </center>
                     </th>
-                    <th>
-                    <center>Nombre de la Materia</center>
+                    <th style="font-size: 14px;">
+                        <center>
+                            NOMBRE
+                        </center>
                     </th>
-                    <th>
-                    <center>Vincular</center>
+                    <th style="font-size: 14px;">
+                        <center>
+                            VINCULAR
+                        </center>
                     </th>
                     </thead>
                     <tbody>
@@ -98,15 +104,21 @@
                 </logic:notPresent>
                 <logic:present name="materias_vinculadas">
                     <thead>
-                        <tr>
-                            <th>
-                    <center>Codigo</center>
+                    <tr>
+                    <th style="font-size: 14px;">
+                        <center >
+                            CODIGO
+                        </center>
                     </th>
-                    <th width="30%">
-                    <center>Nombre de la Materia</center>
+                    <th width="30%" style="font-size: 14px;">
+                        <center>
+                            NOMBRE
+                        </center>
                     </th>
-                    <th>
-                    <center>Desvincular</center>
+                    <th style="font-size: 14px;">
+                        <center>
+                            DESVINCULAR
+                        </center>
                     </th>
                     </thead>
                     <tbody>
