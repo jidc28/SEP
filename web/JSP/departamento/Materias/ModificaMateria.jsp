@@ -30,12 +30,28 @@
             </div>
         </logic:present>
 
+        <logic:present name="campos_vacios">
+            <div class="alert alert-danger" id="alert">
+                Los campos <strong>nombre de la materia</strong> y <strong>número de créditos</strong> 
+                son obligatorios.
+            </div>
+        </logic:present>
+
+        <logic:present name="creditos_incorrecto">
+            <div class="alert alert-danger" id="alert">
+                Introduzca un número de créditos correcto. 
+                <strong><bean:write name="creditos_incorrecto"/></strong> no es un número.
+            </div>
+        </logic:present>
+        
         <h4>Registro de Materias</h4>
          <html:form action="/modificaMateria" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
             <table border="0" style="margin-top: 50px;">
                 <tbody>
                     <tr style="height: 35px;">
-                        <td style="color: black" colspan="11">Codigo de la Materia</td>
+                        <td style="color: black" colspan="11">
+                            <strong>Codigo de la Materia </strong>
+                        </td>
                     </tr>
                     <tr>
                             <td style="padding-left: 5px;">
@@ -362,7 +378,9 @@
                     </tr>
 
                     <tr  style="height: 35px;">
-                        <td style="color: black" colspan="11">Nombre de la Materia</td>
+                        <td style="color: black" colspan="11">
+                            <strong> Nombre de la Materia </strong> 
+                        </td>
                     </tr>
                     <tr  style="height: 35px;">
                         <td colspan="11">
@@ -380,7 +398,7 @@
                     </tr>
                     <tr style="height: 35px;">
                         <td colspan="11">
-                            Número de créditos
+                            <strong> Número de créditos </strong>
                         </td>
                     </tr>
                     <tr style="height: 35px;">

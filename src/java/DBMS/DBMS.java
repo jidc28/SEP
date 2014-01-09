@@ -1166,7 +1166,30 @@ public class DBMS {
         }
         return materias;
     }
+    public String obtenerMensaje(String id_departamento) {
 
+        PreparedStatement ps;
+        try {
+            ps = conexion.prepareStatement("SELECT sa.mensaje "
+                    + "FROM solicita_apertura AS sa, materia AS m, coordinacion AS c "
+                    + "WHERE sa.codigo_departamento = ? "
+                    + "AND sa.codigo_materia = m.codigo "
+                    + "AND m.solicitud = 'si' "
+                    + "AND sa.codigo_coordinacion = c.codigo "
+                    + "ORDER BY sa.codigo_coordinacion;");
+            ps.setString(1, id_departamento);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return materias;
+    }
+    
     public boolean aprobarSolicitudMateria(Materia m) {
 
         PreparedStatement ps1;

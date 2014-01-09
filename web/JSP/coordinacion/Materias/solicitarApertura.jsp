@@ -23,20 +23,34 @@
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
-
-        <h4>Solicitud de Registro de Materias</h4>
         
         <logic:present name="codigo_incorrecto">
             <div class="alert alert-danger" id="alert">
                 Codigo de materia <bean:write name="codigo_incorrecto"/> incorrecto intente de nuevo.
             </div>
         </logic:present>
+        
         <logic:present name="solicitud_no_enviada">
             <div class="alert alert-danger" id="alert">
                 La solicitud no pudo ser enviada, intente de nuevo más tarde.
             </div>
         </logic:present>
         
+        <logic:present name="campos_vacios">
+            <div class="alert alert-danger" id="alert">
+                Los campos <strong>nombre de la materia</strong> y <strong>número de créditos</strong> 
+                son obligatorios.
+            </div>
+        </logic:present>
+
+        <logic:present name="creditos_incorrecto">
+            <div class="alert alert-danger" id="alert">
+                Introduzca un número de créditos correcto. 
+                <strong><bean:write name="creditos_incorrecto"/></strong> no es un número.
+            </div>
+        </logic:present>
+        
+        <h4>Solicitud de Registro de Materias</h4>
         
         <html:form action="/solicitarAperturaMateria" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
             <table border="0" style="margin-top: 50px;">

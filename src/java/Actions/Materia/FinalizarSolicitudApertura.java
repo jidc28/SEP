@@ -23,6 +23,7 @@ public class FinalizarSolicitudApertura extends org.apache.struts.action.Action 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
     private static final String FAILURE = "failure";
+
     /**
      * This is the action called from the Struts framework.
      *
@@ -45,6 +46,17 @@ public class FinalizarSolicitudApertura extends org.apache.struts.action.Action 
         boolean finalizada;
 
         ArrayList<Materia> materias;
+
+        if (materia.getNombre() == null || materia.getCreditos() == null
+                || materia.getNombre().equals("") || materia.getCreditos().equals("")) {
+            request.setAttribute("campos_vacios", FAILURE);
+            return mapping.findForward(FAILURE);
+        }
+
+        if (!materia.getCreditos().matches("\\d+(.\\d+)?")) {
+            request.setAttribute("creditos_incorrecto", materia.getCreditos());
+            return mapping.findForward(FAILURE);
+        }
 
         if (materia.getCod1() == null) {
             materia.setCod1("");
@@ -73,7 +85,7 @@ public class FinalizarSolicitudApertura extends org.apache.struts.action.Action 
         materia.setCodigo(materia.getCod1() + materia.getCod2() + materia.getNum1() + materia.getNum2() + materia.getNum3() + materia.getNum4());
 
         if (materia.getCodigo().length() > 6 || materia.getCodigo().length() < 6) {
-            request.setAttribute("materia",materia);
+            request.setAttribute("materia", materia);
             request.setAttribute("codigo_incorrecto", materia.getCodigo());
             materia.setCod1(null);
             materia.setCod2(null);
@@ -82,7 +94,7 @@ public class FinalizarSolicitudApertura extends org.apache.struts.action.Action 
             materia.setNum3(null);
             materia.setNum4(null);
             return mapping.findForward(FAILURE);
-            
+
         } else {
 
             if (materia.getSolicitud().equals("no")) {
@@ -90,11 +102,11 @@ public class FinalizarSolicitudApertura extends org.apache.struts.action.Action 
             } else {
                 finalizada = DBMS.getInstance().negarSolicitudMateria(materia);
             }
-            
+
             if (finalizada) {
-                request.setAttribute("solicitud_procesada",SUCCESS);
+                request.setAttribute("solicitud_procesada", SUCCESS);
             } else {
-                request.setAttribute("solicitud_no_procesada",FAILURE);
+                request.setAttribute("solicitud_no_procesada", FAILURE);
             }
 
             materias = DBMS.getInstance().listarMateriasSolicitadasDepartamento(usuario.getUsbid());

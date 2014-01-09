@@ -62,7 +62,20 @@ public class agregaMateria extends org.apache.struts.action.Action {
             }
         } else if (tipousuario.equals("departamento")) {
             Materia materia = (Materia) form;
-
+            
+            if (materia.getNombre() == null || materia.getCreditos() == null ||
+                materia.getNombre().equals("") || materia.getCreditos().equals("")) {
+                request.setAttribute("materia", materia);
+                request.setAttribute("campos_vacios", FAILURE);
+                return mapping.findForward(FAILURE);
+            }
+            
+            if (!materia.getCreditos().matches("\\d+(.\\d+)?")) {
+                request.setAttribute("materia", materia);
+                request.setAttribute("creditos_incorrecto", materia.getCreditos());
+                return mapping.findForward(FAILURE);
+            }
+            
             if (materia.getCod1() == null) {
                 materia.setCod1("");
             }

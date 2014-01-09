@@ -38,9 +38,12 @@ public class VerMateria extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
+        HttpSession session = request.getSession(true);
+        String id_departamento = (String) session.getAttribute("usbid");
         Materia materia = (Materia) form;
 
         materia = DBMS.getInstance().obtenerDatosMateria(materia);
+        materia.setMensaje(DBMS.getInstance().obtenerMensaje(id_departamento));
         materia.setViejoCodigo(materia.getCodigo());
 
         String[] caracteres = materia.getCodigo().split("");

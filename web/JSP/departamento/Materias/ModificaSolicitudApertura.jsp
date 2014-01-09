@@ -36,7 +36,21 @@
             <table border="0" style="margin-top: 50px;">
                 <tbody>
                     <tr style="height: 35px;">
-                        <td style="color: black" colspan="11">Codigo de la Materia</td>
+                        <td style="color: black" colspan="11">
+                            <strong>Justificación</strong>
+                        </td>
+                    </tr>
+                    <tr style="height: 35px;">
+                        <td colspan="11">
+                            <p style="font-size: 14px;">
+                                <bean:write name="materia" property="mensaje"/>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr style="height: 35px;">
+                        <td style="color: black" colspan="11">
+                            <strong>Codigo de la Materia</strong>
+                        </td>
                     </tr>
                     <tr>
                             <td style="padding-left: 5px;">
@@ -363,7 +377,9 @@
                     </tr>
 
                     <tr  style="height: 35px;">
-                        <td style="color: black" colspan="11">Nombre de la Materia</td>
+                        <td style="color: black" colspan="11">
+                            <strong>Nombre de la Materia</strong>
+                        </td>
                     </tr>
                     <tr  style="height: 35px;">
                         <td colspan="11">
@@ -381,7 +397,7 @@
                     </tr>
                     <tr style="height: 35px;">
                         <td colspan="11">
-                            Número de créditos
+                            <strong> Número de créditos </strong>
                         </td>
                     </tr>
                     <tr style="height: 35px;">
@@ -396,7 +412,7 @@
                     </tr>
                     <tr style="height: 35px;">
                         <td colspan="11">
-                            Comentarios:
+                            <strong> Comentarios: </strong>
                         </td>
                     </tr>
                     <tr style="height: 35px;">

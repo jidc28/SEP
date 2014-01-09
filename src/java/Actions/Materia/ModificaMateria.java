@@ -45,7 +45,20 @@ public class ModificaMateria extends org.apache.struts.action.Action {
         boolean modificada = false;
 
         String id_departamento = (String) session.getAttribute("usbid");
-        ArrayList<Materia> materias = null;
+        ArrayList<Materia> materias;
+
+        if (materia.getNombre() == null || materia.getCreditos() == null
+                || materia.getNombre().equals("") || materia.getCreditos().equals("")) {
+            request.setAttribute("materia", materia);
+            request.setAttribute("campos_vacios", FAILURE);
+            return mapping.findForward(FAILURE);
+        }
+
+        if (!materia.getCreditos().matches("\\d+(.\\d+)?")) {
+            request.setAttribute("materia", materia);
+            request.setAttribute("creditos_incorrecto", materia.getCreditos());
+            return mapping.findForward(FAILURE);
+        }
 
         if (materia.getCod1() == null) {
             materia.setCod1("");
@@ -84,23 +97,21 @@ public class ModificaMateria extends org.apache.struts.action.Action {
             materia.setNum4(null);
             return mapping.findForward(FAILURE);
 
-        } else {
+        }
 
-            if (materia.getComentarios().equals("null")) {
-                modificada = DBMS.getInstance().modificarMateria(materia);
+        if (materia.getComentarios().equals("null")) {
+            modificada = DBMS.getInstance().modificarMateria(materia);
 
-                if (modificada) {
-                    request.setAttribute("materia_modificada", SUCCESS);
-                } else {
-                    request.setAttribute("materia_no_modificada", SUCCESS);
-                }
-                materias = DBMS.getInstance().listarMateriasOfertadas(id_departamento);
-
-                request.setAttribute("materias", materias);
-                return mapping.findForward(SUCCESS);
+            if (modificada) {
+                request.setAttribute("materia_modificada", SUCCESS);
+            } else {
+                request.setAttribute("materia_no_modificada", SUCCESS);
             }
-            
+            materias = DBMS.getInstance().listarMateriasOfertadas(id_departamento);
+
+            request.setAttribute("materias", materias);
             return mapping.findForward(SUCCESS);
         }
+        return mapping.findForward(SUCCESS);
     }
 }

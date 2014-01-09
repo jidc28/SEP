@@ -24,19 +24,36 @@
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
-        <h4>Registro de Materias</h4>
-        
         <logic:present name="codigo_incorrecto">
             <div class="alert alert-danger" id="alert">
-                Codigo de materia <bean:write name="codigo_incorrecto"/> incorrecto intente de nuevo.
+                <strong>Código</strong> de materia 
+                <bean:write name="codigo_incorrecto"/> incorrecto intente de nuevo.
             </div>
         </logic:present>
+        
+        <logic:present name="campos_vacios">
+            <div class="alert alert-danger" id="alert">
+                Los campos <strong>nombre de la materia</strong> y <strong>número de créditos</strong> 
+                son obligatorios.
+            </div>
+        </logic:present>
+
+        <logic:present name="creditos_incorrecto">
+            <div class="alert alert-danger" id="alert">
+                Introduzca un número de créditos correcto. 
+                <strong><bean:write name="creditos_incorrecto"/></strong> no es un número.
+            </div>
+        </logic:present>
+        
+        <h4>Registro de Materias</h4>
         
         <html:form action="/agregaMateria" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
             <table border="0" style="margin-top: 50px;">
                 <tbody>
                     <tr style="height: 35px;">
-                        <td style="color: black" colspan="11">Codigo de la Materia</td>
+                        <td style="color: black" colspan="11">
+                            <strong> Codigo de la Materia </strong>
+                        </td>
                         </tr>
                             <tr>
                             <td style="padding-left: 5px;">
@@ -363,7 +380,9 @@
                     </tr>
 
                     <tr  style="height: 35px;">
-                        <td style="color: black" colspan="11">Nombre de la Materia</td>
+                        <td style="color: black" colspan="11">
+                            <strong> Nombre de la Materia </strong> 
+                        </td>
                     </tr>
                     <tr  style="height: 35px;">
                         <td colspan="11">
@@ -381,13 +400,13 @@
                     </tr>-->
                     <tr style="height: 35px;">
                         <td colspan="11">
-                            Número de créditos
+                            <strong> Número de créditos </strong>
                         </td>
                     </tr>
                     <tr style="height: 35px;">
                         <td colspan="11">
                         <center>
-                                <html:text property="creditos" style="width: 40%; height: 100%;" name="Materia" maxlength="2" errorKey="org.apache.struts.action.ERROR"/>
+                                <html:text property="creditos" style="text-align: center; width: 20%; height: 100%;" name="Materia" maxlength="2" errorKey="org.apache.struts.action.ERROR"/>
                         </center>
                         </td>
                     </tr>                    
