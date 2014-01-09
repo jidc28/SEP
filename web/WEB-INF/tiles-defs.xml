@@ -82,6 +82,10 @@
     <definition name="agregarInfoP" extends="baseProfesor"> <!-- Agregar Info Profesor-->
         <put name="body" value="/JSP/profesor/AgregarInfoP.jsp"/>
     </definition>
+    
+    <definition name="rendimientoProfesor" extends="baseProfesor"> <!-- Rendimiento Profesor-->
+        <put name="body" value="/JSP/profesor/Materias/resultadosMaterias.jsp"/>
+    </definition>
 
     <!-- DECANATO -->
     

@@ -20,6 +20,7 @@
         <form-bean name="Usuario" type="Clases.Usuario"/>
         <form-bean name="DACE" type="Sistemas.DACE"/>
         <form-bean name="MultiBox" type="Clases.MultiBox"/>
+        <form-bean name="rendimientoProf" type="Clases.rendimientoProf"/>
     </form-beans>
     
     <global-exceptions>
@@ -276,6 +277,9 @@
             <forward name="success" path="agregarInfoP"/>
             <forward name="failure" path="vistaProfesor"/>
         </action>
+        <action input="/VistaProfesor.jsp" name="rendimientoProf" path="/irConsultarRendimiento" scope="request" type="Actions.Profesor.irRendimientoProfesor" validate="false">
+            <forward name="success" path="rendimientoProfesor"/>
+        </action>      
  
         <action name="NoImplementado" path="/noImplementado" scope="request" type="Otros.noimplementadoAction" validate="false">
             <forward name="success" path="/noimplementado.jsp"/>

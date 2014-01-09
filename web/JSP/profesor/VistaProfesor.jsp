@@ -140,7 +140,7 @@
                 </td>
                 <tr>
                     <td>
-                        <html:form action="/ingresarNumerosMateria">
+                        <html:form action="/irConsultarRendimiento">
                             <html:hidden name="usuario" property="usbid"/>
                             <html:submit style="margin: 2.5px;" styleClass="btn btn-default" value="Agregar Números Materias"/>
                         </html:form>

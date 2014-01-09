@@ -125,7 +125,7 @@
                                 <html:option value="EM">Enero-Marzo</html:option>
                                 <html:option value="AJ">Abril-Julio</html:option>
                                 <html:option value="SD">Septiembre-Diciembre</html:option>
-                                <html:option value="SD">Intensivo</html:option>
+                                <html:option value="V">Intensivo</html:option>
                             </html:select>
                             <html:select disabled="false" property="ano" style="width: 100px;">
                                 <html:option value="2004">2004</html:option> 

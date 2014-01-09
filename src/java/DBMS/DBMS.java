@@ -1,6 +1,5 @@
 package DBMS;
 
-import Clases.Coordinacion;
 import Forms.CreateUserForm;
 import Clases.*;
 import Forms.EliminarUserForm;
@@ -1208,4 +1207,67 @@ public class DBMS {
         }
         return false;
     }
+    
+    public ArrayList<rendimientoProf> obtenerRendimientoProfesor(String usbid){
+        PreparedStatement ps;
+        ArrayList<rendimientoProf> rendimiento = new ArrayList<rendimientoProf>(0);
+        try {
+            ps = conexion.prepareStatement("SELECT DISTINCT m.codigo, m.nombre, r.ano, r.trimestre, r.total_estudiantes, r.nota_prom, r.aprobados, r.aplazados, r.retirados"
+                    + " FROM evaluar AS e, rendimiento AS r, materia AS m"
+                    + " WHERE e.usbid_profesor = ? AND e.codigo_materia = r.codigo_materia AND r.usbid_profesor = ?"
+                    + " AND m.codigo = r.codigo_materia"
+                    );
+            ps.setString(1, usbid);
+            ps.setString(2, usbid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                rendimientoProf r = new rendimientoProf();
+                r.setUsbid_profesor(usbid);
+                r.setTrimestre(rs.getString(4));
+                r.setAno(rs.getString(3));
+                r.setCodigo_materia(rs.getString(1));
+                r.setNombre_materia(rs.getString(2));
+                r.setTotal_estudiantes(rs.getInt(5));
+                r.setNota_prom(rs.getFloat(6));
+                r.setAprobados(rs.getInt(7));
+                r.setAplazados(rs.getInt(8));
+                r.setRetirados(rs.getInt(9));
+                rendimiento.add(r);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return rendimiento;
+    }
+    
+    public ArrayList<Materia> obtenerSolicitudEvaluacionesProfesor(String usbid){
+        PreparedStatement ps;
+        ArrayList<Materia> materia = new ArrayList<Materia>(0);
+        try {
+            ps = conexion.prepareStatement("SELECT DISTINCT codigo_materia FROM evaluar"
+                    + " WHERE usbid_profesor = ?");
+            ps.setString(1, usbid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Materia m = new Materia();
+                r.setUsbid_profesor(usbid);
+                r.setTrimestre(rs.getString(4));
+                r.setAno(rs.getString(3));
+                r.setCodigo_materia(rs.getString(1));
+                r.setNombre_materia(rs.getString(2));
+                r.setTotal_estudiantes(rs.getInt(5));
+                r.setNota_prom(rs.getFloat(6));
+                r.setAprobados(rs.getInt(7));
+                r.setAplazados(rs.getInt(8));
+                r.setRetirados(rs.getInt(9));
+                rendimiento.add(r);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return rendimiento;
+    }
+    
 }
