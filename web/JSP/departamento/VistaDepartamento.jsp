@@ -30,8 +30,10 @@
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <p>
                     <strong>Atención: </strong> <br> 
-                    Se solicitó la apertura de materias. Para más información
-                    seleccionar <em>Gestionar Materias, Listar solicitudes pendientes</em>.
+                    Se solicitó la apertura de 
+                    <strong> <bean:write name="solicitud_apertura_materia"/> </strong>
+                    materia(s). Para más información seleccionar 
+                    <em>Gestionar Materias, Listar solicitudes pendientes</em>.
                 </p>
             </div>
         </logic:present>

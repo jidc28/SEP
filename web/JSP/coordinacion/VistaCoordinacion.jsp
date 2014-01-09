@@ -32,8 +32,10 @@
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <p>
                     <strong>Atención: </strong> <br> 
-                    Se solicitó evaluación de profesores. Para más información
-                    seleccionar <em>Gestionar Evaluaciones</em>.
+                    Se solicitó evaluación de 
+                    <strong><bean:write name="evaluaciones_pendientes"/></strong> 
+                    profesor(es). Para más información seleccionar 
+                    <em>Gestionar Evaluaciones</em>.
                 </p>
             </div>
         </logic:present>
