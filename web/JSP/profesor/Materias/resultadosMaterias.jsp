@@ -109,7 +109,7 @@
                         </logic:iterate>
                     </tbody>
                 </table>
-            <html:link action="/irRendimientoProfesor">
+            <html:link action="/irAgregarRendimiento">
                 <button>
                     Agregar Información de Otra Materia
                 </button>

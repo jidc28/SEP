@@ -1251,23 +1251,41 @@ public class DBMS {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Materia m = new Materia();
-                r.setUsbid_profesor(usbid);
-                r.setTrimestre(rs.getString(4));
-                r.setAno(rs.getString(3));
-                r.setCodigo_materia(rs.getString(1));
-                r.setNombre_materia(rs.getString(2));
-                r.setTotal_estudiantes(rs.getInt(5));
-                r.setNota_prom(rs.getFloat(6));
-                r.setAprobados(rs.getInt(7));
-                r.setAplazados(rs.getInt(8));
-                r.setRetirados(rs.getInt(9));
-                rendimiento.add(r);
+                m.setCodigo(rs.getString(1));
+                materia.add(m);
             }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return rendimiento;
+        return materia;
+    }
+    
+    public boolean agregarRendimientoProfesor(rendimientoProf u) {
+
+        PreparedStatement psAgregar1 = null;
+
+        try {
+            psAgregar1 = conexion.prepareStatement("INSERT INTO rendimiento VALUES(?,?,?,?,?,?,?,?,?) ");
+            psAgregar1.setString(1, u.getUsbid_profesor());
+            psAgregar1.setString(2, u.getCodigo_materia());
+            psAgregar1.setString(3, u.getTrimestre());
+            psAgregar1.setString(4, u.getAno());
+            psAgregar1.setInt(5, u.getTotal_estudiantes());
+            psAgregar1.setFloat(6, u.getNota_prom());
+            psAgregar1.setInt(7, u.getAprobados());
+            psAgregar1.setInt(8, u.getAplazados());
+            psAgregar1.setInt(9, u.getRetirados());
+
+
+            Integer i = psAgregar1.executeUpdate();
+
+            return i > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
     
 }

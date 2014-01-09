@@ -28,13 +28,15 @@
         <h4>
             Información de Materias
         </h4>
+        
+                    
         <br>
         UsbID <html:text disabled="true" name="profesor" property="usbid"/>
         </br>      
             
         <div id="tabla" class="table-responsive">
                 <table class="table table-striped">
-                    <html:form action="/agregarRendimiento">
+                        <html:form action="/agregarRendimiento" >
                         <tbody>
                             <tr>
                                 <td>
@@ -54,7 +56,7 @@
                                     Año
                                 </td>
                                 <td>
-                                    <html:select disabled="false" property="ano" style="width: 100px;">
+                                    <html:select name="rendimientoProf" disabled="false" property="ano" style="width: 100px;">
                                         <html:option value="2004">2004</html:option> 
                                         <html:option value="2005">2005</html:option> 
                                         <html:option value="2006">2006</html:option> 
@@ -86,36 +88,60 @@
                                     Código
                                 </td>
                                 <td>
-                                    <bean:write name="RendimientoProf" property="codigo_materia"/>
+                                    <html:select name="rendimientoProf" property="codigo_materia">
+                                        <logic:iterate name="materias" id="codigo">
+                                            <option>
+                                                <bean:write name="materias" property="codigo"/>
+                                            </option>
+                                        </logic:iterate>
+                                    </html:select>
                                 </td>
                             </tr>
+                            <tr>
                                 <td>
-                                    <bean:write name="RendimientoProf" property="nombre_materia"/>
+                                    Total Estudiantes
                                 </td>
                                 <td>
-                                    <bean:write name="RendimientoProf" property="total_estudiantes"/>
+                                    <html:text name="rendimientoProf" property="total_estudiantes"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Nota Promedio
                                 </td>
                                 <td>
-                                    <bean:write name="RendimientoProf" property="nota_prom"/>
+                                    <html:text name="rendimientoProf" property="nota_prom"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Aprobados
                                 </td>
                                 <td>
-                                    <bean:write name="RendimientoProf" property="aprobados"/>
+                                    <html:text name="rendimientoProf" property="aprobados"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Aplazados
                                 </td>
                                 <td>
-                                    <bean:write name="RendimientoProf" property="aplazados"/>
+                                    <html:text name="rendimientoProf" property="aplazados"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Retirados
                                 </td>
                                 <td>
-                                    <bean:write name="RendimientoProf" property="retirados"/>
+                                    <html:text name="rendimientoProf" property="retirados"/>
                                 </td>
                             </tr>
                         </tbody>
+                        
+            <html:submit> Agregar Rendimiento Materia </html:submit>
                     </html:form>
                 </table>
-            <html:link action="/agregarRendimientoProfesor">
-                <button>
-                    Agregar Información de Otra Materia
-                </button>
-            </html:link>
         </div>
 
 
