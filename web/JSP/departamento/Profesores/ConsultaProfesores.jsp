@@ -27,6 +27,21 @@
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
         <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+        <script type="text/javascript" src="scripts/bootstrap.js"></script>
+        <script type="text/javascript">
+            //$().button('loading')
+            
+            /*$('button[data-loading-text]').click(function () {
+                $(this).button('loading');
+            });*/
+            
+            $(function(){
+                $('#cargando').click(function(){
+                      var btn = $(this); 
+                      btn.button('loading');
+                });
+            });
+        </script>
 
         <logic:present name="enviado_memo">
             <div class="alert alert-success" id="alert">
@@ -46,6 +61,8 @@
             <table id="tabla" class="table table-striped">
                 <thead>
                     <tr>
+                        <th>
+                        </th>
                         <th style="font-size: 14px;">
                 <center>
                     USBID
@@ -94,8 +111,13 @@
                     <html:submit styleClass="btn btn-primary" style="type: button; data-loading-text: cargando;">
                         Evaluar profesores seleccionados
                     </html:submit>
-                    <button type="button" data-loading-text="Loading..." class="btn btn-primary">
-                        Loading state
+                    <button type="button" id="cargando" data-loading-text="Cargando..." class="btn btn-primary">
+                        <!--<html:submit styleClass="btn btn-primary" 
+                                     style="border-color: #428bca; type: button; data-loading-text: cargando;
+                                            padding: 0px;">
+                            Evaluar profesores seleccionados
+                        </html:submit>-->
+                        Boton de cargando
                     </button>
                 </center>
             </html:form>
