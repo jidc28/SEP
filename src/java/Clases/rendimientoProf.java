@@ -12,7 +12,7 @@ public class rendimientoProf extends org.apache.struts.action.ActionForm {
     private String usbid_profesor;
     private String codigo_materia;
     private String nombre_materia;
-    private String ano;
+    private int ano;
     private String trimestre;
     private int total_estudiantes;
     private int aprobados;
@@ -40,15 +40,15 @@ public class rendimientoProf extends org.apache.struts.action.ActionForm {
         return nombre_materia;
     }
 
-    public void setNombre_materia(String nombreMateria) {
-        this.nombre_materia = nombreMateria;
+    public void setNombre_materia(String nombre_materia) {
+        this.nombre_materia = nombre_materia;
     }
 
-    public String getAno() {
+    public int getAno() {
         return ano;
     }
 
-    public void setAno(String ano) {
+    public void setAno(int ano) {
         this.ano = ano;
     }
 
@@ -99,6 +99,6 @@ public class rendimientoProf extends org.apache.struts.action.ActionForm {
     public void setNota_prom(float nota_prom) {
         this.nota_prom = nota_prom;
     }
-            
-            
+
+    
 }

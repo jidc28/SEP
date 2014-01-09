@@ -89,7 +89,7 @@
                                 </td>
                                 <td>
                                     <html:select name="rendimientoProf" property="codigo_materia">
-                                        <logic:iterate name="materias" id="codigo">
+                                        <logic:iterate name="materias" id="materias">
                                             <option>
                                                 <bean:write name="materias" property="codigo"/>
                                             </option>
@@ -138,8 +138,11 @@
                                 </td>
                             </tr>
                         </tbody>
-                        
-            <html:submit> Agregar Rendimiento Materia </html:submit>
+                            <tr>
+                                <td>
+                         <html:submit value="Agregar Rendimiento Materia"/> 
+                                </td>
+                            </tr>
                     </html:form>
                 </table>
         </div>

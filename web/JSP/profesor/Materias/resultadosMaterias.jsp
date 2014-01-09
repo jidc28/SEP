@@ -79,7 +79,6 @@
                                     <logic:equal name="rendimientoProf" property="trimestre" value="SD">
                                         Sep-Dic
                                     </logic:equal>
-                                    <bean:write name="RendimientoProf" property="trimestre"/>
                                 </td>
                                 <td>
                                     <bean:write name="RendimientoProf" property="ano"/>

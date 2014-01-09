@@ -1224,7 +1224,7 @@ public class DBMS {
                 rendimientoProf r = new rendimientoProf();
                 r.setUsbid_profesor(usbid);
                 r.setTrimestre(rs.getString(4));
-                r.setAno(rs.getString(3));
+                r.setAno(rs.getInt(3));
                 r.setCodigo_materia(rs.getString(1));
                 r.setNombre_materia(rs.getString(2));
                 r.setTotal_estudiantes(rs.getInt(5));
@@ -1270,7 +1270,7 @@ public class DBMS {
             psAgregar1.setString(1, u.getUsbid_profesor());
             psAgregar1.setString(2, u.getCodigo_materia());
             psAgregar1.setString(3, u.getTrimestre());
-            psAgregar1.setString(4, u.getAno());
+            psAgregar1.setInt(4, u.getAno());
             psAgregar1.setInt(5, u.getTotal_estudiantes());
             psAgregar1.setFloat(6, u.getNota_prom());
             psAgregar1.setInt(7, u.getAprobados());
