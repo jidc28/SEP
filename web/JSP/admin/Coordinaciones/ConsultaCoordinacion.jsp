@@ -51,24 +51,24 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>
+                        <th style="width: 15%; font-size: 14px;">
                             <center>
-                            Codigo
+                            CODIGO
                             </center>
                         </th>
-                        <th>
+                        <th style="font-size: 14px;">
                             <center>
-                            Nombre Coordinacion
+                            NOMBRE
                             </center>
                         </th>
-                        <th>
+                        <th style="font-size: 14px;">
                             <center>
-                            Modificar Nombre
+                            MODIFICAR
                             </center>
                         </th>
-                        <th>
+                        <th style="font-size: 14px;">
                             <center>
-                            Eliminar
+                            ELIMINAR
                             </center>
                         </th>
                     </tr>
@@ -85,7 +85,8 @@
                             <html:form action="/editarNombreCoordinacion" onsubmit="return(this)" style="margin: 0px;">
                                 <html:hidden name="Coord" property="codigo"/>
                                 <button type="button" class="btn btn-primary" 
-                                        style="padding-bottom: 1px; padding-top: 1px; padding-left: 2px; padding-right: 2px;">
+                                        style="padding-bottom: 1px; padding-top: 1px; padding-left: 2px; padding-right: 2px;
+                                               margin-top: 3px;">
                                     <html:image src="imagenes/edit-img.png" value="" property="" style="height: 27px;"/>
                                 </button>
                             </html:form>

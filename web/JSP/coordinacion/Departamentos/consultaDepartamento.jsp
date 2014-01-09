@@ -32,20 +32,20 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th width="15%">
-                <center>
-                    Codigo
-                </center>
+                        <th width="15%" style="font-size: 14px;">
+                    <center>
+                        CODIGO
+                    </center>
                 </th>
-                <th>
-                <center>
-                    Nombre Departamento
-                </center>
+                <th style="font-size: 14px;">
+                    <center>
+                        NOMBRE DEPARTAMENTO
+                    </center>
                 </th>
-                <th width="15%">
-                <center>
-                    Materias
-                </center>
+                <th width="15%" style="font-size: 14px;">
+                    <center>
+                        MATERIA
+                    </center>
                 </th>
                 </thead>
                 <tbody>

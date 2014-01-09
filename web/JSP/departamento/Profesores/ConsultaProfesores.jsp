@@ -46,21 +46,19 @@
             <table id="tabla" class="table table-striped">
                 <thead>
                     <tr>
-                        <th>
-                        </th>
-                        <th>
+                        <th style="font-size: 14px;">
                 <center>
-                    usbid
+                    USBID
                 </center>
                 </th>
-                <th>
+                <th style="font-size: 14px;">
                 <center>
-                    Lapso contractual inicio
+                    LAPSO CONTRACTUAL INICIO
                 </center>
                 </th>
-                <th width="38%">
+                <th width="38%" style="font-size: 14px;">
                 <center>
-                    Profesor
+                    PROFESOR
                 </center>
                 </th>
                 </tr>

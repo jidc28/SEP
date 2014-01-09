@@ -39,7 +39,7 @@
         </logic:present>
         
         <logic:present name="solicitud_enviada">
-            <div class="alert alert-success" id="alert">
+            <div class="alert alert-success" id="alert-coord">
                 La solicitud de apertura de la materia ha sido enviada.
             </div>
         </logic:present>

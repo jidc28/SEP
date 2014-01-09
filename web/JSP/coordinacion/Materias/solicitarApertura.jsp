@@ -411,7 +411,7 @@
                     <tr style="height: 35px;">
                         <td colspan="11">
                         <center>
-                                <html:text property="creditos" style="width: 40%; height: 100%;" name="Materia" maxlength="2" errorKey="org.apache.struts.action.ERROR"/>
+                                <html:text property="creditos" style="width: 20%; height: 100%; text-align: center;" name="Materia" maxlength="2" errorKey="org.apache.struts.action.ERROR"/>
                         </center>
                         </td>
                     </tr>  
