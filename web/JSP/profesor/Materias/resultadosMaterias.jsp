@@ -25,42 +25,54 @@
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
+        <div class="alert alert-info alert-dismissable" 
+             id="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <p>
+                <strong>Atención: </strong> <br> 
+                Para realizar el llenado del formulario debe tener a mano
+                <strong>actas del trimestre correspondiente.</strong>
+            </p>
+        </div>
+        
         <h4>
             Información de Materias
         </h4>
-        <br>
-        UsbID <html:text disabled="true" name="profesor" property="usbid"/>
+        <br style="font-size: 14px;">
+            <strong> USBID </strong> 
+            <html:text disabled="true" name="profesor" property="usbid"
+                       style="height: 30px; margin: 0px;"/>
         </br>      
             
         <div id="tabla" class="table-responsive">
                 <table class="table table-striped">
                     <thead>
-                        <th>
-                            Trimestre
+                        <th style="font-size: 14px;">
+                            <center>TRIMESTRE</center>
                         </th>
-                        <th>
-                            Año
+                        <th style="font-size: 14px;">
+                            <center> AÑO </center>
                         </th>
-                        <th>
-                            Código
+                        <th style="font-size: 14px;">
+                            <center> CÓDIGO </center>
                         </th>
-                        <th>
-                            Nombre Asignatura
+                        <th style="font-size: 14px;">
+                            <center> NOMBRE ASIGNATURA </center>
                         </th>
-                        <th>
-                            N. Estudiantes
+                        <th style="font-size: 14px;">
+                            <center> N. ESTUDIANTES </center>
                         </th>
-                        <th>
-                            Nota Prom.
+                        <th style="font-size: 14px;">
+                            <center> NOTA PROM.</center>
                         </th>
-                        <th>
-                            N. Aprobados
+                        <th style="font-size: 14px;">
+                            <center> APROBADOS </center>
                         </th>
-                        <th>
-                            N. Aplazados
+                        <th style="font-size: 14px;">
+                            <center> APLAZADOS </center>
                         </th>
-                        <th>
-                            N. Retirados
+                        <th style="font-size: 14px;">
+                            <center> RETIRADOS </center>
                         </th>
                     </thead>
                     <tbody>
@@ -109,7 +121,7 @@
                     </tbody>
                 </table>
             <html:link action="/irAgregarRendimiento">
-                <button>
+                <button class="btn btn-primary">
                     Agregar Información de Otra Materia
                 </button>
             </html:link>

@@ -30,20 +30,22 @@
         </h4>
         
                     
-        <br>
-        UsbID <html:text disabled="true" name="profesor" property="usbid"/>
+        <br style="font-size: 14px;">
+            <strong> USBID </strong> 
+            <html:text disabled="true" name="profesor" property="usbid"
+                       style="height: 30px; margin: 0px;"/>
         </br>      
             
+        <html:form action="/agregarRendimiento" >
         <div id="tabla" class="table-responsive">
                 <table class="table table-striped">
-                        <html:form action="/agregarRendimiento" >
                         <tbody>
                             <tr>
-                                <td>
-                                    Trimestre
+                                <td style="text-align: right; width: 40%; font-size: 14px;">
+                                    <strong>TRIMESTRE</strong>
                                 </td>
-                                <td>
-                                    <html:select name="rendimientoProf" property="trimestre">
+                                <td style="padding-left: 100px;">
+                                    <html:select name="rendimientoProf" property="trimestre" style="width: 206px;">
                                         <html:option value="EM">Ene-Mar</html:option>
                                         <html:option value="AJ">Abr-Jul</html:option>
                                         <html:option value="SD">Sep-Dic</html:option>
@@ -52,11 +54,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    Año
+                                <td style="text-align: right; width: 40%; font-size: 14px;">
+                                    <strong>AÑO</strong>
                                 </td>
-                                <td>
-                                    <html:select name="rendimientoProf" disabled="false" property="ano" style="width: 100px;">
+                                <td style="padding-left: 100px;">
+                                    <html:select name="rendimientoProf" disabled="false" property="ano" style="width: 206px;">
                                         <html:option value="2004">2004</html:option> 
                                         <html:option value="2005">2005</html:option> 
                                         <html:option value="2006">2006</html:option> 
@@ -84,11 +86,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    Código
+                                <td style="text-align: right; width: 40%; font-size: 14px;">
+                                    <strong>CÓDIGO</strong>
                                 </td>
-                                <td>
-                                    <html:select name="rendimientoProf" property="codigo_materia">
+                                <td style="padding-left: 100px;">
+                                    <html:select name="rendimientoProf" property="codigo_materia" style="width: 206px;">
                                         <logic:iterate name="materias" id="materias">
                                             <option>
                                                 <bean:write name="materias" property="codigo"/>
@@ -98,55 +100,56 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    Total Estudiantes
+                                <td style="text-align: right; width: 40%; font-size: 14px;">
+                                    <strong>TOTAL ESTUDIANTES</strong>
                                 </td>
-                                <td>
-                                    <html:text name="rendimientoProf" property="total_estudiantes"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Nota Promedio
-                                </td>
-                                <td>
-                                    <html:text name="rendimientoProf" property="nota_prom"/>
+                                <td style="padding-left: 100px;">
+                                    <html:text name="rendimientoProf" property="total_estudiantes"
+                                               style="height: 30px; margin: 0px;"/>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    Aprobados
+                                <td style="text-align: right; width: 40%; font-size: 14px;">
+                                    <strong> NOTA PROMEDIO </strong>
                                 </td>
-                                <td>
-                                    <html:text name="rendimientoProf" property="aprobados"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Aplazados
-                                </td>
-                                <td>
-                                    <html:text name="rendimientoProf" property="aplazados"/>
+                                <td style="padding-left: 100px;">
+                                    <html:text name="rendimientoProf" property="nota_prom"
+                                               style="height: 30px; margin: 0px;"/>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    Retirados
+                                <td style="text-align: right; width: 40%; font-size: 14px;">
+                                    <strong> APROBADOS </strong>
                                 </td>
-                                <td>
-                                    <html:text name="rendimientoProf" property="retirados"/>
+                                <td style="padding-left: 100px;">
+                                    <html:text name="rendimientoProf" property="aprobados"
+                                               style="height: 30px; margin: 0px;"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right; width: 40%; font-size: 14px;">
+                                    <strong> APLAZADOS </strong>
+                                </td>
+                                <td style="padding-left: 100px;">
+                                    <html:text name="rendimientoProf" property="aplazados"
+                                               style="height: 30px; margin: 0px;"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right; width: 40%; font-size: 14px;">
+                                    <strong> RETIRADOS </strong>
+                                </td>
+                                <td style="padding-left: 100px;">
+                                    <html:text name="rendimientoProf" property="retirados"
+                                               style="height: 30px; margin: 0px;"/>
                                 </td>
                             </tr>
                         </tbody>
-                            <tr>
-                                <td>
-                         <html:submit value="Agregar Rendimiento Materia"/> 
-                                </td>
-                            </tr>
-                    </html:form>
                 </table>
         </div>
-
+        <html:submit value="Agregar Rendimiento Materia" 
+                     styleClass="btn btn-success"/> 
+        </html:form>
 
     </body>
 </html>

@@ -40,31 +40,31 @@
             <table border="0">
                 <tbody>
                     <tr style="height: 35px;">
-                        <td>UsbID</td>
+                        <td style="font-size: 14px;"><strong>USBID</strong></td>
                         <td>
                             <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="usuario" property="usbid"/>
                         </td>
                     </tr>
                     <tr style="height: 35px;">
-                        <td>Cédula</td>
+                        <td style="font-size: 14px;"><strong>CÉDULA</strong></td>
                         <td>
                             <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="cedula"/>
                         </td>
                     </tr>
                     <tr style="height: 35px;">
-                        <td>Nombre</td>
+                        <td style="font-size: 14px;"><strong>NOMBRE</strong></td>
                         <td>
                             <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="nombre"/>
                         </td>
                     </tr>
                     <tr style="height: 35px;">
-                        <td>Apellido</td>
+                        <td style="font-size: 14px;"><strong> APELLIDO</strong> </td>
                         <td>
                             <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="apellido"/>
                         </td>
                     </tr>
                     <tr style="height: 35px;">
-                        <td>Género</td>
+                        <td style="font-size: 14px;"> <strong> GÉNERO</strong> </td>
                         <td>
                             <logic:equal name="profesor" property="genero" value="F">
                                 <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="genero" value="Femenino"/>
@@ -75,33 +75,33 @@
                         </td>
                     </tr>
                     <tr style="height: 35px;">
-                        <td>Correo electrónico institucional</td>
+                        <td style="font-size: 14px;"> <strong> CORREO ELECTRÓNICO <br> INSTITUCIONAL </strong> </td>
                         <td>
                             <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="email"/>
                         </td>
                     </tr>
                     </tr>
                     <tr style="height: 35px;">
-                        <td>Correo electrónico personal</td>
+                        <td style="font-size: 14px;"> <strong> CORREO ELECTRÓNICO <br> PERSONAL </strong> </td>
                         <td>
                             <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="email_personal"/>
                         </td>
                     </tr>
                     <tr style="height: 35px;">
-                        <td>Lapso Contractual</td>
+                        <td style="font-size: 14px;"> <strong> LAPSO CONTRACTUAL </strong> </td>
                         <td>
                             <html:text style="width: 127px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="lapso_contractual_inicio"/>
                             <html:text style="width: 127px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="lapso_contractual_fin"/>
                         </td>
                     </tr>
                     <tr style="height: 35px;">
-                        <td>Nivel</td>
+                        <td style="font-size: 14px;"> <strong> NIVEL </strong> </td>
                         <td>
                             <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="nivel"/>
                         </td>
                     </tr>
                     <tr style="height: 35px;">
-                        <td>Jubilación</td>
+                        <td style="font-size: 14px;"> <strong> JUBILACIÓN </strong> </td>
                         <td>
                             <logic:equal name="profesor" property="jubilado" value="S">
                                 <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" disabled="true" name="profesor" property="jubilado" value="Si"/>
@@ -125,12 +125,12 @@
                         <html:submit style="margin: 2.5px;" styleClass="btn btn-info" value="Modificar"/>
                     </html:form>
                 </td>
-                <td>
-                    <!-- <html:form  action="/agregarInfoP" >
+                <!-- <td>
+                    <html:form  action="/agregarInfoP" >
                         <html:hidden name="usuario" property="usbid"/>
                         <html:submit style="margin: 2.5px;" styleClass="btn btn-default" value="Agregar información"/>
-                    </html:form>-->
-                </td>
+                    </html:form>
+                </td> -->
                 <td>
                     <html:form  action="/eliminarInfoP" >
                         <html:hidden name="usuario" property="usbid"/>
@@ -138,14 +138,12 @@
                                      onclick="javascript: return confirm('¿Está seguro que desea eliminar su información?')"/>
                     </html:form>
                 </td>
-                <tr>
                     <td>
                         <html:form action="/irConsultarRendimiento">
                             <html:hidden name="usuario" property="usbid"/>
-                            <html:submit style="margin: 2.5px;" styleClass="btn btn-default" value="Agregar Números Materias"/>
+                            <html:submit style="margin: 2.5px;" styleClass="btn btn-default" value="Consultar Rendimiento"/>
                         </html:form>
                     </td>
-                </tr>
                 </tbody>
             </table>
         </div>
