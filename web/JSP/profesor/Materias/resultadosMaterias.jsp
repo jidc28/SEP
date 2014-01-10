@@ -72,7 +72,7 @@
                             <center> < 3 </center>
                         </th>
                         <th style="font-size: 14px;">
-                            <center> RETIRADOS </center>
+                            <center> RET. </center>
                         </th>
                     </thead>
                     <tbody>
