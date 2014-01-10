@@ -25,6 +25,33 @@
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 
+        <logic:present name="error_num_estudiantes">
+            <div class="alert alert-danger" id="alert">
+                <strong> 
+                    La información sobre el número de estudiantes es errónea. <br>
+                </strong> 
+                El número total de estudiantes
+                (<bean:write name="error_num_estudiantes" property="total_estudiantes" />)
+                no coincide con la suma del número de estudiantes aplazados, el 
+                número de estudiantes aprobados y el número de estudiantes
+                retirados (<bean:write name="error_num_estudiantes" property="aprobados" /> +
+                <bean:write name="error_num_estudiantes" property="aplazados" /> + 
+                <bean:write name="error_num_estudiantes" property="retirados" />)
+            </div>  
+        </logic:present>
+
+        <logic:present name="numero_negativo">
+            <div class="alert alert-danger" id="alert">
+                Los datos insertados <strong> no </strong> pueden ser negativos.
+            </div>  
+        </logic:present>
+        
+        <logic:present name="agregar_informacion">
+            <div class="alert alert-danger" id="alert">
+                Debe llenar todos los campos.
+            </div>  
+        </logic:present>
+        
         <h4>
             Información de Materias
         </h4>

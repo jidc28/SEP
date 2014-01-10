@@ -902,7 +902,7 @@ public class DBMS {
         ArrayList<Materia> materias = new ArrayList<Materia>(0);
 
         try {
-            ps = conexion.prepareStatement("SELECT codigo, nombre "
+            ps = conexion.prepareStatement("SELECT DISTINCT codigo, nombre "
                     + "FROM maneja, materia, oferta "
                     + "WHERE maneja.codigo_coordinacion = ? "
                     + "AND maneja.codigo_materia = codigo "
@@ -1040,6 +1040,7 @@ public class DBMS {
             ps = conexion.prepareStatement("INSERT INTO departamento VALUES (?,?,?)");
             ps.setString(1, d.getCodigo());
             ps.setString(2, d.getNombre());
+            ps.setString(3, "activo");
             Integer i = ps.executeUpdate();
 
             return i > 0;
@@ -1187,13 +1188,14 @@ public class DBMS {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return materias;
+        return null;
     }
     
-    public boolean aprobarSolicitudMateria(Materia m) {
+    public boolean aprobarSolicitudMateria(Materia m, String id_departamento) {
 
         PreparedStatement ps1;
         PreparedStatement ps2;
+        PreparedStatement ps3;
         
         try {
             ps1 = conexion.prepareStatement("UPDATE MATERIA SET solicitud = 'no' WHERE codigo = ?;");
@@ -1201,11 +1203,17 @@ public class DBMS {
 
             ps2 = conexion.prepareStatement("DELETE FROM solicita_apertura WHERE codigo_materia = ?;");
             ps2.setString(1, m.getCodigo());
+
+            ps3 = conexion.prepareStatement("INSERT INTO oferta (codigo_materia, codigo_departamento) "
+                    + "VALUES (?,?);");
+            ps3.setString(1, m.getCodigo());
+            ps3.setString(2, id_departamento);
             
             Integer i = ps1.executeUpdate();
             Integer j = ps2.executeUpdate();
+            Integer k = ps3.executeUpdate();
             
-            return i > 0 && j > 0;
+            return i > 0 && j > 0 & k > 0;
 
         } catch (SQLException ex) {
             ex.printStackTrace();

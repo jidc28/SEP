@@ -57,19 +57,19 @@
                             <center> CÓDIGO </center>
                         </th>
                         <th style="font-size: 14px;">
-                            <center> NOMBRE ASIGNATURA </center>
+                            <center> MATERIA </center>
                         </th>
                         <th style="font-size: 14px;">
                             <center> N. ESTUDIANTES </center>
                         </th>
                         <th style="font-size: 14px;">
-                            <center> NOTA PROM.</center>
+                            <center> PROMEDIO </center>
                         </th>
                         <th style="font-size: 14px;">
-                            <center> APROBADOS </center>
+                            <center> > 3 </center>
                         </th>
                         <th style="font-size: 14px;">
-                            <center> APLAZADOS </center>
+                            <center> < 3 </center>
                         </th>
                         <th style="font-size: 14px;">
                             <center> RETIRADOS </center>

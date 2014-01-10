@@ -108,6 +108,7 @@
         
         <action input="/AgregarDepartamento.jsp" name="Departamento" path="/agregarDepartamento" scope="request" type="Actions.Departamento.AgregarDepartamento" validate="false">
             <forward name="success" path="consultaDepartamento"/>
+            <forward name="yaregistrada" path="agregarDepartamento"/>
         </action>
         
         <action input="/ConsultaDepartamento.jsp" name="Departamento" path="/desactivarDepartamento" scope="request" type="Actions.Departamento.DesactivarDepartamento" validate="false">
@@ -285,6 +286,7 @@
         </action>      
         <action input="/agregarRendimientoProfesor.jsp" name="rendimientoProf" path="/agregarRendimiento" scope="request" type="Actions.Profesor.agregarRendimientoProfesor" validate="false">
             <forward name="success" path="rendimientoProfesor"/>
+            <forward name="failure" path="agregarRendimientoProfesor"/>
         </action>      
  
         <action name="NoImplementado" path="/noImplementado" scope="request" type="Otros.noimplementadoAction" validate="false">

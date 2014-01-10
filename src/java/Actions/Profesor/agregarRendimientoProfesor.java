@@ -48,10 +48,38 @@ public class agregarRendimientoProfesor extends org.apache.struts.action.Action 
 
         renMateria.setUsbid_profesor(id_profesor);
 
+        if (renMateria.getTotal_estudiantes() == 0) {
+            ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor);
+            request.setAttribute("materias", materias);
+            request.setAttribute("rendimientoProf", renMateria);
+            request.setAttribute("agregar_informacion",FAILURE);
+            return mapping.findForward(FAILURE);
+        }
+        
+        if (renMateria.getTotal_estudiantes() != 
+            renMateria.getAplazados() + renMateria.getAprobados() + 
+            renMateria.getRetirados()) {
+            ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor);
+            request.setAttribute("materias", materias);
+            request.setAttribute("rendimientoProf", renMateria);
+            request.setAttribute("error_num_estudiantes", renMateria);
+            return mapping.findForward(FAILURE);
+        }
+
+        if (renMateria.getNota_prom() < 0.0 || renMateria.getTotal_estudiantes() < 0 ||
+            renMateria.getAplazados() < 0 || renMateria.getAprobados() < 0 ||
+            renMateria.getRetirados() < 0) {
+            ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor);
+            request.setAttribute("materias", materias);
+            request.setAttribute("rendimientoProf", renMateria);
+            request.setAttribute("numero_negativo", FAILURE);
+            return mapping.findForward(FAILURE);
+        }
+        
         boolean agregar = DBMS.getInstance().agregarRendimientoProfesor(renMateria);
 
         ArrayList<rendimientoProf> rendimiento = DBMS.getInstance().obtenerRendimientoProfesor(id_profesor);
-        session.setAttribute("rendimiento", rendimiento);
+        request.setAttribute("rendimiento", rendimiento);
         if (agregar) {
             return mapping.findForward(SUCCESS);
         } else {
