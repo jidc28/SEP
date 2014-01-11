@@ -1,25 +1,19 @@
 package DBMS;
 
-import Forms.CreateUserForm;
 import Clases.*;
+import Forms.CreateUserForm;
 import Forms.EliminarUserForm;
 import Sistemas.*;
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Set;
-import java.lang.String;
-import java.util.AbstractSet;
-import java.util.HashSet;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 /**
  * @author Langtech
@@ -1167,11 +1161,12 @@ public class DBMS {
         }
         return materias;
     }
-    public String obtenerMensaje(String id_departamento) {
+
+    public Materia obtenerMensaje(String id_departamento) {
 
         PreparedStatement ps;
         try {
-            ps = conexion.prepareStatement("SELECT sa.mensaje "
+            ps = conexion.prepareStatement("SELECT sa.mensaje, sa.codigo_coordinacion "
                     + "FROM solicita_apertura AS sa, materia AS m, coordinacion AS c "
                     + "WHERE sa.codigo_departamento = ? "
                     + "AND sa.codigo_materia = m.codigo "
@@ -1180,9 +1175,13 @@ public class DBMS {
                     + "ORDER BY sa.codigo_coordinacion;");
             ps.setString(1, id_departamento);
             ResultSet rs = ps.executeQuery();
+
+            Materia m = new Materia();
             
             while (rs.next()) {
-                return rs.getString(1);
+                m.setMensaje(rs.getString(1));
+                m.setCoordinacion(rs.getString(2));
+                return m;
             }
 
         } catch (SQLException ex) {
@@ -1190,30 +1189,35 @@ public class DBMS {
         }
         return null;
     }
-    
+
     public boolean aprobarSolicitudMateria(Materia m, String id_departamento) {
 
-        PreparedStatement ps1;
-        PreparedStatement ps2;
-        PreparedStatement ps3;
-        
+        PreparedStatement ps1, ps2, ps3, ps4, ps5;
+        String c = "";
+
         try {
             ps1 = conexion.prepareStatement("UPDATE MATERIA SET solicitud = 'no' WHERE codigo = ?;");
             ps1.setString(1, m.getCodigo());
 
-            ps2 = conexion.prepareStatement("DELETE FROM solicita_apertura WHERE codigo_materia = ?;");
-            ps2.setString(1, m.getCodigo());
-
-            ps3 = conexion.prepareStatement("INSERT INTO oferta (codigo_materia, codigo_departamento) "
+            ps3 = conexion.prepareStatement("INSERT INTO maneja (codigo_coordinacion, codigo_materia) "
                     + "VALUES (?,?);");
-            ps3.setString(1, m.getCodigo());
-            ps3.setString(2, id_departamento);
-            
+            ps3.setString(1, m.getCoordinacion());
+            ps3.setString(2, m.getCodigo());
+
+            ps4 = conexion.prepareStatement("DELETE FROM solicita_apertura WHERE codigo_materia = ?;");
+            ps4.setString(1, m.getCodigo());
+
+            ps5 = conexion.prepareStatement("INSERT INTO oferta (codigo_materia, codigo_departamento) "
+                    + "VALUES (?,?);");
+            ps5.setString(1, m.getCodigo());
+            ps5.setString(2, id_departamento);
+
             Integer i = ps1.executeUpdate();
-            Integer j = ps2.executeUpdate();
-            Integer k = ps3.executeUpdate();
-            
-            return i > 0 && j > 0 & k > 0;
+            Integer j = ps3.executeUpdate();
+            Integer k = ps4.executeUpdate();
+            Integer l = ps5.executeUpdate();
+
+            return i > 0 && j > 0 && k > 0 && l > 0;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -1238,16 +1242,15 @@ public class DBMS {
         }
         return false;
     }
-    
-    public ArrayList<rendimientoProf> obtenerRendimientoProfesor(String usbid){
+
+    public ArrayList<rendimientoProf> obtenerRendimientoProfesor(String usbid) {
         PreparedStatement ps;
         ArrayList<rendimientoProf> rendimiento = new ArrayList<rendimientoProf>(0);
         try {
             ps = conexion.prepareStatement("SELECT DISTINCT m.codigo, m.nombre, r.ano, r.trimestre, r.total_estudiantes, r.nota_prom, r.aprobados, r.aplazados, r.retirados"
                     + " FROM evaluar AS e, rendimiento AS r, materia AS m"
                     + " WHERE e.usbid_profesor = ? AND e.codigo_materia = r.codigo_materia AND r.usbid_profesor = ?"
-                    + " AND m.codigo = r.codigo_materia"
-                    );
+                    + " AND m.codigo = r.codigo_materia");
             ps.setString(1, usbid);
             ps.setString(2, usbid);
             ResultSet rs = ps.executeQuery();
@@ -1271,8 +1274,8 @@ public class DBMS {
         }
         return rendimiento;
     }
-    
-    public ArrayList<Materia> obtenerSolicitudEvaluacionesProfesor(String usbid){
+
+    public ArrayList<Materia> obtenerSolicitudEvaluacionesProfesor(String usbid) {
         PreparedStatement ps;
         ArrayList<Materia> materia = new ArrayList<Materia>(0);
         try {
@@ -1291,7 +1294,7 @@ public class DBMS {
         }
         return materia;
     }
-    
+
     public boolean agregarRendimientoProfesor(rendimientoProf u) {
 
         PreparedStatement psAgregar1 = null;
@@ -1318,5 +1321,4 @@ public class DBMS {
             return false;
         }
     }
-    
 }

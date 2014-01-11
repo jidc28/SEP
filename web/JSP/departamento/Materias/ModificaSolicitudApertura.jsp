@@ -33,7 +33,8 @@
 
         <h4>Registro de Materias</h4>
          <html:form action="/finalizarSolicitudApertura" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
-            <table border="0" style="margin-top: 50px;">
+             <html:hidden name="materia" property="coordinacion"/>
+             <table border="0" style="margin-top: 50px;">
                 <tbody>
                     <tr style="height: 35px;">
                         <td style="color: black" colspan="11">

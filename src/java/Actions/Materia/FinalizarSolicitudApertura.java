@@ -98,6 +98,7 @@ public class FinalizarSolicitudApertura extends org.apache.struts.action.Action 
         } else {
 
             if (materia.getSolicitud().equals("no")) {
+                System.out.println(materia.getCoordinacion());
                 finalizada = DBMS.getInstance().aprobarSolicitudMateria(materia,usuario.getUsbid());
             } else {
                 finalizada = DBMS.getInstance().negarSolicitudMateria(materia);
