@@ -198,11 +198,15 @@
             <forward name="failure" path="consultaMateria"/>
         </action>
         
-        <action input="/VistaDecanato.jsp" name="MultiBox" path="/irMultibox" validate="false" scope="request" type="Actions.Profesor.IrEvaluarProfesores">
+        <action input="/VistaDepartamento.jsp" name="MultiBox" path="/irEvaluarProfesores" validate="false" scope="request" type="Actions.Profesor.IrEvaluarProfesores">
             <forward name="success" path="consultaProfesor"/>
         </action>
         
-        <action input="/ConsultaProfesores.jsp" name="MultiBox" path="/multibox" validate="false" scope="request" type="Actions.Profesor.EnviarMemoEvaluarProfesores">
+        <action input="/VistaDepartamento.jsp" name="Profesor" path="/ConsultaProfesores" validate="false" scope="request" type="Actions.Profesor.ConsultaProfesor">
+            <forward name="success" path="consultaProfesores"/>
+        </action>        
+        
+        <action input="/ConsultaProfesores.jsp" name="MultiBox" path="/EvaluarProfesores" validate="false" scope="request" type="Actions.Profesor.EnviarMemoEvaluarProfesores">
             <forward name="success" path="consultaProfesor"/>
         </action>
         
@@ -278,10 +282,10 @@
             <forward name="success" path="agregarInfoP"/>
             <forward name="failure" path="vistaProfesor"/>
         </action>
-        <action input="/VistaProfesor.jsp" name="rendimientoProf" path="/irConsultarRendimiento" scope="request" type="Actions.Profesor.irRendimientoProfesor" validate="false">
+        <action input="/VistaProfesor.jsp" name="Profesor" path="/irConsultarRendimiento" scope="request" type="Actions.Profesor.irRendimientoProfesor" validate="false">
             <forward name="success" path="rendimientoProfesor"/>
         </action>      
-        <action input="/resultadosMaterias.jsp" name="Materia" path="/irAgregarRendimiento" scope="request" type="Actions.Profesor.irAgregarRendimiento" validate="false">
+        <action input="/resultadosMaterias.jsp" name="Profesor" path="/irAgregarRendimiento" scope="request" type="Actions.Profesor.irAgregarRendimiento" validate="false">
             <forward name="success" path="agregarRendimientoProfesor"/>
         </action>      
         <action input="/agregarRendimientoProfesor.jsp" name="rendimientoProf" path="/agregarRendimiento" scope="request" type="Actions.Profesor.agregarRendimientoProfesor" validate="false">

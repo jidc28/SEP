@@ -58,10 +58,13 @@
         
                     
         <br style="font-size: 14px;">
+            <strong> PROFESOR </strong> 
+            <html:text disabled="true" name="profesor" property="nombre"
+                       style="height: 30px; margin: 0px; text-align: center;"/>
             <strong> USBID </strong> 
             <html:text disabled="true" name="profesor" property="usbid"
-                       style="height: 30px; margin: 0px;"/>
-        </br>      
+                       style="height: 30px; margin: 0px; text-align: center;"/>
+        </br>
             
         <html:form action="/agregarRendimiento" >
         <div id="tabla" class="table-responsive">

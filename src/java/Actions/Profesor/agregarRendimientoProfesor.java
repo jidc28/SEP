@@ -43,13 +43,16 @@ public class agregarRendimientoProfesor extends org.apache.struts.action.Action 
             throws Exception {
 
         HttpSession session = request.getSession(true);
-        String id_profesor = (String) session.getAttribute("usbid");
+        String id_departamento = (String) session.getAttribute("usbid");
+        Profesor profesor = (Profesor) session.getAttribute("profesor");
+        String id_profesor = profesor.getUsbid();
+        
         rendimientoProf renMateria = (rendimientoProf) form;
 
         renMateria.setUsbid_profesor(id_profesor);
 
         if (renMateria.getTotal_estudiantes() == 0) {
-            ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor);
+            ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor,id_departamento);
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
             request.setAttribute("agregar_informacion",FAILURE);
@@ -59,7 +62,7 @@ public class agregarRendimientoProfesor extends org.apache.struts.action.Action 
         if (renMateria.getTotal_estudiantes() != 
             renMateria.getAplazados() + renMateria.getAprobados() + 
             renMateria.getRetirados()) {
-            ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor);
+            ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor,id_departamento);
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
             request.setAttribute("error_num_estudiantes", renMateria);
@@ -69,7 +72,7 @@ public class agregarRendimientoProfesor extends org.apache.struts.action.Action 
         if (renMateria.getNota_prom() < 0.0 || renMateria.getTotal_estudiantes() < 0 ||
             renMateria.getAplazados() < 0 || renMateria.getAprobados() < 0 ||
             renMateria.getRetirados() < 0) {
-            ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor);
+            ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor,id_departamento);
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
             request.setAttribute("numero_negativo", FAILURE);
@@ -78,7 +81,10 @@ public class agregarRendimientoProfesor extends org.apache.struts.action.Action 
         
         boolean agregar = DBMS.getInstance().agregarRendimientoProfesor(renMateria);
 
-        ArrayList<rendimientoProf> rendimiento = DBMS.getInstance().obtenerRendimientoProfesor(id_profesor);
+        ArrayList<rendimientoProf> rendimiento = DBMS.getInstance().obtenerRendimientoProfesor(id_profesor,id_departamento);
+        ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor,id_departamento);
+        
+        request.setAttribute("materias", materias);
         request.setAttribute("rendimiento", rendimiento);
         if (agregar) {
             return mapping.findForward(SUCCESS);

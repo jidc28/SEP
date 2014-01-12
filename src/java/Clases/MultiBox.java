@@ -27,7 +27,7 @@ public class MultiBox extends ActionForm {
     }
 
     public List getProfesores(String id_departamento) {
-        items = DBMS.getInstance().listarProfesoresDepartamento(id_departamento);
+        items = DBMS.getInstance().listarProfesoresAEvaluar(id_departamento);
         return items;
     }
 }

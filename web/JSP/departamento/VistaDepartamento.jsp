@@ -77,8 +77,11 @@
                 </div>
                 <div id="collapseProfesor" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <html:link action="/irMultibox">
+                        <html:link action="/irEvaluarProfesores">
                             <h5 align ="center">Evaluar Profesores</h5>
+                        </html:link>
+                        <html:link action="/ConsultaProfesores">
+                            <h5 align ="center">Llenar Planilla de Evaluación Profesores</h5>
                         </html:link>
                     </div>
                 </div>

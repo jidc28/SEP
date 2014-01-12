@@ -149,10 +149,10 @@ INSERT INTO DEPARTAMENTO VALUES ('D-2072','Departamento de Termodinamica y Fenom
 INSERT INTO DEPARTAMENTO VALUES ('D-2073','Departamento de Tesoreria');
 INSERT INTO DEPARTAMENTO VALUES ('D-2074','Departamento de Urbanismo');
 
-INSERT INTO PROFESOR VALUES ('22-90457','Rebecca','Bolaffi','2530218','M','RebeccaBolaffi@usb.ve','RebeccaBolaffi@gmail.com','ayudanteAcad','no','11-11-2011','11-11-2013');
-INSERT INTO PROFESOR VALUES ('28-63146','Martin','Torino','9501558','F','MartinTorino@usb.ve','MartinTorino@gmail.com','asociado','no','11-11-2011','11-11-2013');
-INSERT INTO PROFESOR VALUES ('84-73618','Alberto','Riera','5370644','F','AlbertoRiera@usb.ve','AlbertoRiera@gmail.com','titular','no','11-11-2011','11-11-2013');
-INSERT INTO PROFESOR VALUES ('43-62893','Alejandra','Tovar','15326570','F','AlejandraTovar@usb.ve','AlejandraTovar@gmail.com','asistente','no','11-11-2011','11-11-2013');
+INSERT INTO PROFESOR VALUES ('22-90457','Rebecca','Bolaffi','2530218','M','RebeccaBolaffi@usb.ve','RebeccaBolaffi@gmail.com','Ayudante Academico','N','11-11-2011','11-11-2013');
+INSERT INTO PROFESOR VALUES ('28-63146','Martin','Torino','9501558','F','MartinTorino@usb.ve','MartinTorino@gmail.com','Asociado','N','11-11-2011','11-11-2013');
+INSERT INTO PROFESOR VALUES ('84-73618','Alberto','Riera','5370644','F','AlbertoRiera@usb.ve','AlbertoRiera@gmail.com','Titular','N','11-11-2011','11-11-2013');
+INSERT INTO PROFESOR VALUES ('43-62893','Alejandra','Tovar','15326570','F','AlejandraTovar@usb.ve','AlejandraTovar@gmail.com','Asistente','N','11-11-2011','11-11-2013');
 
 INSERT INTO MATERIA VALUES ('CI6116','Sistemas de informacion II','4');
 INSERT INTO MATERIA VALUES ('CI1115','Sistemas de informacion I','4');
@@ -161,6 +161,8 @@ INSERT INTO MATERIA VALUES ('CI5311','Bases de Datos II','4');
 INSERT INTO oferta VALUES ('CI6116','D-2022');
 INSERT INTO oferta VALUES ('CI1115','D-2022');
 INSERT INTO oferta VALUES ('CI5311','D-2022');
+INSERT INTO oferta VALUES ('CI6116','09-10219');
+INSERT INTO oferta VALUES ('CI5311','09-10219');
 
 INSERT INTO pertenece VALUES ('22-90457','09-10219');
 INSERT INTO pertenece VALUES ('28-63146','09-10219');

@@ -43,12 +43,15 @@ public class irAgregarRendimiento extends org.apache.struts.action.Action {
             throws Exception {
 
         HttpSession session = request.getSession(true);
-        String id_profesor = (String) session.getAttribute("usbid");
-        ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor);
+        String id_departamento = (String) session.getAttribute("usbid");
+        ArrayList<Materia> materias;
         
+        Profesor profesor = (Profesor) form;
+        
+        materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(profesor.getUsbid(),id_departamento);
+        
+        session.setAttribute("profesor",profesor);
         request.setAttribute("materias",materias);
-
-
         return mapping.findForward(SUCCESS);
         
     }

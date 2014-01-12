@@ -40,11 +40,15 @@ public class irRendimientoProfesor extends org.apache.struts.action.Action {
             throws Exception {
         
         HttpSession session = request.getSession(true);
-        String id_profesor = (String) session.getAttribute("usbid");
+        String id_departamento = (String) session.getAttribute("usbid");
         
-        ArrayList<rendimientoProf> rendimiento = DBMS.getInstance().obtenerRendimientoProfesor(id_profesor);
+        Profesor profesor = (Profesor) form;
+        profesor.setNombre(profesor.getApellido() + ", " + profesor.getNombre());
+        
+        ArrayList<rendimientoProf> rendimiento = DBMS.getInstance().obtenerRendimientoProfesor(profesor.getUsbid(),id_departamento);
 
-        session.setAttribute("rendimiento", rendimiento);
+        session.setAttribute("profesor", profesor);
+        request.setAttribute("rendimiento", rendimiento);
         return mapping.findForward(SUCCESS);
     }
 }

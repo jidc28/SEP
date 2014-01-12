@@ -1,7 +1,7 @@
 <%-- 
     Document   : ConsultaProfesores
-    Created on : 10/06/2013, 07:43:54 PM
-    Author     : Langtech
+    Created on : Jan 11, 2014, 4:57:54 PM
+    Author     : smaf
 --%>
 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -22,26 +22,12 @@
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
-        <title>Evaluar Profesores</title>
+        <title>Gestión de Profesores</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
         <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
         <script type="text/javascript" src="scripts/bootstrap.js"></script>
-        <script type="text/javascript">
-            //$().button('loading')
-            
-            /*$('button[data-loading-text]').click(function () {
-                $(this).button('loading');
-            });*/
-            
-            $(function(){
-                $('#cargando').click(function(){
-                      var btn = $(this); 
-                      btn.button('loading');
-                });
-            });
-        </script>
 
         <logic:present name="enviado_memo">
             <div class="alert alert-success" id="alert">
@@ -54,15 +40,13 @@
             </div>
         </logic:present>
 
-        <h4> Evaluar Profesores:</h4>
+        <h4> Llenar Planilla de Evaluación Profesores: </h4>
 
     <center>
         <div id="tabla" class="table-responsive">
             <table id="tabla" class="table table-striped">
                 <thead>
                     <tr>
-                        <th>
-                        </th>
                         <th style="font-size: 14px;">
                 <center>
                     USBID
@@ -70,57 +54,52 @@
                 </th>
                 <th style="font-size: 14px;">
                 <center>
-                    LAPSO CONTRACTUAL INICIO
+                    NOMBRE
+                </center>
+                </th>
+                <th style="font-size: 14px;">
+                <center>
+                    NIVEL
                 </center>
                 </th>
                 <th width="38%" style="font-size: 14px;">
                 <center>
-                    PROFESOR
+                    AGREGAR RENDIMIENTO
                 </center>
                 </th>
                 </tr>
                 </thead>
-                <html:form action="/multibox">
-                    <logic:iterate id="profesor" name="profesores" property="items">
-                        <tr>
-                            <td>
-                        <center>
-                            <html:multibox  property="itemsSeleccionados">
-                                <bean:write name="profesor" property="usbid"/>
-                            </html:multibox>
-                            </td>
-                        </center>
+                <logic:iterate id="profesor" name="profesores">
+                    <tr>
                         <td>
+                    <center>
+                        <bean:write name="profesor" property="usbid"/>
+                    </center>
+                    </td>
+                    <td>
+                        <bean:write name="profesor" property="apellido"/>,
+                        <bean:write name="profesor" property="nombre"/>
+                    </td>
+                    <td>
                         <center>
-                            <bean:write name="profesor" property="usbid"/>
+                            <bean:write name="profesor" property="nivel"/>
                         </center>
-                        </td>
-                        <td>
-                        <center>
-                            <bean:write name="profesor" property="lapso_contractual_inicio"/> 
-                        </center>
-                        </td>
-                        <td>
-                            <bean:write name="profesor" property="apellido"/>, 
-                            <bean:write name="profesor" property="nombre"/>
-                        </td>
-                        </tr>
-                    </logic:iterate>
-                </table>
-                <center>
-                    <html:submit styleClass="btn btn-primary" style="type: button; data-loading-text: cargando;">
-                        Evaluar profesores seleccionados
-                    </html:submit>
-                    <button type="button" id="cargando" data-loading-text="Cargando..." class="btn btn-primary">
-                        <!--<html:submit styleClass="btn btn-primary" 
-                                     style="border-color: #428bca; type: button; data-loading-text: cargando;
-                                            padding: 0px;">
-                            Evaluar profesores seleccionados
-                        </html:submit>-->
-                        Boton de cargando
-                    </button>
-                </center>
-            </html:form>
+                    </td>
+                    <td>
+                    <center>
+                        <html:form action="/irConsultarRendimiento">
+                            <html:hidden name="profesor" property="nombre"/>
+                            <html:hidden name="profesor" property="apellido"/>
+                            <html:hidden name="profesor" property="usbid"/>
+                            <html:submit styleClass="btn btn-primary">
+                                Agregar Rendimiento Materias
+                            </html:submit>
+                        </html:form>
+                    </center>
+                    </td>
+                    </tr>
+                </logic:iterate>
+            </table>
         </div>
     </center>
 </body>

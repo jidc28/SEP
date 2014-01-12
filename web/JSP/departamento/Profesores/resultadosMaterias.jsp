@@ -20,7 +20,7 @@
         <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
-        <title>Sistema de Evaluación de Profesores</title>
+        <title>Evaluación de Profesores</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
@@ -39,9 +39,12 @@
             Información de Materias
         </h4>
         <br style="font-size: 14px;">
+            <strong> PROFESOR </strong> 
+            <html:text disabled="true" name="profesor" property="nombre"
+                       style="height: 30px; margin: 0px; text-align: center;"/>
             <strong> USBID </strong> 
             <html:text disabled="true" name="profesor" property="usbid"
-                       style="height: 30px; margin: 0px;"/>
+                       style="height: 30px; margin: 0px; text-align: center;"/>
         </br>      
             
         <div id="tabla" class="table-responsive">
@@ -57,74 +60,61 @@
                             <center> CÓDIGO </center>
                         </th>
                         <th style="font-size: 14px;">
-                            <center> MATERIA </center>
-                        </th>
-                        <th style="font-size: 14px;">
-                            <center> N. ESTUDIANTES </center>
-                        </th>
-                        <th style="font-size: 14px;">
-                            <center> PROMEDIO </center>
-                        </th>
-                        <th style="font-size: 14px;">
-                            <center> > 3 </center>
-                        </th>
-                        <th style="font-size: 14px;">
-                            <center> < 3 </center>
-                        </th>
-                        <th style="font-size: 14px;">
-                            <center> RET. </center>
+                            <center> VER DETALLES </center>
                         </th>
                     </thead>
                     <tbody>
                         <logic:iterate name="rendimiento" id="RendimientoProf" >
                             <tr>
                                 <td>
-                                    <logic:equal name="rendimientoProf" property="trimestre" value="EM">
+                                    <center>
+                                    <logic:equal name="RendimientoProf" property="trimestre" value="EM">
                                         Ene-Mar
                                     </logic:equal>
-                                    <logic:equal name="rendimientoProf" property="trimestre" value="AJ">
+                                    <logic:equal name="RendimientoProf" property="trimestre" value="AJ">
                                         Abr-Jul
                                     </logic:equal>
-                                    <logic:equal name="rendimientoProf" property="trimestre" value="V">
+                                    <logic:equal name="RendimientoProf" property="trimestre" value="V">
                                         Intensivo
                                     </logic:equal>
-                                    <logic:equal name="rendimientoProf" property="trimestre" value="SD">
+                                    <logic:equal name="RendimientoProf" property="trimestre" value="SD">
                                         Sep-Dic
                                     </logic:equal>
+                                    </center>
                                 </td>
                                 <td>
+                                    <center>
                                     <bean:write name="RendimientoProf" property="ano"/>
+                                    </center>
                                 </td>
                                 <td>
+                                    <center>
                                     <bean:write name="RendimientoProf" property="codigo_materia"/>
+                                    </center>
                                 </td>
                                 <td>
-                                    <bean:write name="RendimientoProf" property="nombre_materia"/>
-                                </td>
-                                <td>
-                                    <bean:write name="RendimientoProf" property="total_estudiantes"/>
-                                </td>
-                                <td>
-                                    <bean:write name="RendimientoProf" property="nota_prom"/>
-                                </td>
-                                <td>
-                                    <bean:write name="RendimientoProf" property="aprobados"/>
-                                </td>
-                                <td>
-                                    <bean:write name="RendimientoProf" property="aplazados"/>
-                                </td>
-                                <td>
-                                    <bean:write name="RendimientoProf" property="retirados"/>
+                                    <center>
+                                        <html:form action="/verSolicitudApertura">
+                                            <html:submit styleClass="btn btn-info"
+                                                         style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;"
+                                                         disabled="true">
+                                                Ver detalles
+                                            </html:submit>
+                                        </html:form>
+                                    </center>
                                 </td>
                             </tr>
                         </logic:iterate>
                     </tbody>
                 </table>
-            <html:link action="/irAgregarRendimiento">
-                <button class="btn btn-primary">
+            <html:form action="/irAgregarRendimiento">
+                <html:hidden name="profesor" property="usbid"/>
+                <html:hidden name="profesor" property="nombre"/>
+                <html:hidden name="profesor" property="apellido"/>
+                <html:submit styleClass="btn btn-primary">
                     Agregar Información de Otra Materia
-                </button>
-            </html:link>
+                </html:submit>
+            </html:form>
         </div>
 
 
