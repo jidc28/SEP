@@ -132,11 +132,11 @@
     </definition>    
     
     <definition name="rendimientoProfesor" extends="baseDepartamento"> <!-- Rendimiento Profesor-->
-        <put name="body" value="/JSP/departamento/Profesores/resultadosMaterias.jsp"/>
+        <put name="body" value="/JSP/departamento/Profesores/verPlanillasLlenas.jsp"/>
     </definition>
     
-    <definition name="agregarRendimientoProfesor" extends="baseDepartamento"> <!-- ir Agregar Rendimiento Profesor-->
-        <put name="body" value="/JSP/departamento/Profesores/agregarRendimientoMateria.jsp"/>
+    <definition name="llenarNuevaPlanillaEvaluacion" extends="baseDepartamento"> <!-- ir Agregar Rendimiento Profesor-->
+        <put name="body" value="/JSP/departamento/Profesores/llenarNuevaPlanillaEvaluacion.jsp"/>
     </definition>
     
     <!-- COORDINACION -->

@@ -62,9 +62,14 @@
                     NIVEL
                 </center>
                 </th>
-                <th width="38%" style="font-size: 14px;">
+                <th style="font-size: 14px;">
                 <center>
-                    AGREGAR RENDIMIENTO
+                    LLENAR PLANILLA
+                </center>
+                </th>
+                <th style="font-size: 14px;">
+                <center>
+                    VER PLANILLAS
                 </center>
                 </th>
                 </tr>
@@ -87,12 +92,26 @@
                     </td>
                     <td>
                     <center>
-                        <html:form action="/irConsultarRendimiento">
+                        <html:form action="/irLlenarNuevaPlanillaEvaluacion" style="margin: 0px;">
                             <html:hidden name="profesor" property="nombre"/>
                             <html:hidden name="profesor" property="apellido"/>
                             <html:hidden name="profesor" property="usbid"/>
-                            <html:submit styleClass="btn btn-primary">
-                                Agregar Rendimiento Materias
+                            <html:submit styleClass="btn btn-primary"
+                                         style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                                Llenar Planilla
+                            </html:submit>
+                        </html:form>
+                    </center>
+                    </td>
+                    <td>
+                    <center>
+                        <html:form action="/irConsultarRendimiento" style="margin: 0px;">
+                            <html:hidden name="profesor" property="nombre"/>
+                            <html:hidden name="profesor" property="apellido"/>
+                            <html:hidden name="profesor" property="usbid"/>
+                            <html:submit styleClass="btn btn-default"
+                                         style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                                Ver Planillas
                             </html:submit>
                         </html:form>
                     </center>

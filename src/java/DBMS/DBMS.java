@@ -686,6 +686,9 @@ public class DBMS {
                     + "FROM pertenece, profesor "
                     + "WHERE codigo_departamento = ? "
                     + "AND usbid_profesor = usbid "
+                    + "AND NOT EXISTS "
+                    + "(SELECT * FROM evaluar"
+                    + " WHERE usbid_profesor = usbid) "
                     + "ORDER BY lapso_contractual_inicio;");
             ps.setString(1, id_departamento);
             ResultSet rs = ps.executeQuery();
@@ -720,8 +723,15 @@ public class DBMS {
                     + "FROM pertenece, profesor "
                     + "WHERE codigo_departamento = ? "
                     + "AND usbid_profesor = usbid "
+                    + "AND EXISTS ("
+                    + "SELECT * FROM oferta as o, dicta as d "
+                    + "WHERE usbid_profesor = usbid "
+                    + "AND codigo_departamento = ? "
+                    + "AND o.codigo_materia = d.codigo_materia"
+                    + ") "
                     + "ORDER BY lapso_contractual_inicio;");
             ps.setString(1, id_departamento);
+            ps.setString(2, id_departamento);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -777,7 +787,10 @@ public class DBMS {
         try {
             for (int A = 0; A < id_profesores.length; A++) {
                 String usbid_prof = id_profesores[A];
-                ps = conexion.prepareStatement("SELECT dicta.codigo_materia, usbid_profesor, codigo_coordinacion FROM dicta, maneja WHERE usbid_profesor = ? AND dicta.codigo_materia = maneja.codigo_materia;");
+                ps = conexion.prepareStatement("SELECT dicta.codigo_materia, usbid_profesor, codigo_coordinacion "
+                        + "FROM dicta, maneja "
+                        + "WHERE usbid_profesor = ? "
+                        + "AND dicta.codigo_materia = maneja.codigo_materia;");
                 ps.setString(1, usbid_prof);
                 ResultSet rs = ps.executeQuery();
 
@@ -797,8 +810,6 @@ public class DBMS {
             }
 
             String[] arregloCoords = coords.toArray(new String[0]);
-
-
 
             email.setAsunto("SEP - Evaluación de Profesores");
             email.setMensaje("Se ha solicitado la evaluacion de uno o más profesores a través del"

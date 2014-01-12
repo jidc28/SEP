@@ -66,7 +66,7 @@
                        style="height: 30px; margin: 0px; text-align: center;"/>
         </br>
             
-        <html:form action="/agregarRendimiento" >
+        <html:form action="/llenarNuevaPlanillaEvaluacion" >
         <div id="tabla" class="table-responsive">
                 <table class="table table-striped">
                         <tbody>

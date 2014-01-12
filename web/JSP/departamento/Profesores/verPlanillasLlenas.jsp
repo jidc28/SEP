@@ -94,7 +94,7 @@
                                 </td>
                                 <td>
                                     <center>
-                                        <html:form action="/verSolicitudApertura">
+                                        <html:form action="/verSolicitudApertura" style="margin: 0px;">
                                             <html:submit styleClass="btn btn-info"
                                                          style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;"
                                                          disabled="true">
@@ -107,14 +107,16 @@
                         </logic:iterate>
                     </tbody>
                 </table>
-            <html:form action="/irAgregarRendimiento">
-                <html:hidden name="profesor" property="usbid"/>
-                <html:hidden name="profesor" property="nombre"/>
-                <html:hidden name="profesor" property="apellido"/>
-                <html:submit styleClass="btn btn-primary">
-                    Agregar Información de Otra Materia
-                </html:submit>
-            </html:form>
+                <logic:present name="mas_planillas">
+                    <html:form action="/irLlenarNuevaPlanillaEvaluacion" style="margin: 0px;">
+                        <html:hidden name="profesor" property="usbid"/>
+                        <html:hidden name="profesor" property="nombre"/>
+                        <html:hidden name="profesor" property="apellido"/>
+                        <html:submit styleClass="btn btn-primary">
+                            Llenar otra planilla
+                        </html:submit>
+                    </html:form>
+                </logic:present>
         </div>
 
 

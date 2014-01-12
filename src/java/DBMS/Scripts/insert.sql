@@ -149,10 +149,10 @@ INSERT INTO DEPARTAMENTO VALUES ('D-2072','Departamento de Termodinamica y Fenom
 INSERT INTO DEPARTAMENTO VALUES ('D-2073','Departamento de Tesoreria');
 INSERT INTO DEPARTAMENTO VALUES ('D-2074','Departamento de Urbanismo');
 
-INSERT INTO PROFESOR VALUES ('22-90457','Rebecca','Bolaffi','2530218','M','RebeccaBolaffi@usb.ve','RebeccaBolaffi@gmail.com','Ayudante Academico','N','11-11-2011','11-11-2013');
-INSERT INTO PROFESOR VALUES ('28-63146','Martin','Torino','9501558','F','MartinTorino@usb.ve','MartinTorino@gmail.com','Asociado','N','11-11-2011','11-11-2013');
-INSERT INTO PROFESOR VALUES ('84-73618','Alberto','Riera','5370644','F','AlbertoRiera@usb.ve','AlbertoRiera@gmail.com','Titular','N','11-11-2011','11-11-2013');
-INSERT INTO PROFESOR VALUES ('43-62893','Alejandra','Tovar','15326570','F','AlejandraTovar@usb.ve','AlejandraTovar@gmail.com','Asistente','N','11-11-2011','11-11-2013');
+INSERT INTO PROFESOR VALUES ('22-90457','Rebecca','Bolaffi','2530218','M','RebeccaBolaffi@usb.ve','RebeccaBolaffi@gmail.com','Ayudante Academico','N','11/11/2011','11/11/2013');
+INSERT INTO PROFESOR VALUES ('28-63146','Martin','Torino','9501558','F','MartinTorino@usb.ve','MartinTorino@gmail.com','Asociado','N','11/11/2011','11/11/2013');
+INSERT INTO PROFESOR VALUES ('84-73618','Alberto','Riera','5370644','F','AlbertoRiera@usb.ve','AlbertoRiera@gmail.com','Titular','N','11/11/2011','11/11/2013');
+INSERT INTO PROFESOR VALUES ('43-62893','Alejandra','Tovar','15326570','F','AlejandraTovar@usb.ve','AlejandraTovar@gmail.com','Asistente','N','11/11/2011','11/11/2013');
 
 INSERT INTO MATERIA VALUES ('CI6116','Sistemas de informacion II','4');
 INSERT INTO MATERIA VALUES ('CI1115','Sistemas de informacion I','4');
@@ -172,6 +172,7 @@ INSERT INTO pertenece VALUES ('43-62893','09-10219');
 INSERT INTO maneja VALUES('09-10020','CI6116');
 INSERT INTO maneja VALUES('C-0043','CI6116');
 INSERT INTO maneja VALUES('C-0001','CI6116');
+INSERT INTO maneja VALUES('C-0001','CI5311');
 
 INSERT INTO dicta VALUES('22-90457','CI6116');
 INSERT INTO dicta VALUES('22-90457','CI5311');

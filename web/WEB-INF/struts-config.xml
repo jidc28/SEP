@@ -285,12 +285,12 @@
         <action input="/VistaProfesor.jsp" name="Profesor" path="/irConsultarRendimiento" scope="request" type="Actions.Profesor.irRendimientoProfesor" validate="false">
             <forward name="success" path="rendimientoProfesor"/>
         </action>      
-        <action input="/resultadosMaterias.jsp" name="Profesor" path="/irAgregarRendimiento" scope="request" type="Actions.Profesor.irAgregarRendimiento" validate="false">
-            <forward name="success" path="agregarRendimientoProfesor"/>
+        <action input="/verPlanillasLlenas" name="Profesor" path="/irLlenarNuevaPlanillaEvaluacion" scope="request" type="Actions.Profesor.irAgregarRendimiento" validate="false">
+            <forward name="success" path="llenarNuevaPlanillaEvaluacion"/>
         </action>      
-        <action input="/agregarRendimientoProfesor.jsp" name="rendimientoProf" path="/agregarRendimiento" scope="request" type="Actions.Profesor.agregarRendimientoProfesor" validate="false">
+        <action input="/llenarNuevaPlanillaEvaluacion.jsp" name="rendimientoProf" path="/llenarNuevaPlanillaEvaluacion" scope="request" type="Actions.Profesor.agregarRendimientoProfesor" validate="false">
             <forward name="success" path="rendimientoProfesor"/>
-            <forward name="failure" path="agregarRendimientoProfesor"/>
+            <forward name="failure" path="llenarNuevaPlanillaEvaluacion"/>
         </action>      
  
         <action name="NoImplementado" path="/noImplementado" scope="request" type="Otros.noimplementadoAction" validate="false">
