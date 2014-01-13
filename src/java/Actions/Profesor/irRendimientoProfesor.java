@@ -48,13 +48,6 @@ public class irRendimientoProfesor extends org.apache.struts.action.Action {
         
         ArrayList<rendimientoProf> rendimiento = DBMS.getInstance().obtenerRendimientoProfesor(profesor.getUsbid(),id_departamento);
         
-        int materias_que_dicta = DBMS.getInstance().cantidadMateriasQueDicta(id_profesor, id_departamento);
-        int planilla_llena = DBMS.getInstance().cantidadPlanillaLlena(id_profesor, id_departamento);
-        
-        if (materias_que_dicta != planilla_llena) {
-            request.setAttribute("mas_planillas",SUCCESS);
-        }
-        
         session.setAttribute("profesor", profesor);
         request.setAttribute("rendimiento", rendimiento);
         return mapping.findForward(SUCCESS);

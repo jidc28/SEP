@@ -107,18 +107,6 @@
                         </logic:iterate>
                     </tbody>
                 </table>
-                <logic:present name="mas_planillas">
-                    <html:form action="/irLlenarNuevaPlanillaEvaluacion" style="margin: 0px;">
-                        <html:hidden name="profesor" property="usbid"/>
-                        <html:hidden name="profesor" property="nombre"/>
-                        <html:hidden name="profesor" property="apellido"/>
-                        <html:submit styleClass="btn btn-primary">
-                            Llenar otra planilla
-                        </html:submit>
-                    </html:form>
-                </logic:present>
         </div>
-
-
     </body>
 </html>

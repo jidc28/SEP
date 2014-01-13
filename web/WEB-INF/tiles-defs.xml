@@ -138,7 +138,11 @@
     <definition name="llenarNuevaPlanillaEvaluacion" extends="baseDepartamento"> <!-- ir Agregar Rendimiento Profesor-->
         <put name="body" value="/JSP/departamento/Profesores/llenarNuevaPlanillaEvaluacion.jsp"/>
     </definition>
-    
+
+    <definition name="llenarPlanillas" extends="baseDepartamento"> <!-- ir Agregar Rendimiento Profesor-->
+        <put name="body" value="/JSP/departamento/Profesores/llenarPlanillas.jsp"/>
+    </definition>
+        
     <!-- COORDINACION -->
     <definition name="baseCoordinacion" extends="base"> <!-- BASE PARA COORDINACION -->
         <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDecanato.jsp"/>

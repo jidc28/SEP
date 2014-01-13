@@ -284,15 +284,30 @@
         </action>
         <action input="/VistaProfesor.jsp" name="Profesor" path="/irConsultarRendimiento" scope="request" type="Actions.Profesor.irRendimientoProfesor" validate="false">
             <forward name="success" path="rendimientoProfesor"/>
-        </action>      
-        <action input="/verPlanillasLlenas" name="Profesor" path="/irLlenarNuevaPlanillaEvaluacion" scope="request" type="Actions.Profesor.irAgregarRendimiento" validate="false">
+        </action>  
+            
+        <action input="/verPlanillasLlenas.jsp" name="Profesor" path="/irLlenarNuevaPlanillaEvaluacion" scope="request" type="Actions.Profesor.irAgregarRendimiento" validate="false">
             <forward name="success" path="llenarNuevaPlanillaEvaluacion"/>
-        </action>      
-        <action input="/llenarNuevaPlanillaEvaluacion.jsp" name="rendimientoProf" path="/llenarNuevaPlanillaEvaluacion" scope="request" type="Actions.Profesor.agregarRendimientoProfesor" validate="false">
+        </action>    
+          
+        <!--<action input="/llenarNuevaPlanillaEvaluacion.jsp" name="rendimientoProf" path="/llenarNuevaPlanillaEvaluacion" scope="request" type="Actions.Profesor.agregarRendimientoProfesor" validate="false">
             <forward name="success" path="rendimientoProfesor"/>
             <forward name="failure" path="llenarNuevaPlanillaEvaluacion"/>
-        </action>      
- 
+        </action> -->     
+
+        <action input="/llenarNuevaPlanillaEvaluacion.jsp" name="rendimientoProf" path="/guardarPlanilla" scope="request" type="Actions.Profesor.agregarRendimientoProfesor" validate="false">
+            <forward name="success" path="llenarPlanillas"/>
+        </action>    
+  
+        <action input="/llenarNuevaPlanillaEvaluacion.jsp" name="rendimientoProf" path="/llenarPlanillas" scope="request" type="Actions.Profesor.agregarRendimientoProfesor" validate="false">
+            <forward name="success" path="rendimientoProfesor"/>
+            <forward name="failure" path="llenarPlanillas"/>
+        </action>
+
+        <action input="/verPlanillasLlenas.jsp" name="Profesor" path="/irLlenarPlanillas" scope="request" type="Actions.Profesor.irAgregarRendimiento" validate="false">
+            <forward name="success" path="llenarPlanillas"/>
+        </action>
+  
         <action name="NoImplementado" path="/noImplementado" scope="request" type="Otros.noimplementadoAction" validate="false">
             <forward name="success" path="/noimplementado.jsp"/>
         </action>

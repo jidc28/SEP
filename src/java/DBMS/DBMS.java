@@ -1301,8 +1301,8 @@ public class DBMS {
         try {
             ps = conexion.prepareStatement("SELECT DISTINCT "
                     + "r.usbid_profesor, trimestre, ano, r.codigo_materia, "
-                    + "total_estudiantes, nota_prom, aprobados, aplazados, "
-                    + "retirados "
+                    + "total_estudiantes, nota_prom, nota1, nota2, "
+                    + "nota3, nota4, nota5, retirados "
                     + "FROM rendimiento as r, oferta as o, dicta as d "
                     + "WHERE r.usbid_profesor = ? "
                     + "AND o.codigo_departamento = ? "
@@ -1320,8 +1320,11 @@ public class DBMS {
                 r.setCodigo_materia(rs.getString("codigo_materia"));
                 r.setTotal_estudiantes(rs.getInt("total_estudiantes"));
                 r.setNota_prom(rs.getFloat("nota_prom"));
-                r.setAprobados(rs.getInt("aprobados"));
-                r.setAplazados(rs.getInt("aplazados"));
+                r.setNota1(rs.getInt("nota1"));
+                r.setNota2(rs.getInt("nota2"));
+                r.setNota3(rs.getInt("nota3"));
+                r.setNota4(rs.getInt("nota4"));
+                r.setNota5(rs.getInt("nota5"));
                 r.setRetirados(rs.getInt("retirados"));
                 rendimiento.add(r);
             }
@@ -1337,18 +1340,20 @@ public class DBMS {
         ArrayList<Materia> materia = new ArrayList<Materia>(0);
         try {
             ps = conexion.prepareStatement("SELECT * "
-                    + "FROM dicta as d, oferta as o "
+                    + "FROM materia as m, dicta as d, oferta as o "
                     + "WHERE usbid_profesor = ? "
                     + "AND o.codigo_departamento = ? "
                     + "AND o.codigo_materia = d.codigo_materia "
-                    + "AND d.planilla_llena = 'N';");
+                    + "AND d.planilla_llena = 'N' "
+                    + "AND m.codigo = o.codigo_materia;");
             ps.setString(1, id_profesor);
             ps.setString(2, id_departamento);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Materia m = new Materia();
-                m.setCodigo(rs.getString(2));
+                m.setCodigo(rs.getString(1));
+                m.setNombre(rs.getString(2));
                 materia.add(m);
             }
 
@@ -1363,17 +1368,20 @@ public class DBMS {
         PreparedStatement ps1, ps2;
 
         try {
-            ps1 = conexion.prepareStatement("INSERT INTO rendimiento VALUES(?,?,?,?,?,?,?,?,?);");
+            ps1 = conexion.prepareStatement("INSERT INTO rendimiento VALUES(?,?,?,?,?,?,?,?,?,?,?,?);");
             ps1.setString(1, u.getUsbid_profesor());
             ps1.setString(2, u.getCodigo_materia());
             ps1.setString(3, u.getTrimestre());
             ps1.setInt(4, u.getAno());
             ps1.setInt(5, u.getTotal_estudiantes());
             ps1.setFloat(6, u.getNota_prom());
-            ps1.setInt(7, u.getAprobados());
-            ps1.setInt(8, u.getAplazados());
-            ps1.setInt(9, u.getRetirados());
-
+            ps1.setInt(7, u.getNota1());
+            ps1.setInt(8, u.getNota2());
+            ps1.setInt(9, u.getNota3());
+            ps1.setInt(10, u.getNota4());
+            ps1.setInt(11, u.getNota5());
+            ps1.setInt(12, u.getRetirados());
+            
             ps2 = conexion.prepareStatement("UPDATE dicta "
                     + "SET planilla_llena = 'S' "
                     + "WHERE usbid_profesor = ? "

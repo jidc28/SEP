@@ -435,3 +435,17 @@ seleccAll{
     margin-bottom: 0px;
     margin-right: 0px;
 }
+
+#planilla_head {
+    text-align: left; 
+    font-size: 11px; 
+    border-top-color: white; 
+    padding-left: 0px;
+    color: gray;
+}
+
+#planilla_body {
+    /* padding-left: 100px; */
+    border-top-color: white; 
+    width: 120px;
+}
