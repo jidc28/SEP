@@ -70,7 +70,7 @@
         </br>
             
         <html:form action="/modificarPlanilla" >
-        <div id="tabla" class="table-responsive">
+        <div id="tabla" class="table-responsive" style="margin-top: 20px;">
                 <table class="table table-striped">
                         <tbody>
                             <tr>
