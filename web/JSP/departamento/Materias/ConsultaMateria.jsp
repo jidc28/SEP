@@ -98,7 +98,7 @@
                             <bean:write name="Mat" property="nombre"/>
                         </td>
                         <td align="center">
-                            <html:form action="/irModificarMateria">
+                            <html:form action="/irModificarMateria" style="margin: 0px;">
                                 <html:hidden name="Mat" property="codigo"/>
                                 <html:submit styleClass="btn btn-info"
                                              style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
@@ -108,7 +108,7 @@
                         </td>
                         <td align="center">
                             <logic:equal name="Mat" property="estado" value="visible">
-                                <html:form action="/modificaStatusMateria">
+                                <html:form action="/modificaStatusMateria" style="margin: 0px;">
                                     <html:hidden name="Mat" property="estado" value="oculto"/>
                                     <html:hidden name="Mat" property="codigo"/>
                                     <html:submit styleClass="btn btn-warning"
@@ -120,7 +120,7 @@
                             </logic:equal>
                             
                             <logic:equal name="Mat" property="estado" value="oculto">
-                                <html:form action="/modificaStatusMateria">
+                                <html:form action="/modificaStatusMateria" style="margin: 0px;">
                                     <html:hidden name="Mat" property="estado" value="visible"/>
                                     <html:hidden name="Mat" property="codigo"/>
                                     <html:submit styleClass="btn btn-success"
@@ -132,7 +132,7 @@
                             </logic:equal>
                         </td>
                         <td align="center">
-                            <html:form action="/eliminaMateria">
+                            <html:form action="/eliminaMateria" style="margin: 0px;">
                                 <html:hidden name="Mat" property="codigo"/>
                                 <html:submit styleClass="btn btn-danger"
                                              style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;"

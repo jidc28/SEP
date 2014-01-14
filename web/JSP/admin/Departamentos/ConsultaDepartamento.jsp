@@ -86,10 +86,10 @@
                                 <html:form  action="/irEditarNombreDepartamento" onsubmit="return(this)" style="margin: 0px;">
                                     <html:hidden name="Dep" property="codigo" />
                                     <center>
-                                        <button type="button" class="btn btn-primary" 
-                                                style="padding-bottom: 1px; padding-top: 1px; padding-left: 2px; padding-right: 2px;">
-                                            <html:image src="imagenes/edit-img.png" style="height: 27px;"/>
-                                        </button>
+                                        <html:submit styleClass="btn btn-primary" 
+                                                     style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                                            Modificar
+                                        </html:submit>
                                     </center>
                                 </html:form>
                             </td>

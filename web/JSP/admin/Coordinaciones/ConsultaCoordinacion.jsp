@@ -84,11 +84,10 @@
                         <td align="center">
                             <html:form action="/editarNombreCoordinacion" onsubmit="return(this)" style="margin: 0px;">
                                 <html:hidden name="Coord" property="codigo"/>
-                                <button type="button" class="btn btn-primary" 
-                                        style="padding-bottom: 1px; padding-top: 1px; padding-left: 2px; padding-right: 2px;
-                                               margin-top: 3px;">
-                                    <html:image src="imagenes/edit-img.png" value="" property="" style="height: 27px;"/>
-                                </button>
+                                <html:submit styleClass="btn btn-primary"
+                                             style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                    Modificar
+                                </html:submit>
                             </html:form>
                         </td>
                         <td>

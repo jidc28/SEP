@@ -72,10 +72,10 @@
                         <td width="20%" align="center">
                             <html:form action="/editarNombreDecanato" onsubmit="return(this)" style="margin: 0px;">
                                 <html:hidden name="Dec" property="codigo"/>
-                                <button type="button" class="btn btn-primary" 
-                                        style="padding-bottom: 1px; padding-top: 1px; padding-left: 2px; padding-right: 2px;">
-                                    <html:image src="imagenes/edit-img.png" value="" property="" style="height: 27px;"/>
-                                </button>
+                                <html:submit styleClass="btn btn-primary"
+                                             style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                                    Modificar
+                                </html:submit>
                             </html:form>
                         </td>
                     </tr>

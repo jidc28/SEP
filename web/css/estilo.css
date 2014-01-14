@@ -428,21 +428,29 @@ seleccAll{
 }
 
 #tabla {
-    margin-top: 20px;
+    margin-top: 0px;
     width: 96%;
     border: 0;
 }
 
 #alert {
     width: 95%;
-    margin-bottom: 0px;
+    margin-bottom: 30px;
     margin-right: 0px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.table {
+    margin-top: 0px;
 }
 
 #alert-coord {
     width: 75%;
-    margin-bottom: 0px;
+    margin-bottom: 30px;
     margin-right: 0px;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 #planilla_head {
