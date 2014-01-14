@@ -36,16 +36,11 @@
         </div>
         
         <h4>
-            Información de Materias
-        </h4>
-        <br style="font-size: 14px;">
-            <strong> PROFESOR </strong> 
-            <html:text disabled="true" name="profesor" property="nombre"
-                       style="height: 30px; margin: 0px; text-align: center;"/>
-            <strong> USBID </strong> 
-            <html:text disabled="true" name="profesor" property="usbid"
-                       style="height: 30px; margin: 0px; text-align: center;"/>
-        </br>      
+            Planillas llenas de: <bean:write name="profesor" property="usbid" />
+            <div style="font-size: 14px; color: grey;">
+                <bean:write name="profesor" property="nombre"/>
+            </div>
+        </h4>   
             
         <div id="tabla" class="table-responsive">
                 <table class="table table-striped">
@@ -87,17 +82,16 @@
                                     <bean:write name="RendimientoProf" property="ano"/>
                                     </center>
                                 </td>
-                                <td>
-                                    <center>
-                                    <bean:write name="RendimientoProf" property="codigo_materia"/>
-                                    </center>
+                                <td style="text-align: left;">
+                                    <bean:write name="RendimientoProf" property="codigo_materia"/>,
+                                    <bean:write name="RendimientoProf" property="nombre_materia"/>
                                 </td>
                                 <td>
                                     <center>
-                                        <html:form action="/verSolicitudApertura" style="margin: 0px;">
+                                        <html:form action="/verPlanilla" style="margin: 0px;">
+                                            <html:hidden name="RendimientoProf" property="codigo_materia"/>
                                             <html:submit styleClass="btn btn-info"
-                                                         style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;"
-                                                         disabled="true">
+                                                         style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
                                                 Ver detalles
                                             </html:submit>
                                         </html:form>

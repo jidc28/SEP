@@ -81,7 +81,7 @@
                             <h5 align ="center">Evaluar Profesores</h5>
                         </html:link>
                         <html:link action="/ConsultaProfesores">
-                            <h5 align ="center">Llenar Planilla de Evaluación Profesores</h5>
+                            <h5 align ="center">Gestionar Planillas de Evaluación de Profesores</h5>
                         </html:link>
                     </div>
                 </div>

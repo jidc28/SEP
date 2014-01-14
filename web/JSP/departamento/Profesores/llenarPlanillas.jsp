@@ -73,7 +73,7 @@
         </logic:present> 
         
         <h4>
-            Información de Materias
+            Llenar Planillas:
         </h4>
              
         <br style="font-size: 14px;">

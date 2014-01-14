@@ -1302,13 +1302,14 @@ public class DBMS {
             ps = conexion.prepareStatement("SELECT DISTINCT "
                     + "r.usbid_profesor, trimestre, ano, r.codigo_materia, "
                     + "total_estudiantes, nota_prom, nota1, nota2, "
-                    + "nota3, nota4, nota5, retirados "
-                    + "FROM rendimiento as r, oferta as o, dicta as d "
+                    + "nota3, nota4, nota5, retirados, m.nombre "
+                    + "FROM rendimiento as r, oferta as o, dicta as d, materia as m "
                     + "WHERE r.usbid_profesor = ? "
                     + "AND o.codigo_departamento = ? "
                     + "AND r.codigo_materia = d.codigo_materia "
                     + "AND d.codigo_materia = o.codigo_materia "
-                    + "AND r.usbid_profesor = d.usbid_profesor;");
+                    + "AND r.usbid_profesor = d.usbid_profesor "
+                    + "AND m.codigo = o.codigo_materia;");
             ps.setString(1, id_profesor);
             ps.setString(2, id_departamento);
             ResultSet rs = ps.executeQuery();
@@ -1318,6 +1319,7 @@ public class DBMS {
                 r.setTrimestre(rs.getString("trimestre"));
                 r.setAno(rs.getInt("ano"));
                 r.setCodigo_materia(rs.getString("codigo_materia"));
+                r.setNombre_materia(rs.getString("nombre"));
                 r.setTotal_estudiantes(rs.getInt("total_estudiantes"));
                 r.setNota_prom(rs.getFloat("nota_prom"));
                 r.setNota1(rs.getInt("nota1"));
@@ -1326,6 +1328,7 @@ public class DBMS {
                 r.setNota4(rs.getInt("nota4"));
                 r.setNota5(rs.getInt("nota5"));
                 r.setRetirados(rs.getInt("retirados"));
+                r.setUsbid_profesor(id_profesor);
                 rendimiento.add(r);
             }
 
@@ -1381,7 +1384,7 @@ public class DBMS {
             ps1.setInt(10, u.getNota4());
             ps1.setInt(11, u.getNota5());
             ps1.setInt(12, u.getRetirados());
-            
+
             ps2 = conexion.prepareStatement("UPDATE dicta "
                     + "SET planilla_llena = 'S' "
                     + "WHERE usbid_profesor = ? "
@@ -1449,5 +1452,71 @@ public class DBMS {
             return -1;
         }
         return -1;
+    }
+
+    public rendimientoProf obtenerPlanillaEvaluacionProfesor(String id_profesor, String id_materia) {
+        PreparedStatement ps;
+        try {
+            ps = conexion.prepareStatement("SELECT * "
+                    + "FROM rendimiento, materia "
+                    + "WHERE usbid_profesor = ? "
+                    + "AND codigo_materia = ? "
+                    + "AND codigo_materia = codigo;");
+            ps.setString(1, id_profesor);
+            ps.setString(2, id_materia);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                rendimientoProf r = new rendimientoProf();
+                r.setCodigo_materia(rs.getString("codigo_materia"));
+                r.setTrimestre(rs.getString("trimestre"));
+                r.setAno(rs.getInt("ano"));
+                r.setTotal_estudiantes(rs.getInt("total_estudiantes"));
+                r.setNota1(rs.getInt("nota1"));
+                r.setNota2(rs.getInt("nota2"));
+                r.setNota3(rs.getInt("nota3"));
+                r.setNota4(rs.getInt("nota4"));
+                r.setNota5(rs.getInt("nota5"));
+                r.setRetirados(rs.getInt("retirados"));
+                r.setNombre_materia(rs.getString("nombre"));
+                return r;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean modificarRendimientoProfesor(rendimientoProf r) {
+        PreparedStatement ps;
+
+        try {
+            ps = conexion.prepareStatement("UPDATE RENDIMIENTO "
+                    + "SET trimestre = ?, ano = ?, total_estudiantes = ? "
+                    + "nota1 = ?, nota2 = ?, nota3 = ?, nota4 = ?, nota5 = ? "
+                    + "retirados = ? "
+                    + "WHERE codigo_materia = ? "
+                    + "AND usbid_profesor = ?;");
+            ps.setString(1, r.getTrimestre());
+            ps.setInt(2, r.getAno());
+            ps.setInt(3, r.getTotal_estudiantes());
+            ps.setInt(4, r.getNota1());
+            ps.setInt(5, r.getNota2());
+            ps.setInt(6, r.getNota3());
+            ps.setInt(7, r.getNota4());
+            ps.setInt(8, r.getNota5());
+            ps.setInt(9, r.getRetirados());
+            ps.setString(10, r.getCodigo_materia());
+            ps.setString(11, r.getUsbid_profesor());
+            
+            Integer i = ps.executeUpdate();
+
+            return i > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 }

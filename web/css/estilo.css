@@ -444,6 +444,15 @@ seleccAll{
     color: gray;
 }
 
+#modifica_planilla_head {
+    text-align: left; 
+    font-size: 14px; 
+    padding-left: 0px;
+    color: #555;
+    padding-top: 12px;
+    border-top-color: white; 
+}
+
 #planilla_body {
     /* padding-left: 100px; */
     border-top-color: white; 

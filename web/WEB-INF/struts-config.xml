@@ -289,6 +289,10 @@
         <action input="/verPlanillasLlenas.jsp" name="Profesor" path="/irLlenarNuevaPlanillaEvaluacion" scope="request" type="Actions.Profesor.irAgregarRendimiento" validate="false">
             <forward name="success" path="llenarNuevaPlanillaEvaluacion"/>
         </action>    
+        
+        <action input="/verPlanillasLlenas.jsp" name="rendimientoProf" path="/verPlanilla" scope="request" type="Actions.Profesor.irModificarRendimiento" validate="false">
+            <forward name="success" path="verPlanilla"/>
+        </action>  
           
         <!--<action input="/llenarNuevaPlanillaEvaluacion.jsp" name="rendimientoProf" path="/llenarNuevaPlanillaEvaluacion" scope="request" type="Actions.Profesor.agregarRendimientoProfesor" validate="false">
             <forward name="success" path="rendimientoProfesor"/>
@@ -298,7 +302,12 @@
         <action input="/llenarNuevaPlanillaEvaluacion.jsp" name="rendimientoProf" path="/guardarPlanilla" scope="request" type="Actions.Profesor.agregarRendimientoProfesor" validate="false">
             <forward name="success" path="llenarPlanillas"/>
         </action>    
-  
+
+        <action input="/llenarNuevaPlanillaEvaluacion.jsp" name="rendimientoProf" path="/modificarPlanilla" scope="request" type="Actions.Profesor.modificarRendimientoProfesor" validate="false">
+            <forward name="success" path="rendimientoProfesor"/>
+            <forward name="failure" path="verPlanilla"/>
+        </action> 
+    
         <action input="/llenarNuevaPlanillaEvaluacion.jsp" name="rendimientoProf" path="/llenarPlanillas" scope="request" type="Actions.Profesor.agregarRendimientoProfesor" validate="false">
             <forward name="success" path="rendimientoProfesor"/>
             <forward name="failure" path="llenarPlanillas"/>
