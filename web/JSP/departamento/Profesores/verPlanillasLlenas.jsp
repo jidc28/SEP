@@ -35,6 +35,14 @@
             </p>
         </div>
         
+        <logic:present name="planilla_modificada">
+            <div class="alert alert-success" id="alert">
+                La planilla de la materia
+                <bean:write name="planilla_modificada" property="codigo_materia"/>
+                se ha guardado exitosamente.
+            </div>  
+        </logic:present> 
+        
         <h4>
             Planillas llenas de: <bean:write name="profesor" property="usbid" />
             <div style="font-size: 14px; color: grey;">

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Actions.Profesor;
+package Actions.Departamento;
 
 import Clases.*;
 import DBMS.DBMS;
@@ -21,10 +21,11 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author jidc28
  */
-public class irModificarRendimiento extends org.apache.struts.action.Action {
+public class irLlenarPlanillas extends org.apache.struts.action.Action {
     /* forward name="success" path="" */
 
     private static final String SUCCESS = "success";
+    private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -42,13 +43,15 @@ public class irModificarRendimiento extends org.apache.struts.action.Action {
             throws Exception {
 
         HttpSession session = request.getSession(true);
-        Profesor profesor = (Profesor) session.getAttribute("profesor");
+        String id_departamento = (String) session.getAttribute("usbid");
+        ArrayList<Materia> materias;
         
-        rendimientoProf rendimiento = (rendimientoProf) form;
-        rendimiento = DBMS.getInstance().obtenerPlanillaEvaluacionProfesor(profesor.getUsbid(),rendimiento.getCodigo_materia());
+        Profesor profesor = (Profesor) form;
+        
+        materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(profesor.getUsbid(),id_departamento);
         
         session.setAttribute("profesor",profesor);
-        request.setAttribute("rendimientoProf",rendimiento);
+        request.setAttribute("materias",materias);
         return mapping.findForward(SUCCESS);
         
     }

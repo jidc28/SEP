@@ -84,12 +84,13 @@
             <html:text disabled="true" name="profesor" property="usbid"
                        style="height: 30px; margin: 0px; text-align: center;"/>
         </br>
-            
+        
+        <logic:present name="materias">
         <div class="panel-group" id="accordion">
         <logic:iterate name="materias" id="materia">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
+                    <h4 id="h4" class="panel-title" style="text-align: left;">
                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#${materia.getCodigo()}">
                             <bean:write name="materia" property="codigo"/>
                             <div style="font-size: 14px; color: grey;"><bean:write name="materia" property="nombre"/></div>
@@ -156,12 +157,10 @@
                                     </tr>
                                     <tr>
                                         <td id="planilla_head" colspan="4" style="color: red;">
-                                            <!--<div class="alert alert-danger" id="alert">-->
                                                 <center>
                                                     <strong> Los siguientes datos deben ser llenados con CANTIDADES
                                                     y no porcentajes.</strong>
                                                 </center>
-                                            <!--</div>-->
                                         </td>
                                     </tr>
                                     <tr>
@@ -224,5 +223,9 @@
             </div>
         </logic:iterate>
         </div>
+        </logic:present>
+        <logic:empty name="materias">
+            <h4>Ya se han llenado todas las planillas</h4>
+        </logic:empty>
     </body>
 </html>

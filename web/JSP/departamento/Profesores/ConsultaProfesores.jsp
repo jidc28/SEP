@@ -29,17 +29,6 @@
         <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
         <script type="text/javascript" src="scripts/bootstrap.js"></script>
 
-        <logic:present name="enviado_memo">
-            <div class="alert alert-success" id="alert">
-                Se ha enviado la solicitud para evaluar a los profesores.
-            </div>
-        </logic:present>
-        <logic:present name="no_seleccionado">
-            <div class="alert alert-danger" id="alert">
-                No ha seleccionado ningun profesor a evaluar.
-            </div>
-        </logic:present>
-
         <h4> Llenar Planilla de Evaluación Profesores: </h4>
 
     <center>
@@ -92,7 +81,7 @@
                     </td>
                     <td>
                     <center>
-                        <html:form action="/irConsultarRendimiento" style="margin: 0px;">
+                        <html:form action="/verPlanillasLlenas" style="margin: 0px;">
                             <html:hidden name="profesor" property="nombre"/>
                             <html:hidden name="profesor" property="apellido"/>
                             <html:hidden name="profesor" property="usbid"/>

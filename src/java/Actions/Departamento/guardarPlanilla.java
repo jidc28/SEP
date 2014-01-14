@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Actions.Profesor;
+package Actions.Departamento;
 
 import Clases.*;
 import DBMS.DBMS;
@@ -21,7 +21,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author jidc28
  */
-public class agregarRendimientoProfesor extends org.apache.struts.action.Action {
+public class guardarPlanilla extends org.apache.struts.action.Action {
     /* forward name="success" path="" */
 
     private static final String SUCCESS = "success";
@@ -81,7 +81,7 @@ public class agregarRendimientoProfesor extends org.apache.struts.action.Action 
             return mapping.findForward(FAILURE);
         }
 
-        boolean agregar = DBMS.getInstance().agregarRendimientoProfesor(renMateria);
+        boolean agregar = DBMS.getInstance().agregarRendimientoProfesor(renMateria,id_departamento);
 
         ArrayList<rendimientoProf> rendimiento = DBMS.getInstance().obtenerRendimientoProfesor(id_profesor, id_departamento);
         ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);

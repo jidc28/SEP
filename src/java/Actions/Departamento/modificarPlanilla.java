@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Actions.Profesor;
+package Actions.Departamento;
 
 import Clases.*;
 import DBMS.DBMS;
@@ -21,7 +21,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author jidc28
  */
-public class modificarRendimientoProfesor extends org.apache.struts.action.Action {
+public class modificarPlanilla extends org.apache.struts.action.Action {
     /* forward name="success" path="" */
 
     private static final String SUCCESS = "success";
@@ -81,7 +81,7 @@ public class modificarRendimientoProfesor extends org.apache.struts.action.Actio
             return mapping.findForward(FAILURE);
         }
 
-        boolean agregar = DBMS.getInstance().modificarRendimientoProfesor(renMateria);
+        boolean agregar = DBMS.getInstance().modificarRendimientoProfesor(renMateria,id_departamento);
 
         ArrayList<rendimientoProf> rendimiento = DBMS.getInstance().obtenerRendimientoProfesor(id_profesor, id_departamento);
         ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
@@ -89,10 +89,10 @@ public class modificarRendimientoProfesor extends org.apache.struts.action.Actio
         request.setAttribute("materias", materias);
         request.setAttribute("rendimiento", rendimiento);
         if (agregar) {
-            request.setAttribute("planilla_guardada", renMateria);
+            request.setAttribute("planilla_modificada", renMateria);
             return mapping.findForward(SUCCESS);
         } else {
-            request.setAttribute("planilla_no_guardada", renMateria);
+            request.setAttribute("planilla_no_modificada", renMateria);
             return mapping.findForward(FAILURE);
         }
     }

@@ -69,7 +69,7 @@
                        style="height: 30px; margin: 0px; text-align: center;"/>
         </br>
             
-        <html:form action="/guardarPlanilla" >
+        <html:form action="/modificarPlanilla" >
         <div id="tabla" class="table-responsive">
                 <table class="table table-striped">
                         <tbody>
@@ -79,9 +79,6 @@
                                 </td>
                                 <td style="padding-left: 100px;">
                                     <html:select name="rendimientoProf" property="trimestre" style="width: 206px;">
-                                        <option>
-                                            <bean:write name="rendimientoProf" property="trimestre" />
-                                        </option>
                                         <html:option value="EM">Ene-Mar</html:option>
                                         <html:option value="AJ">Abr-Jul</html:option>
                                         <html:option value="SD">Sep-Dic</html:option>
@@ -95,9 +92,6 @@
                                 </td>
                                 <td style="padding-left: 100px;">
                                     <html:select name="rendimientoProf" disabled="false" property="ano" style="width: 206px;">
-                                        <option>
-                                            <bean:write name="rendimientoProf" property="ano" />
-                                        </option>
                                         <html:option value="2004">2004</html:option> 
                                         <html:option value="2005">2005</html:option> 
                                         <html:option value="2006">2006</html:option> 
@@ -190,9 +184,11 @@
                         </tbody>
                 </table>
         </div>
+        <html:hidden name="rendimientoProf" property="viejoTrimestre"/>
+        <html:hidden name="rendimientoProf" property="viejoAno"/>
         <html:hidden name="rendimientoProf" property="codigo_materia"/>
         <html:submit value="Modificar Planilla" 
-                     styleClass="btn btn-info" disabled="true"/> 
+                     styleClass="btn btn-info"/> 
         </html:form>
 
     </body>

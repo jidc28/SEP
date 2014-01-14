@@ -22,7 +22,25 @@ public class rendimientoProf extends org.apache.struts.action.ActionForm {
     private int nota5;
     private int retirados;
     private float nota_prom;
+    private int viejoAno;
+    private String viejoTrimestre;
 
+    public int getViejoAno() {
+        return viejoAno;
+    }
+
+    public void setViejoAno(int viejoAno) {
+        this.viejoAno = viejoAno;
+    }
+
+    public String getViejoTrimestre() {
+        return viejoTrimestre;
+    }
+
+    public void setViejoTrimestre(String viejoTrimestre) {
+        this.viejoTrimestre = viejoTrimestre;
+    }
+    
     public String getUsbid_profesor() {
         return usbid_profesor;
     }

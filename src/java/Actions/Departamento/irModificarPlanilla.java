@@ -2,7 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Actions.Profesor;
+package Actions.Departamento;
+
 import Clases.*;
 import DBMS.DBMS;
 import java.util.ArrayList;
@@ -20,10 +21,11 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author jidc28
  */
-public class irRendimientoProfesor extends org.apache.struts.action.Action {
+public class irModificarPlanilla extends org.apache.struts.action.Action {
     /* forward name="success" path="" */
+
     private static final String SUCCESS = "success";
-    private static final String FAILURE = "failure";
+
     /**
      * This is the action called from the Struts framework.
      *
@@ -38,18 +40,19 @@ public class irRendimientoProfesor extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
+
         HttpSession session = request.getSession(true);
-        String id_departamento = (String) session.getAttribute("usbid");
+        Profesor profesor = (Profesor) session.getAttribute("profesor");
         
-        Profesor profesor = (Profesor) form;
-        String id_profesor = profesor.getUsbid();
-        profesor.setNombre(profesor.getApellido() + ", " + profesor.getNombre());
+        rendimientoProf rendimiento = (rendimientoProf) form;
+        rendimiento = DBMS.getInstance().obtenerPlanillaEvaluacionProfesor(profesor.getUsbid(),rendimiento.getCodigo_materia());
         
-        ArrayList<rendimientoProf> rendimiento = DBMS.getInstance().obtenerRendimientoProfesor(profesor.getUsbid(),id_departamento);
+        rendimiento.setViejoAno(rendimiento.getAno());
+        rendimiento.setViejoTrimestre(rendimiento.getTrimestre());
         
-        session.setAttribute("profesor", profesor);
-        request.setAttribute("rendimiento", rendimiento);
+        session.setAttribute("profesor",profesor);
+        request.setAttribute("rendimientoProf",rendimiento);
         return mapping.findForward(SUCCESS);
+        
     }
 }

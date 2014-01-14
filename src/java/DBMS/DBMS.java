@@ -1366,9 +1366,9 @@ public class DBMS {
         return materia;
     }
 
-    public boolean agregarRendimientoProfesor(rendimientoProf u) {
+    public boolean agregarRendimientoProfesor(rendimientoProf u, String id_departamento) {
 
-        PreparedStatement ps1, ps2;
+        PreparedStatement ps1, ps2, ps3;
 
         try {
             ps1 = conexion.prepareStatement("INSERT INTO rendimiento VALUES(?,?,?,?,?,?,?,?,?,?,?,?);");
@@ -1392,6 +1392,17 @@ public class DBMS {
             ps2.setString(1, u.getUsbid_profesor());
             ps2.setString(2, u.getCodigo_materia());
 
+            if (0 == cantidadPlanillaVacia(u.getUsbid_profesor(), null)) {
+                ps3 = conexion.prepareStatement("UPDATE pertenece "
+                        + "SET evaluado = 'S' "
+                        + "WHERE usbid_profesor = ? "
+                        + "AND codigo_departamento = ?;");
+                ps3.setString(1, u.getUsbid_profesor());
+                ps3.setString(2, id_departamento);
+                Integer k = ps3.executeUpdate();
+            }
+            
+            //ps3 = conexion.prepareStatement();
             Integer i = ps1.executeUpdate();
             Integer j = ps2.executeUpdate();
 
@@ -1414,6 +1425,32 @@ public class DBMS {
                     + "AND o.codigo_departamento = ? "
                     + "AND o.codigo_materia = d.codigo_materia "
                     + "AND d.planilla_llena = 'S';");
+            ps1.setString(1, id_profesor);
+            ps1.setString(2, id_departamento);
+
+            ResultSet rs = ps1.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return -1;
+        }
+        return -1;
+    }
+    
+    public int cantidadPlanillaVacia(String id_profesor, String id_departamento) {
+
+        PreparedStatement ps1;
+
+        try {
+            ps1 = conexion.prepareStatement("SELECT count(usbid_profesor) "
+                    + "FROM dicta as d, oferta as o "
+                    + "WHERE d.usbid_profesor = ? "
+                    + "AND planilla_llena = 'N' "
+                    + "AND d.codigo_materia = o.codigo_materia "
+                    + "AND codigo_departamento = ? ");
             ps1.setString(1, id_profesor);
             ps1.setString(2, id_departamento);
 
@@ -1488,31 +1525,26 @@ public class DBMS {
         return null;
     }
 
-    public boolean modificarRendimientoProfesor(rendimientoProf r) {
-        PreparedStatement ps;
+    public boolean modificarRendimientoProfesor(rendimientoProf r,String id_departamento) {
+        PreparedStatement ps1, ps2;
 
         try {
-            ps = conexion.prepareStatement("UPDATE RENDIMIENTO "
-                    + "SET trimestre = ?, ano = ?, total_estudiantes = ? "
-                    + "nota1 = ?, nota2 = ?, nota3 = ?, nota4 = ?, nota5 = ? "
-                    + "retirados = ? "
-                    + "WHERE codigo_materia = ? "
-                    + "AND usbid_profesor = ?;");
-            ps.setString(1, r.getTrimestre());
-            ps.setInt(2, r.getAno());
-            ps.setInt(3, r.getTotal_estudiantes());
-            ps.setInt(4, r.getNota1());
-            ps.setInt(5, r.getNota2());
-            ps.setInt(6, r.getNota3());
-            ps.setInt(7, r.getNota4());
-            ps.setInt(8, r.getNota5());
-            ps.setInt(9, r.getRetirados());
-            ps.setString(10, r.getCodigo_materia());
-            ps.setString(11, r.getUsbid_profesor());
-            
-            Integer i = ps.executeUpdate();
 
-            return i > 0;
+            ps1 = conexion.prepareStatement("DELETE FROM RENDIMIENTO "
+                    + "WHERE trimestre = ? "
+                    + "AND codigo_materia = ? "
+                    + "AND usbid_profesor = ? "
+                    + "AND ano = ?;");
+            ps1.setString(1, r.getViejoTrimestre());
+            ps1.setString(2, r.getCodigo_materia());
+            ps1.setString(3, r.getUsbid_profesor());
+            ps1.setInt(4, r.getViejoAno());
+
+            Integer i = ps1.executeUpdate();
+
+            boolean agregado = agregarRendimientoProfesor(r,id_departamento);
+
+            return i > 0 && agregado;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
