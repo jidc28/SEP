@@ -31,10 +31,14 @@
                 <tbody>
                     <tr style="height: 35px;">
                         <td style="color: black">Codigo del Departamento</td>
+                    </tr>
+                    <tr>
                         <td>
+                            <center>
                             <html:text name="Departamento" property="codigo" maxlength="10" value="" errorStyleClass="error"
-                                       style="margin-bottom: 0px; height: 30px;"
+                                       styleClass="input-codigo" style="height: 30px; margin-bottom: 0px;"
                                        errorKey="org.apache.struts.action.ERROR"></html:text>
+                            </center>
 
                         </td>
                     </tr>
@@ -43,19 +47,17 @@
                             <html:errors property="codigo"/>
                         </td>
                     </tr>
-                    <tr>
+                    <tr style="height: 35px;">
                         <td style="color: black">Nombre del Departamento</td>
+                    </tr>
+                    <tr>
                         <td>
+                            <center>
                             <html:text property="nombre" name="Departamento" maxlength="50" 
-                                       style="margin-bottom: 0px; height: 30px;"
+                                       styleClass="input-nombre" style="height: 30px;"
                                        errorKey="org.apache.struts.action.ERROR">
                             </html:text>
-                            <!--
-                            <html:textarea name="Departamento" property="nombre" errorStyleClass="error"
-                                       style="margin-bottom: 0px;"
-                                       rows="5"
-                                       errorKey="org.apache.struts.action.ERROR"/>
-                            -->
+                            </center>
                         </td>
                     </tr>
                     <tr>

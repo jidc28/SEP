@@ -475,3 +475,17 @@ seleccAll{
     border-top-color: white; 
     width: 120px;
 }
+
+.input-codigo {
+    margin-bottom: 0px; 
+    height: 30px; 
+    width: 30%; 
+    text-align: center;
+}
+
+.input-nombre {
+    margin-bottom: 0px; 
+    height: 30px; 
+    width: 410px; 
+    text-align: center;
+}

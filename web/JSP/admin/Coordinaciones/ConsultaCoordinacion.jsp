@@ -85,7 +85,7 @@
                             <html:form action="/editarNombreCoordinacion" onsubmit="return(this)" style="margin: 0px;">
                                 <html:hidden name="Coord" property="codigo"/>
                                 <html:submit styleClass="btn btn-primary"
-                                             style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                             style="padding: 3px; padding-left: 5px; padding-right: 5px;">
                                     Modificar
                                 </html:submit>
                             </html:form>
@@ -93,7 +93,7 @@
                         <td>
                             <html:form action="/eliminaCoordinacionA" onsubmit="return(this)" style="margin: 0px;">
                                 <html:hidden name="Coord" property="codigo"/>
-                                <html:submit styleClass="btn btn-danger" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                <html:submit styleClass="btn btn-danger" style="padding: 3px; padding-left: 5px; padding-right: 5px;"
                                              onclick="javascript: return confirm('¿Está seguro de que desea eliminar la Coordinación Docente: \n ${Coord.getNombre()}?')">
                                     Eliminar
                                 </html:submit>

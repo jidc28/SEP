@@ -55,8 +55,8 @@
             </logic:present>
         </h4>
         <br>
-        <div class="table-responsive">
-            <table border="0" style="margin: auto" class="table-striped">
+        <div id="tabla" class="table-responsive">
+            <table border="0" style="margin: auto" class="table table-striped">
                 <thead>
                     <tr>
                         <th style="font-size: 14px;">

@@ -27,15 +27,18 @@
         <h4>Registro de Coordinaciones</h4>
 
         <html:form action="/registrarCoordinacion" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
-            <table border="0" style="margin-top: 50px;">
+            <table border="0" style="margin-top: 30px;">
                 <tbody>
                     <tr style="height: 35px;">
                         <td style="color: black">Codigo de la Coordinación</td>
+                    </tr>
+                    <tr>
                         <td>
-                            <html:text name="Coordinacion" property="codigo" maxlength="10" value="" errorStyleClass="error"
-                                       style="margin-bottom: 0px;height: 30px;"
+                            <center>
+                            <html:text name="Coordinacion" property="codigo" maxlength="10" errorStyleClass="error"
+                                       styleClass="input-codigo" style="height: 30px;"
                                        errorKey="org.apache.struts.action.ERROR"></html:text>
-
+                            </center>
                             </td>
                         </tr>
                         <tr>
@@ -44,20 +47,20 @@
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr style="height: 35px;">
                         <td style="color: black">Nombre de la Coordinación</td>
+                    </tr>
+                    <tr>
                         <td>
-                            <html:text property="nombre" name="Coordinacion" maxlength="50" errorKey="org.apache.struts.action.ERROR"/>
-                            <!--
-                            <html:textarea name="Coordinacion" property="nombre" errorStyleClass="error"
-                                       rows="5"
-                                       style="margin-bottom: 0px;"
-                                       errorKey="org.apache.struts.action.ERROR"/>
-                            -->
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="color:firebrick">
+                            <center>
+                                <html:text property="nombre" name="Coordinacion" maxlength="50" 
+                                           styleClass="input-nombre" style="height: 30px;" 
+                                           errorKey="org.apache.struts.action.ERROR"/>
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="color:firebrick">
                             <html:errors property="nombre"/>
                         </td>
                     <tr>
@@ -69,7 +72,7 @@
             </table>
             <p style="text-align: center; margin-top: 10px;">
                 <html:submit styleClass="btn btn-success"
-                    onclick="javascript: return confirm('¿Está seguro de que los datos son correctos?')">
+                             onclick="javascript: return confirm('¿Está seguro de que los datos son correctos?')">
                     Agregar
                 </html:submit>
                 <html:reset styleClass="btn btn-default" value="Limpiar"/>
@@ -77,5 +80,5 @@
 
         </html:form>
 
-</body>
+    </body>
 </html>

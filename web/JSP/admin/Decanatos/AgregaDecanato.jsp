@@ -31,28 +31,30 @@
                 <tbody>
                     <tr style="height: 35px;">
                         <td style="color: black">Codigo del Decanato</td>
+                    </tr>
+                    <tr>
                         <td>
+                            <center>
                             <html:text name="Decanato" property="codigo" maxlength="10" value="" errorStyleClass="error"
-                                       style="margin-bottom: 0px;height: 30px;"
+                                       styleClass="input-codigo" style="margin-bottom: 0px;height: 30px;"
                                        errorKey="org.apache.struts.action.ERROR"></html:text>
+                            </center>
 
-                            </td>
-                        </tr>
-                        <tr>
+                        </td>
+                    </tr>
+                    <tr>
                             <td colspan="2" style="color:firebrick">
                             <html:errors property="codigo"/>
                         </td>
                     </tr>
-                    <tr>
+                    <tr style="height: 35px;">
                         <td style="color: black">Nombre del Decanato</td>
+                    </tr>
+                    <tr>
                         <td>
-                            <html:text property="nombre" name="Decanato" maxlength="50" errorKey="org.apache.struts.action.ERROR"/>
-                            <!--
-                            <html:textarea name="Decanato" property="nombre" errorStyleClass="error"
-                                           style="margin-bottom: 0px;"
-                                           rows="5"
-                                           errorKey="org.apache.struts.action.ERROR"/>
-                            -->
+                            <html:text property="nombre" name="Decanato" maxlength="50" 
+                                       styleClass="input-nombre" style="height: 30px;"
+                                       errorKey="org.apache.struts.action.ERROR"/>
                         </td>
                     </tr>
                     <tr>
