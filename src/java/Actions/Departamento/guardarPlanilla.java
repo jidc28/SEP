@@ -25,7 +25,6 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
     /* forward name="success" path="" */
 
     private static final String SUCCESS = "success";
-    private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -63,8 +62,8 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
             ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
-            request.setAttribute("agregar_informacion", FAILURE);
-            return mapping.findForward(FAILURE);
+            request.setAttribute("agregar_informacion", SUCCESS);
+            return mapping.findForward(SUCCESS);
         }
 
         if (_total != _1 + _2 + _3 + _4 + _5 + _r) {
@@ -72,15 +71,15 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
             request.setAttribute("error_num_estudiantes", renMateria);
-            return mapping.findForward(FAILURE);
+            return mapping.findForward(SUCCESS);
         }
 
         if (_total < 0 || _1 < 0 || _2 < 0 || _3 < 0 || _4 < 0 || _5 < 0 || _r < 0) {
             ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
-            request.setAttribute("numero_negativo", FAILURE);
-            return mapping.findForward(FAILURE);
+            request.setAttribute("numero_negativo", SUCCESS);
+            return mapping.findForward(SUCCESS);
         }
 
         float promedio = (float) (_1 + (2*_2) + (3*_3) + (4*_4) + (5*_5)) / (_total - _r);
