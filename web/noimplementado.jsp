@@ -15,18 +15,26 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
+
+        <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="css/js/bootstrap.js"></script>
+        <script type="text/javascript" src="css/js/bootstrap.min.js"></script>
         <title>Gestion de Planillas de Evaluacion</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
-<div id="body-content">
+        <div id="body-content">
 
             <div >
                 <div >
                     <img id="banner" src="imagenes/logo.jpg" alt="Inicio">
                 </div>
             </div>
-            
+
             <div id="sidebarL">
                 <div class="glossymenu" style="width: 190px">
                     <a style="border-bottom: none;"/>
@@ -42,25 +50,35 @@
                     <a class="menuitem" href="cerrarSesion.do" onclick="return confirm('¿Está seguro que desea cerrar sesión?')" >
                         Cerrar Sesión
                     </a>
-                    
+
                 </div>
             </div>
-            
+
             <div id="sidebarR">
                 <a href="http://www.usb.ve/">
                     <img width="150" height="50" src="imagenes/somosusb.gif"/>
                 </a>
             </div>
 
-            <div id="cuerpo-principal">                
-                    <p align ="center" style="background-color: red;
-                       width: 300px; margin-left: auto; margin-right: auto">
-                        AREA EN CONSTRUCCION.
-                    <form><input type="button" value="Volver Atras" onclick="history.go(-1);return true;"></form>
+            <center>
+            <div id="cuerpo-principal">     
+                <div class="alert alert-danger" 
+                     id="alert-coord" style="width: 50%; margin-top: 50px;">
+                    <p>
+                        AREA EN CONSTRUCCIÓN
                     </p>
+                </div>
+                <center>
+                <form>
+                    <input type="button" class="btn btn-default" 
+                           value="Volver Atras" onclick="history.go(-1); return true;"
+                           style="margin-right: 180px;">
+                </form>
+                </center>
             </div>
+            </center>
+                
 
         </div>
-
     </body>
 </html>
