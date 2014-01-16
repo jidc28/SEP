@@ -25,7 +25,6 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
     /* forward name="success" path="" */
 
     private static final String SUCCESS = "success";
-    private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -50,37 +49,42 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
         rendimientoProf renMateria = (rendimientoProf) form;
 
         renMateria.setUsbid_profesor(id_profesor);
-
-        if (renMateria.getTotal_estudiantes() == 0) {
+        
+        int _1 = renMateria.getNota1();
+        int _2 = renMateria.getNota2();
+        int _3 = renMateria.getNota3();
+        int _4 = renMateria.getNota4();
+        int _5 = renMateria.getNota5();
+        int _r = renMateria.getRetirados();
+        int _total = renMateria.getTotal_estudiantes();
+        
+        if (_total == 0) {
             ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
-            request.setAttribute("agregar_informacion", FAILURE);
-            return mapping.findForward(FAILURE);
+            request.setAttribute("agregar_informacion", SUCCESS);
+            return mapping.findForward(SUCCESS);
         }
 
-        if (renMateria.getTotal_estudiantes()
-                != renMateria.getNota1() + renMateria.getNota2()
-                + renMateria.getNota3() + renMateria.getNota4()
-                + renMateria.getNota5() + renMateria.getRetirados()) {
+        if (_total != _1 + _2 + _3 + _4 + _5 + _r) {
             ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
             request.setAttribute("error_num_estudiantes", renMateria);
-            return mapping.findForward(FAILURE);
+            return mapping.findForward(SUCCESS);
         }
 
-        if (renMateria.getNota_prom() < 0.0 || renMateria.getTotal_estudiantes() < 0
-                || renMateria.getNota1() < 0 || renMateria.getNota2() < 0
-                || renMateria.getNota3() < 0 || renMateria.getNota4() < 0
-                || renMateria.getNota5() < 0 || renMateria.getRetirados() < 0) {
+        if (_total < 0 || _1 < 0 || _2 < 0 || _3 < 0 || _4 < 0 || _5 < 0 || _r < 0) {
             ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
-            request.setAttribute("numero_negativo", FAILURE);
-            return mapping.findForward(FAILURE);
+            request.setAttribute("numero_negativo", SUCCESS);
+            return mapping.findForward(SUCCESS);
         }
 
+        float promedio = (float) (_1 + (2*_2) + (3*_3) + (4*_4) + (5*_5)) / (_total - _r);
+        renMateria.setNota_prom(promedio);
+        
         boolean agregar = DBMS.getInstance().agregarRendimientoProfesor(renMateria,id_departamento);
 
         ArrayList<rendimientoProf> rendimiento = DBMS.getInstance().obtenerRendimientoProfesor(id_profesor, id_departamento);
@@ -93,6 +97,7 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
         } else {
             request.setAttribute("planilla_no_guardada", renMateria);
         }
+        request.setAttribute("rendimientoProf",new rendimientoProf());
         return mapping.findForward(SUCCESS);
     }
 }

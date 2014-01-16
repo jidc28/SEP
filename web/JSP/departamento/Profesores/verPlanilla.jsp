@@ -34,8 +34,13 @@
                 (<bean:write name="error_num_estudiantes" property="total_estudiantes" />)
                 no coincide con la suma del número de estudiantes aplazados, el 
                 número de estudiantes aprobados y el número de estudiantes
-                retirados (<bean:write name="error_num_estudiantes" property="aprobados" /> +
-                <bean:write name="error_num_estudiantes" property="aplazados" /> + 
+                retirados 
+                <br>
+                (<bean:write name="error_num_estudiantes" property="nota1" /> +
+                <bean:write name="error_num_estudiantes" property="nota2" /> + 
+                <bean:write name="error_num_estudiantes" property="nota3" /> +
+                <bean:write name="error_num_estudiantes" property="nota4" /> +
+                <bean:write name="error_num_estudiantes" property="nota5" /> +
                 <bean:write name="error_num_estudiantes" property="retirados" />)
             </div>  
         </logic:present>
@@ -48,7 +53,7 @@
         
         <logic:present name="agregar_informacion">
             <div class="alert alert-danger" id="alert">
-                Debe llenar todos los campos.
+                Debe colocar el número total de estudiantes.
             </div>  
         </logic:present>
         
@@ -70,7 +75,7 @@
         </br>
             
         <html:form action="/modificarPlanilla" >
-        <div id="tabla" class="table-responsive">
+        <div id="tabla" class="table-responsive" style="margin-top: 20px;">
                 <table class="table table-striped">
                         <tbody>
                             <tr>
@@ -120,7 +125,7 @@
                             </tr>
                             <tr>
                                 <td style="text-align: right; width: 40%; font-size: 14px;">
-                                    <strong>TOTAL ESTUDIANTES</strong>
+                                    <strong style="color: red">TOTAL ESTUDIANTES</strong>
                                 </td>
                                 <td style="padding-left: 100px;">
                                     <html:text name="rendimientoProf" property="total_estudiantes"
@@ -128,17 +133,35 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="text-align: right; width: 40%; font-size: 14px;">
-                                    <strong> ESTUDIANTES CON 1 </strong>
+                                <td id="planilla_head" colspan="4" style="color: #A80000; font-size: 12px;">
+                                    <center>
+                                        <strong> Los siguientes datos deben ser llenados con CANTIDADES
+                                        y no porcentajes.</strong>
+                                    </center>
                                 </td>
-                                <td style="padding-left: 100px;">
+                            </tr>
+                            <tr>
+                                <td  id="planilla_head" style="text-align: right; width: 40%; font-size: 14px; color:black;">
+                                    <logic:present name="error_num_estudiantes" >
+                                        <strong style="color: red;"> ESTUDIANTES CON 1 </strong>
+                                    </logic:present>
+                                    <logic:notPresent name="error_num_estudiantes" >
+                                        <strong> ESTUDIANTES CON 1 </strong>
+                                    </logic:notPresent>
+                                </td>
+                                <td  id="planilla_head" style="padding-left: 100px;">
                                     <html:text name="rendimientoProf" property="nota1"
                                                style="height: 30px; margin: 0px;"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="text-align: right; width: 40%; font-size: 14px;">
-                                    <strong> ESTUDIANTES CON 2 </strong>
+                                    <logic:present name="error_num_estudiantes" >
+                                        <strong style="color: red;"> ESTUDIANTES CON 2 </strong>
+                                    </logic:present>
+                                    <logic:notPresent name="error_num_estudiantes" >
+                                        <strong> ESTUDIANTES CON 2 </strong>
+                                    </logic:notPresent>
                                 </td>
                                 <td style="padding-left: 100px;">
                                     <html:text name="rendimientoProf" property="nota2"
@@ -147,7 +170,12 @@
                             </tr>
                             <tr>
                                 <td style="text-align: right; width: 40%; font-size: 14px;">
-                                    <strong> ESTUDIANTES CON 3 </strong>
+                                    <logic:present name="error_num_estudiantes" >
+                                        <strong style="color: red;"> ESTUDIANTES CON 3</strong>
+                                    </logic:present>
+                                    <logic:notPresent name="error_num_estudiantes" >
+                                        <strong> ESTUDIANTES CON 3</strong>
+                                    </logic:notPresent>
                                 </td>
                                 <td style="padding-left: 100px;">
                                     <html:text name="rendimientoProf" property="nota3"
@@ -156,7 +184,12 @@
                             </tr>
                             <tr>
                                 <td style="text-align: right; width: 40%; font-size: 14px;">
-                                    <strong> ESTUDIANTES CON 4 </strong>
+                                    <logic:present name="error_num_estudiantes" >
+                                        <strong style="color: red;"> ESTUDIANTES CON 4</strong>
+                                    </logic:present>
+                                    <logic:notPresent name="error_num_estudiantes" >
+                                        <strong> ESTUDIANTES CON 4</strong>
+                                    </logic:notPresent>
                                 </td>
                                 <td style="padding-left: 100px;">
                                     <html:text name="rendimientoProf" property="nota4"
@@ -165,7 +198,12 @@
                             </tr>
                             <tr>
                                 <td style="text-align: right; width: 40%; font-size: 14px;">
-                                    <strong> ESTUDIANTES CON 5 </strong>
+                                    <logic:present name="error_num_estudiantes" >
+                                        <strong style="color: red;"> ESTUDIANTES CON 5</strong>
+                                    </logic:present>
+                                    <logic:notPresent name="error_num_estudiantes" >
+                                        <strong> ESTUDIANTES CON 5</strong>
+                                    </logic:notPresent>
                                 </td>
                                 <td style="padding-left: 100px;">
                                     <html:text name="rendimientoProf" property="nota5"
@@ -174,7 +212,12 @@
                             </tr>
                             <tr>
                                 <td style="text-align: right; width: 40%; font-size: 14px;">
-                                    <strong> RETIRADOS </strong>
+                                    <logic:present name="error_num_estudiantes" >
+                                        <strong style="color: red;">RETIRADOS</strong>
+                                    </logic:present>
+                                    <logic:notPresent name="error_num_estudiantes" >
+                                        <strong>RETIRADOS</strong>
+                                    </logic:notPresent>
                                 </td>
                                 <td style="padding-left: 100px;">
                                     <html:text name="rendimientoProf" property="retirados"

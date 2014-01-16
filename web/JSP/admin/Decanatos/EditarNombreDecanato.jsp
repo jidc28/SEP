@@ -29,13 +29,24 @@
             <h4><bean:write name="Decanato" property="nombre"/></h4>
             <h4>(<bean:write name="Decanato" property="codigo"/>)</h4>
             <br>
-        <center>
-            <html:textarea name="Decanato" property="nombre" errorStyleClass="error"
-                       rows="5" style="width: 300px;"
-                       errorKey="org.apache.struts.action.ERROR">
-            </html:textarea>
-        </center>
-        <p style="text-align: center; margin-top: 10px;">
+            <table border="0" style="margin-top: 0px;">
+                <tbody>
+                    <tr style="height: 35px;">
+                        <td style="color: black">
+                            Nombre del Decanato
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <center>
+                            <html:text property="nombre" name="Decanato" maxlength="50" 
+                                       styleClass="input-nombre" style="height: 30px;" 
+                                       errorKey="org.apache.struts.action.ERROR"/>
+                        </center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <html:submit styleClass="btn btn-success"
                          onclick="javascript: return confirm('¿Está seguro de que los datos son correctos?')">
                 Modificar

@@ -51,7 +51,15 @@ public class modificarPlanilla extends org.apache.struts.action.Action {
 
         renMateria.setUsbid_profesor(id_profesor);
 
-        if (renMateria.getTotal_estudiantes() == 0) {
+        int _1 = renMateria.getNota1();
+        int _2 = renMateria.getNota2();
+        int _3 = renMateria.getNota3();
+        int _4 = renMateria.getNota4();
+        int _5 = renMateria.getNota5();
+        int _r = renMateria.getRetirados();
+        int _total = renMateria.getTotal_estudiantes();
+
+        if (_total == 0) {
             ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
@@ -59,10 +67,7 @@ public class modificarPlanilla extends org.apache.struts.action.Action {
             return mapping.findForward(FAILURE);
         }
 
-        if (renMateria.getTotal_estudiantes()
-                != renMateria.getNota1() + renMateria.getNota2()
-                + renMateria.getNota3() + renMateria.getNota4()
-                + renMateria.getNota5() + renMateria.getRetirados()) {
+        if (_total != _1 + _2 + _3 + _4 + _5 + _r) {
             ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
@@ -70,10 +75,7 @@ public class modificarPlanilla extends org.apache.struts.action.Action {
             return mapping.findForward(FAILURE);
         }
 
-        if (renMateria.getNota_prom() < 0.0 || renMateria.getTotal_estudiantes() < 0
-                || renMateria.getNota1() < 0 || renMateria.getNota2() < 0
-                || renMateria.getNota3() < 0 || renMateria.getNota4() < 0
-                || renMateria.getNota5() < 0 || renMateria.getRetirados() < 0) {
+        if (_total < 0 || _1 < 0 || _2 < 0 || _3 < 0 || _4 < 0 || _5 < 0 || _r < 0) {
             ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
@@ -81,7 +83,10 @@ public class modificarPlanilla extends org.apache.struts.action.Action {
             return mapping.findForward(FAILURE);
         }
 
-        boolean agregar = DBMS.getInstance().modificarRendimientoProfesor(renMateria,id_departamento);
+        float promedio = (float) (_1 + (2 * _2) + (3 * _3) + (4 * _4) + (5 * _5)) / (_total - _r);
+        renMateria.setNota_prom(promedio);
+
+        boolean agregar = DBMS.getInstance().modificarRendimientoProfesor(renMateria, id_departamento);
 
         ArrayList<rendimientoProf> rendimiento = DBMS.getInstance().obtenerRendimientoProfesor(id_profesor, id_departamento);
         ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);

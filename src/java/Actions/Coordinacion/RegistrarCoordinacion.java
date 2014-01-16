@@ -49,7 +49,11 @@ public class RegistrarCoordinacion extends org.apache.struts.action.Action {
         //valido los campos de formulario
         error = u.validate(mapping, request);
         boolean huboError = false;
-
+        
+        String nombreNormal = new String(u.getNombre().getBytes("UTF-8"), "ISO-8859-1");
+        u.setNombre(nombreNormal);
+        
+        
         
         if (error.size()!=0) {
             huboError = true;
