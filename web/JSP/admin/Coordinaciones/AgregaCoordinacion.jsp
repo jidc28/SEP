@@ -8,7 +8,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>  
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <!DOCTYPE html>
 <html>
@@ -19,7 +19,7 @@
         <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
-        <title>GestiÃ³n de coordinaciones</title>
+        <title>Gestión de coordinaciones</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
@@ -30,7 +30,7 @@
             <table border="0" style="margin-top: 50px;">
                 <tbody>
                     <tr style="height: 35px;">
-                        <td style="color: black">Codigo de la CoordinaciÃ³n</td>
+                        <td style="color: black">Codigo de la Coordinación</td>
                         <td>
                             <html:text name="Coordinacion" property="codigo" maxlength="10" value="" errorStyleClass="error"
                                        style="margin-bottom: 0px;height: 30px;"
@@ -45,9 +45,9 @@
                     </tr>
 
                     <tr>
-                        <td style="color: black">Nombre de la CoordinaciÃ³n</td>
+                        <td style="color: black">Nombre de la Coordinación</td>
                         <td>
-                            <html:text property="nombre" name="Coordinacion" maxlength="50" errorKey="org.apache.struts.action.ERROR"/>
+                            <html:text property="nombre" name="Coordinacion" maxlength="50"  errorKey="org.apache.struts.action.ERROR"/>
                             <!--
                             <html:textarea name="Coordinacion" property="nombre" errorStyleClass="error"
                                        rows="5"
@@ -69,7 +69,7 @@
             </table>
             <p style="text-align: center; margin-top: 10px;">
                 <html:submit styleClass="btn btn-success"
-                    onclick="javascript: return confirm('Â¿EstÃ¡ seguro de que los datos son correctos?')">
+                    onclick="javascript: return confirm('¿Está seguro de que los datos son correctos?')">
                     Agregar
                 </html:submit>
                 <html:reset styleClass="btn btn-default" value="Limpiar"/>
