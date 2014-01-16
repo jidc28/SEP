@@ -32,8 +32,8 @@
             <table border="0" style="margin-top: 0px;">
                 <tbody>
                     <tr style="height: 35px;">
-                        <td style="color: black">
-                            Nombre del Departamento
+                        <td style="color: black; font-size: 14px; font-weight: bold;">
+                            NOMBRE DEL DEPARTAMENTO
                         </td>
                     </tr>
                     <tr>

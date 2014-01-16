@@ -224,6 +224,30 @@ public class DBMS {
         return coords;
     }
 
+    public ArrayList<Coordinacion> listarCoordinacionesAdscritas(String id_decanato) {
+
+        ArrayList<Coordinacion> coords = new ArrayList<Coordinacion>(0);
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT * "
+                    + "FROM COORDINACION, se_adscribe "
+                    + "WHERE codigo_decanato = ? "
+                    + "AND codigo_coordinacion = codigo "
+                    + "ORDER BY CODIGO");
+            ps.setString(1, id_decanato);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Coordinacion u = new Coordinacion();
+                u.setCodigo(rs.getString("codigo"));
+                u.setNombre(rs.getString("nombre"));
+                coords.add(u);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return coords;
+    }
+
     public ArrayList<Departamento> listarDepartamentos() {
 
         ArrayList<Departamento> dptos = new ArrayList<Departamento>(0);
@@ -437,6 +461,44 @@ public class DBMS {
         }
     }
 
+    public boolean adscribirCoordinacion(Coordinacion c, String id_decanato, boolean decanato) {
+        PreparedStatement ps1, ps2;
+
+        try {
+            ps1 = conexion.prepareStatement("INSERT INTO COORDINACION(codigo, nombre) VALUES (?, ?);");
+            ps1.setString(1, c.getCodigo());
+            ps1.setString(2, c.getNombre());
+
+            if (!decanato) {
+                PreparedStatement ps3;
+                
+                ps3 = conexion.prepareStatement("SELECT * "
+                        + "FROM DECANATO "
+                        + "WHERE nombre = ?;");
+                ps3.setString(1,id_decanato);
+                
+                ResultSet rs = ps3.executeQuery();
+                while (rs.next()) {
+                    id_decanato = rs.getString("codigo");
+                }
+            }
+            
+            ps2 = conexion.prepareStatement("INSERT INTO se_adscribe(codigo_coordinacion, codigo_decanato) "
+                    + "VALUES (?, ?);");
+            ps2.setString(1, c.getCodigo());
+            ps2.setString(2, id_decanato);
+
+            Integer i = ps1.executeUpdate();
+            Integer j = ps2.executeUpdate();
+
+            return i > 0 && j > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean actualizarNombreDecanato(Decanato u) {
         PreparedStatement ps = null;
         try {
@@ -482,8 +544,6 @@ public class DBMS {
 
             ResultSet rs = ps.executeQuery();
 
-
-
             while (rs.next()) {
                 u.setNombre(rs.getString("nombre"));
             }
@@ -496,6 +556,25 @@ public class DBMS {
         return u;
     }
 
+    public String obtenerCodigoDecanato(Decanato u) {
+
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT * FROM decanato WHERE nombre = ?");
+            ps.setString(1, u.getNombre());
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                return rs.getString("codigo");
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
     public Coordinacion obtenerNombreCoordinacion(Coordinacion u) {
 
         PreparedStatement ps = null;
@@ -1401,7 +1480,7 @@ public class DBMS {
                 ps3.setString(2, id_departamento);
                 Integer k = ps3.executeUpdate();
             }
-            
+
             //ps3 = conexion.prepareStatement();
             Integer i = ps1.executeUpdate();
             Integer j = ps2.executeUpdate();
@@ -1439,7 +1518,7 @@ public class DBMS {
         }
         return -1;
     }
-    
+
     public int cantidadPlanillaVacia(String id_profesor, String id_departamento) {
 
         PreparedStatement ps1;
@@ -1525,7 +1604,7 @@ public class DBMS {
         return null;
     }
 
-    public boolean modificarRendimientoProfesor(rendimientoProf r,String id_departamento) {
+    public boolean modificarRendimientoProfesor(rendimientoProf r, String id_departamento) {
         PreparedStatement ps1, ps2;
 
         try {
@@ -1542,7 +1621,7 @@ public class DBMS {
 
             Integer i = ps1.executeUpdate();
 
-            boolean agregado = agregarRendimientoProfesor(r,id_departamento);
+            boolean agregado = agregarRendimientoProfesor(r, id_departamento);
 
             return i > 0 && agregado;
 

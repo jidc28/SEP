@@ -16,8 +16,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
+        
+        <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
         <title>Gestión de coordinaciones</title>
     </head>
     <body>
@@ -45,13 +49,42 @@
                La coordinacion no pudo ser eliminada exitosamente.
             </div>
         </logic:present>
-          
-        <h4> Lista de Coordinaciones en el sistema:</h4>
+
+    <h4> Lista de Coordinaciones en el sistema:</h4>
+    
+    <logic:present name="decanatos">
+    <html:form action="/consultaCoordinacionA">
+        <table>
+        <!--<center>-->
+            <tbody>
+                <tr>
+                    <td style="margin-left: 10px;"">
+                        <html:select style="width: 350px; height: 34px; margin-right: 10px;" name="Decanato" property="nombre">
+                            <logic:iterate name="decanatos" id="decanato">
+                                <option>
+                                    <bean:write name="decanato" property="nombre"/>
+                                </option>
+                            </logic:iterate>
+                        </html:select>
+                    </td>
+                    <td>
+                        <html:submit styleClass="btn btn-info">
+                            Consultar
+                        </html:submit>
+                    </td>
+                </tr>
+            </tbody>
+        <!--</center>-->
+        </table>
+    </html:form>
+    </logic:present>
+
+    <logic:present name="coordinaciones">
         <div id="tabla" class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th style="width: 15%; font-size: 14px;">
+                        <th style="font-size: 14px;">
                             <center>
                             CODIGO
                             </center>
@@ -75,34 +108,49 @@
                 </thead>
                 <logic:iterate name="coordinaciones" id="Coord">
                     <tr>
-                        <td align="center">
-                            <bean:write name="Coord" property="codigo"/>
+                        <td>
+                            <center>
+                                <bean:write name="Coord" property="codigo"/>
+                            </center>
                         </td>
                         <td>
                             <bean:write name="Coord" property="nombre"/>
                         </td>
-                        <td align="center">
-                            <html:form action="/editarNombreCoordinacion" onsubmit="return(this)" style="margin: 0px;">
-                                <html:hidden name="Coord" property="codigo"/>
-                                <html:submit styleClass="btn btn-primary"
-                                             style="padding: 3px; padding-left: 5px; padding-right: 5px;">
-                                    Modificar
-                                </html:submit>
-                            </html:form>
+                        <td>
+                            <center>
+                                <html:form action="/editarNombreCoordinacion" onsubmit="return(this)" style="margin: 0px;">
+                                    <html:hidden name="Coord" property="codigo"/>
+                                    <html:submit styleClass="btn btn-primary"
+                                                 style="padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                        Modificar
+                                    </html:submit>
+                                </html:form>
+                            </center>
                         </td>
                         <td>
-                            <html:form action="/eliminaCoordinacionA" onsubmit="return(this)" style="margin: 0px;">
-                                <html:hidden name="Coord" property="codigo"/>
-                                <html:submit styleClass="btn btn-danger" style="padding: 3px; padding-left: 5px; padding-right: 5px;"
-                                             onclick="javascript: return confirm('¿Está seguro de que desea eliminar la Coordinación Docente: \n ${Coord.getNombre()}?')">
-                                    Eliminar
-                                </html:submit>
-                            </html:form>
+                            <center>
+                                <html:form action="/eliminaCoordinacionA" onsubmit="return(this)" style="margin: 0px;">
+                                    <html:hidden name="Coord" property="codigo"/>
+                                    <html:submit styleClass="btn btn-danger" style="padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea eliminar la Coordinación Docente: \n ${Coord.getNombre()}?')">
+                                        Eliminar
+                                    </html:submit>
+                                </html:form>
+                            </center>
                         </td>
                     </tr>
                 </logic:iterate>
             </table>
         </div>
-
+    </logic:present>
+    <logic:notPresent name="coordinaciones">
+            <div class="alert alert-warning alert-dismissable" 
+                 id="alert-coord">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <p>
+                   Para consultar las coordinaciones escoja un decanato y seleccione CONSULTAR.
+                </p>
+            </div>
+    </logic:notPresent>
     </body>
 </html>
