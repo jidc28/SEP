@@ -51,8 +51,8 @@
             <table border="0" style="margin-top: 50px;">
                 <tbody>
                     <tr style="height: 35px;">
-                        <td style="color: black" colspan="11">
-                            <strong> Codigo de la Materia </strong>
+                        <td style="color: black; font-size: 14px; font-weight: bold;" colspan="11">
+                            CÓDIGO DE LA MATERIA
                         </td>
                         </tr>
                             <tr>
@@ -133,9 +133,6 @@
                                 <html:radio property="cod1" value="EE">
                                     EE
                                 </html:radio><br>
-                                <html:radio property="cod1" value="1">
-                                    1
-                                </html:radio><br>
                                 <html:radio property="cod1" value="GC">
                                     GC
                                 </html:radio><br>
@@ -151,13 +148,8 @@
                                 <html:radio property="cod1" value="CO">
                                     CO
                                 </html:radio><br>
-                            </td>
-                            <td style="padding-left: 5px;">
                                 <html:radio property="cod1" value="TS">
                                     TS
-                                </html:radio><br>
-                                <html:radio property="cod1" value="8">
-                                    8
                                 </html:radio><br>
                             </td>
                             <td style="padding-left: 5px;">
@@ -224,7 +216,7 @@
                                     T
                                 </html:radio><br>
                             </td>
-                            <td style="padding-left: 5px;">
+                            <td style="padding-left: 5px; padding-bottom: 70px;">
                                 <html:radio property="cod2" value="U">
                                     U
                                 </html:radio><br>
@@ -380,8 +372,8 @@
                     </tr>
 
                     <tr  style="height: 35px;">
-                        <td style="color: black" colspan="11">
-                            <strong> Nombre de la Materia </strong> 
+                        <td style="color: black; font-size: 14px; font-weight: bold;" colspan="11">
+                            NOMBRE DE LA MATERIA
                         </td>
                     </tr>
                     <tr  style="height: 35px;">
@@ -399,8 +391,8 @@
                         </td>
                     </tr>-->
                     <tr style="height: 35px;">
-                        <td colspan="11">
-                            <strong> Número de créditos </strong>
+                        <td style="font-size: 14px; font-weight: bold;" colspan="11">
+                            NÚMERO DE CRÉDITOS
                         </td>
                     </tr>
                     <tr style="height: 35px;">

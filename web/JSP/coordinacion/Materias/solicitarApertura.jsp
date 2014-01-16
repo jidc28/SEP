@@ -56,8 +56,8 @@
             <table border="0" style="margin-top: 50px;">
                 <tbody>
                     <tr style="height: 35px;">
-                        <td style="color: black" colspan="11">
-                            Departamento al que se solicita: 
+                        <td style="color: black; font-size: 14px; font-weight: bold;" colspan="11">
+                            DEPARTAMENTO AL QUE SE SOLICITA
                         </td>
                     </tr>
                     <tr style="height: 35px;">
@@ -74,7 +74,9 @@
                         </td>
                      </tr>
                     <tr style="height: 35px;">
-                        <td style="color: black" colspan="11">Codigo de la Materia</td>
+                        <td style="color: black; font-size: 14px; font-weight: bold;" colspan="11">
+                            CÓDIGO DE LA MATERIA
+                        </td>
                         </tr>
                             <tr>
                             <td style="padding-left: 5px;">
@@ -154,9 +156,6 @@
                                 <html:radio property="cod1" value="EE">
                                     EE
                                 </html:radio><br>
-                                <html:radio property="cod1" value="1">
-                                    1
-                                </html:radio><br>
                                 <html:radio property="cod1" value="GC">
                                     GC
                                 </html:radio><br>
@@ -172,13 +171,8 @@
                                 <html:radio property="cod1" value="CO">
                                     CO
                                 </html:radio><br>
-                            </td>
-                            <td style="padding-left: 5px;">
                                 <html:radio property="cod1" value="TS">
                                     TS
-                                </html:radio><br>
-                                <html:radio property="cod1" value="8">
-                                    8
                                 </html:radio><br>
                             </td>
                             <td style="padding-left: 5px;">
@@ -245,7 +239,7 @@
                                     T
                                 </html:radio><br>
                             </td>
-                            <td style="padding-left: 5px;">
+                            <td style="padding-left: 5px; padding-bottom: 70px;">
                                 <html:radio property="cod2" value="U">
                                     U
                                 </html:radio><br>
@@ -401,7 +395,9 @@
                     </tr>
 
                     <tr  style="height: 35px;">
-                        <td style="color: black" colspan="11">Nombre de la Materia</td>
+                        <td style="color: black; font-size: 14px; font-weight: bold;" colspan="11">
+                            NOMBRE DE LA MATERIA
+                        </td>
                     </tr>
                     <tr  style="height: 35px;">
                         <td colspan="11">
@@ -418,8 +414,8 @@
                         </td>
                     </tr>-->
                     <tr style="height: 35px;">
-                        <td colspan="11">
-                            Número de créditos
+                        <td colspan="11" style="font-size: 14px; font-weight: bold;">
+                            NÚMERO DE CRÉDITOS
                         </td>
                     </tr>
                     <tr style="height: 35px;">
@@ -430,8 +426,8 @@
                         </td>
                     </tr>  
                     <tr style="height: 35px;">
-                        <td colspan="11">
-                            Justificación
+                        <td colspan="11" style="font-size: 14px; font-weight: bold;">
+                            JUSTIFICACIÓN
                         </td>
                     </tr>
                     <tr>
