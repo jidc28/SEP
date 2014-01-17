@@ -44,9 +44,6 @@ public class IrSolicitarAperturaMateria extends org.apache.struts.action.Action 
 
         ArrayList<Departamento> d = DBMS.getInstance().listarDepartamentos();
 
-        //si existen usuarios registrados
-
-        //retorno a pagina de exito
         session.setAttribute("departamentos", d);
         return mapping.findForward(SUCCESS);
     }

@@ -5,7 +5,9 @@
 package Actions.Coordinacion;
 
 import Clases.Coordinacion;
+import Clases.Decanato;
 import DBMS.DBMS;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -40,16 +42,21 @@ public class EditarNombreCoordinacion extends org.apache.struts.action.Action {
 
         Coordinacion u = (Coordinacion) form;
         HttpSession session = request.getSession(true);
+        String codigoDecan = (String) session.getAttribute("codigoDecanatoActual");
+        
+        session.removeAttribute("coordinaciones");
 
         ActionErrors error = new ActionErrors();
-        
+
         Coordinacion c = DBMS.getInstance().obtenerNombreCoordinacion(u);
-
-        //si existen usuarios registrados
-
+        ArrayList<Decanato> decanatos = DBMS.getInstance().listarDecanatos();
+        ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinacionesAdscritas(codigoDecan);
         //retorno a pagina de exito
-        session.setAttribute("codigo", c.getCodigo());
-        session.setAttribute("nombre", c.getNombre());
+        
+        request.setAttribute("decanatos", decanatos);
+        request.setAttribute("codigo", c.getCodigo());
+        request.setAttribute("nombre", c.getNombre());
+        request.setAttribute("coordinaciones",coords);
         return mapping.findForward(SUCCESS);
     }
 }

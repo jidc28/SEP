@@ -54,6 +54,7 @@ public class ConsultaCoordinacionA extends org.apache.struts.action.Action {
                 System.out.println(decanato.getNombre());
                 decanato.setCodigo(DBMS.getInstance().obtenerCodigoDecanato(decanato));
                 coords = DBMS.getInstance().listarCoordinacionesAdscritas(decanato.getCodigo());
+                session.setAttribute("codigoDecanatoActual",decanato.getCodigo());
             }
 
             decanatos = DBMS.getInstance().listarDecanatos();

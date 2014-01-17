@@ -48,20 +48,14 @@ public class EditarDepartamento extends org.apache.struts.action.Action {
         ActionErrors error = new ActionErrors();
 
         //valido los campos de formulario
-        /*error = u.validate(mapping, request);
-        boolean huboError = false;
-
-
-        if (error.size() != 0) {
-            huboError = true;
-        }*/
-
+        error = d.validate(mapping, request);
+        
         //si los campos no son validos
-        /*if (huboError) {
+        if (error.size() != 0) {
+            error.add("registro", new ActionMessage("error.nombre.required"));
             saveErrors(request, error);
             return mapping.findForward(FAILURE);
-            //si los campos son validos
-        } else {*/
+        } else {
 
             boolean registro = DBMS.getInstance().actualizarDepartamento(d);
 
@@ -69,17 +63,14 @@ public class EditarDepartamento extends org.apache.struts.action.Action {
 
                 ArrayList<Departamento> departamentos = DBMS.getInstance().listarDepartamentos();
 
-        //si existen decanatos registrados
-
-            //retorno a pagina de exito
                 session.setAttribute("departamentos", departamentos);
                 request.setAttribute("success", SUCCESS);
                 return mapping.findForward(SUCCESS);
             } else {
-                error.add("registro", new ActionMessage("error.codigoexistente"));
+                error.add("registro", new ActionMessage("error.nombreDepartamento.existente"));
                 saveErrors(request, error);
                 return mapping.findForward(YAREGISTRADA);
             }
         }
-    //}
+    }
 }

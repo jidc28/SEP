@@ -50,24 +50,10 @@ public class IrModificarMateria extends org.apache.struts.action.Action {
 
         materia.setCod1(caracteres[1] + caracteres[2]);
         
-        if (caracteres[3].equals("0") || caracteres[3].equals("1")
-                || caracteres[3].equals("2") || caracteres[3].equals("3")
-                || caracteres[3].equals("4") || caracteres[3].equals("5")
-                || caracteres[3].equals("6") || caracteres[3].equals("7")
-                || caracteres[3].equals("8") || caracteres[3].equals("9")) {
-            
-            materia.setNum1(caracteres[3]);
-            materia.setNum2(caracteres[4]);
-            materia.setNum3(caracteres[5]);
-            materia.setNum4(caracteres[6]);
-            
-        } else {
-            
-            materia.setCod2(caracteres[3]);
-            materia.setNum1(caracteres[4]);
-            materia.setNum2(caracteres[5]);
-            materia.setNum3(caracteres[6]);
-        }
+        materia.setCod2(caracteres[3]);
+        materia.setNum2(caracteres[4]);
+        materia.setNum3(caracteres[5]);
+        materia.setNum4(caracteres[6]);
 
         request.setAttribute("modificar","modificar");
         request.setAttribute("materia", materia);

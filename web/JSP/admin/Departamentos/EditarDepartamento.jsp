@@ -44,6 +44,11 @@
                                        errorKey="org.apache.struts.action.ERROR"/>
                         </center>
                         </td>
+                        <tr>
+                            <td colspan="2" style="color:firebrick">
+                                <html:errors property="registro"/>
+                            </td>
+                        <tr>
                     </tr>
                 </tbody>
             </table>

@@ -45,6 +45,11 @@
                         </center>
                         </td>
                     </tr>
+                    <tr>
+                        <td colspan="2" style="color:firebrick">
+                            <html:errors property="nombre"/>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <html:submit styleClass="btn btn-success"

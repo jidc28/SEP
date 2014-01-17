@@ -4,7 +4,7 @@
  */
 package Actions.Coordinacion;
 
-import Clases.Coordinacion;
+import Clases.*;
 import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +14,7 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
 
 /**
  *
@@ -48,26 +49,26 @@ public class CambiarNombreCoordinacionA extends org.apache.struts.action.Action 
 
         //valido los campos de formulario
         error = u.validate(mapping, request);
-        boolean huboError = false;
-
-
-        if (error.size() != 0) {
-            huboError = true;
-        }
 
         //si los campos no son validos
-        if (huboError) {
+        if (error.size() != 0) {
+            Coordinacion c = DBMS.getInstance().obtenerNombreCoordinacion(u);
+            request.setAttribute("codigo", c.getCodigo());
+            request.setAttribute("nombre", c.getNombre());
+            saveErrors(request, error);
             return mapping.findForward(FAILURE);
             //si los campos son validos
         } else {
 
-            //elimina usuario del sistema 
             boolean actualizo = DBMS.getInstance().actualizarNombreCoordinacion(u);
 
             if (actualizo) {
-
-                ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
-                session.setAttribute("coordinaciones", coords);
+                String codigoDecan = (String) session.getAttribute("codigoDecanatoActual");
+                
+                ArrayList<Decanato> decanatos = DBMS.getInstance().listarDecanatos();
+                request.setAttribute("decanatos", decanatos);
+                ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinacionesAdscritas(codigoDecan);
+                request.setAttribute("coordinaciones", coords);
                 request.setAttribute("modificacion", SUCCESS);
 
                 return mapping.findForward(SUCCESS);

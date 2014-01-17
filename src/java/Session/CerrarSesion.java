@@ -37,7 +37,7 @@ public class CerrarSesion extends org.apache.struts.action.Action {
         
         HttpSession session = request.getSession(true);
         
-        session.removeAttribute("autenticado");
+        session.invalidate();
         
         return mapping.findForward(SUCCESS);
     }

@@ -237,34 +237,34 @@
                                 </html:radio><br>
                             </td>
                             <td style="padding-left: 5px;">
-                                <html:radio property="num1" value="0">
+                                <html:radio property="cod2" value="0">
                                     0
                                 </html:radio><br>
-                                <html:radio property="num1" value="1">
+                                <html:radio property="cod2" value="1">
                                     1
                                 </html:radio><br>
-                                <html:radio property="num1" value="2">
+                                <html:radio property="cod2" value="2">
                                     2
                                 </html:radio><br>
-                                <html:radio property="num1" value="3">
+                                <html:radio property="cod2" value="3">
                                     3
                                 </html:radio><br>
-                                <html:radio property="num1" value="4">
+                                <html:radio property="cod2" value="4">
                                     4
                                 </html:radio><br>
-                                <html:radio property="num1" value="5">
+                                <html:radio property="cod2" value="5">
                                     5
                                 </html:radio><br>
-                                <html:radio property="num1" value="6">
+                                <html:radio property="cod2" value="6">
                                     6
                                 </html:radio><br>
-                                <html:radio property="num1" value="7">
+                                <html:radio property="cod2" value="7">
                                     7
                                 </html:radio><br>
-                                <html:radio property="num1" value="8">
+                                <html:radio property="cod2" value="8">
                                     8
                                 </html:radio><br>
-                                <html:radio property="num1" value="9">
+                                <html:radio property="cod2" value="9">
                                     9
                                 </html:radio><br>
                             </td>

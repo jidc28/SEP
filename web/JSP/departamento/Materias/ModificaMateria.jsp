@@ -131,9 +131,6 @@
                                 <html:radio name="materia" property="cod1" value="EE">
                                     EE
                                 </html:radio><br>
-                                <html:radio name="materia" property="cod1" value="1">
-                                    1
-                                </html:radio><br>
                                 <html:radio name="materia" property="cod1" value="GC">
                                     GC
                                 </html:radio><br>
@@ -149,13 +146,8 @@
                                 <html:radio name="materia" property="cod1" value="CO">
                                     CO
                                 </html:radio><br>
-                            </td>
-                            <td style="padding-left: 5px;">
                                 <html:radio name="materia" property="cod1" value="TS">
                                     TS
-                                </html:radio><br>
-                                <html:radio name="materia" property="cod1" value="8">
-                                    8
                                 </html:radio><br>
                             </td>
                             <td style="padding-left: 5px;">
@@ -222,7 +214,7 @@
                                     T
                                 </html:radio><br>
                             </td>
-                            <td style="padding-left: 5px;">
+                            <td style="padding-left: 5px; padding-bottom: 70px;">
                                 <html:radio name="materia" property="cod2" value="U">
                                     U
                                 </html:radio><br>
@@ -242,35 +234,35 @@
                                     Z
                                 </html:radio><br>
                             </td>
-                        <td style="padding-left: 5px;">
-                                <html:radio name="materia" property="num1" value="0">
+                            <td style="padding-left: 5px;">
+                                <html:radio name="materia" property="cod2" value="0">
                                     0
                                 </html:radio><br>
-                                <html:radio name="materia" property="num1" value="1">
+                                <html:radio name="materia" property="cod2" value="1">
                                     1
                                 </html:radio><br>
-                                <html:radio name="materia" property="num1" value="2">
+                                <html:radio name="materia" property="cod2" value="2">
                                     2
                                 </html:radio><br>
-                                <html:radio name="materia" property="num1" value="3">
+                                <html:radio name="materia" property="cod2" value="3">
                                     3
                                 </html:radio><br>
-                                <html:radio name="materia" property="num1" value="4">
+                                <html:radio name="materia" property="cod2" value="4">
                                     4
                                 </html:radio><br>
-                                <html:radio name="materia" property="num1" value="5">
+                                <html:radio name="materia" property="cod2" value="5">
                                     5
                                 </html:radio><br>
-                                <html:radio name="materia" property="num1" value="6">
+                                <html:radio name="materia" property="cod2" value="6">
                                     6
                                 </html:radio><br>
-                                <html:radio name="materia" property="num1" value="7">
+                                <html:radio name="materia" property="cod2" value="7">
                                     7
                                 </html:radio><br>
-                                <html:radio name="materia" property="num1" value="8">
+                                <html:radio name="materia" property="cod2" value="8">
                                     8
                                 </html:radio><br>
-                                <html:radio name="materia" property="num1" value="9">
+                                <html:radio name="materia" property="cod2" value="9">
                                     9
                                 </html:radio><br>
                             </td>
@@ -370,7 +362,7 @@
                                     9
                                 </html:radio><br>         
                             </td>
-                    </tr>
+                        </tr>
                     <tr>
                         <td colspan="11" style="color:firebrick">
                             <html:errors property="codigo"/>
