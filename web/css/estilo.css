@@ -37,7 +37,7 @@ h4 {
     font-family: sans-serif ! important;
 }
 
-#h4 {
+#izquierda {
     letter-spacing: 3px ! important;
     font-size: 1.5em ! important;
     color: #369 ! important;
@@ -488,4 +488,8 @@ seleccAll{
     height: 30px; 
     width: 410px; 
     text-align: center;
+}
+
+#link-dropdown {
+    text-decoration: none;
 }

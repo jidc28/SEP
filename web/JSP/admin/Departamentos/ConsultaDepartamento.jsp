@@ -98,7 +98,7 @@
                                     <html:hidden name="Dep" property="codigo"/>
                                     <center>
                                         <html:submit styleClass="btn btn-danger" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
-                                                     onclick="javascript: return confirm('¿Está seguro de que desea eliminar el departamento de este decanato?')">
+                                                     onclick="javascript: return confirm('¿Está seguro de que desea desactivar el Departamento ${Dep.getNombre()} ?')">
                                             Desactivar
                                         </html:submit>
                                     </center>

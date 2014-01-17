@@ -92,8 +92,8 @@
         <logic:iterate name="materias" id="materia">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 id="h4" class="panel-title" style="text-align: left;">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#${materia.getCodigo()}">
+                    <h4 id="izquierda" class="panel-title" style="text-align: left;">
+                        <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#${materia.getCodigo()}">
                             <bean:write name="materia" property="codigo"/>
                             <div style="font-size: 14px; color: grey;"><bean:write name="materia" property="nombre"/></div>
                         </a>

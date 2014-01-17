@@ -92,7 +92,7 @@
                                         <html:hidden name="mat" property="codigo" />
                                         <center>
                                             <html:submit styleClass="btn btn-success" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
-                                                         onclick="javascript: return confirm('¿Está seguro de que desea vincular esta materia?')">
+                                                         onclick="javascript: return confirm('¿Está seguro de que desea vincular la materia: ${mat.getNombre()}?')">
                                                 Vincular
                                             </html:submit>
                                         </center>
@@ -135,7 +135,7 @@
                                         <html:hidden name="mat" property="codigo" />
                                         <center>
                                             <html:submit styleClass="btn btn-danger" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
-                                                         onclick="javascript: return confirm('¿Está seguro de que desea desvincular esta materia?')">
+                                                         onclick="javascript: return confirm('¿Está seguro de que desea desvincular la materia: ${mat.getNombre()}?')">
                                                 Desvincular
                                             </html:submit>
                                         </center>

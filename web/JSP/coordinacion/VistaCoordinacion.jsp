@@ -49,8 +49,8 @@
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseDepartamentos">
+                    <h4 id="izquierda" class="panel-title">
+                        <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseDepartamentos">
                             Gestión de Materias
                         </a>
                     </h4>
@@ -72,8 +72,8 @@
             <logic:present name="evaluaciones_pendientes">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseEvaluaciones">
+                        <h4 id="izquierda" class="panel-title">
+                            <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseEvaluaciones">
                                 Gestionar Evaluaciones  
                             </a>
                         </h4>
