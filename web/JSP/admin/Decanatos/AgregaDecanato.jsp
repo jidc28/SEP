@@ -30,7 +30,9 @@
             <table border="0">
                 <tbody>
                     <tr style="height: 35px;">
-                        <td style="color: black">Codigo del Decanato</td>
+                        <td style="color: black; font-size: 14px; font-weight: bold;">
+                            CÓDIGO DEL DECANATO
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -48,7 +50,9 @@
                         </td>
                     </tr>
                     <tr style="height: 35px;">
-                        <td style="color: black">Nombre del Decanato</td>
+                        <td style="color: black; font-size: 14px; font-weight: bold;">
+                            NOMBRE DEL DECANATO
+                        </td>
                     </tr>
                     <tr>
                         <td>

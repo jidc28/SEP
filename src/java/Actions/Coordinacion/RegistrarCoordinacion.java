@@ -5,6 +5,7 @@
 package Actions.Coordinacion;
 
 import Clases.Coordinacion;
+import Clases.Usuario;
 import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -41,44 +42,61 @@ public class RegistrarCoordinacion extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
+
         Coordinacion u = (Coordinacion) form;
         HttpSession session = request.getSession(true);
         ActionErrors error = new ActionErrors();
-                
+
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
+
         //valido los campos de formulario
         error = u.validate(mapping, request);
         boolean huboError = false;
-        
-        String nombreNormal = new String(u.getNombre().getBytes("UTF-8"), "ISO-8859-1");
-        u.setNombre(nombreNormal);
-        
-        
-        
-        if (error.size()!=0) {
+
+        if (error.size() != 0) {
             huboError = true;
         }
-        
+
         //si los campos no son validos
         if (huboError) {
-           
+
             saveErrors(request, error);
             return mapping.findForward(FAILURE);
-        //si los campos son validos
+            //si los campos son validos
         } else {
-            
-            boolean registro = DBMS.getInstance().registrarCoordinacion(u);
-            
-            if(registro){
-                ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
-                session.setAttribute("coordinaciones", coords);
-                request.setAttribute("success", SUCCESS);
-            return mapping.findForward(SUCCESS);
-            } else {
-                error.add("nombre", new ActionMessage("error.codigoexistente"));
-                saveErrors(request, error);
-                return mapping.findForward(YAREGISTRADA);
+
+            if (tipousuario.equals("administrador")) {
+
+                
+                boolean registro = DBMS.getInstance().adscribirCoordinacion(u,u.getDecanato(),false);
+
+                if (registro) {
+                    ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
+                    request.setAttribute("coordinaciones", coords);
+                    request.setAttribute("success", SUCCESS);
+                    return mapping.findForward(SUCCESS);
+                } else {
+                    error.add("nombre", new ActionMessage("error.codigoexistente"));
+                    saveErrors(request, error);
+                    return mapping.findForward(YAREGISTRADA);
+                }
+            } else if (tipousuario.equals("decanato")) {
+
+                boolean registro = DBMS.getInstance().adscribirCoordinacion(u,usuario.getUsbid(),true);
+
+                if (registro) {
+                    ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
+                    request.setAttribute("coordinaciones", coords);
+                    request.setAttribute("success", SUCCESS);
+                    return mapping.findForward(SUCCESS);
+                } else {
+                    error.add("nombre", new ActionMessage("error.codigoexistente"));
+                    saveErrors(request, error);
+                    return mapping.findForward(YAREGISTRADA);
+                }
             }
+            return mapping.findForward(SUCCESS);
         }
     }
 }

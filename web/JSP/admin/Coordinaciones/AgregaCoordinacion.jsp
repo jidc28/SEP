@@ -29,8 +29,30 @@
         <html:form action="/registrarCoordinacion" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
             <table border="0" style="margin-top: 30px;">
                 <tbody>
+                    <logic:present name="decanatos">
+                        <tr style="height: 35px;">
+                            <td style="color: black; font-size: 14px; font-weight: bold;">
+                                ADSCRIBIR A DECANATO
+                            </td>
+                        </tr>
+                        <tr style="height: 35px;">
+                            <td>
+                                <center>
+                                    <html:select styleClass="input-nombre" name="Coordinacion" property="decanato">
+                                        <logic:iterate name="decanatos" id="decanato">
+                                                <option>
+                                                    <bean:write name="decanato" property="nombre"/>
+                                                </option>
+                                        </logic:iterate>
+                                    </html:select>
+                                </center>
+                            </td>
+                        </tr>
+                    </logic:present>
                     <tr style="height: 35px;">
-                        <td style="color: black">Codigo de la Coordinación</td>
+                        <td style="color: black; font-size: 14px; font-weight: bold;">
+                            CÓDIGO DE LA COORDINACIÓN
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -47,7 +69,9 @@
                         </td>
                     </tr>
                     <tr style="height: 35px;">
-                        <td style="color: black">Nombre de la Coordinación</td>
+                        <td style="color: black; font-size: 14px; font-weight: bold;">
+                            NOMBRE DE LA COORDINACIÓN
+                        </td>
                     </tr>
                     <tr>
                         <td>

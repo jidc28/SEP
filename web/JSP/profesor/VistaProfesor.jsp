@@ -138,12 +138,6 @@
                                      onclick="javascript: return confirm('¿Está seguro que desea eliminar su información?')"/>
                     </html:form>
                 </td>
-                    <!--<td>
-                        <html:form action="/irConsultarRendimiento">
-                            <html:hidden name="usuario" property="usbid"/>
-                            <html:submit style="margin: 2.5px;" styleClass="btn btn-default" value="Consultar Rendimiento"/>
-                        </html:form>
-                    </td>-->
                 </tbody>
             </table>
         </div>

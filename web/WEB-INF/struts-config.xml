@@ -94,7 +94,7 @@
             <forward name="success" path="consultaDecanato"/>
         </action>
         
-        <action input="/VistaAdministrador.jsp" path="/consultaCoordinacionA" scope="request" type="Actions.Coordinacion.ConsultaCoordinacionA" validate="false">
+        <action input="/VistaAdministrador.jsp" path="/consultaCoordinacionA" name="Decanato" scope="request" type="Actions.Coordinacion.ConsultaCoordinacionA" validate="false">
             <forward name="success" path="consultaCoordinacion"/>
         </action>
         

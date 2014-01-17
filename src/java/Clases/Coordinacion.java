@@ -20,6 +20,15 @@ public class Coordinacion extends org.apache.struts.action.ActionForm {
     
     private String codigo;
     private String nombre;
+    private String decanato;
+
+    public String getDecanato() {
+        return decanato;
+    }
+
+    public void setDecanato(String decanato) {
+        this.decanato = decanato;
+    }
 
     public String getCodigo() {
         return codigo;
