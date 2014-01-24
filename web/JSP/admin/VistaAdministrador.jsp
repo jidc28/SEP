@@ -23,7 +23,29 @@
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
         <title>Sistema de Evaluación de Profesores</title>
     <body>
-
+    <script>  
+        $(function () { 
+                $("#ayuda1").popover({
+                    'title': 'Gestión de Decanatos',
+                    'content': 'permite agregar, consultar, modificar y eliminar'
+                        + ' un decanato del sistema.'
+                });  
+            });  
+        $(function () { 
+                $("#ayuda2").popover({
+                    'title': 'Gestión de Departamentos',
+                    'content': 'permite agregar, consultar, modificar y eliminar'
+                        + ' un departamento del sistema.'
+                });  
+            });  
+        $(function () { 
+                $("#ayuda3").popover({
+                    'title': 'Gestión de Coordinaciones',
+                    'content': 'permite agregar, consultar, modificar y eliminar'
+                        + ' una coordinación, en base a un decanato, en el sistema.'
+                });  
+            }); 
+    </script>
         <div class="panel-group" id="accordion">
 
             <div class="panel panel-default">
@@ -31,6 +53,9 @@
                     <h4 id="izquierda" class="panel-title">
                         <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                             Gestión de Decanatos
+                        </a>
+                        <a href="#" id="ayuda1" style="float: right" rel="popover" >
+                            <span class="glyphicon glyphicon-question-sign"></span> 
                         </a>
                     </h4>
                 </div>
@@ -51,6 +76,9 @@
                         <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                             Gestión de Departamentos
                         </a>
+                        <a href="#" id="ayuda2" style="float: right" rel="popover" >
+                            <span class="glyphicon glyphicon-question-sign"></span> 
+                        </a>
                     </h4>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse">
@@ -69,6 +97,9 @@
                     <h4 id="izquierda" class="panel-title">
                         <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
                             Gestión de Coordinaciones
+                        </a>
+                        <a href="#" id="ayuda3" style="float: right" rel="popover" >
+                            <span class="glyphicon glyphicon-question-sign"></span> 
                         </a>
                     </h4>
                 </div>

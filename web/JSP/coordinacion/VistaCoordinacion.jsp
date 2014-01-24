@@ -25,7 +25,22 @@
         <title>Sistema de Evaluación de Profesores</title>
     </head>
     <body>
-
+    <script>  
+        $(function () { 
+                $("#ayuda1").popover({
+                    'title': 'Gestión de Materias',
+                    'content': 'permite vincular, desvincular materias del pensum,' + 
+                           'consultar las materias ofertadas por los departamentos de la USB y' +
+                           'solicitar la apertura de una materia a un departamento.'
+                });  
+            });  
+        $(function () { 
+                $("#ayuda2").popover({
+                    'title': 'Gestión de Evaluaciones',
+                    'content': 'permite obtener la evaluación de los profesores por materia.'
+                });  
+            });  
+    </script>
         <logic:present name="evaluaciones_pendientes">
             <div class="alert alert-info alert-dismissable" 
                  id="alert-coord">
@@ -53,6 +68,9 @@
                         <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseDepartamentos">
                             Gestión de Materias
                         </a>
+                        <a href="#" id="ayuda1" style="float: right" rel="popover"> 
+                            <span class="glyphicon glyphicon-question-sign"></span> 
+                        </a>
                     </h4>
                 </div>
                 <div id="collapseDepartamentos" class="panel-collapse collapse">
@@ -75,6 +93,9 @@
                         <h4 id="izquierda" class="panel-title">
                             <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseEvaluaciones">
                                 Gestionar Evaluaciones  
+                            </a>
+                            <a href="#" id="ayuda2" style="float: right" rel="popover"> 
+                                <span class="glyphicon glyphicon-question-sign"></span> 
                             </a>
                         </h4>
                     </div>

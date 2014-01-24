@@ -493,3 +493,8 @@ seleccAll{
 #link-dropdown {
     text-decoration: none;
 }
+
+.popover-content {
+    font-size: 10px;
+    font-style: normal;
+}

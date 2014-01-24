@@ -17,13 +17,30 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link href="css/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
+        <!--<link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.css">-->
+        <!--<link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">-->
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
         <title>Sistema de Evaluación de Profesores</title>
     </head>
     <body>
+    <script>  
+        $(function () { 
+                $("#ayuda1").popover({
+                    'title': 'Gestión de Materias',
+                    'content': 'permite agregar materias a la oferta y consultar'
+                        + ' las materias ofertadas por el departamento.'
+                });  
+            });  
+        $(function () { 
+                $("#ayuda2").popover({
+                    'title': 'Gestión de Profesores',
+                    'content': 'permite evaluar un grupo de profesores y llenar'
+                        +' las planillas correspondientes a las materias '
+                        +'dictadas por cada uno de ellos.'
+                });  
+            });
+    </script>
         <logic:present name="solicitud_apertura_materia">
             <div class="alert alert-info alert-dismissable" 
                  id="alert-coord">
@@ -45,7 +62,10 @@
                         <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMaterias">
                             Gestión de Materias
                         </a>
-                    </h4>
+                        <a href="#" id="ayuda1" style="float: right" rel="popover"> 
+                            <span class="glyphicon glyphicon-question-sign"></span> 
+                        </a>
+                    </h4> 
                 </div>
                 <div id="collapseMaterias" class="panel-collapse collapse">
                     <div class="panel-body">
@@ -72,6 +92,9 @@
                     <h4 id="izquierda" class="panel-title">
                         <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseProfesor">
                             Gestión de Profesores
+                        </a>
+                        <a href="#" id="ayuda2" style="float: right" rel="popover"> 
+                            <span class="glyphicon glyphicon-question-sign"></span> 
                         </a>
                     </h4>
                 </div>

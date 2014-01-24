@@ -36,6 +36,16 @@
                 });
             });
         </script>
+        
+        <script>  
+            $(function () { 
+                $("#ayuda1").popover({
+                    'title': 'Ir a llenar las planillas',
+                    'content': 'Haga click en este <html:link action="/ConsultaProfesores"> link </html:link> para llenar las planillas.',
+                    'html': 'true'
+                });  
+            });  
+        </script>
 
         <logic:present name="enviado_memo">
             <div class="alert alert-success" id="alert">
@@ -121,7 +131,11 @@
         <logic:empty name="profesores" property="items">
             <div class="alert alert-warning alert-dismissable" 
                  id="alert-coord">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <a href="#" id="ayuda1" style="color: #c09853; float: right" rel="popover" > 
+                    <span style="color: #c09853;" class="glyphicon glyphicon-question-sign">     
+                    </span> 
+                </a>
+                <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>-->
                 <p>
                    Verifique haber llenado todas las planillas de los profesores del 
                    departamento.

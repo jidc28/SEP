@@ -24,12 +24,24 @@
         <title>Gestion de Planillas de Evaluación</title>
     </head>
     <body>
+    <script>  
+        $(function () { 
+                $("#ayuda1").popover({
+                    'title': 'Gestión de Coordinaciones',
+                    'content': 'permite agregar, consultar, modificar y eliminar'
+                        + ' una coordinación en el sistema.'
+                });  
+            });  
+     </script>
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 id="izquierda" class="panel-title">
                         <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
                             Gestión de Coordinaciones
+                        </a>
+                        <a href="#" id="ayuda1" style="float: right" rel="popover" >
+                            <span class="glyphicon glyphicon-question-sign"></span> 
                         </a>
                     </h4>
                 </div>
