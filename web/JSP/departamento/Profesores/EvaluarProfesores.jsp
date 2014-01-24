@@ -51,71 +51,83 @@
         <h4> Evaluar Profesores:</h4>
 
     <center>
-        <div id="tabla" class="table-responsive">
-            <table id="tabla" class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>
-                        </th>
-                        <th style="font-size: 14px;">
-                <center>
-                    USBID
-                </center>
-                </th>
-                <th style="font-size: 14px;">
-                <center>
-                    LAPSO CONTRACTUAL INICIO
-                </center>
-                </th>
-                <th width="38%" style="font-size: 14px;">
-                <center>
-                    PROFESOR
-                </center>
-                </th>
-                </tr>
-                </thead>
-                <html:form action="/EvaluarProfesores">
-                    <logic:iterate id="profesor" name="profesores" property="items">
+        <logic:notEmpty name="profesores" property="items">
+            <div id="tabla" class="table-responsive">
+                <table id="tabla" class="table table-striped">
+                    <thead>
                         <tr>
+                            <th>
+                            </th>
+                            <th style="font-size: 14px;">
+                    <center>
+                        USBID
+                    </center>
+                    </th>
+                    <th style="font-size: 14px;">
+                    <center>
+                        LAPSO CONTRACTUAL INICIO
+                    </center>
+                    </th>
+                    <th width="38%" style="font-size: 14px;">
+                    <center>
+                        PROFESOR
+                    </center>
+                    </th>
+                    </tr>
+                    </thead>
+                    <html:form action="/EvaluarProfesores">
+                        <logic:iterate id="profesor" name="profesores" property="items">
+                            <tr>
+                                <td>
+                            <center>
+                                <html:multibox  property="itemsSeleccionados">
+                                    <bean:write name="profesor" property="usbid"/>
+                                </html:multibox>
+                                </td>
+                            </center>
                             <td>
-                        <center>
-                            <html:multibox  property="itemsSeleccionados">
+                            <center>
                                 <bean:write name="profesor" property="usbid"/>
-                            </html:multibox>
+                            </center>
                             </td>
-                        </center>
-                        <td>
-                        <center>
-                            <bean:write name="profesor" property="usbid"/>
-                        </center>
-                        </td>
-                        <td>
-                        <center>
-                            <bean:write name="profesor" property="lapso_contractual_inicio"/> 
-                        </center>
-                        </td>
-                        <td>
-                            <bean:write name="profesor" property="apellido"/>, 
-                            <bean:write name="profesor" property="nombre"/>
-                        </td>
-                        </tr>
-                    </logic:iterate>
-                </table>
-                <center>
-                    <html:submit styleClass="btn btn-primary" style="type: button; data-loading-text: cargando;">
-                        Evaluar profesores seleccionados
-                    </html:submit>
-                    <button type="button" id="cargando" data-loading-text="Cargando..." class="btn btn-primary">
-                        <!--<html:submit styleClass="btn btn-primary" 
-                                     style="border-color: #428bca; type: button; data-loading-text: cargando;
-                                            padding: 0px;">
+                            <td>
+                            <center>
+                                <bean:write name="profesor" property="lapso_contractual_inicio"/> 
+                            </center>
+                            </td>
+                            <td>
+                                <bean:write name="profesor" property="apellido"/>, 
+                                <bean:write name="profesor" property="nombre"/>
+                            </td>
+                            </tr>
+                        </logic:iterate>
+                    </table>
+                    <center>
+                        <html:submit styleClass="btn btn-primary" style="type: button; data-loading-text: cargando;">
                             Evaluar profesores seleccionados
-                        </html:submit>-->
-                        Boton de cargando
-                    </button>
-                </center>
-            </html:form>
-        </div>
+                        </html:submit>
+                        <button type="button" id="cargando" data-loading-text="Cargando..." class="btn btn-primary">
+                            <!--<html:submit styleClass="btn btn-primary" 
+                                         style="border-color: #428bca; type: button; data-loading-text: cargando;
+                                                padding: 0px;">
+                                Evaluar profesores seleccionados
+                            </html:submit>-->
+                            Boton de cargando
+                        </button>
+                    </center>
+                </html:form>
+            </div>
+        </logic:notEmpty>
+        <logic:empty name="profesores" property="items">
+            <div class="alert alert-warning alert-dismissable" 
+                 id="alert-coord">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <p>
+                   Verifique haber llenado todas las planillas de los profesores del 
+                   departamento.
+                </p>
+            </div>
+        </logic:empty>
     </center>
 </body>
 </html>

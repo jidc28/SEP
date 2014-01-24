@@ -62,7 +62,7 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
             ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
-            request.setAttribute("agregar_informacion", SUCCESS);
+            request.setAttribute("agregar_informacion", renMateria);
             return mapping.findForward(SUCCESS);
         }
 
