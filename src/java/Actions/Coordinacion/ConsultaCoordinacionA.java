@@ -4,7 +4,7 @@
  */
 package Actions.Coordinacion;
 
-import Clases.Coordinacion;
+import Clases.*;
 import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -37,16 +37,36 @@ public class ConsultaCoordinacionA extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
+
         HttpSession session = request.getSession(true);
+        ArrayList<Coordinacion> coords = null;
+        ArrayList<Decanato> decanatos = null;
+
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
 
         //obtengo una lista de coords registradas
-        ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
+
+        if (tipousuario.equals("administrador")) {
+
+            Decanato decanato = (Decanato) form;
+            if (decanato.getNombre() != null) {
+                System.out.println(decanato.getNombre());
+                decanato.setCodigo(DBMS.getInstance().obtenerCodigoDecanato(decanato));
+                coords = DBMS.getInstance().listarCoordinacionesAdscritas(decanato.getCodigo());
+                session.setAttribute("codigoDecanatoActual",decanato.getCodigo());
+            }
+
+            decanatos = DBMS.getInstance().listarDecanatos();
+            request.setAttribute("decanatos", decanatos);
+        } else if (tipousuario.equals("decanato")) {
+            coords = DBMS.getInstance().listarCoordinacionesAdscritas(usuario.getUsbid());
+        }
 
         //si existen coords registradas
 
-            //retorno a pagina de exito
-            session.setAttribute("coordinaciones", coords);
-            return mapping.findForward(SUCCESS);
+        //retorno a pagina de exito
+        request.setAttribute("coordinaciones", coords);
+        return mapping.findForward(SUCCESS);
     }
 }

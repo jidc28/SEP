@@ -13,8 +13,25 @@
 <!DOCTYPE html>
 <html>
     <div id="sidebarR">
-        <a href="http://www.usb.ve/">
-            <img width="100%" height="50" src="imagenes/somosusb.gif"/>
-        </a>
+        <p>
+            <a href="http://www.usb.ve/">
+                <img width="100%" height="50" src="imagenes/somosusb.gif"/>
+            </a>
+        </p>
+        <p>
+            <a href="#">
+                <img width="100%" height="50" src="imagenes/noticias.jpg"/>
+            </a>
+        </p>
+        <p>
+            <a href="http://www.dace.usb.ve/">
+                <img width="100%" height="50" src="imagenes/dace.jpg"/>
+            </a>
+        </p>
+        <!--<p>
+            <a href="http://www.intensivos.coord.usb.ve/node/16">
+                <img width="100%" height="50" src="imagenes/encuesta.png"/>
+            </a>
+        </p>-->
     </div>
 </html>

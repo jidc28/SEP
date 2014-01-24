@@ -21,15 +21,15 @@
         <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
-        <title>Gestion de Planillas de Evaluacion</title>
+        <title>Sistema de Evaluación de Profesores</title>
     <body>
 
         <div class="panel-group" id="accordion">
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                    <h4 id="izquierda" class="panel-title">
+                        <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                             Gestión de Decanatos
                         </a>
                     </h4>
@@ -47,27 +47,27 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                    <h4 id="izquierda" class="panel-title">
+                        <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                             Gestión de Departamentos
                         </a>
                     </h4>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <a style="color: red;"> 
-                            <h5 style="color: red;"> Agregar Departamento (No implementado) </h5>
-                        </a>
-                        <a style="color: red;">
-                            <h5 style="color: red;"> Consultar Departamentos (No implementado) </h5>
-                        </a>
+                        <html:link action="/irAgregarDepartamento"> 
+                            <h5> Agregar Departamento </h5>
+                        </html:link>
+                        <html:link action="/listarDepartamentos">
+                            <h5>Consultar Departamentos</h5>
+                        </html:link>
                     </div>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                    <h4 id="izquierda" class="panel-title">
+                        <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
                             Gestión de Coordinaciones
                         </a>
                     </h4>

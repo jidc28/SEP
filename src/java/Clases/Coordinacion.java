@@ -18,19 +18,17 @@ import org.apache.struts.action.ActionMessage;
  */
 public class Coordinacion extends org.apache.struts.action.ActionForm {
     
-    private static final String patronCodigo = "^[0-9]+$";
-    private static final String patronNombre = "[a-zA-Z]*$";
     private String codigo;
     private String nombre;
-    private String Estado;
-    private String errorCodigo;
-    private String errorNombre;
-    private String errorEstado;
-    private String errorCodigoFormato;
-    private String errorNombreFormato;
-    private Pattern patron;
-    private Pattern patron2;
-    private Matcher match;
+    private String decanato;
+
+    public String getDecanato() {
+        return decanato;
+    }
+
+    public void setDecanato(String decanato) {
+        this.decanato = decanato;
+    }
 
     public String getCodigo() {
         return codigo;
@@ -47,95 +45,7 @@ public class Coordinacion extends org.apache.struts.action.ActionForm {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public String getEstado() {
-        return Estado;
-    }
-
-    public void setEstado(String Estado) {
-        this.Estado = Estado;
-    }
-
-    public String getErrorCodigo() {
-        return errorCodigo;
-    }
-
-    public void setErrorCodigo(String errorCodigo) {
-        if (errorCodigo.equals("")) {
-            this.errorCodigo = "";
-        } else {
-            this.errorCodigo = "<span style='color:red'>Por favor introduzca su Codigo de Coordinacion</span>";
-
-        }
-    }
-
-    public String getErrorNombre() {
-        return errorNombre;
-    }
-
-    public void setErrorNombre(String errorNombre) {
-        if (errorNombre.equals("")) {
-            this.errorNombre = "";
-        } else {
-            this.errorNombre = "<span style='color:red'>Por favor introduzca el Nombre de la Coordinacion</span>";
-
-        }
-    }
-
-    public String getErrorEstado() {
-        return errorEstado;
-    }
-
-    public void setErrorEstado(String errorEstado) {
-        if (errorEstado.equals("")) {
-            this.errorEstado = "";
-        } else {
-            this.errorEstado = "<span style='color:red'>Por favor introduzca el Estado de la Coordinacion</span>";
-
-        }
-    }
-
-    public String getErrorCodigoFormato() {
-        return errorCodigoFormato;
-    }
-
-    public void setErrorCodigoFormato(String errorCodigoFormato) {
-        if (errorCodigoFormato.equals("")) {
-            this.errorCodigoFormato = "";
-        } else {
-            this.errorCodigoFormato = "<span style='color:red'>Campo Codigo formato incorrecto (Sugerencia: Solo Numeros).</span>";
-
-        }
-    }
-
-    public String getErrorNombreFormato() {
-        return errorNombreFormato;
-    }
-
-    public void setErrorNombreFormato(String errorNombreFormato) {
-        if (errorNombreFormato.equals("")) {
-            this.errorNombreFormato = "";
-        } else {
-            this.errorNombreFormato = "<span style='color:red'>Campo Nombre formato incorrecto (Sugerencia: sólo letras).</span>";
-
-        }
-    }
     
-    public Coordinacion(){
-        patron = Pattern.compile(patronCodigo);
-        patron2 = Pattern.compile(patronNombre);
-    }
-    
-    public boolean validate(final String val){
-        match = patron.matcher(val);
-        return match.matches();
-    }
-    
-    public boolean validate2(final String val){
-        match = patron2.matcher(val);
-        return match.matches();
-    }
-
     /**
      * This is the action called from the Struts framework.
      *
@@ -145,23 +55,14 @@ public class Coordinacion extends org.apache.struts.action.ActionForm {
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
-        this.setErrorCodigo("");
-        this.setErrorNombre("");
-        this.setErrorEstado("");
-        this.setErrorCodigoFormato("");
-        this.setErrorNombreFormato("");
 
         if (getCodigo() == null || getCodigo().length() < 1) {
-            this.setErrorCodigo("error");
             errors.add("codigo", new ActionMessage("error.codigo.required"));
-            // TODO: add 'error.name.required' key to your resources
         }
         
         
         if (getNombre() == null || getNombre().length() < 1) {
-            this.setErrorNombre("error");
             errors.add("nombre", new ActionMessage("error.nombre.required"));
-            // TODO: add 'error.name.required' key to your resources
         }
         
         

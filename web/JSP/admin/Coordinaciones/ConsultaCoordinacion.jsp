@@ -11,37 +11,20 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
-<script type="text/javascript">
-    function altRows(id) {
-        if (document.getElementsByTagName) {
-
-            var table = document.getElementById(id);
-            var rows = table.getElementsByTagName("tr");
-
-            for (i = 0; i < rows.length; i++) {
-                if (i % 2 === 0) {
-                    rows[i].className = "evenrowcolor";
-                } else {
-                    rows[i].className = "oddrowcolor";
-                }
-            }
-        }
-    }
-    $(document).ready(function() {
-        $('table').tablePagination({});
-    });
-    window.onload = function() {
-        altRows('alternatecolor');
-    }
-</script>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
-        <title>Gestion de Planillas de Evaluacion</title>
+        
+        <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="css/js/bootstrap.js"></script>
+        <script type="text/javascript" src="css/js/bootstrap.min.js"></script>
+        <title>Gestión de coordinaciones</title>
     </head>
     <body>
 
@@ -68,64 +51,108 @@
                La coordinacion no pudo ser eliminada exitosamente.
             </div>
         </logic:present>
-          
-        <h4> Lista de Coordinaciones en el sistema:</h4>
+
+    <h4> Lista de Coordinaciones en el sistema:</h4>
+    
+    <logic:present name="decanatos">
+    <html:form action="/consultaCoordinacionA">
+        <table>
+        <!--<center>-->
+            <tbody>
+                <tr>
+                    <td style="margin-left: 10px;"">
+                        <html:select style="width: 350px; height: 34px; margin-right: 10px;" name="Decanato" property="nombre">
+                            <logic:iterate name="decanatos" id="decanato">
+                                <option>
+                                    <bean:write name="decanato" property="nombre"/>
+                                </option>
+                            </logic:iterate>
+                        </html:select>
+                    </td>
+                    <td>
+                        <html:submit styleClass="btn btn-info">
+                            Consultar
+                        </html:submit>
+                    </td>
+                </tr>
+            </tbody>
+        <!--</center>-->
+        </table>
+    </html:form>
+    </logic:present>
+
+    <logic:present name="coordinaciones">
         <div id="tabla" class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>
+                        <th style="font-size: 14px;">
                             <center>
-                            Codigo
+                            CODIGO
                             </center>
                         </th>
-                        <th>
+                        <th style="font-size: 14px;">
                             <center>
-                            Nombre Coordinacion
+                            NOMBRE
                             </center>
                         </th>
-                        <th>
+                        <th style="font-size: 14px;">
                             <center>
-                            Modificar Nombre
+                            MODIFICAR
                             </center>
                         </th>
-                        <th>
+                        <th style="font-size: 14px;">
                             <center>
-                            Eliminar
+                            ELIMINAR
                             </center>
                         </th>
                     </tr>
                 </thead>
                 <logic:iterate name="coordinaciones" id="Coord">
                     <tr>
-                        <td align="center">
-                            <bean:write name="Coord" property="codigo"/>
+                        <td>
+                            <center>
+                                <bean:write name="Coord" property="codigo"/>
+                            </center>
                         </td>
                         <td>
                             <bean:write name="Coord" property="nombre"/>
                         </td>
-                        <td align="center">
-                            <html:form action="/editarNombreCoordinacion" onsubmit="return(this)" style="margin: 0px;">
-                                <html:hidden name="Coord" property="codigo"/>
-                                <button type="button" class="btn btn-primary" 
-                                        style="padding-bottom: 1px; padding-top: 1px; padding-left: 2px; padding-right: 2px;">
-                                    <html:image src="imagenes/edit-img.png" value="" property="" style="height: 27px;"/>
-                                </button>
-                            </html:form>
+                        <td>
+                            <center>
+                                <html:form action="/editarNombreCoordinacion" onsubmit="return(this)" style="margin: 0px;">
+                                    <html:hidden name="Coord" property="codigo"/>
+                                    <html:submit styleClass="btn btn-primary"
+                                                 style="padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                        Modificar
+                                    </html:submit>
+                                </html:form>
+                            </center>
                         </td>
                         <td>
-                            <html:form action="/eliminaCoordinacionA" onsubmit="return(this)" style="margin: 0px;">
-                                <html:hidden name="Coord" property="codigo"/>
-                                <html:submit styleClass="btn btn-danger" style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
-                                                 onclick="javascript: return confirm('¿Está seguro de que desea eliminar la coordinacion?')">
-                                    Eliminar
-                                </html:submit>
-                            </html:form>
+                            <center>
+                                <html:form action="/eliminaCoordinacionA" onsubmit="return(this)" style="margin: 0px;">
+                                    <html:hidden name="Coord" property="codigo"/>
+                                    <html:submit styleClass="btn btn-danger" style="padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                                 onclick="javascript: return confirm('¿Está seguro de que desea eliminar la Coordinación Docente: ${Coord.getNombre()}?')">
+                                        Eliminar
+                                    </html:submit>
+                                </html:form>
+                            </center>
                         </td>
                     </tr>
                 </logic:iterate>
             </table>
         </div>
-
+    </logic:present>
+    <logic:notPresent name="coordinaciones">
+            <div class="alert alert-warning alert-dismissable" 
+                 id="alert-coord">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <p>
+                   Para consultar las coordinaciones escoja un decanato y seleccione CONSULTAR.
+                </p>
+            </div>
+    </logic:notPresent>
     </body>
 </html>

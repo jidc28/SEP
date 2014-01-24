@@ -32,17 +32,25 @@
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <p>
                     <strong>Atención: </strong> <br> 
-                    Se solicitó evaluación de profesores. Para más información
-                    seleccionar <em>Gestionar Evaluaciones</em>.
+                    Se solicitó evaluación de 
+                    <strong><bean:write name="evaluaciones_pendientes"/></strong> 
+                    profesor(es). Para más información seleccionar 
+                    <em>Gestionar Evaluaciones</em>.
                 </p>
+            </div>
+        </logic:present>
+        
+        <logic:present name="solicitud_enviada">
+            <div class="alert alert-success" id="alert-coord">
+                La solicitud de apertura de la materia ha sido enviada.
             </div>
         </logic:present>
 
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseDepartamentos">
+                    <h4 id="izquierda" class="panel-title">
+                        <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseDepartamentos">
                             Gestión de Materias
                         </a>
                     </h4>
@@ -54,15 +62,18 @@
                         </html:link>
                         <html:link action="/listarDepartamentos" >
                             <h5 align ="center">Vincular Materias por Departamento</h5>
-                        </html:link>  
+                        </html:link> 
+                        <html:link action="/irSolicitarAperturaMateria">
+                            <h5 align ="center">Solicitar Apertura de Materia</h5>
+                        </html:link>
                     </div>
                 </div>
             </div>
             <logic:present name="evaluaciones_pendientes">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseEvaluaciones">
+                        <h4 id="izquierda" class="panel-title">
+                            <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseEvaluaciones">
                                 Gestionar Evaluaciones  
                             </a>
                         </h4>

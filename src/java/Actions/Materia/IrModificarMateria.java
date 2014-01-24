@@ -39,12 +39,24 @@ public class IrModificarMateria extends org.apache.struts.action.Action {
             throws Exception {
 
         HttpSession session = request.getSession(true);
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+
         Materia materia = (Materia) form;
 
         materia = DBMS.getInstance().obtenerDatosMateria(materia);
         materia.setViejoCodigo(materia.getCodigo());
+
+        String[] caracteres = materia.getCodigo().split("");
+
+        materia.setCod1(caracteres[1] + caracteres[2]);
         
-        request.setAttribute("materia",materia);
+        materia.setCod2(caracteres[3]);
+        materia.setNum2(caracteres[4]);
+        materia.setNum3(caracteres[5]);
+        materia.setNum4(caracteres[6]);
+
+        request.setAttribute("modificar","modificar");
+        request.setAttribute("materia", materia);
         return mapping.findForward(SUCCESS);
     }
 }

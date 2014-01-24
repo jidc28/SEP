@@ -1,7 +1,7 @@
 <%-- 
     Document   : AgregarDecanato
     Created on : 10/06/2013, 07:43:54 PM
-    Author     : admin
+    Author     : Langtech
 --%>
 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -19,7 +19,7 @@
         <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
-        <title>Gestion de Planillas de Evaluacion</title>
+        <title>Gestión de Decanatos</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
@@ -30,29 +30,35 @@
             <table border="0">
                 <tbody>
                     <tr style="height: 35px;">
-                        <td style="color: black">Codigo del Decanato</td>
+                        <td style="color: black; font-size: 14px; font-weight: bold;">
+                            CÓDIGO DEL DECANATO
+                        </td>
+                    </tr>
+                    <tr>
                         <td>
+                            <center>
                             <html:text name="Decanato" property="codigo" maxlength="10" value="" errorStyleClass="error"
-                                       style="margin-bottom: 0px;height: 30px;"
+                                       styleClass="input-codigo" style="margin-bottom: 0px;height: 30px;"
                                        errorKey="org.apache.struts.action.ERROR"></html:text>
+                            </center>
 
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="color:firebrick">
+                            <td colspan="2" style="color:firebrick">
                             <html:errors property="codigo"/>
                         </td>
                     </tr>
+                    <tr style="height: 35px;">
+                        <td style="color: black; font-size: 14px; font-weight: bold;">
+                            NOMBRE DEL DECANATO
+                        </td>
+                    </tr>
                     <tr>
-                        <td style="color: black">Nombre del Decanato</td>
                         <td>
-                            <html:text property="nombre" name="Decanato" maxlength="50" errorKey="org.apache.struts.action.ERROR"/>
-                            <!--
-                            <html:textarea name="Decanato" property="nombre" errorStyleClass="error"
-                                       style="margin-bottom: 0px;"
-                                       rows="5"
+                            <html:text property="nombre" name="Decanato" maxlength="50" 
+                                       styleClass="input-nombre" style="height: 30px;"
                                        errorKey="org.apache.struts.action.ERROR"/>
-                            -->
                         </td>
                     </tr>
                     <tr>
@@ -77,5 +83,5 @@
         </html:form>
 
 
-</body>
+    </body>
 </html>

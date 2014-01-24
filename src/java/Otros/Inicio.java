@@ -46,7 +46,7 @@ public class Inicio extends org.apache.struts.action.Action {
         //Usuario u = (Usuario) form;
         HttpSession session = request.getSession(true);
         Usuario u = (Usuario) request.getSession().getAttribute("usuario");
-        System.out.println("--------------------> USUARIO: " + u.getUsbid() + "\n");
+        //System.out.println("--------------------> USUARIO: " + u.getUsbid() + "\n");
         
         ActionErrors error = new ActionErrors();
 
@@ -86,6 +86,10 @@ public class Inicio extends org.apache.struts.action.Action {
                 } else if (tmp.getTipousuario().equals("departamento")) {
                     session.setAttribute("usuario", tmp);
                     session.setAttribute("usbid", tmp.getUsbid());
+                    int solicitudes_pendientes = DBMS.getInstance().contarSolicitudesPendientesDepartamento(tmp.getUsbid());
+                    if (solicitudes_pendientes != 0) {
+                        request.setAttribute("solicitud_apertura_materia", solicitudes_pendientes);
+                    }
                     return mapping.findForward(DEPARTAMENTO);
                 } else if (tmp.getTipousuario().equals("coordinacion")) {
                     session.setAttribute("usuario", tmp);

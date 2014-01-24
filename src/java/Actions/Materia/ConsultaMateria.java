@@ -48,12 +48,12 @@ public class ConsultaMateria extends org.apache.struts.action.Action {
             materias = DBMS.getInstance().listarMateriasOfertadas(id_departamento);
         } else if (tipousuario.equals("coordinacion")) {
             Departamento dpto = (Departamento) form;
-            materias = DBMS.getInstance().listarMateriasOfertadas(dpto.getCodigo());
+            materias = DBMS.getInstance().listarMateriasOfertadasDepartamento(dpto.getCodigo());
             request.setAttribute("dpto_seleccionado",dpto);
             session.removeAttribute("materias_vinculadas");
         }
             
-            session.setAttribute("materias", materias);
+            request.setAttribute("materias", materias);
             return mapping.findForward(SUCCESS);
     }
 }

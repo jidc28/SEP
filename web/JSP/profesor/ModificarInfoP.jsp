@@ -19,7 +19,7 @@
         <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
-        <title>Gestion de Planillas de Evaluacion</title>
+        <title>Gestión de Información</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>

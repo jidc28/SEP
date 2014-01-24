@@ -21,14 +21,28 @@
         <link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
-        <title>Gestion de Planillas de Evaluación</title>
+        <title>Sistema de Evaluación de Profesores</title>
     </head>
     <body>
+        <logic:present name="solicitud_apertura_materia">
+            <div class="alert alert-info alert-dismissable" 
+                 id="alert-coord">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <p>
+                    <strong>Atención: </strong> <br> 
+                    Se solicitó la apertura de 
+                    <strong> <bean:write name="solicitud_apertura_materia"/> </strong>
+                    materia(s). Para más información seleccionar 
+                    <em>Gestionar Materias, Listar solicitudes pendientes</em>.
+                </p>
+            </div>
+        </logic:present>
+        
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMaterias">
+                    <h4 id="izquierda" class="panel-title">
+                        <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMaterias">
                             Gestión de Materias
                         </a>
                     </h4>
@@ -41,21 +55,33 @@
                         <html:link action="/consultaMateria">
                             <h5 align ="center">Consultar Materias</h5>
                         </html:link>
+                        <logic:present name="solicitud_apertura_materia">
+                            <html:link action="/consultaSolicitudesApertura"> 
+                                <h5 align ="center"> Listar Solicitudes Pendientes                                
+                                    <span class="badge">
+                                        <bean:write name="solicitud_apertura_materia"/>
+                                    </span>
+                                </h5>
+                            </html:link>
+                        </logic:present>
                     </div>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseProfesor">
+                    <h4 id="izquierda" class="panel-title">
+                        <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseProfesor">
                             Gestión de Profesores
                         </a>
                     </h4>
                 </div>
                 <div id="collapseProfesor" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <html:link action="/irMultibox">
+                        <html:link action="/irEvaluarProfesores">
                             <h5 align ="center">Evaluar Profesores</h5>
+                        </html:link>
+                        <html:link action="/ConsultaProfesores">
+                            <h5 align ="center">Gestionar Planillas de Evaluación de Profesores</h5>
                         </html:link>
                     </div>
                 </div>

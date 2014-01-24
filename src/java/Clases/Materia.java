@@ -21,7 +21,124 @@ public class Materia extends org.apache.struts.action.ActionForm {
     private String codigo;
     private String viejoCodigo;
     private String nombre;
+    private String num1;
+    private String num2;
+    private String num3;
+    private String num4;
+    private String cod1;
+    private String cod2;
+    private String creditos;
+    private String condicion;
     private String estado;
+    private String mensaje;
+    private String departamento;
+    private String coordinacion;
+    private String comentarios;
+    private String solicitud;
+
+    public String getSolicitud() {
+        return solicitud;
+    }
+
+    public void setSolicitud(String solicitud) {
+        this.solicitud = solicitud;
+    }
+
+    public String getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(String comentarios) {
+        this.comentarios = comentarios;
+    }
+
+    public String getCoordinacion() {
+        return coordinacion;
+    }
+
+    public void setCoordinacion(String coordinacion) {
+        this.coordinacion = coordinacion;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public String getCondicion() {
+        return condicion;
+    }
+
+    public void setCondicion(String condicion) {
+        this.condicion = condicion;
+    }
+
+    public String getCod1() {
+        return cod1;
+    }
+
+    public void setCod1(String cod1) {
+        this.cod1 = cod1;
+    }
+
+    public String getCod2() {
+        return cod2;
+    }
+
+    public void setCod2(String cod2) {
+        this.cod2 = cod2;
+    }
+
+    public String getCreditos() {
+        return creditos;
+    }
+
+    public void setCreditos(String creditos) {
+        this.creditos = creditos;
+    }
+
+    public String getNum1() {
+        return num1;
+    }
+
+    public void setNum1(String num1) {
+        this.num1 = num1;
+    }
+
+    public String getNum2() {
+        return num2;
+    }
+
+    public void setNum2(String num2) {
+        this.num2 = num2;
+    }
+
+    public String getNum3() {
+        return num3;
+    }
+
+    public void setNum3(String num3) {
+        this.num3 = num3;
+    }
+
+    public String getNum4() {
+        return num4;
+    }
+
+    public void setNum4(String num4) {
+        this.num4 = num4;
+    }
     
     public String getViejoCodigo() {
         return viejoCodigo;

@@ -4,8 +4,9 @@
  */
 package Actions.Coordinacion;
 
-import Clases.Carrera;
 import Clases.Coordinacion;
+import Clases.Decanato;
+import Clases.Usuario;
 import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -42,40 +43,61 @@ public class RegistrarCoordinacion extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
+
         Coordinacion u = (Coordinacion) form;
         HttpSession session = request.getSession(true);
         ActionErrors error = new ActionErrors();
-                
+
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
+
         //valido los campos de formulario
         error = u.validate(mapping, request);
-        boolean huboError = false;
-
-        
-        if (error.size()!=0) {
-            huboError = true;
-        }
-        
         //si los campos no son validos
-        if (huboError) {
-           
+        if (error.size() != 0) {
+
             saveErrors(request, error);
-            return mapping.findForward(FAILURE);
-        //si los campos son validos
-        } else {
-            
-            boolean registro = DBMS.getInstance().registrarCoordinacion(u);
-            
-            if(registro){
-                ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
-                session.setAttribute("coordinaciones", coords);
-                request.setAttribute("success", SUCCESS);
-            return mapping.findForward(SUCCESS);
-            } else {
-                error.add("nombre", new ActionMessage("error.codigoexistente"));
-                saveErrors(request, error);
-                return mapping.findForward(YAREGISTRADA);
+            if (tipousuario.equals("administrador")) {
+                ArrayList<Decanato> decanatos = DBMS.getInstance().listarDecanatos();
+                request.setAttribute("decanatos", decanatos);
             }
+            return mapping.findForward(FAILURE);
+            //si los campos son validos
+        } else {
+
+            if (tipousuario.equals("administrador")) {
+
+
+                boolean registro = DBMS.getInstance().adscribirCoordinacion(u, u.getDecanato(), false);
+
+                if (registro) {
+                    ArrayList<Decanato> decanatos = DBMS.getInstance().listarDecanatos();
+                    request.setAttribute("decanatos", decanatos);
+                    request.setAttribute("success", SUCCESS);
+                    return mapping.findForward(SUCCESS);
+                } else {
+                    ArrayList<Decanato> decanatos = DBMS.getInstance().listarDecanatos();
+                    request.setAttribute("decanatos", decanatos);
+                    error.add("registro", new ActionMessage("error.coordinacion.existente"));
+                    saveErrors(request, error);
+                    return mapping.findForward(YAREGISTRADA);
+                }
+            } else if (tipousuario.equals("decanato")) {
+
+                boolean registro = DBMS.getInstance().adscribirCoordinacion(u, usuario.getUsbid(), true);
+
+                if (registro) {
+                    ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
+                    request.setAttribute("coordinaciones", coords);
+                    request.setAttribute("success", SUCCESS);
+                    return mapping.findForward(SUCCESS);
+                } else {
+                    error.add("registro", new ActionMessage("error.coordinacion.existente"));
+                    saveErrors(request, error);
+                    return mapping.findForward(YAREGISTRADA);
+                }
+            }
+            return mapping.findForward(SUCCESS);
         }
     }
 }

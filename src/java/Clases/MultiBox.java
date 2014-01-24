@@ -1,34 +1,33 @@
 package Clases;
 
-import Clases.Profesor;
 import DBMS.DBMS;
-import java.util.ArrayList;
+import java.util.List;
 import org.apache.struts.action.ActionForm;
 
 public class MultiBox extends ActionForm {
 
     private static final long serialVersionUID = 1L;
-    private ArrayList<Profesor> profesores;
-    private String[] profesoresSeleccionados = {};
+    private List items;
+    private String[] itemsSeleccionados = {};
 
-    public ArrayList<Profesor> getProfesores(String id_departamento) {
-        profesores = DBMS.getInstance().listarProfesoresDepartamento(id_departamento);
-        return profesores;
+    public List getItems() {
+        return items;
     }
 
-    public ArrayList<Profesor> getProfesores() {
-        return profesores;
-    }
-    
-    public void setProfesores(ArrayList<Profesor> profesores) {
-        this.profesores = profesores;
+    public void setItems(List items) {
+        this.items = items;
     }
 
-    public String [] getProfesoresSeleccionados() {
-        return profesoresSeleccionados;
+    public String[] getItemsSeleccionados() {
+        return itemsSeleccionados;
     }
 
-    public void setProfesoresSeleccionados(String[] profesoresSeleccionados) {
-        this.profesoresSeleccionados = profesoresSeleccionados;
+    public void setItemsSeleccionados(String[] itemsSeleccionados) {
+        this.itemsSeleccionados = itemsSeleccionados;
+    }
+
+    public List getProfesores(String id_departamento) {
+        items = DBMS.getInstance().listarProfesoresAEvaluar(id_departamento);
+        return items;
     }
 }

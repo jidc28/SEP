@@ -26,17 +26,19 @@ public class EnviarMemoEvaluarProfesores extends Action {
         String id_departamento = (String) session.getAttribute("usbid");
 
         MultiBox m = (MultiBox) form;
-        String[] profesores_seleccionados = m.getProfesoresSeleccionados();
+        String[] profesores_seleccionados = m.getItemsSeleccionados();
+        
         /*System.out.println("Ahora vienen los profs");
-         for (int i=0; i < profesores_seleccionados.length; i++) {
-         System.out.println("usbid: "+profesores_seleccionados[i]);
-         }*/
+        for (int i = 0; i < profesores_seleccionados.length; i++) {
+            System.out.println("usbid: " + profesores_seleccionados[i]);
+        }*/
+        
         if (profesores_seleccionados.length == 0) {
             request.setAttribute("no_seleccionado", FAILURE);
         } else {
             request.setAttribute("enviado_memo", SUCCESS);
         }
-        DBMS.getInstance().enviarMemoEvaluar(profesores_seleccionados);
+        DBMS.getInstance().enviarMemoEvaluarProfesor(profesores_seleccionados);
         m.getProfesores(id_departamento);
         request.setAttribute("profesores", m);
         return mapping.findForward(SUCCESS);

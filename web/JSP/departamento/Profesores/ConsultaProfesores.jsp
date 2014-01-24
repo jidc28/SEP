@@ -1,7 +1,7 @@
 <%-- 
-    Document   : ConsultaDecanato
-    Created on : 10/06/2013, 07:43:54 PM
-    Author     : admin
+    Document   : ConsultaProfesores
+    Created on : Jan 11, 2014, 4:57:54 PM
+    Author     : smaf
 --%>
 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -14,32 +14,6 @@
 <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="scripts/bootstrap.js"></script>
 <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
-<script type="text/javascript">
-    function altRows(id) {
-        if (document.getElementsByTagName) {
-
-            var table = document.getElementById(id);
-            var rows = table.getElementsByTagName("tr");
-
-            for (i = 0; i < rows.length; i++) {
-                if (i % 2 === 0) {
-                    rows[i].className = "evenrowcolor";
-                } else {
-                    rows[i].className = "oddrowcolor";
-                }
-            }
-        }
-    }
-    $(document).ready(function() {
-        $('table').tablePagination({});
-    });
-    window.onload = function() {
-        altRows('alternatecolor');
-    }
-    $(function () {
-        $('#todos').tooltip();
-    });
-</script>
 
 <!DOCTYPE html>
 <html>
@@ -48,83 +22,92 @@
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
-        <!--        <link rel="stylesheet" type="text/css" href="css/css/bootstrap-theme.css">
-                <link rel="stylesheet" type="text/css" href="css/css/bootstrap-theme.min.css"> -->
-        <title>Gestion de Profesores</title>
+        <title>Gestión de Profesores</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+        <script type="text/javascript" src="scripts/bootstrap.js"></script>
 
-        <logic:present name="enviado_memo">
-            <div class="alert alert-success" id="alert">
-                Se ha enviado la solicitud para evaluar a los profesores.
-            </div>
-        </logic:present>
-        <logic:present name="no_seleccionado">
-            <div class="alert alert-danger" id="alert">
-                No ha seleccionado ningun profesor a evaluar.
-            </div>
-        </logic:present>
-        
-        <h4> Evaluar Profesores:</h4>
+        <h4> Llenar Planilla de Evaluación Profesores: </h4>
 
     <center>
         <div id="tabla" class="table-responsive">
             <table id="tabla" class="table table-striped">
                 <thead>
                     <tr>
-                        <th>
-                        </th>
-                        <th>
+                        <th style="font-size: 14px; width: 15%;">
                 <center>
-                    usbid
+                    USBID
                 </center>
                 </th>
-                <th>
+                <th style="font-size: 14px;">
                 <center>
-                    Lapso contractual inicio
+                    NOMBRE
                 </center>
                 </th>
-                <th width="38%">
+                <th style="font-size: 14px;">
                 <center>
-                    Profesor
+                    NIVEL
+                </center>
+                </th>
+                <th style="font-size: 14px;">
+                <center>
+                    VER PLANILLAS
+                </center>
+                </th>
+                <th style="font-size: 14px;">
+                <center>
+                    LLENAR PLANILLAS
                 </center>
                 </th>
                 </tr>
                 </thead>
-                <html:form action="/multibox">
-                    <logic:iterate id="profesor" name="profesores" property="profesores">
-                        <tr>
-                            <td>
-                        <center>
-                            <html:multibox  property="profesoresSeleccionados">
-                                <bean:write name="profesor" property="usbid"/>
-                            </html:multibox>
-                            </td>
-                        </center>
+                <logic:iterate id="profesor" name="profesores">
+                    <tr>
                         <td>
+                    <center>
+                        <bean:write name="profesor" property="usbid"/>
+                    </center>
+                    </td>
+                    <td>
+                        <bean:write name="profesor" property="apellido"/>,
+                        <bean:write name="profesor" property="nombre"/>
+                    </td>
+                    <td>
                         <center>
-                            <bean:write name="profesor" property="usbid"/>
+                            <bean:write name="profesor" property="nivel"/>
                         </center>
-                        </td>
-                        <td>
-                        <center>
-                            <bean:write name="profesor" property="lapso_contractual_inicio"/> 
-                        </center>
-                        </td>
-                        <td>
-                            <bean:write name="profesor" property="apellido"/>, 
-                            <bean:write name="profesor" property="nombre"/>
-                        </td>
-                        </tr>
-                    </logic:iterate>
-                </table>
-                <center>
-                    <html:submit styleClass="btn btn-primary">
-                        Evaluar profesores seleccionados
-                    </html:submit>
-                </center>
-            </html:form>
+                    </td>
+                    <td>
+                    <center>
+                        <html:form action="/verPlanillasLlenas" style="margin: 0px;">
+                            <html:hidden name="profesor" property="nombre"/>
+                            <html:hidden name="profesor" property="apellido"/>
+                            <html:hidden name="profesor" property="usbid"/>
+                            <html:submit styleClass="btn btn-default"
+                                         style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                                Ver Planillas
+                            </html:submit>
+                        </html:form>
+                    </center>
+                    </td>
+                    <td>
+                    <center>
+                        <html:form action="/irLlenarPlanillas" style="margin: 0px;">
+                            <html:hidden name="profesor" property="nombre"/>
+                            <html:hidden name="profesor" property="apellido"/>
+                            <html:hidden name="profesor" property="usbid"/>
+                            <html:submit styleClass="btn btn-primary"
+                                         style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                                Llenar Planilla
+                            </html:submit>
+                        </html:form>
+                    </center>
+                    </td>
+                    </tr>
+                </logic:iterate>
+            </table>
         </div>
     </center>
 </body>

@@ -1,7 +1,7 @@
 <%-- 
     Document   : consultaDepartamento
     Created on : 08/12/2013, 12:10:31 AM
-    Author     : jidc28
+    Author     : Langtech
 --%>
 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -14,33 +14,6 @@
 <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="scripts/bootstrap.js"></script>
 <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
-<script type="text/javascript">
-    function altRows(id) {
-        if (document.getElementsByTagName) {
-
-            var table = document.getElementById(id);
-            var rows = table.getElementsByTagName("tr");
-
-            for (i = 0; i < rows.length; i++) {
-                if (i % 2 === 0) {
-                    rows[i].className = "evenrowcolor";
-                } else {
-                    rows[i].className = "oddrowcolor";
-                }
-            }
-        }
-    }
-    $(document).ready(function() {
-        $('table').tablePagination({});
-    });
-    window.onload = function() {
-        altRows('alternatecolor');
-    }
-    $(function() {
-        $('#todos').tooltip();
-    });
-</script>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -48,9 +21,7 @@
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
-        <!--        <link rel="stylesheet" type="text/css" href="css/css/bootstrap-theme.css">
-                <link rel="stylesheet" type="text/css" href="css/css/bootstrap-theme.min.css"> -->
-        <title>Gestion de Departamentos</title>
+        <title>Gestión de Materias</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
@@ -61,20 +32,20 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th width="15%">
-                <center>
-                    Codigo
-                </center>
+                        <th width="15%" style="font-size: 14px;">
+                    <center>
+                        CODIGO
+                    </center>
                 </th>
-                <th>
-                <center>
-                    Nombre Departamento
-                </center>
+                <th style="font-size: 14px;">
+                    <center>
+                        NOMBRE DEPARTAMENTO
+                    </center>
                 </th>
-                <th width="15%">
-                <center>
-                    Materias
-                </center>
+                <th width="15%" style="font-size: 14px;">
+                    <center>
+                        MATERIA
+                    </center>
                 </th>
                 </thead>
                 <tbody>

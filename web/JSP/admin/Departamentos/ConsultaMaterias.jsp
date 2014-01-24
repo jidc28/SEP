@@ -1,7 +1,7 @@
 <%-- 
-    Document   : ConsultaDecanato
+    Document   : ConsultaMaterias
     Created on : 10/06/2013, 07:43:54 PM
-    Author     : admin
+    Author     : Langtech
 --%>
 
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -12,29 +12,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
-<script type="text/javascript">
-    function altRows(id) {
-        if (document.getElementsByTagName) {
-
-            var table = document.getElementById(id);
-            var rows = table.getElementsByTagName("tr");
-
-            for (i = 0; i < rows.length; i++) {
-                if (i % 2 === 0) {
-                    rows[i].className = "evenrowcolor";
-                } else {
-                    rows[i].className = "oddrowcolor";
-                }
-            }
-        }
-    }
-    $(document).ready(function() {
-        $('table').tablePagination({});
-    });
-    window.onload = function() {
-        altRows('alternatecolor');
-    }
-</script>
 
 <!DOCTYPE html>
 <html>
@@ -43,7 +20,7 @@
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
-        <title>Gestion de Materias</title>
+        <title>Gestión de Materias</title>
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
@@ -64,8 +41,8 @@
             </div>
         </logic:present>
         <h4> Lista de Materias en el sistema:</h4>
-        <div id="testTable">
-            <table border="0" style="margin: auto" class="altrowstable" id="alternatecolor">
+        <div id="tabla">
+            <table class="table table-responsive">
                 <thead>
                     <tr>
                         <th align="center">
