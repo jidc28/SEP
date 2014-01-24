@@ -47,6 +47,11 @@
                     </tr>
                     <tr>
                         <td colspan="2" style="color:firebrick">
+                            <html:errors property="registro"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="color:firebrick">
                             <html:errors property="nombre"/>
                         </td>
                     </tr>

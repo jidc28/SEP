@@ -36,7 +36,7 @@
             <table id="tabla" class="table table-striped">
                 <thead>
                     <tr>
-                        <th style="font-size: 14px;">
+                        <th style="font-size: 14px; width: 15%;">
                 <center>
                     USBID
                 </center>

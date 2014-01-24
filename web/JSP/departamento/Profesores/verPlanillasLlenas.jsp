@@ -24,16 +24,6 @@
     </head>
     <body>
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
-
-        <div class="alert alert-info alert-dismissable" 
-             id="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <p>
-                <strong>Atención: </strong> <br> 
-                Para realizar el llenado del formulario debe tener a mano
-                <strong>actas del trimestre correspondiente.</strong>
-            </p>
-        </div>
         
         <logic:present name="planilla_modificada">
             <div class="alert alert-success" id="alert">

@@ -64,7 +64,7 @@ public class CambiarNombreCoordinacionA extends org.apache.struts.action.Action 
 
             if (actualizo) {
                 String codigoDecan = (String) session.getAttribute("codigoDecanatoActual");
-                
+
                 ArrayList<Decanato> decanatos = DBMS.getInstance().listarDecanatos();
                 request.setAttribute("decanatos", decanatos);
                 ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinacionesAdscritas(codigoDecan);
@@ -73,7 +73,12 @@ public class CambiarNombreCoordinacionA extends org.apache.struts.action.Action 
 
                 return mapping.findForward(SUCCESS);
             } else {
-                return mapping.findForward(ERRORUPDATE);
+                Coordinacion c = DBMS.getInstance().obtenerNombreCoordinacion(u);
+                error.add("registro", new ActionMessage("error.coordinacion.existente"));
+                request.setAttribute("codigo", c.getCodigo());
+                request.setAttribute("nombre", c.getNombre());
+                saveErrors(request, error);
+                return mapping.findForward(FAILURE);
             }
         }
     }

@@ -26,6 +26,16 @@
         <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
         <script src="css/js/bootstrap.min.js"></script>
 
+        <div class="alert alert-info alert-dismissable" 
+             id="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <p>
+                <strong>Atención: </strong> <br> 
+                Para realizar el llenado del formulario debe tener a mano
+                <strong>actas del trimestre correspondiente.</strong>
+            </p>
+        </div>
+        
         <logic:present name="error_num_estudiantes">
             <div class="alert alert-danger" id="alert">
                 <strong> 
