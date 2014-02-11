@@ -43,7 +43,11 @@ public class ConsultaProfesor extends org.apache.struts.action.Action {
         //obtengo una lista de decanatos registrados
         ArrayList<Profesor> profesores = DBMS.getInstance().listarProfesoresDepartamento(id_departamento);
 
-        session.setAttribute("profesores", profesores);
+        if(profesores.isEmpty()){
+            request.setAttribute("vacio", SUCCESS);
+        }
+        
+        session.setAttribute("profesores", profesores);        
         return mapping.findForward(SUCCESS);
     }
 }

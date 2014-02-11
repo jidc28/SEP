@@ -67,6 +67,10 @@ public class EliminaMateria extends org.apache.struts.action.Action {
                 request.setAttribute("materia_falla_desvinculado",FAILURE);
             }
         }
+        
+        if(materias.isEmpty()){
+            request.setAttribute("vacio", FAILURE);
+        }
 
         request.setAttribute("materias_vinculadas", SUCCESS);
         request.setAttribute("materias", materias);

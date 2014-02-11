@@ -45,6 +45,10 @@ public class ListarEvaluacionesPendientes extends org.apache.struts.action.Actio
         ArrayList<dicta> evaluaciones_pendientes;
         evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(id_coordinacion);
         
+        if (evaluaciones_pendientes.isEmpty()){
+            request.setAttribute("vacio",SUCCESS);
+        }
+        
         //retorno a pagina de exito
         request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
         return mapping.findForward(SUCCESS);

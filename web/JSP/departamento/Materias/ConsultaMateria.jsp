@@ -57,8 +57,8 @@
         </logic:present>
 
         <h4> Lista de Materias en el sistema:</h4>
-
-        <div id="tabla" class="table-responsive">
+        <logic:notPresent name="vacio">
+            <div id="tabla" class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -145,6 +145,14 @@
                 </logic:iterate>
             </table>
         </div>
+        </logic:notPresent>
+        <logic:present name="vacio">
+            <div class="alert alert-warning" id="alert" style="width: 60%">
+                <p>
+                No existen materias ofertadas en este momento.
+                </p>
+            </div>
+        </logic:present>
 
     </body>
 </html>

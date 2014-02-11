@@ -44,6 +44,10 @@ public class ConsultaMateriasCoordinacion extends org.apache.struts.action.Actio
         
         
         materias = DBMS.getInstance().listarMateriasCoordinacion(usuario.getUsbid());
+        
+        if (materias.isEmpty()){
+            request.setAttribute("vacio",SUCCESS);
+        }
 
         request.setAttribute("materias_vinculadas",SUCCESS);
         session.setAttribute("materias", materias);

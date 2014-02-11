@@ -46,6 +46,9 @@ public class ConsultarSolicitudesApertura extends org.apache.struts.action.Actio
         materias = DBMS.getInstance().listarMateriasSolicitadasDepartamento(usuario.getUsbid());
 
         //request.setAttribute("materias_vinculadas",SUCCESS);
+        if (materias.isEmpty()){
+            request.setAttribute("vacio",SUCCESS);
+        }
         session.setAttribute("materias", materias);
         return mapping.findForward(SUCCESS);
     }

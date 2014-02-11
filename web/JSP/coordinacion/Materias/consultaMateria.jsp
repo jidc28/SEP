@@ -56,9 +56,10 @@
                 Vinculadas:
             </logic:notPresent>
         </h4>
-        <div id="tabla" class="table-responsive">
+        
+        <logic:notPresent name="vacio">
+            <div id="tabla" class="table-responsive">
             <table class="table table-striped">
-                
                 <logic:notPresent name="materias_vinculadas">
                     <thead>
                     <tr>
@@ -147,5 +148,22 @@
                 </logic:present>
             </table>
         </div>
+        </logic:notPresent>
+        <logic:present name="vacio">
+            <logic:notPresent name="materias_vinculadas">
+                <div class="alert alert-warning" id="alert" style="width: 60%">
+                    <p>
+                    No existen materias ofertadas por el departamento en este momento.
+                    </p>
+                </div>
+            </logic:notPresent>
+            <logic:present name="materias_vinculadas">
+                <div class="alert alert-warning" id="alert" style="width: 60%">
+                    <p>
+                    No existen materias vinculadas en este momento.
+                    </p>
+                </div>
+            </logic:present>
+        </logic:present>
     </body>
 </html>

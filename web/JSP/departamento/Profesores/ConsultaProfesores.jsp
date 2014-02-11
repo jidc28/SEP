@@ -32,7 +32,8 @@
         <h4> Llenar Planilla de Evaluación Profesores: </h4>
 
     <center>
-        <div id="tabla" class="table-responsive">
+        <logic:notPresent name="vacio">
+            <div id="tabla" class="table-responsive">
             <table id="tabla" class="table table-striped">
                 <thead>
                     <tr>
@@ -109,6 +110,14 @@
                 </logic:iterate>
             </table>
         </div>
+        </logic:notPresent>
+        <logic:present name="vacio">
+            <div class="alert alert-warning" id="alert" style="width: 60%">
+                <p>
+                No existen profesores con planillas de evaluación pendientes en este momento.
+                </p>
+            </div>
+        </logic:present>
     </center>
 </body>
 </html>

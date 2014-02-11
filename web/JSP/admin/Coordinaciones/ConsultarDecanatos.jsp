@@ -40,7 +40,7 @@
             </div>
         </logic:present>
         <h4> Lista de Decanatos en el sistema:</h4>
-        <div id="tabla" class="table-responsive">
+            <div id="tabla" class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -82,6 +82,5 @@
                 </logic:iterate>
             </table>
         </div>
-
 </body>
 </html>
