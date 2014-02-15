@@ -169,4 +169,8 @@
         <put name="body" value="/JSP/coordinacion/Materias/solicitarApertura.jsp"/>
     </definition>
     
+    <definition name="obtenerEvaluacion" extends="baseCoordinacion">
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/obtenerEvaluaciones.jsp"/>
+    </definition>
+    
 </tiles-definitions>

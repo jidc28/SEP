@@ -5,12 +5,18 @@
 package Clases;
 
 import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
 
 /**
  *
  * @author smaf
  */
-public class dicta {
+public class dicta extends org.apache.struts.action.ActionForm {
+    
     private String codigoMateria;
     private String numeroMateria;
     private ArrayList<Profesor> profesores = new ArrayList(0);

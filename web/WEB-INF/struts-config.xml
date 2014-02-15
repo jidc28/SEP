@@ -20,6 +20,7 @@
         <form-bean name="Usuario" type="Clases.Usuario"/>
         <form-bean name="DACE" type="Sistemas.DACE"/>
         <form-bean name="MultiBox" type="Clases.MultiBox"/>
+        <form-bean name="dicta" type="Clases.dicta"/>
         <form-bean name="rendimientoProf" type="Clases.rendimientoProf"/>
     </form-beans>
     
@@ -280,6 +281,15 @@
         <!-- ACCIONES COORDINADOR -->
         <action input="/VistaCoordinacion.jsp" name="Coordinacion" path="/listarEvaluacionesPendientes" scope="request" type="Actions.Evaluaciones.ListarEvaluacionesPendientes" validate="false">
             <forward name="success" path="listarEvaluacionesPendientes"/>
+        </action>
+        
+        <action input="/listarEvaluacionesPendientes.jsp" 
+                name="dicta" 
+                path="/obtenerEvaluacion" 
+                scope="request" 
+                type="Actions.Evaluaciones.ObtenerEvaluacion"
+                validate="false">
+            <forward name="success" path="obtenerEvaluacion"/>
         </action>
         
         <!--         OTROS       -->               

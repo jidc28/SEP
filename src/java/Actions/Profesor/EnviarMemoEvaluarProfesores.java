@@ -38,7 +38,7 @@ public class EnviarMemoEvaluarProfesores extends Action {
         } else {
             request.setAttribute("enviado_memo", SUCCESS);
         }
-        DBMS.getInstance().enviarMemoEvaluarProfesor(profesores_seleccionados);
+        DBMS.getInstance().enviarMemoEvaluarProfesor(profesores_seleccionados,id_departamento);
         m.getProfesores(id_departamento);
         request.setAttribute("profesores", m);
         return mapping.findForward(SUCCESS);
