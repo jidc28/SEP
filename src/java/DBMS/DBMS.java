@@ -1738,4 +1738,36 @@ public class DBMS {
         }
         return -1;
     }
+    
+    public boolean agregarProfesor(Profesor p) {
+        PreparedStatement ps1, ps2;
+
+        try {
+            ps1 = conexion.prepareStatement("INSERT INTO usuario "
+                    + "VALUES (?,?,?)");
+            ps1.setString(1,p.getUsbid());
+            ps1.setString(2,"profesor");
+            ps1.setString(3,p.getUsbid());
+            
+            Integer j = ps1.executeUpdate();
+            
+            ps2 = conexion.prepareStatement("INSERT INTO profesor "
+                    + "(usbid, nombre, apellido, cedula, genero, email) "
+                    + "VALUES (?,?,?,?,?,?)");
+            ps2.setString(1,p.getUsbid());
+            ps2.setString(2,p.getNombre());
+            ps2.setString(3,p.getApellido());
+            ps2.setString(4,p.getCedula());
+            ps2.setString(5,p.getGenero());
+            ps2.setString(6,p.getEmail());
+            
+            Integer i = ps2.executeUpdate();
+            return i > 0 && j > 0;
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+
+    }
 }

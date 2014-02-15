@@ -34,10 +34,17 @@
             });  
         $(function () { 
                 $("#ayuda2").popover({
-                    'title': 'Gestión de Profesores',
+                    'title': 'Gestión de Evaluaciones',
                     'content': 'permite evaluar un grupo de profesores y llenar'
                         +' las planillas correspondientes a las materias '
                         +'dictadas por cada uno de ellos.'
+                });  
+            });
+        $(function () { 
+                $("#ayuda3").popover({
+                    'title': 'Gestión de Profesores',
+                    'content': 'permite agregar, consultar y eliminar un '
+                        + 'profesor y agregar las materias que dicta'
                 });  
             });
     </script>
@@ -93,12 +100,34 @@
                         <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseProfesor">
                             Gestión de Profesores
                         </a>
-                        <a href="#" id="ayuda2" style="float: right" rel="popover"> 
+                        <a href="#" id="ayuda3" style="float: right" rel="popover"> 
                             <span class="glyphicon glyphicon-question-sign"></span> 
                         </a>
                     </h4>
                 </div>
                 <div id="collapseProfesor" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <html:link action="/irAgregarProfesor">
+                            <h5 align ="center">Agregar Profesor</h5>
+                        </html:link>
+                        <html:link action="/ConsultaProfesores">
+                            <h5 align ="center">Consultar Profesores</h5>
+                        </html:link>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 id="izquierda" class="panel-title">
+                        <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseEvaluacion">
+                            Gestión de Evaluaciones
+                        </a>
+                        <a href="#" id="ayuda2" style="float: right" rel="popover"> 
+                            <span class="glyphicon glyphicon-question-sign"></span> 
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseEvaluacion" class="panel-collapse collapse">
                     <div class="panel-body">
                         <html:link action="/irEvaluarProfesores">
                             <h5 align ="center">Evaluar Profesores</h5>

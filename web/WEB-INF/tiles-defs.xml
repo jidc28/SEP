@@ -143,6 +143,9 @@
         <put name="body" value="/JSP/departamento/Profesores/verPlanilla.jsp"/>
     </definition>    
     
+    <definition name="agregarProfesor" extends="baseDepartamento"> <!-- ir Agregar Rendimiento Profesor-->
+        <put name="body" value="/JSP/departamento/Profesores/agregarProfesor.jsp"/>
+    </definition>        
         
     <!-- COORDINACION -->
     <definition name="baseCoordinacion" extends="base"> <!-- BASE PARA COORDINACION -->

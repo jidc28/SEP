@@ -57,310 +57,310 @@
                         </tr>
                             <tr>
                             <td style="padding-left: 5px;">
-                                <html:radio property="cod1" value="BC">
+                                <html:radio property="cod1" value="BC" style="margin: 0px;">
                                     BC
                                 </html:radio><br>
-                                <html:radio property="cod1" value="BO">
+                                <html:radio property="cod1" value="BO" style="margin: 0px;">
                                     BO
                                 </html:radio><br>
-                                <html:radio property="cod1" value="CC">
+                                <html:radio property="cod1" value="CC" style="margin: 0px;">
                                     CC
                                 </html:radio><br>
-                                <html:radio property="cod1" value="CE">
+                                <html:radio property="cod1" value="CE" style="margin: 0px;">
                                     CE
                                 </html:radio><br>
-                                <html:radio property="cod1" value="CI">
+                                <html:radio property="cod1" value="CI" style="margin: 0px;">
                                     CI
                                 </html:radio><br>
-                                <html:radio property="cod1" value="CS">
+                                <html:radio property="cod1" value="CS" style="margin: 0px;">
                                     CS
                                 </html:radio><br>
-                                <html:radio property="cod1" value="CT">
+                                <html:radio property="cod1" value="CT" style="margin: 0px;">
                                     CT
                                 </html:radio><br>
-                                <html:radio property="cod1" value="DU">
+                                <html:radio property="cod1" value="DU" style="margin: 0px;">
                                     DU
                                 </html:radio><br>
-                                <html:radio property="cod1" value="EA">
+                                <html:radio property="cod1" value="EA" style="margin: 0px;">
                                     EA
                                 </html:radio><br>
-                                <html:radio property="cod1" value="EC">
+                                <html:radio property="cod1" value="EC" style="margin: 0px;">
                                     EC
                                 </html:radio><br>
                             </td>
                             <td style="padding-left: 5px;">
-                                <html:radio property="cod1" value="EG">
+                                <html:radio property="cod1" value="EG" style="margin: 0px;">
                                     EG
                                 </html:radio><br>
-                                <html:radio property="cod1" value="EP">
+                                <html:radio property="cod1" value="EP" style="margin: 0px;">
                                     EP
                                 </html:radio><br>
-                                <html:radio property="cod1" value="ID">
+                                <html:radio property="cod1" value="ID" style="margin: 0px;">
                                     ID
                                 </html:radio><br>
-                                <html:radio property="cod1" value="FL">
+                                <html:radio property="cod1" value="FL" style="margin: 0px;">
                                     FL
                                 </html:radio><br>
-                                <html:radio property="cod1" value="FS">
+                                <html:radio property="cod1" value="FS" style="margin: 0px;">
                                     FS
                                 </html:radio><br>
-                                <html:radio property="cod1" value="LL">
+                                <html:radio property="cod1" value="LL" style="margin: 0px;">
                                     LL
                                 </html:radio><br>
-                                <html:radio property="cod1" value="MA">
+                                <html:radio property="cod1" value="MA" style="margin: 0px;">
                                     MA
                                 </html:radio><br>
-                                <html:radio property="cod1" value="MC">
+                                <html:radio property="cod1" value="MC" style="margin: 0px;">
                                     MC
                                 </html:radio><br>
-                                <html:radio property="cod1" value="MT">
+                                <html:radio property="cod1" value="MT" style="margin: 0px;">
                                     MT
                                 </html:radio><br>
-                                <html:radio property="cod1" value="PB">
+                                <html:radio property="cod1" value="PB" style="margin: 0px;">
                                     PB
                                 </html:radio><br>
                             </td>
                             <td style="padding-left: 5px;">
-                                <html:radio property="cod1" value="PS">
+                                <html:radio property="cod1" value="PS" style="margin: 0px;">
                                     PS
                                 </html:radio><br>
-                                <html:radio property="cod1" value="QM">
+                                <html:radio property="cod1" value="QM" style="margin: 0px;">
                                     QM
                                 </html:radio><br>
-                                <html:radio property="cod1" value="TF">
+                                <html:radio property="cod1" value="TF" style="margin: 0px;">
                                     TF
                                 </html:radio><br>
-                                <html:radio property="cod1" value="EE">
+                                <html:radio property="cod1" value="EE" style="margin: 0px;">
                                     EE
                                 </html:radio><br>
-                                <html:radio property="cod1" value="GC">
+                                <html:radio property="cod1" value="GC" style="margin: 0px;">
                                     GC
                                 </html:radio><br>
-                                <html:radio property="cod1" value="DA">
+                                <html:radio property="cod1" value="DA" style="margin: 0px;">
                                     DA
                                 </html:radio><br>
-                                <html:radio property="cod1" value="PL">
+                                <html:radio property="cod1" value="PL" style="margin: 0px;">
                                     PL
                                 </html:radio><br>
-                                <html:radio property="cod1" value="CM">
+                                <html:radio property="cod1" value="CM" style="margin: 0px;">
                                     CM
                                 </html:radio><br>
-                                <html:radio property="cod1" value="CO">
+                                <html:radio property="cod1" value="CO" style="margin: 0px;">
                                     CO
                                 </html:radio><br>
-                                <html:radio property="cod1" value="TS">
+                                <html:radio property="cod1" value="TS" style="margin: 0px;">
                                     TS
                                 </html:radio><br>
                             </td>
                             <td style="padding-left: 5px;">
-                                <html:radio property="cod2" value="A">
+                                <html:radio property="cod2" value="A" style="margin: 0px;">
                                     A
                                 </html:radio><br>
-                                <html:radio property="cod2" value="B">
+                                <html:radio property="cod2" value="B" style="margin: 0px;">
                                     B
                                 </html:radio><br>
-                                <html:radio property="cod2" value="C">
+                                <html:radio property="cod2" value="C" style="margin: 0px;">
                                     C
                                 </html:radio><br>
-                                <html:radio property="cod2" value="D">
+                                <html:radio property="cod2" value="D" style="margin: 0px;">
                                     D
                                 </html:radio><br>
-                                <html:radio property="cod2" value="E">
+                                <html:radio property="cod2" value="E" style="margin: 0px;">
                                     E
                                 </html:radio><br>
-                                <html:radio property="cod2" value="F">
+                                <html:radio property="cod2" value="F" style="margin: 0px;">
                                     F
                                 </html:radio><br>
-                                <html:radio property="cod2" value="G">
+                                <html:radio property="cod2" value="G" style="margin: 0px;">
                                     G
                                 </html:radio><br>
-                                <html:radio property="cod2" value="H">
+                                <html:radio property="cod2" value="H" style="margin: 0px;">
                                     H
                                 </html:radio><br>
-                                <html:radio property="cod2" value="I">
+                                <html:radio property="cod2" value="I" style="margin: 0px;">
                                     I
                                 </html:radio><br>
-                                <html:radio property="cod2" value="J">
+                                <html:radio property="cod2" value="J" style="margin: 0px;">
                                     J
                                 </html:radio><br>
                             </td>
                             <td style="padding-left: 5px;">
-                                <html:radio property="cod2" value="K">
+                                <html:radio property="cod2" value="K" style="margin: 0px;">
                                     K
                                 </html:radio><br>
-                                <html:radio property="cod2" value="L">
+                                <html:radio property="cod2" value="L" style="margin: 0px;">
                                     L
                                 </html:radio><br>
-                                <html:radio property="cod2" value="M">
+                                <html:radio property="cod2" value="M" style="margin: 0px;">
                                     M
                                 </html:radio><br>
-                                <html:radio property="cod2" value="N">
+                                <html:radio property="cod2" value="N" style="margin: 0px;">
                                     N
                                 </html:radio><br>
-                                <html:radio property="cod2" value="O">
+                                <html:radio property="cod2" value="O" style="margin: 0px;">
                                     O
                                 </html:radio><br>
-                                <html:radio property="cod2" value="P">
+                                <html:radio property="cod2" value="P" style="margin: 0px;">
                                     P
                                 </html:radio><br>
-                                <html:radio property="cod2" value="Q">
+                                <html:radio property="cod2" value="Q" style="margin: 0px;">
                                     Q
                                 </html:radio><br>
-                                <html:radio property="cod2" value="R">
+                                <html:radio property="cod2" value="R" style="margin: 0px;">
                                     R
                                 </html:radio><br>
-                                <html:radio property="cod2" value="S">
+                                <html:radio property="cod2" value="S" style="margin: 0px;">
                                     S
                                 </html:radio><br>
-                                <html:radio property="cod2" value="T">
+                                <html:radio property="cod2" value="T" style="margin: 0px;">
                                     T
                                 </html:radio><br>
                             </td>
                             <td style="padding-left: 5px; padding-bottom: 70px;">
-                                <html:radio property="cod2" value="U">
+                                <html:radio property="cod2" value="U" style="margin: 0px;">
                                     U
                                 </html:radio><br>
-                                <html:radio property="cod2" value="V">
+                                <html:radio property="cod2" value="V" style="margin: 0px;">
                                     V
                                 </html:radio><br>
-                                <html:radio property="cod2" value="W">
+                                <html:radio property="cod2" value="W" style="margin: 0px;">
                                     W
                                 </html:radio><br>
-                                <html:radio property="cod2" value="X">
+                                <html:radio property="cod2" value="X" style="margin: 0px;">
                                     X
                                 </html:radio><br>
-                                <html:radio property="cod2" value="Y">
+                                <html:radio property="cod2" value="Y" style="margin: 0px;">
                                     Y
                                 </html:radio><br>
-                                <html:radio property="cod2" value="Z">
+                                <html:radio property="cod2" value="Z" style="margin: 0px;">
                                     Z
                                 </html:radio><br>
                             </td>
                             <td style="padding-left: 5px;">
-                                <html:radio property="cod2" value="0">
+                                <html:radio property="cod2" value="0" style="margin: 0px;">
                                     0
                                 </html:radio><br>
-                                <html:radio property="cod2" value="1">
+                                <html:radio property="cod2" value="1" style="margin: 0px;">
                                     1
                                 </html:radio><br>
-                                <html:radio property="cod2" value="2">
+                                <html:radio property="cod2" value="2" style="margin: 0px;">
                                     2
                                 </html:radio><br>
-                                <html:radio property="cod2" value="3">
+                                <html:radio property="cod2" value="3" style="margin: 0px;">
                                     3
                                 </html:radio><br>
-                                <html:radio property="cod2" value="4">
+                                <html:radio property="cod2" value="4" style="margin: 0px;">
                                     4
                                 </html:radio><br>
-                                <html:radio property="cod2" value="5">
+                                <html:radio property="cod2" value="5" style="margin: 0px;">
                                     5
                                 </html:radio><br>
-                                <html:radio property="cod2" value="6">
+                                <html:radio property="cod2" value="6" style="margin: 0px;">
                                     6
                                 </html:radio><br>
-                                <html:radio property="cod2" value="7">
+                                <html:radio property="cod2" value="7" style="margin: 0px;">
                                     7
                                 </html:radio><br>
-                                <html:radio property="cod2" value="8">
+                                <html:radio property="cod2" value="8" style="margin: 0px;">
                                     8
                                 </html:radio><br>
-                                <html:radio property="cod2" value="9">
+                                <html:radio property="cod2" value="9" style="margin: 0px;">
                                     9
                                 </html:radio><br>
                             </td>
                             <td style="padding-left: 5px;">
-                                <html:radio property="num2" value="0">
+                                <html:radio property="num2" value="0" style="margin: 0px;">
                                     0
                                 </html:radio><br>
-                                <html:radio property="num2" value="1">
+                                <html:radio property="num2" value="1" style="margin: 0px;">
                                     1
                                 </html:radio><br>
-                                <html:radio property="num2" value="2">
+                                <html:radio property="num2" value="2" style="margin: 0px;">
                                     2
                                 </html:radio><br>
-                                <html:radio property="num2" value="3">
+                                <html:radio property="num2" value="3"style="margin: 0px;">
                                     3
                                 </html:radio><br>
-                                <html:radio property="num2" value="4">
+                                <html:radio property="num2" value="4" style="margin: 0px;">
                                     4
                                 </html:radio><br>
-                                <html:radio property="num2" value="5">
+                                <html:radio property="num2" value="5" style="margin: 0px;">
                                     5
                                 </html:radio><br>
-                                <html:radio property="num2" value="6">
+                                <html:radio property="num2" value="6" style="margin: 0px;">
                                     6
                                 </html:radio><br>
-                                <html:radio property="num2" value="7">
+                                <html:radio property="num2" value="7" style="margin: 0px;">
                                     7
                                 </html:radio><br>
-                                <html:radio property="num2" value="8">
+                                <html:radio property="num2" value="8" style="margin: 0px;">
                                     8
                                 </html:radio><br>
-                                <html:radio property="num2" value="9">
+                                <html:radio property="num2" value="9" style="margin: 0px;">
                                     9
                                 </html:radio><br>
                             </td>
                             <td>
-                                <html:radio property="num3" value="0">
+                                <html:radio property="num3" value="0" style="margin: 0px;">
                                     0
                                 </html:radio><br>
-                                <html:radio property="num3" value="1">
+                                <html:radio property="num3" value="1" style="margin: 0px;">
                                     1
                                 </html:radio><br>
-                                <html:radio property="num3" value="2">
+                                <html:radio property="num3" value="2" style="margin: 0px;">
                                     2
                                 </html:radio><br>
-                                <html:radio property="num3" value="3">
+                                <html:radio property="num3" value="3" style="margin: 0px;">
                                     3
                                 </html:radio><br>
-                                <html:radio property="num3" value="4">
+                                <html:radio property="num3" value="4" style="margin: 0px;">
                                     4
                                 </html:radio><br>
-                                <html:radio property="num3" value="5">
+                                <html:radio property="num3" value="5" style="margin: 0px;">
                                     5
                                 </html:radio><br>
-                                <html:radio property="num3" value="6">
+                                <html:radio property="num3" value="6" style="margin: 0px;">
                                     6
                                 </html:radio><br>
-                                <html:radio property="num3" value="7">
+                                <html:radio property="num3" value="7" style="margin: 0px;">
                                     7
                                 </html:radio><br>
-                                <html:radio property="num3" value="8">
+                                <html:radio property="num3" value="8" style="margin: 0px;">
                                     8
                                 </html:radio><br>
-                                <html:radio property="num3" value="9">
+                                <html:radio property="num3" value="9" style="margin: 0px;">
                                     9
                                 </html:radio><br>
                             </td>
                             <td>
-                                <html:radio property="num4" value="0">
+                                <html:radio property="num4" value="0" style="margin: 0px;">
                                     0
                                 </html:radio><br>
-                                <html:radio property="num4" value="1">
+                                <html:radio property="num4" value="1" style="margin: 0px;">
                                     1
                                 </html:radio><br>
-                                <html:radio property="num4" value="2">
+                                <html:radio property="num4" value="2" style="margin: 0px;">
                                     2
                                 </html:radio><br>
-                                <html:radio property="num4" value="3">
+                                <html:radio property="num4" value="3" style="margin: 0px;">
                                     3
                                 </html:radio><br>
-                                <html:radio property="num4" value="4">
+                                <html:radio property="num4" value="4" style="margin: 0px;">
                                     4
                                 </html:radio><br>
-                                <html:radio property="num4" value="5">
+                                <html:radio property="num4" value="5" style="margin: 0px;">
                                     5
                                 </html:radio><br>
-                                <html:radio property="num4" value="6">
+                                <html:radio property="num4" value="6" style="margin: 0px;">
                                     6
                                 </html:radio><br>
-                                <html:radio property="num4" value="7">
+                                <html:radio property="num4" value="7" style="margin: 0px;">
                                     7
                                 </html:radio><br>
-                                <html:radio property="num4" value="8">
+                                <html:radio property="num4" value="8" style="margin: 0px;">
                                     8
                                 </html:radio><br>
-                                <html:radio property="num4" value="9">
+                                <html:radio property="num4" value="9" style="margin: 0px;">
                                     9
                                 </html:radio><br>         
                             </td>

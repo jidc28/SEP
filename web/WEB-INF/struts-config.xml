@@ -277,6 +277,22 @@
         <action input="/verPlanillasLlenas.jsp" name="Profesor" path="/irLlenarPlanillas" scope="request" type="Actions.Departamento.irLlenarPlanillas" validate="false">
             <forward name="success" path="llenarPlanillas"/>
         </action>
+        
+        <action path="/irAgregarProfesor"
+            type="org.apache.struts.actions.ForwardAction"
+            scope="request"
+            validate="false"
+            parameter="agregarProfesor">
+        </action>
+        
+        <action input="agregarProfesor.jsp"
+            path="/agregarProfesor"
+            type="Actions.Profesor.AgregarProfesor"
+            scope="request"
+            name="Profesor"
+            validate="false">
+            <forward name="success" path="vistaDepartamento"/>
+        </action>
                                                                 
         <!-- ACCIONES COORDINADOR -->
         <action input="/VistaCoordinacion.jsp" name="Coordinacion" path="/listarEvaluacionesPendientes" scope="request" type="Actions.Evaluaciones.ListarEvaluacionesPendientes" validate="false">
