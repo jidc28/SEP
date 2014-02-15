@@ -35,6 +35,14 @@
                 <tbody>
                     <tr>
                         <td style="text-align: right; width: 50%; font-size: 14px;">
+                            <strong>TOTAL ESTUDIANTES</strong>
+                        </td>
+                        <td>
+                            <bean:write name="evaluacion" property="total_estudiantes"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 50%; font-size: 14px;">
                             <strong>PORCENTAJE APLAZADOS</strong>
                         </td>
                         <td>

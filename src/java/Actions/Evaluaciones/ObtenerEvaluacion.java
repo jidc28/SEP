@@ -36,16 +36,16 @@ public class ObtenerEvaluacion extends Action {
         int aprobados = evaluacion.getNota3() + evaluacion.getNota4()
                 + evaluacion.getNota5();
 
-        Float porcentaje1 = calcularPorcentaje(total, evaluacion.getNota1());
-        Float porcentaje2 = calcularPorcentaje(total, evaluacion.getNota2());
-        Float porcentaje3 = calcularPorcentaje(total, evaluacion.getNota3());
-        Float porcentaje4 = calcularPorcentaje(total, evaluacion.getNota4());
-        Float porcentaje5 = calcularPorcentaje(total, evaluacion.getNota5());
-        Float porcentajeR = calcularPorcentaje(total, evaluacion.getRetirados());
+        String porcentaje1 = String.format("%.2f",calcularPorcentaje(total, evaluacion.getNota1()));
+        String porcentaje2 = String.format("%.2f",calcularPorcentaje(total, evaluacion.getNota2()));
+        String porcentaje3 = String.format("%.2f",calcularPorcentaje(total, evaluacion.getNota3()));
+        String porcentaje4 = String.format("%.2f",calcularPorcentaje(total, evaluacion.getNota4()));
+        String porcentaje5 = String.format("%.2f",calcularPorcentaje(total, evaluacion.getNota5()));
+        String porcentajeR = String.format("%.2f",calcularPorcentaje(total, evaluacion.getRetirados()));
 
-        Float porcentajeApr = calcularPorcentaje(total, aprobados);
-        Float porcentajeApl = calcularPorcentaje(total, aplazados);
-
+        String porcentajeApr = String.format("%.2f",calcularPorcentaje(total, aprobados));
+        String porcentajeApl = String.format("%.2f",calcularPorcentaje(total, aplazados));
+        
         int profEvaluados =
                 DBMS.getInstance().cantidadEvaluados(d.getCodigoMateria(), id_coordinacion);
 
