@@ -162,7 +162,7 @@
                         
         <div class="progress" style="width: 60%">
             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<bean:write name="porcentajeProf"/>" aria-valuemin="0" aria-valuemax="100" style="width: <bean:write name="porcentajeProf"/>%">
-                <bean:write name="porcentajeProf"/>%
+                <strong><bean:write name="porcentajeProf"/>%</strong>
             </div>
         </div>
                      
@@ -179,9 +179,7 @@
                             <bean:write name="departamento"/>
                         </td>
                         <td style="align: left;">
-<!--                            <button class="btn btn-success">-->
                                 <span class="glyphicon glyphicon-envelope" style="color: green;"></span>
-<!--                            </button>-->
                         </td>
                     </tr>
                 </logic:iterate>

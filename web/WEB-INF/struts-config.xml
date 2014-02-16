@@ -206,8 +206,8 @@
             <forward name="success" path="consultaProfesor"/>
         </action>
         
-        <action input="/VistaDepartamento.jsp" name="Profesor" path="/ConsultaProfesores" validate="false" scope="request" type="Actions.Profesor.ConsultaProfesor">
-            <forward name="success" path="consultaProfesores"/>
+        <action input="/VistaDepartamento.jsp" name="Profesor" path="/ConsultaEstadoPlanillas" validate="false" scope="request" type="Actions.Profesor.ConsultaProfesor">
+            <forward name="success" path="consultaEstadoPlanillas"/>
         </action>        
         
         <action input="/ConsultaProfesores.jsp" name="MultiBox" path="/EvaluarProfesores" validate="false" scope="request" type="Actions.Profesor.EnviarMemoEvaluarProfesores">
@@ -291,9 +291,27 @@
             scope="request"
             name="Profesor"
             validate="false">
-            <forward name="success" path="vistaDepartamento"/>
+            <forward name="success" path="consultaProfesores"/>
         </action>
-                                                                
+
+        <action input="VistaDepartamento.jsp"
+            path="/consultarProfesores"
+            type="Actions.Profesor.ConsultaProfesorDepartamento"
+            scope="request"
+            name="Profesor"
+            validate="false">
+            <forward name="success" path="consultaProfesores"/>
+        </action>
+        
+        <action input="ConsultaProfesores.jsp"
+            path="/eliminarProfesor"
+            type="Actions.Profesor.EliminarProfesor"
+            scope="request"
+            name="Profesor"
+            validate="false">
+            <forward name="success" path="consultaProfesores"/>
+        </action>        
+                                                                                                                                
         <!-- ACCIONES COORDINADOR -->
         <action input="/VistaCoordinacion.jsp" name="Coordinacion" path="/listarEvaluacionesPendientes" scope="request" type="Actions.Evaluaciones.ListarEvaluacionesPendientes" validate="false">
             <forward name="success" path="listarEvaluacionesPendientes"/>

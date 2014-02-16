@@ -115,6 +115,10 @@
         <put name="body" value="/JSP/departamento/Profesores/ConsultaProfesores.jsp"/>
     </definition>
     
+    <definition name="consultaEstadoPlanillas" extends="baseDepartamento"> <!-- Consulta Materias -->
+        <put name="body" value="/JSP/departamento/Profesores/ConsultaEstadoPlanillas.jsp"/>
+    </definition>
+    
     <definition name="agregaMateria" extends="baseDepartamento"> <!-- Consulta Materias -->
         <put name="body" value="/JSP/departamento/Materias/AgregaMateria.jsp"/>
     </definition>

@@ -4,22 +4,21 @@
  */
 package Actions.Profesor;
 
-import Clases.*;
 import DBMS.DBMS;
+import Clases.Profesor;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author jidc28
+ * @author admin
  */
-public class AgregarProfesor extends org.apache.struts.action.Action {
+public class ConsultaProfesorDepartamento extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -40,20 +39,17 @@ public class AgregarProfesor extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        Profesor profesor = (Profesor) form;
         HttpSession session = request.getSession(true);
         String id_departamento = (String) session.getAttribute("usbid");
-
-        ActionErrors error = new ActionErrors();
-
-        boolean agregado = 
-                DBMS.getInstance().agregarProfesor(profesor,id_departamento);
-        
+        //obtengo una lista de decanatos registrados
         ArrayList<Profesor> profesores =
                 DBMS.getInstance().listarProfesoresDepartamento(id_departamento);
 
-        session.setAttribute("profesores",profesores);
-        
+        if (profesores.isEmpty()) {
+            request.setAttribute("vacio", SUCCESS);
+        }
+
+        session.setAttribute("profesores", profesores);
         return mapping.findForward(SUCCESS);
     }
 }

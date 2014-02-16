@@ -4,9 +4,8 @@
  */
 package Actions.Profesor;
 
+import Clases.*;
 import DBMS.DBMS;
-import Forms.EliminarUserForm;
-import Clases.Usuario;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +19,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Langtech
  */
-public class EliminarProfesorAction extends org.apache.struts.action.Action {
+public class EliminarProfesor extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -41,28 +40,27 @@ public class EliminarProfesorAction extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        EliminarUserForm u = (EliminarUserForm) form;
+        Profesor profesor = (Profesor) form;
         HttpSession session = request.getSession(true);
+        String id_departamento = (String) session.getAttribute("usbid");
 
         ActionErrors error = new ActionErrors();
 
+        boolean elimino = DBMS.getInstance().eliminarProfesor(profesor);
 
-            //verifica un usuario en el sistema CAS
-            boolean elimino = DBMS.getInstance().eliminarUsuario(u);
-            
-            ArrayList<Usuario> users = DBMS.getInstance().listarProfesores();
+        ArrayList<Profesor> profesores =
+                DBMS.getInstance().listarProfesoresDepartamento(id_departamento);
 
-            if (elimino) {
-                //retorno a pagina de exito
-                session.setAttribute("usuarios", users);
-                //si elimino usuario entonces
-                return mapping.findForward(SUCCESS);
-                
-            } else {
-                return mapping.findForward(FAILURE);
-            }
+        if (elimino) {
+            //retorno a pagina de exito
+            session.setAttribute("usuarios", profesores);
+            //si elimino usuario entonces
+            return mapping.findForward(SUCCESS);
 
-        
+        } else {
+            return mapping.findForward(FAILURE);
+        }
+
+
     }
 }
-

@@ -73,7 +73,8 @@
                         </td>
                         <td rowspan="<bean:write name="evaluacion" property="numeroMateria"/>">
                         <center>
-                            <html:form action="/obtenerEvaluacion" onsubmit="return(this)">
+                            <html:form action="/obtenerEvaluacion" onsubmit="return(this)"
+                                       style="margin: 0px;">
                                 <html:hidden name="evaluacion" property="codigoMateria"/>
                                 <html:submit styleClass="btn btn-primary">
                                     Obtener evaluacion

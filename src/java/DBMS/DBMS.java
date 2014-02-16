@@ -301,16 +301,20 @@ public class DBMS {
         return u;
     }
 
-    public boolean eliminarUsuario(EliminarUserForm u) {
-        PreparedStatement ps = null;
+    public boolean eliminarProfesor(Profesor p) {
+        PreparedStatement ps1, ps2;
         try {
 
-            ps = conexion.prepareStatement("DELETE FROM usuario WHERE ( usbid = ? )");
-
-            ps.setString(1, u.getUsbid());
-            Integer s = ps.executeUpdate();
-
-            return s > 0;
+            ps1 = conexion.prepareStatement("DELETE FROM usuario WHERE ( usbid = ? );");
+            ps1.setString(1, p.getUsbid());
+            
+            ps2 = conexion.prepareStatement("DELETE FROM profesor WHERE ( usbid = ? );");
+            ps2.setString(1, p.getUsbid());
+                        
+            Integer r = ps2.executeUpdate();
+            Integer s = ps1.executeUpdate();
+            
+            return s > 0 && r > 0;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -794,6 +798,35 @@ public class DBMS {
     }
 
     public ArrayList<Profesor> listarProfesoresDepartamento(String id_departamento) {
+
+        ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT * "
+                    + "FROM pertenece, profesor "
+                    + "WHERE codigo_departamento = ? "
+                    + "AND usbid_profesor = usbid "
+                    + "ORDER BY usbid;");
+            ps.setString(1, id_departamento);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Profesor p = new Profesor();
+                p.setUsbid(rs.getString("usbid"));
+                p.setNombre(rs.getString("nombre"));
+                p.setApellido(rs.getString("apellido"));
+                p.setLapso_contractual_inicio(rs.getString("lapso_contractual_inicio"));
+                p.setNivel(rs.getString("nivel"));
+                profesores.add(p);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return profesores;
+    }
+
+    public ArrayList<Profesor> listarProfesoresActivosDepartamento(String id_departamento) {
 
         ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
         PreparedStatement ps = null;
@@ -1738,32 +1771,41 @@ public class DBMS {
         }
         return -1;
     }
-    
-    public boolean agregarProfesor(Profesor p) {
-        PreparedStatement ps1, ps2;
+
+    public boolean agregarProfesor(Profesor p, String id_departamento) {
+        PreparedStatement ps1, ps2, ps3;
 
         try {
             ps1 = conexion.prepareStatement("INSERT INTO usuario "
                     + "VALUES (?,?,?)");
-            ps1.setString(1,p.getUsbid());
-            ps1.setString(2,"profesor");
-            ps1.setString(3,p.getUsbid());
-            
+            ps1.setString(1, p.getUsbid());
+            ps1.setString(2, "profesor");
+            ps1.setString(3, p.getUsbid());
+
             Integer j = ps1.executeUpdate();
-            
+
             ps2 = conexion.prepareStatement("INSERT INTO profesor "
                     + "(usbid, nombre, apellido, cedula, genero, email) "
                     + "VALUES (?,?,?,?,?,?)");
-            ps2.setString(1,p.getUsbid());
-            ps2.setString(2,p.getNombre());
-            ps2.setString(3,p.getApellido());
-            ps2.setString(4,p.getCedula());
-            ps2.setString(5,p.getGenero());
-            ps2.setString(6,p.getEmail());
-            
+            ps2.setString(1, p.getUsbid());
+            ps2.setString(2, p.getNombre());
+            ps2.setString(3, p.getApellido());
+            ps2.setString(4, p.getCedula());
+            ps2.setString(5, p.getGenero());
+            ps2.setString(6, p.getEmail());
+
             Integer i = ps2.executeUpdate();
-            return i > 0 && j > 0;
-            
+
+            ps3 = conexion.prepareStatement("INSERT INTO pertenece "
+                    + "(usbid_profesor, codigo_departamento) "
+                    + "VALUES (?,?);");
+            ps3.setString(1, p.getUsbid());
+            ps3.setString(2, id_departamento);
+
+            Integer k = ps3.executeUpdate();
+
+            return i > 0 && j > 0 && k > 0;
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

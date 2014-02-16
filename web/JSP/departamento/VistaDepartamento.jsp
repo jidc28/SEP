@@ -110,7 +110,7 @@
                         <html:link action="/irAgregarProfesor">
                             <h5 align ="center">Agregar Profesor</h5>
                         </html:link>
-                        <html:link action="/ConsultaProfesores">
+                        <html:link action="/consultarProfesores">
                             <h5 align ="center">Consultar Profesores</h5>
                         </html:link>
                     </div>
@@ -132,7 +132,7 @@
                         <html:link action="/irEvaluarProfesores">
                             <h5 align ="center">Evaluar Profesores</h5>
                         </html:link>
-                        <html:link action="/ConsultaProfesores">
+                        <html:link action="/ConsultaEstadoPlanillas">
                             <h5 align ="center">Gestionar Planillas de Evaluación de Profesores</h5>
                         </html:link>
                     </div>

@@ -41,7 +41,7 @@ public class ConsultaProfesor extends org.apache.struts.action.Action {
         HttpSession session = request.getSession(true);
         String id_departamento = (String) session.getAttribute("usbid");
         //obtengo una lista de decanatos registrados
-        ArrayList<Profesor> profesores = DBMS.getInstance().listarProfesoresDepartamento(id_departamento);
+        ArrayList<Profesor> profesores = DBMS.getInstance().listarProfesoresActivosDepartamento(id_departamento);
 
         if(profesores.isEmpty()){
             request.setAttribute("vacio", SUCCESS);
