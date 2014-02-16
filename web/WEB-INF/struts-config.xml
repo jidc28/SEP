@@ -310,8 +310,30 @@
             name="Profesor"
             validate="false">
             <forward name="success" path="consultaProfesores"/>
-        </action>        
-                                                                                                                                
+        </action>       
+        
+        <!-- accion que lleva a la vista de asignar 
+             una o mas materias a un profesor-->
+        <action input="ConsultaProfesores.jsp"
+            path="/irAsignarMateriaProfesor"
+            type="Actions.Profesor.irAsignarMateriaProfesor"
+            scope="request"
+            name="Profesor"
+            validate="false">
+            <forward name="success" path="asignarMateriaProfesor"/>
+        </action>
+        
+        <!--accion que dado unas materias seleccionadas envia a la pagina para
+        seleccionar el periodo en que dara la materia el profesor-->
+        <action input="asignarMateriaProfesor.jsp"
+            path="/asignarMateriaProfesor"
+            type="Actions.Profesor.AsignarMateriaProfesor"
+            scope="request"
+            name="MultiBox"
+            validate="false">
+            <forward name="success" path="asignarPeriodo"/>
+        </action>
+                                                                                                                                                                                                                                                        
         <!-- ACCIONES COORDINADOR -->
         <action input="/VistaCoordinacion.jsp" name="Coordinacion" path="/listarEvaluacionesPendientes" scope="request" type="Actions.Evaluaciones.ListarEvaluacionesPendientes" validate="false">
             <forward name="success" path="listarEvaluacionesPendientes"/>

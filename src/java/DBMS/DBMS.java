@@ -307,13 +307,13 @@ public class DBMS {
 
             ps1 = conexion.prepareStatement("DELETE FROM usuario WHERE ( usbid = ? );");
             ps1.setString(1, p.getUsbid());
-            
+
             ps2 = conexion.prepareStatement("DELETE FROM profesor WHERE ( usbid = ? );");
             ps2.setString(1, p.getUsbid());
-                        
+
             Integer r = ps2.executeUpdate();
             Integer s = ps1.executeUpdate();
-            
+
             return s > 0 && r > 0;
 
         } catch (SQLException ex) {
@@ -706,51 +706,24 @@ public class DBMS {
         ArrayList<Materia> materias = new ArrayList<Materia>(0);
         PreparedStatement ps = null;
         try {
-            ps = conexion.prepareStatement("SELECT codigo, nombre, condicion, estado "
+            ps = conexion.prepareStatement("SELECT codigo, nombre, condicion, estado, creditos "
                     + "FROM oferta, materia "
                     + "WHERE codigo_departamento = ? AND "
                     + "codigo_materia = codigo AND "
                     + "condicion = 'activo' "
                     + "AND solicitud = 'no' "
                     + "ORDER BY estado;");
+
             ps.setString(1, id_departamento);
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
                 Materia m = new Materia();
                 m.setCodigo(rs.getString("codigo"));
                 m.setNombre(rs.getString("nombre"));
                 m.setCondicion(rs.getString("condicion"));
                 m.setEstado(rs.getString("estado"));
-                materias.add(m);
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return materias;
-    }
-
-    public ArrayList<Materia> listarMateriasOfertadasDepartamento(String id_departamento) {
-
-        ArrayList<Materia> materias = new ArrayList<Materia>(0);
-        PreparedStatement ps = null;
-        try {
-            ps = conexion.prepareStatement("SELECT codigo, nombre, condicion, estado "
-                    + "FROM oferta, materia "
-                    + "WHERE codigo_departamento = ? "
-                    + "AND codigo_materia = codigo "
-                    + "AND condicion = 'activo' "
-                    + "AND estado = 'visible' "
-                    + "AND solicitud = 'no' "
-                    + "ORDER BY estado;");
-            ps.setString(1, id_departamento);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Materia m = new Materia();
-                m.setCodigo(rs.getString("codigo"));
-                m.setNombre(rs.getString("nombre"));
-                m.setCondicion(rs.getString("condicion"));
-                m.setEstado(rs.getString("estado"));
+                m.setCreditos(rs.getString("creditos"));
                 materias.add(m);
             }
 
@@ -1810,6 +1783,44 @@ public class DBMS {
             ex.printStackTrace();
         }
         return false;
+    }
 
+    public ArrayList<Materia> consultarMateriasSeleccionadas(String[] materias_seleccionadas) {
+        PreparedStatement ps1;
+        ArrayList<Materia> materias = new ArrayList<Materia>(0);
+        try {
+
+            String lista_materias = "";
+
+            for (int i = 0; i < materias_seleccionadas.length; i++) {
+                if (i == materias_seleccionadas.length - 1) {
+                    lista_materias = lista_materias + "codigo = '"
+                            + materias_seleccionadas[i] + "'";
+                } else {
+                    lista_materias = lista_materias + "codigo = '"
+                            + materias_seleccionadas[i] + "' OR ";
+                }
+            }
+
+            System.out.println(lista_materias);
+            ps1 = conexion.prepareStatement("SELECT * "
+                    + "FROM materia "
+                    + "WHERE " + lista_materias + ";");
+
+            ResultSet rs = ps1.executeQuery();
+
+            while (rs.next()) {
+                Materia m = new Materia();
+                m.setCodigo(rs.getString("codigo"));
+                m.setNombre(rs.getString("nombre"));
+                materias.add(m);
+            }
+
+            return materias;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return materias;
     }
 }

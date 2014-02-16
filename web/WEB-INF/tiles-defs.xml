@@ -147,10 +147,22 @@
         <put name="body" value="/JSP/departamento/Profesores/verPlanilla.jsp"/>
     </definition>    
     
-    <definition name="agregarProfesor" extends="baseDepartamento"> <!-- ir Agregar Rendimiento Profesor-->
+    <!-- vista para agregar un profesor al departamento-->
+    <definition name="agregarProfesor" extends="baseDepartamento">
         <put name="body" value="/JSP/departamento/Profesores/agregarProfesor.jsp"/>
     </definition>        
-        
+
+    <!--vista para asignar materias a los profesores del departamento -->
+    <definition name="asignarMateriaProfesor" extends="baseDepartamento">
+        <put name="body" 
+             value="/JSP/departamento/Profesores/asignarMateriaProfesor.jsp"/>
+    </definition>    
+
+    <definition name="asignarPeriodo" extends="baseDepartamento">
+        <put name="body" 
+             value="/JSP/departamento/Profesores/asignarPeriodo.jsp"/>
+    </definition>
+                        
     <!-- COORDINACION -->
     <definition name="baseCoordinacion" extends="base"> <!-- BASE PARA COORDINACION -->
         <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDecanato.jsp"/>
