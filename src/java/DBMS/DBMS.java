@@ -1802,7 +1802,6 @@ public class DBMS {
                 }
             }
 
-            System.out.println(lista_materias);
             ps1 = conexion.prepareStatement("SELECT * "
                     + "FROM materia "
                     + "WHERE " + lista_materias + ";");
@@ -1822,5 +1821,26 @@ public class DBMS {
             ex.printStackTrace();
         }
         return materias;
+    }
+
+    public boolean agregarDicta(Profesor profesor, String id_materia, String periodo) {
+        PreparedStatement ps1;
+        try {
+
+            ps1 = conexion.prepareStatement("INSERT INTO dicta "
+                    + "(usbid_profesor,codigo_materia,periodo) "
+                    + "VALUES (?,?,?)");
+            ps1.setString(1, profesor.getUsbid());
+            ps1.setString(2, id_materia);
+            ps1.setString(3, periodo);
+
+            Integer j = ps1.executeUpdate();
+
+            return j > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 }

@@ -31,6 +31,14 @@
         <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
         <script type="text/javascript" src="scripts/bootstrap.js"></script>
 
+        <logic:present name="periodo_vacio">
+            <script>
+                $(function() {
+                    $('#${periodo_vacio.getCodigo()}').addClass('in'); 
+                });
+            </script>
+        </logic:present>
+
         <h4> Asignar períodos a materias:</h4>
 
         <br style="font-size: 14px;">
@@ -56,50 +64,57 @@
                     </div>
                     <div id='${materia.getCodigo()}' class="panel-collapse collapse">
                         <div class="panel-body">
+                            <logic:present name="periodo_vacio">
+                                <logic:equal name="materia" property="codigo" value="${periodo_vacio.getCodigo()}">
+                                    <div class="alert alert-danger" id="alert">
+                                        Seleccione el período en que el profesor dicta
+                                        la materia.
+                                    </div>  
+                                </logic:equal>
+                            </logic:present>
                             <table style="margin: 0px; width: 100%;">
                                 <tbody>
-                                    <tr>
-                                        <td text-align="left" style="padding: 5px">
-                                <html:checkbox style="margin: 0px; margin-right: 5px;" 
-                                               name="materia" property="periodoSD"
-                                               value="SD">
-                                    Septiembre-Diciembre
-                                </html:checkbox>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                <td text-align="left" style="padding: 5px">
-                                <html:checkbox style="margin: 0px; margin-right: 5px;" 
-                                               name="materia" property="periodoSD"
-                                               value="EM">
-                                    Enero-Marzo
-                                </html:checkbox>
-                                </td>
-                                    </tr>
-                                    <tr>
-                                <td text-align="left" style="padding: 5px">
-                                <html:checkbox style="margin: 0px; margin-right: 5px;" 
-                                               name="materia" property="periodoSD"
-                                               value="AJ">
-                                    Abril-Julio
-                                </html:checkbox>
-                                </td>
-                                    </tr>
-                                    <tr>
-                                        <td text-align="left" style="padding: 5px">
-                                <html:checkbox style="margin: 0px; margin-right: 5px;" 
-                                               name="materia" property="periodoSD"
-                                               value="V">
-                                    Intensivo
-                                </html:checkbox>
-                                        </td>
-                                        <td align="right">
-                                            <button class="btn btn-info"
-                                                    style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
-                                                Asignar
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    <html:form action="/asignarPeriodo">
+                                        <html:hidden name="materia" property="codigo"/>
+                                        <tr>
+                                            <td text-align="left" style="padding: 5px">
+                                                <html:checkbox style="margin: 0px; margin-right: 5px;" 
+                                                               name="materia" property="periodoSD"
+                                                               value="SD"/>
+                                                Septiembre-Diciembre
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td text-align="left" style="padding: 5px">
+                                                <html:checkbox style="margin: 0px; margin-right: 5px;" 
+                                                               name="materia" property="periodoEM"
+                                                               value="EM"/>
+                                                Enero-Marzo
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td text-align="left" style="padding: 5px">
+                                                <html:checkbox style="margin: 0px; margin-right: 5px;" 
+                                                               name="materia" property="periodoAJ"
+                                                               value="AJ"/>
+                                                Abril-Julio
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td text-align="left" style="padding: 5px">
+                                                <html:checkbox style="margin: 0px; margin-right: 5px;" 
+                                                               name="materia" property="periodoV"
+                                                               value="V"/>
+                                                Intensivo
+                                            </td>
+                                            <td align="right">
+                                                <button class="btn btn-info"
+                                                        style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                                                    Asignar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </html:form>
                                 </tbody>
                             </table>
                         </div>

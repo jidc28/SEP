@@ -31,6 +31,12 @@
         <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
         <script type="text/javascript" src="scripts/bootstrap.js"></script>
 
+        <logic:present name="no_seleccionado">
+            <div class="alert alert-danger" id="alert">
+                Porfavor, seleccione una o más materias a asignar.
+            </div>
+        </logic:present>
+        
         <h4> Asignar Materias a Profesores:</h4>
 
         <br style="font-size: 14px;">

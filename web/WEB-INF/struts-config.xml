@@ -332,6 +332,20 @@
             name="MultiBox"
             validate="false">
             <forward name="success" path="asignarPeriodo"/>
+            <forward name="failure" path="asignarMateriaProfesor"/>
+        </action>
+        
+        <!--accion que dado unas materias seleccionadas asigna al profesor
+            el periodo en que las dicta-->
+        <action input="asignarPeriodo.jsp"
+            path="/asignarPeriodo"
+            type="Actions.Profesor.AsignarPeriodo"
+            scope="request"
+            name="Materia"
+            validate="false">
+            <forward name="success" path="consultaProfesores"/>
+            <forward name="failure" path="asignarPeriodo"/>
+            <forward name="llenar_periodo" path="asignarPeriodo"/>
         </action>
                                                                                                                                                                                                                                                         
         <!-- ACCIONES COORDINADOR -->
