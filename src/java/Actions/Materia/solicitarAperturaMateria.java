@@ -99,6 +99,14 @@ public class solicitarAperturaMateria extends org.apache.struts.action.Action {
 
             if (registrada) {
                 request.setAttribute("solicitud_enviada", SUCCESS);
+                Correo email = new Correo();
+                email.setAsunto("SEP - Solicitud Apertura Materia");
+                email.setMensaje("Se ha solicitado la apertura de una materia a través del"
+                    + "\n Sistema de Evaluación de Profesores de la Universidad Simón Bolívar."
+                    + "\n\n Por favor, ingrese al sistema mediante el siguiente link:"
+                    + "\n\n LINK \n\n");
+                email.enviarNotificacion(id_departamento+"usb.ve");
+                
                 return mapping.findForward(SUCCESS);
             } else {
                 request.setAttribute("solicitud_no_enviada", FAILURE);
