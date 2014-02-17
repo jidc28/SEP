@@ -6,13 +6,13 @@ package Actions.Departamento;
 
 import Clases.*;
 import DBMS.DBMS;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -45,14 +45,31 @@ public class irLlenarPlanillas extends org.apache.struts.action.Action {
         HttpSession session = request.getSession(true);
         String id_departamento = (String) session.getAttribute("usbid");
         ArrayList<Materia> materias;
-        
+
         Profesor profesor = (Profesor) form;
-        
-        materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(profesor.getUsbid(),id_departamento);
-        
-        session.setAttribute("profesor",profesor);
-        request.setAttribute("materias",materias);
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        String fecha = dateFormat.format(date).toString();
+        String ano = fecha.substring(0, 4);
+
+        int[] anos = new int[4];
+        anos[3] = Integer.parseInt(ano);
+        int i = 2;
+        int tmp = anos[3];
+
+        while (i > -1) {
+            tmp--;
+            anos[i] = tmp;
+            i--;
+        }
+
+        materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(profesor.getUsbid(), id_departamento);
+
+        session.setAttribute("profesor", profesor);
+        request.setAttribute("materias", materias);
+        request.setAttribute("anos", anos);
         return mapping.findForward(SUCCESS);
-        
+
     }
 }
