@@ -278,7 +278,7 @@
                                 <html:radio property="num2" value="2" style="margin: 0px;">
                                     2
                                 </html:radio><br>
-                                <html:radio property="num2" value="3"style="margin: 0px;">
+                                <html:radio property="num2" value="3" style="margin: 0px;">
                                     3
                                 </html:radio><br>
                                 <html:radio property="num2" value="4" style="margin: 0px;">

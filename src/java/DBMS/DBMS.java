@@ -1330,10 +1330,14 @@ public class DBMS {
 
     public boolean aprobarSolicitudMateria(Materia m, String id_departamento) {
 
-        PreparedStatement ps1, ps2, ps3, ps4, ps5;
-        String c = "";
+        PreparedStatement ps0, ps1, ps3, ps4, ps5;
 
         try {
+            
+            ps0 = conexion.prepareStatement("UPDATE MATERIA SET codigo = ? WHERE codigo = ?;");
+            ps0.setString(1, m.getCodigo());
+            ps0.setString(2, m.getViejoCodigo());
+            
             ps1 = conexion.prepareStatement("UPDATE MATERIA SET solicitud = 'no' WHERE codigo = ?;");
             ps1.setString(1, m.getCodigo());
 
@@ -1350,12 +1354,13 @@ public class DBMS {
             ps5.setString(1, m.getCodigo());
             ps5.setString(2, id_departamento);
 
-            Integer i = ps1.executeUpdate();
-            Integer j = ps3.executeUpdate();
-            Integer k = ps4.executeUpdate();
-            Integer l = ps5.executeUpdate();
+            Integer i = ps0.executeUpdate();
+            Integer j = ps1.executeUpdate();
+            Integer k = ps3.executeUpdate();
+            Integer l = ps4.executeUpdate();
+            Integer n = ps5.executeUpdate();
 
-            return i > 0 && j > 0 && k > 0 && l > 0;
+            return i > 0 && j > 0 && k > 0 && l > 0 && n > 0;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -1369,7 +1374,7 @@ public class DBMS {
 
         try {
             ps = conexion.prepareStatement("DELETE FROM MATERIA WHERE codigo = ?;");
-            ps.setString(1, m.getCodigo());
+            ps.setString(1, m.getViejoCodigo());
 
             Integer i = ps.executeUpdate();
 

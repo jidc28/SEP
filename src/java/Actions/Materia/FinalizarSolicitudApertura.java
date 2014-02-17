@@ -66,10 +66,6 @@ public class FinalizarSolicitudApertura extends org.apache.struts.action.Action 
             materia.setCod2("");
         }
 
-        if (materia.getNum1() == null) {
-            materia.setNum1("");
-        }
-
         if (materia.getNum2() == null) {
             materia.setNum2("");
         }
@@ -82,14 +78,13 @@ public class FinalizarSolicitudApertura extends org.apache.struts.action.Action 
             materia.setNum4("");
         }
 
-        materia.setCodigo(materia.getCod1() + materia.getCod2() + materia.getNum1() + materia.getNum2() + materia.getNum3() + materia.getNum4());
+        materia.setCodigo(materia.getCod1() + materia.getCod2() + materia.getNum2() + materia.getNum3() + materia.getNum4());
 
         if (materia.getCodigo().length() > 6 || materia.getCodigo().length() < 6) {
             request.setAttribute("materia", materia);
             request.setAttribute("codigo_incorrecto", materia.getCodigo());
             materia.setCod1(null);
             materia.setCod2(null);
-            materia.setNum1(null);
             materia.setNum2(null);
             materia.setNum3(null);
             materia.setNum4(null);
