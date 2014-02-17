@@ -271,7 +271,8 @@
                                     </div>
                                     <html:hidden name="rendimientoProf" property="codigo_materia" value='${materia.getCodigo()}'/>
                                     <html:submit value="Guardar" style="margin-top: 10px;"
-                                                 styleClass="btn btn-info"/> 
+                                                 styleClass="btn btn-info"
+                                                 onclick="javascript: return confirm('¿Está seguro de haber llenado corectamente la planilla?')"/> 
                                 </html:form>
                             </div>
                         </div>
