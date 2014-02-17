@@ -99,7 +99,7 @@ public class FinalizarSolicitudApertura extends org.apache.struts.action.Action 
 
             if (materia.getSolicitud().equals("no")) {
                 System.out.println(materia.getCoordinacion());
-                finalizada = DBMS.getInstance().aprobarSolicitudMateria(materia,usuario.getUsbid());
+                finalizada = DBMS.getInstance().aprobarSolicitudMateria(materia, usuario.getUsbid());
             } else {
                 finalizada = DBMS.getInstance().negarSolicitudMateria(materia);
             }
@@ -111,6 +111,10 @@ public class FinalizarSolicitudApertura extends org.apache.struts.action.Action 
             }
 
             materias = DBMS.getInstance().listarMateriasSolicitadasDepartamento(usuario.getUsbid());
+
+            if (materias.isEmpty()) {
+                request.setAttribute("vacio", SUCCESS);
+            }
 
             request.setAttribute("materias", materias);
             return mapping.findForward(SUCCESS);
