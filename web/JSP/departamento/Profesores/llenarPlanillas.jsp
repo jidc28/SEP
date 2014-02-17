@@ -39,7 +39,7 @@
         <logic:present name="error_num_estudiantes">
             <script>
                 $(function() {
-                    $('#${error_num_estudiantes.getCodigo_materia()}').addClass('in'); 
+                    $('#${error_num_estudiantes.getCodigo_materia()}_${error_num_estudiantes.getTrimestre()}').addClass('in'); 
                 });
             </script>
         </logic:present>
@@ -53,7 +53,7 @@
         <logic:present name="agregar_informacion">
             <script>
                 $(function() {
-                    $('#${agregar_informacion.getCodigo_materia()}').addClass('in'); 
+                    $('#${agregar_informacion.getCodigo_materia()}_${agregar_informacion.getTrimestre()}').addClass('in'); 
                 });
             </script>
         </logic:present>
@@ -92,16 +92,35 @@
                 <logic:iterate name="materias" id="materia">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h4 id="izquierda" class="panel-title" style="text-align: left;">
-                                <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#${materia.getCodigo()}">
-                                    <bean:write name="materia" property="codigo"/>
-                                    <div style="font-size: 14px; color: grey;"><bean:write name="materia" property="nombre"/></div>
-                                </a>
-                            </h4>
+                            <table style="margin: 0px; width: 100%">
+                                <tbody>
+                                    <tr>
+                                    <td>
+                                        <h4 id="izquierda" class="panel-title" style="text-align: left; width: 100%">
+                                    <a id="link-dropdown" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#${materia.getCodigo()}_${materia.getPeriodo()}">
+                                        <bean:write name="materia" property="codigo"/>
+                                        <div style="font-size: 14px; color: grey;">
+                                            <bean:write name="materia" property="nombre"/>
+                                        </div>
+                                    </a>
+                                        </h4>
+                                    </td>
+                                    <td>
+                                        <h4 id="izquierda" class="panel-title" style="text-align: left; width: 100%">
+                                        <div style="font-size: 14px; color: grey; text-align: right;">
+                                            (<bean:write name="materia" property="periodo"/>)
+                                        </div>
+                                        </h4>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div id='${materia.getCodigo()}' class="panel-collapse collapse">
+                        <div id='${materia.getCodigo()}_${materia.getPeriodo()}' class="panel-collapse collapse">
                             <div class="panel-body">
                                 <logic:present name="error_num_estudiantes">
+                                    <logic:equal name="error_num_estudiantes" property="codigo_materia" value="${materia.getCodigo()}">
+                                        <logic:equal name="error_num_estudiantes" property="trimestre" value="${materia.getPeriodo()}">
                                     <div class="alert alert-danger" id="alert" style="font-size: 12px;"> 
                                         El número total de estudiantes
                                         (<bean:write name="error_num_estudiantes" property="total_estudiantes" />)
@@ -116,28 +135,24 @@
                                         <bean:write name="error_num_estudiantes" property="nota5" /> +
                                         <bean:write name="error_num_estudiantes" property="retirados" />)
                                     </div>
+                                        </logic:equal>
+                                    </logic:equal>
                                 </logic:present>
                                 <logic:present name="agregar_informacion">
+                                    <logic:equal name="agregar_informacion" property="codigo_materia" value="${materia.getCodigo()}">
+                                    <logic:equal name="agregar_informacion" property="trimestre" value="${materia.getPeriodo()}">
                                     <div class="alert alert-danger" id="alert" style="font-size: 12px;">
                                         Debe colocar el número total de estudiantes.
                                     </div>  
+                                        </logic:equal>
+                                    </logic:equal>
                                 </logic:present>
                                 <html:form action="/guardarPlanilla" style="margin: 0px;">
+                                    <html:hidden name="rendimientoProf" property="trimestre" value="${materia.getPeriodo()}"/>
                                     <div id="tabla" class="table-responsive" style="margin-top: 0px;">
                                         <table class="table" style="margin-top: 0px; margin-bottom: 0px;">      
                                             <tbody>
                                                 <tr>
-                                                    <td id="planilla_head" style="padding-top: 12px;">
-                                                        <strong>TRIMESTRE</strong>
-                                                    </td>
-                                                    <td id="planilla_body" style="width: 155px;">
-                                                        <html:select name="rendimientoProf" property="trimestre" style="width: 95px;">
-                                                            <html:option value="EM">Ene-Mar</html:option>
-                                                            <html:option value="AJ">Abr-Jul</html:option>
-                                                            <html:option value="SD">Sep-Dic</html:option>
-                                                            <html:option value="V">Intensivo</html:option>
-                                                        </html:select>
-                                                    </td>
                                                     <td id="planilla_head" style="padding-top: 12px;">
                                                         <strong>AÑO</strong>
                                                     </td>

@@ -1443,6 +1443,21 @@ public class DBMS {
                 Materia m = new Materia();
                 m.setCodigo(rs.getString(1));
                 m.setNombre(rs.getString(2));
+                String periodo = rs.getString("periodo");
+                if (periodo.equals("SD")) {
+                    m.setPeriodo("Septiembre-Diciembre");
+                    m.setPeriodoSD("SD");
+                } else if (periodo.equals("EM")) {
+                    m.setPeriodo("Enero-Marzo");
+                    m.setPeriodoEM("EM");
+                } else if (periodo.equals("AJ")) {
+                    m.setPeriodo("Abril-Julio");
+                    m.setPeriodoAJ("AJ");
+                } else if (periodo.equals("V")) {
+                    m.setPeriodo("Intensivo");
+                    m.setPeriodoV("V");
+                }
+
                 materia.add(m);
             }
 

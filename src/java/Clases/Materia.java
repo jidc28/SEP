@@ -39,6 +39,15 @@ public class Materia extends org.apache.struts.action.ActionForm {
     private String periodoEM;
     private String periodoAJ;
     private String periodoV;
+    private String periodo;
+
+    public String getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
+    }
 
     public String getPeriodoSD() {
         return periodoSD;

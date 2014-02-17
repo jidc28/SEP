@@ -48,8 +48,10 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
 
         rendimientoProf renMateria = (rendimientoProf) form;
 
+        System.out.println("periodo: " + renMateria.getTrimestre());
+
         renMateria.setUsbid_profesor(id_profesor);
-        
+
         int _1 = renMateria.getNota1();
         int _2 = renMateria.getNota2();
         int _3 = renMateria.getNota3();
@@ -57,7 +59,7 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
         int _5 = renMateria.getNota5();
         int _r = renMateria.getRetirados();
         int _total = renMateria.getTotal_estudiantes();
-        
+
         if (_total == 0) {
             ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
             request.setAttribute("materias", materias);
@@ -82,10 +84,21 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
             return mapping.findForward(SUCCESS);
         }
 
-        float promedio = (float) (_1 + (2*_2) + (3*_3) + (4*_4) + (5*_5)) / (_total - _r);
+        float promedio = (float) (_1 + (2 * _2) + (3 * _3) + (4 * _4) + (5 * _5)) / (_total - _r);
         renMateria.setNota_prom(promedio);
-        
-        boolean agregar = DBMS.getInstance().agregarRendimientoProfesor(renMateria,id_departamento);
+
+        String periodo = renMateria.getTrimestre();
+        if (periodo.equals("Septiembre-Diciembre")) {
+            renMateria.setTrimestre("SD");
+        } else if (periodo.equals("Enero-Marzo")) {
+            renMateria.setTrimestre("EM");
+        } else if (periodo.equals("Abril-Julio")) {
+            renMateria.setTrimestre("AJ");
+        } else if (periodo.equals("Intensivo")) {
+            renMateria.setTrimestre("V");
+        }
+
+        boolean agregar = DBMS.getInstance().agregarRendimientoProfesor(renMateria, id_departamento);
 
         ArrayList<rendimientoProf> rendimiento = DBMS.getInstance().obtenerRendimientoProfesor(id_profesor, id_departamento);
         ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
@@ -97,7 +110,7 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
         } else {
             request.setAttribute("planilla_no_guardada", renMateria);
         }
-        request.setAttribute("rendimientoProf",new rendimientoProf());
+        request.setAttribute("rendimientoProf", new rendimientoProf());
         return mapping.findForward(SUCCESS);
     }
 }
