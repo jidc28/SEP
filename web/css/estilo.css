@@ -498,3 +498,17 @@ seleccAll{
     font-size: 10px;
     font-style: normal;
 }
+
+#footer {
+
+	display: block;
+	height: 40px;
+	width: 100%;
+	float: left;
+	text-align: center;
+	margin-top: 60px;
+	padding: 10px;
+	border-top-width: 2px;
+	border-top-style: solid;
+	border-top-color: #369;
+}

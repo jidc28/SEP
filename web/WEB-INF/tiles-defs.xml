@@ -7,6 +7,8 @@
 <tiles-definitions>
 
     <definition name="base" path="/Plantilla/plantilla.jsp">
+        <put name="css" value="/JSP/general-css.jsp"/>
+        <put name="script" value="/JSP/general-script.jsp"/>
         <put name="banner" value="/Plantilla/banner.jsp"/>
         <put name="body" value="/Plantilla/body.jsp"/>
         <put name="sidebarR" value="/Plantilla/sidebarR.jsp"/>
@@ -22,6 +24,7 @@
     </definition>
     
     <definition name="vistaAdmin" extends="baseAdmin"> <!-- Vista administrador -->
+        <put name="script" value="/JSP/admin/scripts/vista-administrador-script.jsp"/>
         <put name="body" value="/JSP/admin/VistaAdministrador.jsp"/>
     </definition>
 
@@ -91,6 +94,7 @@
     </definition>
     
     <definition name="vistaDecanato" extends="baseDecanato"> <!-- Vista administrador -->
+        <put name="script" value="/JSP/decanato/scripts/vista-decanato-script.jsp"/>
         <put name="body" value="/JSP/decanato/VistaDecanato.jsp"/>
     </definition>
 
@@ -100,6 +104,7 @@
     </definition>
 
     <definition name="vistaDepartamento" extends="baseDepartamento"> <!-- Vista Departamento -->
+        <put name="script" value="/JSP/departamento/scripts/vista-departamento-script.jsp"/>
         <put name="body" value="/JSP/departamento/VistaDepartamento.jsp"/>
     </definition>
     
@@ -169,6 +174,7 @@
     </definition>
     
     <definition name="vistaCoordinacion" extends="baseCoordinacion">
+        <put name="script" value="/JSP/coordinacion/scripts/vista-coordinacion-script.jsp"/>
         <put name="body" value="/JSP/coordinacion/VistaCoordinacion.jsp"/>
     </definition>
     
