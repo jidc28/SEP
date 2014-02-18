@@ -34,7 +34,8 @@
                     </p>
                     <p style="margin-bottom: 20px;"> 
                         Diseñada y desarrollada por la Dirección de 
-                        Servicios Multimedia webmaster@usb.ve
+                        Servicios Multimedia 
+                        <a href="mailto:webmaster@usb.ve">webmaster@usb.ve</a>
                     </p>  
                 </td>
             </tr>
