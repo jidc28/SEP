@@ -112,6 +112,7 @@
     </definition>
     
     <definition name="consultaMateria" extends="baseDepartamento"> <!-- Consulta Materias -->
+        <put name="css" value="/JSP/consulta-css.jsp"/>
         <put name="body" value="/JSP/departamento/Materias/ConsultaMateria.jsp"/>
     </definition>
     
@@ -136,6 +137,7 @@
     </definition>
     
     <definition name="consultaSolicitudesApertura" extends="baseDepartamento"> <!-- Consulta Solicitudes de apertura de materias -->
+        <put name="css" value="/JSP/consulta-css.jsp"/>
         <put name="body" value="/JSP/departamento/Materias/ConsultarSolicitudesApertura.jsp"/>
     </definition>
     
