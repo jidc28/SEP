@@ -41,6 +41,7 @@
     </definition>
 
     <definition name="consultaCoordinacion" extends="baseAdmin"> <!-- Consulta Coordinacion -->
+        <put name="script" value="/JSP/admin/scripts/consulta-coordinacion-script.jsp"/>
         <put name="body" value="/JSP/admin/Coordinaciones/ConsultaCoordinacion.jsp"/>
     </definition>
     
@@ -61,7 +62,7 @@
     </definition>
     
     <definition name="editarNombreCoordinacion" extends="baseAdmin"> <!-- Editar Nombre Coordinacion -->
-        <put name="body" value="/JSP/admin/Coordinaciones/EditarNombreCoordinacion.jsp"/>
+        <put name="body" value="/JSP/admin/Coordinaciones/EditarCoordinacion.jsp"/>
     </definition>
     
     <!-- PROFESOR -->
