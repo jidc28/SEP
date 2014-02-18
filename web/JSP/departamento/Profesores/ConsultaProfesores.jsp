@@ -10,54 +10,36 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>  
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
-<script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="scripts/bootstrap.js"></script>
-<script type="text/javascript" src="scripts/bootstrap.min.js"></script>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <link rel="stylesheet" type="text/css" href="css/estilo.css">
-        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">
-        <title>Gestión de Profesores</title>
-    </head>
-    <body>
-        <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
-        <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
-        <script type="text/javascript" src="scripts/bootstrap.js"></script>
+<h4> Profesores registrados en el sistema: </h4>
 
-        <h4> Profesores registrados en el sistema: </h4>
-
-    <center>
-        <logic:notPresent name="vacio">
-            <div id="tabla" class="table-responsive">
+<center>
+    <logic:notPresent name="vacio">
+        <div id="tabla" class="table-responsive">
             <table id="tabla" class="table table-striped">
                 <thead>
-                <tr>
-                    <th style="font-size: 14px; width: 15%;">
-                        <center>
-                            USBID
-                        </center>
-                    </th>
-                    <th style="font-size: 14px;">
-                        <center>
-                            NOMBRE
-                        </center>
-                    </th>
-                    <th style="font-size: 14px;">
-                        <center>
-                            ELIMINAR
-                        </center>
-                    </th>
-                    <th style="font-size: 14px;">
-                        <center>
-                            ASIGNAR MATERIAS
-                        </center>
-                    </th>
-                </tr>
+                    <tr>
+                        <th style="font-size: 14px; width: 15%;">
+                            <center>
+                                USBID
+                            </center>
+                        </th>
+                        <th style="font-size: 14px;">
+                            <center>
+                                NOMBRE
+                            </center>
+                        </th>
+                        <th style="font-size: 14px;">
+                            <center>
+                                ELIMINAR
+                            </center>
+                        </th>
+                        <th style="font-size: 14px;">
+                            <center>
+                                ASIGNAR MATERIAS
+                            </center>
+                        </th>
+                    </tr>
                 </thead>
                 <logic:iterate id="profesor" name="profesores">
                     <tr>
@@ -98,14 +80,12 @@
                 </logic:iterate>
             </table>
         </div>
-        </logic:notPresent>
-        <logic:present name="vacio">
-            <div class="alert alert-warning" id="alert" style="width: 60%">
-                <p>
-                    No existen profesores registrados en este momento.
-                </p>
-            </div>
-        </logic:present>
-    </center>
-</body>
-</html>
+    </logic:notPresent>
+    <logic:present name="vacio">
+        <div class="alert alert-warning" id="alert" style="width: 60%">
+            <p>
+                No existen profesores registrados en este momento.
+            </p>
+        </div>
+    </logic:present>
+</center>
