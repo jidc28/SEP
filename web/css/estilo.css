@@ -507,8 +507,6 @@ seleccAll{
 	float: left;
 	text-align: center;
 	margin-top: 60px;
+        margin-bottom: 30px;
 	padding: 10px;
-	border-top-width: 2px;
-	border-top-style: solid;
-	border-top-color: #369;
 }
