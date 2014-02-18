@@ -190,7 +190,7 @@
     </definition>
     
     <definition name="listarEvaluacionesPendientes" extends="baseCoordinacion">
-        <put name="body" value="/JSP/coordinacion/Evaluaciones/listarEvaluacionesPendientes.jsp"/>
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/ListarEvaluacionesPendientes.jsp"/>
     </definition>
     
     <definition name="solicitarApertura" extends="baseCoordinacion"> <!-- Consulta Materias -->
@@ -198,7 +198,8 @@
     </definition>
     
     <definition name="obtenerEvaluacion" extends="baseCoordinacion">
-        <put name="body" value="/JSP/coordinacion/Evaluaciones/obtenerEvaluaciones.jsp"/>
+        <put name="css" value="/JSP/consulta-css.jsp"/>
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/ObtenerEvaluaciones.jsp"/>
     </definition>
     
 </tiles-definitions>
