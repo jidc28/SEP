@@ -77,22 +77,15 @@
         <put name="body" value="/JSP/profesor/VistaProfesor.jsp"/>
     </definition>
     
-    <definition name="agregarInfoPDace" extends="baseProfesor"> <!-- Info Dace -->
-        <put name="body" value="/JSP/profesor/AgregarInfoPDace.jsp"/>
-    </definition>
-    
     <definition name="modificarInfoP" extends="baseProfesor"> <!-- Info Profesor -->
-        <put name="body" value="/JSP/profesor/ModificarInfoP.jsp"/>
-    </definition>
-    
-    <definition name="agregarInfoP" extends="baseProfesor"> <!-- Agregar Info Profesor-->
-        <put name="body" value="/JSP/profesor/AgregarInfoP.jsp"/>
+        <put name="script" value="/JSP/profesor/scripts/modificar-informacion-script.jsp"/>
+        <put name="css" value="/JSP/profesor/css/modificar-informacion-css.jsp"/>
+        <put name="body" value="/JSP/profesor/ModificarInformacion.jsp"/>
     </definition>
     
     <!-- DECANATO -->
     
     <definition name="baseDecanato" extends="base"> <!-- BASE PARA DECANATO -->
-        <!-- No estoy segura de si hay que modificar el sidebar izquierdo -->
         <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDecanato.jsp"/>
     </definition>
     
