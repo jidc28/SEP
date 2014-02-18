@@ -37,6 +37,7 @@
     </definition>
 
     <definition name="consultaDecanato" extends="baseAdmin"> <!-- Consultar Decanato -->
+        <put name="css" value="/JSP/admin/css/consulta-decanato-css.jsp"/>
         <put name="body" value="/JSP/admin/Decanatos/ConsultaDecanato.jsp"/>
     </definition>
 
@@ -58,7 +59,7 @@
     </definition>
         
     <definition name="editarNombreDecanato" extends="baseAdmin"> <!-- Editar Nombre Decanato -->
-        <put name="body" value="/JSP/admin/Decanatos/EditarNombreDecanato.jsp"/>
+        <put name="body" value="/JSP/admin/Decanatos/EditarDecanato.jsp"/>
     </definition>
     
     <definition name="editarNombreCoordinacion" extends="baseAdmin"> <!-- Editar Nombre Coordinacion -->
