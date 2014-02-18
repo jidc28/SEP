@@ -6,6 +6,7 @@
 
 <tiles-definitions>
 
+    <!-- DEFINICION BASE -->
     <definition name="base" path="/Plantilla/plantilla.jsp">
         <put name="css" value="/JSP/general-css.jsp"/>
         <put name="script" value="/JSP/general-script.jsp"/>
@@ -14,192 +15,251 @@
         <put name="sidebarR" value="/Plantilla/sidebarR.jsp"/>
         <put name="footer" value="/Plantilla/footer.jsp"/>
     </definition>
-    
     <definition name="footer" path="/Plantillas/footer.jsp"/>
 
-    <!-- ADMIN -->
     
-    <definition name="baseAdmin" extends="base"> <!-- BASE PARA ADMIN -->
+    <!-- ADMINISTRADOR -->
+    
+    <!-- Archivo base para el administrador -->
+    <definition name="baseAdmin" extends="base">
         <put name="sidebarL" value="/Plantilla/sidebarsL/sideLAdmin.jsp"/>
     </definition>
     
-    <definition name="vistaAdmin" extends="baseAdmin"> <!-- Vista administrador -->
+    <!-- Vista del administrador -->
+    <definition name="vistaAdmin" extends="baseAdmin">
         <put name="script" value="/JSP/admin/scripts/vista-administrador-script.jsp"/>
         <put name="body" value="/JSP/admin/VistaAdministrador.jsp"/>
     </definition>
 
-    <definition name="agregaDecanato" extends="baseAdmin"> <!-- Agregar Decanato -->
-        <put name="body" value="/JSP/admin/Decanatos/AgregaDecanato.jsp"/>
-    </definition>
-
-    <definition name="agregaCoordinacion" extends="baseAdmin"> <!-- Agregar Coordinacion -->
+    <!-- ADMINISTRADOR / COORDINACIONES -->
+          
+    <!-- 1. Agregar una coordinacion -->
+    <definition name="agregaCoordinacion" extends="baseAdmin">
         <put name="body" value="/JSP/admin/Coordinaciones/AgregaCoordinacion.jsp"/>
     </definition>
-
-    <definition name="consultaDecanato" extends="baseAdmin"> <!-- Consultar Decanato -->
-        <put name="css" value="/JSP/consulta-css.jsp"/>
-        <put name="body" value="/JSP/admin/Decanatos/ConsultaDecanato.jsp"/>
-    </definition>
-
-    <definition name="consultaCoordinacion" extends="baseAdmin"> <!-- Consulta Coordinacion -->
+    
+    <!-- 2. Consultar coordinaciones -->
+    <definition name="consultaCoordinacion" extends="baseAdmin">
         <put name="script" value="/JSP/admin/scripts/consulta-coordinacion-script.jsp"/>
         <put name="body" value="/JSP/admin/Coordinaciones/ConsultaCoordinacion.jsp"/>
     </definition>
     
-    <definition name="agregarDepartamento" extends="baseAdmin"> <!-- Agregar Decanato -->
+    <!-- 3. Editar una coordinacion -->
+    <definition name="editarNombreCoordinacion" extends="baseAdmin">
+        <put name="body" value="/JSP/admin/Coordinaciones/EditarCoordinacion.jsp"/>
+    </definition>
+    
+    <!-- ADMINISTRADOR / DECANATOS -->
+    
+    <!--1. Agregar un decanato -->
+    <definition name="agregaDecanato" extends="baseAdmin"> 
+        <put name="body" value="/JSP/admin/Decanatos/AgregaDecanato.jsp"/>
+    </definition>
+    
+    <!-- 2. Consultar decanatos -->
+    <definition name="consultaDecanato" extends="baseAdmin">
+        <put name="css" value="/JSP/consulta-css.jsp"/>
+        <put name="body" value="/JSP/admin/Decanatos/ConsultaDecanato.jsp"/>
+    </definition>
+    
+    <!-- 3. Editar un decanato -->
+    <definition name="editarNombreDecanato" extends="baseAdmin">
+        <put name="body" value="/JSP/admin/Decanatos/EditarDecanato.jsp"/>
+    </definition>
+
+    <!-- ADMINISTRADOR / DEPARTAMENTOS -->
+
+    <!-- 1. Agregar un departamento -->
+    <definition name="agregarDepartamento" extends="baseAdmin">
         <put name="body" value="/JSP/admin/Departamentos/AgregarDepartamento.jsp"/>
     </definition>
     
-    <definition name="consultaDepartamento" extends="baseAdmin"> <!-- Consulta Departamento -->
+    <!-- 2. Consultar departamentos -->
+    <definition name="consultaDepartamento" extends="baseAdmin">
         <put name="css" value="/JSP/consulta-css.jsp"/>
         <put name="body" value="/JSP/admin/Departamentos/ConsultaDepartamento.jsp"/>
     </definition>
 
-    <definition name="editarDepartamento" extends="baseAdmin"> <!-- Consulta Departamento -->
+    <!-- 3. Editar un departamento-->
+    <definition name="editarDepartamento" extends="baseAdmin">
         <put name="body" value="/JSP/admin/Departamentos/EditarDepartamento.jsp"/>
     </definition>
-        
-    <definition name="editarNombreDecanato" extends="baseAdmin"> <!-- Editar Nombre Decanato -->
-        <put name="body" value="/JSP/admin/Decanatos/EditarDecanato.jsp"/>
-    </definition>
-    
-    <definition name="editarNombreCoordinacion" extends="baseAdmin"> <!-- Editar Nombre Coordinacion -->
-        <put name="body" value="/JSP/admin/Coordinaciones/EditarCoordinacion.jsp"/>
-    </definition>
-    
-    <!-- PROFESOR -->
-    
-    <definition name="baseProfesor" extends="base"> <!-- BASE PARA PROFESOR -->
-        <put name="sidebarL" value="/Plantilla/sidebarsL/sideLProfesor.jsp"/>
-    </definition>
-    
-    <definition name="vistaProfesor" extends="baseProfesor"> <!-- Vista Profesor -->
-        <put name="body" value="/JSP/profesor/VistaProfesor.jsp"/>
-    </definition>
-    
-    <definition name="modificarInfoP" extends="baseProfesor"> <!-- Info Profesor -->
-        <put name="script" value="/JSP/profesor/scripts/modificar-informacion-script.jsp"/>
-        <put name="css" value="/JSP/profesor/css/modificar-informacion-css.jsp"/>
-        <put name="body" value="/JSP/profesor/ModificarInformacion.jsp"/>
-    </definition>
-    
+
+
     <!-- DECANATO -->
     
-    <definition name="baseDecanato" extends="base"> <!-- BASE PARA DECANATO -->
+    <!-- Archivo base para el decanato -->
+    <definition name="baseDecanato" extends="base">
         <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDecanato.jsp"/>
     </definition>
     
-    <definition name="vistaDecanato" extends="baseDecanato"> <!-- Vista administrador -->
+    <!-- Vista del decanato -->
+    <definition name="vistaDecanato" extends="baseDecanato">
         <put name="script" value="/JSP/decanato/scripts/vista-decanato-script.jsp"/>
         <put name="body" value="/JSP/decanato/VistaDecanato.jsp"/>
     </definition>
 
+
+    <!-- PROFESOR -->
+    
+    <!-- Archivo base para el administrador -->
+    <definition name="baseProfesor" extends="base">
+        <put name="sidebarL" value="/Plantilla/sidebarsL/sideLProfesor.jsp"/>
+    </definition>
+    
+    <!-- Vista del profesor -->
+    <definition name="vistaProfesor" extends="baseProfesor">
+        <put name="body" value="/JSP/profesor/VistaProfesor.jsp"/>
+    </definition>
+    
+    <!-- 1. Modificar informacion del profesor -->
+    <definition name="modificarInfoP" extends="baseProfesor">
+        <put name="script" value="/JSP/profesor/scripts/modificar-informacion-script.jsp"/>
+        <put name="css" value="/JSP/profesor/css/modificar-informacion-css.jsp"/>
+        <put name="body" value="/JSP/profesor/ModificarInformacion.jsp"/>
+    </definition>
+
+
     <!-- DEPARTAMENTO --> 
+    
+    <!-- Archivo base para el departamento -->
     <definition name="baseDepartamento" extends="base"> 
         <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDecanato.jsp"/>
     </definition>
 
-    <definition name="vistaDepartamento" extends="baseDepartamento"> <!-- Vista Departamento -->
+    <!-- Vista del departamento -->
+    <definition name="vistaDepartamento" extends="baseDepartamento">
         <put name="script" value="/JSP/departamento/scripts/vista-departamento-script.jsp"/>
         <put name="body" value="/JSP/departamento/VistaDepartamento.jsp"/>
-    </definition>
+    </definition>    
     
-    <definition name="consultaMateria" extends="baseDepartamento"> <!-- Consulta Materias -->
-        <put name="css" value="/JSP/consulta-css.jsp"/>
-        <put name="body" value="/JSP/departamento/Materias/ConsultaMateria.jsp"/>
-    </definition>
+    <!-- DEPARTAMENTO / MATERIAS --> 
     
-    <definition name="consultaProfesor" extends="baseDepartamento"> <!-- Consulta Materias -->
-        <put name="css" value="/JSP/consulta-css.jsp"/>
-        <put name="script" value="/JSP/departamento/scripts/evaluar-profesores-script.jsp"/>
-        <put name="body" value="/JSP/departamento/Profesores/EvaluarProfesores.jsp"/>
-    </definition>
-    
-    <definition name="consultaProfesores" extends="baseDepartamento"> <!-- Consulta Materias -->
-        <put name="css" value="/JSP/consulta-css.jsp"/>
-        <put name="body" value="/JSP/departamento/Profesores/ConsultaProfesores.jsp"/>
-    </definition>
-    
-    <definition name="consultaEstadoPlanillas" extends="baseDepartamento"> <!-- Consulta Materias -->
-        <put name="css" value="/JSP/consulta-css.jsp"/>
-        <put name="body" value="/JSP/departamento/Profesores/ConsultaEstadoPlanillas.jsp"/>
-    </definition>
-    
-    <definition name="agregaMateria" extends="baseDepartamento"> <!-- Consulta Materias -->
+    <!-- 1. Agregar una materia -->
+    <definition name="agregaMateria" extends="baseDepartamento"> 
         <put name="body" value="/JSP/departamento/Materias/AgregaMateria.jsp"/>
     </definition>
     
-    <definition name="modificaMateria" extends="baseDepartamento"> <!-- Consulta Materias -->
-        <put name="body" value="/JSP/departamento/Materias/ModificaMateria.jsp"/>
+    <!-- 2. Consulta materis -->
+    <definition name="consultaMateria" extends="baseDepartamento">
+        <put name="css" value="/JSP/consulta-css.jsp"/>
+        <put name="body" value="/JSP/departamento/Materias/ConsultaMateria.jsp"/>
     </definition>
-    
-    <definition name="consultaSolicitudesApertura" extends="baseDepartamento"> <!-- Consulta Solicitudes de apertura de materias -->
+
+    <!-- 3. Consultar las colicitudes pendientes de apertura de materias -->
+    <definition name="consultaSolicitudesApertura" extends="baseDepartamento">
         <put name="css" value="/JSP/consulta-css.jsp"/>
         <put name="body" value="/JSP/departamento/Materias/ConsultarSolicitudesApertura.jsp"/>
     </definition>
     
-    <definition name="modificaSolicitudApertura" extends="baseDepartamento"> <!-- Consulta Materias -->
+    <!-- 4. Modificar una materia -->
+    <definition name="modificaMateria" extends="baseDepartamento">
+        <put name="body" value="/JSP/departamento/Materias/ModificaMateria.jsp"/>
+    </definition>
+
+    <!-- 5. Modificar la solicitud de apertura de una materia -->
+    <definition name="modificaSolicitudApertura" extends="baseDepartamento">
         <put name="body" value="/JSP/departamento/Materias/ModificaSolicitudApertura.jsp"/>
-    </definition>    
+    </definition>  
     
-    <definition name="verPlanillasLlenas" extends="baseDepartamento"> <!-- Rendimiento Profesor-->
-        <put name="body" value="/JSP/departamento/Profesores/VerPlanillasLlenas.jsp"/>
-    </definition>
-
-    <definition name="llenarPlanillas" extends="baseDepartamento"> <!-- ir Agregar Rendimiento Profesor-->
-        <put name="script" value="/JSP/departamento/scripts/llenar-planillas-script.jsp"/>
-        <put name="body" value="/JSP/departamento/Profesores/LlenarPlanillas.jsp"/>
-    </definition>
-
-    <definition name="verPlanilla" extends="baseDepartamento"> <!-- ir Agregar Rendimiento Profesor-->
-        <put name="body" value="/JSP/departamento/Profesores/VerPlanilla.jsp"/>
-    </definition>    
-    
-    <!-- vista para agregar un profesor al departamento-->
+    <!-- DEPARTAMENTO / PROFESORES --> 
+     
+    <!-- 1. Agregar un profesor al departamento-->
     <definition name="agregarProfesor" extends="baseDepartamento">
         <put name="body" value="/JSP/departamento/Profesores/AgregarProfesor.jsp"/>
-    </definition>        
-
-    <!--vista para asignar materias a los profesores del departamento -->
+    </definition>  
+     
+    <!-- 2. Asignar materias a los profesores del departamento -->
     <definition name="asignarMateriaProfesor" extends="baseDepartamento">
         <put name="body" value="/JSP/departamento/Profesores/AsignarMateriaProfesor.jsp"/>
-    </definition>    
-
+    </definition>  
+     
+    <!-- 3. Asignar un periodo para la materia dictada por un profesor -->
     <definition name="asignarPeriodo" extends="baseDepartamento">
         <put name="script" value="/JSP/departamento/scripts/asignar-periodo-script.jsp"/>
         <put name="body" value="/JSP/departamento/Profesores/AsignarPeriodo.jsp"/>
     </definition>
-                        
+     
+    <!-- 4. Consultar el estado de ls planillas de los profesores -->
+    <definition name="consultaEstadoPlanillas" extends="baseDepartamento">
+        <put name="css" value="/JSP/consulta-css.jsp"/>
+        <put name="body" value="/JSP/departamento/Profesores/ConsultaEstadoPlanillas.jsp"/>
+    </definition>
+    
+    <!-- 5. Consulta de profesores -->
+    <definition name="consultaProfesores" extends="baseDepartamento">
+        <put name="css" value="/JSP/consulta-css.jsp"/>
+        <put name="body" value="/JSP/departamento/Profesores/ConsultaProfesores.jsp"/>
+    </definition>
+       
+    <!-- 6. Evaluar profesores -->
+    <definition name="consultaProfesor" extends="baseDepartamento">
+        <put name="css" value="/JSP/consulta-css.jsp"/>
+        <put name="script" value="/JSP/departamento/scripts/evaluar-profesores-script.jsp"/>
+        <put name="body" value="/JSP/departamento/Profesores/EvaluarProfesores.jsp"/>
+    </definition>
+
+    <!-- 7. Llenar las planillas de un determinado profesor -->
+    <definition name="llenarPlanillas" extends="baseDepartamento">
+        <put name="script" value="/JSP/departamento/scripts/llenar-planillas-script.jsp"/>
+        <put name="body" value="/JSP/departamento/Profesores/LlenarPlanillas.jsp"/>
+    </definition>
+
+    <!-- 8. Ver las planillas de un determinado profesor -->
+    <definition name="verPlanilla" extends="baseDepartamento"> 
+        <put name="body" value="/JSP/departamento/Profesores/VerPlanilla.jsp"/>
+    </definition>
+
+    <!-- 9. Ver las planillas previamente llenadas de un profesor -->
+    <definition name="verPlanillasLlenas" extends="baseDepartamento">
+        <put name="body" value="/JSP/departamento/Profesores/VerPlanillasLlenas.jsp"/>
+    </definition>
+
+
     <!-- COORDINACION -->
-    <definition name="baseCoordinacion" extends="base"> <!-- BASE PARA COORDINACION -->
+    
+    <!-- Archivo base para la coordinacion -->
+    <definition name="baseCoordinacion" extends="base">
         <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDecanato.jsp"/>
     </definition>
     
+    <!-- Vista principal de la coordinacion -->
     <definition name="vistaCoordinacion" extends="baseCoordinacion">
         <put name="script" value="/JSP/coordinacion/scripts/vista-coordinacion-script.jsp"/>
         <put name="body" value="/JSP/coordinacion/VistaCoordinacion.jsp"/>
     </definition>
     
+    <!-- COORDINACION / DEPARTAMENTOS -->
+    
+    <!-- 1. Consultar departamentos -->
     <definition name="consultaDepartamentoCoordinacion" extends="baseCoordinacion">
         <put name="body" value="/JSP/coordinacion/Departamentos/ConsultaDepartamento.jsp"/>
     </definition>
     
-    <definition name="consultaMaterias" extends="baseCoordinacion">
-        <put name="css" value="/JSP/consulta-css.jsp"/>
-        <put name="body" value="/JSP/coordinacion/Materias/ConsultaMateria.jsp"/>
-    </definition>
-    
+    <!-- COORDINACION / EVALUACIONES -->
+  
+    <!-- 1. Listar las evaluaciones prendientes de materias -->
     <definition name="listarEvaluacionesPendientes" extends="baseCoordinacion">
         <put name="body" value="/JSP/coordinacion/Evaluaciones/ListarEvaluacionesPendientes.jsp"/>
     </definition>
     
-    <definition name="solicitarApertura" extends="baseCoordinacion"> <!-- Consulta Materias -->
-        <put name="body" value="/JSP/coordinacion/Materias/SolicitarApertura.jsp"/>
-    </definition>
-    
+    <!-- 2. Obtener la evaluacion de una materia -->
     <definition name="obtenerEvaluacion" extends="baseCoordinacion">
         <put name="css" value="/JSP/consulta-css.jsp"/>
         <put name="body" value="/JSP/coordinacion/Evaluaciones/ObtenerEvaluaciones.jsp"/>
     </definition>
-    
+  
+    <!-- COORDINACION / MATERIAS -->
+        
+    <!-- 1. Consultar materias-->
+    <definition name="consultaMaterias" extends="baseCoordinacion">
+        <put name="css" value="/JSP/consulta-css.jsp"/>
+        <put name="body" value="/JSP/coordinacion/Materias/ConsultaMateria.jsp"/>
+    </definition>
+
+    <!-- 2. Solicitar la apertura de una materia -->
+    <definition name="solicitarApertura" extends="baseCoordinacion">
+        <put name="body" value="/JSP/coordinacion/Materias/SolicitarApertura.jsp"/>
+    </definition>
+
 </tiles-definitions>
