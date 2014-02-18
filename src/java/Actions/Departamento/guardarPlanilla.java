@@ -6,7 +6,10 @@ package Actions.Departamento;
 
 import Clases.*;
 import DBMS.DBMS;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -110,6 +113,24 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
         } else {
             request.setAttribute("planilla_no_guardada", renMateria);
         }
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        String fecha = dateFormat.format(date).toString();
+        String ano = fecha.substring(0, 4);
+
+        int[] anos = new int[4];
+        anos[3] = Integer.parseInt(ano);
+        int i = 2;
+        int tmp = anos[3];
+
+        while (i > -1) {
+            tmp--;
+            anos[i] = tmp;
+            i--;
+        }
+
+        request.setAttribute("anos", anos);
         request.setAttribute("rendimientoProf", new rendimientoProf());
         return mapping.findForward(SUCCESS);
     }
