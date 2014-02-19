@@ -21,7 +21,6 @@ public class Materia extends org.apache.struts.action.ActionForm {
     private String codigo;
     private String viejoCodigo;
     private String nombre;
-    private String num1;
     private String num2;
     private String num3;
     private String num4;
@@ -151,14 +150,6 @@ public class Materia extends org.apache.struts.action.ActionForm {
 
     public void setCreditos(String creditos) {
         this.creditos = creditos;
-    }
-
-    public String getNum1() {
-        return num1;
-    }
-
-    public void setNum1(String num1) {
-        this.num1 = num1;
     }
 
     public String getNum2() {
