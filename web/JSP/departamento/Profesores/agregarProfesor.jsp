@@ -58,11 +58,16 @@
                             <html:radio property="genero" value="M" style="margin: 0px;">
                                 Masculino
                             </html:radio>
-                            <br>
+                        </td>
+                    </tr>
+                    <tr style="height: 35px;">
+                        <td>
+                        </td>
+                        <td>
                             <html:radio property="genero" value="F" style="margin: 0px;">
                                 Femenino
                             </html:radio><br>
-                        </td>
+                        </td>                        
                     </tr>
                     <tr style="height: 35px;">
                         <td style="font-size: 14px;"> <strong> CORREO ELECTRÓNICO <br> INSTITUCIONAL </strong> </td>
