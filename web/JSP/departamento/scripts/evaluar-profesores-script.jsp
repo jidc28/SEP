@@ -29,7 +29,7 @@
     $(function () { 
         $("#ayuda1").popover({
             'title': 'Ir a llenar las planillas',
-            'content': 'Haga click en este <html:link action="/ConsultaProfesores"> link </html:link> para llenar las planillas.',
+            'content': 'Haga click en este <html:link action="/ConsultaEstadoPlanillas"> link </html:link> para llenar las planillas.',
             'html': 'true'
         });  
     });  
