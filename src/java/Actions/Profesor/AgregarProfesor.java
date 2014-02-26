@@ -45,15 +45,25 @@ public class AgregarProfesor extends org.apache.struts.action.Action {
         String id_departamento = (String) session.getAttribute("usbid");
 
         ActionErrors error = new ActionErrors();
+        error = profesor.validateAgregar(mapping, request);
 
-        boolean agregado = 
-                DBMS.getInstance().agregarProfesor(profesor,id_departamento);
-        
-        ArrayList<Profesor> profesores =
-                DBMS.getInstance().listarProfesoresDepartamento(id_departamento);
 
-        session.setAttribute("profesores",profesores);
-        
-        return mapping.findForward(SUCCESS);
+        if (error.size() != 0) {          
+            saveErrors(request, error);
+            return mapping.findForward(FAILURE);
+        } else {
+
+            boolean agregado = 
+                    DBMS.getInstance().
+                            agregarProfesor(profesor,id_departamento);
+
+            ArrayList<Profesor> profesores =
+                    DBMS.getInstance().
+                            listarProfesoresDepartamento(id_departamento);
+
+            session.setAttribute("profesores",profesores);
+
+            return mapping.findForward(SUCCESS);
+        }
     }
 }

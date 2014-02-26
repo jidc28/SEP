@@ -165,4 +165,37 @@ public class Profesor extends org.apache.struts.action.ActionForm {
 
         return errors;
     }
+    
+    public ActionErrors validateAgregar(ActionMapping mapping, HttpServletRequest request) {
+        ActionErrors errors = new ActionErrors();
+
+        try {
+            Integer.parseInt(getCedula());
+        } catch (Exception e) {
+            e.printStackTrace();
+            errors.add("cedula", new ActionMessage("error.cedula.malformulada"));
+        }
+        
+        if (this.usbid == "") {
+            errors.add("usbid", new ActionMessage("error.usbid.required"));
+        }
+        
+        if (this.nombre == ""){
+            errors.add("nombre", new ActionMessage("error.nombre.required"));
+        }
+        
+        if (this.apellido == ""){
+            errors.add("apellido", new ActionMessage("error.apellido.required"));
+        }
+        
+        if (this.genero == null) {
+            errors.add("genero", new ActionMessage("error.genero.required"));
+        }
+
+        if (!validarEmail(this.email)) {
+            errors.add("email", new ActionMessage("error.email.malformulado"));
+        }
+
+        return errors;
+    }
 }
