@@ -1334,9 +1334,13 @@ public class DBMS {
 
         try {
             
-            ps0 = conexion.prepareStatement("UPDATE MATERIA SET codigo = ? WHERE codigo = ?;");
+            ps0 = conexion.prepareStatement("UPDATE MATERIA "
+                    + "SET codigo = ?, creditos = ?, nombre = ?"
+                    + "WHERE codigo = ?;");
             ps0.setString(1, m.getCodigo());
-            ps0.setString(2, m.getViejoCodigo());
+            ps0.setString(2, m.getCreditos());
+            ps0.setString(3, m.getNombre());
+            ps0.setString(4, m.getViejoCodigo());
             
             ps1 = conexion.prepareStatement("UPDATE MATERIA SET solicitud = 'no' WHERE codigo = ?;");
             ps1.setString(1, m.getCodigo());

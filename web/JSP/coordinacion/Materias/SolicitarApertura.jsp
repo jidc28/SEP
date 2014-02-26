@@ -399,10 +399,18 @@
             <tr style="height: 35px;">
                 <td colspan="11">
                     <center>
-                        <html:text property="creditos" 
-                                   style="width: 20%; height: 100%; text-align: center;" 
-                                   name="Materia" maxlength="2" 
-                                   errorKey="org.apache.struts.action.ERROR"/>
+                        <html:select name="Materia" property="creditos">
+                            <html:option value="1">1</html:option>
+                            <html:option value="2">2</html:option>
+                            <html:option value="3">3</html:option>
+                            <html:option value="4">4</html:option>
+                            <html:option value="5">5</html:option>
+                            <html:option value="6">6</html:option>
+                            <html:option value="7">7</html:option>
+                            <html:option value="8">8</html:option>
+                            <html:option value="9">9</html:option>
+                            <html:option value="10">10</html:option>
+                        </html:select>
                     </center>
                 </td>
             </tr>  
