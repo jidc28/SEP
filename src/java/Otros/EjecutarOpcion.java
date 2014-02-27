@@ -47,25 +47,20 @@ public class EjecutarOpcion extends org.apache.struts.action.Action {
         String opcion = usuario.getOpcion();
         String tipousuario = u.getTipousuario();
 
+        if (tipousuario.equals("departamento")) {
+            int solicitudes_pendientes = 
+                    DBMS.getInstance().contarSolicitudesPendientesDepartamento(u.getUsbid());
+            if (solicitudes_pendientes != 0) {
+                request.setAttribute("solicitud_apertura_materia", solicitudes_pendientes);
+            }
+        } else if (tipousuario.equals("coordinacion")) {
+            int evaluaciones_pendientes = 
+                    DBMS.getInstance().contarEvaluacionesPendientes(u.getUsbid());
+            if (evaluaciones_pendientes != 0) {
+                request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
+            }
+        }
         request.setAttribute(opcion, opcion);
-        
-//        if (tipousuario.equals("departamento")) {
-//
-//            if (opcion.equals("gestion_materias")) {
-//                request.setAttribute("gestion_materias", DEPARTAMENTO);
-//            } else if (opcion.equals("gestion_profesores")) {
-//                request.setAttribute("gestion_profesores", DEPARTAMENTO);
-//            } else if (opcion.equals("gestion_evaluaciones")) {
-//                request.setAttribute("gestion_evaluaciones", DEPARTAMENTO);
-//            }
-//
-//            int solicitudes_pendientes =
-//                    DBMS.getInstance().contarSolicitudesPendientesDepartamento(u.getUsbid());
-//            if (solicitudes_pendientes != 0) {
-//                request.setAttribute("solicitud_apertura_materia", solicitudes_pendientes);
-//            }
-//            return mapping.findForward(DEPARTAMENTO);
-//        }
         return mapping.findForward(tipousuario);
     }
 }

@@ -232,7 +232,7 @@
     
     <!-- Archivo base para la coordinacion -->
     <definition name="baseCoordinacion" extends="base">
-        <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDecanato.jsp"/>
+        <put name="sidebarL" value="/Plantilla/sidebarsL/sideLCoordinacion.jsp"/>
     </definition>
     
     <!-- Vista principal de la coordinacion -->

@@ -94,7 +94,6 @@ public class Inicio extends org.apache.struts.action.Action {
                     session.setAttribute("usuario", tmp);
                     session.setAttribute("usbid", tmp.getUsbid());
                     int evaluaciones_pendientes = DBMS.getInstance().contarEvaluacionesPendientes(tmp.getUsbid());
-                    System.out.println(evaluaciones_pendientes);
                     if (evaluaciones_pendientes != 0) {
                         request.setAttribute("evaluaciones_pendientes",evaluaciones_pendientes);
                     }
