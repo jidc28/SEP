@@ -301,6 +301,7 @@
             name="Usuario"
             validate="false">
             <forward name="departamento" path="vistaDepartamento"/>
+            <forward name="administrador" path="vistaAdmin"/>
         </action>
 
         <action input="ConsultaProfesores.jsp"
