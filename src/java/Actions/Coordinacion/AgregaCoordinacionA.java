@@ -47,6 +47,6 @@ public class AgregaCoordinacionA extends org.apache.struts.action.Action {
         if (tipousuario.equals("administrador")) {
             request.setAttribute("decanatos", decanatos);
         }
-        return mapping.findForward(SUCCESS);
+        return mapping.findForward(usuario.getTipousuario());
     }
 }

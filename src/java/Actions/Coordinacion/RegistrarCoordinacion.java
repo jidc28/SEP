@@ -61,7 +61,7 @@ public class RegistrarCoordinacion extends org.apache.struts.action.Action {
                 ArrayList<Decanato> decanatos = DBMS.getInstance().listarDecanatos();
                 request.setAttribute("decanatos", decanatos);
             }
-            return mapping.findForward(FAILURE);
+            return mapping.findForward(FAILURE + "_" + tipousuario);
             //si los campos son validos
         } else {
 
@@ -74,13 +74,13 @@ public class RegistrarCoordinacion extends org.apache.struts.action.Action {
                     ArrayList<Decanato> decanatos = DBMS.getInstance().listarDecanatos();
                     request.setAttribute("decanatos", decanatos);
                     request.setAttribute("success", SUCCESS);
-                    return mapping.findForward(SUCCESS);
+                    return mapping.findForward(tipousuario);
                 } else {
                     ArrayList<Decanato> decanatos = DBMS.getInstance().listarDecanatos();
                     request.setAttribute("decanatos", decanatos);
                     error.add("registro", new ActionMessage("error.coordinacion.existente"));
                     saveErrors(request, error);
-                    return mapping.findForward(YAREGISTRADA);
+                    return mapping.findForward(YAREGISTRADA + "_administrador");
                 }
             } else if (tipousuario.equals("decanato")) {
 
@@ -90,14 +90,14 @@ public class RegistrarCoordinacion extends org.apache.struts.action.Action {
                     ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
                     request.setAttribute("coordinaciones", coords);
                     request.setAttribute("success", SUCCESS);
-                    return mapping.findForward(SUCCESS);
+                    return mapping.findForward(tipousuario);
                 } else {
                     error.add("registro", new ActionMessage("error.coordinacion.existente"));
                     saveErrors(request, error);
-                    return mapping.findForward(YAREGISTRADA);
+                    return mapping.findForward(YAREGISTRADA + "_decanato");
                 }
             }
-            return mapping.findForward(SUCCESS);
+            return mapping.findForward(tipousuario);
         }
     }
 }

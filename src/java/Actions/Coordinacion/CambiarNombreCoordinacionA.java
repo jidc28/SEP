@@ -25,7 +25,6 @@ public class CambiarNombreCoordinacionA extends org.apache.struts.action.Action 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
     private static final String FAILURE = "failure";
-    private static final String ERRORUPDATE = "errorupdate";
 
     /**
      * This is the action called from the Struts framework.
@@ -45,6 +44,9 @@ public class CambiarNombreCoordinacionA extends org.apache.struts.action.Action 
         Coordinacion u = (Coordinacion) form;
         HttpSession session = request.getSession(true);
 
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
+
         ActionErrors error = new ActionErrors();
 
         //valido los campos de formulario
@@ -56,29 +58,34 @@ public class CambiarNombreCoordinacionA extends org.apache.struts.action.Action 
             request.setAttribute("codigo", c.getCodigo());
             request.setAttribute("nombre", c.getNombre());
             saveErrors(request, error);
-            return mapping.findForward(FAILURE);
+            return mapping.findForward(FAILURE + "_" + tipousuario);
             //si los campos son validos
         } else {
 
             boolean actualizo = DBMS.getInstance().actualizarNombreCoordinacion(u);
 
             if (actualizo) {
-                String codigoDecan = (String) session.getAttribute("codigoDecanatoActual");
+                String codigoDecan = null;
 
-                ArrayList<Decanato> decanatos = DBMS.getInstance().listarDecanatos();
-                request.setAttribute("decanatos", decanatos);
+                if (tipousuario.equals("administrador")) {
+                    codigoDecan = (String) session.getAttribute("codigoDecanatoActual");
+                    ArrayList<Decanato> decanatos = DBMS.getInstance().listarDecanatos();
+                    request.setAttribute("decanatos", decanatos);
+                } else {
+                    codigoDecan = (String) session.getAttribute("usbid");
+                }
                 ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinacionesAdscritas(codigoDecan);
                 request.setAttribute("coordinaciones", coords);
                 request.setAttribute("modificacion", SUCCESS);
 
-                return mapping.findForward(SUCCESS);
+                return mapping.findForward(tipousuario);
             } else {
                 Coordinacion c = DBMS.getInstance().obtenerNombreCoordinacion(u);
                 error.add("registro", new ActionMessage("error.coordinacion.existente"));
                 request.setAttribute("codigo", c.getCodigo());
                 request.setAttribute("nombre", c.getNombre());
                 saveErrors(request, error);
-                return mapping.findForward(FAILURE);
+                return mapping.findForward(FAILURE + "_" + tipousuario);
             }
         }
     }

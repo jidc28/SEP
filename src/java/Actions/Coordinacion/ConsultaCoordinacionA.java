@@ -67,6 +67,6 @@ public class ConsultaCoordinacionA extends org.apache.struts.action.Action {
 
         //retorno a pagina de exito
         request.setAttribute("coordinaciones", coords);
-        return mapping.findForward(SUCCESS);
+        return mapping.findForward(tipousuario);
     }
 }

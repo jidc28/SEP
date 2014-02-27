@@ -24,3 +24,11 @@
         });  
     });  
 </script>
+
+<logic:present name="gestion_coordinaciones">
+    <script>
+        $(function() {
+            $('#collapseFour').addClass('in'); 
+        });
+    </script>
+</logic:present>

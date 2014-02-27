@@ -6,6 +6,7 @@ package Actions.Coordinacion;
 
 import Clases.Coordinacion;
 import Clases.Decanato;
+import Clases.Usuario;
 import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +44,9 @@ public class EditarNombreCoordinacion extends org.apache.struts.action.Action {
         Coordinacion u = (Coordinacion) form;
         HttpSession session = request.getSession(true);
         String codigoDecan = (String) session.getAttribute("codigoDecanatoActual");
+
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
         
         session.removeAttribute("coordinaciones");
 
@@ -57,6 +61,6 @@ public class EditarNombreCoordinacion extends org.apache.struts.action.Action {
         request.setAttribute("codigo", c.getCodigo());
         request.setAttribute("nombre", c.getNombre());
         request.setAttribute("coordinaciones",coords);
-        return mapping.findForward(SUCCESS);
+        return mapping.findForward(tipousuario);
     }
 }

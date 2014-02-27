@@ -34,18 +34,18 @@
     <!-- ADMINISTRADOR / COORDINACIONES -->
           
     <!-- 1. Agregar una coordinacion -->
-    <definition name="agregaCoordinacion" extends="baseAdmin">
+    <definition name="agregaCoordinacionAdmin" extends="baseAdmin">
         <put name="body" value="/JSP/admin/Coordinaciones/AgregaCoordinacion.jsp"/>
     </definition>
     
     <!-- 2. Consultar coordinaciones -->
-    <definition name="consultaCoordinacion" extends="baseAdmin">
+    <definition name="consultaCoordinacionAdmin" extends="baseAdmin">
         <put name="script" value="/JSP/admin/scripts/consulta-coordinacion-script.jsp"/>
         <put name="body" value="/JSP/admin/Coordinaciones/ConsultaCoordinacion.jsp"/>
     </definition>
     
     <!-- 3. Editar una coordinacion -->
-    <definition name="editarNombreCoordinacion" extends="baseAdmin">
+    <definition name="editarNombreCoordinacionAdmin" extends="baseAdmin">
         <put name="body" value="/JSP/admin/Coordinaciones/EditarCoordinacion.jsp"/>
     </definition>
     
@@ -99,6 +99,18 @@
         <put name="body" value="/JSP/decanato/VistaDecanato.jsp"/>
     </definition>
 
+    <definition name="agregaCoordinacionDecanato" extends="baseDecanato">
+        <put name="body" value="/JSP/admin/Coordinaciones/AgregaCoordinacion.jsp"/>
+    </definition>
+    
+    <definition name="consultaCoordinacionDecanato" extends="baseDecanato">
+        <put name="script" value="/JSP/admin/scripts/consulta-coordinacion-script.jsp"/>
+        <put name="body" value="/JSP/admin/Coordinaciones/ConsultaCoordinacion.jsp"/>
+    </definition>
+    
+    <definition name="editarNombreCoordinacionDecanato" extends="baseDecanato">
+        <put name="body" value="/JSP/admin/Coordinaciones/EditarCoordinacion.jsp"/>
+    </definition>
 
     <!-- PROFESOR -->
     
