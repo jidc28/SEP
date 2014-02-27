@@ -1898,4 +1898,79 @@ public class DBMS {
         }
         return false;
     }
+
+    public ArrayList<Materia> consultarMateriasAsignadas(String usbid_profesor) {
+
+        PreparedStatement ps1, ps2;
+        ArrayList<Materia> materias = new ArrayList<Materia>(0);
+
+        try {
+
+            ps1 = conexion.prepareStatement("SELECT DISTINCT codigo, nombre "
+                    + "FROM materia, dicta "
+                    + "WHERE usbid_profesor = ? "
+                    + "AND codigo = codigo_materia "
+                    + "ORDER BY codigo;");
+            ps1.setString(1, usbid_profesor);
+
+            ResultSet rs1 = ps1.executeQuery();
+
+            while (rs1.next()) {
+
+                Materia m = new Materia();
+                m.setCodigo(rs1.getString("codigo"));
+                m.setNombre(rs1.getString("nombre"));
+
+                ps2 = conexion.prepareStatement("SELECT periodo "
+                        + "FROM dicta "
+                        + "WHERE codigo_materia = ? "
+                        + "AND usbid_profesor = ?");
+                ps2.setString(1, m.getCodigo());
+                ps2.setString(2, usbid_profesor);
+
+                ResultSet rs2 = ps2.executeQuery();
+
+                while (rs2.next()) {
+                    String periodo = rs2.getString("periodo");
+                    if (periodo.equals("SD")) {
+                        m.setPeriodoSD("SD");
+                    } else if (periodo.equals("EM")) {
+                        m.setPeriodoEM("EM");
+                    } else if (periodo.equals("AJ")) {
+                        m.setPeriodoAJ("AJ");
+                    } else if (periodo.equals("V")) {
+                        m.setPeriodoV("V");
+                    }
+                }
+
+                materias.add(m);
+            }
+
+            return materias;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean eliminarPeriodos(String id_profesor, String codigo_materia) {
+        PreparedStatement ps1, ps2;
+        try {
+
+            ps1 = conexion.prepareStatement("DELETE FROM dicta "
+                    + "WHERE usbid_profesor = ? "
+                    + "AND codigo_materia = ?;");
+            ps1.setString(1, id_profesor);
+            ps1.setString(2, codigo_materia);
+
+            Integer i = ps1.executeUpdate();
+
+            return i > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 }

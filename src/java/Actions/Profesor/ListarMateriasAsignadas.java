@@ -10,20 +10,18 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author Langtech
+ * @author admin
  */
-public class EliminarProfesor extends org.apache.struts.action.Action {
+public class ListarMateriasAsignadas extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
-    private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -40,25 +38,16 @@ public class EliminarProfesor extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        Profesor profesor = (Profesor) form;
         HttpSession session = request.getSession(true);
-        String id_departamento = (String) session.getAttribute("usbid");
+        
+        Profesor profesor = (Profesor) form;
+        ArrayList<Materia> materias = 
+                DBMS.getInstance().consultarMateriasAsignadas(profesor.getUsbid());
 
-        ActionErrors error = new ActionErrors();
-
-        boolean elimino = DBMS.getInstance().eliminarProfesor(profesor);
-
-        ArrayList<Profesor> profesores =
-                DBMS.getInstance().listarProfesoresDepartamento(id_departamento);
-
-        if (elimino) {
-            session.setAttribute("profesores", profesores);
-            return mapping.findForward(SUCCESS);
-
-        } else {
-            return mapping.findForward(FAILURE);
-        }
-
-
+        profesor = DBMS.getInstance().obtenerInfoProfesor(profesor.getUsbid());
+        
+        request.setAttribute("materias", materias);
+        session.setAttribute("profesor", profesor);
+        return mapping.findForward(SUCCESS);
     }
 }

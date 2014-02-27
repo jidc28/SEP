@@ -19,7 +19,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Langtech
  */
-public class EliminarProfesor extends org.apache.struts.action.Action {
+public class ModificarPeriodo extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
@@ -40,25 +40,30 @@ public class EliminarProfesor extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        Profesor profesor = (Profesor) form;
+        Materia materia = (Materia) form;
         HttpSession session = request.getSession(true);
-        String id_departamento = (String) session.getAttribute("usbid");
+        Profesor profesor = (Profesor) session.getAttribute("profesor");
 
-        ActionErrors error = new ActionErrors();
+        boolean eliminados =
+                DBMS.getInstance().eliminarPeriodos(profesor.getUsbid(), materia.getCodigo());
 
-        boolean elimino = DBMS.getInstance().eliminarProfesor(profesor);
-
-        ArrayList<Profesor> profesores =
-                DBMS.getInstance().listarProfesoresDepartamento(id_departamento);
-
-        if (elimino) {
-            session.setAttribute("profesores", profesores);
-            return mapping.findForward(SUCCESS);
-
-        } else {
-            return mapping.findForward(FAILURE);
+        if (materia.getPeriodoSD() != null) {
+            DBMS.getInstance().agregarDicta(profesor, materia.getCodigo(), "SD");
+        }
+        if (materia.getPeriodoEM() != null) {
+            DBMS.getInstance().agregarDicta(profesor, materia.getCodigo(), "EM");
+        }
+        if (materia.getPeriodoAJ() != null) {
+            DBMS.getInstance().agregarDicta(profesor, materia.getCodigo(), "AJ");
+        }
+        if (materia.getPeriodoV() != null) {
+            DBMS.getInstance().agregarDicta(profesor, materia.getCodigo(), "V");
         }
 
-
+        ArrayList<Materia> materias =
+                DBMS.getInstance().consultarMateriasAsignadas(profesor.getUsbid());
+        
+        request.setAttribute("materias", materias);
+        return mapping.findForward(SUCCESS);
     }
 }

@@ -342,7 +342,34 @@
             validate="false">
             <forward name="success" path="asignarMateriaProfesor"/>
         </action>
+
+        <action input="ConsultaProfesores.jsp"
+            path="/listarMateriasAsignadas"
+            type="Actions.Profesor.ListarMateriasAsignadas"
+            scope="request"
+            name="Profesor"
+            validate="false">
+            <forward name="success" path="listarMateriasAsignadas"/>
+        </action>
         
+        <action input="ListarMateriasAsignadas.jsp"
+            path="/modificarPeriodo"
+            type="Actions.Profesor.ModificarPeriodo"
+            scope="request"
+            name="Materia"
+            validate="false">
+            <forward name="success" path="listarMateriasAsignadas"/>
+        </action>
+        
+        <action input="ListarMateriasAsignadas.jsp"
+            path="/eliminarPeriodo"
+            type="Actions.Profesor.EliminarPeriodo"
+            scope="request"
+            name="Materia"
+            validate="false">
+            <forward name="success" path="listarMateriasAsignadas"/>
+        </action>
+                                                        
         <!--accion que dado unas materias seleccionadas envia a la pagina para
         seleccionar el periodo en que dara la materia el profesor-->
         <action input="asignarMateriaProfesor.jsp"

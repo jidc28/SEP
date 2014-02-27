@@ -16,18 +16,23 @@ public class irAsignarMateriaProfesor extends Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
+
         HttpSession session = request.getSession(true);
         String id_departamento = (String) session.getAttribute("usbid");
+
+        Profesor profesor = (Profesor) session.getAttribute("profesor");
+
+        if (profesor == null) {
+           profesor = (Profesor) form;
+        }
         
-        Profesor profesor = (Profesor) form;
         profesor = DBMS.getInstance().obtenerInfoProfesor(profesor.getUsbid());
-        
+
         MultiBox materias = new MultiBox();
         materias.getMaterias(id_departamento);
-        request.setAttribute("materias",materias);
-        
-        session.setAttribute("profesor",profesor);
+        request.setAttribute("materias", materias);
+
+        session.setAttribute("profesor", profesor);
         return mapping.findForward("success");
     }
 }

@@ -41,7 +41,7 @@ public class ConsultaProfesorDepartamento extends org.apache.struts.action.Actio
 
         HttpSession session = request.getSession(true);
         String id_departamento = (String) session.getAttribute("usbid");
-        //obtengo una lista de decanatos registrados
+
         ArrayList<Profesor> profesores =
                 DBMS.getInstance().listarProfesoresDepartamento(id_departamento);
 
@@ -49,7 +49,7 @@ public class ConsultaProfesorDepartamento extends org.apache.struts.action.Actio
             request.setAttribute("vacio", SUCCESS);
         }
 
-        session.setAttribute("profesores", profesores);
+        request.setAttribute("profesores", profesores);
         return mapping.findForward(SUCCESS);
     }
 }
