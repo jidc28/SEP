@@ -14,13 +14,29 @@
 <h4> Lista de Materias asignadas:</h4>
 
 <br style="font-size: 14px;">
-<strong> PROFESOR </strong> 
-<html:text disabled="true" name="profesor" property="nombre"
-           style="height: 30px; margin: 0px; text-align: center;"/>
-<strong> USBID </strong> 
-<html:text disabled="true" name="profesor" property="usbid"
-           style="height: 30px; margin: 0px; text-align: center;"/>
+<table style="margin: 0px;">
+    <tr>
+        <td>
+            <strong style="color: #333;"> PROFESOR </strong>
+        </td>
+        <td>
+            <div class="col-xs-4" style="width: 100%; height: 30px; margin: 0px; padding: 0px;">
+                <input disabled="true" 
+                       value='<bean:write name="profesor" property="apellido" />, <bean:write name="profesor" property="nombre"/>'
+                       class="form-control" style="height: 30px; text-align: center;">
+            </div>
+        </td>
+        <td>
+            <strong style="color: #333;"> USBID </strong>
+        </td>
+        <td>
+            <html:text disabled="true" name="profesor" property="usbid"
+                       style="width: 100%; height: 30px; margin: 0px; text-align: center;"/>
+        </td>
+    </tr>
+</table>
 </br>
+
 <logic:notEmpty name="materias">
     <div id="tabla" class="table-responsive">
         <table class="table table-striped">

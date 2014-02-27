@@ -20,12 +20,27 @@
 <h4> Asignar Materias a Profesores:</h4>
 
 <br style="font-size: 14px;">
-<strong> PROFESOR </strong> 
-<html:text disabled="true" name="profesor" property="nombre"
-           style="height: 30px; margin: 0px; text-align: center;"/>
-<strong> USBID </strong> 
-<html:text disabled="true" name="profesor" property="usbid"
-           style="height: 30px; margin: 0px; text-align: center;"/>
+<table>
+    <tr>
+        <td>
+            <strong style="color: #333;"> PROFESOR </strong>
+        </td>
+        <td>
+            <div class="col-xs-4" style="width: 100%; height: 30px; margin: 0px; padding: 0px;">
+                <input disabled="true" 
+                       value='<bean:write name="profesor" property="apellido" />, <bean:write name="profesor" property="nombre"/>'
+                       class="form-control" style="height: 30px; text-align: center;">
+            </div>
+        </td>
+        <td>
+            <strong style="color: #333;"> USBID </strong>
+        </td>
+        <td>
+            <html:text disabled="true" name="profesor" property="usbid"
+                       style="width: 100%; height: 30px; margin: 0px; text-align: center;"/>
+        </td>
+    </tr>
+</table>
 </br>
 
 <center>
@@ -37,45 +52,45 @@
                         <th>
                         </th>
                         <th style="font-size: 14px;">
-                            <center>
-                                CODIGO
-                            </center>
-                        </th>
-                        <th style="font-size: 14px;">
-                            <center>
-                                NOMBRE
-                            </center>
-                        </th>
-                        <th style="font-size: 14px;">
-                            <center>
-                                CRÉDITOS
-                            </center>
-                        </th>
-                    </tr>
+                <center>
+                    CODIGO
+                </center>
+                </th>
+                <th style="font-size: 14px;">
+                <center>
+                    NOMBRE
+                </center>
+                </th>
+                <th style="font-size: 14px;">
+                <center>
+                    CRÉDITOS
+                </center>
+                </th>
+                </tr>
                 </thead>
                 <html:form action="/asignarMateriaProfesor">
                     <logic:iterate id="materia" name="materias" property="items">
                         <tr>
                             <td>
-                                <center>
-                                    <html:multibox  property="itemsSeleccionados">
-                                        <bean:write name="materia" property="codigo"/>
-                                    </html:multibox>
-                                </center>
-                            </td>
-                            <td>
-                                <center>
-                                    <bean:write name="materia" property="codigo"/>
-                                </center>
-                            </td>
-                            <td>
-                                <bean:write name="materia" property="nombre"/> 
-                            </td>
-                            <td>
-                                <center>
-                                    <bean:write name="materia" property="creditos"/>
-                                </center>
-                            </td>
+                        <center>
+                            <html:multibox  property="itemsSeleccionados">
+                                <bean:write name="materia" property="codigo"/>
+                            </html:multibox>
+                        </center>
+                        </td>
+                        <td>
+                        <center>
+                            <bean:write name="materia" property="codigo"/>
+                        </center>
+                        </td>
+                        <td>
+                            <bean:write name="materia" property="nombre"/> 
+                        </td>
+                        <td>
+                        <center>
+                            <bean:write name="materia" property="creditos"/>
+                        </center>
+                        </td>
                         </tr>
                     </logic:iterate>
                 </table>
