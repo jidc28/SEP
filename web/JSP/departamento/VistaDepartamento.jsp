@@ -98,13 +98,13 @@
         </div>
         <div id="collapseEvaluacion" class="panel-collapse collapse">
             <div class="panel-body">
-                <html:link action="/irEvaluarProfesores">
-                    <h5 align ="center">Evaluar Profesores</h5>
-                </html:link>
                 <html:link action="/ConsultaEstadoPlanillas">
                     <h5 align ="center">
                         Gestionar Planillas de Evaluación de Profesores
                     </h5>
+                </html:link>
+                <html:link action="/irEvaluarProfesores">
+                    <h5 align ="center">Evaluar Profesores</h5>
                 </html:link>
             </div>
         </div>

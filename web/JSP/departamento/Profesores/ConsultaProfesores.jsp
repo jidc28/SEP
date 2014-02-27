@@ -11,7 +11,13 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h4> Profesores registrados en el sistema: </h4>
+<h4>  
+        <a href="#" id="ayuda1" style="text-decoration: none;" rel="popover" > 
+            <span class="glyphicon glyphicon-question-sign">     
+            </span> 
+        </a>
+    Profesores registrados en el sistema:
+</h4>
 
 <center>
     <logic:notPresent name="vacio">
