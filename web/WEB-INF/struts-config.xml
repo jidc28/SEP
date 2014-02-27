@@ -295,6 +295,25 @@
             <forward name="failure" path="agregarProfesor"/>
         </action>
 
+        <action input="ConsultaProfesores.jsp"
+            path="/irModificarProfesor"
+            type="Actions.Profesor.IrModificarProfesor"
+            scope="request"
+            name="Profesor"
+            validate="false">
+            <forward name="success" path="modificarProfesor"/>
+        </action>
+
+        <action input="ModificarProfesor.jsp"
+            path="/modificarProfesor"
+            type="Actions.Profesor.ModificarProfesor"
+            scope="request"
+            name="Profesor"
+            validate="false">
+            <forward name="success" path="consultaProfesores"/>
+            <forward name="failure" path="modificarProfesor"/>
+        </action>
+
         <action input="VistaDepartamento.jsp"
             path="/consultarProfesores"
             type="Actions.Profesor.ConsultaProfesorDepartamento"

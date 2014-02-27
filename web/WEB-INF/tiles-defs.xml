@@ -206,12 +206,17 @@
         <put name="body" value="/JSP/departamento/Profesores/LlenarPlanillas.jsp"/>
     </definition>
 
-    <!-- 8. Ver las planillas de un determinado profesor -->
+    <!-- 8. Modificar un profesor -->
+    <definition name="modificarProfesor" extends="baseDepartamento"> 
+        <put name="body" value="/JSP/departamento/Profesores/ModificarProfesor.jsp"/>
+    </definition>
+
+    <!-- 9. Ver las planillas de un determinado profesor -->
     <definition name="verPlanilla" extends="baseDepartamento"> 
         <put name="body" value="/JSP/departamento/Profesores/VerPlanilla.jsp"/>
     </definition>
 
-    <!-- 9. Ver las planillas previamente llenadas de un profesor -->
+    <!-- 10. Ver las planillas previamente llenadas de un profesor -->
     <definition name="verPlanillasLlenas" extends="baseDepartamento">
         <put name="body" value="/JSP/departamento/Profesores/VerPlanillasLlenas.jsp"/>
     </definition>

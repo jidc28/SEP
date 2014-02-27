@@ -328,7 +328,11 @@ public class DBMS {
         PreparedStatement psAgregar1 = null;
 
         try {
-            psAgregar1 = conexion.prepareStatement("UPDATE profesor SET email = ?, email_personal = ?, nivel = ?, jubilado = ?, lapso_contractual_inicio = ?, lapso_contractual_fin = ? WHERE usbid = ? ");
+            psAgregar1 = conexion.prepareStatement("UPDATE profesor "
+                    + "SET email = ?, email_personal = ?, nivel = ?, "
+                    + "jubilado = ?, lapso_contractual_inicio = ?, "
+                    + "lapso_contractual_fin = ? "
+                    + "WHERE usbid = ? ");
             psAgregar1.setString(1, u.getEmail());
             psAgregar1.setString(2, u.getEmail_personal());
             psAgregar1.setString(3, u.getNivel());
@@ -339,6 +343,33 @@ public class DBMS {
 
 
             Integer i = psAgregar1.executeUpdate();
+
+            return i > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean modificarProfesor(Profesor p) {
+
+        PreparedStatement ps = null;
+
+        try {
+            ps = conexion.prepareStatement("UPDATE profesor "
+                    + "SET usbid = ?, cedula = ?, nombre = ?, apellido = ?,"
+                    + "genero = ?, email = ? "
+                    + "WHERE usbid = ? ");
+            ps.setString(1, p.getUsbid());
+            ps.setString(2, p.getCedula());
+            ps.setString(3, p.getNombre());
+            ps.setString(4, p.getApellido());
+            ps.setString(5, p.getGenero());
+            ps.setString(6, p.getEmail());
+            ps.setString(7, p.getUsbidViejo());
+
+            Integer i = ps.executeUpdate();
 
             return i > 0;
 
@@ -1333,7 +1364,7 @@ public class DBMS {
         PreparedStatement ps0, ps1, ps3, ps4, ps5;
 
         try {
-            
+
             ps0 = conexion.prepareStatement("UPDATE MATERIA "
                     + "SET codigo = ?, creditos = ?, nombre = ?"
                     + "WHERE codigo = ?;");
@@ -1341,7 +1372,7 @@ public class DBMS {
             ps0.setString(2, m.getCreditos());
             ps0.setString(3, m.getNombre());
             ps0.setString(4, m.getViejoCodigo());
-            
+
             ps1 = conexion.prepareStatement("UPDATE MATERIA SET solicitud = 'no' WHERE codigo = ?;");
             ps1.setString(1, m.getCodigo());
 

@@ -42,7 +42,17 @@
                         </th>
                         <th style="font-size: 14px;">
                             <center>
-                                ASIGNAR MATERIAS
+                                MODIFICAR
+                            </center>
+                        </th>
+                        <th style="font-size: 14px;">
+                            <center>
+                                ASIGNAR <br> MATERIAS
+                            </center>
+                        </th>
+                        <th style="font-size: 14px;">
+                            <center>
+                                LISTAR <br> MATERIAS
                             </center>
                         </th>
                     </tr>
@@ -73,11 +83,33 @@
                     </td>
                     <td>
                     <center>
+                        <html:form action="/irModificarProfesor" style="margin: 0px;">
+                            <html:hidden name="profesor" property="usbid"/>
+                            <html:submit styleClass="btn btn-primary"
+                                         style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                                Modificar
+                            </html:submit>
+                        </html:form>
+                    </center>
+                    </td>
+                    <td>
+                    <center>
                         <html:form action="/irAsignarMateriaProfesor" style="margin: 0px;">
+                            <html:hidden name="profesor" property="usbid"/>
+                            <html:submit styleClass="btn btn-info"
+                                         style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                                Asignar
+                            </html:submit>
+                        </html:form>
+                    </center>
+                    </td>
+                    <td>
+                    <center>
+                        <html:form action="/eliminarProfesor" style="margin: 0px;">
                             <html:hidden name="profesor" property="usbid"/>
                             <html:submit styleClass="btn btn-default"
                                          style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
-                                Asignar Materias
+                                Listar
                             </html:submit>
                         </html:form>
                     </center>

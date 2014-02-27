@@ -1,6 +1,8 @@
 package Actions.Profesor;
 
-import Clases.MultiBox;
+import Clases.*;
+import DBMS.DBMS;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,9 +11,10 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-public class IrEvaluarProfesores extends Action {
+public class ModificarProfesor extends Action {
 
     private static final String SUCCESS = "success";
+    
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
@@ -20,9 +23,15 @@ public class IrEvaluarProfesores extends Action {
         HttpSession session = request.getSession(true);
         String id_departamento = (String) session.getAttribute("usbid");
         
-        MultiBox m = new MultiBox();
-        m.getProfesores(id_departamento);
-        request.setAttribute("profesores",m);
+        Profesor profesor = (Profesor) form;
+        profesor.setEmail(profesor.getUsbid()+"@usb.ve");
+        
+        boolean modificado = DBMS.getInstance().modificarProfesor(profesor);
+
+        ArrayList<Profesor> profesores =
+                DBMS.getInstance().listarProfesoresDepartamento(id_departamento);
+
+        request.setAttribute("profesores", profesores);
         return mapping.findForward(SUCCESS);
     }
 }

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : AgregarProfesor
-    Created on : Feb 15, 2014, 4:06:00 PM
+    Document   : ModificarProfesor
+    Created on : Feb 27, 2014, 10:02:37 AM
     Author     : smaf
 --%>
 
@@ -12,52 +12,53 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <h4> Planilla para agregar un profesor </h4>
-<html:form action="/agregarProfesor">
+<html:form action="/modificarProfesor">
     <table border="0">
         <tbody>
             <tr style="height: 35px;">
                 <td style="font-size: 14px;"><strong>USBID</strong></td>
                 <td>
                     <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
-                               name="Profesor" property="usbid"/>
+                               name="profesor" property="usbid"/>
                 </td>
             </tr>
             <tr style="height: 35px;">
                 <td style="font-size: 14px;"><strong>CÉDULA</strong></td>
                 <td>
                     <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
-                               name="Profesor" property="cedula"/>
+                               name="profesor" property="cedula"/>
                 </td>
             </tr>
             <tr style="height: 35px;">
                 <td style="font-size: 14px;"><strong>NOMBRE</strong></td>
                 <td>
                     <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
-                               name="Profesor" property="nombre"/>
+                               name="profesor" property="nombre"/>
                 </td>
             </tr>
             <tr style="height: 35px;">
                 <td style="font-size: 14px;"><strong> APELLIDO</strong> </td>
                 <td>
                     <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
-                               name="Profesor" property="apellido"/>
+                               name="profesor" property="apellido"/>
                 </td>
             </tr>
             <tr style="height: 35px;">
                 <td style="font-size: 14px;"> <strong> GÉNERO</strong> </td>
                 <td>
-                    <html:radio property="genero" value="M" style="margin: 0px;">
+                    <html:radio name="profesor" property="genero" value="M" style="margin: 0px;">
                         Masculino
                     </html:radio>
                     <br>
-                    <html:radio property="genero" value="F" style="margin: 0px;">
+                    <html:radio name="profesor" property="genero" value="F" style="margin: 0px;">
                         Femenino
                     </html:radio><br>
                 </td>
             </tr>
         </tbody>
     </table>
+    <html:hidden name="profesor" property="usbidViejo"/>
     <html:submit styleClass="btn btn-success" style="margin-top: 20px;">
-        Agregar Profesor
+        Modificar Profesor
     </html:submit>
 </html:form>
