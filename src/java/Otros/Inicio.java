@@ -10,10 +10,10 @@ import DBMS.DBMS;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMessage;
 
 /**
@@ -46,7 +46,6 @@ public class Inicio extends org.apache.struts.action.Action {
         //Usuario u = (Usuario) form;
         HttpSession session = request.getSession(true);
         Usuario u = (Usuario) request.getSession().getAttribute("usuario");
-        //System.out.println("--------------------> USUARIO: " + u.getUsbid() + "\n");
         
         ActionErrors error = new ActionErrors();
 

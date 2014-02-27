@@ -124,7 +124,7 @@
     
     <!-- Archivo base para el departamento -->
     <definition name="baseDepartamento" extends="base"> 
-        <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDecanato.jsp"/>
+        <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDepartamento.jsp"/>
     </definition>
 
     <!-- Vista del departamento -->

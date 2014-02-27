@@ -295,6 +295,14 @@
             <forward name="failure" path="agregarProfesor"/>
         </action>
 
+        <action path="/ejecutarOpcion"
+            type="Otros.EjecutarOpcion"
+            scope="request"
+            name="Usuario"
+            validate="false">
+            <forward name="departamento" path="vistaDepartamento"/>
+        </action>
+
         <action input="ConsultaProfesores.jsp"
             path="/irModificarProfesor"
             type="Actions.Profesor.IrModificarProfesor"

@@ -40,3 +40,25 @@
     });
 </script>
 
+<logic:present name="gestion_materias">
+    <script>
+        $(function() {
+            $('#collapseMaterias').addClass('in'); 
+        });
+    </script>
+</logic:present>
+<logic:present name="gestion_profesores">
+    <script>
+        $(function() {
+            $('#collapseProfesor').addClass('in'); 
+        });
+    </script>
+</logic:present>
+<logic:present name="gestion_evaluaciones">
+    <script>
+        $(function() {
+            $('#collapseEvaluacion').addClass('in'); 
+        });
+    </script>
+</logic:present>
+

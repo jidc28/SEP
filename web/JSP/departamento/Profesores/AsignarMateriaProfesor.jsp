@@ -20,7 +20,7 @@
 <h4> Asignar Materias a Profesores:</h4>
 
 <br style="font-size: 14px;">
-<table>
+<table style="margin-top: 0px;">
     <tr>
         <td>
             <strong style="color: #333;"> PROFESOR </strong>
