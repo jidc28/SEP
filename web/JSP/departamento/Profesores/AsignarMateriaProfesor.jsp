@@ -90,11 +90,12 @@
     </logic:notEmpty>
     <logic:empty name="materias" property="items">
         <div class="alert alert-warning alert-dismissable" 
-             id="alert-coord">
+             id="alert-coord"
+             style="margin-top: 20px;">
             <a href="#" id="ayuda1" style="color: #c09853; float: right" rel="popover" > 
             </a>
             <p>
-                No existen materias registradas en el sistema.
+                El profesor dicta todas las materias ofertadas por este departamento.
             </p>
         </div>
     </logic:empty>

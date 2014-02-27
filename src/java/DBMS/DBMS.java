@@ -1973,4 +1973,42 @@ public class DBMS {
         }
         return false;
     }
+    
+    public ArrayList<Materia> listarMateriasNoDictadas(String id_departamento, String id_profesor) {
+
+        ArrayList<Materia> materias = new ArrayList<Materia>(0);
+        PreparedStatement ps;
+        try {
+            ps = conexion.prepareStatement("SELECT codigo, nombre, condicion, estado, creditos "
+                    + "FROM oferta as o, materia "
+                    + "WHERE o.codigo_departamento = ? AND "
+                    + "o.codigo_materia = codigo AND "
+                    + "condicion = 'activo' "
+                    + "AND solicitud = 'no' "
+                    + "and o.codigo_materia NOT IN "
+                    + "(SELECT codigo_materia "
+                    + "FROM dicta as d "
+                    + "WHERE usbid_profesor = ? "
+                    + "AND o.codigo_materia = d.codigo_materia) "
+                    + "ORDER BY estado;");
+
+            ps.setString(1, id_departamento);
+            ps.setString(2, id_profesor);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Materia m = new Materia();
+                m.setCodigo(rs.getString("codigo"));
+                m.setNombre(rs.getString("nombre"));
+                m.setCondicion(rs.getString("condicion"));
+                m.setEstado(rs.getString("estado"));
+                m.setCreditos(rs.getString("creditos"));
+                materias.add(m);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return materias;
+    }
 }

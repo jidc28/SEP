@@ -24,6 +24,8 @@ public class AsignarPeriodo extends Action {
 
         HttpSession session = request.getSession(true);
         Profesor profesor = (Profesor) session.getAttribute("profesor");
+        String id_departamento = (String) session.getAttribute("usbid");
+
         String[] materias_seleccionadas =
                 (String[]) session.getAttribute("materias_seleccionadas");
 
@@ -34,7 +36,7 @@ public class AsignarPeriodo extends Action {
 
         if (materia.getPeriodoSD() == null && materia.getPeriodoEM() == null
                 && materia.getPeriodoAJ() == null && materia.getPeriodoV() == null) {
-            
+
             ArrayList<Materia> materias =
                     DBMS.getInstance().consultarMateriasSeleccionadas(materias_seleccionadas);
 
@@ -75,7 +77,10 @@ public class AsignarPeriodo extends Action {
         }
 
         if (materias_resultantes.length == 0) {
+            ArrayList<Profesor> profesores =
+                    DBMS.getInstance().listarProfesoresDepartamento(id_departamento);
 
+            request.setAttribute("profesores", profesores);
             return mapping.findForward(SUCCESS);
         } else {
 

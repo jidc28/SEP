@@ -31,8 +31,8 @@ public class MultiBox extends ActionForm {
         return items;
     }
     
-    public List getMaterias(String id_departamento) {
-        items = DBMS.getInstance().listarMateriasOfertadas(id_departamento);
+    public List getMaterias(String id_departamento, String id_profesor) {
+        items = DBMS.getInstance().listarMateriasNoDictadas(id_departamento,id_profesor);
         return items;
     }
 }

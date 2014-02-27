@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionMapping;
 
 public class irAsignarMateriaProfesor extends Action {
 
+    @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -29,7 +30,7 @@ public class irAsignarMateriaProfesor extends Action {
         profesor = DBMS.getInstance().obtenerInfoProfesor(profesor.getUsbid());
 
         MultiBox materias = new MultiBox();
-        materias.getMaterias(id_departamento);
+        materias.getMaterias(id_departamento,profesor.getUsbid());
         request.setAttribute("materias", materias);
 
         session.setAttribute("profesor", profesor);
