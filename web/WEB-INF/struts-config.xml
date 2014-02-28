@@ -108,22 +108,22 @@
             type="org.apache.struts.actions.ForwardAction"
             scope="request"
             validate="false"
-            parameter="agregarDepartamento">
+            parameter="agrega_departamento_pagina">
         </action>
         
         <action input="/AgregarDepartamento.jsp" name="Departamento" path="/agregarDepartamento" scope="request" type="Actions.Departamento.AgregarDepartamento" validate="false">
-            <forward name="success" path="consultaDepartamento"/>
-            <forward name="yaregistrada" path="agregarDepartamento"/>
-            <forward name="failure" path="agregarDepartamento"/>
+            <forward name="success" path="consulta_departamento_pagina"/>
+            <forward name="yaregistrada" path="agrega_departamento_pagina"/>
+            <forward name="failure" path="agrega_departamento_pagina"/>
         </action>
         
         <action input="/ConsultaDepartamento.jsp" name="Departamento" path="/desactivarDepartamento" scope="request" type="Actions.Departamento.DesactivarDepartamento" validate="false">
-            <forward name="success" path="consultaDepartamento"/>
+            <forward name="success" path="consulta_departamento_pagina"/>
         </action>
         
         <!--       DECANATOS        -->
         <action input="/AgregaDecanato.jsp" name="Decanato" path="/registrarDecanato" scope="request" type="Actions.Decanato.RegistrarDecanato" validate="false">
-            <forward name="success" path="consultaDecanato"/>
+            <forward name="success" path="consulta_decanato_pagina"/>
             <forward name="failure" path="agrega_decanato_pagina"/> 
             <forward name="yaregistrada" path="agrega_decanato_pagina"/> 
         </action>
@@ -164,8 +164,9 @@
         </action>
         
         <action input="/VistaCoordinacion.jsp" name="Departamentos" path="/listarDepartamentos" scope="request" type="Actions.Departamento.ConsultaDepartamentoA" validate="false">
-            <forward name="coordinacion" path="consultaDepartamentoCoordinacion"/>
-            <forward name="administrador" path="consultaDepartamento"/>
+            <forward name="coordinacion" path="consulta_departamento_pagina"/>
+            <forward name="administrador" path="consulta_departamento_pagina"/>
+            <forward name="no_autorizado" path="noAutorizado"/>
         </action>
         
         <action input="/ConsultaDepartamento.jsp" name="Departamento" path="/listarMateriasDepto" scope="request" type="Actions.Materia.ConsultaMateria" validate="false">
@@ -198,13 +199,13 @@
         <!--     DEPARTAMENTOS      --> 
         
         <action input="/ConsultaDepartamento.jsp" name="Departamento" path="/irEditarNombreDepartamento" scope="request" type="Actions.Departamento.irEditarNombreDepartamento" validate="false">
-            <forward name="success" path="editarDepartamento"/>
+            <forward name="success" path="edita_departamento_pagina"/>
         </action>
 
         <action input="/EditarDepartamento.jsp" name="Departamento" path="/editarDepartamento" scope="request" type="Actions.Departamento.EditarDepartamento" validate="false">
-            <forward name="success" path="consultaDepartamento"/>
-            <forward name="failure" path="editarDepartamento"/>
-            <forward name="yaregistrada" path="editarDepartamento"/>
+            <forward name="success" path="consulta_departamento_pagina"/>
+            <forward name="failure" path="edita_departamento_pagina"/>
+            <forward name="yaregistrada" path="edita_departamento_pagina"/>
         </action>
                 
         <!-- ACCIONES JEFE DE DEPARTAMENTO -->

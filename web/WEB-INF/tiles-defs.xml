@@ -23,6 +23,18 @@
         <put name="vista" value="/JSP/admin/Decanatos/edita_decanato_pagina.jsp"/>
     </definition>
     
+    <definition name="agrega_departamento_pagina" extends="generico">
+        <put name="vista" value="/JSP/admin/Departamentos/agrega_departamento_pagina.jsp"/>
+    </definition>
+    
+    <definition name="consulta_departamento_pagina" extends="generico">
+        <put name="vista" value="/JSP/admin/Departamentos/consulta_departamento_pagina.jsp"/>
+    </definition>
+    
+    <definition name="edita_departamento_pagina" extends="generico">
+        <put name="vista" value="/JSP/admin/Departamentos/edita_departamento_pagina.jsp"/>
+    </definition>
+    
     <!-- DEFINICION BASE -->
     <definition name="base" path="/Plantilla/plantilla.jsp">
         <put name="css" value="/JSP/general-css.jsp"/>

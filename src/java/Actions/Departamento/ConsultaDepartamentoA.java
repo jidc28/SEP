@@ -20,6 +20,8 @@ import org.apache.struts.action.ActionMapping;
  */
 public class ConsultaDepartamentoA extends org.apache.struts.action.Action {
 
+    private static final String NO_AUTORIZADO = "no_autorizado";
+
     /**
      * This is the action called from the Struts framework.
      *
@@ -45,6 +47,10 @@ public class ConsultaDepartamentoA extends org.apache.struts.action.Action {
         departamentos = DBMS.getInstance().listarDepartamentos();
         session.setAttribute("departamentos", departamentos);
         //retorno a pagina de exito
-        return mapping.findForward(tipousuario);
+        if (tipousuario.equals("coordinacion") || tipousuario.equals("administrador")) {
+            return mapping.findForward(tipousuario);
+        } else {
+            return mapping.findForward(NO_AUTORIZADO);
+        }
     }
 }
