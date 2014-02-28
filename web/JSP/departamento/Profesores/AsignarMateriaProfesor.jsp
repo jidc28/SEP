@@ -103,6 +103,7 @@
             </html:form>
         </div>
     </logic:notEmpty>
+    
     <logic:empty name="materias" property="items">
         <div class="alert alert-warning alert-dismissable" 
              id="alert-coord"

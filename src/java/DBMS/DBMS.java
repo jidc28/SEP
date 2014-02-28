@@ -1979,18 +1979,16 @@ public class DBMS {
         ArrayList<Materia> materias = new ArrayList<Materia>(0);
         PreparedStatement ps;
         try {
-            ps = conexion.prepareStatement("SELECT codigo, nombre, condicion, estado, creditos "
+            ps = conexion.prepareStatement("SELECT * "
                     + "FROM oferta as o, materia "
                     + "WHERE o.codigo_departamento = ? AND "
                     + "o.codigo_materia = codigo AND "
                     + "condicion = 'activo' "
                     + "AND solicitud = 'no' "
                     + "and o.codigo_materia NOT IN "
-                    + "(SELECT codigo_materia "
+                    + "(SELECT d.codigo_materia "
                     + "FROM dicta as d "
-                    + "WHERE usbid_profesor = ? "
-                    + "AND o.codigo_materia = d.codigo_materia) "
-                    + "ORDER BY estado;");
+                    + "WHERE usbid_profesor = ?);");
 
             ps.setString(1, id_departamento);
             ps.setString(2, id_profesor);
@@ -2000,8 +1998,6 @@ public class DBMS {
                 Materia m = new Materia();
                 m.setCodigo(rs.getString("codigo"));
                 m.setNombre(rs.getString("nombre"));
-                m.setCondicion(rs.getString("condicion"));
-                m.setEstado(rs.getString("estado"));
                 m.setCreditos(rs.getString("creditos"));
                 materias.add(m);
             }

@@ -20,8 +20,13 @@
     $(function () { 
         $("#ayuda1").popover({
             'title': 'Ir a asignar materias',
-            'content': 'Para asignarle materia a un profesor seleccione este '
-                +'<html:link action="/irAsignarMateriaProfesor"> link </html:link>',
+            'content': 'Para asignarle materia a un profesor seleccione:'
+                +'<html:form action="/irAsignarMateriaProfesor" style="margin: 0px;">'
+                +'<html:hidden name="profesor" property="nombre"/>'
+                +'<html:hidden name="profesor" property="apellido"/>'
+                +'<html:hidden name="profesor" property="usbid"/>'
+                +'<html:submit styleClass="link" style="padding:0px;">link</html:submit>'
+                +'</html:form>',
             'placement': 'bottom',
             'html': 'true'
         });  

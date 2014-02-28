@@ -2,7 +2,6 @@ package Actions.Profesor;
 
 import Clases.*;
 import DBMS.DBMS;
-import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,16 +20,16 @@ public class irAsignarMateriaProfesor extends Action {
         HttpSession session = request.getSession(true);
         String id_departamento = (String) session.getAttribute("usbid");
 
-        Profesor profesor = (Profesor) session.getAttribute("profesor");
+        Profesor profesor = (Profesor) form;
 
         if (profesor == null) {
-           profesor = (Profesor) form;
+            profesor = (Profesor) session.getAttribute("profesor");
         }
-        
+
         profesor = DBMS.getInstance().obtenerInfoProfesor(profesor.getUsbid());
 
         MultiBox materias = new MultiBox();
-        materias.getMaterias(id_departamento,profesor.getUsbid());
+        materias.getMaterias(id_departamento, profesor.getUsbid());
         request.setAttribute("materias", materias);
 
         session.setAttribute("profesor", profesor);
