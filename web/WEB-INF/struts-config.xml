@@ -88,8 +88,8 @@
         </action>
         
         <action input="/VistaAdministrador.jsp" path="/agregaCoordinacionA" scope="request" type="Actions.Coordinacion.AgregaCoordinacionA">
-            <forward name="administrador" path="agregaCoordinacionAdmin"/>
-            <forward name="decanato" path="agregaCoordinacionDecanato"/>
+            <forward name="administrador" path="agrega_coordinacion_pagina"/>
+            <forward name="decanato" path="agrega_coordinacion_pagina"/>
             <forward name="failure" path="noAutorizado"/>
         </action>
         
@@ -98,8 +98,8 @@
         </action>
         
         <action input="/VistaAdministrador.jsp" path="/consultaCoordinacionA" name="Decanato" scope="request" type="Actions.Coordinacion.ConsultaCoordinacionA" validate="false">
-            <forward name="administrador" path="consultaCoordinacionAdmin"/>
-            <forward name="decanato" path="consultaCoordinacionDecanato"/>
+            <forward name="administrador" path="consulta_coordinacion_pagina"/>
+            <forward name="decanato" path="consulta_coordinacion_pagina"/>
             <forward name="failure" path="noAutorizado"/>
         </action>
         
@@ -137,30 +137,30 @@
         
         <!--     COORDINACIONES     -->
         <action input="/AgregaCoordinacion.jsp" name="Coordinacion" path="/registrarCoordinacion" scope="request" type="Actions.Coordinacion.RegistrarCoordinacion" validate="false">
-            <forward name="administrador" path="consultaCoordinacionAdmin"/>
-            <forward name="decanato" path="consultaCoordinacionDecanato"/>
-            <forward name="failure_administrador" path="agregaCoordinacionAdmin"/>
-            <forward name="failure_decanato" path="agregaCoordinacionDecanato"/>
-            <forward name="yaregistrada_administrador" path="agregaCoordinacionAdmin"/>
-            <forward name="yaregistrada_decanato" path="agregaCoordinacionDecanato"/>
+            <forward name="administrador" path="consulta_coordinacion_pagina"/>
+            <forward name="decanato" path="consulta_coordinacion_pagina"/>
+            <forward name="failure_administrador" path="agrega_coordinacion_pagina"/>
+            <forward name="failure_decanato" path="agrega_coordinacion_pagina"/>
+            <forward name="yaregistrada_administrador" path="agrega_coordinacion_pagina"/>
+            <forward name="yaregistrada_decanato" path="agrega_coordinacion_pagina"/>
         </action>
         
         <action input="/ConsultaCoordinacion.jsp" name="Coordinacion" path="/editarNombreCoordinacion" scope="request" type="Actions.Coordinacion.EditarNombreCoordinacion" validate="false">
-            <forward name="administrador" path="editarNombreCoordinacionAdmin"/>
-            <forward name="decanato" path="editarNombreCoordinacionDecanato"/>
+            <forward name="administrador" path="editar_coordinacion_pagina"/>
+            <forward name="decanato" path="editar_coordinacion_pagina"/>
             <forward name="failure" path="noAutorizado"/>
         </action>
         
         <action input="/EditarNombreCoordinacion.jsp" name="Coordinacion" path="/cambiarNombreCoordinacionA" scope="request" type="Actions.Coordinacion.CambiarNombreCoordinacionA" validate="false">
-            <forward name="administrador" path="consultaCoordinacionAdmin"/>
-            <forward name="decanato" path="consultaCoordinacionDecanato"/>
-            <forward name="failure_administrador" path="editarNombreCoordinacionAdmin"/>
-            <forward name="failure_decanato" path="editarNombreCoordinacionDecanato"/>
+            <forward name="administrador" path="consulta_coordinacion_pagina"/>
+            <forward name="decanato" path="consulta_coordinacion_pagina"/>
+            <forward name="failure_administrador" path="editar_coordinacion_pagina"/>
+            <forward name="failure_decanato" path="editar_coordinacion_pagina"/>
         </action>
         
         <action input="/ConsultarCoordinacion.jsp" name="Coordinacion" path="/eliminaCoordinacionA" scope="request" type="Actions.Coordinacion.EliminaCoordinacionA" validate="false">
-            <forward name="success" path="consultaCoordinacion"/>
-            <forward name="failure" path="consultaCoordinacion"/>
+            <forward name="success" path="consulta_coordinacion_pagina"/>
+            <forward name="failure" path="consulta_coordinacion_pagina"/>
         </action>
         
         <action input="/VistaCoordinacion.jsp" name="Departamentos" path="/listarDepartamentos" scope="request" type="Actions.Departamento.ConsultaDepartamentoA" validate="false">
@@ -384,7 +384,7 @@
             scope="request"
             name="Materia"
             validate="false">
-            <forward name="success" path="listarMateriasAsignadas"/>
+            <forward name="success" path="listar_materias_asignadas_pagina"/>
         </action>
         
         <action input="ListarMateriasAsignadas.jsp"
@@ -393,7 +393,7 @@
             scope="request"
             name="Materia"
             validate="false">
-            <forward name="success" path="listarMateriasAsignadas"/>
+            <forward name="success" path="listar_materias_asignadas_pagina"/>
         </action>
                                                         
         <!--accion que dado unas materias seleccionadas envia a la pagina para

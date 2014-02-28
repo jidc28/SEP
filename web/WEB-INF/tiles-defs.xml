@@ -11,6 +11,18 @@
         <put name="vista" value="/Plantilla/body.jsp"/>
     </definition>
     
+    <definition name="agrega_coordinacion_pagina" extends="generico">
+        <put name="vista" value="/JSP/admin/Coordinaciones/agrega_coordinacion_pagina.jsp"/>
+    </definition>
+    
+    <definition name="consulta_coordinacion_pagina" extends="generico">
+        <put name="vista" value="/JSP/admin/Coordinaciones/consulta_coordinacion_pagina.jsp"/>
+    </definition>
+    
+    <definition name="editar_coordinacion_pagina" extends="generico">
+        <put name="vista" value="/JSP/admin/Coordinaciones/editar_coordinacion_pagina.jsp"/>
+    </definition>
+
     <definition name="agrega_decanato_pagina" extends="generico">
         <put name="vista" value="/JSP/admin/Decanatos/agrega_decanato_pagina.jsp"/>
     </definition>
