@@ -20,8 +20,8 @@ import org.apache.struts.action.ActionMapping;
  */
 public class VerMateria extends org.apache.struts.action.Action {
 
-    /* forward name="success" path="" */
     private static final String SUCCESS = "success";
+    private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -40,25 +40,35 @@ public class VerMateria extends org.apache.struts.action.Action {
 
         HttpSession session = request.getSession(true);
         String id_departamento = (String) session.getAttribute("usbid");
-        Materia materia = (Materia) form;
-        Materia temporal = DBMS.getInstance().obtenerMensaje(id_departamento);
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
 
-        materia = DBMS.getInstance().obtenerDatosMateria(materia);
-        materia.setMensaje(temporal.getMensaje());
-        materia.setCoordinacion(temporal.getCoordinacion());
-        materia.setViejoCodigo(materia.getCodigo());
+        if (tipousuario.equals("departamento")) {
+            
+            Materia materia = (Materia) form;
+            Materia temporal = DBMS.getInstance().obtenerMensaje(id_departamento);
 
-        String[] caracteres = materia.getCodigo().split("");
+            materia = DBMS.getInstance().obtenerDatosMateria(materia);
+            materia.setMensaje(temporal.getMensaje());
+            materia.setCoordinacion(temporal.getCoordinacion());
+            materia.setViejoCodigo(materia.getCodigo());
 
-        materia.setCod1(caracteres[1] + caracteres[2]);
-                    
-        materia.setCod2(caracteres[3]);
-        materia.setNum2(caracteres[4]);
-        materia.setNum3(caracteres[5]);
-        materia.setNum4(caracteres[6]);
+            String[] caracteres = materia.getCodigo().split("");
 
-        request.setAttribute("aprobar","aprobar");
-        request.setAttribute("materia", materia);
-        return mapping.findForward(SUCCESS);
+            materia.setCod1(caracteres[1] + caracteres[2]);
+
+            materia.setCod2(caracteres[3]);
+            materia.setNum2(caracteres[4]);
+            materia.setNum3(caracteres[5]);
+            materia.setNum4(caracteres[6]);
+
+            request.setAttribute("aprobar", "aprobar");
+            request.setAttribute("materia", materia);
+            return mapping.findForward(SUCCESS);
+            
+        } else {
+            
+            return mapping.findForward(FAILURE);
+        }
     }
 }

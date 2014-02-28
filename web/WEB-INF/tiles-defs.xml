@@ -51,6 +51,26 @@
         <put name="vista" value="/JSP/coordinacion/Materias/solicitar_apertura_pagina.jsp"/>
     </definition>
     
+    <definition name="agrega_materia_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Materias/agrega_materia_pagina.jsp"/>
+    </definition>
+    
+    <definition name="consulta_materia_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Materias/consulta_materia_pagina.jsp"/>
+    </definition>
+    
+    <definition name="consulta_solicitud_apertura_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Materias/consulta_solicitud_apertura_pagina.jsp"/>
+    </definition>
+    
+    <definition name="modifica_materia_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Materias/modifica_materia_pagina.jsp"/>
+    </definition>
+    
+    <definition name="modifica_status_apertura_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Materias/modifica_status_apertura_pagina.jsp"/>
+    </definition>
+    
     <!-- DEFINICION BASE -->
     <definition name="base" path="/Plantilla/plantilla.jsp">
         <put name="css" value="/JSP/general-css.jsp"/>
@@ -211,7 +231,7 @@
         <put name="body" value="/JSP/departamento/Materias/ConsultaMateria.jsp"/>
     </definition>
 
-    <!-- 3. Consultar las colicitudes pendientes de apertura de materias -->
+    <!-- 3. Consultar las solicitudes pendientes de apertura de materias -->
     <definition name="consultaSolicitudesApertura" extends="baseDepartamento">
         <put name="css" value="/JSP/consulta-css.jsp"/>
         <put name="body" value="/JSP/departamento/Materias/ConsultarSolicitudesApertura.jsp"/>
