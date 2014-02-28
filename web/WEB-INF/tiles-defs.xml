@@ -35,6 +35,14 @@
         <put name="vista" value="/JSP/admin/Departamentos/edita_departamento_pagina.jsp"/>
     </definition>
     
+    <definition name="listar_evaluaciones_pendientes_pagina" extends="generico">
+        <put name="vista" value="/JSP/coordinacion/Evaluaciones/listar_evaluaciones_pendientes_pagina.jsp"/>
+    </definition>
+    
+    <definition name="obtener_evaluaciones_pagina" extends="generico">
+        <put name="vista" value="/JSP/coordinacion/Evaluaciones/obtener_evaluaciones_pagina.jsp"/>
+    </definition>
+    
     <!-- DEFINICION BASE -->
     <definition name="base" path="/Plantilla/plantilla.jsp">
         <put name="css" value="/JSP/general-css.jsp"/>

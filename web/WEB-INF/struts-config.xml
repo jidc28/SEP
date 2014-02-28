@@ -420,7 +420,7 @@
                                                                                                                                                                                                                                                         
         <!-- ACCIONES COORDINADOR -->
         <action input="/VistaCoordinacion.jsp" name="Coordinacion" path="/listarEvaluacionesPendientes" scope="request" type="Actions.Evaluaciones.ListarEvaluacionesPendientes" validate="false">
-            <forward name="success" path="listarEvaluacionesPendientes"/>
+            <forward name="success" path="listar_evaluaciones_pendientes_pagina"/>
         </action>
         
         <action input="/listarEvaluacionesPendientes.jsp" 
@@ -429,7 +429,7 @@
                 scope="request" 
                 type="Actions.Evaluaciones.ObtenerEvaluacion"
                 validate="false">
-            <forward name="success" path="obtenerEvaluacion"/>
+            <forward name="success" path="obtener_evaluaciones_pagina"/>
         </action>
         
         <!--         OTROS       -->               

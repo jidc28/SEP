@@ -31,6 +31,14 @@
             </tr>
             <tr>
                 <td style="text-align: right; width: 50%; font-size: 14px;">
+                    <strong>NOTA PROMEDIO</strong>
+                </td>
+                <td>
+                    <bean:write name="evaluacion" property="nota_prom"/>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right; width: 50%; font-size: 14px;">
                     <strong>PORCENTAJE APLAZADOS</strong>
                 </td>
                 <td>
