@@ -127,6 +127,10 @@
         <put name="vista" value="/JSP/departamento/Profesores/evaluar_profesores_pagina.jsp"/>
     </definition>
     
+    <definition name="modificar_informacion_pagina" extends="generico">
+        <put name="vista" value="/JSP/profesor/modificar_informacion_pagina.jsp"/>
+    </definition>
+    
     <!-- DEFINICION BASE -->
     <definition name="base" path="/Plantilla/plantilla.jsp">
         <put name="css" value="/JSP/general-css.jsp"/>
@@ -254,7 +258,7 @@
     </definition>
     
     <!-- 1. Modificar informacion del profesor -->
-    <definition name="modificarInfoP" extends="baseProfesor">
+    <definition name="modificarInformacion" extends="baseProfesor">
         <put name="script" value="/JSP/profesor/scripts/modificar-informacion-script.jsp"/>
         <put name="css" value="/JSP/profesor/css/modificar-informacion-css.jsp"/>
         <put name="body" value="/JSP/profesor/ModificarInformacion.jsp"/>
