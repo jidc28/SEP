@@ -170,29 +170,29 @@
         </action>
         
         <action input="/ConsultaDepartamento.jsp" name="Departamento" path="/listarMateriasDepto" scope="request" type="Actions.Materia.ConsultaMateria" validate="false">
-            <forward name="success" path="consultaMaterias"/>
+            <forward name="success" path="consulta_materia_pagina"/>
         </action>
         
         <action input="/ConsultaMateriasDepartamento.jsp" name="Materia" path="/vincularMateriaCoordinacion" scope="request" type="Actions.Materia.agregaMateria" validate="false">
-            <forward name="success" path="consultaMaterias"/>
-            <forward name="failure" path="consultaMaterias"/>
+            <forward name="success" path="consulta_materia_pagina"/>
+            <forward name="failure" path="consulta_materia_pagina"/>
         </action>
         
         <action input="/ConsultaMaterias.jsp" name="Materia" path="/desvincularMateriaCoordinacion" scope="request" type="Actions.Materia.EliminaMateria" validate="false">
-            <forward name="success" path="consultaMaterias"/>
-            <forward name="failure" path="consultaMaterias"/>
+            <forward name="success" path="consulta_materia_pagina"/>
+            <forward name="failure" path="consulta_materia_pagina"/>
         </action>
         
         <action input="/VistaCoordinacion.jsp" name="Materia" path="/listarMaterias" scope="request" type="Actions.Materia.ConsultaMateriasCoordinacion" validate="false">
-            <forward name="success" path="consultaMaterias"/>
+            <forward name="success" path="consulta_materia_pagina"/>
         </action>
         
         <action input="VistaCoordinacion.jsp" path="/irSolicitarAperturaMateria" name="Materia" type="Actions.Materia.IrSolicitarAperturaMateria" scope="request" validate="false">
-            <forward name="success" path="solicitarApertura"/>
+            <forward name="success" path="solicitar_apertura_pagina"/>
         </action>
 
         <action input="solicitarApertura.jsp" path="/solicitarAperturaMateria" name="Materia" type="Actions.Materia.solicitarAperturaMateria" scope="request" validate="false">
-            <forward name="failure" path="solicitarApertura"/>
+            <forward name="failure" path="solicitar_apertura_pagina"/>
             <forward name="success" path="vistaCoordinacion"/>
         </action>
                 

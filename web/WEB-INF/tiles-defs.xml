@@ -43,6 +43,14 @@
         <put name="vista" value="/JSP/coordinacion/Evaluaciones/obtener_evaluaciones_pagina.jsp"/>
     </definition>
     
+    <definition name="consulta_materia_pagina" extends="generico">
+        <put name="vista" value="/JSP/coordinacion/Materias/consulta_materia_pagina.jsp"/>
+    </definition>
+    
+    <definition name="solicitar_apertura_pagina" extends="generico">
+        <put name="vista" value="/JSP/coordinacion/Materias/solicitar_apertura_pagina.jsp"/>
+    </definition>
+    
     <!-- DEFINICION BASE -->
     <definition name="base" path="/Plantilla/plantilla.jsp">
         <put name="css" value="/JSP/general-css.jsp"/>
@@ -321,7 +329,7 @@
     <!-- COORDINACION / MATERIAS -->
         
     <!-- 1. Consultar materias-->
-    <definition name="consultaMaterias" extends="baseCoordinacion">
+    <definition name="consultaMateriaCoordinacion" extends="baseCoordinacion">
         <put name="css" value="/JSP/consulta-css.jsp"/>
         <put name="body" value="/JSP/coordinacion/Materias/ConsultaMateria.jsp"/>
     </definition>
