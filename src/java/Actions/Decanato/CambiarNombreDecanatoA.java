@@ -79,6 +79,7 @@ public class CambiarNombreDecanatoA extends org.apache.struts.action.Action {
             } else {
                 error.add("actualizacion", new ActionMessage("error.actualizacion.errada"));
                 saveErrors(request, error);
+                request.setAttribute("ya_existe", FAILURE);
                 return mapping.findForward(FAILURE);
             }
         }

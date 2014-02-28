@@ -6,6 +6,23 @@
 
 <tiles-definitions>
 
+    <!-- DEFINICION GENERICA -->
+    <definition name="generico" path="/Plantilla/generico.jsp">
+        <put name="vista" value="/Plantilla/body.jsp"/>
+    </definition>
+    
+    <definition name="agrega_decanato_pagina" extends="generico">
+        <put name="vista" value="/JSP/admin/Decanatos/agrega_decanato_pagina.jsp"/>
+    </definition>
+    
+    <definition name="consulta_decanato_pagina" extends="generico">
+        <put name="vista" value="/JSP/admin/Decanatos/consulta_decanato_pagina.jsp"/>
+    </definition>
+    
+    <definition name="edita_decanato_pagina" extends="generico">
+        <put name="vista" value="/JSP/admin/Decanatos/edita_decanato_pagina.jsp"/>
+    </definition>
+    
     <!-- DEFINICION BASE -->
     <definition name="base" path="/Plantilla/plantilla.jsp">
         <put name="css" value="/JSP/general-css.jsp"/>
@@ -15,8 +32,11 @@
         <put name="sidebarR" value="/Plantilla/sidebarR.jsp"/>
         <put name="footer" value="/Plantilla/footer.jsp"/>
     </definition>
+    
+    <!-- creo que esto NO hace falta -->
     <definition name="footer" path="/Plantillas/footer.jsp"/>
 
+    <!-- DEFINICION PLANTILLA DE USUARIO NO AUTORIZADO -->
     <definition name="noAutorizado" path="/Plantilla/noAutorizado.jsp">
         <put name="css" value="/JSP/general-css.jsp"/>
         <put name="script" value="/JSP/general-script.jsp"/>

@@ -84,7 +84,7 @@
         <!-- VISTA ADMINISTRADOR -->
         
         <action input="/VistaAdministrador.jsp" path="/agregaDecanatoA" scope="request" type="Actions.Decanato.AgregaDecanatoA">
-            <forward name="success" path="agregaDecanato"/>
+            <forward name="success" path="agrega_decanato_pagina"/>
         </action>
         
         <action input="/VistaAdministrador.jsp" path="/agregaCoordinacionA" scope="request" type="Actions.Coordinacion.AgregaCoordinacionA">
@@ -94,7 +94,7 @@
         </action>
         
         <action input="/VistaAdministrador.jsp" path="/consultaDecanatoA" scope="request" type="Actions.Decanato.ConsultaDecanatoA" validate="false">
-            <forward name="success" path="consultaDecanato"/>
+            <forward name="success" path="consulta_decanato_pagina"/>
         </action>
         
         <action input="/VistaAdministrador.jsp" path="/consultaCoordinacionA" name="Decanato" scope="request" type="Actions.Coordinacion.ConsultaCoordinacionA" validate="false">
@@ -124,15 +124,15 @@
         <!--       DECANATOS        -->
         <action input="/AgregaDecanato.jsp" name="Decanato" path="/registrarDecanato" scope="request" type="Actions.Decanato.RegistrarDecanato" validate="false">
             <forward name="success" path="consultaDecanato"/>
-            <forward name="failure" path="agregaDecanato"/> 
-            <forward name="yaregistrada" path="agregaDecanato"/> 
+            <forward name="failure" path="agrega_decanato_pagina"/> 
+            <forward name="yaregistrada" path="agrega_decanato_pagina"/> 
         </action>
         <action input="/ConsultaDecanato.jsp" name="Decanato" path="/editarNombreDecanato" scope="request" type="Actions.Decanato.EditarNombreDecanato" validate="false">
-            <forward name="success" path="editarNombreDecanato"/>
+            <forward name="success" path="edita_decanato_pagina"/>
         </action>
         <action input="/EditarNombreDecanato.jsp" name="Decanato" path="/cambiarNombreDecanatoA" scope="request" type="Actions.Decanato.CambiarNombreDecanatoA" validate="false">
-            <forward name="success" path="consultaDecanato"/>
-            <forward name="failure" path="editarNombreDecanato"/> 
+            <forward name="success" path="consulta_decanato_pagina"/>
+            <forward name="failure" path="edita_decanato_pagina"/> 
         </action>
         
         <!--     COORDINACIONES     -->

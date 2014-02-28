@@ -4,8 +4,8 @@
  */
 package Actions.Decanato;
 
-import DBMS.DBMS;
 import Clases.Decanato;
+import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -69,10 +69,7 @@ public class RegistrarDecanato extends org.apache.struts.action.Action {
 
                 ArrayList<Decanato> dcnto = DBMS.getInstance().listarDecanatos();
 
-        //si existen decanatos registrados
-
-            //retorno a pagina de exito
-                session.setAttribute("dcnto", dcnto);
+                session.setAttribute("decanatos", dcnto);
                 request.setAttribute("success", SUCCESS);
                 return mapping.findForward(SUCCESS);
             } else {
