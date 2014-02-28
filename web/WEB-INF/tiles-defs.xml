@@ -71,6 +71,30 @@
         <put name="vista" value="/JSP/departamento/Materias/modifica_status_apertura_pagina.jsp"/>
     </definition>
     
+    <definition name="agregar_profesor_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/agregar_profesor_pagina.jsp"/>
+    </definition>
+    
+    <definition name="consulta_profesores_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/consulta_profesores_pagina.jsp"/>
+    </definition>
+    
+    <definition name="modifica_profesor_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/modifica_profesor_pagina.jsp"/>
+    </definition>
+    
+    <definition name="listar_materias_asignadas_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/listar_materias_asignadas_pagina.jsp"/>
+    </definition>
+    
+    <definition name="asignar_materia_profesor_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/asignar_materia_profesor_pagina.jsp"/>
+    </definition>
+    
+    <definition name="asignar_periodo_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/asignar_periodo_pagina.jsp"/>
+    </definition>
+    
     <!-- DEFINICION BASE -->
     <definition name="base" path="/Plantilla/plantilla.jsp">
         <put name="css" value="/JSP/general-css.jsp"/>

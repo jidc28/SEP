@@ -296,7 +296,7 @@
             type="org.apache.struts.actions.ForwardAction"
             scope="request"
             validate="false"
-            parameter="agregarProfesor">
+            parameter="agregar_profesor_pagina">
         </action>
         
         <action input="agregarProfesor.jsp"
@@ -305,8 +305,8 @@
             scope="request"
             name="Profesor"
             validate="false">
-            <forward name="success" path="consultaProfesores"/>
-            <forward name="failure" path="agregarProfesor"/>
+            <forward name="success" path="consulta_profesores_pagina"/>
+            <forward name="failure" path="agregar_profesor_pagina"/>
         </action>
 
         <action path="/ejecutarOpcion"
@@ -326,7 +326,7 @@
             scope="request"
             name="Profesor"
             validate="false">
-            <forward name="success" path="modificarProfesor"/>
+            <forward name="success" path="modifica_profesor_pagina"/>
         </action>
 
         <action input="ModificarProfesor.jsp"
@@ -335,8 +335,8 @@
             scope="request"
             name="Profesor"
             validate="false">
-            <forward name="success" path="consultaProfesores"/>
-            <forward name="failure" path="modificarProfesor"/>
+            <forward name="success" path="consulta_profesores_pagina"/>
+            <forward name="failure" path="modifica_profesor_pagina"/>
         </action>
 
         <action input="VistaDepartamento.jsp"
@@ -345,7 +345,7 @@
             scope="request"
             name="Profesor"
             validate="false">
-            <forward name="success" path="consultaProfesores"/>
+            <forward name="success" path="consulta_profesores_pagina"/>
         </action>
         
         <action input="ConsultaProfesores.jsp"
@@ -354,7 +354,7 @@
             scope="request"
             name="Profesor"
             validate="false">
-            <forward name="success" path="consultaProfesores"/>
+            <forward name="success" path="consulta_profesores_pagina"/>
         </action>       
         
         <!-- accion que lleva a la vista de asignar 
@@ -365,7 +365,7 @@
             scope="request"
             name="Profesor"
             validate="false">
-            <forward name="success" path="asignarMateriaProfesor"/>
+            <forward name="success" path="asignar_materia_profesor_pagina"/>
         </action>
 
         <action input="ConsultaProfesores.jsp"
@@ -374,7 +374,7 @@
             scope="request"
             name="Profesor"
             validate="false">
-            <forward name="success" path="listarMateriasAsignadas"/>
+            <forward name="success" path="listar_materias_asignadas_pagina"/>
         </action>
         
         <action input="ListarMateriasAsignadas.jsp"
@@ -403,8 +403,8 @@
             scope="request"
             name="MultiBox"
             validate="false">
-            <forward name="success" path="asignarPeriodo"/>
-            <forward name="failure" path="asignarMateriaProfesor"/>
+            <forward name="success" path="asignar_periodo_pagina"/>
+            <forward name="failure" path="asignar_materia_profesor_pagina"/>
         </action>
         
         <!--accion que dado unas materias seleccionadas asigna al profesor
@@ -415,9 +415,10 @@
             scope="request"
             name="Materia"
             validate="false">
-            <forward name="success" path="consultaProfesores"/>
-            <forward name="failure" path="asignarPeriodo"/>
-            <forward name="llenar_periodo" path="asignarPeriodo"/>
+            <forward name="success" path="consulta_profesores_pagina"/>
+            <forward name="failure" path="asignar_periodo_pagina"/>
+            <forward name="llenar_periodo" path="asignar_periodo_pagina"/>
+            <forward name="no_autorizado" path="noAutorizado"/>
         </action>
                                                                                                                                                                                                                                                         
         <!-- ACCIONES COORDINADOR -->
