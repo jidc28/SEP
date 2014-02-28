@@ -24,7 +24,7 @@ import org.apache.struts.action.ActionMapping;
 public class EditarNombreCoordinacion extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
-    private static final String SUCCESS = "success";
+        private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -61,6 +61,10 @@ public class EditarNombreCoordinacion extends org.apache.struts.action.Action {
         request.setAttribute("codigo", c.getCodigo());
         request.setAttribute("nombre", c.getNombre());
         request.setAttribute("coordinaciones",coords);
-        return mapping.findForward(tipousuario);
+        if (tipousuario.equals("administrador") || tipousuario.equals("decanato")) {
+            return mapping.findForward(tipousuario);
+        } else {
+            return mapping.findForward(FAILURE);
+        }
     }
 }

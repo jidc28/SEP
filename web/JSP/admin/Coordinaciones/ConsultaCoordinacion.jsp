@@ -4,12 +4,18 @@
     Author     : Langtech
 --%>
 
+<%@page import="Clases.Usuario"%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>  
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    Usuario usuario = (Usuario) session.getAttribute("usuario");
+    String tipousuario = usuario.getTipousuario();
+    if (tipousuario.equals("administrador") || tipousuario.equals("decanato")){
+%>
 <logic:present name="success">
     <div class="alert alert-success" id="alert">
         Coordinación registrada exitosamente.
@@ -142,3 +148,10 @@
         </p>
     </div>
 </logic:notPresent>
+<%
+    } else {
+%>
+    <tiles:insert definition="noAutorizado"/>
+<%
+    }
+%>

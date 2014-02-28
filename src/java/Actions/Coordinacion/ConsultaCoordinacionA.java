@@ -21,7 +21,7 @@ import org.apache.struts.action.ActionMapping;
 public class ConsultaCoordinacionA extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
-    private static final String SUCCESS = "success";
+    private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -54,7 +54,7 @@ public class ConsultaCoordinacionA extends org.apache.struts.action.Action {
                 System.out.println(decanato.getNombre());
                 decanato.setCodigo(DBMS.getInstance().obtenerCodigoDecanato(decanato));
                 coords = DBMS.getInstance().listarCoordinacionesAdscritas(decanato.getCodigo());
-                session.setAttribute("codigoDecanatoActual",decanato.getCodigo());
+                session.setAttribute("codigoDecanatoActual", decanato.getCodigo());
             }
 
             decanatos = DBMS.getInstance().listarDecanatos();
@@ -67,6 +67,10 @@ public class ConsultaCoordinacionA extends org.apache.struts.action.Action {
 
         //retorno a pagina de exito
         request.setAttribute("coordinaciones", coords);
-        return mapping.findForward(tipousuario);
+        if (tipousuario.equals("administrador") || tipousuario.equals("decanato")) {
+            return mapping.findForward(tipousuario);
+        } else {
+            return mapping.findForward(FAILURE);
+        }
     }
 }

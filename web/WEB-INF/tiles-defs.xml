@@ -17,6 +17,11 @@
     </definition>
     <definition name="footer" path="/Plantillas/footer.jsp"/>
 
+    <definition name="noAutorizado" path="/Plantilla/noAutorizado.jsp">
+        <put name="css" value="/JSP/general-css.jsp"/>
+        <put name="script" value="/JSP/general-script.jsp"/>
+        <put name="body" value="/JSP/NoAutorizado.jsp"/>
+    </definition>
     
     <!-- ADMINISTRADOR -->
     
