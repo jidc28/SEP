@@ -215,15 +215,15 @@
         </action>
         
         <action input="/VistaDepartamento.jsp" name="MultiBox" path="/irEvaluarProfesores" validate="false" scope="request" type="Actions.Profesor.IrEvaluarProfesores">
-            <forward name="success" path="consultaProfesor"/>
+            <forward name="success" path="evaluar_profesores_pagina"/>
         </action>
         
         <action input="/VistaDepartamento.jsp" name="Profesor" path="/ConsultaEstadoPlanillas" validate="false" scope="request" type="Actions.Profesor.ConsultaProfesor">
-            <forward name="success" path="consultaEstadoPlanillas"/>
+            <forward name="success" path="consulta_estado_planillas_pagina"/>
         </action>        
         
         <action input="/ConsultaProfesores.jsp" name="MultiBox" path="/EvaluarProfesores" validate="false" scope="request" type="Actions.Profesor.EnviarMemoEvaluarProfesores">
-            <forward name="success" path="consultaProfesor"/>
+            <forward name="success" path="evaluar_profesores_pagina"/>
         </action>
         
         <action input="/AgregaMateria.jsp" name="Materia" path="/agregaMateria" validate="false" scope="request" type="Actions.Materia.agregaMateria">
@@ -272,24 +272,25 @@
         </action>    
         
         <action input="/VistaProfesor.jsp" name="Profesor" path="/verPlanillasLlenas" scope="request" type="Actions.Departamento.verPlanillasLlenas" validate="false">
-            <forward name="success" path="verPlanillasLlenas"/>
+            <forward name="success" path="ver_planillas_llenas_pagina"/>
         </action>     
         
         <action input="/verPlanillasLlenas.jsp" name="rendimientoProf" path="/verPlanilla" scope="request" type="Actions.Departamento.irModificarPlanilla" validate="false">
-            <forward name="success" path="verPlanilla"/>
+            <forward name="success" path="ver_planilla_pagina"/>
+            <forward name="no_autorizado" path="noAutorizado"/>
         </action>   
 
         <action input="/llenarPlanillas.jsp" name="rendimientoProf" path="/guardarPlanilla" scope="request" type="Actions.Departamento.guardarPlanilla" validate="false">
-            <forward name="success" path="llenarPlanillas"/>
+            <forward name="success" path="llenar_planillas_pagina"/>
         </action>    
 
         <action input="/verPlanillasLlenas.jsp" name="rendimientoProf" path="/modificarPlanilla" scope="request" type="Actions.Departamento.modificarPlanilla" validate="false">
-            <forward name="success" path="verPlanillasLlenas"/>
-            <forward name="failure" path="verPlanilla"/>
+            <forward name="success" path="ver_planillas_llenas_pagina"/>
+            <forward name="failure" path="ver_planilla_pagina"/>
         </action>
 
         <action input="/verPlanillasLlenas.jsp" name="Profesor" path="/irLlenarPlanillas" scope="request" type="Actions.Departamento.irLlenarPlanillas" validate="false">
-            <forward name="success" path="llenarPlanillas"/>
+            <forward name="success" path="llenar_planillas_pagina"/>
         </action>
         
         <action path="/irAgregarProfesor"

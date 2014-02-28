@@ -95,6 +95,26 @@
         <put name="vista" value="/JSP/departamento/Profesores/asignar_periodo_pagina.jsp"/>
     </definition>
     
+    <definition name="consulta_estado_planillas_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/consulta_estado_planillas_pagina.jsp"/>
+    </definition>
+    
+    <definition name="llenar_planillas_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/llenar_planillas_pagina.jsp"/>
+    </definition>
+    
+    <definition name="ver_planillas_llenas_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/ver_planillas_llenas_pagina.jsp"/>
+    </definition>
+    
+    <definition name="ver_planilla_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/ver_planilla_pagina.jsp"/>
+    </definition>
+    
+    <definition name="evaluar_profesores_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/evaluar_profesores_pagina.jsp"/>
+    </definition>
+    
     <!-- DEFINICION BASE -->
     <definition name="base" path="/Plantilla/plantilla.jsp">
         <put name="css" value="/JSP/general-css.jsp"/>
@@ -303,7 +323,7 @@
     </definition>
        
     <!-- 6. Evaluar profesores -->
-    <definition name="consultaProfesor" extends="baseDepartamento">
+    <definition name="consultaProfesorAEvaluar" extends="baseDepartamento">
         <put name="css" value="/JSP/consulta-css.jsp"/>
         <put name="script" value="/JSP/departamento/scripts/evaluar-profesores-script.jsp"/>
         <put name="body" value="/JSP/departamento/Profesores/EvaluarProfesores.jsp"/>
