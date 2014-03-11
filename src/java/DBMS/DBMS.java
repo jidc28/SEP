@@ -1693,7 +1693,7 @@ public class DBMS {
         return false;
     }
 
-    public rendimientoProf obtenerEvaluacion(dicta d) {
+    public rendimientoProf obtenerEvaluacionGeneral(dicta d) {
         PreparedStatement ps;
         rendimientoProf evaluacion = null;
         try {
@@ -1705,6 +1705,41 @@ public class DBMS {
                     + "WHERE codigo_materia = ?;");
             String codigo_materia = d.getCodigoMateria();
             ps.setString(1, codigo_materia);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                evaluacion = new rendimientoProf();
+                evaluacion.setCodigo_materia(codigo_materia);
+                evaluacion.setTotal_estudiantes(rs.getInt("sum"));
+                evaluacion.setNota_prom(rs.getFloat("np"));
+                evaluacion.setNota1(rs.getInt("n1"));
+                evaluacion.setNota2(rs.getInt("n2"));
+                evaluacion.setNota3(rs.getInt("n3"));
+                evaluacion.setNota4(rs.getInt("n4"));
+                evaluacion.setNota5(rs.getInt("n5"));
+                evaluacion.setRetirados(rs.getInt("r"));
+
+            }
+            return evaluacion;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public rendimientoProf obtenerEvaluacion(dicta d) {
+        PreparedStatement ps;
+        rendimientoProf evaluacion = null;
+        try {
+            ps = conexion.prepareStatement("SELECT sum(total_estudiantes), "
+                    + "avg(nota_prom) as np, sum(nota1) as n1, sum(nota2) as n2, "
+                    + "sum(nota3) as n3, sum(nota4) as n4, sum(nota5) as n5, "
+                    + "sum(retirados) as r "
+                    + "FROM rendimiento "
+                    + "WHERE codigo_materia = ? "
+                    + "AND usbid_profesor = ?;");
+            String codigo_materia = d.getCodigoMateria();
+            ps.setString(1, codigo_materia);
+            ps.setString(2, d.getUsbidProfesor());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 evaluacion = new rendimientoProf();
@@ -1973,7 +2008,7 @@ public class DBMS {
         }
         return false;
     }
-    
+
     public ArrayList<Materia> listarMateriasNoDictadas(String id_departamento, String id_profesor) {
 
         ArrayList<Materia> materias = new ArrayList<Materia>(0);

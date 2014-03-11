@@ -404,6 +404,7 @@
     <!-- 2. Obtener la evaluacion de una materia -->
     <definition name="obtenerEvaluacion" extends="baseCoordinacion">
         <put name="css" value="/JSP/consulta-css.jsp"/>
+        <put name="script" value="/JSP/coordinacion/scripts/obtener-evaluaciones-script.jsp"/>
         <put name="body" value="/JSP/coordinacion/Evaluaciones/ObtenerEvaluaciones.jsp"/>
     </definition>
   

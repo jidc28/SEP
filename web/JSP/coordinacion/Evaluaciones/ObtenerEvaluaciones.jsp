@@ -11,113 +11,147 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h4>Evaluación de la materia:
-    <bean:write name="evaluacion" property="codigo_materia"/>
+<h4>Evaluación del profesor: 
+    <bean:write name="profesor" property="apellido"/>,
+    <bean:write name="profesor" property="nombre"/>
 </h4>
 
-<h3 style="text-align: left; font-size: 18px; margin-left: 30px;">
-    Información general: 
-</h3>
-<div id="tabla" class="table-responsive" style="margin-top: 20px;">
-    <table class="table table-striped">
-        <tbody>
-            <tr>
-                <td style="text-align: right; width: 50%; font-size: 14px;">
-                    <strong>TOTAL ESTUDIANTES</strong>
-                </td>
-                <td>
-                    <bean:write name="evaluacion" property="total_estudiantes"/>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right; width: 50%; font-size: 14px;">
-                    <strong>NOTA PROMEDIO</strong>
-                </td>
-                <td>
-                    <bean:write name="evaluacion" property="nota_prom"/>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right; width: 50%; font-size: 14px;">
-                    <strong>PORCENTAJE APLAZADOS</strong>
-                </td>
-                <td>
-                    <bean:write name="aplazados"/>%
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right; width: 50%; font-size: 14px;">
-                    <strong>PORCENTAJE APROBADOS</strong>
-                </td>
-                <td>
-                    <bean:write name="aprobados"/>%
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right; width: 50%; font-size: 14px;">
-                    <strong>PORCENTAJE RETIRADOS  </strong>
-                </td>
-                <td>
-                    <bean:write name="retirados"/>%
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div style="width: 95%">
+<ul class="nav nav-tabs" style="height: 39px;">
+    <li class="active">
+        <a href="#departamento" data-toggle="tab" style="font-size: 12px; margin: 0px;">
+          Información del departamento
+        </a>
+    </li>
+    <li>
+        <a href="#profesor" data-toggle="tab" style="font-size: 12px; margin: 0px;">
+            Información del profesor
+        </a>
+    </li>
+</ul>
 </div>
-<h3 style="text-align: left; font-size: 18px; margin-left: 30px;">
-    Información específica: 
-</h3>
-<div id="tabla" class="table-responsive" style="margin-top: 20px;">
-    <table class="table table-striped">
-        <tbody>
-            <tr>
-                <td style="text-align: right; width: 50%; font-size: 14px;">
-                    <strong>PORCENTAJE ESTUDIANTES CON 1</strong>
-                </td>
-                <td>
-                    <bean:write name="porcentaje1"/>%
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right; width: 50%; font-size: 14px;">
-                    <strong>PORCENTAJE ESTUDIANTES CON 2</strong>
-                </td>
-                <td>
-                    <bean:write name="porcentaje2"/>%
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right; width: 40%; font-size: 14px;">
-                    <strong>PORCENTAJE ESTUDIANTES CON 3</strong>
-                </td>
-                <td>
-                    <bean:write name="porcentaje3"/>%
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right; width: 50%; font-size: 14px;">
-                    <strong>PORCENTAJE ESTUDIANTES CON 4</strong>
-                </td>
-                <td>
-                    <bean:write name="porcentaje4"/>%
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right; width: 50%; font-size: 14px;">
-                    <strong>PORCENTAJE ESTUDIANTES CON 5</strong>
-                </td>
-                <td>
-                    <bean:write name="porcentaje5"/>%
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right; width: 50%; font-size: 14px;">
-                    <strong>PORCENTAJE ESTUDIANTES RETIRADOS</strong>
-                </td>
-                <td>
-                    <bean:write name="retirados"/>%
-                </td>
-            </tr>
-        </tbody>
-    </table>
+
+
+<div class="tab-content">
+    <div class="tab-pane" id="profesor">
+        <center>
+            <div id="cuerpo-principal">     
+                <div class="alert alert-danger" 
+                     id="alert-coord" style="width: 50%; margin-top: 50px;">
+                    <p>
+                        AREA EN CONSTRUCCIÓN
+                    </p>
+                </div>
+            </div>
+        </center>                
+    </div>
+
+    <div class="tab-pane active" id="departamento">
+        <h3 style="text-align: left; font-size: 18px; margin-left: 30px;">
+            Información general: 
+        </h3>
+        <div id="tabla" class="table-responsive" style="margin-top: 20px;">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td style="text-align: right; width: 50%; font-size: 14px;">
+                            <strong>TOTAL ESTUDIANTES</strong>
+                        </td>
+                        <td>
+                            <bean:write name="evaluacion" property="total_estudiantes"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 50%; font-size: 14px;">
+                            <strong>NOTA PROMEDIO</strong>
+                        </td>
+                        <td>
+                            <bean:write name="evaluacion" property="nota_prom"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 50%; font-size: 14px;">
+                            <strong>PORCENTAJE APLAZADOS</strong>
+                        </td>
+                        <td>
+                            <bean:write name="aplazados"/>%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 50%; font-size: 14px;">
+                            <strong>PORCENTAJE APROBADOS</strong>
+                        </td>
+                        <td>
+                            <bean:write name="aprobados"/>%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 50%; font-size: 14px;">
+                            <strong>PORCENTAJE RETIRADOS  </strong>
+                        </td>
+                        <td>
+                            <bean:write name="retirados"/>%
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <h3 style="text-align: left; font-size: 18px; margin-left: 30px;">
+            Información específica: 
+        </h3>
+        <div id="tabla" class="table-responsive" style="margin-top: 20px;">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td style="text-align: right; width: 50%; font-size: 14px;">
+                            <strong>PORCENTAJE ESTUDIANTES CON 1</strong>
+                        </td>
+                        <td>
+                            <bean:write name="porcentaje1"/>%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 50%; font-size: 14px;">
+                            <strong>PORCENTAJE ESTUDIANTES CON 2</strong>
+                        </td>
+                        <td>
+                            <bean:write name="porcentaje2"/>%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 40%; font-size: 14px;">
+                            <strong>PORCENTAJE ESTUDIANTES CON 3</strong>
+                        </td>
+                        <td>
+                            <bean:write name="porcentaje3"/>%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 50%; font-size: 14px;">
+                            <strong>PORCENTAJE ESTUDIANTES CON 4</strong>
+                        </td>
+                        <td>
+                            <bean:write name="porcentaje4"/>%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 50%; font-size: 14px;">
+                            <strong>PORCENTAJE ESTUDIANTES CON 5</strong>
+                        </td>
+                        <td>
+                            <bean:write name="porcentaje5"/>%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; width: 50%; font-size: 14px;">
+                            <strong>PORCENTAJE ESTUDIANTES RETIRADOS</strong>
+                        </td>
+                        <td>
+                            <bean:write name="retirados"/>%
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

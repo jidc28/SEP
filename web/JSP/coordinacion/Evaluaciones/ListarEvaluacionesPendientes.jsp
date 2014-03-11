@@ -33,7 +33,12 @@
                     </th>
                     <th>
                         <center>
-                            Obtener Evaluacion
+                            Por materia
+                        </center>
+                    </th>
+                    <th>
+                        <center>
+                            Por profesor
                         </center>
                     </th>
                 </tr>
@@ -70,7 +75,25 @@
                                         <html:hidden name="evaluacion" 
                                                      property="codigoMateria"/>
                                         <html:submit styleClass="btn btn-primary">
-                                            Hacer evaluación
+                                            Ver rendimiento
+                                        </html:submit>
+                                    </html:form>
+                                </center>
+                            </td>
+                            <td>
+                                <center>
+                                    <html:form action="/obtenerEvaluacion" 
+                                        onsubmit="return(this)"
+                                        style="margin: 0px;">
+                                        <html:hidden name="dicta" 
+                                            property="codigoMateria"
+                                            value="${evaluacion.getCodigoMateria()}"/>
+                                        <html:hidden name="dicta"
+                                            property="usbidProfesor"
+                                            value="${evaluacion.getPrimerProfesor().getUsbid()}"/>
+                                        <html:submit styleClass="btn btn-info"
+                                                     style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                                Hacer evaluación
                                         </html:submit>
                                     </html:form>
                                 </center>
@@ -79,7 +102,7 @@
                     <logic:iterate name="evaluacion" property="profesores" 
                                    id="profesores">
                         <tr>
-                            <td>
+                        <td>
                         <center>
                             <bean:write name="profesores" property="usbid"/>
                         </center>
@@ -87,6 +110,24 @@
                         <td>
                             <bean:write name="profesores" property="apellido"/>,
                             <bean:write name="profesores" property="nombre"/>
+                        </td>
+                        <td>
+                            <center>
+                                <html:form action="/obtenerEvaluacion" 
+                                    onsubmit="return(this)"
+                                    style="margin: 0px;">
+                                    <html:hidden name="dicta" 
+                                        property="codigoMateria"
+                                        value="${evaluacion.getCodigoMateria()}"/>
+                                    <html:hidden name="dicta"
+                                        property="usbidProfesor"
+                                        value="${profesores.getUsbid()}"/>
+                                    <html:submit styleClass="btn btn-info"
+                                                 style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                            Hacer evaluación
+                                    </html:submit>
+                                </html:form>
+                            </center>
                         </td>
                         </tr>
                     </logic:iterate>

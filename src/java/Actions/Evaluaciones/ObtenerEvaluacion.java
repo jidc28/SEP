@@ -16,20 +16,19 @@ public class ObtenerEvaluacion extends Action {
 
     private static final String SUCCESS = "success";
 
+    @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
         HttpSession session = request.getSession(true);
-        String id_coordinacion = (String) session.getAttribute("usbid");
 
         dicta d = (dicta) form;
-
-        ArrayList<String> departamentosFaltantes =
-                DBMS.getInstance().obtenerDepartamentosQueNoEvaluaron(d.getCodigoMateria());
-
+        
         rendimientoProf evaluacion = DBMS.getInstance().obtenerEvaluacion(d);
-        System.out.println("evaluacion: " + evaluacion);
+        
+        Profesor profesor = 
+                DBMS.getInstance().obtenerInfoProfesor(d.getUsbidProfesor());
 
         int total = evaluacion.getTotal_estudiantes();
         int aplazados = evaluacion.getNota1() + evaluacion.getNota2();
@@ -46,14 +45,7 @@ public class ObtenerEvaluacion extends Action {
         String porcentajeApr = String.format("%.2f",calcularPorcentaje(total, aprobados));
         String porcentajeApl = String.format("%.2f",calcularPorcentaje(total, aplazados));
         
-        int profEvaluados =
-                DBMS.getInstance().cantidadEvaluados(d.getCodigoMateria(), id_coordinacion);
-
-        int profPorEvaluar =
-                DBMS.getInstance().cantidadProfesoresDictanMateria(d.getCodigoMateria());
-
-        Float porcentajeProf = calcularPorcentaje(profPorEvaluar,profEvaluados);
-
+        request.setAttribute("profesor", profesor);
         request.setAttribute("evaluacion", evaluacion);
         request.setAttribute("porcentaje1", porcentaje1);
         request.setAttribute("porcentaje2", porcentaje2);
@@ -63,9 +55,6 @@ public class ObtenerEvaluacion extends Action {
         request.setAttribute("retirados", porcentajeR);
         request.setAttribute("aplazados", porcentajeApl);
         request.setAttribute("aprobados", porcentajeApr);
-        request.setAttribute("departamentosFaltantes", departamentosFaltantes);
-        request.setAttribute("porcentajeProf", porcentajeProf);
-
 
         return mapping.findForward(SUCCESS);
     }
