@@ -354,24 +354,33 @@ public class DBMS {
 
     public boolean modificarProfesor(Profesor p) {
 
-        PreparedStatement ps = null;
+        PreparedStatement ps0, ps1 = null;
 
         try {
-            ps = conexion.prepareStatement("UPDATE profesor "
+            ps0 = conexion.prepareStatement("UPDATE profesor "
                     + "SET usbid = ?, cedula = ?, nombre = ?, apellido = ?,"
-                    + "genero = ?, email = ? "
-                    + "WHERE usbid = ? ");
-            ps.setString(1, p.getUsbid());
-            ps.setString(2, p.getCedula());
-            ps.setString(3, p.getNombre());
-            ps.setString(4, p.getApellido());
-            ps.setString(5, p.getGenero());
-            ps.setString(6, p.getEmail());
-            ps.setString(7, p.getUsbidViejo());
+                    + "genero = ?, email = ?, nivel = ? "
+                    + "WHERE usbid = ?;");
+            ps0.setString(1, p.getUsbid());
+            ps0.setString(2, p.getCedula());
+            ps0.setString(3, p.getNombre());
+            ps0.setString(4, p.getApellido());
+            ps0.setString(5, p.getGenero());
+            ps0.setString(6, p.getEmail());
+            ps0.setString(7, p.getNivel());
+            ps0.setString(8, p.getUsbidViejo());
 
-            Integer i = ps.executeUpdate();
+            ps1 = conexion.prepareStatement("UPDATE usuario "
+                    + "SET usbid = ?, contrasena = ? "
+                    + "WHERE usbid = ?;");
+            ps1.setString(1, p.getUsbid());
+            ps1.setString(2, p.getUsbid());
+            ps1.setString(3, p.getUsbidViejo());
 
-            return i > 0;
+            Integer j = ps1.executeUpdate();
+            Integer i = ps0.executeUpdate();
+
+            return i > 0 && j > 0;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -1474,7 +1483,8 @@ public class DBMS {
                     + "AND o.codigo_departamento = ? "
                     + "AND o.codigo_materia = d.codigo_materia "
                     + "AND d.planilla_llena = 'N' "
-                    + "AND m.codigo = o.codigo_materia;");
+                    + "AND m.codigo = o.codigo_materia "
+                    + "AND m.condicion = 'activo';");
             ps.setString(1, id_profesor);
             ps.setString(2, id_departamento);
 
@@ -1848,14 +1858,15 @@ public class DBMS {
             Integer j = ps1.executeUpdate();
 
             ps2 = conexion.prepareStatement("INSERT INTO profesor "
-                    + "(usbid, nombre, apellido, cedula, genero, email) "
-                    + "VALUES (?,?,?,?,?,?)");
+                    + "(usbid, nombre, apellido, cedula, genero, email, nivel) "
+                    + "VALUES (?,?,?,?,?,?,?)");
             ps2.setString(1, p.getUsbid());
             ps2.setString(2, p.getNombre());
             ps2.setString(3, p.getApellido());
             ps2.setString(4, p.getCedula());
             ps2.setString(5, p.getGenero());
             ps2.setString(6, p.getEmail());
+            ps2.setString(7, p.getNivel());
 
             Integer i = ps2.executeUpdate();
 

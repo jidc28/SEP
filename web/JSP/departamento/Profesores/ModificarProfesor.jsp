@@ -12,7 +12,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <h4> Planilla para agregar un profesor </h4>
-<html:form action="/modificarProfesor">
+<html:form action="/modificarProfesor" acceptCharset="ISO-8859-1">
     <table border="0">
         <tbody>
             <tr style="height: 35px;">
@@ -55,6 +55,28 @@
                     </html:radio><br>
                 </td>
             </tr>
+            <tr style="height: 35px;">
+                <td style="font-size: 14px;"> <strong> NIVEL</strong> </td>
+                <td>
+                    <html:select style="width: 258px;" name="profesor" property="nivel">
+                        <html:option value="Ayudante Académico">
+                            Ayudante Académico
+                        </html:option>
+                        <html:option value="Asistente">
+                            Asistente
+                        </html:option>
+                        <html:option value="Agregado">
+                            Agregado
+                        </html:option>
+                        <html:option value="Asociado">
+                            Asociado
+                        </html:option>
+                        <html:option value="Titular">
+                            Titular
+                        </html:option>
+                    </html:select>
+                </td>
+            </tr
         </tbody>
     </table>
     <html:hidden name="profesor" property="usbidViejo"/>
