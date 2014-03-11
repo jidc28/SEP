@@ -70,7 +70,7 @@
                                         <html:hidden name="evaluacion" 
                                                      property="codigoMateria"/>
                                         <html:submit styleClass="btn btn-primary">
-                                            Obtener evaluacion
+                                            Hacer evaluación
                                         </html:submit>
                                     </html:form>
                                 </center>

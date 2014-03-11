@@ -35,7 +35,7 @@
     </div>
 </logic:present>
 
-<h4>Solicitud de Registro de Materias</h4>
+<h4>Solicitud de creación de asignatura</h4>
 
 <html:form action="/solicitarAperturaMateria" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
     <table border="0" style="margin-top: 50px;">

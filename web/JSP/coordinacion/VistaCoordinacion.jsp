@@ -40,7 +40,7 @@
                 <a id="link-dropdown" class="accordion-toggle" 
                    data-toggle="collapse" 
                    data-parent="#accordion" href="#collapseDepartamentos">
-                    Gestión de Materias
+                    Gestión de asignaturas
                 </a>
                 <a href="#" id="ayuda1" style="float: right" rel="popover"> 
                     <span class="glyphicon glyphicon-question-sign"></span> 
@@ -49,14 +49,14 @@
         </div>
         <div id="collapseDepartamentos" class="panel-collapse collapse">
             <div class="panel-body">
-                <html:link action="/listarMaterias" >
-                    <h5 align ="center">Listar Materias Vinculadas</h5>
+                <html:link action="/irSolicitarAperturaMateria">
+                    <h5 align ="center">Solicitar creación de asignatura</h5>
                 </html:link>
                 <html:link action="/listarDepartamentos" >
-                    <h5 align ="center">Vincular Materias por Departamento</h5>
+                    <h5 align ="center">Vincular asignaturas por departamento</h5>
                 </html:link> 
-                <html:link action="/irSolicitarAperturaMateria">
-                    <h5 align ="center">Solicitar Apertura de Materia</h5>
+                <html:link action="/listarMaterias" >
+                    <h5 align ="center">Listar asignaturas vinculadas</h5>
                 </html:link>
             </div>
         </div>
@@ -68,7 +68,7 @@
                     <a id="link-dropdown" class="accordion-toggle" 
                        data-toggle="collapse" 
                        data-parent="#accordion" href="#collapseEvaluaciones">
-                        Gestionar Evaluaciones  
+                        Gestión de evaluaciones  
                     </a>
                     <a href="#" id="ayuda2" style="float: right" rel="popover"> 
                         <span class="glyphicon glyphicon-question-sign"></span> 

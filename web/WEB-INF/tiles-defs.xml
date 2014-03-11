@@ -369,6 +369,7 @@
 
     <!-- 11. Ver las planillas previamente llenadas de un profesor -->
     <definition name="verPlanillasLlenas" extends="baseDepartamento">
+        <put name="script" value="/JSP/departamento/scripts/ver-planillas-llenas-script.jsp"/>
         <put name="body" value="/JSP/departamento/Profesores/VerPlanillasLlenas.jsp"/>
     </definition>
 

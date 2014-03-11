@@ -110,41 +110,14 @@
                     <bean:write name="porcentaje5"/>%
                 </td>
             </tr>
-        </tbody>
-    </table>
-</div>
-
-<h3 style="text-align: left; font-size: 18px; margin-left: 30px; margin-bottom: 20px;">
-    Porcentaje de profesores evaluados: 
-</h3>
-
-<div class="progress" style="width: 60%">
-    <div class="progress-bar progress-bar-success" role="progressbar" 
-         aria-valuenow="<bean:write name="porcentajeProf"/>" 
-         aria-valuemin="0" aria-valuemax="100" 
-         style="width: <bean:write name="porcentajeProf"/>%">
-        <strong><bean:write name="porcentajeProf"/>%</strong>
-    </div>
-</div>
-
-<h3 style="text-align: left; font-size: 18px; margin-left: 30px;">
-    Departamentos que no han enviado el memo para evaluar:  
-</h3>
-
-<div id="tabla" class="table-responsive" style="margin-top: 20px; width: 50%">
-    <table class="table">
-        <tbody>
-            <logic:iterate name="departamentosFaltantes" id="departamento">
-                <tr>
-                    <td style="align: left;">
-                        <bean:write name="departamento"/>
-                    </td>
-                    <td style="align: left;">
-                        <span class="glyphicon glyphicon-envelope" style="color: green;">
-                        </span>
-                    </td>
-                </tr>
-            </logic:iterate>
+            <tr>
+                <td style="text-align: right; width: 50%; font-size: 14px;">
+                    <strong>PORCENTAJE ESTUDIANTES RETIRADOS</strong>
+                </td>
+                <td>
+                    <bean:write name="retirados"/>%
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>
