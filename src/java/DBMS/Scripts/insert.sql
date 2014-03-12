@@ -158,12 +158,14 @@ INSERT INTO MATERIA VALUES ('CI6116','Sistemas de informacion II','4');
 INSERT INTO MATERIA VALUES ('CI1115','Sistemas de informacion I','4');
 INSERT INTO MATERIA VALUES ('CI5311','Bases de Datos II','4');
 insert into MATERIA values ('CI4357','Materia para Negar',4,'activo','visible','si');
+insert into MATERIA values ('TF1111','Materia desctivada',4,'desactivado','visible','si');
 
 INSERT INTO oferta VALUES ('CI6116','D-2022');
 INSERT INTO oferta VALUES ('CI1115','D-2022');
 INSERT INTO oferta VALUES ('CI5311','D-2022');
 INSERT INTO oferta VALUES ('CI6116','09-10219');
 INSERT INTO oferta VALUES ('CI5311','09-10219');
+INSERT INTO oferta VALUES ('TF1111','09-10219');
 
 INSERT INTO pertenece VALUES ('22-90457','09-10219');
 INSERT INTO pertenece VALUES ('28-63146','09-10219');
@@ -180,6 +182,7 @@ INSERT INTO dicta VALUES('22-90457','CI5311','SD');
 INSERT INTO dicta VALUES('28-63146','CI6116','SD');
 INSERT INTO dicta VALUES('84-73618','CI1115','SD');
 INSERT INTO dicta VALUES('43-62893','CI5311','SD');
+INSERT INTO dicta VALUES('28-63146','TF1111','SD');
 
 INSERT INTO se_adscribe VALUES('09-10020','1003');
 INSERT INTO se_adscribe VALUES('C-0001','1003');

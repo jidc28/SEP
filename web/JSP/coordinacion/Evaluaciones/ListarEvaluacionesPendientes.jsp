@@ -12,6 +12,20 @@
 
 <h4>Evaluaciones Pendientes</h4>
 <center>
+    
+<logic:empty name="evaluaciones_pendientes">
+    <div class="alert alert-warning alert-dismissable" 
+        id="alert-coord">
+<!--        <a href="#" id="ayuda1" style="color: #c09853; float: right" rel="popover" > 
+                <span style="color: #c09853;" class="glyphicon glyphicon-question-sign">     
+                </span> 
+        </a>-->
+        <p>
+            En este momento no existen evaluaciones pendientes.
+        </p>
+    </div>     
+</logic:empty>
+<logic:notEmpty name="evaluaciones_pendientes">
     <div class="table-responsive" id="tabla">
         <table class="table table-striped">
             <thead>
@@ -69,15 +83,9 @@
                             <td rowspan="<bean:write name="evaluacion" 
                                         property="numeroMateria"/>">
                                 <center>
-                                    <html:form action="/obtenerEvaluacion" 
-                                               onsubmit="return(this)"
-                                               style="margin: 0px;">
-                                        <html:hidden name="evaluacion" 
-                                                     property="codigoMateria"/>
-                                        <html:submit styleClass="btn btn-primary">
+                                    <html:link action="/graficarRendimiento">
                                             Ver rendimiento
-                                        </html:submit>
-                                    </html:form>
+                                    </html:link>
                                 </center>
                             </td>
                             <td>
@@ -136,4 +144,5 @@
             </tbody>
         </table>
     </div>
+</logic:notEmpty>
 </center>

@@ -24,6 +24,15 @@ public class rendimientoProf extends org.apache.struts.action.ActionForm {
     private float nota_prom;
     private int viejoAno;
     private String viejoTrimestre;
+    private String recomendado;
+
+    public String getRecomendado() {
+        return recomendado;
+    }
+
+    public void setRecomendado(String recomendado) {
+        this.recomendado = recomendado;
+    }
 
     public int getViejoAno() {
         return viejoAno;

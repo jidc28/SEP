@@ -17,18 +17,18 @@
 </h4>
 
 <div style="width: 95%">
-<ul class="nav nav-tabs" style="height: 39px;">
-    <li class="active">
-        <a href="#departamento" data-toggle="tab" style="font-size: 12px; margin: 0px;">
-          Información del departamento
-        </a>
-    </li>
-    <li>
-        <a href="#profesor" data-toggle="tab" style="font-size: 12px; margin: 0px;">
-            Información del profesor
-        </a>
-    </li>
-</ul>
+    <ul class="nav nav-tabs" style="height: 39px;">
+        <li class="active">
+            <a href="#departamento" data-toggle="tab" style="font-size: 12px; margin: 0px;">
+                Información del departamento
+            </a>
+        </li>
+        <li>
+            <a href="#profesor" data-toggle="tab" style="font-size: 12px; margin: 0px;">
+                Información del profesor
+            </a>
+        </li>
+    </ul>
 </div>
 
 
@@ -154,4 +154,40 @@
             </table>
         </div>
     </div>
+</div>
+
+<div class="recomendar">
+    <html:form action="/evaluarCoordinacion" onsubmit="return(this)" style="margin: 0px;">
+        <html:hidden name="evaluacion" property="usbid_profesor" value="${profesor.getUsbid()}"/>
+        <html:hidden name="evaluacion" property="codigo_materia"/>
+    <table class="table" style="border-top: none; margin: 0px;">
+        <tbody>
+            <tr>
+                <td style="border: none;">
+                    <html:checkbox style="margin-right: 5px;" 
+                                   name="evaluacion" property="recomendado"
+                                   value="si"/>
+                    Recomendado
+                </td>
+            </tr>
+            <tr>
+                <td style="border: none;">
+                    <html:checkbox style="margin-right: 5px;" 
+                                   name="evaluacion" property="recomendado"
+                                   value="no"/>
+                    No recomendado
+                </td>
+            </tr>
+            <tr>
+                <td style="border: none;">
+                    <center>
+                        <html:submit styleClass="btn btn-success">
+                            Evaluar
+                        </html:submit>
+                    </center>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </html:form>
 </div>

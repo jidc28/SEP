@@ -407,6 +407,12 @@
         <put name="script" value="/JSP/coordinacion/scripts/obtener-evaluaciones-script.jsp"/>
         <put name="body" value="/JSP/coordinacion/Evaluaciones/ObtenerEvaluaciones.jsp"/>
     </definition>
+
+    <!-- 3. Graficar el rendimiento del profesor -->
+    <definition name="graficarRendimiento" extends="baseCoordinacion">
+        <put name="script" value="/JSP/coordinacion/scripts/graficar-rendimiento-script.jsp"/>
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/graficarRendimiento.jsp"/>
+    </definition>
   
     <!-- COORDINACION / MATERIAS -->
         
