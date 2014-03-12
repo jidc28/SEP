@@ -11,8 +11,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.css">
-
 <h4>  
     Profesores registrados en el sistema:
 </h4>

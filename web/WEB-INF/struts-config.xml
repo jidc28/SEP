@@ -354,6 +354,24 @@
             <forward name="coordinacion" path="consulta_profesores_coordinacion_pagina"/>
             <forward name="no_autorizado" path="noAutorizado"/>
         </action>
+
+        <action input="VistaCoordinacion.jsp"
+            path="/consultarProfesoresCoordinacion"
+            type="Actions.Profesor.ConsultaProfesorCoordinacion"
+            scope="request"
+            name="Profesor"
+            validate="false">
+            <forward name="success" path="listar_evaluaciones_enviadas_profesor_pagina"/>
+        </action>
+
+        <action input="ListarEvaluacionesEnviadasProfesor"
+            path="/listarAnosEvaluados"
+            type="Actions.Profesor.ListarAnosEvaluados"
+            scope="request"
+            name="Profesor"
+            validate="false">
+            <forward name="success" path="listar_evaluaciones_enviadas_ano_pagina"/>
+        </action>
         
         <action input="ConsultaProfesores.jsp"
             path="/eliminarProfesor"

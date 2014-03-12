@@ -515,7 +515,7 @@ seleccAll{
     color: #2a6496;
     font-weight: bold;
     border: 0;
-    background-color: white;
+    background: transparent;
     padding-top: 4px;
     padding-bottom: 4px;
     padding-right: 10px;
@@ -531,4 +531,14 @@ seleccAll{
     -webkit-border-radius: 5px;
     border-radius: 5px; 
     width: 40%;
+}
+
+.link2 {
+    color: #428bca;
+    border: 0;
+    background: transparent;
+}
+
+.link2:hover {
+    text-decoration: underline;    
 }

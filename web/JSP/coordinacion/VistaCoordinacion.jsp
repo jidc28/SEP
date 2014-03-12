@@ -82,22 +82,26 @@
             </div>
         </div>
     </div>
-    <logic:present name="evaluaciones_pendientes">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 id="izquierda" class="panel-title">
-                    <a id="link-dropdown" class="accordion-toggle" 
-                       data-toggle="collapse" 
-                       data-parent="#accordion" href="#collapseEvaluaciones">
-                        Gestión de evaluaciones  
-                    </a>
-                    <a href="#" id="ayuda2" style="float: right" rel="popover"> 
-                        <span class="glyphicon glyphicon-question-sign"></span> 
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseEvaluaciones" class="panel-collapse collapse">
-                <div class="panel-body">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 id="izquierda" class="panel-title">
+                <a id="link-dropdown" class="accordion-toggle" 
+                   data-toggle="collapse" 
+                   data-parent="#accordion" href="#collapseEvaluaciones">
+                    Gestión de evaluaciones  
+                </a>
+                <a href="#" id="ayuda2" style="float: right" rel="popover"> 
+                    <span class="glyphicon glyphicon-question-sign"></span> 
+                </a>
+            </h4>
+        </div>
+        <div id="collapseEvaluaciones" class="panel-collapse collapse">
+            <div class="panel-body">
+                <html:link action="/consultarProfesoresCoordinacion">
+                    <h5 align ="center">Listar evaluaciones enviadas</h5>
+                </html:link>
+                <logic:present name="evaluaciones_pendientes">
                     <html:link action="/listarEvaluacionesPendientes">
                         <h5 align ="center">Listar evaluaciones pendientes                                
                             <span class="badge">
@@ -105,8 +109,9 @@
                             </span>
                         </h5>
                     </html:link>
-                </div>
+                </logic:present>
             </div>
         </div>
-    </logic:present>
+    </div>
+
 </div>

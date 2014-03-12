@@ -135,6 +135,14 @@
         <put name="vista" value="/JSP/coordinacion/Profesores/consulta_profesores_pagina.jsp"/>
     </definition>
     
+    <definition name="listar_evaluaciones_enviadas_profesor_pagina" extends="generico">
+        <put name="vista" value="/JSP/coordinacion/Evaluaciones/listar_evaluaciones_enviadas_profesor_pagina.jsp"/>
+    </definition>
+    
+    <definition name="listar_evaluaciones_enviadas_ano_pagina" extends="generico">
+        <put name="vista" value="/JSP/coordinacion/Evaluaciones/listar_evaluaciones_enviadas_ano_pagina.jsp"/>
+    </definition>
+    
     <!-- DEFINICION BASE -->
     <definition name="base" path="/Plantilla/plantilla.jsp">
         <put name="css" value="/JSP/general-css.jsp"/>
@@ -400,19 +408,31 @@
     
     <!-- COORDINACION / EVALUACIONES -->
   
-    <!-- 1. Listar las evaluaciones prendientes de materias -->
+    <!-- 1. Listar las evaluaciones enviadas de profesores -->
+    <definition name="listarEvaluacionesEnviadasAno" extends="baseCoordinacion">
+        <put name="css" value="/JSP/consulta-css.jsp"/>
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/ListarEvaluacionesEnviadasAno.jsp"/>
+    </definition>
+
+    <!-- 2. Listar las evaluaciones enviadas de profesores -->
+    <definition name="listarEvaluacionesEnviadasProfesor" extends="baseCoordinacion">
+        <put name="css" value="/JSP/consulta-css.jsp"/>
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/ListarEvaluacionesEnviadasProfesor.jsp"/>
+    </definition>
+    
+    <!-- 3. Listar las evaluaciones prendientes de materias -->
     <definition name="listarEvaluacionesPendientes" extends="baseCoordinacion">
         <put name="body" value="/JSP/coordinacion/Evaluaciones/ListarEvaluacionesPendientes.jsp"/>
     </definition>
     
-    <!-- 2. Obtener la evaluacion de una materia -->
+    <!-- 4. Obtener la evaluacion de una materia -->
     <definition name="obtenerEvaluacion" extends="baseCoordinacion">
         <put name="css" value="/JSP/consulta-css.jsp"/>
         <put name="script" value="/JSP/coordinacion/scripts/obtener-evaluaciones-script.jsp"/>
         <put name="body" value="/JSP/coordinacion/Evaluaciones/ObtenerEvaluaciones.jsp"/>
     </definition>
 
-    <!-- 3. Graficar el rendimiento del profesor -->
+    <!-- 5. Graficar el rendimiento del profesor -->
     <definition name="graficarRendimiento" extends="baseCoordinacion">
         <put name="script" value="/JSP/coordinacion/scripts/graficar-rendimiento-script.jsp"/>
         <put name="body" value="/JSP/coordinacion/Evaluaciones/graficarRendimiento.jsp"/>

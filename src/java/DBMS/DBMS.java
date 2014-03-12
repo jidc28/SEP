@@ -2086,4 +2086,32 @@ public class DBMS {
         }
         return profesores;
     }
+
+    public ArrayList<String> listarAnoEvaluacionesEnviadas(String id_coordinacion, String usbid_profesor) {
+
+        PreparedStatement ps;
+        ArrayList<String> anos = new ArrayList(0);
+        try {
+            ps = conexion.prepareStatement("SELECT ano "
+                    + "FROM evaluado "
+                    + "WHERE codigo_coordinacion = ? "
+                    + "AND usbid_profesor = ? "
+                    + "ORDER BY ano;");
+            ps.setString(1, id_coordinacion);
+            ps.setString(2, usbid_profesor);
+
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                anos.add(rs.getString("ano"));
+                System.out.println(rs.getString("ano"));
+            }
+
+            return anos;
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }
