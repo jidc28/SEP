@@ -217,7 +217,12 @@
             <forward name="success" path="evaluar_profesores_pagina"/>
         </action>
         
-        <action input="/VistaDepartamento.jsp" name="Profesor" path="/ConsultaEstadoPlanillas" validate="false" scope="request" type="Actions.Profesor.ConsultaProfesor">
+        <action input="/VistaDepartamento.jsp" 
+                name="Profesor" 
+                path="/ConsultaEstadoPlanillas" 
+                validate="false" 
+                scope="request" 
+                type="Actions.Profesor.ConsultaProfesor">
             <forward name="success" path="consulta_estado_planillas_pagina"/>
         </action>        
         
@@ -345,7 +350,9 @@
             scope="request"
             name="Profesor"
             validate="false">
-            <forward name="success" path="consulta_profesores_pagina"/>
+            <forward name="departamento" path="consulta_profesores_pagina"/>
+            <forward name="coordinacion" path="consulta_profesores_coordinacion_pagina"/>
+            <forward name="no_autorizado" path="noAutorizado"/>
         </action>
         
         <action input="ConsultaProfesores.jsp"

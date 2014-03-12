@@ -19,13 +19,19 @@
     <html:form action="/ejecutarOpcion" style="margin: 0px;">
         <html:hidden name="Usuario" property="opcion" value="gestion_materias"/>
         <html:submit styleClass="link">
-            Gestionar Materias
+            Gestionar materias
         </html:submit>
     </html:form>
     <html:form action="/ejecutarOpcion" style="margin: 0px;">
         <html:hidden name="Usuario" property="opcion" value="gestion_evaluaciones"/>
         <html:submit styleClass="link">
-            Gestionar Evaluaciones
+            Gestionar evaluaciones
+        </html:submit>
+    </html:form>
+    <html:form action="/ejecutarOpcion" style="margin: 0px;">
+        <html:hidden name="Usuario" property="opcion" value="gestion_profesores"/>
+        <html:submit styleClass="link">
+            Gestionar profesores
         </html:submit>
     </html:form>
     <a class="menuitem" href="cerrarSesion.do" onclick="return confirm('¿Está seguro que desea cerrar sesión?')" >

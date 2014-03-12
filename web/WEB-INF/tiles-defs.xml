@@ -131,6 +131,10 @@
         <put name="vista" value="/JSP/profesor/modificar_informacion_pagina.jsp"/>
     </definition>
     
+    <definition name="consulta_profesores_coordinacion_pagina" extends="generico">
+        <put name="vista" value="/JSP/coordinacion/Profesores/consulta_profesores_pagina.jsp"/>
+    </definition>
+    
     <!-- DEFINICION BASE -->
     <definition name="base" path="/Plantilla/plantilla.jsp">
         <put name="css" value="/JSP/general-css.jsp"/>
@@ -425,6 +429,12 @@
     <!-- 2. Solicitar la apertura de una materia -->
     <definition name="solicitarApertura" extends="baseCoordinacion">
         <put name="body" value="/JSP/coordinacion/Materias/SolicitarApertura.jsp"/>
+    </definition>
+    
+    <!-- COORDINACION / PROFESORES -->
+    
+    <definition name="consultaProfesoresCoordinacion" extends="baseDepartamento">
+        <put name="body" value="/JSP/coordinacion/Profesores/ConsultarProfesores.jsp"/>
     </definition>
 
 </tiles-definitions>

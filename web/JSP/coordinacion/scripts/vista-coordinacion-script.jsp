@@ -47,3 +47,11 @@
         });
     </script>
 </logic:present>
+
+<logic:present name="gestion_profesores">
+    <script>
+        $(function() {
+            $('#collapseProfesores').addClass('in'); 
+        });
+    </script>
+</logic:present>

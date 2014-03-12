@@ -4,8 +4,8 @@
  */
 package Actions.Profesor;
 
+import Clases.*;
 import DBMS.DBMS;
-import Clases.Profesor;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +22,6 @@ public class ConsultaProfesorDepartamento extends org.apache.struts.action.Actio
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
-    private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -40,16 +39,29 @@ public class ConsultaProfesorDepartamento extends org.apache.struts.action.Actio
             throws Exception {
 
         HttpSession session = request.getSession(true);
-        String id_departamento = (String) session.getAttribute("usbid");
+Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
+        String id = (String) session.getAttribute("usbid");
 
-        ArrayList<Profesor> profesores =
-                DBMS.getInstance().listarProfesoresDepartamento(id_departamento);
+        ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
+        String return_mapping = "no_autorizado";
+
+        if (tipousuario.equals("departamento")) {
+            profesores =
+                    DBMS.getInstance().listarProfesoresActivosDepartamento(id);
+            return_mapping = "departamento";
+        } else if (tipousuario.equals("coordinacion")){
+            profesores =
+                    DBMS.getInstance().listarProfesoresCoordinacion(id);
+            return_mapping = "coordinacion";
+        }
 
         if (profesores.isEmpty()) {
             request.setAttribute("vacio", SUCCESS);
         }
 
-        request.setAttribute("profesores", profesores);
-        return mapping.findForward(SUCCESS);
+        session.setAttribute("profesores", profesores);
+        System.out.println(return_mapping);
+        return mapping.findForward(return_mapping);
     }
 }

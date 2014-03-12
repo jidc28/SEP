@@ -61,6 +61,27 @@
             </div>
         </div>
     </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 id="izquierda" class="panel-title">
+                <a id="link-dropdown" class="accordion-toggle" 
+                   data-toggle="collapse" 
+                   data-parent="#accordion" href="#collapseProfesores">
+                    Gestión de información de profesores
+                </a>
+                <a href="#" id="ayuda1" style="float: right" rel="popover"> 
+                    <span class="glyphicon glyphicon-question-sign"></span> 
+                </a>
+            </h4>
+        </div>
+        <div id="collapseProfesores" class="panel-collapse collapse">
+            <div class="panel-body">
+                <html:link action="/consultarProfesores">
+                    <h5 align ="center">Consultar Profesores</h5>
+                </html:link>
+            </div>
+        </div>
+    </div>
     <logic:present name="evaluaciones_pendientes">
         <div class="panel panel-default">
             <div class="panel-heading">

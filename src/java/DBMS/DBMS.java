@@ -1778,38 +1778,6 @@ public class DBMS {
         return null;
     }
 
-//    public ArrayList<String> obtenerDepartamentosQueNoEvaluaron(String codigo_materia) {
-////        select * from dicta as d, pertenece as p, departamento as dep where d.codigo_materia = 'CI6116' and p.usbid_profesor = d.usbid_profesor and dep.codigo = p.codigo_departamento and d.usbid_profesor not in (select usbid_profesor from rendimiento where codigo_materia = 'CI6116');
-//        PreparedStatement ps;
-//        ArrayList<String> departamentos = new ArrayList<String>(0);
-//        try {
-//            ps = conexion.prepareStatement("SELECT * "
-//                    + "FROM dicta as d, pertenece as p, departamento as dep "
-//                    + "WHERE d.codigo_materia = ? "
-//                    + "AND p.usbid_profesor = d.usbid_profesor "
-//                    + "AND dep.codigo = p.codigo_departamento "
-//                    + "AND d.usbid_profesor NOT IN "
-//                    + "(SELECT usbid_profesor "
-//                    + "FROM rendimiento "
-//                    + "WHERE codigo_materia = ?);");
-//            ps.setString(1, codigo_materia);
-//            ps.setString(2, codigo_materia);
-//            ResultSet rs = ps.executeQuery();
-//
-//            while (rs.next()) {
-//                String dep = rs.getString("nombre");
-//                System.out.println("-----> " + dep);
-//                departamentos.add(dep);
-//            }
-//
-//            return departamentos;
-//
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
-//        return departamentos;
-//    }
-
     public int cantidadEvaluados(String codigo_materia, String codigo_coordinacion) {
         PreparedStatement ps;
         int cantidad = 0;
@@ -2077,7 +2045,7 @@ public class DBMS {
             ps0.setString(2, rendimiento.getUsbid_profesor());
             ps0.setString(3, rendimiento.getCodigo_materia());
             ps0.setString(4, id_coordinacion);
-            
+
             System.out.println(ps0.toString());
 
             Integer i = ps0.executeUpdate();
@@ -2088,5 +2056,34 @@ public class DBMS {
             ex.printStackTrace();
             return false;
         }
+    }
+
+    public ArrayList<Profesor> listarProfesoresCoordinacion(String id_coordinacion) {
+
+        ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
+        PreparedStatement ps;
+        try {
+            ps = conexion.prepareStatement("SELECT DISTINCT p.usbid, p.nombre, "
+                    + "p.apellido, m.codigo_materia "
+                    + "FROM maneja as m, dicta as d, profesor as p "
+                    + "WHERE m.codigo_materia = d.codigo_materia "
+                    + "AND m.codigo_coordinacion = ? "
+                    + "ORDER BY usbid;");
+
+            ps.setString(1, id_coordinacion);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Profesor p = new Profesor();
+                p.setUsbid(rs.getString("usbid"));
+                p.setNombre(rs.getString("nombre"));
+                p.setApellido(rs.getString("apellido"));
+                profesores.add(p);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return profesores;
     }
 }
