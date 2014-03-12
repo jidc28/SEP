@@ -9,95 +9,180 @@
 
 body 
 {
-	margin: 0px;
-	font-family: verdana, arial;
+    margin: 0px;
+    font-family: verdana, arial;
 }
 
-input { 
-border-radius:6px; 
--moz-border-radius:6px; /* Firefox */ 
--webkit-border-radius:6px; /* Safari y Chrome */
+p {
+    color: #333;
+    text-align: left;
+    font: normal 400 62.5%/1.0 Verdana, sans-serif;
+    font-size: 11px;
 }
-	
+
+#check {
+    height: 13px;
+    width: 13px;
+    margin: 4px;
+}
+
+.bottom {
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    border-top: 1px solid #ddd;
+}
+
+input.texto { 
+    width: 158px;
+    height: 16.5px;
+    padding: 3px;
+    margin: 2px;
+    margin-top: 0px;
+    background: #ffd;
+    border-width: 1px;
+}
+
+.login {
+    padding: 3px;
+    font-family: Verdana,sans-serif;
+    font-size: 10.5px;
+    margin: 0px;
+}
+
+#side {
+    width: 288px;
+    height: 107px;
+}
+
+.clear {
+    color: #777;
+    background: transparent;
+    border: none;
+    font-family: Verdana,sans-serif;
+    font-size: 10px;
+    margin-left: 3px;
+    border-left: 1px solid #ddd;
+}
+
+h2 {
+    border-bottom: 1px solid #ddd;
+    margin-top: 0px;
+    padding: 3px 0;
+    font: normal 400 17px Georgia, "Times New Roman", Times, serif;
+    text-align: left;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+label {
+    font: normal 400 62.5%/1.0 Verdana, sans-serif;
+    font-size: 11px;
+    text-align: left;
+    color: #777;
+}
+
 #encabezado {
-	width: 900px;
-	
+    width: 960px;
+    height: 155px;
+    margin-left: 195.5px;
+    margin-right: 195.5px;
+
+}
+
+.box {
+    padding: 15px;
+    width: 258px;
+    height: 224.5px;
+    background-color: #eee;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px; 
+}
+
+#contenido {
+    margin-right: 25px;
+    margin-left: 25px;
+    margin-bottom: 20px;
+    margin-top: 110px;
+    width: 910px;
+    height: 254.5px;
 }
 
 #encabezado img {
-	height: 250px;	
+    height: 250px;	
 }
 
 #contenedor {
-	clear: left;
-	width: 900px;
-	margin-left: auto;
-	margin-right: auto;
-	left: 50%;
+    clear: left;
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 50%;
 }
 
 div {
-display: block;
+    display: block;
 }
 
 #welcome table {
-display: table;
-border-collapse: separate;
-border-spacing: 2px;
-border-color: gray;
-margin-left: auto;
-margin-right: auto;
-width: 190px;
-font-size: 12px;
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: gray;
+    margin-left: auto;
+    margin-right: auto;
+    width: 190px;
+    font-size: 12px;
 }
 
 #contenedor table {
-display: table;
-border-collapse: separate;
-border-spacing: 2px;
-border-color: gray;
-margin-left: auto;
-margin-right: auto;
-width: 750px;
-font-size: 12px;
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: gray;
+    margin-left: auto;
+    margin-right: auto;
+    width: 750px;
+    font-size: 12px;
 }
 
 #welcome {
-margin-left: auto;
-margin-right: auto;
-padding: 15px;
-background: #eee url("../images/key-point_back.gif") right repeat-y;
-position: relative;
-text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    background: #eee url("../images/key-point_back.gif") right repeat-y;
+    position: relative;
+    text-align: left;
 }
 
 #content {
-width: 750px;
-margin-left: auto;
-margin-right: auto;
-left: 50%;
+    width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 50%;
 }
 
 #welcome p {
-padding: 0;
-margin-top: 0;
-font-size: 12px;
+    padding: 0;
+    margin-top: 0;
+    font-size: 12px;
 }
 
 p {
-line-height: 1.5em;
+    line-height: 1.5em;
 }
 
 #copyright {
-font-size: .9em;
-color: #999;
-padding-top: 3px;
-text-align: center;
+    font-size: .9em;
+    color: #999;
+    padding-top: 3px;
+    text-align: center;
 }
 p {
-display: block;
--webkit-margin-before: 1em;
--webkit-margin-after: 1em;
--webkit-margin-start: 0px;
--webkit-margin-end: 0px;
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
 }
