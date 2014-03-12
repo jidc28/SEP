@@ -43,12 +43,12 @@ public class ListarAnosEvaluados extends org.apache.struts.action.Action {
 
         Profesor profesor = (Profesor) form;
         
-        ArrayList<String> anos;
+        ArrayList<rendimientoProf> evaluaciones;
 
-        anos = DBMS.getInstance().listarAnoEvaluacionesEnviadas(id_coordinacion,profesor.getUsbid());
+        evaluaciones = DBMS.getInstance().listarAnoEvaluacionesEnviadas(id_coordinacion,profesor.getUsbid());
         profesor = DBMS.getInstance().obtenerInfoProfesor(profesor.getUsbid());
 
-        session.setAttribute("anos", anos);
+        session.setAttribute("evaluaciones", evaluaciones);
         session.setAttribute("profesor", profesor);
         return mapping.findForward(SUCCESS);
     }

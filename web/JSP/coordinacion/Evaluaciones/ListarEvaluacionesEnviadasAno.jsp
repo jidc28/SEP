@@ -19,14 +19,14 @@
 
 <table style="margin: 0px; margin-top: 20px; margin-left: 20px;" align="left">
     <tbody>
-        <logic:iterate id="ano" name="anos">
+        <logic:iterate id="evaluacion" name="evaluaciones">
             <tr>
                 <td style="padding: 5px;">
                     <html:form action="/listarAnosEvaluados">
                         <html:hidden name="Profesor" property="usbid" 
                                      value="${profesor.getUsbid()}"/>
                         <html:submit styleClass="link2">
-                            Evaluaciones del año <bean:write name="ano"/>
+                            Evaluaciones de <bean:write name="evaluacion" property="trimestre"/> <bean:write name="evaluacion" property="ano"/>
                         </html:submit>  
                         <span style="color: #428bca;" 
                               class="glyphicon glyphicon-arrow-right">

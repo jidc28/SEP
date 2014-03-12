@@ -2087,12 +2087,12 @@ public class DBMS {
         return profesores;
     }
 
-    public ArrayList<String> listarAnoEvaluacionesEnviadas(String id_coordinacion, String usbid_profesor) {
+    public ArrayList<rendimientoProf> listarAnoEvaluacionesEnviadas(String id_coordinacion, String usbid_profesor) {
 
         PreparedStatement ps;
-        ArrayList<String> anos = new ArrayList(0);
+        ArrayList<rendimientoProf> rendimiento = new ArrayList(0);
         try {
-            ps = conexion.prepareStatement("SELECT ano "
+            ps = conexion.prepareStatement("SELECT ano, trimestre "
                     + "FROM evaluado "
                     + "WHERE codigo_coordinacion = ? "
                     + "AND usbid_profesor = ? "
@@ -2101,14 +2101,25 @@ public class DBMS {
             ps.setString(2, usbid_profesor);
 
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
-                anos.add(rs.getString("ano"));
-                System.out.println(rs.getString("ano"));
+                rendimientoProf r = new rendimientoProf();
+                r.setAno(rs.getInt("ano"));
+                String periodo = rs.getString("trimestre");
+                if (periodo.equals("SD")) {
+                    r.setTrimestre("Septiembre-Diciembre");
+                } else if (periodo.equals("EM")) {
+                    r.setTrimestre("Ener-Marzo");
+                } else if (periodo.equals("AJ")) {
+                    r.setTrimestre("Abril-Julio");
+                } else if (periodo.equals("V")) {
+                    r.setTrimestre("Intensivo");
+                }
+                rendimiento.add(r);
             }
 
-            return anos;
-            
+            return rendimiento;
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

@@ -241,6 +241,7 @@ insert into solicita_apertura values ('CI4357','09-10020','09-10219','Necesito a
 
 insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2008','AJ');
 insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2005','AJ');
+insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2005','SD');
 insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2006','AJ');
 insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2007','AJ');
 insert into evaluado values ('09-10020','28-63146','CI6116','09-10219','2007','SD');
