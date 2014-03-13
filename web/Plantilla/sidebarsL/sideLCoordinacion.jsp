@@ -28,12 +28,6 @@
             Gestionar evaluaciones
         </html:submit>
     </html:form>
-    <html:form action="/ejecutarOpcion" style="margin: 0px;">
-        <html:hidden name="Usuario" property="opcion" value="gestion_profesores"/>
-        <html:submit styleClass="link">
-            Gestionar profesores
-        </html:submit>
-    </html:form>
     <a class="menuitem" href="cerrarSesion.do" onclick="return confirm('¿Está seguro que desea cerrar sesión?')" >
         Cerrar Sesión
     </a>

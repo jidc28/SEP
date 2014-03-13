@@ -351,9 +351,7 @@
             scope="request"
             name="Profesor"
             validate="false">
-            <forward name="departamento" path="consulta_profesores_pagina"/>
-            <forward name="coordinacion" path="consulta_profesores_coordinacion_pagina"/>
-            <forward name="no_autorizado" path="noAutorizado"/>
+            <forward name="success" path="consulta_profesores_pagina"/>
         </action>
 
         <action input="VistaCoordinacion.jsp"

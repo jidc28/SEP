@@ -39,29 +39,16 @@ public class ConsultaProfesorDepartamento extends org.apache.struts.action.Actio
             throws Exception {
 
         HttpSession session = request.getSession(true);
-Usuario usuario = (Usuario) session.getAttribute("usuario");
-        String tipousuario = usuario.getTipousuario();
         String id = (String) session.getAttribute("usbid");
 
-        ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
-        String return_mapping = "no_autorizado";
-
-        if (tipousuario.equals("departamento")) {
-            profesores =
-                    DBMS.getInstance().listarProfesoresActivosDepartamento(id);
-            return_mapping = "departamento";
-        } else if (tipousuario.equals("coordinacion")){
-            profesores =
-                    DBMS.getInstance().listarProfesoresCoordinacion(id);
-            return_mapping = "coordinacion";
-        }
+        ArrayList<Profesor> profesores = 
+                DBMS.getInstance().listarProfesoresActivosDepartamento(id);
 
         if (profesores.isEmpty()) {
             request.setAttribute("vacio", SUCCESS);
         }
 
         session.setAttribute("profesores", profesores);
-        System.out.println(return_mapping);
-        return mapping.findForward(return_mapping);
+        return mapping.findForward(SUCCESS);
     }
 }
