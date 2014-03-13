@@ -40,7 +40,9 @@
                                             </tr>
                                             <tr>
                                                 <td style="color: red">
-                                                    <html:errors property="usbid" /> 
+                                                    <label style="color: red;">
+                                                        <html:errors property="usbid" />
+                                                    </label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -52,8 +54,10 @@
                                                 <td><html:password styleClass="texto" property="contrasena" /></td>
                                             </tr>
                                             <tr>
-                                                <td style="color: red">
-                                                    <html:errors property="contrasena" /> 
+                                                <td>
+                                                    <label style="color: red;">
+                                                        <html:errors property="contrasena" />
+                                                    </label>
                                                 </td>
                                             </tr>
                                             <tr>

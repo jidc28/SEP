@@ -2125,4 +2125,112 @@ public class DBMS {
         }
         return null;
     }
+
+    public InformacionProfesorCoord listarInformacionProfesorCoordinacion(String id_coordinacion, String usbid_profesor) {
+
+        PreparedStatement ps;
+        InformacionProfesorCoord informacion = null;
+        try {
+            ps = conexion.prepareStatement("SELECT * "
+                    + "FROM informacion_profesor_coordinacion "
+                    + "WHERE codigo_coordinacion = ? "
+                    + "AND usbid_profesor = ?;");
+            ps.setString(1, id_coordinacion);
+            ps.setString(2, usbid_profesor);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                informacion = new InformacionProfesorCoord();
+                informacion.setCodigoCoordinacion(id_coordinacion);
+                informacion.setUsbidProfesor(usbid_profesor);
+                informacion.setConsejoAsesor(rs.getString("consejo_asesor"));
+                informacion.setTesisTutoria(rs.getInt("tesis_tutoria"));
+                informacion.setTesisJurado(rs.getInt("tesis_jurado"));
+                informacion.setPasantiaCorta(rs.getInt("pasantia_corta"));
+                informacion.setPasantiaLargaTutor(rs.getInt("pasantia_larga_tutor"));
+                informacion.setPasantiaLargaJurado(rs.getInt("pasantia_larga_jurado"));
+            }
+
+            return informacion;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean crearInformacionProfesorCoordinacion(String id_coordinacion, String usbid_profesor,
+            InformacionProfesorCoord informacion) {
+
+        PreparedStatement ps;
+        try {
+            ps = conexion.prepareStatement("INSERT INTO informacion_profesor_coordinacion "
+                    + "VALUES (?,?,?,?,?,?,?,?)");
+            ps.setString(1, id_coordinacion);
+            ps.setString(2, usbid_profesor);
+            ps.setString(3, informacion.getConsejoAsesor());
+            ps.setInt(4, informacion.getTesisTutoria());
+            ps.setInt(5, informacion.getTesisJurado());
+            ps.setInt(6, informacion.getPasantiaCorta());
+            ps.setInt(7, informacion.getPasantiaLargaTutor());
+            ps.setInt(8, informacion.getPasantiaLargaJurado());
+
+            Integer j = ps.executeUpdate();
+
+            return j > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean actualizarInformacionProfesorCoordinacion(String id_coordinacion, String usbid_profesor,
+            InformacionProfesorCoord informacion) {
+
+        PreparedStatement ps0;
+        try {
+            ps0 = conexion.prepareStatement("UPDATE informacion_profesor_coordinacion "
+                    + "SET consejo_asesor = ?, "
+                    + "tesis_tutoria = ?, "
+                    + "tesis_jurado = ?, "
+                    + "pasantia_corta = ?, "
+                    + "pasantia_larga_tutor = ?, "
+                    + "pasantia_larga_jurado = ? "
+                    + "WHERE usbid_profesor = ? "
+                    + "AND codigo_coordinacion = ?;");
+            ps0.setString(1, informacion.getConsejoAsesor());
+            ps0.setInt(2, informacion.getTesisTutoria());
+            ps0.setInt(3, informacion.getTesisJurado());
+            ps0.setInt(4, informacion.getPasantiaCorta());
+            ps0.setInt(5, informacion.getPasantiaLargaTutor());
+            ps0.setInt(6, informacion.getPasantiaLargaJurado());
+            ps0.setString(7, usbid_profesor);
+            ps0.setString(8, id_coordinacion);
+
+            Integer i = ps0.executeUpdate();
+
+            return i > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean procesarInformacionProfesorCoordinacion(String id_coordinacion, String usbid_profesor,
+            InformacionProfesorCoord informacion) {
+
+        boolean procesado = false;
+        InformacionProfesorCoord consulta_informacion = null;
+        consulta_informacion =
+                listarInformacionProfesorCoordinacion(id_coordinacion, usbid_profesor);
+        if (consulta_informacion == null) {
+            procesado = crearInformacionProfesorCoordinacion(id_coordinacion, usbid_profesor, informacion);
+        } else {
+            procesado = actualizarInformacionProfesorCoordinacion(id_coordinacion, usbid_profesor, informacion);
+        }
+        return procesado;
+    }
 }

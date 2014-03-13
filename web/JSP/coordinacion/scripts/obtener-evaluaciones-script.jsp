@@ -15,10 +15,33 @@
 <title>Sistema de Evaluación de Profesores</title>
 <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 <script src="css/js/bootstrap.min.js"></script>
+
+<logic:notPresent name="informacion_coordinacion">
+    <script>
+        $(document).ready(function(){
+            $('a[href="#departamento"]').tab('show');
+        });
+    </script>
+</logic:notPresent>
+
 <script>
-    $('[data-toggle=tab]').click(function(){
-        if ($(this).parent().hasClass('active')){
-            $($(this).attr("href")).toggleClass('active');
-        }
-    })
+    function guardar_informacion(){
+        confirm("¿Está seguro que los datos insertados son correctos?");
+        document.forms['informacion_coordinacion'].submit();
+        //        document.forms['informacion_coordinacion'].submit();
+    }
 </script>
+
+<script>
+    function update(){
+        document.forms['informacion_coordinacion'].submit();
+    }
+</script>
+
+<logic:present name="informacion_coordinacion">
+    <script>
+        $(document).ready(function(){
+            $('a[href="#coordinacion"]').tab('show');
+        });
+    </script>
+</logic:present>

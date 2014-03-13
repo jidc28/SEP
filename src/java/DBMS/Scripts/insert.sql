@@ -245,3 +245,6 @@ insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2005','S
 insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2006','AJ');
 insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2007','AJ');
 insert into evaluado values ('09-10020','28-63146','CI6116','09-10219','2007','SD');
+
+--insert into rendimiento values ('28-63146','CI6116','SD','2011','10','3.00','1','1','1','1','1','5');
+--insert into evaluar values ('09-10020','28-63146','CI6116','09-10219','si','no','si','no','ninguna');

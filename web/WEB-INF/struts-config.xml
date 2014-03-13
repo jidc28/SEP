@@ -22,6 +22,7 @@
         <form-bean name="MultiBox" type="Clases.MultiBox"/>
         <form-bean name="dicta" type="Clases.dicta"/>
         <form-bean name="rendimientoProf" type="Clases.rendimientoProf"/>
+        <form-bean name="InformacionProfesorCoord" type="Clases.InformacionProfesorCoord"/>
     </form-beans>
     
     <global-exceptions>
@@ -364,13 +365,22 @@
             <forward name="success" path="listar_evaluaciones_enviadas_profesor_pagina"/>
         </action>
 
-        <action input="ListarEvaluacionesEnviadasProfesor"
+        <action input="ListarEvaluacionesEnviadasProfesor.jsp"
             path="/listarAnosEvaluados"
             type="Actions.Profesor.ListarAnosEvaluados"
             scope="request"
             name="Profesor"
             validate="false">
             <forward name="success" path="listar_evaluaciones_enviadas_ano_pagina"/>
+        </action>
+
+        <action input="ObtenerEvaluaciones.jsp"
+            path="/guardarInformacionCoordinacion"
+            type="Actions.Coordinacion.GuardarInformacionCoordinacion"
+            scope="request"
+            name="InformacionProfesorCoord"
+            validate="false">
+            <forward name="success" path="obtener_evaluaciones_pagina"/>
         </action>
         
         <action input="ConsultaProfesores.jsp"
@@ -475,6 +485,7 @@
                 type="Actions.Evaluaciones.EvaluarCoordinacion"
                 validate="false">
             <forward name="success" path="listar_evaluaciones_pendientes_pagina"/>
+            <forward name="failure" path="obtener_evaluaciones_pagina"/>
         </action>
         
         <!--         OTROS       -->               
