@@ -295,14 +295,22 @@
                     </td>
                 </tr>
                 <tr>
+                    <td colspan="2" style="border: none;">
+                        <html:textarea name="evaluacion" property="observaciones_c"
+                                       styleClass="form-control" rows="5">
+                        </html:textarea>
+                    </td>
+                </tr>
+                <tr>
                     <td style="border: none;">
-            <center>
-                <html:submit onclick="guardar_informacion()" styleClass="btn btn-success">
-                    Evaluar
-                </html:submit>
-            </center>
-            </td>
-            </tr>
+                        <center>
+                            <html:submit onclick="guardar_informacion()" 
+                                         styleClass="btn btn-success">
+                                Evaluar
+                            </html:submit>
+                        </center>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </html:form>

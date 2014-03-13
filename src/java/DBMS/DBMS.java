@@ -2037,14 +2037,16 @@ public class DBMS {
 
             ps0 = conexion.prepareStatement("UPDATE evaluar "
                     + "SET evaluado_coordinacion = 'si', "
-                    + "recomendado_coordinacion = ? "
+                    + "recomendado_coordinacion = ?,"
+                    + "observaciones_coordinacion = ? "
                     + "WHERE usbid_profesor = ? "
                     + "AND codigo_materia = ? "
                     + "AND codigo_coordinacion = ?;");
             ps0.setString(1, rendimiento.getRecomendado());
-            ps0.setString(2, rendimiento.getUsbid_profesor());
-            ps0.setString(3, rendimiento.getCodigo_materia());
-            ps0.setString(4, id_coordinacion);
+            ps0.setString(2, rendimiento.getObservaciones_c());
+            ps0.setString(3, rendimiento.getUsbid_profesor());
+            ps0.setString(4, rendimiento.getCodigo_materia());
+            ps0.setString(5, id_coordinacion);
 
             System.out.println(ps0.toString());
 
