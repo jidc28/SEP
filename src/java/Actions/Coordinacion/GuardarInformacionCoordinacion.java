@@ -26,10 +26,8 @@ public class GuardarInformacionCoordinacion extends Action {
         
         InformacionProfesorCoord informacion = (InformacionProfesorCoord) form;
 
-        System.out.println("holaaaaa");
-        
         boolean procesado = DBMS.getInstance().
-                procesarInformacionProfesorCoordinacion(id_coordinacion,usbid_profesor,informacion);
+                actualizarInformacionProfesorCoordinacion(id_coordinacion,usbid_profesor,informacion);
 
         request.setAttribute("informacion", informacion);
         request.setAttribute("informacion_coordinacion",SUCCESS);

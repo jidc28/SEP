@@ -2048,8 +2048,6 @@ public class DBMS {
             ps0.setString(4, rendimiento.getCodigo_materia());
             ps0.setString(5, id_coordinacion);
 
-            System.out.println(ps0.toString());
-
             Integer i = ps0.executeUpdate();
 
             return i > 0;
@@ -2154,6 +2152,11 @@ public class DBMS {
                 informacion.setPasantiaLargaJurado(rs.getInt("pasantia_larga_jurado"));
             }
 
+            if (informacion == null) {
+                crearInformacionProfesorCoordinacion(id_coordinacion, usbid_profesor,
+                        new InformacionProfesorCoord());
+            }
+            
             return informacion;
 
         } catch (SQLException ex) {
@@ -2219,20 +2222,5 @@ public class DBMS {
             ex.printStackTrace();
         }
         return false;
-    }
-
-    public boolean procesarInformacionProfesorCoordinacion(String id_coordinacion, String usbid_profesor,
-            InformacionProfesorCoord informacion) {
-
-        boolean procesado = false;
-        InformacionProfesorCoord consulta_informacion = null;
-        consulta_informacion =
-                listarInformacionProfesorCoordinacion(id_coordinacion, usbid_profesor);
-        if (consulta_informacion == null) {
-            procesado = crearInformacionProfesorCoordinacion(id_coordinacion, usbid_profesor, informacion);
-        } else {
-            procesado = actualizarInformacionProfesorCoordinacion(id_coordinacion, usbid_profesor, informacion);
-        }
-        return procesado;
     }
 }
