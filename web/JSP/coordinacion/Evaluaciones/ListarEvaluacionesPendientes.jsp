@@ -32,27 +32,27 @@
                 <tr>
                     <th>
                         <center>
-                            Materia
+                            MATERIA
                         </center>
                     </th>
                     <th>
                         <center>
-                            usbid
+                            USBID
                         </center>
                     </th>
                     <th>
                         <center>
-                            Profesor
+                            PROFESOR
                         </center>
                     </th>
                     <th>
                         <center>
-                            Por materia
+                            POR MATERIA
                         </center>
                     </th>
                     <th>
                         <center>
-                            Por profesor
+                            POR PROFESOR
                         </center>
                     </th>
                 </tr>
@@ -90,7 +90,7 @@
                             </td>
                             <td>
                                 <center>
-                                    <html:form action="/obtenerEvaluacion" 
+                                    <html:form action="/hacerEvaluacion" 
                                         onsubmit="return(this)"
                                         style="margin: 0px;">
                                         <html:hidden name="dicta" 
@@ -121,7 +121,7 @@
                         </td>
                         <td>
                             <center>
-                                <html:form action="/obtenerEvaluacion" 
+                                <html:form action="/hacerEvaluacion" 
                                     onsubmit="return(this)"
                                     style="margin: 0px;">
                                     <html:hidden name="dicta" 

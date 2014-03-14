@@ -22,9 +22,30 @@
         <logic:iterate id="evaluacion" name="evaluaciones">
             <tr>
                 <td style="padding: 5px;">
-                    <html:form action="/listarAnosEvaluados">
-                        <html:hidden name="Profesor" property="usbid" 
+                    <html:form action="/listarEvaluacionesEnviadas">
+                        <html:hidden name="evaluacion" property="usbid_profesor" 
                                      value="${profesor.getUsbid()}"/>
+                        <logic:equal name="evaluacion" property="trimestre"
+                                     value="Septiembre-Diciembre">
+                            <html:hidden name="evaluacion" property="trimestre"
+                                         value="SD"/>
+                        </logic:equal>
+                        <logic:equal name="evaluacion" property="trimestre"
+                                     value="Enero-Marzo">
+                            <html:hidden name="evaluacion" property="trimestre"
+                                         value="EM"/>
+                        </logic:equal>
+                        <logic:equal name="evaluacion" property="trimestre"
+                                     value="Abril-Julio">
+                            <html:hidden name="evaluacion" property="trimestre"
+                                         value="AJ"/>
+                        </logic:equal>
+                        <logic:equal name="evaluacion" property="trimestre"
+                                     value="Intensivo">
+                            <html:hidden name="evaluacion" property="trimestre"
+                                         value="V"/>
+                        </logic:equal>
+                        <html:hidden name="evaluacion" property="ano"/>
                         <html:submit styleClass="link2">
                             Evaluaciones de <bean:write name="evaluacion" property="trimestre"/> <bean:write name="evaluacion" property="ano"/>
                         </html:submit>  

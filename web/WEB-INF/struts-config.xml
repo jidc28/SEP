@@ -373,6 +373,15 @@
         </action>
 
         <action input="ObtenerEvaluaciones.jsp"
+            path="/listarEvaluacionesEnviadas"
+            type="Actions.Evaluaciones.ListarEvaluacionesEnviadas"
+            scope="request"
+            name="rendimientoProf"
+            validate="false">
+            <forward name="success" path="listar_evaluaciones_enviadas_pagina"/>
+        </action>
+        
+        <action input="ObtenerEvaluaciones.jsp"
             path="/guardarInformacionCoordinacion"
             type="Actions.Coordinacion.GuardarInformacionCoordinacion"
             scope="request"
@@ -469,9 +478,9 @@
         
         <action input="/listarEvaluacionesPendientes.jsp" 
                 name="dicta" 
-                path="/obtenerEvaluacion" 
+                path="/hacerEvaluacion" 
                 scope="request" 
-                type="Actions.Evaluaciones.ObtenerEvaluacion"
+                type="Actions.Evaluaciones.HacerEvaluacion"
                 validate="false">
             <forward name="success" path="obtener_evaluaciones_pagina"/>
         </action>
