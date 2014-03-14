@@ -2,6 +2,7 @@ package Actions.Evaluaciones;
 
 import Clases.*;
 import DBMS.DBMS;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -62,11 +63,20 @@ public class HacerEvaluacion extends Action {
          * una instancia vacia de la informacion */
         InformacionProfesorCoord informacion =
                 DBMS.getInstance().listarInformacionProfesorCoordinacion(id_coordinacion, profesor.getUsbid());
-
-        if (informacion == null) {
-            informacion = new InformacionProfesorCoord();
+        
+        if (d.getOpcion().equals("pendiente")){
+            session.setAttribute("pendiente",SUCCESS);
+        } else {
+            String trimestre = (String) session.getAttribute("trimestre");
+            int ano = (Integer) session.getAttribute("ano");
+            /* Ojo eso debe estar */
+//            session.removeAttribute("trimestre");
+//            session.removeAttribute("ano");
+            rendimientoProf evaluado = 
+                    DBMS.getInstance().listarEvaluacionesEnviadasMateria(id_coordinacion, ano, trimestre, d.getCodigoMateria());
+            request.setAttribute("evaluado_coordinacion", evaluado);
         }
-
+        
         /* Se envian a la vista los atributos correspondiente */
         session.setAttribute("informacion", informacion);
         session.setAttribute("profesor", profesor);

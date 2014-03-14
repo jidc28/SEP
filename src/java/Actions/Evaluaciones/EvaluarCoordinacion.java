@@ -42,6 +42,7 @@ public class EvaluarCoordinacion extends Action {
 
             request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
 
+            session.removeAttribute("pendiente");
             session.removeAttribute("informacion");
             session.removeAttribute("profesor");
             session.removeAttribute("evaluacion");

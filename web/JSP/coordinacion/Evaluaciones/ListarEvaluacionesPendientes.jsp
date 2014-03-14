@@ -99,6 +99,9 @@
                                         <html:hidden name="dicta"
                                             property="usbidProfesor"
                                             value="${evaluacion.getPrimerProfesor().getUsbid()}"/>
+                                        <html:hidden name="dicta"
+                                                     property="opcion"
+                                                     value="pendiente"/>
                                         <html:submit styleClass="btn btn-info"
                                                      style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
                                                 Hacer evaluación
@@ -130,6 +133,9 @@
                                     <html:hidden name="dicta"
                                         property="usbidProfesor"
                                         value="${profesores.getUsbid()}"/>
+                                    <html:hidden name="dicta"
+                                                     property="opcion"
+                                                     value="pendiente"/>
                                     <html:submit styleClass="btn btn-info"
                                                  style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
                                             Hacer evaluación

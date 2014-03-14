@@ -42,6 +42,12 @@
                 por la coordinación
             </a>
         </li>
+        <li>
+            <a href="#evaluacion_coordinacion" data-toggle="tab" style="font-size: 12px; margin: 0px;">
+                Información sobre la <br>
+                evaluación
+            </a>
+        </li>
     </ul>
 </div>
 
@@ -60,107 +66,238 @@
         </center>                
     </div>
 
-    <div class="tab-pane" id="coordinacion" style="margin-bottom: 40px;">
-        <center>
-            <form id="informacion_coordinacion" name="informacion_coordinacion" 
-                  action="guardarInformacionCoordinacion.do">
-                <table  style="width: 90%;">
-                    <tbody>
-                    <div class="form-group">
-                        <tr>
-                            <td style="text-align: right; width: 70%; font-size: 14px; height: 40px;">
-                                <strong>
-                                    ¿HA SIDO MIEMBRO DE CONSEJO ASESOR?
-                                </strong>
-                            </td>
-                            <td>
-                                <div style="padding-left: 15px;" >
-                                    <div class="radio">
-                                        <html:radio name="informacion" property="consejoAsesor"
-                                                    value="si" onchange="update()">
-                                            Si
-                                        </html:radio>
+    <logic:present name="pendiente">    
+        <div class="tab-pane" id="coordinacion" style="margin-bottom: 40px;">
+            <center>
+                <form id="informacion_coordinacion" name="informacion_coordinacion" 
+                      action="guardarInformacionCoordinacion.do">
+                    <table  style="width: 90%;">
+                        <tbody>
+                        <div class="form-group">
+                            <tr>
+                                <td style="text-align: right; width: 70%; font-size: 14px; height: 40px;">
+                                    <strong>
+                                        ¿HA SIDO MIEMBRO DE CONSEJO ASESOR?
+                                    </strong>
+                                </td>
+                                <td>
+                                    <div style="padding-left: 15px;" >
+                                        <div class="radio">
+                                            <html:radio name="informacion" property="consejoAsesor"
+                                                        value="si" onchange="update()">
+                                                Si
+                                            </html:radio>
+                                        </div>
+                                        <div class="radio" style="margin-bottom: 0px;">
+                                            <html:radio name="informacion" property="consejoAsesor"
+                                                        value="no" onchange="update()">
+                                                No
+                                            </html:radio>
+                                        </div>
                                     </div>
-                                    <div class="radio" style="margin-bottom: 0px;">
-                                        <html:radio name="informacion" property="consejoAsesor"
-                                                    value="no" onchange="update()">
-                                            No
-                                        </html:radio>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right; width: 70%; font-size: 14px; height: 40px;">
+                                    <strong>
+                                        NÚMERO DE PROYECTOS DE GRADO, TRABAJOS DE GRADO O TESIS DOCTORALES TUTOREADOS
+                                    </strong>
+                                </td>
+                                <td>
+                                    <div class="col-xs-6">
+                                        <html:text styleClass="form-control" name="informacion" property="tesisTutoria" onchange="update()">
+                                        </html:text>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right; width: 70%; font-size: 14px; height: 40px;">
-                                <strong>
-                                    NÚMERO DE PROYECTOS DE GRADO, TRABAJOS DE GRADO O TESIS DOCTORALES TUTOREADOS
-                                </strong>
-                            </td>
-                            <td>
-                                <div class="col-xs-6">
-                                    <html:text styleClass="form-control" name="informacion" property="tesisTutoria" onchange="update()">
-                                    </html:text>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right; width: 70%; font-size: 14px; height: 40px;">
-                                <strong>
-                                    NÚMERO DE PROYECTOS DE GRADO, TRABAJOS DE GRADO O TESIS DOCTORALES EVALUADAS COMO JURADO
-                                </strong>
-                            </td>
-                            <td>
-                                <div class="col-xs-6">
-                                    <html:text styleClass="form-control" name="informacion" property="tesisJurado" onchange="update()">
-                                    </html:text>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right; width: 70%; font-size: 14px; height: 40px;">
-                                <strong>
-                                    NÚMERO DE PASANTÍAS CORTAS TUTOREADAS
-                                </strong>
-                            </td>
-                            <td>
-                                <div class="col-xs-6">
-                                    <html:text styleClass="form-control" name="informacion" property="pasantiaCorta" onchange="update()">
-                                    </html:text>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right; width: 70%; font-size: 14px; height: 40px;">
-                                <strong>
-                                    NÚMERO DE PASANTÍAS LARGAS E INTERMEDIAS TUTOREADAS
-                                </strong>
-                            </td>
-                            <td>
-                                <div class="col-xs-6">
-                                    <html:text styleClass="form-control" name="informacion" property="pasantiaLargaTutor" onchange="update()">
-                                    </html:text>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right; width: 70%; font-size: 14px; height: 40px;">
-                                <strong>
-                                    NÚMERO DE PASANTÍAS LARGAS E INTERMEDIAS EVALUADAS COMO JURADO
-                                </strong>
-                            </td>
-                            <td>
-                                <div class="col-xs-6">
-                                    <html:text styleClass="form-control" name="informacion" property="pasantiaLargaJurado" onchange="update()">
-                                    </html:text>
-                                </div>
-                            </td>
-                        </tr>
-                    </div>
-                    </tbody>
-                </table>
-            </form>
-        </center>                
-    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right; width: 70%; font-size: 14px; height: 40px;">
+                                    <strong>
+                                        NÚMERO DE PROYECTOS DE GRADO, TRABAJOS DE GRADO O TESIS DOCTORALES EVALUADAS COMO JURADO
+                                    </strong>
+                                </td>
+                                <td>
+                                    <div class="col-xs-6">
+                                        <html:text styleClass="form-control" name="informacion" property="tesisJurado" onchange="update()">
+                                        </html:text>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right; width: 70%; font-size: 14px; height: 40px;">
+                                    <strong>
+                                        NÚMERO DE PASANTÍAS CORTAS TUTOREADAS
+                                    </strong>
+                                </td>
+                                <td>
+                                    <div class="col-xs-6">
+                                        <html:text styleClass="form-control" name="informacion" property="pasantiaCorta" onchange="update()">
+                                        </html:text>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right; width: 70%; font-size: 14px; height: 40px;">
+                                    <strong>
+                                        NÚMERO DE PASANTÍAS LARGAS E INTERMEDIAS TUTOREADAS
+                                    </strong>
+                                </td>
+                                <td>
+                                    <div class="col-xs-6">
+                                        <html:text styleClass="form-control" name="informacion" property="pasantiaLargaTutor" onchange="update()">
+                                        </html:text>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right; width: 70%; font-size: 14px; height: 40px;">
+                                    <strong>
+                                        NÚMERO DE PASANTÍAS LARGAS E INTERMEDIAS EVALUADAS COMO JURADO
+                                    </strong>
+                                </td>
+                                <td>
+                                    <div class="col-xs-6">
+                                        <html:text styleClass="form-control" name="informacion" property="pasantiaLargaJurado" onchange="update()">
+                                        </html:text>
+                                    </div>
+                                </td>
+                            </tr>
+                        </div>
+                        </tbody>
+                    </table>
+                </form>
+            </center>                
+        </div>
+    </logic:present>
+
+    <logic:notPresent name="pendiente">
+        <div class="tab-pane" id="coordinacion" style="margin-bottom: 40px;">
+            <center>
+                <form id="informacion_coordinacion" name="informacion_coordinacion" 
+                      action="guardarInformacionCoordinacion.do">
+                    <table  style="width: 90%;">
+                        <tbody>
+                        <div class="form-group">
+                            <tr>
+                                <td style="text-align: right; width: 70%; font-size: 14px; height: 40px;">
+                                    <strong>
+                                        ¿HA SIDO MIEMBRO DE CONSEJO ASESOR?
+                                    </strong>
+                                </td>
+                                <td>
+                                    <div style="padding-left: 15px; font-size: 14px; color: #444444">
+                                        <strong>
+                                            <bean:write name="informacion" property="consejoAsesor"/>
+                                        </strong>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right; width: 70%; font-size: 14px; height: 40px;">
+                                    <strong>
+                                        NÚMERO DE PROYECTOS DE GRADO, TRABAJOS DE GRADO O TESIS DOCTORALES TUTOREADOS
+                                    </strong>
+                                </td>
+                                <td style="padding-left: 15px; font-size: 14px; color: #444444;">
+                                    <strong>
+                                        <bean:write name="informacion" property="tesisTutoria"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right; width: 70%; font-size: 14px; height: 40px;">
+                                    <strong>
+                                        NÚMERO DE PROYECTOS DE GRADO, TRABAJOS DE GRADO O TESIS DOCTORALES EVALUADAS COMO JURADO
+                                    </strong>
+                                </td>
+                                <td style="padding-left: 15px; font-size: 14px; color: #444444">
+                                    <strong>
+                                        <bean:write name="informacion" property="tesisJurado"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right; width: 70%; font-size: 14px; height: 40px;">
+                                    <strong>
+                                        NÚMERO DE PASANTÍAS CORTAS TUTOREADAS
+                                    </strong>
+                                </td>
+                                <td style="padding-left: 15px; font-size: 14px; color: #444444">
+                                    <strong>
+                                        <bean:write name="informacion" property="pasantiaCorta"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right; width: 70%; font-size: 14px; height: 40px;">
+                                    <strong>
+                                        NÚMERO DE PASANTÍAS LARGAS E INTERMEDIAS TUTOREADAS
+                                    </strong>
+                                </td>
+                                <td style="padding-left: 15px; font-size: 14px; color: #444444">
+                                    <strong>
+                                        <bean:write name="informacion" property="pasantiaLargaTutor"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right; width: 70%; font-size: 14px; height: 40px;">
+                                    <strong>
+                                        NÚMERO DE PASANTÍAS LARGAS E INTERMEDIAS EVALUADAS COMO JURADO
+                                    </strong>
+                                </td>
+                                <td style="padding-left: 15px; font-size: 14px; color: #444444">
+                                    <strong>
+                                        <bean:write name="informacion" property="pasantiaLargaJurado"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                        </div>
+                        </tbody>
+                    </table>
+                </form>
+            </center>                
+        </div>
+    </logic:notPresent>
+
+    <logic:notPresent name="pendiente">
+        <div class="tab-pane" id="evaluacion_coordinacion">
+            <table style="width: 60%;">
+                <tbody>
+                    <tr>
+                        <td style="width: 70%; font-size: 14px; height: 40px;">
+                            <strong>
+                                <logic:equal name="evaluado_coordinacion" property="recomendado" value="no">
+                                    El profesor no fue recomendado.
+                                </logic:equal>
+                                <logic:equal name="evaluado_coordinacion" property="recomendado" value="si">
+                                    El profesor fue recomendado.
+                                </logic:equal>
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 70%; font-size: 14px; height: 40px;">
+                            <strong>
+                                Observaciones
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>
+                                <html:textarea name="evaluado_coordinacion" 
+                                               property="observaciones_c"
+                                               styleClass="form-control" 
+                                               rows="8"
+                                               disabled="true"/>
+                            </strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </logic:notPresent>
 
     <div class="tab-pane" id="departamento">
         <h3 style="text-align: left; font-size: 18px; margin-left: 30px;">
@@ -272,46 +409,48 @@
     </div>
 </div>
 
-<div class="recomendar">
-    <html:form action="/evaluarCoordinacion">
-        <html:hidden name="evaluacion" property="usbid_profesor" value="${profesor.getUsbid()}"/>
-        <html:hidden name="evaluacion" property="codigo_materia"/>
-        <table class="table" style="border-top: none; margin: 0px;">
-            <tbody>
-                <tr>
-                    <td style="border: none;">
-                        <html:checkbox style="margin-right: 5px;" 
-                                       name="evaluacion" property="recomendado"
-                                       value="si"/>
-                        Recomendado
-                    </td>
+<logic:present name="pendiente">
+    <div class="recomendar">
+        <html:form action="/evaluarCoordinacion">
+            <html:hidden name="evaluacion" property="usbid_profesor" value="${profesor.getUsbid()}"/>
+            <html:hidden name="evaluacion" property="codigo_materia"/>
+            <table class="table" style="border-top: none; margin: 0px;">
+                <tbody>
+                    <tr>
+                        <td style="border: none;">
+                            <html:checkbox style="margin-right: 5px;" 
+                                           name="evaluacion" property="recomendado"
+                                           value="si"/>
+                            Recomendado
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: none;">
+                            <html:checkbox style="margin-right: 5px;" 
+                                           name="evaluacion" property="recomendado"
+                                           value="no"/>
+                            No recomendado
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border: none;">
+                            <html:textarea name="evaluacion" property="observaciones_c"
+                                           styleClass="form-control" rows="5">
+                            </html:textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: none;">
+                <center>
+                    <html:submit onclick="guardar_informacion()" 
+                                 styleClass="btn btn-success">
+                        Evaluar
+                    </html:submit>
+                </center>
+                </td>
                 </tr>
-                <tr>
-                    <td style="border: none;">
-                        <html:checkbox style="margin-right: 5px;" 
-                                       name="evaluacion" property="recomendado"
-                                       value="no"/>
-                        No recomendado
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="border: none;">
-                        <html:textarea name="evaluacion" property="observaciones_c"
-                                       styleClass="form-control" rows="5">
-                        </html:textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="border: none;">
-                        <center>
-                            <html:submit onclick="guardar_informacion()" 
-                                         styleClass="btn btn-success">
-                                Evaluar
-                            </html:submit>
-                        </center>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </html:form>
-</div>
+                </tbody>
+            </table>
+        </html:form>
+    </div>
+</logic:present>

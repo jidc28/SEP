@@ -17,6 +17,15 @@ public class dicta extends org.apache.struts.action.ActionForm {
     private ArrayList<Profesor> profesores = new ArrayList(0);
     private Profesor primerProfesor;
     private String usbidProfesor;
+    private String opcion;
+
+    public String getOpcion() {
+        return opcion;
+    }
+
+    public void setOpcion(String opcion) {
+        this.opcion = opcion;
+    }
 
     public String getUsbidProfesor() {
         return usbidProfesor;

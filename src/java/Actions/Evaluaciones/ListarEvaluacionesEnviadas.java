@@ -40,18 +40,21 @@ public class ListarEvaluacionesEnviadas extends org.apache.struts.action.Action 
 
         HttpSession session = request.getSession(true);
         String id_coordinacion = (String) session.getAttribute("usbid");
-        
+
         rendimientoProf rendimiento = (rendimientoProf) form;
-        
+        int ano = rendimiento.getAno();
+        String trimestre = rendimiento.getTrimestre();
+
         ArrayList<rendimientoProf> evaluaciones_enviadas;
-        evaluaciones_enviadas = 
-                DBMS.getInstance().listarEvaluacionesEnviadas
-                (id_coordinacion,rendimiento.getAno(),rendimiento.getTrimestre());
-        
-        if (evaluaciones_enviadas.isEmpty()){
-            request.setAttribute("vacio",SUCCESS);
+        evaluaciones_enviadas =
+                DBMS.getInstance().listarEvaluacionesEnviadas(id_coordinacion, ano, trimestre);
+
+        if (evaluaciones_enviadas.isEmpty()) {
+            request.setAttribute("vacio", SUCCESS);
         }
-        
+
+        session.setAttribute("ano", ano);
+        session.setAttribute("trimestre", trimestre);
         request.setAttribute("evaluaciones_enviadas", evaluaciones_enviadas);
         return mapping.findForward(SUCCESS);
     }

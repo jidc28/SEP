@@ -14,7 +14,7 @@ public class InformacionProfesorCoord extends ActionForm {
 
     public String codigoCoordinacion;
     public String usbidProfesor;
-    public String consejoAsesor;
+    public String consejoAsesor = "no";
     public int tesisTutoria;
     public int tesisJurado;
     public int pasantiaCorta;

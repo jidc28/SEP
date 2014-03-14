@@ -21,7 +21,7 @@
                 </span> 
         </a>-->
         <p>
-            En este momento no existen evaluaciones pendientes.
+            En este momento no existen evaluaciones enviadas.
         </p>
     </div>     
 </logic:empty>
@@ -74,12 +74,15 @@
                                     <html:form action="/hacerEvaluacion" 
                                         onsubmit="return(this)"
                                         style="margin: 0px;">
-                                        <%--<html:hidden name="dicta" 
+                                        <html:hidden name="dicta" 
                                             property="codigoMateria"
-                                            value="${evaluacion.getCodigoMateria()}"/>
+                                            value="${evaluacion.getCodigo_materia()}"/>
                                         <html:hidden name="dicta"
                                             property="usbidProfesor"
-                                            value="${evaluacion.getPrimerProfesor().getUsbid()}"/>--%>
+                                            value="${evaluacion.getUsbid_profesor()}"/>
+                                        <html:hidden name="dicta"
+                                                     property="opcion"
+                                                     value="enviada"/>
                                         <html:submit styleClass="btn btn-info"
                                                      style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
                                                 Hacer evaluación

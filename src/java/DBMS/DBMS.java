@@ -1200,6 +1200,49 @@ public class DBMS {
         }
         return null;
     }
+    
+    public rendimientoProf listarEvaluacionesEnviadasMateria
+            (String id_coordinacion,int ano, String trimestre, String codigo_materia) {
+
+        PreparedStatement ps, ps2;
+        rendimientoProf rendimiento = null;
+
+        try {
+            ps = conexion.prepareStatement("SELECT codigo, recomendado, "
+                    + "observaciones, nombre, usbid_profesor, ano, trimestre "
+                    + "FROM evaluado, materia "
+                    + "WHERE codigo_coordinacion = ? "
+                    + "AND ano = ? "
+                    + "AND trimestre = ? "
+                    + "AND codigo_materia = codigo "
+                    + "AND codigo_materia = ?;");
+            ps.setString(1, id_coordinacion);
+            ps.setInt(2, ano);
+            ps.setString(3, trimestre);
+            ps.setString(4, codigo_materia);
+            
+            System.out.println(ps.toString());
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                rendimiento = new rendimientoProf();
+                rendimiento.setCodigo_materia(rs.getString("codigo"));
+                rendimiento.setRecomendado(rs.getString("recomendado"));
+                rendimiento.setObservaciones_c(rs.getString("observaciones"));
+                rendimiento.setNombre_materia(rs.getString("nombre"));
+                rendimiento.setUsbid_profesor(rs.getString("usbid_profesor"));
+                rendimiento.setAno(rs.getInt("ano"));
+                rendimiento.setTrimestre(rs.getString("trimestre"));
+            }
+
+            return rendimiento;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
     public boolean registrarMateria(Materia m, String id_departamento) {
 
@@ -2147,13 +2190,14 @@ public class DBMS {
         PreparedStatement ps;
         try {
             ps = conexion.prepareStatement("SELECT DISTINCT p.usbid, p.nombre, "
-                    + "p.apellido, m.codigo_materia "
+                    + "p.apellido "
                     + "FROM maneja as m, dicta as d, profesor as p "
                     + "WHERE m.codigo_materia = d.codigo_materia "
                     + "AND m.codigo_coordinacion = ? "
                     + "ORDER BY usbid;");
 
             ps.setString(1, id_coordinacion);
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -2227,17 +2271,16 @@ public class DBMS {
                 informacion = new InformacionProfesorCoord();
                 informacion.setCodigoCoordinacion(id_coordinacion);
                 informacion.setUsbidProfesor(usbid_profesor);
-                informacion.setConsejoAsesor(rs.getString("consejo_asesor"));
+                if (rs.getString("consejo_asesor") == null) {
+                    informacion.setConsejoAsesor("no");
+                } else {
+                    informacion.setConsejoAsesor(rs.getString("consejo_asesor"));
+                }
                 informacion.setTesisTutoria(rs.getInt("tesis_tutoria"));
                 informacion.setTesisJurado(rs.getInt("tesis_jurado"));
                 informacion.setPasantiaCorta(rs.getInt("pasantia_corta"));
                 informacion.setPasantiaLargaTutor(rs.getInt("pasantia_larga_tutor"));
                 informacion.setPasantiaLargaJurado(rs.getInt("pasantia_larga_jurado"));
-            }
-
-            if (informacion == null) {
-                crearInformacionProfesorCoordinacion(id_coordinacion, usbid_profesor,
-                        new InformacionProfesorCoord());
             }
 
             return informacion;
@@ -2253,6 +2296,8 @@ public class DBMS {
 
         PreparedStatement ps;
         try {
+            System.out.println("consejo asesor: " + informacion.getConsejoAsesor());
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             ps = conexion.prepareStatement("INSERT INTO informacion_profesor_coordinacion "
                     + "VALUES (?,?,?,?,?,?,?,?)");
             ps.setString(1, id_coordinacion);
