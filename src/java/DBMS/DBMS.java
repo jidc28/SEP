@@ -1094,12 +1094,34 @@ public class DBMS {
         return null;
     }
 
-    public int contarEvaluacionesPendientes(String id_coordinacion) {
+    public int contarEvaluacionesPendientesCoordinacion(String id_coordinacion) {
 
         PreparedStatement ps = null;
         try {
-            ps = conexion.prepareStatement("SELECT Count(usbid_profesor) FROM evaluar WHERE codigo_coordinacion = ?;");
+            ps = conexion.prepareStatement("SELECT Count(usbid_profesor) "
+                    + "FROM evaluar WHERE "
+                    + "codigo_coordinacion = ?;");
             ps.setString(1, id_coordinacion);
+
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            return Integer.parseInt(rs.getString("count"));
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int contarEvaluacionesPendientesDepartamento(String id_departamento) {
+
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT Count(usbid_profesor) "
+                    + "FROM evaluar "
+                    + "WHERE codigo_departamento = ? "
+                    + "AND evaluado_coordinacion = 'si';");
+            ps.setString(1, id_departamento);
 
             ResultSet rs = ps.executeQuery();
             rs.next();
@@ -1200,9 +1222,8 @@ public class DBMS {
         }
         return null;
     }
-    
-    public rendimientoProf listarEvaluacionesEnviadasMateria
-            (String id_coordinacion,int ano, String trimestre, String codigo_materia) {
+
+    public rendimientoProf listarEvaluacionesEnviadasMateria(String id_coordinacion, int ano, String trimestre, String codigo_materia) {
 
         PreparedStatement ps, ps2;
         rendimientoProf rendimiento = null;
@@ -1220,7 +1241,7 @@ public class DBMS {
             ps.setInt(2, ano);
             ps.setString(3, trimestre);
             ps.setString(4, codigo_materia);
-            
+
             System.out.println(ps.toString());
 
             ResultSet rs = ps.executeQuery();
@@ -2350,5 +2371,54 @@ public class DBMS {
             ex.printStackTrace();
         }
         return false;
+    }
+
+    public ArrayList<dicta> listarEvaluadosPorCoordinacion(String id_departamento) {
+
+        PreparedStatement ps, ps2;
+        ArrayList<dicta> dicta_materia = new ArrayList(0);
+        String codigoMateria;
+        try {
+            ps = conexion.prepareStatement("SELECT DISTINCT codigo_materia, count(codigo_materia) "
+                    + "FROM evaluar "
+                    + "WHERE codigo_departamento = ? "
+                    + "AND evaluado_coordinacion = 'si' "
+                    + "GROUP BY codigo_materia;");
+            ps.setString(1, id_departamento);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                dicta d = new dicta();
+                d.setNumeroMateria(rs.getString("count"));
+                codigoMateria = rs.getString("codigo_materia");
+                d.setCodigoMateria(codigoMateria);
+
+                ps2 = conexion.prepareStatement("SELECT codigo_materia, usbid, "
+                        + "nombre, apellido "
+                        + "FROM evaluar, profesor "
+                        + "WHERE codigo_departamento = ? "
+                        + "AND usbid = usbid_profesor "
+                        + "AND codigo_materia = ?;");
+                ps2.setString(1, id_departamento);
+                ps2.setString(2, codigoMateria);
+
+                ResultSet rs2 = ps2.executeQuery();
+
+                while (rs2.next()) {
+                    Profesor p = new Profesor();
+                    p.setUsbid(rs2.getString("usbid"));
+                    p.setNombre(rs2.getString("nombre"));
+                    p.setApellido(rs2.getString("apellido"));
+                    d.addProfesor(p);
+                }
+                d.setPrimerProfesor();
+                dicta_materia.add(d);
+            }
+            return dicta_materia;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 }

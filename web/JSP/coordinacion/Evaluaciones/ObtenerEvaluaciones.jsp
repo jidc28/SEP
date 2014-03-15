@@ -42,12 +42,14 @@
                 por la coordinación
             </a>
         </li>
-        <li>
-            <a href="#evaluacion_coordinacion" data-toggle="tab" style="font-size: 12px; margin: 0px;">
-                Información sobre la <br>
-                evaluación
-            </a>
-        </li>
+        <logic:notPresent name="pendiente">
+            <li>
+                <a href="#evaluacion_coordinacion" data-toggle="tab" style="font-size: 12px; margin: 0px;">
+                    Información sobre la <br>
+                    evaluación
+                </a>
+            </li>
+        </logic:notPresent>
     </ul>
 </div>
 

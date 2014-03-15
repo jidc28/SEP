@@ -39,15 +39,22 @@ public class ListarEvaluacionesPendientes extends org.apache.struts.action.Actio
             throws Exception {
 
         HttpSession session = request.getSession(true);
-        String id_coordinacion = (String) session.getAttribute("usbid");
-        
-        ArrayList<dicta> evaluaciones_pendientes;
-        evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(id_coordinacion);
-        
-        if (evaluaciones_pendientes.isEmpty()){
-            request.setAttribute("vacio",SUCCESS);
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String id = usuario.getUsbid();
+        String tipousuario = usuario.getTipousuario();
+
+        ArrayList<dicta> evaluaciones_pendientes = null;
+
+        if (tipousuario.equals("coordinacion")) {
+            evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(id);
+        } else if (tipousuario.equals("departamento")) {
+            evaluaciones_pendientes = DBMS.getInstance().listarEvaluadosPorCoordinacion(id);
         }
-        
+
+        if (evaluaciones_pendientes.isEmpty()) {
+            request.setAttribute("vacio", SUCCESS);
+        }
+
         //retorno a pagina de exito
         request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
         return mapping.findForward(SUCCESS);

@@ -55,7 +55,7 @@
         <put name="vista" value="/JSP/coordinacion/Evaluaciones/obtener_evaluaciones_pagina.jsp"/>
     </definition>
     
-    <definition name="consulta_materia_pagina" extends="generico">
+    <definition name="consulta_materia_coordinacion_pagina" extends="generico">
         <put name="vista" value="/JSP/coordinacion/Materias/consulta_materia_pagina.jsp"/>
     </definition>
     

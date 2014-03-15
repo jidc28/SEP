@@ -18,11 +18,11 @@
     <tbody>
         <logic:iterate id="profesor" name="profesores">
             <tr>
-                <td style="padding: 5px;">
+                <td style="padding: 0px; color: #999; font-size: 14px;">
                     <bean:write name="profesor" property="usbid"/>
                 </td>
                 <td style="padding: 5px;">
-                    <html:form action="/listarAnosEvaluados">
+                    <html:form action="/listarAnosEvaluados" style="margin: 0px;">
                         <html:hidden name="profesor" property="usbid"/>
                         <html:submit styleClass="link2">
                             <bean:write name="profesor" property="apellido"/>, <bean:write name="profesor" property="nombre"/>

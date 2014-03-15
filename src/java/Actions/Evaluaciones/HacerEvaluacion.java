@@ -32,12 +32,6 @@ public class HacerEvaluacion extends Action {
 
         HttpSession session = request.getSession(true);
 
-        if (session.getAttribute("usuario") == null) {
-            System.out.println("-----------------------------------------------------> SESION EXPIRADA");
-        } else {
-            System.out.println("-----------------------------------------------------> SESION NO EXPIRADA");
-        }
-
         if (session.getAttribute("usuario") != null) {
             String id_coordinacion = (String) session.getAttribute("usbid");
 
@@ -71,6 +65,14 @@ public class HacerEvaluacion extends Action {
              * una instancia vacia de la informacion */
             InformacionProfesorCoord informacion =
                     DBMS.getInstance().listarInformacionProfesorCoordinacion(id_coordinacion, profesor.getUsbid());
+
+            if (informacion == null) {
+                System.out.println("------------------------------------------------------------------------------->informacion: " + informacion);
+                boolean creada =
+                        DBMS.getInstance().crearInformacionProfesorCoordinacion(id_coordinacion, d.getUsbidProfesor(), new InformacionProfesorCoord());
+                informacion =
+                        DBMS.getInstance().listarInformacionProfesorCoordinacion(id_coordinacion, profesor.getUsbid());
+            }
 
             if (d.getOpcion().equals("pendiente")) {
                 session.setAttribute("pendiente", SUCCESS);

@@ -25,8 +25,10 @@ public class EvaluarCoordinacion extends Action {
         String id_coordinacion = (String) session.getAttribute("usbid");
 
         rendimientoProf rendimiento = (rendimientoProf) form;
-        rendimiento.setObservaciones_c(rendimiento.getObservaciones_c().substring(0,500));
-        
+        if (rendimiento.getObservaciones_c().length() > 500) {
+            rendimiento.setObservaciones_c(rendimiento.getObservaciones_c().substring(0, 500));
+        }
+
         if (rendimiento.getRecomendado() == null) {
 
             request.setAttribute("recomendar", FAILURE);

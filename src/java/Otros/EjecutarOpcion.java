@@ -48,14 +48,19 @@ public class EjecutarOpcion extends org.apache.struts.action.Action {
         String tipousuario = u.getTipousuario();
 
         if (tipousuario.equals("departamento")) {
-            int solicitudes_pendientes = 
+            int solicitudes_pendientes =
                     DBMS.getInstance().contarSolicitudesPendientesDepartamento(u.getUsbid());
             if (solicitudes_pendientes != 0) {
                 request.setAttribute("solicitud_apertura_materia", solicitudes_pendientes);
             }
+            int evaluaciones_pendientes =
+                    DBMS.getInstance().contarEvaluacionesPendientesDepartamento(u.getUsbid());
+            if (evaluaciones_pendientes != 0) {
+                request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
+            }
         } else if (tipousuario.equals("coordinacion")) {
-            int evaluaciones_pendientes = 
-                    DBMS.getInstance().contarEvaluacionesPendientes(u.getUsbid());
+            int evaluaciones_pendientes =
+                    DBMS.getInstance().contarEvaluacionesPendientesCoordinacion(u.getUsbid());
             if (evaluaciones_pendientes != 0) {
                 request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
             }

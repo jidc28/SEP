@@ -20,7 +20,23 @@
             Se solicitó la apertura de 
             <strong> <bean:write name="solicitud_apertura_materia"/> </strong>
             materia(s). Para más información seleccionar 
-            <em>Gestionar Materias, Listar solicitudes pendientes</em>.
+            <em>Gestión de asignaturas, Listar solicitudes creación pendientes</em>.
+        </p>
+    </div>
+</logic:present>
+
+<logic:present name="evaluaciones_pendientes">
+    <div class="alert alert-info alert-dismissable" 
+         id="alert-coord">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+            &times;
+        </button>
+        <p>
+            <strong>Atención: </strong> <br> 
+            Se ha(n) evaluado
+            <strong> <bean:write name="solicitud_apertura_materia"/> </strong>
+            profesor(es). Para más información seleccionar 
+            <em>Gestión de evaluaciones, Listar evaluaciones pendientes</em>.
         </p>
     </div>
 </logic:present>
@@ -106,6 +122,15 @@
                 <html:link action="/irEvaluarProfesores">
                     <h5 align ="center">Evaluar profesores</h5>
                 </html:link>
+                <logic:present name="evaluaciones_pendientes">
+                    <html:link action="/irEvaluarProfesores">
+                        <h5 align ="center">Listar Evaluaciones Pendientes
+                            <span class="badge">
+                                <bean:write name="evaluaciones_pendientes"/>
+                            </span>
+                        </h5>
+                    </html:link>
+                </logic:present>
             </div>
         </div>
     </div>

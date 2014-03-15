@@ -22,7 +22,7 @@
         <logic:iterate id="evaluacion" name="evaluaciones">
             <tr>
                 <td style="padding: 5px;">
-                    <html:form action="/listarEvaluacionesEnviadas">
+                    <html:form action="/listarEvaluacionesEnviadas" style="margin: 0px;">
                         <html:hidden name="evaluacion" property="usbid_profesor" 
                                      value="${profesor.getUsbid()}"/>
                         <logic:equal name="evaluacion" property="trimestre"

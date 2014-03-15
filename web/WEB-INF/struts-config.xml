@@ -190,8 +190,13 @@
             <forward name="failure" path="consulta_materia_pagina"/>
         </action>
         
-        <action input="/VistaCoordinacion.jsp" name="Materia" path="/listarMaterias" scope="request" type="Actions.Materia.ConsultaMateriasCoordinacion" validate="false">
-            <forward name="success" path="consulta_materia_pagina"/>
+        <action input="/VistaCoordinacion.jsp" 
+                name="Materia" 
+                path="/listarMaterias" 
+                scope="request" 
+                type="Actions.Materia.ConsultaMateriasCoordinacion" 
+                validate="false">
+            <forward name="success" path="consulta_materia_coordinacion_pagina"/>
         </action>
         
         <action input="VistaCoordinacion.jsp" path="/irSolicitarAperturaMateria" name="Materia" type="Actions.Materia.IrSolicitarAperturaMateria" scope="request" validate="false">

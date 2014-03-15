@@ -99,6 +99,11 @@ public class LoginAction extends org.apache.struts.action.Action {
                     if (solicitudes_pendientes != 0) {
                         request.setAttribute("solicitud_apertura_materia", solicitudes_pendientes);
                     }
+                    int evaluaciones_pendientes =
+                            DBMS.getInstance().contarEvaluacionesPendientesDepartamento(tmp.getUsbid());
+                    if (evaluaciones_pendientes != 0) {
+                        request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
+                    }
                     return mapping.findForward(DEPARTAMENTO);
                 } else if (tmp.getTipousuario().equals("coordinacion")) {
                     Coordinacion coordinacion = new Coordinacion();
@@ -106,7 +111,7 @@ public class LoginAction extends org.apache.struts.action.Action {
                     session.setAttribute("autenticado", DBMS.getInstance().obtenerNombreCoordinacion(coordinacion));
                     session.setAttribute("usuario", tmp);
                     session.setAttribute("usbid", tmp.getUsbid());
-                    int evaluaciones_pendientes = DBMS.getInstance().contarEvaluacionesPendientes(tmp.getUsbid());
+                    int evaluaciones_pendientes = DBMS.getInstance().contarEvaluacionesPendientesCoordinacion(tmp.getUsbid());
                     if (evaluaciones_pendientes != 0) {
                         request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
                     }
