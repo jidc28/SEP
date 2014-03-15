@@ -31,64 +31,73 @@ public class HacerEvaluacion extends Action {
             throws Exception {
 
         HttpSession session = request.getSession(true);
-        String id_coordinacion = (String) session.getAttribute("usbid");
 
-        dicta d = (dicta) form;
-        /* Se obtiene el rendimiento del profesor determinado asociado con
-         * la materia que maneja la coordinación */
-        rendimientoProf evaluacion = DBMS.getInstance().obtenerEvaluacion(d);
-
-        /* Se obtiene toda la informacion del profesor */
-        Profesor profesor =
-                DBMS.getInstance().obtenerInfoProfesor(d.getUsbidProfesor());
-
-        int total = evaluacion.getTotal_estudiantes();
-        int aplazados = evaluacion.getNota1() + evaluacion.getNota2();
-        int aprobados = evaluacion.getNota3() + evaluacion.getNota4()
-                + evaluacion.getNota5();
-
-        /* Se obtienen los porcentajes de cada rubro y se transforman a 
-         * dos decimales */
-        String porcentaje1 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota1()));
-        String porcentaje2 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota2()));
-        String porcentaje3 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota3()));
-        String porcentaje4 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota4()));
-        String porcentaje5 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota5()));
-        String porcentajeR = String.format("%.2f", calcularPorcentaje(total, evaluacion.getRetirados()));
-
-        String porcentajeApr = String.format("%.2f", calcularPorcentaje(total, aprobados));
-        String porcentajeApl = String.format("%.2f", calcularPorcentaje(total, aplazados));
-
-        /* Si existe una informacion previa se envia a la vista, sino, se crea
-         * una instancia vacia de la informacion */
-        InformacionProfesorCoord informacion =
-                DBMS.getInstance().listarInformacionProfesorCoordinacion(id_coordinacion, profesor.getUsbid());
-        
-        if (d.getOpcion().equals("pendiente")){
-            session.setAttribute("pendiente",SUCCESS);
+        if (session.getAttribute("usuario") == null) {
+            System.out.println("-----------------------------------------------------> SESION EXPIRADA");
         } else {
-            String trimestre = (String) session.getAttribute("trimestre");
-            int ano = (Integer) session.getAttribute("ano");
-            /* Ojo eso debe estar */
+            System.out.println("-----------------------------------------------------> SESION NO EXPIRADA");
+        }
+
+        if (session.getAttribute("usuario") != null) {
+            String id_coordinacion = (String) session.getAttribute("usbid");
+
+            dicta d = (dicta) form;
+            /* Se obtiene el rendimiento del profesor determinado asociado con
+             * la materia que maneja la coordinación */
+            rendimientoProf evaluacion = DBMS.getInstance().obtenerEvaluacion(d);
+
+            /* Se obtiene toda la informacion del profesor */
+            Profesor profesor =
+                    DBMS.getInstance().obtenerInfoProfesor(d.getUsbidProfesor());
+
+            int total = evaluacion.getTotal_estudiantes();
+            int aplazados = evaluacion.getNota1() + evaluacion.getNota2();
+            int aprobados = evaluacion.getNota3() + evaluacion.getNota4()
+                    + evaluacion.getNota5();
+
+            /* Se obtienen los porcentajes de cada rubro y se transforman a 
+             * dos decimales */
+            String porcentaje1 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota1()));
+            String porcentaje2 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota2()));
+            String porcentaje3 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota3()));
+            String porcentaje4 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota4()));
+            String porcentaje5 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota5()));
+            String porcentajeR = String.format("%.2f", calcularPorcentaje(total, evaluacion.getRetirados()));
+
+            String porcentajeApr = String.format("%.2f", calcularPorcentaje(total, aprobados));
+            String porcentajeApl = String.format("%.2f", calcularPorcentaje(total, aplazados));
+
+            /* Si existe una informacion previa se envia a la vista, sino, se crea
+             * una instancia vacia de la informacion */
+            InformacionProfesorCoord informacion =
+                    DBMS.getInstance().listarInformacionProfesorCoordinacion(id_coordinacion, profesor.getUsbid());
+
+            if (d.getOpcion().equals("pendiente")) {
+                session.setAttribute("pendiente", SUCCESS);
+            } else {
+                String trimestre = (String) session.getAttribute("trimestre");
+                int ano = (Integer) session.getAttribute("ano");
+                /* Ojo eso debe estar */
 //            session.removeAttribute("trimestre");
 //            session.removeAttribute("ano");
-            rendimientoProf evaluado = 
-                    DBMS.getInstance().listarEvaluacionesEnviadasMateria(id_coordinacion, ano, trimestre, d.getCodigoMateria());
-            request.setAttribute("evaluado_coordinacion", evaluado);
+                rendimientoProf evaluado =
+                        DBMS.getInstance().listarEvaluacionesEnviadasMateria(id_coordinacion, ano, trimestre, d.getCodigoMateria());
+                request.setAttribute("evaluado_coordinacion", evaluado);
+            }
+
+            /* Se envian a la vista los atributos correspondiente */
+            session.setAttribute("informacion", informacion);
+            session.setAttribute("profesor", profesor);
+            session.setAttribute("evaluacion", evaluacion);
+            session.setAttribute("porcentaje1", porcentaje1);
+            session.setAttribute("porcentaje2", porcentaje2);
+            session.setAttribute("porcentaje3", porcentaje3);
+            session.setAttribute("porcentaje4", porcentaje4);
+            session.setAttribute("porcentaje5", porcentaje5);
+            session.setAttribute("retirados", porcentajeR);
+            session.setAttribute("aplazados", porcentajeApl);
+            session.setAttribute("aprobados", porcentajeApr);
         }
-        
-        /* Se envian a la vista los atributos correspondiente */
-        session.setAttribute("informacion", informacion);
-        session.setAttribute("profesor", profesor);
-        session.setAttribute("evaluacion", evaluacion);
-        session.setAttribute("porcentaje1", porcentaje1);
-        session.setAttribute("porcentaje2", porcentaje2);
-        session.setAttribute("porcentaje3", porcentaje3);
-        session.setAttribute("porcentaje4", porcentaje4);
-        session.setAttribute("porcentaje5", porcentaje5);
-        session.setAttribute("retirados", porcentajeR);
-        session.setAttribute("aplazados", porcentajeApl);
-        session.setAttribute("aprobados", porcentajeApr);
 
         return mapping.findForward(SUCCESS);
     }

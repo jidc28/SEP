@@ -35,10 +35,9 @@
                 </div>
             </center>
 
-                <div id="footer" style="padding: 0px;">
-                    <tiles:insert attribute="footer"/> 
+            <div id="footer" style="padding: 0px;">
+                <tiles:insert attribute="footer"/> 
             </div>
-
         </div>
     </body>
 </html>

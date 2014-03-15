@@ -14,9 +14,11 @@
 
 <p style="text-align: right; margin-top: 5px;">
     Usted se ha identificado como
-    <a href="#"> <bean:write name="autenticado" property="nombre"/> 
-        <logic:present name="autenticado" property="apellido">
-            <bean:write name="autenticado" property="apellido"/>
-        </logic:present>
-    </a>
+    <logic:present name="autenticado">
+        <a href="#"> <bean:write name="autenticado" property="nombre"/> 
+            <logic:present name="autenticado" property="apellido">
+                <bean:write name="autenticado" property="apellido"/>
+            </logic:present>
+        </a>
+    </logic:present>
 </p>

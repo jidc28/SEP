@@ -11,15 +11,24 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    Usuario usuario = (Usuario) session.getAttribute("usuario");
-    String tipousuario = usuario.getTipousuario();
-    if (tipousuario.equals("coordinacion")){
+    if (session.getAttribute("usuario") == null) {
 %>
-    <tiles:insert definition="obtenerEvaluacion"/>
+<tiles:insert definition="baseCoordinacion"/>
+<script>
+    login()
+</script>
 <%
-   } else {
+    } else {
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
+        if (tipousuario.equals("coordinacion")) {
 %>
-    <tiles:insert definition="noAutorizado"/>
+<tiles:insert definition="obtenerEvaluacion"/>
 <%
-   }
+        } else {
+%>
+<tiles:insert definition="noAutorizado"/>
+<%        
+        }
+    }
 %>

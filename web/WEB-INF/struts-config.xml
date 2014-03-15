@@ -35,6 +35,13 @@
 
     <action-mappings>
         
+        <action path="/loginCAS"
+            type="org.apache.struts.actions.ForwardAction"
+            scope="request"
+            validate="false"
+            parameter="/Login.jsp">
+        </action>
+
         <action path="/vistaAdmin"
             type="org.apache.struts.actions.ForwardAction"
             scope="request"

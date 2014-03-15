@@ -11,4 +11,13 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<script>
+    function login(){
+        alert("Su sesión ha caducado, vaya a la página de inicio y vuelva a iniciar sesión");
+        document.forms['sesion_invalida'].submit();
+    }
+</script>
+
+<form action="loginCAS.do" name="sesion_invalida"></form>
+
 <tiles:insert attribute="vista"/>
