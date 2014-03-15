@@ -31,11 +31,14 @@ public class HacerEvaluacion extends Action {
             throws Exception {
 
         HttpSession session = request.getSession(true);
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
+        String id = usuario.getUsbid();
 
         if (session.getAttribute("usuario") != null) {
-            String id_coordinacion = (String) session.getAttribute("usbid");
 
             dicta d = (dicta) form;
+
             /* Se obtiene el rendimiento del profesor determinado asociado con
              * la materia que maneja la coordinación */
             rendimientoProf evaluacion = DBMS.getInstance().obtenerEvaluacion(d);
@@ -44,6 +47,7 @@ public class HacerEvaluacion extends Action {
             Profesor profesor =
                     DBMS.getInstance().obtenerInfoProfesor(d.getUsbidProfesor());
 
+            /* Se calcula la cantidad de aplazados y la cantidad de aprobados */
             int total = evaluacion.getTotal_estudiantes();
             int aplazados = evaluacion.getNota1() + evaluacion.getNota2();
             int aprobados = evaluacion.getNota3() + evaluacion.getNota4()
@@ -61,44 +65,73 @@ public class HacerEvaluacion extends Action {
             String porcentajeApr = String.format("%.2f", calcularPorcentaje(total, aprobados));
             String porcentajeApl = String.format("%.2f", calcularPorcentaje(total, aplazados));
 
-            /* Si existe una informacion previa se envia a la vista, sino, se crea
-             * una instancia vacia de la informacion */
-            InformacionProfesorCoord informacion =
-                    DBMS.getInstance().listarInformacionProfesorCoordinacion(id_coordinacion, profesor.getUsbid());
+            /* Si el usuario que accede a esta funcionalidad es el/la 
+             * coordinador/coordinadora */
+            if (tipousuario.equals("coordinacion")) {
 
-            if (informacion == null) {
-                System.out.println("------------------------------------------------------------------------------->informacion: " + informacion);
-                boolean creada =
-                        DBMS.getInstance().crearInformacionProfesorCoordinacion(id_coordinacion, d.getUsbidProfesor(), new InformacionProfesorCoord());
-                informacion =
-                        DBMS.getInstance().listarInformacionProfesorCoordinacion(id_coordinacion, profesor.getUsbid());
-            }
+                /* Si existe una informacion previa se envia a la vista, sino, se crea
+                 * una instancia vacia de la informacion */
+                InformacionProfesorCoord informacion =
+                        DBMS.getInstance().listarInformacionProfesorCoordinacion(id, profesor.getUsbid());
 
-            if (d.getOpcion().equals("pendiente")) {
-                session.setAttribute("pendiente", SUCCESS);
-            } else {
-                String trimestre = (String) session.getAttribute("trimestre");
-                int ano = (Integer) session.getAttribute("ano");
-                /* Ojo eso debe estar */
+                if (informacion == null) {
+                    boolean creada =
+                            DBMS.getInstance().crearInformacionProfesorCoordinacion(id, profesor.getUsbid(), new InformacionProfesorCoord());
+                    informacion =
+                            DBMS.getInstance().listarInformacionProfesorCoordinacion(id, profesor.getUsbid());
+                }
+                
+                session.setAttribute("informacion", informacion);
+
+                /* Si no se ha realizado todavia la evaluacion del profesor por
+                 * parte de la coordinacion */
+                if (d.getOpcion().equals("pendiente")) {
+
+                    request.setAttribute("evaluar_coordinacion", SUCCESS);
+                    request.setAttribute("evaluar", SUCCESS);
+
+                    /* Si ya se realizo la evaluacion del profesor */
+                } else if (d.getOpcion().equals("enviada")) {
+
+                    String trimestre = (String) session.getAttribute("trimestre");
+                    int ano = (Integer) session.getAttribute("ano");
+                    /* Ojo eso debe estar */
 //            session.removeAttribute("trimestre");
 //            session.removeAttribute("ano");
-                rendimientoProf evaluado =
-                        DBMS.getInstance().listarEvaluacionesEnviadasMateria(id_coordinacion, ano, trimestre, d.getCodigoMateria());
-                request.setAttribute("evaluado_coordinacion", evaluado);
-            }
+                    rendimientoProf evaluado =
+                            DBMS.getInstance().listarEvaluacionesEnviadasMateria(id, ano, trimestre, d.getCodigoMateria());
+                    request.setAttribute("evaluado_coordinacion", evaluado);
+                }
 
-            /* Se envian a la vista los atributos correspondiente */
-            session.setAttribute("informacion", informacion);
-            session.setAttribute("profesor", profesor);
-            session.setAttribute("evaluacion", evaluacion);
-            session.setAttribute("porcentaje1", porcentaje1);
-            session.setAttribute("porcentaje2", porcentaje2);
-            session.setAttribute("porcentaje3", porcentaje3);
-            session.setAttribute("porcentaje4", porcentaje4);
-            session.setAttribute("porcentaje5", porcentaje5);
-            session.setAttribute("retirados", porcentajeR);
-            session.setAttribute("aplazados", porcentajeApl);
-            session.setAttribute("aprobados", porcentajeApr);
+                /* Si el usuario que accede a esta funcionalidad es
+                 * jefe de departamento */
+            } else if (tipousuario.equals("departamento")) {
+
+                /* Si no se ha realizado todavia la evaluacion del profesor por
+                 * parte del departamento */
+                if (d.getOpcion().equals("pendiente")) {
+
+                    ArrayList<rendimientoProf> evaluacion_coordinaciones =
+                            DBMS.getInstance().obtenerEvaluacionCoordinaciones(id, profesor.getUsbid(), d.getCodigoMateria());
+
+//                    request.setAttribute("evaluar_departamento", SUCCESS);
+                    request.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
+                    request.setAttribute("evaluar", SUCCESS);
+
+                }
+
+                /* Se envian a la vista los atributos correspondiente */
+                session.setAttribute("profesor", profesor);
+                session.setAttribute("evaluacion", evaluacion);
+                session.setAttribute("porcentaje1", porcentaje1);
+                session.setAttribute("porcentaje2", porcentaje2);
+                session.setAttribute("porcentaje3", porcentaje3);
+                session.setAttribute("porcentaje4", porcentaje4);
+                session.setAttribute("porcentaje5", porcentaje5);
+                session.setAttribute("retirados", porcentajeR);
+                session.setAttribute("aplazados", porcentajeApl);
+                session.setAttribute("aprobados", porcentajeApr);
+            }
         }
 
         return mapping.findForward(SUCCESS);

@@ -36,20 +36,38 @@
                 por el profesor
             </a>
         </li>
-        <li>
-            <a href="#coordinacion" data-toggle="tab" style="font-size: 12px; margin: 0px;">
-                Información proporcionada<br>
-                por la coordinación
-            </a>
-        </li>
-        <logic:notPresent name="pendiente">
+        <logic:present name="evaluar_coordinacion">
+            <li>
+                <a href="#coordinacion" data-toggle="tab" style="font-size: 12px; margin: 0px;">
+                    Información proporcionada<br>
+                    por la coordinación
+                </a>
+            </li>
+        </logic:present>
+        <logic:present name="evaluado_coordinacion">
+            <li>
+                <a href="#coordinacion" data-toggle="tab" style="font-size: 12px; margin: 0px;">
+                    Información proporcionada<br>
+                    por la coordinación
+                </a>
+            </li>
+        </logic:present>
+        <logic:present name="evaluado_coordinacion">
             <li>
                 <a href="#evaluacion_coordinacion" data-toggle="tab" style="font-size: 12px; margin: 0px;">
                     Información sobre la <br>
                     evaluación
                 </a>
             </li>
-        </logic:notPresent>
+        </logic:present>
+        <logic:present name="evaluacion_departamento">
+            <li>
+                <a href="#evaluacion_departamento" data-toggle="tab" style="font-size: 12px; margin: 0px;">
+                    Evaluaciones de las <br>
+                    coordinaciones
+                </a>
+            </li>
+        </logic:present>
     </ul>
 </div>
 
@@ -68,7 +86,7 @@
         </center>                
     </div>
 
-    <logic:present name="pendiente">    
+    <logic:present name="evaluar_coordinacion">    
         <div class="tab-pane" id="coordinacion" style="margin-bottom: 40px;">
             <center>
                 <form id="informacion_coordinacion" name="informacion_coordinacion" 
@@ -172,7 +190,7 @@
         </div>
     </logic:present>
 
-    <logic:notPresent name="pendiente">
+    <logic:present name="evaluado_coordinacion">
         <div class="tab-pane" id="coordinacion" style="margin-bottom: 40px;">
             <center>
                 <form id="informacion_coordinacion" name="informacion_coordinacion" 
@@ -260,11 +278,11 @@
                 </form>
             </center>                
         </div>
-    </logic:notPresent>
+    </logic:present>
 
-    <logic:notPresent name="pendiente">
+    <logic:present name="evaluado_coordinacion">
         <div class="tab-pane" id="evaluacion_coordinacion">
-            <table style="width: 60%;">
+            <table style="width: 80%; word-break: break-all;">
                 <tbody>
                     <tr>
                         <td style="width: 70%; font-size: 14px; height: 40px;">
@@ -288,18 +306,59 @@
                     <tr>
                         <td>
                             <strong>
-                                <html:textarea name="evaluado_coordinacion" 
-                                               property="observaciones_c"
-                                               styleClass="form-control" 
-                                               rows="8"
-                                               disabled="true"/>
+                                <blockquote>
+                                    <p style="font-size: 12px;">
+                                        <bean:write name="evaluado_coordinacion" property="observaciones_c"/>
+                                    </p>
+                                </blockquote>
                             </strong>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-    </logic:notPresent>
+    </logic:present>
+
+    <logic:present name="evaluacion_departamento">
+        <div class="tab-pane" id="evaluacion_departamento">
+            <table style="word-break: break-all; width: 80%">
+                <tbody>
+                    <logic:iterate name="evaluacion_departamento" id="evaluacion_coordinacion">
+                        <tr>
+                            <td>
+                                <p style="font-size: 14px;">
+                                    La
+                                    <strong>
+                                        <bean:write name="evaluacion_coordinacion" 
+                                                    property="observaciones_d"/>
+                                    </strong>
+                                    <logic:equal name="evaluacion_coordinacion" 
+                                                 property="recomendado"
+                                                 value="si">
+                                        recomendó al profesor
+                                    </logic:equal>
+                                    <logic:equal name="evaluacion_coordinacion" 
+                                                 property="recomendado"
+                                                 value="no">
+                                        no recomendó al profesor
+                                    </logic:equal>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <blockquote>
+                                    <p style="font-size: 12px;">
+                                        <bean:write name="evaluacion_coordinacion" property="observaciones_c"/>
+                                    </p>
+                                </blockquote>
+                            </td>
+                        </tr>
+                    </logic:iterate>
+                </tbody>
+            </table>
+        </div>
+    </logic:present>
 
     <div class="tab-pane" id="departamento">
         <h3 style="text-align: left; font-size: 18px; margin-left: 30px;">
@@ -411,7 +470,7 @@
     </div>
 </div>
 
-<logic:present name="pendiente">
+<logic:present name="evaluar">
     <div class="recomendar">
         <html:form action="/evaluarCoordinacion">
             <html:hidden name="evaluacion" property="usbid_profesor" value="${profesor.getUsbid()}"/>
@@ -419,7 +478,7 @@
             <table class="table" style="border-top: none; margin: 0px;">
                 <tbody>
                     <tr>
-                        <td style="border: none;">
+                        <td style="border: none; font-size: 14px;">
                             <html:checkbox style="margin-right: 5px;" 
                                            name="evaluacion" property="recomendado"
                                            value="si"/>
@@ -427,7 +486,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="border: none;">
+                        <td style="border: none;  font-size: 14px;">
                             <html:checkbox style="margin-right: 5px;" 
                                            name="evaluacion" property="recomendado"
                                            value="no"/>

@@ -484,7 +484,12 @@
             parameter="graficarRendimiento">
         </action>
         
-        <action input="/VistaCoordinacion.jsp" name="Coordinacion" path="/listarEvaluacionesPendientes" scope="request" type="Actions.Evaluaciones.ListarEvaluacionesPendientes" validate="false">
+        <action input="/VistaCoordinacion.jsp" 
+                name="Coordinacion" 
+                path="/listarEvaluacionesPendientes" 
+                scope="request" 
+                type="Actions.Evaluaciones.ListarEvaluacionesPendientes" 
+                validate="false">
             <forward name="success" path="listar_evaluaciones_pendientes_pagina"/>
         </action>
         

@@ -44,18 +44,18 @@ public class EvaluarCoordinacion extends Action {
 
             request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
 
-            session.removeAttribute("pendiente");
-            session.removeAttribute("informacion");
-            session.removeAttribute("profesor");
-            session.removeAttribute("evaluacion");
-            session.removeAttribute("porcentaje1");
-            session.removeAttribute("porcentaje2");
-            session.removeAttribute("porcentaje3");
-            session.removeAttribute("porcentaje4");
-            session.removeAttribute("porcentaje5");
-            session.removeAttribute("retirados");
-            session.removeAttribute("aplazados");
-            session.removeAttribute("aprobados");
+//            session.removeAttribute("pendiente");
+//            session.removeAttribute("informacion");
+//            session.removeAttribute("profesor");
+//            session.removeAttribute("evaluacion");
+//            session.removeAttribute("porcentaje1");
+//            session.removeAttribute("porcentaje2");
+//            session.removeAttribute("porcentaje3");
+//            session.removeAttribute("porcentaje4");
+//            session.removeAttribute("porcentaje5");
+//            session.removeAttribute("retirados");
+//            session.removeAttribute("aplazados");
+//            session.removeAttribute("aprobados");
 
             return mapping.findForward(SUCCESS);
         }

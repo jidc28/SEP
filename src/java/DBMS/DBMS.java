@@ -1099,8 +1099,9 @@ public class DBMS {
         PreparedStatement ps = null;
         try {
             ps = conexion.prepareStatement("SELECT Count(usbid_profesor) "
-                    + "FROM evaluar WHERE "
-                    + "codigo_coordinacion = ?;");
+                    + "FROM evaluar "
+                    + "WHERE codigo_coordinacion = ? "
+                    + "AND evaluado_coordinacion = 'no';");
             ps.setString(1, id_coordinacion);
 
             ResultSet rs = ps.executeQuery();
@@ -1850,7 +1851,7 @@ public class DBMS {
 
     public rendimientoProf obtenerEvaluacion(dicta d) {
         PreparedStatement ps;
-        rendimientoProf evaluacion = null;
+        rendimientoProf evaluacion = new rendimientoProf();
         try {
             ps = conexion.prepareStatement("SELECT sum(total_estudiantes), "
                     + "avg(nota_prom) as np, sum(nota1) as n1, sum(nota2) as n2, "
@@ -1859,12 +1860,16 @@ public class DBMS {
                     + "FROM rendimiento "
                     + "WHERE codigo_materia = ? "
                     + "AND usbid_profesor = ?;");
+            
             String codigo_materia = d.getCodigoMateria();
             ps.setString(1, codigo_materia);
             ps.setString(2, d.getUsbidProfesor());
+            
+            System.out.println(ps.toString());
+            
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                evaluacion = new rendimientoProf();
+//                evaluacion = new rendimientoProf();
                 evaluacion.setCodigo_materia(codigo_materia);
                 evaluacion.setTotal_estudiantes(rs.getInt("sum"));
                 evaluacion.setNota_prom(rs.getFloat("np"));
@@ -2317,8 +2322,6 @@ public class DBMS {
 
         PreparedStatement ps;
         try {
-            System.out.println("consejo asesor: " + informacion.getConsejoAsesor());
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             ps = conexion.prepareStatement("INSERT INTO informacion_profesor_coordinacion "
                     + "VALUES (?,?,?,?,?,?,?,?)");
             ps.setString(1, id_coordinacion);
@@ -2398,7 +2401,8 @@ public class DBMS {
                         + "FROM evaluar, profesor "
                         + "WHERE codigo_departamento = ? "
                         + "AND usbid = usbid_profesor "
-                        + "AND codigo_materia = ?;");
+                        + "AND codigo_materia = ? "
+                        + "AND evaluado_coordinacion = 'si';");
                 ps2.setString(1, id_departamento);
                 ps2.setString(2, codigoMateria);
 
@@ -2415,6 +2419,46 @@ public class DBMS {
                 dicta_materia.add(d);
             }
             return dicta_materia;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<rendimientoProf> obtenerEvaluacionCoordinaciones
+            (String id_departamento, String usbid_profesor, String codigo_materia) {
+
+        PreparedStatement ps;
+        ArrayList<rendimientoProf> informacion = new ArrayList<rendimientoProf>(0);
+        try {
+            ps = conexion.prepareStatement("SELECT codigo, nombre, "
+                    + "recomendado_coordinacion, observaciones_coordinacion "
+                    + "FROM evaluar, coordinacion "
+                    + "WHERE codigo_departamento = ? "
+                    + "AND usbid_profesor = ? "
+                    + "AND codigo_materia = ? "
+                    + "AND codigo = codigo_coordinacion;");
+            ps.setString(1, id_departamento);
+            ps.setString(2, usbid_profesor);
+            ps.setString(3, codigo_materia);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                rendimientoProf rendimiento = new rendimientoProf();
+                String nombre_coordinacion = rs.getString("nombre");
+                String codigo_coordinacion = rs.getString("codigo");
+                /* Uso estos setters porque de verdad necesito la informacion 
+                 * y no quiero embasusrar mas la clase */
+                rendimiento.setObservaciones_d(nombre_coordinacion);
+                rendimiento.setCodigo_materia(codigo_coordinacion);
+                rendimiento.setObservaciones_c(rs.getString("observaciones_coordinacion"));
+                rendimiento.setRecomendado(rs.getString("recomendado_coordinacion"));
+                informacion.add(rendimiento);
+            }
+
+            return informacion;
 
         } catch (SQLException ex) {
             ex.printStackTrace();

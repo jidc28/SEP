@@ -65,6 +65,10 @@ h6 {
     font-family: sans-serif;
 }
 
+#footer p {
+    font-size: 10px;
+}
+
 pre {
     font-family: sans-serif;
 
@@ -324,12 +328,13 @@ table.altrowstable td {
 }
 
 a.menuitem{
-    color :#369;
+    color: #1c6ea0;
     display: block;
     position: relative; 
     width: auto;
     padding: 4px 0;
     padding-right: 10px;
+    font-size: 11px;
     font-family: sans-serif;
     font-weight: bold;
     border-bottom-color: black;
@@ -512,7 +517,8 @@ seleccAll{
 }
 
 .link {
-    color: #2a6496;
+    color: #1c6ea0;
+    font-size: 11px;
     font-weight: bold;
     border: 0;
     background: transparent;
@@ -523,6 +529,7 @@ seleccAll{
 
 .link:hover {
     text-decoration: underline;    
+    border: none;
 }
 
 .recomendar {
@@ -531,6 +538,7 @@ seleccAll{
     -webkit-border-radius: 5px;
     border-radius: 5px; 
     width: 50%;
+    margin-top: 30px;
 }
 
 .link2 {
