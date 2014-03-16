@@ -91,7 +91,7 @@ public class Inicio extends org.apache.struts.action.Action {
                         request.setAttribute("solicitud_apertura_materia", solicitudes_pendientes);
                     }
                     int evaluaciones_pendientes =
-                            DBMS.getInstance().contarEvaluacionesPendientesDepartamento(tmp.getUsbid());
+                            DBMS.getInstance().contarEvaluacionesPendientesDepartamento(tmp.getUsbid(),null);
                     if (evaluaciones_pendientes != 0) {
                         request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
                     }
