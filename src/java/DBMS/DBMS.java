@@ -223,22 +223,43 @@ public class DBMS {
         return coords;
     }
 
-    public ArrayList<Coordinacion> listarCoordinacionesAdscritas(String id_decanato) {
+    public ArrayList<Coordinacion> listarCoordinacionesAdscritas(String id_decanato, String opcion) {
 
         ArrayList<Coordinacion> coords = new ArrayList<Coordinacion>(0);
-        PreparedStatement ps = null;
+        PreparedStatement ps, ps1;
         try {
             ps = conexion.prepareStatement("SELECT * "
                     + "FROM COORDINACION, se_adscribe "
                     + "WHERE codigo_decanato = ? "
                     + "AND codigo_coordinacion = codigo "
                     + "ORDER BY CODIGO");
+
             ps.setString(1, id_decanato);
+
+            System.out.println(ps.toString());
+
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
                 Coordinacion u = new Coordinacion();
-                u.setCodigo(rs.getString("codigo"));
+                String codigo_coordinacion = rs.getString("codigo");
+                u.setCodigo(codigo_coordinacion);
                 u.setNombre(rs.getString("nombre"));
+                if (opcion != null) {
+                    ps1 = conexion.prepareStatement("SELECT count(codigo_coordinacion) "
+                            + "FROM evaluar "
+                            + "WHERE codigo_coordinacion = ? "
+                            + "AND evaluado_coordinacion = 'si';");
+                    
+                    ps1.setString(1, codigo_coordinacion);
+                    
+                    System.out.println(ps1.toString());
+                    
+                    ResultSet rs1 = ps1.executeQuery();
+                    
+                    rs1.next();
+                    u.setEvaluaciones(rs1.getString("count"));
+                }
                 coords.add(u);
             }
         } catch (SQLException ex) {
@@ -1422,12 +1443,35 @@ public class DBMS {
 
     public int contarSolicitudesPendientesDepartamento(String id_departamento) {
 
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         try {
             ps = conexion.prepareStatement("SELECT Count(codigo_materia) "
                     + "FROM solicita_apertura "
                     + "WHERE codigo_departamento = ?;");
             ps.setString(1, id_departamento);
+
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            return Integer.parseInt(rs.getString("count"));
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int contarSolicitudesPendientesDecanato(String id_decanato) {
+
+        PreparedStatement ps;
+        try {
+            ps = conexion.prepareStatement("SELECT count(usbid_profesor) "
+                    + "FROM evaluar as ev, se_adscribe as se "
+                    + "WHERE ev.codigo_coordinacion = se.codigo_coordinacion "
+                    + "AND se.codigo_decanato = ? "
+                    + "AND ev.evaluado_coordinacion = 'si';");
+            ps.setString(1, id_decanato);
+
+            System.out.println(ps.toString());
 
             ResultSet rs = ps.executeQuery();
             rs.next();

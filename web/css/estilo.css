@@ -65,8 +65,26 @@ h6 {
     font-family: sans-serif;
 }
 
+.h5 {
+    font-size: 14px; 
+    font-family: Helvetica Neue ,Helvetica,Arial,sans-serif;
+    font-weight: 500;
+    line-height: 1.1;
+    color: #428bca;
+    background: transparent;
+    border: none;
+    letter-spacing: 1px; 
+    margin-top: 10px; 
+    margin-bottom: 10px
+}
+
+.h5:hover{
+    text-decoration: underline;    
+}
+
 #footer p {
-    font-size: 10px;
+    font-size: 11px;
+    margin: 4px;
 }
 
 pre {

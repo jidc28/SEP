@@ -4,10 +4,7 @@
  */
 package Clases;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
@@ -22,7 +19,7 @@ public class Decanato extends org.apache.struts.action.ActionForm {
     private static final String patronNombre = "[a-zA-Z]*$";
     private String codigo;
     private String nombre;
-
+    
     public String getCodigo() {
         return codigo;
     }

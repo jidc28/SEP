@@ -28,7 +28,15 @@
 <logic:present name="gestion_coordinaciones">
     <script>
         $(function() {
-            $('#collapseFour').addClass('in'); 
+            $('#collapseCoordinaciones').addClass('in'); 
+        });
+    </script>
+</logic:present>
+    
+<logic:present name="gestion_evaluaciones">
+    <script>
+        $(function() {
+            $('#collapseEvaluaciones').addClass('in'); 
         });
     </script>
 </logic:present>

@@ -74,7 +74,7 @@ public class CambiarNombreCoordinacionA extends org.apache.struts.action.Action 
                 } else {
                     codigoDecan = (String) session.getAttribute("usbid");
                 }
-                ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinacionesAdscritas(codigoDecan);
+                ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinacionesAdscritas(codigoDecan,null);
                 request.setAttribute("coordinaciones", coords);
                 request.setAttribute("modificacion", SUCCESS);
 

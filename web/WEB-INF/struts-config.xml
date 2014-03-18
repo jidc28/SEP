@@ -141,6 +141,15 @@
             <forward name="success" path="consulta_decanato_pagina"/>
             <forward name="failure" path="edita_decanato_pagina"/> 
         </action>
+
+        <action input="/vistaDecanato.jsp" 
+                path="/listarCoordinaciones" 
+                name="Coordinacion"
+                scope="request" 
+                type="Actions.Coordinacion.ConsultaCoordinacionA" 
+                validate="false">
+            <forward name="decanato" path="listar_coordinaciones_pagina"/>
+        </action>
         
         <!--     COORDINACIONES     -->
         <action input="/AgregaCoordinacion.jsp" name="Coordinacion" path="/registrarCoordinacion" scope="request" type="Actions.Coordinacion.RegistrarCoordinacion" validate="false">

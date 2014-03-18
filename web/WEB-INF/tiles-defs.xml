@@ -143,6 +143,10 @@
         <put name="vista" value="/JSP/coordinacion/Evaluaciones/listar_evaluaciones_enviadas_pagina.jsp"/>
     </definition>
     
+    <definition name="listar_coordinaciones_pagina" extends="generico">
+        <put name="vista" value="/JSP/decanato/Evaluaciones/listar_coordinaciones_pagina.jsp"/>
+    </definition>
+    
     <!-- DEFINICION BASE -->
     <definition name="base" path="/Plantilla/plantilla.jsp">
         <put name="css" value="/JSP/general-css.jsp"/>
@@ -255,6 +259,13 @@
     
     <definition name="editarNombreCoordinacionDecanato" extends="baseDecanato">
         <put name="body" value="/JSP/admin/Coordinaciones/EditarCoordinacion.jsp"/>
+    </definition>
+
+    <!-- DECANATO / EVALUACIONES -->
+    
+    <!-- 1. Listar las coordinaciones adscritas -->
+    <definition name="listarCoordinaciones" extends="baseDecanato">
+        <put name="body" value="/JSP/decanato/Evaluaciones/ListarCoordinaciones.jsp"/>
     </definition>
 
     <!-- PROFESOR -->

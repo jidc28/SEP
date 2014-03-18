@@ -54,7 +54,7 @@ public class EditarNombreCoordinacion extends org.apache.struts.action.Action {
 
         Coordinacion c = DBMS.getInstance().obtenerNombreCoordinacion(u);
         ArrayList<Decanato> decanatos = DBMS.getInstance().listarDecanatos();
-        ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinacionesAdscritas(codigoDecan);
+        ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinacionesAdscritas(codigoDecan,null);
         //retorno a pagina de exito
         
         request.setAttribute("decanatos", decanatos);

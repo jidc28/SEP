@@ -53,14 +53,16 @@ public class ConsultaCoordinacionA extends org.apache.struts.action.Action {
             if (decanato.getNombre() != null) {
                 System.out.println(decanato.getNombre());
                 decanato.setCodigo(DBMS.getInstance().obtenerCodigoDecanato(decanato));
-                coords = DBMS.getInstance().listarCoordinacionesAdscritas(decanato.getCodigo());
+                coords = DBMS.getInstance().listarCoordinacionesAdscritas(decanato.getCodigo(),null);
                 session.setAttribute("codigoDecanatoActual", decanato.getCodigo());
             }
 
             decanatos = DBMS.getInstance().listarDecanatos();
             request.setAttribute("decanatos", decanatos);
         } else if (tipousuario.equals("decanato")) {
-            coords = DBMS.getInstance().listarCoordinacionesAdscritas(usuario.getUsbid());
+            
+            Coordinacion coordinacion = (Coordinacion) form;
+            coords = DBMS.getInstance().listarCoordinacionesAdscritas(usuario.getUsbid(),coordinacion.getOpcion());
         }
 
         //si existen coords registradas
