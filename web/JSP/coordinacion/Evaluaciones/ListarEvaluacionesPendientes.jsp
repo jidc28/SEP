@@ -80,12 +80,19 @@
                                 <bean:write name="evaluacion" 
                                             property="primerProfesor.nombre"/>
                             </td>
-                            <td rowspan="<bean:write name="evaluacion" 
-                                        property="numeroMateria"/>">
+                            <td>
                                 <center>
-                                    <html:link action="/graficarRendimiento">
-                                            Ver rendimiento
-                                    </html:link>
+                                    <html:form action="/graficarRendimiento"
+                                               style="margin: 0px;">
+                                        <html:hidden name="dicta" property="usbidProfesor"
+                                                     value="${evaluacion.getPrimerProfesor().getUsbid()}"/>
+                                        <html:hidden name="dicta" property="codigoMateria"
+                                                     value="${evaluacion.getCodigoMateria()}"/>
+                                        <html:submit styleClass="btn btn-default"
+                                                     style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                                Ver rendimiento
+                                        </html:submit>
+                                    </html:form>
                                 </center>
                             </td>
                             <td>
@@ -129,6 +136,21 @@
                         <td>
                             <bean:write name="profesores" property="apellido"/>,
                             <bean:write name="profesores" property="nombre"/>
+                        </td>
+                        <td>
+                                <center>
+                                    <html:form action="/graficarRendimiento"
+                                               style="margin: 0px;">
+                                        <html:hidden name="dicta" property="usbidProfesor"
+                                                     value="${profesores.getUsbid()}"/>
+                                        <html:hidden name="dicta" property="codigoMateria"
+                                                     value="${evaluacion.getCodigoMateria()}"/>
+                                        <html:submit styleClass="btn btn-default"
+                                                     style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                                Ver rendimiento
+                                        </html:submit>
+                                    </html:form>
+                                </center>
                         </td>
                         <td>
                             <center>

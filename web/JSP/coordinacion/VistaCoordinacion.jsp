@@ -19,9 +19,9 @@
         </button>
         <p>
             <strong>Atención: </strong> <br> 
-            Se solicitó evaluación de 
+            Se ha solicitado realizar
             <strong><bean:write name="evaluaciones_pendientes"/></strong> 
-            profesor(es). Para más información seleccionar 
+            evaluación(es). Para más información seleccionar 
             <em>Gestionar Evaluaciones</em>.
         </p>
     </div>

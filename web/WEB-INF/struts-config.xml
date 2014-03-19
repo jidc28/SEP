@@ -487,10 +487,11 @@
         <!-- ACCIONES COORDINADOR -->
         
         <action path="/graficarRendimiento"
-            type="org.apache.struts.actions.ForwardAction"
+            name="dicta" 
+            type="Actions.Evaluaciones.Graficar" 
             scope="request"
-            validate="false"
-            parameter="graficarRendimiento">
+            validate="false">
+            <forward name="success" path="graficarRendimiento"/>
         </action>
         
         <action input="/VistaCoordinacion.jsp" 

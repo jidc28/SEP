@@ -2028,6 +2028,43 @@ public class DBMS {
         }
         return null;
     }
+    
+    public rendimientoProf obtenerEvaluaciones(dicta d) {
+        PreparedStatement ps;
+        rendimientoProf evaluacion = new rendimientoProf();
+        try {
+            ps = conexion.prepareStatement("SELECT sum(total_estudiantes) as t, "
+                    + "sum(nota_prom) as np, sum(nota1) as n1, sum(nota2) as n2, "
+                    + "sum(nota3) as n3, sum(nota4) as n4, sum(nota5) as n5, "
+                    + "sum(retirados) as r "
+                    + "FROM rendimiento "
+                    + "WHERE codigo_materia = ?;");
+
+            String codigo_materia = d.getCodigoMateria();
+            ps.setString(1, codigo_materia);
+
+            System.out.println(ps.toString());
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                evaluacion.setCodigo_materia(codigo_materia);
+                evaluacion.setTotal_estudiantes(rs.getInt("t"));
+                evaluacion.setNota_prom(rs.getFloat("np"));
+                evaluacion.setNota1(rs.getInt("n1"));
+                evaluacion.setNota2(rs.getInt("n2"));
+                evaluacion.setNota3(rs.getInt("n3"));
+                evaluacion.setNota4(rs.getInt("n4"));
+                evaluacion.setNota5(rs.getInt("n5"));
+                evaluacion.setRetirados(rs.getInt("r"));
+            }
+            
+            return evaluacion;
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
     public rendimientoProf obtenerEvaluacionEnviada(String usbid_profesor,
             int ano, String trimestre) {
