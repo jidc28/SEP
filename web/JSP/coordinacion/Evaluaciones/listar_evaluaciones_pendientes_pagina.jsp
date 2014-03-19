@@ -11,17 +11,18 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>  
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
+<%    
     Usuario usuario = (Usuario) session.getAttribute("usuario");
     String tipousuario = usuario.getTipousuario();
-    if (tipousuario.equals("coordinacion") || 
-            tipousuario.equals("departamento")){
+    if (tipousuario.equals("coordinacion")
+            || tipousuario.equals("departamento")
+            || tipousuario.equals("decanato")) {
 %>
-    <tiles:insert definition="listarEvaluacionesPendientes"/>
-<%
-   } else {
+<tiles:insert definition="listarEvaluacionesPendientes"/>
+<%    
+} else {
 %>
-    <tiles:insert definition="noAutorizado"/>
-<%
-   }
+<tiles:insert definition="noAutorizado"/>
+<%        
+    }
 %>

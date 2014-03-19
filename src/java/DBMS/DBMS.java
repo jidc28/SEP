@@ -236,8 +236,6 @@ public class DBMS {
 
             ps.setString(1, id_decanato);
 
-            System.out.println(ps.toString());
-
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -250,13 +248,11 @@ public class DBMS {
                             + "FROM evaluar "
                             + "WHERE codigo_coordinacion = ? "
                             + "AND evaluado_coordinacion = 'si';");
-                    
+
                     ps1.setString(1, codigo_coordinacion);
-                    
-                    System.out.println(ps1.toString());
-                    
+
                     ResultSet rs1 = ps1.executeQuery();
-                    
+
                     rs1.next();
                     u.setEvaluaciones(rs1.getString("count"));
                 }
@@ -1207,7 +1203,7 @@ public class DBMS {
         return 0;
     }
 
-    public ArrayList<dicta> listarEvaluacionesPendientes(String id_coordinacion) {
+    public ArrayList<dicta> listarEvaluacionesPendientes(String id_coordinacion, String evaluado) {
 
         PreparedStatement ps, ps2;
         ArrayList<dicta> dicta_materia = new ArrayList(0);
@@ -1216,9 +1212,10 @@ public class DBMS {
             ps = conexion.prepareStatement("SELECT DISTINCT codigo_materia, count(codigo_materia) "
                     + "FROM evaluar "
                     + "WHERE codigo_coordinacion = ? "
-                    + "AND evaluado_coordinacion = 'no' "
+                    + "AND evaluado_coordinacion = ? "
                     + "GROUP BY codigo_materia;");
             ps.setString(1, id_coordinacion);
+            ps.setString(2, evaluado);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -1325,6 +1322,53 @@ public class DBMS {
                 rendimiento.setCodigo_materia(rs.getString("codigo"));
                 rendimiento.setRecomendado(rs.getString("recomendado"));
                 rendimiento.setObservaciones_c(rs.getString("observaciones"));
+                rendimiento.setNombre_materia(rs.getString("nombre"));
+                rendimiento.setUsbid_profesor(rs.getString("usbid_profesor"));
+                rendimiento.setAno(rs.getInt("ano"));
+                rendimiento.setTrimestre(rs.getString("trimestre"));
+            }
+
+            return rendimiento;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public rendimientoProf listarEvaluacionesCoordinacion(String id_coordinacion, int ano, String trimestre, String codigo_materia, String usbid_profesor) {
+
+        PreparedStatement ps, ps2;
+        rendimientoProf rendimiento = null;
+
+        try {
+            ps = conexion.prepareStatement("SELECT m.codigo, "
+                    + "e.recomendado_coordinacion, e.observaciones_coordinacion, "
+                    + "m.nombre, e.usbid_profesor, r.ano, r.trimestre "
+                    + "FROM evaluar as e, materia as m, rendimiento as r "
+                    + "WHERE e.codigo_coordinacion = ? "
+                    + "AND r.ano = ? "
+                    + "AND r.trimestre = ? "
+                    + "AND e.codigo_materia = codigo "
+                    + "AND e.codigo_materia = r.codigo_materia "
+                    + "AND r.usbid_profesor = e.usbid_profesor "
+                    + "AND r.usbid_profesor = ? "
+                    + "AND e.codigo_materia = ?;");
+            ps.setString(1, id_coordinacion);
+            ps.setInt(2, ano);
+            ps.setString(3, trimestre);
+            ps.setString(4, usbid_profesor);
+            ps.setString(5, codigo_materia);
+
+            System.out.println(ps.toString());
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                rendimiento = new rendimientoProf();
+                rendimiento.setCodigo_materia(rs.getString("codigo"));
+                rendimiento.setRecomendado(rs.getString("recomendado_coordinacion"));
+                rendimiento.setObservaciones_c(rs.getString("observaciones_coordinacion"));
                 rendimiento.setNombre_materia(rs.getString("nombre"));
                 rendimiento.setUsbid_profesor(rs.getString("usbid_profesor"));
                 rendimiento.setAno(rs.getInt("ano"));
@@ -1949,10 +1993,10 @@ public class DBMS {
         PreparedStatement ps;
         rendimientoProf evaluacion = new rendimientoProf();
         try {
-            ps = conexion.prepareStatement("SELECT sum(total_estudiantes), "
-                    + "avg(nota_prom) as np, sum(nota1) as n1, sum(nota2) as n2, "
-                    + "sum(nota3) as n3, sum(nota4) as n4, sum(nota5) as n5, "
-                    + "sum(retirados) as r "
+            ps = conexion.prepareStatement("SELECT total_estudiantes as t, "
+                    + "nota_prom as np, nota1 as n1, nota2 as n2, "
+                    + "nota3 as n3, nota4 as n4, nota5 as n5, "
+                    + "retirados as r, ano, trimestre "
                     + "FROM rendimiento "
                     + "WHERE codigo_materia = ? "
                     + "AND usbid_profesor = ?;");
@@ -1965,9 +2009,8 @@ public class DBMS {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-//                evaluacion = new rendimientoProf();
                 evaluacion.setCodigo_materia(codigo_materia);
-                evaluacion.setTotal_estudiantes(rs.getInt("sum"));
+                evaluacion.setTotal_estudiantes(rs.getInt("t"));
                 evaluacion.setNota_prom(rs.getFloat("np"));
                 evaluacion.setNota1(rs.getInt("n1"));
                 evaluacion.setNota2(rs.getInt("n2"));
@@ -1975,6 +2018,8 @@ public class DBMS {
                 evaluacion.setNota4(rs.getInt("n4"));
                 evaluacion.setNota5(rs.getInt("n5"));
                 evaluacion.setRetirados(rs.getInt("r"));
+                evaluacion.setAno(rs.getInt("ano"));
+                evaluacion.setTrimestre(rs.getString("trimestre"));
 
             }
             return evaluacion;
@@ -2386,6 +2431,8 @@ public class DBMS {
                     + "AND usbid_profesor = ?;");
             ps.setString(1, id_coordinacion);
             ps.setString(2, usbid_profesor);
+            
+            System.out.println(ps.toString());
 
             ResultSet rs = ps.executeQuery();
 

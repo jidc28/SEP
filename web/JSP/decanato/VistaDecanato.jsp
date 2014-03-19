@@ -45,9 +45,9 @@
                 <html:link action="/agregaCoordinacionA" >
                     <h5 align ="center">Agregar coordinación</h5>
                 </html:link>
-                <%--                <html:link action="/consultaCoordinacionA" >
-                                    <h5 align ="center">Consultar coordinación</h5>
-                </html:link>--%>
+                <html:link action="/consultaCoordinacionA" >
+                    <h5 align ="center">Consultar coordinación</h5>
+                </html:link>
             </div>
         </div>
     </div>
@@ -60,9 +60,9 @@
                        data-parent="#accordion" href="#collapseEvaluaciones">
                         Gestión de evaluaciones
                     </a>
-                    <!--                <a href="#" id="ayuda1" style="float: right" rel="popover" >
-                                        <span class="glyphicon glyphicon-question-sign"></span> 
-                                    </a>-->
+                    <a href="#" id="ayuda2" style="float: right" rel="popover" >
+                        <span class="glyphicon glyphicon-question-sign"></span> 
+                    </a>
                 </h4>
             </div>
             <div id="collapseEvaluaciones" class="panel-collapse collapse">

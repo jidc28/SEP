@@ -515,3 +515,9 @@
         </html:form>
     </div>
 </logic:present>
+
+<logic:present name="revisar_decanato">
+    <button class="btn btn-success" type="submit">
+        Revisado
+    </button>
+</logic:present>

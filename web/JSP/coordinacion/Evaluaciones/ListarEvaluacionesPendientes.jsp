@@ -102,10 +102,18 @@
                                         <html:hidden name="dicta"
                                                      property="opcion"
                                                      value="pendiente"/>
-                                        <html:submit styleClass="btn btn-info"
+                                        <logic:notPresent name="solo_lectura">
+                                            <html:submit styleClass="btn btn-info"
+                                                         style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                                    Hacer evaluación
+                                            </html:submit>
+                                        </logic:notPresent>
+                                        <logic:present name="solo_lectura">
+                                            <html:submit styleClass="btn btn-info"
                                                      style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
-                                                Hacer evaluación
-                                        </html:submit>
+                                                Ver evaluación
+                                            </html:submit>
+                                        </logic:present>
                                     </html:form>
                                 </center>
                             </td>
@@ -136,10 +144,18 @@
                                     <html:hidden name="dicta"
                                                      property="opcion"
                                                      value="pendiente"/>
-                                    <html:submit styleClass="btn btn-info"
+                                    <logic:notPresent name="solo_lectura">
+                                        <html:submit styleClass="btn btn-info"
+                                                     style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                                Hacer evaluación
+                                        </html:submit>
+                                    </logic:notPresent>
+                                    <logic:present name="solo_lectura">
+                                        <html:submit styleClass="btn btn-info"
                                                  style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
-                                            Hacer evaluación
-                                    </html:submit>
+                                            Ver evaluación
+                                        </html:submit>
+                                    </logic:present>
                                 </html:form>
                             </center>
                         </td>

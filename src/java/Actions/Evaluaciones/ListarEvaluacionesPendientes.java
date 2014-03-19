@@ -46,9 +46,14 @@ public class ListarEvaluacionesPendientes extends org.apache.struts.action.Actio
         ArrayList<dicta> evaluaciones_pendientes = null;
 
         if (tipousuario.equals("coordinacion")) {
-            evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(id);
+            evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(id, "no");
         } else if (tipousuario.equals("departamento")) {
             evaluaciones_pendientes = DBMS.getInstance().listarEvaluadosPorCoordinacion(id);
+        } else if (tipousuario.equals("decanato")) {
+            Coordinacion coordinacion = (Coordinacion) form;
+            evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(coordinacion.getCodigo(), "si");
+            session.setAttribute("coordinacion", coordinacion.getCodigo());
+            request.setAttribute("solo_lectura", SUCCESS);
         }
 
         if (evaluaciones_pendientes.isEmpty()) {

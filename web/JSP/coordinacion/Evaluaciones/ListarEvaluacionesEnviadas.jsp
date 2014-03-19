@@ -85,7 +85,7 @@
                                                      value="enviada"/>
                                         <html:submit styleClass="btn btn-info"
                                                      style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
-                                                Hacer evaluación
+                                                Ver evaluación
                                         </html:submit>
                                     </html:form>
                                 </center>

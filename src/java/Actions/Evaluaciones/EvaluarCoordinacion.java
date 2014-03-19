@@ -40,7 +40,7 @@ public class EvaluarCoordinacion extends Action {
 
             ArrayList<dicta> evaluaciones_pendientes;
             evaluaciones_pendientes =
-                    DBMS.getInstance().listarEvaluacionesPendientes(id_coordinacion);
+                    DBMS.getInstance().listarEvaluacionesPendientes(id_coordinacion,"no");
 
             request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
 

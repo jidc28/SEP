@@ -23,17 +23,25 @@
                     <bean:write name="coordinacion" property="codigo"/>
                 </td>
                 <td>      
-                    <html:form action="/listarEvaluacionesEnviadas" style="margin: 0px;">
-                        <html:submit styleClass="link2">
-                            <bean:write name="coordinacion" property="nombre"/>
-                        </html:submit>
+                    <html:form action="/listarEvaluacionesPendientes" style="margin: 0px;">
                         <logic:notEqual name="coordinacion" property="evaluaciones"
                                         value="0">
+                            <html:hidden name="Coordinacion" property="codigo"
+                                         value="${coordinacion.getCodigo()}"/>
+                            <html:submit styleClass="link2" style="padding-left: 0px;">
+                                <bean:write name="coordinacion" property="nombre"/>
+                            </html:submit>
                             <span class="label label-warning" style="padding-bottom: 2.4px;">
                                 <bean:write name="coordinacion" property="evaluaciones"/>
                             </span>
                         </logic:notEqual>
                     </html:form>
+                    <logic:equal name="coordinacion" property="evaluaciones"
+                                 value="0">
+                        <a class="link2" style="padding: 5px; padding-left: 0px;">
+                            <bean:write name="coordinacion" property="nombre"/>
+                        </a>
+                    </logic:equal>
                 </td>
             </tr>
         </logic:iterate>
