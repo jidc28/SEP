@@ -114,7 +114,7 @@ public class HacerEvaluacion extends Action {
                     ArrayList<rendimientoProf> evaluacion_coordinaciones =
                             DBMS.getInstance().obtenerEvaluacionCoordinaciones(id, profesor.getUsbid(), d.getCodigoMateria());
 
-                    request.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
+                    session.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
                     request.setAttribute("evaluar", SUCCESS);
 
                 }

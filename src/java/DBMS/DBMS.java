@@ -1141,6 +1141,7 @@ public class DBMS {
                         + "FROM evaluar "
                         + "WHERE codigo_departamento = ? "
                         + "AND evaluado_coordinacion = 'si' "
+                        + "AND evaluado_departamento = 'no' "
                         + "GROUP BY usbid_profesor;");
                 ps.setString(1, id_departamento);
             } else {
@@ -1148,6 +1149,7 @@ public class DBMS {
                         + "FROM evaluar "
                         + "WHERE codigo_departamento = ? "
                         + "AND evaluado_coordinacion = 'si' "
+                        + "AND evaluado_departamento = 'no' "
                         + "AND usbid_profesor = ? "
                         + "GROUP BY usbid_profesor;");
                 ps.setString(1, id_departamento);
@@ -2465,6 +2467,35 @@ public class DBMS {
         }
     }
 
+    public boolean evaluarDepartamento(rendimientoProf rendimiento, String id_departamento) {
+
+        PreparedStatement ps0;
+
+        try {
+
+            ps0 = conexion.prepareStatement("UPDATE evaluar "
+                    + "SET evaluado_departamento = 'si', "
+                    + "recomendado_departamento = ?, "
+                    + "observaciones_departamento = ? "
+                    + "WHERE usbid_profesor = ? "
+                    + "AND codigo_materia = ? "
+                    + "AND codigo_departamento = ?;");
+            ps0.setString(1, rendimiento.getRecomendado());
+            ps0.setString(2, rendimiento.getObservaciones_c());
+            ps0.setString(3, rendimiento.getUsbid_profesor());
+            ps0.setString(4, rendimiento.getCodigo_materia());
+            ps0.setString(5, id_departamento);
+
+            Integer i = ps0.executeUpdate();
+
+            return i > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
     public ArrayList<Profesor> listarProfesoresCoordinacion(String id_coordinacion) {
 
         ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
@@ -2648,6 +2679,7 @@ public class DBMS {
                     + "FROM evaluar "
                     + "WHERE codigo_departamento = ? "
                     + "AND evaluado_coordinacion = 'si' "
+                    + "AND evaluado_departamento = 'no' "
                     + "ORDER BY usbid_profesor;");
             ps.setString(1, id_departamento);
 

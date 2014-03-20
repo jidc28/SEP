@@ -472,7 +472,7 @@
 
 <logic:present name="evaluar">
     <div class="recomendar">
-        <html:form action="/evaluarCoordinacion">
+        <html:form action="/evaluar">
             <html:hidden name="evaluacion" property="usbid_profesor" value="${profesor.getUsbid()}"/>
             <html:hidden name="evaluacion" property="codigo_materia"/>
             <table class="table" style="border-top: none; margin: 0px;">
