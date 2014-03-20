@@ -240,6 +240,14 @@ INSERT INTO se_adscribe VALUES('C-0052','1001');
 
 insert into solicita_apertura values ('CI4357','09-10020','09-10219','Necesito apertura');
 
+insert into rendimiento values ('22-90457','CI6116','AJ','2008','20','3.2','7','2','4','4','3','0');
+insert into rendimiento values ('22-90457','CI6116','AJ','2005','20','3.2','7','2','4','4','3','0');
+insert into rendimiento values ('22-90457','CI5311','AJ','2005','20','3.2','7','2','4','4','3','0');
+insert into rendimiento values ('22-90457','CI6116','SD','2005','20','3.2','7','2','4','4','3','0');
+insert into rendimiento values ('22-90457','CI6116','AJ','2006','20','3.2','7','2','4','4','3','0');
+insert into rendimiento values ('22-90457','CI6116','AJ','2007','20','3.2','7','2','4','4','3','0');
+insert into rendimiento values ('28-63146','CI6116','SD','2007','20','3.2','7','2','4','4','3','0');
+
 insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2008','AJ','no','irresponsable');
 insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2005','AJ','si','responsable');
 insert into evaluado values ('09-10020','22-90457','CI5311','09-10219','2005','AJ','si','responsable');
@@ -247,6 +255,3 @@ insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2005','S
 insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2006','AJ','no','irresponsable');
 insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2007','AJ','si','responsable');
 insert into evaluado values ('09-10020','28-63146','CI6116','09-10219','2007','SD','si','responsable');
-
---insert into rendimiento values ('28-63146','CI6116','SD','2011','10','3.00','1','1','1','1','1','5');
---insert into evaluar values ('09-10020','28-63146','CI6116','09-10219','si','no','si','no','ninguna');

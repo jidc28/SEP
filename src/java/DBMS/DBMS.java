@@ -1229,9 +1229,11 @@ public class DBMS {
                         + "FROM evaluar, profesor "
                         + "WHERE codigo_coordinacion = ? "
                         + "AND usbid = usbid_profesor "
-                        + "AND codigo_materia= ?;");
+                        + "AND codigo_materia = ? "
+                        + "AND evaluado_coordinacion = ?;");
                 ps2.setString(1, id_coordinacion);
                 ps2.setString(2, codigoMateria);
+                ps2.setString(3, evaluado);
 
                 ResultSet rs2 = ps2.executeQuery();
 
@@ -2005,8 +2007,6 @@ public class DBMS {
             ps.setString(1, codigo_materia);
             ps.setString(2, d.getUsbidProfesor());
 
-            System.out.println(ps.toString());
-
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 evaluacion.setCodigo_materia(codigo_materia);
@@ -2028,7 +2028,47 @@ public class DBMS {
         }
         return null;
     }
-    
+
+    public rendimientoProf obtenerEvaluacion(String codigo_materia,
+            String usbid_profesor, int ano, String trimestre) {
+        PreparedStatement ps;
+        rendimientoProf evaluacion = new rendimientoProf();
+        try {
+            ps = conexion.prepareStatement("SELECT total_estudiantes as t, "
+                    + "nota_prom as np, nota1 as n1, nota2 as n2, "
+                    + "nota3 as n3, nota4 as n4, nota5 as n5, "
+                    + "retirados as r, ano, trimestre "
+                    + "FROM rendimiento "
+                    + "WHERE codigo_materia = ? "
+                    + "AND usbid_profesor = ? "
+                    + "AND ano = ? "
+                    + "AND trimestre = ?;");
+
+            ps.setString(1, codigo_materia);
+            ps.setString(2, usbid_profesor);
+            ps.setInt(3, ano);
+            ps.setString(4, trimestre);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                evaluacion.setCodigo_materia(codigo_materia);
+                evaluacion.setTotal_estudiantes(rs.getInt("t"));
+                evaluacion.setNota_prom(rs.getFloat("np"));
+                evaluacion.setNota1(rs.getInt("n1"));
+                evaluacion.setNota2(rs.getInt("n2"));
+                evaluacion.setNota3(rs.getInt("n3"));
+                evaluacion.setNota4(rs.getInt("n4"));
+                evaluacion.setNota5(rs.getInt("n5"));
+                evaluacion.setRetirados(rs.getInt("r"));
+
+            }
+            return evaluacion;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public rendimientoProf obtenerEvaluaciones(dicta d) {
         PreparedStatement ps;
         rendimientoProf evaluacion = new rendimientoProf();
@@ -2043,7 +2083,44 @@ public class DBMS {
             String codigo_materia = d.getCodigoMateria();
             ps.setString(1, codigo_materia);
 
-            System.out.println(ps.toString());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                evaluacion.setCodigo_materia(codigo_materia);
+                evaluacion.setTotal_estudiantes(rs.getInt("t"));
+                evaluacion.setNota_prom(rs.getFloat("np"));
+                evaluacion.setNota1(rs.getInt("n1"));
+                evaluacion.setNota2(rs.getInt("n2"));
+                evaluacion.setNota3(rs.getInt("n3"));
+                evaluacion.setNota4(rs.getInt("n4"));
+                evaluacion.setNota5(rs.getInt("n5"));
+                evaluacion.setRetirados(rs.getInt("r"));
+            }
+
+            return evaluacion;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public rendimientoProf obtenerEvaluaciones(String codigo_materia, int ano,
+            String trimestre) {
+        PreparedStatement ps;
+        rendimientoProf evaluacion = new rendimientoProf();
+        try {
+            ps = conexion.prepareStatement("SELECT sum(total_estudiantes) as t, "
+                    + "sum(nota_prom) as np, sum(nota1) as n1, sum(nota2) as n2, "
+                    + "sum(nota3) as n3, sum(nota4) as n4, sum(nota5) as n5, "
+                    + "sum(retirados) as r "
+                    + "FROM rendimiento "
+                    + "WHERE codigo_materia = ? "
+                    + "AND ano = ? "
+                    + "AND trimestre = ?;");
+
+            ps.setString(1, codigo_materia);
+            ps.setInt(2, ano);
+            ps.setString(3, trimestre);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -2057,9 +2134,9 @@ public class DBMS {
                 evaluacion.setNota5(rs.getInt("n5"));
                 evaluacion.setRetirados(rs.getInt("r"));
             }
-            
+
             return evaluacion;
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -2395,12 +2472,15 @@ public class DBMS {
         try {
             ps = conexion.prepareStatement("SELECT DISTINCT p.usbid, p.nombre, "
                     + "p.apellido "
-                    + "FROM maneja as m, dicta as d, profesor as p "
+                    + "FROM maneja as m, dicta as d, profesor as p, evaluado as e "
                     + "WHERE m.codigo_materia = d.codigo_materia "
+                    + "AND p.usbid = e.usbid_profesor "
                     + "AND m.codigo_coordinacion = ? "
-                    + "ORDER BY usbid;");
+                    + "ORDER BY p.usbid;");
 
             ps.setString(1, id_coordinacion);
+
+            System.out.println(ps.toString());
 
             ResultSet rs = ps.executeQuery();
 
@@ -2468,7 +2548,7 @@ public class DBMS {
                     + "AND usbid_profesor = ?;");
             ps.setString(1, id_coordinacion);
             ps.setString(2, usbid_profesor);
-            
+
             System.out.println(ps.toString());
 
             ResultSet rs = ps.executeQuery();

@@ -34,7 +34,7 @@
         <p>
             <strong>Atención: </strong> <br> 
             Se ha(n) evaluado
-            <strong> <bean:write name="solicitud_apertura_materia"/> </strong>
+            <strong> <bean:write name="evaluaciones_pendientes"/> </strong>
             profesor(es). Para más información seleccionar 
             <em>Gestión de evaluaciones, Listar evaluaciones pendientes</em>.
         </p>
