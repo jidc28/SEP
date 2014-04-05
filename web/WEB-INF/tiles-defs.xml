@@ -147,6 +147,10 @@
         <put name="vista" value="/JSP/decanato/Evaluaciones/listar_coordinaciones_pagina.jsp"/>
     </definition>
     
+    <definition name="sesion_expirada" extends="generico">
+        <put name="vista" value="/JSP/sesion_expirada.jsp"/>
+    </definition>
+    
     <!-- DEFINICION BASE -->
     <definition name="base" path="/Plantilla/plantilla.jsp">
         <put name="css" value="/JSP/general-css.jsp"/>
@@ -154,6 +158,7 @@
         <put name="banner" value="/Plantilla/banner.jsp"/>
         <put name="body" value="/Plantilla/body.jsp"/>
         <put name="sidebarR" value="/Plantilla/sidebarR.jsp"/>
+        <put name="sidebarL" value="/Plantilla/sidebarsL/sideLProfesor.jsp"/>
         <put name="footer" value="/Plantilla/footer.jsp"/>
     </definition>
     

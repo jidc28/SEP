@@ -23,6 +23,7 @@ import org.apache.struts.action.ActionMessage;
 public class Inicio extends org.apache.struts.action.Action {
 
     private static final String FAILURE = "failure";
+    private static final String SESION_EXPIRADA = "sesion_expirada";
     private static final String PROFESOR = "profesor";
     private static final String ADMINISTRADOR = "administrador";
     private static final String DECANATO = "decanato";
@@ -47,6 +48,10 @@ public class Inicio extends org.apache.struts.action.Action {
         //Usuario u = (Usuario) form;
         HttpSession session = request.getSession(true);
         Usuario u = (Usuario) request.getSession().getAttribute("usuario");
+        
+        if (u == null) {
+            return mapping.findForward(SESION_EXPIRADA);
+        }
 
         ActionErrors error = new ActionErrors();
 

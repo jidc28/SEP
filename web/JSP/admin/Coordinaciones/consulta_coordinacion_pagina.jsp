@@ -12,19 +12,28 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    Usuario usuario = (Usuario) session.getAttribute("usuario");
-    String tipousuario = usuario.getTipousuario();
-    if (tipousuario.equals("administrador")){
+    if (session.getAttribute("usuario") == null) {
 %>
-    <tiles:insert definition="consultaCoordinacionAdmin"/>
+<tiles:insert definition="base"/>
+<script>
+    login()
+</script>
 <%
-       } else if (tipousuario.equals("decanato")) {
+    } else {
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
+        if (tipousuario.equals("administrador")) {
 %>
-    <tiles:insert definition="consultaCoordinacionDecanato"/>
+<tiles:insert definition="consultaCoordinacionAdmin"/>
 <%
-   } else {
+        } else if (tipousuario.equals("decanato")) {
 %>
-    <tiles:insert definition="noAutorizado"/>
+<tiles:insert definition="consultaCoordinacionDecanato"/>
 <%
-   }
+        } else {
+%>
+<tiles:insert definition="noAutorizado"/>
+<%        
+        }
+    }
 %>

@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionMapping;
 public class GuardarInformacionCoordinacion extends Action {
 
     private static final String SUCCESS = "success";
+    private static final String SESION_EXPIRADA = "sesion_expirada";
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -21,17 +22,24 @@ public class GuardarInformacionCoordinacion extends Action {
 
         HttpSession session = request.getSession(true);
         String id_coordinacion = (String) session.getAttribute("usbid");
-        String usbid_profesor = 
+
+        /* En caso de haber expirado la sesion se direcciona a la vista que
+         * le indica al usuario que debe volver a iniciar sesion. */
+        if (id_coordinacion == null) {
+            return mapping.findForward(SESION_EXPIRADA);
+        }
+
+        String usbid_profesor =
                 ((Profesor) session.getAttribute("profesor")).getUsbid();
-        
+
         InformacionProfesorCoord informacion = (InformacionProfesorCoord) form;
 
         boolean procesado = DBMS.getInstance().
-                actualizarInformacionProfesorCoordinacion(id_coordinacion,usbid_profesor,informacion);
+                actualizarInformacionProfesorCoordinacion(id_coordinacion, usbid_profesor, informacion);
 
         request.setAttribute("informacion", informacion);
-        request.setAttribute("informacion_coordinacion",SUCCESS);
-        
+        request.setAttribute("informacion_coordinacion", SUCCESS);
+
         return mapping.findForward(SUCCESS);
     }
 }

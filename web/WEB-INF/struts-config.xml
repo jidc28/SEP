@@ -76,6 +76,7 @@
             <forward name="decanato" path="vistaDecanato"/>
             <forward name="departamento" path="vistaDepartamento"/>
             <forward name="coordinacion" path="vistaCoordinacion"/>
+            <forward name="sesion_expirada" path="sesion_expirada"/>
         </action>
         
         <!--       LOGIN         -->
@@ -98,6 +99,7 @@
             <forward name="administrador" path="agrega_coordinacion_pagina"/>
             <forward name="decanato" path="agrega_coordinacion_pagina"/>
             <forward name="failure" path="noAutorizado"/>
+            <forward name="sesion_expirada" path="sesion_expirada"/>
         </action>
         
         <action input="/VistaAdministrador.jsp" path="/consultaDecanatoA" scope="request" type="Actions.Decanato.ConsultaDecanatoA" validate="false">
@@ -108,6 +110,7 @@
             <forward name="administrador" path="consulta_coordinacion_pagina"/>
             <forward name="decanato" path="consulta_coordinacion_pagina"/>
             <forward name="failure" path="noAutorizado"/>
+            <forward name="sesion_expirada" path="sesion_expirada"/>
         </action>
         
         <action path="/irAgregarDepartamento"
@@ -159,12 +162,14 @@
             <forward name="failure_decanato" path="agrega_coordinacion_pagina"/>
             <forward name="yaregistrada_administrador" path="agrega_coordinacion_pagina"/>
             <forward name="yaregistrada_decanato" path="agrega_coordinacion_pagina"/>
+            <forward name="sesion_expirada" path="sesion_expirada"/>
         </action>
         
         <action input="/ConsultaCoordinacion.jsp" name="Coordinacion" path="/editarNombreCoordinacion" scope="request" type="Actions.Coordinacion.EditarNombreCoordinacion" validate="false">
             <forward name="administrador" path="editar_coordinacion_pagina"/>
             <forward name="decanato" path="editar_coordinacion_pagina"/>
             <forward name="failure" path="noAutorizado"/>
+            <forward name="sesion_expirada" path="sesion_expirada"/>
         </action>
         
         <action input="/EditarNombreCoordinacion.jsp" name="Coordinacion" path="/cambiarNombreCoordinacionA" scope="request" type="Actions.Coordinacion.CambiarNombreCoordinacionA" validate="false">
@@ -172,6 +177,7 @@
             <forward name="decanato" path="consulta_coordinacion_pagina"/>
             <forward name="failure_administrador" path="editar_coordinacion_pagina"/>
             <forward name="failure_decanato" path="editar_coordinacion_pagina"/>
+            <forward name="sesion_expirada" path="sesion_expirada"/>
         </action>
         
         <action input="/ConsultarCoordinacion.jsp" name="Coordinacion" path="/eliminaCoordinacionA" scope="request" type="Actions.Coordinacion.EliminaCoordinacionA" validate="false">
@@ -409,6 +415,7 @@
             name="InformacionProfesorCoord"
             validate="false">
             <forward name="success" path="obtener_evaluaciones_pagina"/>
+            <forward name="sesion_expirada" path="sesion_expirada"/>
         </action>
         
         <action input="ConsultaProfesores.jsp"
