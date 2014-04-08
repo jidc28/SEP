@@ -11,15 +11,24 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    Usuario usuario = (Usuario) session.getAttribute("usuario");
-    String tipousuario = usuario.getTipousuario();
-    if (tipousuario.equals("administrador")){
+    if (session.getAttribute("usuario") == null) {
+%>
+<tiles:insert definition="baseAdmin"/>
+<script>
+    login()
+</script>
+<%
+    } else {
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
+        if (tipousuario.equals("administrador")){
 %>
     <tiles:insert definition="agregaDecanato"/>
 <%
-   } else {
+        } else {
 %>
     <tiles:insert definition="noAutorizado"/>
 <%
-   }
+       }
+    }
 %>

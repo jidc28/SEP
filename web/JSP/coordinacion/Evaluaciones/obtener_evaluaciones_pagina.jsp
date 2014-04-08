@@ -18,16 +18,16 @@
     login()
 </script>
 <%    
-} else {
-    Usuario usuario = (Usuario) session.getAttribute("usuario");
-    String tipousuario = usuario.getTipousuario();
-    if (tipousuario.equals("coordinacion")
-            || tipousuario.equals("departamento")
-            || tipousuario.equals("decanato")) {
+    } else {
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
+        if (tipousuario.equals("coordinacion")
+                || tipousuario.equals("departamento")
+                || tipousuario.equals("decanato")) {
 %>
 <tiles:insert definition="obtenerEvaluacion"/>
 <%    
-} else {
+        } else {
 %>
 <tiles:insert definition="noAutorizado"/>
 <%            
