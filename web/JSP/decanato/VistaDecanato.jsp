@@ -18,9 +18,8 @@
         </button>
         <p>
             <strong>Atención: </strong> <br> 
-            <strong> <bean:write name="evaluaciones_pendientes"/> </strong>
-            coordinacioón(nes) han realizado la evaluación. 
-            Para más información seleccionar 
+            se han realizado <bean:write name="evaluaciones_pendientes"/> 
+            evaluación(nes). Para más información seleccionar 
             <em>Gestión de evaluaciones, Listar evaluaciones pendientes</em>.
         </p>
     </div>

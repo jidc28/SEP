@@ -69,7 +69,7 @@ public class ConsultaCoordinacionA extends org.apache.struts.action.Action {
             request.setAttribute("decanatos", decanatos);
         } else if (tipousuario.equals("decanato")) {
 
-            coords = DBMS.getInstance().listarCoordinacionesAdscritas(usuario.getUsbid(), null);
+            coords = DBMS.getInstance().listarCoordinacionesAdscritas(usuario.getUsbid(), "contar");
         }
 
         /* Envio del listado de coordinaciones a la vista correspondiente */

@@ -39,6 +39,8 @@ public class GuardarInformacionCoordinacion extends Action {
 
         request.setAttribute("informacion", informacion);
         request.setAttribute("informacion_coordinacion", SUCCESS);
+        request.setAttribute("evaluar_coordinacion", SUCCESS);
+        request.setAttribute("evaluar", SUCCESS);
 
         return mapping.findForward(SUCCESS);
     }

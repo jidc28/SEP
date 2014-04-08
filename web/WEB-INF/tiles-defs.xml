@@ -273,6 +273,12 @@
         <put name="body" value="/JSP/decanato/Evaluaciones/ListarCoordinaciones.jsp"/>
     </definition>
 
+    <!-- 2. Listar las evaluaciones prendientes de materias -->
+    <definition name="listarEvaluacionesPendientesDecanato" extends="baseDecanato">
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/ListarEvaluacionesPendientes.jsp"/>
+    </definition>
+    
+
     <!-- PROFESOR -->
     
     <!-- Archivo base para el administrador -->
@@ -401,6 +407,12 @@
         <put name="body" value="/JSP/departamento/Profesores/VerPlanillasLlenas.jsp"/>
     </definition>
 
+    <!-- DEPARTAMENTO / EVALUACIONES --> 
+
+    <!-- 1. Listar las evaluaciones prendientes de materias -->
+    <definition name="listarEvaluacionesPendientesDepartamento" extends="baseDepartamento">
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/ListarEvaluacionesPendientes.jsp"/>
+    </definition>
 
     <!-- COORDINACION -->
     

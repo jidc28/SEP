@@ -508,6 +508,7 @@
                 type="Actions.Evaluaciones.ListarEvaluacionesPendientes" 
                 validate="false">
             <forward name="success" path="listar_evaluaciones_pendientes_pagina"/>
+            <forward name="departamento" path="listar_evaluaciones_pendientes_pagina"/>
         </action>
         
         <action input="/listarEvaluacionesPendientes.jsp" 

@@ -2580,8 +2580,6 @@ public class DBMS {
             ps.setString(1, id_coordinacion);
             ps.setString(2, usbid_profesor);
 
-            System.out.println(ps.toString());
-
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
