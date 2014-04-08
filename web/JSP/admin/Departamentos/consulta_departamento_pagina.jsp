@@ -11,19 +11,28 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    Usuario usuario = (Usuario) session.getAttribute("usuario");
-    String tipousuario = usuario.getTipousuario();
-    if (tipousuario.equals("administrador")){
+    if (session.getAttribute("usuario") == null) {
+%>
+<tiles:insert definition="base"/>
+<script>
+    login()
+</script>
+<%
+    } else {
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
+        if (tipousuario.equals("administrador")) {
 %>
     <tiles:insert definition="consultaDepartamento"/>
 <%
-       } else if (tipousuario.equals("coordinacion")) {
+        } else if (tipousuario.equals("coordinacion")) {
 %>
     <tiles:insert definition="consultaDepartamentoCoordinacion"/>
 <%
-   } else {
+        } else {
 %>
     <tiles:insert definition="noAutorizado"/>
 <%
-   }
+        }
+    }
 %>

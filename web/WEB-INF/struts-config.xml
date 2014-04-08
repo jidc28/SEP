@@ -189,6 +189,7 @@
             <forward name="coordinacion" path="consulta_departamento_pagina"/>
             <forward name="administrador" path="consulta_departamento_pagina"/>
             <forward name="no_autorizado" path="noAutorizado"/>
+            <forward name="sesion_expirada" path="sesion_expirada"/>
         </action>
         
         <action input="/ConsultaDepartamento.jsp" name="Departamento" path="/listarMateriasDepto" scope="request" type="Actions.Materia.ConsultaMateria" validate="false">
