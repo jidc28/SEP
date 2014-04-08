@@ -42,7 +42,7 @@ public class ConsultaProfesorDepartamento extends org.apache.struts.action.Actio
         String id = (String) session.getAttribute("usbid");
 
         ArrayList<Profesor> profesores = 
-                DBMS.getInstance().listarProfesoresActivosDepartamento(id);
+                DBMS.getInstance().listarProfesoresDepartamento(id);
 
         if (profesores.isEmpty()) {
             request.setAttribute("vacio", SUCCESS);
