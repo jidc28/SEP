@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Actions.Coordinacion;
 
 import Clases.Coordinacion;
@@ -10,18 +6,19 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+
 /**
  *
  * @author smaf
  */
 public class EliminaCoordinacionA extends org.apache.struts.action.Action {
-    
+
     private static final String FAILURE = "failure";
     private static final String SUCCESS = "success";
+
     /**
      * This is the action called from the Struts framework.
      *
@@ -40,22 +37,19 @@ public class EliminaCoordinacionA extends org.apache.struts.action.Action {
         Coordinacion u = (Coordinacion) form;
         HttpSession session = request.getSession(true);
 
-            boolean eliminado = DBMS.getInstance().eliminarCoordinacion(u);
+        boolean eliminado = DBMS.getInstance().eliminarCoordinacion(u);
 
-            if (!eliminado) {
-                request.setAttribute("noEliminado",FAILURE);
-                return mapping.findForward(SUCCESS);
-            } else {
-                request.setAttribute("eliminado",SUCCESS);
+        if (!eliminado) {
+            request.setAttribute("noEliminado", FAILURE);
+            return mapping.findForward(SUCCESS);
+        } else {
+            request.setAttribute("eliminado", SUCCESS);
 
-                ArrayList<Coordinacion> coords = DBMS.getInstance().listarCoordinaciones();
+            ArrayList<Coordinacion> coords = 
+                    DBMS.getInstance().listarCoordinaciones();
 
-                //si existen carreras registradas
-
-                //retorno a pagina de exito
-                session.setAttribute("coordinaciones", coords);
-                return mapping.findForward(SUCCESS);
-            }
-        // }
+            request.setAttribute("coordinaciones", coords);
+            return mapping.findForward(SUCCESS);
+        }
     }
 }

@@ -52,9 +52,7 @@ public class EliminarProfesor extends org.apache.struts.action.Action {
                 DBMS.getInstance().listarProfesoresDepartamento(id_departamento);
 
         if (elimino) {
-            //retorno a pagina de exito
-            session.setAttribute("usuarios", profesores);
-            //si elimino usuario entonces
+            session.setAttribute("profesores", profesores);
             return mapping.findForward(SUCCESS);
 
         } else {

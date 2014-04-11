@@ -32,3 +32,18 @@
     });  
 </script>
 
+<logic:present name="gestion_materias">
+    <script>
+        $(function() {
+            $('#collapseDepartamentos').addClass('in'); 
+        });
+    </script>
+</logic:present>
+    
+<logic:present name="gestion_evaluaciones">
+    <script>
+        $(function() {
+            $('#collapseEvaluaciones').addClass('in'); 
+        });
+    </script>
+</logic:present>

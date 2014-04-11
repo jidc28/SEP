@@ -22,7 +22,8 @@ import org.apache.struts.action.ActionMapping;
 public class AgregaCoordinacionA extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
-    private static final String SUCCESS = "success";
+    private static final String FAILURE = "failure";
+    private static final String SESION_EXPIRADA = "sesion_expirada";
 
     /**
      * This is the action called from the Struts framework.
@@ -42,11 +43,30 @@ public class AgregaCoordinacionA extends org.apache.struts.action.Action {
         HttpSession session = request.getSession(true);
         ArrayList<Decanato> decanatos = DBMS.getInstance().listarDecanatos();
         Usuario usuario = (Usuario) session.getAttribute("usuario");
+        
+        /* En caso de haber expirado la sesion se direcciona a la vista que
+         * le indica al usuario que debe volver a iniciar sesion. */
+        if (usuario == null) {
+            return mapping.findForward(SESION_EXPIRADA);
+        }
+        
         String tipousuario = usuario.getTipousuario();
 
+        /* Dependiendo del tipo de usuario se listan o no los decanatos
+         * Administrador: debe asignar a un decanato la coordinacio que
+         *                va a agregar al sistema
+         * Decanato: se asigna a si mismo la coordinacion que va a agregar
+         *           al sistema*/
         if (tipousuario.equals("administrador")) {
             request.setAttribute("decanatos", decanatos);
         }
-        return mapping.findForward(SUCCESS);
+        if (tipousuario.equals("administrador") || tipousuario.equals("decanato")) {
+            return mapping.findForward(tipousuario);
+        } else {
+            /* En caso que el usuario no sea ni administrador ni decanato se
+             * direcciona a la pagina que indica que no se esta autorizado
+             * para realizar esta operacion */
+            return mapping.findForward(FAILURE);
+        }
     }
 }

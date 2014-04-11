@@ -14,21 +14,11 @@
 <html>
     <div class="glossymenu">
         <a style="border-bottom: none;"/>
-        <a class="menuitem" href="noimplementado.jsp">
-            Perfil
-        </a>
         <html:link styleClass="menuitem" action="irInicio.do">
             Inicio
         </html:link>
-        <a class="menuitem" href="noimplementado.jsp">
-            Contáctenos
-        </a>
-        <a class="menuitem" href="noimplementado.jsp">
-            Ayuda
-        </a>
         <a class="menuitem" href="cerrarSesion.do" onclick="return confirm('¿Está seguro que desea cerrar sesión?')" >
             Cerrar Sesión
         </a>
-
     </div>
 </html>

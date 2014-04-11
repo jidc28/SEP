@@ -20,7 +20,23 @@
             Se solicitó la apertura de 
             <strong> <bean:write name="solicitud_apertura_materia"/> </strong>
             materia(s). Para más información seleccionar 
-            <em>Gestionar Materias, Listar solicitudes pendientes</em>.
+            <em>Gestión de asignaturas, Listar solicitudes creación pendientes</em>.
+        </p>
+    </div>
+</logic:present>
+
+<logic:present name="evaluaciones_pendientes">
+    <div class="alert alert-info alert-dismissable" 
+         id="alert-coord">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+            &times;
+        </button>
+        <p>
+            <strong>Atención: </strong> <br> 
+            Se ha(n) evaluado
+            <strong> <bean:write name="evaluaciones_pendientes"/> </strong>
+            profesor(es). Para más información seleccionar 
+            <em>Gestión de evaluaciones, Listar evaluaciones pendientes</em>.
         </p>
     </div>
 </logic:present>
@@ -32,7 +48,7 @@
                 <a id="link-dropdown" class="accordion-toggle" 
                    data-toggle="collapse" 
                    data-parent="#accordion" href="#collapseMaterias">
-                    Gestión de Materias
+                    Gestión de asignaturas
                 </a>
                 <a href="#" id="ayuda1" style="float: right" rel="popover"> 
                     <span class="glyphicon glyphicon-question-sign"></span> 
@@ -42,14 +58,14 @@
         <div id="collapseMaterias" class="panel-collapse collapse">
             <div class="panel-body">
                 <html:link action="/vistaAgregaMateria">
-                    <h5 align ="center">Agregar Materia</h5>
+                    <h5 align ="center">Agregar asignatura</h5>
                 </html:link>
                 <html:link action="/consultaMateria">
-                    <h5 align ="center">Consultar Materias</h5>
+                    <h5 align ="center">Consultar asignaturas</h5>
                 </html:link>
                 <logic:present name="solicitud_apertura_materia">
                     <html:link action="/consultaSolicitudesApertura"> 
-                        <h5 align ="center"> Listar Solicitudes Pendientes                                
+                        <h5 align ="center"> Listar solicitudes creación pendientes
                             <span class="badge">
                                 <bean:write name="solicitud_apertura_materia"/>
                             </span>
@@ -65,7 +81,7 @@
                 <a id="link-dropdown" class="accordion-toggle" 
                    data-toggle="collapse" 
                    data-parent="#accordion" href="#collapseProfesor">
-                    Gestión de Profesores
+                    Gestión de profesores
                 </a>
                 <a href="#" id="ayuda3" style="float: right" rel="popover"> 
                     <span class="glyphicon glyphicon-question-sign"></span> 
@@ -75,10 +91,10 @@
         <div id="collapseProfesor" class="panel-collapse collapse">
             <div class="panel-body">
                 <html:link action="/irAgregarProfesor">
-                    <h5 align ="center">Agregar Profesor</h5>
+                    <h5 align ="center">Agregar profesor</h5>
                 </html:link>
                 <html:link action="/consultarProfesores">
-                    <h5 align ="center">Consultar Profesores</h5>
+                    <h5 align ="center">Consultar profesores</h5>
                 </html:link>
             </div>
         </div>
@@ -89,7 +105,7 @@
                 <a id="link-dropdown" class="accordion-toggle" 
                    data-toggle="collapse" 
                    data-parent="#accordion" href="#collapseEvaluacion">
-                    Gestión de Evaluaciones
+                    Gestión de evaluaciones
                 </a>
                 <a href="#" id="ayuda2" style="float: right" rel="popover"> 
                     <span class="glyphicon glyphicon-question-sign"></span> 
@@ -98,14 +114,23 @@
         </div>
         <div id="collapseEvaluacion" class="panel-collapse collapse">
             <div class="panel-body">
-                <html:link action="/irEvaluarProfesores">
-                    <h5 align ="center">Evaluar Profesores</h5>
-                </html:link>
                 <html:link action="/ConsultaEstadoPlanillas">
                     <h5 align ="center">
-                        Gestionar Planillas de Evaluación de Profesores
+                        Gestión de planillas de evaluación
                     </h5>
                 </html:link>
+                <html:link action="/irEvaluarProfesores">
+                    <h5 align ="center">Evaluar profesores</h5>
+                </html:link>
+                <logic:present name="evaluaciones_pendientes">
+                    <html:link action="/listarEvaluacionesPendientes">
+                        <h5 align ="center">Listar Evaluaciones Pendientes
+                            <span class="badge">
+                                <bean:write name="evaluaciones_pendientes"/>
+                            </span>
+                        </h5>
+                    </html:link>
+                </logic:present>
             </div>
         </div>
     </div>

@@ -11,6 +11,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<logic:present name="ya_existe">
+    <div class="alert alert-danger" id="alert">
+        El nombre de decanato ya existe
+    </div>
+</logic:present>
+
 <html:form action="/cambiarNombreDecanatoA" acceptCharset="ISO-8859-1" 
            onsubmit="return(this)">
     <html:hidden name="Decanato" property="codigo"/>

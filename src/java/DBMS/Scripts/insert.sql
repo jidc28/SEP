@@ -158,12 +158,14 @@ INSERT INTO MATERIA VALUES ('CI6116','Sistemas de informacion II','4');
 INSERT INTO MATERIA VALUES ('CI1115','Sistemas de informacion I','4');
 INSERT INTO MATERIA VALUES ('CI5311','Bases de Datos II','4');
 insert into MATERIA values ('CI4357','Materia para Negar',4,'activo','visible','si');
+insert into MATERIA values ('TF1111','Materia desctivada',4,'desactivado','visible','si');
 
 INSERT INTO oferta VALUES ('CI6116','D-2022');
 INSERT INTO oferta VALUES ('CI1115','D-2022');
 INSERT INTO oferta VALUES ('CI5311','D-2022');
 INSERT INTO oferta VALUES ('CI6116','09-10219');
 INSERT INTO oferta VALUES ('CI5311','09-10219');
+INSERT INTO oferta VALUES ('TF1111','09-10219');
 
 INSERT INTO pertenece VALUES ('22-90457','09-10219');
 INSERT INTO pertenece VALUES ('28-63146','09-10219');
@@ -171,6 +173,7 @@ INSERT INTO pertenece VALUES ('84-73618','09-10219');
 INSERT INTO pertenece VALUES ('43-62893','09-10219');
 
 INSERT INTO maneja VALUES('09-10020','CI6116');
+INSERT INTO maneja VALUES('09-10020','CI5311');
 INSERT INTO maneja VALUES('C-0043','CI6116');
 INSERT INTO maneja VALUES('C-0001','CI6116');
 INSERT INTO maneja VALUES('C-0001','CI5311');
@@ -180,6 +183,7 @@ INSERT INTO dicta VALUES('22-90457','CI5311','SD');
 INSERT INTO dicta VALUES('28-63146','CI6116','SD');
 INSERT INTO dicta VALUES('84-73618','CI1115','SD');
 INSERT INTO dicta VALUES('43-62893','CI5311','SD');
+INSERT INTO dicta VALUES('28-63146','TF1111','SD');
 
 INSERT INTO se_adscribe VALUES('09-10020','1003');
 INSERT INTO se_adscribe VALUES('C-0001','1003');
@@ -235,3 +239,19 @@ INSERT INTO se_adscribe VALUES('C-0051','1001');
 INSERT INTO se_adscribe VALUES('C-0052','1001');
 
 insert into solicita_apertura values ('CI4357','09-10020','09-10219','Necesito apertura');
+
+insert into rendimiento values ('22-90457','CI6116','AJ','2008','20','3.2','7','2','4','4','3','0');
+insert into rendimiento values ('22-90457','CI6116','AJ','2005','20','3.2','7','2','4','4','3','0');
+insert into rendimiento values ('22-90457','CI5311','AJ','2005','20','3.2','7','2','4','4','3','0');
+insert into rendimiento values ('22-90457','CI6116','SD','2005','20','3.2','7','2','4','4','3','0');
+insert into rendimiento values ('22-90457','CI6116','AJ','2006','20','3.2','7','2','4','4','3','0');
+insert into rendimiento values ('22-90457','CI6116','AJ','2007','20','3.2','7','2','4','4','3','0');
+insert into rendimiento values ('28-63146','CI6116','SD','2007','20','3.2','7','2','4','4','3','0');
+
+insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2008','AJ','no','irresponsable');
+insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2005','AJ','si','responsable');
+insert into evaluado values ('09-10020','22-90457','CI5311','09-10219','2005','AJ','si','responsable');
+insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2005','SD','si','responsable');
+insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2006','AJ','no','irresponsable');
+insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2007','AJ','si','responsable');
+insert into evaluado values ('09-10020','28-63146','CI6116','09-10219','2007','SD','si','responsable');

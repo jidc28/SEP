@@ -19,9 +19,9 @@
         </button>
         <p>
             <strong>Atención: </strong> <br> 
-            Se solicitó evaluación de 
+            Se ha solicitado realizar
             <strong><bean:write name="evaluaciones_pendientes"/></strong> 
-            profesor(es). Para más información seleccionar 
+            evaluación(es). Para más información seleccionar 
             <em>Gestionar Evaluaciones</em>.
         </p>
     </div>
@@ -40,7 +40,7 @@
                 <a id="link-dropdown" class="accordion-toggle" 
                    data-toggle="collapse" 
                    data-parent="#accordion" href="#collapseDepartamentos">
-                    Gestión de Materias
+                    Gestión de asignaturas
                 </a>
                 <a href="#" id="ayuda1" style="float: right" rel="popover"> 
                     <span class="glyphicon glyphicon-question-sign"></span> 
@@ -49,34 +49,38 @@
         </div>
         <div id="collapseDepartamentos" class="panel-collapse collapse">
             <div class="panel-body">
-                <html:link action="/listarMaterias" >
-                    <h5 align ="center">Listar Materias Vinculadas</h5>
+                <html:link action="/irSolicitarAperturaMateria">
+                    <h5 align ="center">Solicitar creación de asignatura</h5>
                 </html:link>
                 <html:link action="/listarDepartamentos" >
-                    <h5 align ="center">Vincular Materias por Departamento</h5>
+                    <h5 align ="center">Vincular asignaturas por departamento</h5>
                 </html:link> 
-                <html:link action="/irSolicitarAperturaMateria">
-                    <h5 align ="center">Solicitar Apertura de Materia</h5>
+                <html:link action="/listarMaterias" >
+                    <h5 align ="center">Listar asignaturas vinculadas</h5>
                 </html:link>
             </div>
         </div>
     </div>
-    <logic:present name="evaluaciones_pendientes">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 id="izquierda" class="panel-title">
-                    <a id="link-dropdown" class="accordion-toggle" 
-                       data-toggle="collapse" 
-                       data-parent="#accordion" href="#collapseEvaluaciones">
-                        Gestionar Evaluaciones  
-                    </a>
-                    <a href="#" id="ayuda2" style="float: right" rel="popover"> 
-                        <span class="glyphicon glyphicon-question-sign"></span> 
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseEvaluaciones" class="panel-collapse collapse">
-                <div class="panel-body">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 id="izquierda" class="panel-title">
+                <a id="link-dropdown" class="accordion-toggle" 
+                   data-toggle="collapse" 
+                   data-parent="#accordion" href="#collapseEvaluaciones">
+                    Gestión de evaluaciones  
+                </a>
+                <a href="#" id="ayuda2" style="float: right" rel="popover"> 
+                    <span class="glyphicon glyphicon-question-sign"></span> 
+                </a>
+            </h4>
+        </div>
+        <div id="collapseEvaluaciones" class="panel-collapse collapse">
+            <div class="panel-body">
+                <html:link action="/consultarProfesoresCoordinacion">
+                    <h5 align ="center">Listar evaluaciones enviadas</h5>
+                </html:link>
+                <logic:present name="evaluaciones_pendientes">
                     <html:link action="/listarEvaluacionesPendientes">
                         <h5 align ="center">Listar evaluaciones pendientes                                
                             <span class="badge">
@@ -84,8 +88,8 @@
                             </span>
                         </h5>
                     </html:link>
-                </div>
+                </logic:present>
             </div>
         </div>
-    </logic:present>
+    </div>
 </div>

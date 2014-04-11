@@ -91,11 +91,20 @@ public class FinalizarSolicitudApertura extends org.apache.struts.action.Action 
             return mapping.findForward(FAILURE);
 
         } else {
-
+            Correo email = new Correo();
+            email.setAsunto("SEP - Solicitud Apertura Materia");
             if (materia.getSolicitud().equals("no")) {
                 System.out.println(materia.getCoordinacion());
+                email.setMensaje("Se ha solicitado la apertura de una materia a través del"
+                    + "\n Sistema de Evaluación de Profesores de la Universidad Simón Bolívar."
+                    + "\n\n Por favor, ingrese al sistema mediante el siguiente link:"
+                    + "\n\n LINK \n\n");
                 finalizada = DBMS.getInstance().aprobarSolicitudMateria(materia, usuario.getUsbid());
             } else {
+                email.setMensaje("Se ha solicitado la apertura de una materia a través del"
+                    + "\n Sistema de Evaluación de Profesores de la Universidad Simón Bolívar."
+                    + "\n\n Por favor, ingrese al sistema mediante el siguiente link:"
+                    + "\n\n LINK \n\n");
                 finalizada = DBMS.getInstance().negarSolicitudMateria(materia);
             }
 
@@ -104,7 +113,8 @@ public class FinalizarSolicitudApertura extends org.apache.struts.action.Action 
             } else {
                 request.setAttribute("solicitud_no_procesada", FAILURE);
             }
-
+            
+            //email.enviarNotificacion(usuario.getUsbid()+"usb.ve");
             materias = DBMS.getInstance().listarMateriasSolicitadasDepartamento(usuario.getUsbid());
 
             if (materias.isEmpty()) {

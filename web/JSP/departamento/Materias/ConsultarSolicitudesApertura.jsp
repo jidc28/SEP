@@ -23,7 +23,7 @@
     </div>
 </logic:present>
 
-<h4> Lista de Solicitudes de apertura de Materias:</h4>
+<h4> Solicitudes de creación de asignaturas </h4>
 
 <logic:notPresent name="vacio">
     <div id="tabla" class="table-responsive">

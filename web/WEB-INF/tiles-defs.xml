@@ -6,6 +6,151 @@
 
 <tiles-definitions>
 
+    <!-- DEFINICION GENERICA -->
+    <definition name="generico" path="/Plantilla/generico.jsp">
+        <put name="vista" value="/Plantilla/body.jsp"/>
+    </definition>
+    
+    <definition name="agrega_coordinacion_pagina" extends="generico">
+        <put name="vista" value="/JSP/admin/Coordinaciones/agrega_coordinacion_pagina.jsp"/>
+    </definition>
+    
+    <definition name="consulta_coordinacion_pagina" extends="generico">
+        <put name="vista" value="/JSP/admin/Coordinaciones/consulta_coordinacion_pagina.jsp"/>
+    </definition>
+    
+    <definition name="editar_coordinacion_pagina" extends="generico">
+        <put name="vista" value="/JSP/admin/Coordinaciones/editar_coordinacion_pagina.jsp"/>
+    </definition>
+
+    <definition name="agrega_decanato_pagina" extends="generico">
+        <put name="vista" value="/JSP/admin/Decanatos/agrega_decanato_pagina.jsp"/>
+    </definition>
+    
+    <definition name="consulta_decanato_pagina" extends="generico">
+        <put name="vista" value="/JSP/admin/Decanatos/consulta_decanato_pagina.jsp"/>
+    </definition>
+    
+    <definition name="edita_decanato_pagina" extends="generico">
+        <put name="vista" value="/JSP/admin/Decanatos/edita_decanato_pagina.jsp"/>
+    </definition>
+    
+    <definition name="agrega_departamento_pagina" extends="generico">
+        <put name="vista" value="/JSP/admin/Departamentos/agrega_departamento_pagina.jsp"/>
+    </definition>
+    
+    <definition name="consulta_departamento_pagina" extends="generico">
+        <put name="vista" value="/JSP/admin/Departamentos/consulta_departamento_pagina.jsp"/>
+    </definition>
+    
+    <definition name="edita_departamento_pagina" extends="generico">
+        <put name="vista" value="/JSP/admin/Departamentos/edita_departamento_pagina.jsp"/>
+    </definition>
+    
+    <definition name="listar_evaluaciones_pendientes_pagina" extends="generico">
+        <put name="vista" value="/JSP/coordinacion/Evaluaciones/listar_evaluaciones_pendientes_pagina.jsp"/>
+    </definition>
+    
+    <definition name="obtener_evaluaciones_pagina" extends="generico">
+        <put name="vista" value="/JSP/coordinacion/Evaluaciones/obtener_evaluaciones_pagina.jsp"/>
+    </definition>
+    
+    <definition name="consulta_materia_coordinacion_pagina" extends="generico">
+        <put name="vista" value="/JSP/coordinacion/Materias/consulta_materia_pagina.jsp"/>
+    </definition>
+    
+    <definition name="solicitar_apertura_pagina" extends="generico">
+        <put name="vista" value="/JSP/coordinacion/Materias/solicitar_apertura_pagina.jsp"/>
+    </definition>
+    
+    <definition name="agrega_materia_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Materias/agrega_materia_pagina.jsp"/>
+    </definition>
+    
+    <definition name="consulta_materia_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Materias/consulta_materia_pagina.jsp"/>
+    </definition>
+    
+    <definition name="consulta_solicitud_apertura_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Materias/consulta_solicitud_apertura_pagina.jsp"/>
+    </definition>
+    
+    <definition name="modifica_materia_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Materias/modifica_materia_pagina.jsp"/>
+    </definition>
+    
+    <definition name="modifica_status_apertura_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Materias/modifica_status_apertura_pagina.jsp"/>
+    </definition>
+    
+    <definition name="agregar_profesor_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/agregar_profesor_pagina.jsp"/>
+    </definition>
+    
+    <definition name="consulta_profesores_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/consulta_profesores_pagina.jsp"/>
+    </definition>
+    
+    <definition name="modifica_profesor_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/modifica_profesor_pagina.jsp"/>
+    </definition>
+    
+    <definition name="listar_materias_asignadas_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/listar_materias_asignadas_pagina.jsp"/>
+    </definition>
+    
+    <definition name="asignar_materia_profesor_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/asignar_materia_profesor_pagina.jsp"/>
+    </definition>
+    
+    <definition name="asignar_periodo_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/asignar_periodo_pagina.jsp"/>
+    </definition>
+    
+    <definition name="consulta_estado_planillas_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/consulta_estado_planillas_pagina.jsp"/>
+    </definition>
+    
+    <definition name="llenar_planillas_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/llenar_planillas_pagina.jsp"/>
+    </definition>
+    
+    <definition name="ver_planillas_llenas_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/ver_planillas_llenas_pagina.jsp"/>
+    </definition>
+    
+    <definition name="ver_planilla_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/ver_planilla_pagina.jsp"/>
+    </definition>
+    
+    <definition name="evaluar_profesores_pagina" extends="generico">
+        <put name="vista" value="/JSP/departamento/Profesores/evaluar_profesores_pagina.jsp"/>
+    </definition>
+    
+    <definition name="modificar_informacion_pagina" extends="generico">
+        <put name="vista" value="/JSP/profesor/modificar_informacion_pagina.jsp"/>
+    </definition>
+    
+    <definition name="listar_evaluaciones_enviadas_profesor_pagina" extends="generico">
+        <put name="vista" value="/JSP/coordinacion/Evaluaciones/listar_evaluaciones_enviadas_profesor_pagina.jsp"/>
+    </definition>
+    
+    <definition name="listar_evaluaciones_enviadas_ano_pagina" extends="generico">
+        <put name="vista" value="/JSP/coordinacion/Evaluaciones/listar_evaluaciones_enviadas_ano_pagina.jsp"/>
+    </definition>
+    
+    <definition name="listar_evaluaciones_enviadas_pagina" extends="generico">
+        <put name="vista" value="/JSP/coordinacion/Evaluaciones/listar_evaluaciones_enviadas_pagina.jsp"/>
+    </definition>
+    
+    <definition name="listar_coordinaciones_pagina" extends="generico">
+        <put name="vista" value="/JSP/decanato/Evaluaciones/listar_coordinaciones_pagina.jsp"/>
+    </definition>
+    
+    <definition name="sesion_expirada" extends="generico">
+        <put name="vista" value="/JSP/sesion_expirada.jsp"/>
+    </definition>
+    
     <!-- DEFINICION BASE -->
     <definition name="base" path="/Plantilla/plantilla.jsp">
         <put name="css" value="/JSP/general-css.jsp"/>
@@ -13,10 +158,19 @@
         <put name="banner" value="/Plantilla/banner.jsp"/>
         <put name="body" value="/Plantilla/body.jsp"/>
         <put name="sidebarR" value="/Plantilla/sidebarR.jsp"/>
+        <put name="sidebarL" value="/Plantilla/sidebarsL/sideLProfesor.jsp"/>
         <put name="footer" value="/Plantilla/footer.jsp"/>
     </definition>
+    
+    <!-- creo que esto NO hace falta -->
     <definition name="footer" path="/Plantillas/footer.jsp"/>
 
+    <!-- DEFINICION PLANTILLA DE USUARIO NO AUTORIZADO -->
+    <definition name="noAutorizado" path="/Plantilla/noAutorizado.jsp">
+        <put name="css" value="/JSP/general-css.jsp"/>
+        <put name="script" value="/JSP/general-script.jsp"/>
+        <put name="body" value="/JSP/NoAutorizado.jsp"/>
+    </definition>
     
     <!-- ADMINISTRADOR -->
     
@@ -34,18 +188,18 @@
     <!-- ADMINISTRADOR / COORDINACIONES -->
           
     <!-- 1. Agregar una coordinacion -->
-    <definition name="agregaCoordinacion" extends="baseAdmin">
+    <definition name="agregaCoordinacionAdmin" extends="baseAdmin">
         <put name="body" value="/JSP/admin/Coordinaciones/AgregaCoordinacion.jsp"/>
     </definition>
     
     <!-- 2. Consultar coordinaciones -->
-    <definition name="consultaCoordinacion" extends="baseAdmin">
+    <definition name="consultaCoordinacionAdmin" extends="baseAdmin">
         <put name="script" value="/JSP/admin/scripts/consulta-coordinacion-script.jsp"/>
         <put name="body" value="/JSP/admin/Coordinaciones/ConsultaCoordinacion.jsp"/>
     </definition>
     
     <!-- 3. Editar una coordinacion -->
-    <definition name="editarNombreCoordinacion" extends="baseAdmin">
+    <definition name="editarNombreCoordinacionAdmin" extends="baseAdmin">
         <put name="body" value="/JSP/admin/Coordinaciones/EditarCoordinacion.jsp"/>
     </definition>
     
@@ -99,6 +253,31 @@
         <put name="body" value="/JSP/decanato/VistaDecanato.jsp"/>
     </definition>
 
+    <definition name="agregaCoordinacionDecanato" extends="baseDecanato">
+        <put name="body" value="/JSP/admin/Coordinaciones/AgregaCoordinacion.jsp"/>
+    </definition>
+    
+    <definition name="consultaCoordinacionDecanato" extends="baseDecanato">
+        <put name="script" value="/JSP/admin/scripts/consulta-coordinacion-script.jsp"/>
+        <put name="body" value="/JSP/admin/Coordinaciones/ConsultaCoordinacion.jsp"/>
+    </definition>
+    
+    <definition name="editarNombreCoordinacionDecanato" extends="baseDecanato">
+        <put name="body" value="/JSP/admin/Coordinaciones/EditarCoordinacion.jsp"/>
+    </definition>
+
+    <!-- DECANATO / EVALUACIONES -->
+    
+    <!-- 1. Listar las coordinaciones adscritas -->
+    <definition name="listarCoordinaciones" extends="baseDecanato">
+        <put name="body" value="/JSP/decanato/Evaluaciones/ListarCoordinaciones.jsp"/>
+    </definition>
+
+    <!-- 2. Listar las evaluaciones prendientes de materias -->
+    <definition name="listarEvaluacionesPendientesDecanato" extends="baseDecanato">
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/ListarEvaluacionesPendientes.jsp"/>
+    </definition>
+    
 
     <!-- PROFESOR -->
     
@@ -113,7 +292,7 @@
     </definition>
     
     <!-- 1. Modificar informacion del profesor -->
-    <definition name="modificarInfoP" extends="baseProfesor">
+    <definition name="modificarInformacion" extends="baseProfesor">
         <put name="script" value="/JSP/profesor/scripts/modificar-informacion-script.jsp"/>
         <put name="css" value="/JSP/profesor/css/modificar-informacion-css.jsp"/>
         <put name="body" value="/JSP/profesor/ModificarInformacion.jsp"/>
@@ -124,7 +303,7 @@
     
     <!-- Archivo base para el departamento -->
     <definition name="baseDepartamento" extends="base"> 
-        <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDecanato.jsp"/>
+        <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDepartamento.jsp"/>
     </definition>
 
     <!-- Vista del departamento -->
@@ -146,7 +325,7 @@
         <put name="body" value="/JSP/departamento/Materias/ConsultaMateria.jsp"/>
     </definition>
 
-    <!-- 3. Consultar las colicitudes pendientes de apertura de materias -->
+    <!-- 3. Consultar las solicitudes pendientes de apertura de materias -->
     <definition name="consultaSolicitudesApertura" extends="baseDepartamento">
         <put name="css" value="/JSP/consulta-css.jsp"/>
         <put name="body" value="/JSP/departamento/Materias/ConsultarSolicitudesApertura.jsp"/>
@@ -189,38 +368,57 @@
     <!-- 5. Consulta de profesores -->
     <definition name="consultaProfesores" extends="baseDepartamento">
         <put name="css" value="/JSP/consulta-css.jsp"/>
+        <put name="script" value="/JSP/departamento/scripts/consulta-profesores-script.jsp"/>
         <put name="body" value="/JSP/departamento/Profesores/ConsultaProfesores.jsp"/>
     </definition>
        
     <!-- 6. Evaluar profesores -->
-    <definition name="consultaProfesor" extends="baseDepartamento">
+    <definition name="consultaProfesorAEvaluar" extends="baseDepartamento">
         <put name="css" value="/JSP/consulta-css.jsp"/>
         <put name="script" value="/JSP/departamento/scripts/evaluar-profesores-script.jsp"/>
         <put name="body" value="/JSP/departamento/Profesores/EvaluarProfesores.jsp"/>
     </definition>
 
-    <!-- 7. Llenar las planillas de un determinado profesor -->
+    <!-- 7. Listar las materias asignadas a un profesor -->
+    <definition name="listarMateriasAsignadas" extends="baseDepartamento">
+        <put name="script" value="/JSP/departamento/scripts/listar-materias-asignadas-script.jsp"/>
+        <put name="body" value="/JSP/departamento/Profesores/ListarMateriasAsignadas.jsp"/>
+    </definition>
+
+    <!-- 8. Llenar las planillas de un determinado profesor -->
     <definition name="llenarPlanillas" extends="baseDepartamento">
         <put name="script" value="/JSP/departamento/scripts/llenar-planillas-script.jsp"/>
         <put name="body" value="/JSP/departamento/Profesores/LlenarPlanillas.jsp"/>
     </definition>
 
-    <!-- 8. Ver las planillas de un determinado profesor -->
+    <!-- 9. Modificar un profesor -->
+    <definition name="modificarProfesor" extends="baseDepartamento"> 
+        <put name="body" value="/JSP/departamento/Profesores/ModificarProfesor.jsp"/>
+    </definition>
+
+    <!-- 10. Ver las planillas de un determinado profesor -->
     <definition name="verPlanilla" extends="baseDepartamento"> 
         <put name="body" value="/JSP/departamento/Profesores/VerPlanilla.jsp"/>
     </definition>
 
-    <!-- 9. Ver las planillas previamente llenadas de un profesor -->
+    <!-- 11. Ver las planillas previamente llenadas de un profesor -->
     <definition name="verPlanillasLlenas" extends="baseDepartamento">
+        <put name="script" value="/JSP/departamento/scripts/ver-planillas-llenas-script.jsp"/>
         <put name="body" value="/JSP/departamento/Profesores/VerPlanillasLlenas.jsp"/>
     </definition>
 
+    <!-- DEPARTAMENTO / EVALUACIONES --> 
+
+    <!-- 1. Listar las evaluaciones prendientes de materias -->
+    <definition name="listarEvaluacionesPendientesDepartamento" extends="baseDepartamento">
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/ListarEvaluacionesPendientes.jsp"/>
+    </definition>
 
     <!-- COORDINACION -->
     
     <!-- Archivo base para la coordinacion -->
     <definition name="baseCoordinacion" extends="base">
-        <put name="sidebarL" value="/Plantilla/sidebarsL/sideLDecanato.jsp"/>
+        <put name="sidebarL" value="/Plantilla/sidebarsL/sideLCoordinacion.jsp"/>
     </definition>
     
     <!-- Vista principal de la coordinacion -->
@@ -238,21 +436,46 @@
     
     <!-- COORDINACION / EVALUACIONES -->
   
-    <!-- 1. Listar las evaluaciones prendientes de materias -->
+    <!-- 1. Listar las evaluaciones enviadas de profesores -->
+    <definition name="listarEvaluacionesEnviadas" extends="baseCoordinacion">
+        <put name="css" value="/JSP/consulta-css.jsp"/>
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/ListarEvaluacionesEnviadas.jsp"/>
+    </definition>
+
+    <!-- 2. Listar las evaluaciones enviadas de profesores -->
+    <definition name="listarEvaluacionesEnviadasAno" extends="baseCoordinacion">
+        <put name="css" value="/JSP/consulta-css.jsp"/>
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/ListarEvaluacionesEnviadasAno.jsp"/>
+    </definition>
+
+    <!-- 3. Listar las evaluaciones enviadas de profesores -->
+    <definition name="listarEvaluacionesEnviadasProfesor" extends="baseCoordinacion">
+        <put name="css" value="/JSP/consulta-css.jsp"/>
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/ListarEvaluacionesEnviadasProfesor.jsp"/>
+    </definition>
+    
+    <!-- 4. Listar las evaluaciones prendientes de materias -->
     <definition name="listarEvaluacionesPendientes" extends="baseCoordinacion">
         <put name="body" value="/JSP/coordinacion/Evaluaciones/ListarEvaluacionesPendientes.jsp"/>
     </definition>
     
-    <!-- 2. Obtener la evaluacion de una materia -->
+    <!-- 5. Obtener la evaluacion de una materia -->
     <definition name="obtenerEvaluacion" extends="baseCoordinacion">
         <put name="css" value="/JSP/consulta-css.jsp"/>
+        <put name="script" value="/JSP/coordinacion/scripts/obtener-evaluaciones-script.jsp"/>
         <put name="body" value="/JSP/coordinacion/Evaluaciones/ObtenerEvaluaciones.jsp"/>
+    </definition>
+
+    <!-- 6. Graficar el rendimiento del profesor -->
+    <definition name="graficarRendimiento" extends="baseCoordinacion">
+        <put name="script" value="/JSP/coordinacion/scripts/graficar-rendimiento-script.jsp"/>
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/graficarRendimiento.jsp"/>
     </definition>
   
     <!-- COORDINACION / MATERIAS -->
         
     <!-- 1. Consultar materias-->
-    <definition name="consultaMaterias" extends="baseCoordinacion">
+    <definition name="consultaMateriaCoordinacion" extends="baseCoordinacion">
         <put name="css" value="/JSP/consulta-css.jsp"/>
         <put name="body" value="/JSP/coordinacion/Materias/ConsultaMateria.jsp"/>
     </definition>

@@ -9,7 +9,16 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%    
+    if (session.getAttribute("usuario") == null) {
+%>
+<tiles:insert definition="baseAdmin"/>
+<script>
+    login()
+</script>
+<%    
+    } else {
+%>
 <div class="panel-group" id="accordion">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -77,4 +86,6 @@
             </div>
         </div>
     </div>
-</div>
+<% 
+    }
+%>

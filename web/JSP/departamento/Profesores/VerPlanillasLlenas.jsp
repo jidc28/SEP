@@ -27,68 +27,83 @@
     </div>
 </h4>   
 
-<div id="tabla" class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <th style="font-size: 14px;">
-                <center>TRIMESTRE</center>
-            </th>
-            <th style="font-size: 14px;">
-                <center> AÑO </center>
-            </th>
-            <th style="font-size: 14px;">
-                <center> CÓDIGO </center>
-            </th>
-            <th style="font-size: 14px;">
-                <center> VER DETALLES </center>
-            </th>
-        </thead>
-        <tbody>
-            <logic:iterate name="rendimiento" id="RendimientoProf" >
-                <tr>
-                    <td>
-                        <center>
-                            <logic:equal name="RendimientoProf" 
-                                         property="trimestre" value="EM">
-                                Ene-Mar
-                            </logic:equal>
-                            <logic:equal name="RendimientoProf" 
-                                         property="trimestre" value="AJ">
-                                Abr-Jul
-                            </logic:equal>
-                            <logic:equal name="RendimientoProf" 
-                                         property="trimestre" value="V">
-                                Intensivo
-                            </logic:equal>
-                            <logic:equal name="RendimientoProf" 
-                                         property="trimestre" value="SD">
-                                Sep-Dic
-                            </logic:equal>
-                        </center>
-                    </td>
-                    <td>
-                        <center>
-                            <bean:write name="RendimientoProf" property="ano"/>
-                        </center>
-                    </td>
-                    <td style="text-align: left;">
-                        <bean:write name="RendimientoProf" property="codigo_materia"/>,
-                        <bean:write name="RendimientoProf" property="nombre_materia"/>
-                    </td>
-                    <td>
-                        <center>
-                            <html:form action="/verPlanilla" style="margin: 0px;">
-                                <html:hidden name="RendimientoProf" 
-                                             property="codigo_materia"/>
-                                <html:submit styleClass="btn btn-info"
-                                             style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
-                                    Ver detalles
-                                </html:submit>
-                            </html:form>
-                        </center>
-                    </td>
-                </tr>
-        </logic:iterate>
-        </tbody>
-    </table>
-</div>
+<logic:empty name="rendimiento">
+    <div class="alert alert-warning alert-dismissable" 
+        id="alert-coord">
+        <a href="#" id="ayuda1" style="color: #c09853; float: right" rel="popover" > 
+            <span style="color: #c09853;" class="glyphicon glyphicon-question-sign">     
+            </span> 
+        </a>
+        <p>
+            No existen planillas llenas, verifique haber llenado alguna planilla.
+        </p>
+    </div>
+</logic:empty>
+        
+<logic:notEmpty name="rendimiento">
+    <div id="tabla" class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <th style="font-size: 14px;">
+                    <center>TRIMESTRE</center>
+                </th>
+                <th style="font-size: 14px;">
+                    <center> AÑO </center>
+                </th>
+                <th style="font-size: 14px;">
+                    <center> CÓDIGO </center>
+                </th>
+                <th style="font-size: 14px;">
+                    <center> VER DETALLES </center>
+                </th>
+            </thead>
+            <tbody>
+                <logic:iterate name="rendimiento" id="RendimientoProf" >
+                    <tr>
+                        <td>
+                            <center>
+                                <logic:equal name="RendimientoProf" 
+                                             property="trimestre" value="EM">
+                                    Ene-Mar
+                                </logic:equal>
+                                <logic:equal name="RendimientoProf" 
+                                             property="trimestre" value="AJ">
+                                    Abr-Jul
+                                </logic:equal>
+                                <logic:equal name="RendimientoProf" 
+                                             property="trimestre" value="V">
+                                    Intensivo
+                                </logic:equal>
+                                <logic:equal name="RendimientoProf" 
+                                             property="trimestre" value="SD">
+                                    Sep-Dic
+                                </logic:equal>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <bean:write name="RendimientoProf" property="ano"/>
+                            </center>
+                        </td>
+                        <td style="text-align: left;">
+                            <bean:write name="RendimientoProf" property="codigo_materia"/>,
+                            <bean:write name="RendimientoProf" property="nombre_materia"/>
+                        </td>
+                        <td>
+                            <center>
+                                <html:form action="/verPlanilla" style="margin: 0px;">
+                                    <html:hidden name="RendimientoProf" 
+                                                 property="codigo_materia"/>
+                                    <html:submit styleClass="btn btn-info"
+                                                 style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
+                                        Ver detalles
+                                    </html:submit>
+                                </html:form>
+                            </center>
+                        </td>
+                    </tr>
+            </logic:iterate>
+            </tbody>
+        </table>
+    </div>
+</logic:notEmpty>

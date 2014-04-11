@@ -37,3 +37,25 @@
         });  
     }); 
 </script>
+
+<logic:present name="gestion_decanatos">
+    <script>
+        $(function() {
+            $('#collapseThree').addClass('in'); 
+        });
+    </script>
+</logic:present>
+<logic:present name="gestion_departamentos">
+    <script>
+        $(function() {
+            $('#collapseOne').addClass('in'); 
+        });
+    </script>
+</logic:present>
+<logic:present name="gestion_coordinaciones">
+    <script>
+        $(function() {
+            $('#collapseFour').addClass('in'); 
+        });
+    </script>
+</logic:present>

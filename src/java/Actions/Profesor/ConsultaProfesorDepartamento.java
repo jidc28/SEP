@@ -4,8 +4,8 @@
  */
 package Actions.Profesor;
 
+import Clases.*;
 import DBMS.DBMS;
-import Clases.Profesor;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +22,6 @@ public class ConsultaProfesorDepartamento extends org.apache.struts.action.Actio
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
-    private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -40,10 +39,10 @@ public class ConsultaProfesorDepartamento extends org.apache.struts.action.Actio
             throws Exception {
 
         HttpSession session = request.getSession(true);
-        String id_departamento = (String) session.getAttribute("usbid");
-        //obtengo una lista de decanatos registrados
-        ArrayList<Profesor> profesores =
-                DBMS.getInstance().listarProfesoresDepartamento(id_departamento);
+        String id = (String) session.getAttribute("usbid");
+
+        ArrayList<Profesor> profesores = 
+                DBMS.getInstance().listarProfesoresDepartamento(id);
 
         if (profesores.isEmpty()) {
             request.setAttribute("vacio", SUCCESS);

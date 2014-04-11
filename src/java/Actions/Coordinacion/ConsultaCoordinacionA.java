@@ -21,7 +21,8 @@ import org.apache.struts.action.ActionMapping;
 public class ConsultaCoordinacionA extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
-    private static final String SUCCESS = "success";
+    private static final String FAILURE = "failure";
+    private static final String SESION_EXPIRADA = "sesion_expirada";
 
     /**
      * This is the action called from the Struts framework.
@@ -39,34 +40,49 @@ public class ConsultaCoordinacionA extends org.apache.struts.action.Action {
             throws Exception {
 
         HttpSession session = request.getSession(true);
-        ArrayList<Coordinacion> coords = null;
-        ArrayList<Decanato> decanatos = null;
-
         Usuario usuario = (Usuario) session.getAttribute("usuario");
+
+        /* En caso de haber expirado la sesion se direcciona a la vista que
+         * le indica al usuario que debe volver a iniciar sesion. */
+        if (usuario == null) {
+            return mapping.findForward(SESION_EXPIRADA);
+        }
+
         String tipousuario = usuario.getTipousuario();
 
-        //obtengo una lista de coords registradas
+        ArrayList<Coordinacion> coords = null;
+        ArrayList<Decanato> decanatos;
 
+        /* Se obtiene la lista de coordinaciones registradas de acuerdo
+         * al tipo de usuario que solicita el listado de coordinaciones*/
         if (tipousuario.equals("administrador")) {
 
             Decanato decanato = (Decanato) form;
             if (decanato.getNombre() != null) {
                 System.out.println(decanato.getNombre());
                 decanato.setCodigo(DBMS.getInstance().obtenerCodigoDecanato(decanato));
-                coords = DBMS.getInstance().listarCoordinacionesAdscritas(decanato.getCodigo());
-                session.setAttribute("codigoDecanatoActual",decanato.getCodigo());
+                coords = DBMS.getInstance().listarCoordinacionesAdscritas(decanato.getCodigo(), null);
+                session.setAttribute("codigoDecanatoActual", decanato.getCodigo());
             }
 
             decanatos = DBMS.getInstance().listarDecanatos();
             request.setAttribute("decanatos", decanatos);
         } else if (tipousuario.equals("decanato")) {
-            coords = DBMS.getInstance().listarCoordinacionesAdscritas(usuario.getUsbid());
+
+            coords = DBMS.getInstance().listarCoordinacionesAdscritas(usuario.getUsbid(), "contar");
         }
 
-        //si existen coords registradas
-
-        //retorno a pagina de exito
+        /* Envio del listado de coordinaciones a la vista correspondiente */
         request.setAttribute("coordinaciones", coords);
-        return mapping.findForward(SUCCESS);
+        
+        /* Si el tipo del usuario es administrador o decanato se le autoriza
+         * la realizacion de esta operacion, en caso contrario se direcciona
+         * a la vista que le notifica que no esta autorizado para realizar
+         * dicha operacion */
+        if (tipousuario.equals("administrador") || tipousuario.equals("decanato")) {
+            return mapping.findForward(tipousuario);
+        } else {
+            return mapping.findForward(FAILURE);
+        }
     }
 }

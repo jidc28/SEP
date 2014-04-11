@@ -12,28 +12,47 @@
 
 <h4>Evaluaciones Pendientes</h4>
 <center>
+    
+<logic:empty name="evaluaciones_pendientes">
+    <div class="alert alert-warning alert-dismissable" 
+        id="alert-coord">
+<!--        <a href="#" id="ayuda1" style="color: #c09853; float: right" rel="popover" > 
+                <span style="color: #c09853;" class="glyphicon glyphicon-question-sign">     
+                </span> 
+        </a>-->
+        <p>
+            En este momento no existen evaluaciones pendientes.
+        </p>
+    </div>     
+</logic:empty>
+<logic:notEmpty name="evaluaciones_pendientes">
     <div class="table-responsive" id="tabla">
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>
                         <center>
-                            Materia
+                            MATERIA
                         </center>
                     </th>
                     <th>
                         <center>
-                            usbid
+                            USBID
                         </center>
                     </th>
                     <th>
                         <center>
-                            Profesor
+                            PROFESOR
                         </center>
                     </th>
                     <th>
                         <center>
-                            Obtener Evaluacion
+                            POR MATERIA
+                        </center>
+                    </th>
+                    <th>
+                        <center>
+                            POR PROFESOR
                         </center>
                     </th>
                 </tr>
@@ -61,17 +80,47 @@
                                 <bean:write name="evaluacion" 
                                             property="primerProfesor.nombre"/>
                             </td>
-                            <td rowspan="<bean:write name="evaluacion" 
-                                        property="numeroMateria"/>">
+                            <td>
                                 <center>
-                                    <html:form action="/obtenerEvaluacion" 
-                                               onsubmit="return(this)"
+                                    <html:form action="/graficarRendimiento"
                                                style="margin: 0px;">
-                                        <html:hidden name="evaluacion" 
-                                                     property="codigoMateria"/>
-                                        <html:submit styleClass="btn btn-primary">
-                                            Obtener evaluacion
+                                        <html:hidden name="dicta" property="usbidProfesor"
+                                                     value="${evaluacion.getPrimerProfesor().getUsbid()}"/>
+                                        <html:hidden name="dicta" property="codigoMateria"
+                                                     value="${evaluacion.getCodigoMateria()}"/>
+                                        <html:submit styleClass="btn btn-default"
+                                                     style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                                Ver rendimiento
                                         </html:submit>
+                                    </html:form>
+                                </center>
+                            </td>
+                            <td>
+                                <center>
+                                    <html:form action="/hacerEvaluacion" 
+                                        onsubmit="return(this)"
+                                        style="margin: 0px;">
+                                        <html:hidden name="dicta" 
+                                            property="codigoMateria"
+                                            value="${evaluacion.getCodigoMateria()}"/>
+                                        <html:hidden name="dicta"
+                                            property="usbidProfesor"
+                                            value="${evaluacion.getPrimerProfesor().getUsbid()}"/>
+                                        <html:hidden name="dicta"
+                                                     property="opcion"
+                                                     value="pendiente"/>
+                                        <logic:notPresent name="solo_lectura">
+                                            <html:submit styleClass="btn btn-info"
+                                                         style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                                    Hacer evaluación
+                                            </html:submit>
+                                        </logic:notPresent>
+                                        <logic:present name="solo_lectura">
+                                            <html:submit styleClass="btn btn-info"
+                                                     style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                                Ver evaluación
+                                            </html:submit>
+                                        </logic:present>
                                     </html:form>
                                 </center>
                             </td>
@@ -79,7 +128,7 @@
                     <logic:iterate name="evaluacion" property="profesores" 
                                    id="profesores">
                         <tr>
-                            <td>
+                        <td>
                         <center>
                             <bean:write name="profesores" property="usbid"/>
                         </center>
@@ -88,6 +137,50 @@
                             <bean:write name="profesores" property="apellido"/>,
                             <bean:write name="profesores" property="nombre"/>
                         </td>
+                        <td>
+                                <center>
+                                    <html:form action="/graficarRendimiento"
+                                               style="margin: 0px;">
+                                        <html:hidden name="dicta" property="usbidProfesor"
+                                                     value="${profesores.getUsbid()}"/>
+                                        <html:hidden name="dicta" property="codigoMateria"
+                                                     value="${evaluacion.getCodigoMateria()}"/>
+                                        <html:submit styleClass="btn btn-default"
+                                                     style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                                Ver rendimiento
+                                        </html:submit>
+                                    </html:form>
+                                </center>
+                        </td>
+                        <td>
+                            <center>
+                                <html:form action="/hacerEvaluacion" 
+                                    onsubmit="return(this)"
+                                    style="margin: 0px;">
+                                    <html:hidden name="dicta" 
+                                        property="codigoMateria"
+                                        value="${evaluacion.getCodigoMateria()}"/>
+                                    <html:hidden name="dicta"
+                                        property="usbidProfesor"
+                                        value="${profesores.getUsbid()}"/>
+                                    <html:hidden name="dicta"
+                                                     property="opcion"
+                                                     value="pendiente"/>
+                                    <logic:notPresent name="solo_lectura">
+                                        <html:submit styleClass="btn btn-info"
+                                                     style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                                Hacer evaluación
+                                        </html:submit>
+                                    </logic:notPresent>
+                                    <logic:present name="solo_lectura">
+                                        <html:submit styleClass="btn btn-info"
+                                                 style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                            Ver evaluación
+                                        </html:submit>
+                                    </logic:present>
+                                </html:form>
+                            </center>
+                        </td>
                         </tr>
                     </logic:iterate>
                 </logic:iterate>
@@ -95,4 +188,5 @@
             </tbody>
         </table>
     </div>
+</logic:notEmpty>
 </center>

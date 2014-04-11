@@ -20,6 +20,7 @@ public class Profesor extends org.apache.struts.action.ActionForm {
 
     private static final String patronEmail = "^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private String usbid;
+    private String usbidViejo;
     private String nombre;
     private String apellido;
     private String cedula;
@@ -34,6 +35,14 @@ public class Profesor extends org.apache.struts.action.ActionForm {
     private Pattern patron;
     private Matcher match;
 
+    public String getUsbidViejo() {
+        return usbidViejo;
+    }
+
+    public void setUsbidViejo(String usbidViejo) {
+        this.usbidViejo = usbidViejo;
+    }
+    
     public String[] getNiveles() {
         return niveles;
     }
@@ -160,6 +169,39 @@ public class Profesor extends org.apache.struts.action.ActionForm {
         }
 
         if (!validarEmail(this.email_personal)) {
+            errors.add("email", new ActionMessage("error.email.malformulado"));
+        }
+
+        return errors;
+    }
+    
+    public ActionErrors validateAgregar(ActionMapping mapping, HttpServletRequest request) {
+        ActionErrors errors = new ActionErrors();
+
+        try {
+            Integer.parseInt(getCedula());
+        } catch (Exception e) {
+            e.printStackTrace();
+            errors.add("cedula", new ActionMessage("error.cedula.malformulada"));
+        }
+        
+        if (this.usbid == "") {
+            errors.add("usbid", new ActionMessage("error.usbid.required"));
+        }
+        
+        if (this.nombre == ""){
+            errors.add("nombre", new ActionMessage("error.nombre.required"));
+        }
+        
+        if (this.apellido == ""){
+            errors.add("apellido", new ActionMessage("error.apellido.required"));
+        }
+        
+        if (this.genero == null) {
+            errors.add("genero", new ActionMessage("error.genero.required"));
+        }
+
+        if (!validarEmail(this.email)) {
             errors.add("email", new ActionMessage("error.email.malformulado"));
         }
 
