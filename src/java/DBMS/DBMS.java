@@ -1863,4 +1863,21 @@ public class DBMS {
         }
         return false;
     }
+    
+    public boolean pathArchivos(String usbid, String path){
+        PreparedStatement ps;
+        try{
+            ps = conexion.prepareStatement("INSERT INTO directorios "
+                    + "(usbid_profesor,path) VALUES (?,?)");
+            ps.setString(1,usbid);
+            ps.setString(2,path);
+            
+            Integer j = ps.executeUpdate();
+            
+            return j > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 }
