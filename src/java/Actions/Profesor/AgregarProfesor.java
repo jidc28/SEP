@@ -44,14 +44,14 @@ public class AgregarProfesor extends org.apache.struts.action.Action {
         HttpSession session = request.getSession(true);
         String id_departamento = (String) session.getAttribute("usbid");
 
-//        ActionErrors error = new ActionErrors();
-//        error = profesor.validateAgregar(mapping, request);
+        ActionErrors error = new ActionErrors();
+        error = profesor.validateAgregar(mapping, request);
 
 
-//        if (error.size() != 0) {          
-//            saveErrors(request, error);
-//            return mapping.findForward(FAILURE);
-//        } else {
+        if (error.size() != 0) {          
+            saveErrors(request, error);
+            return mapping.findForward(FAILURE);
+        } else {
 
             profesor.setEmail(profesor.getUsbid() + "@usb.ve");
             boolean agregado = 
@@ -65,6 +65,6 @@ public class AgregarProfesor extends org.apache.struts.action.Action {
             session.setAttribute("profesores",profesores);
 
             return mapping.findForward(SUCCESS);
-//        }
+        }
     }
 }

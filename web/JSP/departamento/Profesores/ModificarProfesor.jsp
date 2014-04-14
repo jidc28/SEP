@@ -21,12 +21,22 @@
                     <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
                                name="profesor" property="usbid"/>
                 </td>
+                <td style="color: red">
+                    <label style="color: red;">
+                    <html:errors property="usbid" />
+                    </label>
+                </td>
             </tr>
             <tr style="height: 35px;">
                 <td style="font-size: 14px;"><strong>CÉDULA</strong></td>
                 <td>
                     <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
                                name="profesor" property="cedula"/>
+                </td>
+                <td style="color: red">
+                    <label style="color: red;">
+                    <html:errors property="cedula" />
+                    </label>
                 </td>
             </tr>
             <tr style="height: 35px;">
@@ -35,12 +45,22 @@
                     <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
                                name="profesor" property="nombre"/>
                 </td>
+                <td style="color: red">
+                    <label style="color: red;">
+                    <html:errors property="nombre" />
+                    </label>
+                </td>
             </tr>
             <tr style="height: 35px;">
                 <td style="font-size: 14px;"><strong> APELLIDO</strong> </td>
                 <td>
                     <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
                                name="profesor" property="apellido"/>
+                </td>
+                <td style="color: red">
+                    <label style="color: red;">
+                    <html:errors property="apellido" />
+                    </label>
                 </td>
             </tr>
             <tr style="height: 35px;">
@@ -53,6 +73,11 @@
                     <html:radio name="profesor" property="genero" value="F" style="margin: 0px;">
                         Femenino
                     </html:radio><br>
+                </td>
+                <td style="color: red">
+                    <label style="color: red;">
+                    <html:errors property="genero" />
+                    </label>
                 </td>
             </tr>
             <tr style="height: 35px;">
@@ -76,7 +101,12 @@
                         </html:option>
                     </html:select>
                 </td>
-            </tr
+                <td style="color: red">
+                    <label style="color: red;">
+                    <html:errors property="profesor" />
+                    </label>
+                </td>
+            </tr>
         </tbody>
     </table>
     <html:hidden name="profesor" property="usbidViejo"/>
