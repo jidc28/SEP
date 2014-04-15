@@ -115,7 +115,7 @@ public class HacerEvaluacion extends Action {
                             DBMS.getInstance().obtenerEvaluacionCoordinaciones(id, profesor.getUsbid(), d.getCodigoMateria());
 
                     session.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
-                    request.setAttribute("evaluar", SUCCESS);
+                    request.setAttribute("revisar", SUCCESS);
 
                 }
 
@@ -140,7 +140,7 @@ public class HacerEvaluacion extends Action {
                         DBMS.getInstance().listarEvaluacionesCoordinacion(id_coordinacion, ano, trimestre, d.getCodigoMateria(), d.getUsbidProfesor());
                 
                 request.setAttribute("evaluado_coordinacion", evaluado);
-                request.setAttribute("revisar_decanato", SUCCESS);
+                request.setAttribute("revisar", SUCCESS);
             }
 
             /* Se envian a la vista los atributos correspondiente */

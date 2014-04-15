@@ -373,6 +373,15 @@
             <forward name="failure" path="modifica_profesor_pagina"/>
         </action>
 
+        <action input="ObtenerEvaluacion.jsp"
+            path="/revisarEvaluacion"
+            type="Actions.Evaluaciones.RevisarEvaluacion"
+            scope="request"
+            name="rendimientoProf"
+            validate="false">
+            <forward name="success" path="listar_evaluaciones_pendientes_pagina"/>
+        </action>
+        
         <action input="VistaDepartamento.jsp"
             path="/consultarProfesores"
             type="Actions.Profesor.ConsultaProfesorDepartamento"

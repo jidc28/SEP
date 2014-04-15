@@ -516,8 +516,12 @@
     </div>
 </logic:present>
 
-<logic:present name="revisar_decanato">
-    <button class="btn btn-success" type="submit">
-        Revisado
-    </button>
+<logic:present name="revisar">
+    <html:form action="/revisarEvaluacion">
+        <html:hidden name="evaluacion" property="usbid_profesor" value="${profesor.getUsbid()}"/>
+        <html:hidden name="evaluacion" property="codigo_materia"/>
+        <html:submit styleClass="btn btn-success">
+            Revisado
+        </html:submit>
+    </html:form>
 </logic:present>
