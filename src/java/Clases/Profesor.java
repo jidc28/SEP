@@ -201,10 +201,6 @@ public class Profesor extends org.apache.struts.action.ActionForm {
             errors.add("genero", new ActionMessage("error.genero.required"));
         }
 
-        if (!validarEmail(this.email)) {
-            errors.add("email", new ActionMessage("error.email.malformulado"));
-        }
-
         return errors;
     }
 }
