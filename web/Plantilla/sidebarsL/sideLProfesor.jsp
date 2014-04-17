@@ -17,6 +17,9 @@
         <html:link styleClass="menuitem" action="irInicio.do">
             Inicio
         </html:link>
+        <a class="menuitem" onclick="history.go(-1);">
+            Volver
+        </a>
         <a class="menuitem" href="cerrarSesion.do" onclick="return confirm('¿Está seguro que desea cerrar sesión?')" >
             Cerrar Sesión
         </a>

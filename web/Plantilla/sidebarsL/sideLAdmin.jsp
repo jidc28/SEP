@@ -16,6 +16,9 @@
     <a class="menuitem" href="irInicio.do">
         Inicio
     </a>
+    <a class="menuitem" onclick="history.go(-1);">
+        Volver
+    </a>
     <html:form action="/ejecutarOpcion" style="margin: 0px;">
         <html:hidden name="Usuario" property="opcion" value="gestion_decanatos"/>
         <html:submit styleClass="link">
