@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Actions.Profesor;
 
 import Clases.*;
@@ -18,9 +14,8 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author admin
  */
-public class ConsultaProfesorCoordinacion extends org.apache.struts.action.Action {
+public class ConsultaProfesoresEvaluados extends org.apache.struts.action.Action {
 
-    /* forward name="success" path="" */
     private static final String SUCCESS = "success";
 
     /**
@@ -39,12 +34,20 @@ public class ConsultaProfesorCoordinacion extends org.apache.struts.action.Actio
             throws Exception {
 
         HttpSession session = request.getSession(true);
-        String id_coordinacion = (String) session.getAttribute("usbid");
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String id = usuario.getUsbid();
+        String tipousuario = usuario.getTipousuario();
 
-        ArrayList<Profesor> profesores;
+        ArrayList<Profesor> profesores = null;
 
-        profesores =
-                DBMS.getInstance().listarProfesoresCoordinacion(id_coordinacion);
+        if (tipousuario.equals("departamento")) {
+            profesores =
+                    DBMS.getInstance().listarProfesoresEvaluadosDepartamento(id);
+
+        } else if (tipousuario.equals("coordinacion")) {
+            profesores =
+                    DBMS.getInstance().listarProfesoresEvaluadosCoordinacion(id);
+        }
 
         if (profesores.isEmpty()) {
             request.setAttribute("vacio", SUCCESS);

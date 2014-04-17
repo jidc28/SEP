@@ -401,8 +401,8 @@
         </action>
 
         <action input="VistaCoordinacion.jsp"
-            path="/consultarProfesoresCoordinacion"
-            type="Actions.Profesor.ConsultaProfesorCoordinacion"
+            path="/consultarProfesoresEvaluados"
+            type="Actions.Profesor.ConsultaProfesoresEvaluados"
             scope="request"
             name="Profesor"
             validate="false">

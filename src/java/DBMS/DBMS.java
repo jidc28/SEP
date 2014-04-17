@@ -1,8 +1,7 @@
 package DBMS;
 
 import Clases.*;
-import Forms.CreateUserForm;
-import Forms.EliminarUserForm;
+import Forms.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -767,6 +766,35 @@ public class DBMS {
         return profesores;
     }
 
+    public ArrayList<Profesor> listarProfesoresEvaluadosDepartamento(String id_departamento) {
+
+        ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT DISTINCT usbid, nombre, apellido "
+                    + "FROM pertenece AS pe, profesor AS pr, evaluado AS ev "
+                    + "WHERE pe.codigo_departamento = ? "
+                    + "AND pe.codigo_departamento = ev.codigo_departamento "
+                    + "AND pe.usbid_profesor = usbid "
+                    + "AND pe.usbid_profesor = ev.usbid_profesor "
+                    + "ORDER BY usbid;");
+            ps.setString(1, id_departamento);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Profesor p = new Profesor();
+                p.setUsbid(rs.getString("usbid"));
+                p.setNombre(rs.getString("nombre"));
+                p.setApellido(rs.getString("apellido"));
+                profesores.add(p);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return profesores;
+    }
+
     public ArrayList<Profesor> listarProfesoresDepartamento(String id_departamento) {
 
         ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
@@ -1198,7 +1226,7 @@ public class DBMS {
         return null;
     }
 
-    public ArrayList<rendimientoProf> listarEvaluacionesEnviadas(String id_coordinacion,
+    public ArrayList<rendimientoProf> listarEvaluacionesEnviadasCoordinacion(String id_coordinacion,
             int ano, String trimestre) {
 
         PreparedStatement ps, ps2;
@@ -1213,6 +1241,47 @@ public class DBMS {
                     + "AND trimestre = ? "
                     + "AND codigo_materia = codigo;");
             ps.setString(1, id_coordinacion);
+            ps.setInt(2, ano);
+            ps.setString(3, trimestre);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                rendimientoProf rendimiento = new rendimientoProf();
+                rendimiento.setCodigo_materia(rs.getString("codigo"));
+                rendimiento.setRecomendado(rs.getString("recomendado"));
+                rendimiento.setObservaciones_c(rs.getString("observaciones"));
+                rendimiento.setNombre_materia(rs.getString("nombre"));
+                rendimiento.setUsbid_profesor(rs.getString("usbid_profesor"));
+                rendimiento.setAno(rs.getInt("ano"));
+                rendimiento.setTrimestre(rs.getString("trimestre"));
+
+                rendimientos.add(rendimiento);
+            }
+
+            return rendimientos;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<rendimientoProf> listarEvaluacionesEnviadasDepartamento(String id_departamento,
+            int ano, String trimestre) {
+
+        PreparedStatement ps, ps2;
+        ArrayList<rendimientoProf> rendimientos = new ArrayList(0);
+
+        try {
+            ps = conexion.prepareStatement("SELECT codigo, recomendado, "
+                    + "observaciones, nombre, usbid_profesor, ano, trimestre "
+                    + "FROM evaluado, materia "
+                    + "WHERE codigo_departamento = ? "
+                    + "AND ano = ? "
+                    + "AND trimestre = ? "
+                    + "AND codigo_materia = codigo;");
+            ps.setString(1, id_departamento);
             ps.setInt(2, ano);
             ps.setString(3, trimestre);
 
@@ -2780,7 +2849,7 @@ public class DBMS {
         }
     }
 
-    public ArrayList<Profesor> listarProfesoresCoordinacion(String id_coordinacion) {
+    public ArrayList<Profesor> listarProfesoresEvaluadosCoordinacion(String id_coordinacion) {
 
         ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
         PreparedStatement ps;
@@ -2811,7 +2880,8 @@ public class DBMS {
         return profesores;
     }
 
-    public ArrayList<rendimientoProf> listarAnoEvaluacionesEnviadas(String id_coordinacion, String usbid_profesor) {
+    public ArrayList<rendimientoProf> listarAnoEvaluacionesEnviadasCoordinacion(
+            String id_coordinacion, String usbid_profesor) {
 
         PreparedStatement ps;
         ArrayList<rendimientoProf> rendimiento = new ArrayList(0);
@@ -2822,6 +2892,46 @@ public class DBMS {
                     + "AND usbid_profesor = ? "
                     + "ORDER BY ano;");
             ps.setString(1, id_coordinacion);
+            ps.setString(2, usbid_profesor);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                rendimientoProf r = new rendimientoProf();
+                r.setAno(rs.getInt("ano"));
+                String periodo = rs.getString("trimestre");
+                if (periodo.equals("SD")) {
+                    r.setTrimestre("Septiembre-Diciembre");
+                } else if (periodo.equals("EM")) {
+                    r.setTrimestre("Ener-Marzo");
+                } else if (periodo.equals("AJ")) {
+                    r.setTrimestre("Abril-Julio");
+                } else if (periodo.equals("V")) {
+                    r.setTrimestre("Intensivo");
+                }
+                rendimiento.add(r);
+            }
+
+            return rendimiento;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<rendimientoProf> listarAnoEvaluacionesEnviadasDepartamento(
+            String id_departamento, String usbid_profesor) {
+
+        PreparedStatement ps;
+        ArrayList<rendimientoProf> rendimiento = new ArrayList(0);
+        try {
+            ps = conexion.prepareStatement("SELECT DISTINCT ano, trimestre "
+                    + "FROM evaluado "
+                    + "WHERE codigo_departamento = ? "
+                    + "AND usbid_profesor = ? "
+                    + "ORDER BY ano;");
+            ps.setString(1, id_departamento);
             ps.setString(2, usbid_profesor);
 
             ResultSet rs = ps.executeQuery();
@@ -3034,11 +3144,53 @@ public class DBMS {
                 String nombre_coordinacion = rs.getString("nombre");
                 String codigo_coordinacion = rs.getString("codigo");
                 /* Uso estos setters porque de verdad necesito la informacion 
-                 * y no quiero embasusrar mas la clase */
+                 * y no quiero embasurar mas la clase */
                 rendimiento.setObservaciones_d(nombre_coordinacion);
                 rendimiento.setCodigo_materia(codigo_coordinacion);
                 rendimiento.setObservaciones_c(rs.getString("observaciones_coordinacion"));
                 rendimiento.setRecomendado(rs.getString("recomendado_coordinacion"));
+                informacion.add(rendimiento);
+            }
+
+            return informacion;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<rendimientoProf> obtenerEvaluacionesEnviadasCoordinaciones(
+            String id_departamento, String usbid_profesor, String codigo_materia) {
+
+        PreparedStatement ps;
+        ArrayList<rendimientoProf> informacion = new ArrayList<rendimientoProf>(0);
+        try {
+            ps = conexion.prepareStatement("SELECT codigo, nombre, "
+                    + "recomendado, observaciones "
+                    + "FROM evaluado, coordinacion "
+                    + "WHERE codigo_departamento = ? "
+                    + "AND usbid_profesor = ? "
+                    + "AND codigo_materia = ? "
+                    + "AND codigo = codigo_coordinacion;");
+            ps.setString(1, id_departamento);
+            ps.setString(2, usbid_profesor);
+            ps.setString(3, codigo_materia);
+
+            System.out.println(ps.toString());
+            
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                rendimientoProf rendimiento = new rendimientoProf();
+                String nombre_coordinacion = rs.getString("nombre");
+                String codigo_coordinacion = rs.getString("codigo");
+                /* Uso estos setters porque de verdad necesito la informacion 
+                 * y no quiero embasurar mas la clase */
+                rendimiento.setObservaciones_d(nombre_coordinacion);
+                rendimiento.setCodigo_materia(codigo_coordinacion);
+                rendimiento.setObservaciones_c(rs.getString("observaciones"));
+                rendimiento.setRecomendado(rs.getString("recomendado"));
                 informacion.add(rendimiento);
             }
 

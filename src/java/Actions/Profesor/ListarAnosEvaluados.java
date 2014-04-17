@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Actions.Profesor;
 
 import Clases.*;
@@ -20,7 +16,6 @@ import org.apache.struts.action.ActionMapping;
  */
 public class ListarAnosEvaluados extends org.apache.struts.action.Action {
 
-    /* forward name="success" path="" */
     private static final String SUCCESS = "success";
 
     /**
@@ -39,14 +34,24 @@ public class ListarAnosEvaluados extends org.apache.struts.action.Action {
             throws Exception {
 
         HttpSession session = request.getSession(true);
-        String id_coordinacion = (String) session.getAttribute("usbid");
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String id = usuario.getUsbid();
+        String tipousuario = usuario.getTipousuario();
 
         Profesor profesor = (Profesor) form;
-        
-        ArrayList<rendimientoProf> evaluaciones;
 
-        evaluaciones = DBMS.getInstance().listarAnoEvaluacionesEnviadas(id_coordinacion,profesor.getUsbid());
+        ArrayList<rendimientoProf> evaluaciones = null;
+        /* Se obtiene la informacion del profesor */
         profesor = DBMS.getInstance().obtenerInfoProfesor(profesor.getUsbid());
+
+        /* Dependiendo del tipo de usuario se consultan las evaluaciones enviadas */
+        if (tipousuario.equals("coordinacion")) {
+            evaluaciones = 
+                    DBMS.getInstance().listarAnoEvaluacionesEnviadasCoordinacion(id, profesor.getUsbid());
+        } else if (tipousuario.equals("departamento")) {
+            evaluaciones = 
+                    DBMS.getInstance().listarAnoEvaluacionesEnviadasDepartamento(id, profesor.getUsbid());
+        }
 
         session.setAttribute("evaluaciones", evaluaciones);
         session.setAttribute("profesor", profesor);

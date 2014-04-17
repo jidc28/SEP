@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Actions.Evaluaciones;
 
 import Clases.*;
@@ -19,7 +15,6 @@ import org.apache.struts.action.ActionMapping;
  * @author smaf
  */
 public class ListarEvaluacionesEnviadas extends org.apache.struts.action.Action {
-    /* forward name="success" path="" */
 
     private static final String SUCCESS = "success";
 
@@ -39,20 +34,36 @@ public class ListarEvaluacionesEnviadas extends org.apache.struts.action.Action 
             throws Exception {
 
         HttpSession session = request.getSession(true);
-        String id_coordinacion = (String) session.getAttribute("usbid");
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String id = usuario.getUsbid();
+        String tipousuario = usuario.getTipousuario();
 
+        /* Se obtienen los datos requeridos por la consulta */
         rendimientoProf rendimiento = (rendimientoProf) form;
         int ano = rendimiento.getAno();
         String trimestre = rendimiento.getTrimestre();
 
-        ArrayList<rendimientoProf> evaluaciones_enviadas;
-        evaluaciones_enviadas =
-                DBMS.getInstance().listarEvaluacionesEnviadas(id_coordinacion, ano, trimestre);
+        ArrayList<rendimientoProf> evaluaciones_enviadas = null;
 
+        /* Dependiendo del tipo de usuario se consultan las evaluaciones
+         * enviadas */
+        if (tipousuario.equals("coordinacion")) {
+
+            evaluaciones_enviadas =
+                    DBMS.getInstance().listarEvaluacionesEnviadasCoordinacion(id, ano, trimestre);
+            
+        } else if (tipousuario.equals("departamento")) {
+
+            evaluaciones_enviadas =
+                    DBMS.getInstance().listarEvaluacionesEnviadasDepartamento(id, ano, trimestre);
+        }
+
+        /* En caso en el que no existan evaluaciones enviadas */
         if (evaluaciones_enviadas.isEmpty()) {
             request.setAttribute("vacio", SUCCESS);
         }
 
+        /* Se envian los atributos a la vista */
         session.setAttribute("ano", ano);
         session.setAttribute("trimestre", trimestre);
         request.setAttribute("evaluaciones_enviadas", evaluaciones_enviadas);

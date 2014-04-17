@@ -117,6 +117,14 @@ public class HacerEvaluacion extends Action {
                     session.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
                     request.setAttribute("revisar", SUCCESS);
 
+                } else {
+                    /* Se consultan los resultados de las evaluaciones por parte de 
+                     * las coordinaciones */
+                    ArrayList<rendimientoProf> evaluacion_coordinaciones =
+                            DBMS.getInstance().obtenerEvaluacionesEnviadasCoordinaciones(id,
+                            profesor.getUsbid(), d.getCodigoMateria());
+
+                    session.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
                 }
 
                 /* Si el usuario que accede a esta funcionalidad decano */
@@ -133,12 +141,12 @@ public class HacerEvaluacion extends Action {
 
                 String trimestre = evaluacion.getTrimestre();
                 int ano = evaluacion.getAno();
-                
+
                 /* Se obtienen los datos de la evaluacion que realizo la
                  * coordinacion */
                 rendimientoProf evaluado =
                         DBMS.getInstance().listarEvaluacionesCoordinacion(id_coordinacion, ano, trimestre, d.getCodigoMateria(), d.getUsbidProfesor());
-                
+
                 request.setAttribute("evaluado_coordinacion", evaluado);
                 request.setAttribute("revisar", SUCCESS);
             }

@@ -77,7 +77,7 @@
         </div>
         <div id="collapseEvaluaciones" class="panel-collapse collapse">
             <div class="panel-body">
-                <html:link action="/consultarProfesoresCoordinacion">
+                <html:link action="/consultarProfesoresEvaluados">
                     <h5 align ="center">Listar evaluaciones enviadas</h5>
                 </html:link>
                 <logic:present name="evaluaciones_pendientes">

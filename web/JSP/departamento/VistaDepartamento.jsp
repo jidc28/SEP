@@ -131,6 +131,9 @@
                         </h5>
                     </html:link>
                 </logic:present>
+                <html:link action="/consultarProfesoresEvaluados">
+                    <h5 align ="center">Listar evaluaciones enviadas</h5>
+                </html:link>
             </div>
         </div>
     </div>
