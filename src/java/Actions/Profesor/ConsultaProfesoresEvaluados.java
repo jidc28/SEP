@@ -47,6 +47,12 @@ public class ConsultaProfesoresEvaluados extends org.apache.struts.action.Action
         } else if (tipousuario.equals("coordinacion")) {
             profesores =
                     DBMS.getInstance().listarProfesoresEvaluadosCoordinacion(id);
+            
+        } else if (tipousuario.equals("decanato")) {
+            String id_coordinacion = ((Coordinacion) form).getCodigo();
+            profesores =
+                    DBMS.getInstance().listarProfesoresEvaluadosCoordinacion(id_coordinacion);
+            session.setAttribute("coordinacion", id_coordinacion);
         }
 
         if (profesores.isEmpty()) {

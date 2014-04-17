@@ -46,11 +46,19 @@ public class ListarAnosEvaluados extends org.apache.struts.action.Action {
 
         /* Dependiendo del tipo de usuario se consultan las evaluaciones enviadas */
         if (tipousuario.equals("coordinacion")) {
-            evaluaciones = 
+            evaluaciones =
                     DBMS.getInstance().listarAnoEvaluacionesEnviadasCoordinacion(id, profesor.getUsbid());
+
         } else if (tipousuario.equals("departamento")) {
-            evaluaciones = 
+            evaluaciones =
                     DBMS.getInstance().listarAnoEvaluacionesEnviadasDepartamento(id, profesor.getUsbid());
+
+        } else if (tipousuario.equals("decanato")) {
+            String id_coordinacion =
+                    (String) session.getAttribute("coordinacion");
+            
+            evaluaciones =
+                    DBMS.getInstance().listarAnoEvaluacionesEnviadasCoordinacion(id_coordinacion, profesor.getUsbid());
         }
 
         session.setAttribute("evaluaciones", evaluaciones);

@@ -76,6 +76,13 @@
                             <bean:write name="evaluaciones_pendientes"/>
                         </span>
                     </html:form>
+                    <html:form action="/listarEvaluacionesEnviadasCoordinaciones" style="margin: 0px;">
+                        <html:hidden name="Coordinacion" property="opcion"
+                                     value="no_listar"/>
+                        <html:submit styleClass="h5" style="margin: 0px;">
+                            Listar Evaluaciones Enviadas
+                        </html:submit>
+                    </html:form>
                 </div>
             </div>
         </div>

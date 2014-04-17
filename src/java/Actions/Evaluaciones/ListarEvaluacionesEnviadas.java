@@ -51,11 +51,18 @@ public class ListarEvaluacionesEnviadas extends org.apache.struts.action.Action 
 
             evaluaciones_enviadas =
                     DBMS.getInstance().listarEvaluacionesEnviadasCoordinacion(id, ano, trimestre);
-            
+
         } else if (tipousuario.equals("departamento")) {
 
             evaluaciones_enviadas =
                     DBMS.getInstance().listarEvaluacionesEnviadasDepartamento(id, ano, trimestre);
+
+        } else if (tipousuario.equals("decanato")) {
+            
+            String id_coordinacion = (String) session.getAttribute("coordinacion");
+
+            evaluaciones_enviadas =
+                    DBMS.getInstance().listarEvaluacionesEnviadasCoordinacion(id_coordinacion, ano, trimestre);
         }
 
         /* En caso en el que no existan evaluaciones enviadas */

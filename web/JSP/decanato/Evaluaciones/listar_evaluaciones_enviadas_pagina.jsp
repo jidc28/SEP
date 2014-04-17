@@ -1,6 +1,6 @@
 <%-- 
-    Document   : listar_evaluaciones_enviadas_profesor_pagina
-    Created on : Mar 12, 2014, 11:54:45 AM
+    Document   : listar_evaluaciones_enviadas
+    Created on : Apr 17, 2014, 5:10:15 PM
     Author     : smaf
 --%>
 
@@ -14,10 +14,9 @@
 <%
     Usuario usuario = (Usuario) session.getAttribute("usuario");
     String tipousuario = usuario.getTipousuario();
-    if (tipousuario.equals("coordinacion") || tipousuario.equals("departamento")
-            || tipousuario.equals("decanato")){
+    if (tipousuario.equals("decanato")){
 %>
-    <tiles:insert definition="listarEvaluacionesEnviadasProfesor"/>
+    <tiles:insert definition="listarEvaluacionesEnviadasCoordinaciones"/>
 <%
    } else {
 %>

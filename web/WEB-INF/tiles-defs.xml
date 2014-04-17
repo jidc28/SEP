@@ -147,6 +147,10 @@
         <put name="vista" value="/JSP/decanato/Evaluaciones/listar_coordinaciones_pagina.jsp"/>
     </definition>
     
+    <definition name="listar_evaluaciones_enviadas_coordinaciones_pagina" extends="generico">
+        <put name="vista" value="/JSP/decanato/Evaluaciones/listar_evaluaciones_enviadas_pagina.jsp"/>
+    </definition>
+    
     <definition name="sesion_expirada" extends="generico">
         <put name="vista" value="/JSP/sesion_expirada.jsp"/>
     </definition>
@@ -276,6 +280,11 @@
     <!-- 2. Listar las evaluaciones prendientes de materias -->
     <definition name="listarEvaluacionesPendientesDecanato" extends="baseDecanato">
         <put name="body" value="/JSP/coordinacion/Evaluaciones/ListarEvaluacionesPendientes.jsp"/>
+    </definition>
+    
+    <!-- 3. Listar las coordinaciones que tienen evaluaciones enviadas -->
+    <definition name="listarEvaluacionesEnviadasCoordinaciones" extends="baseDecanato">
+        <put name="body" value="/JSP/decanato/Evaluaciones/ListarEvaluacionesEnviadasCoordinaciones.jsp"/>
     </definition>
     
 

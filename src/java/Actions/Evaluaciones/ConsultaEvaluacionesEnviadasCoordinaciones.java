@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Actions.Coordinacion;
+package Actions.Evaluaciones;
 
 import Clases.*;
 import DBMS.DBMS;
@@ -18,7 +18,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Langtech
  */
-public class ConsultaCoordinacionA extends org.apache.struts.action.Action {
+public class ConsultaEvaluacionesEnviadasCoordinaciones extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String FAILURE = "failure";
@@ -50,27 +50,9 @@ public class ConsultaCoordinacionA extends org.apache.struts.action.Action {
 
         String tipousuario = usuario.getTipousuario();
 
-        ArrayList<Coordinacion> coords = null;
-        ArrayList<Decanato> decanatos;
+        ArrayList<Coordinacion> coords;
 
-        /* Se obtiene la lista de coordinaciones registradas de acuerdo
-         * al tipo de usuario que solicita el listado de coordinaciones*/
-        if (tipousuario.equals("administrador")) {
-
-            Decanato decanato = (Decanato) form;
-            if (decanato.getNombre() != null) {
-                System.out.println(decanato.getNombre());
-                decanato.setCodigo(DBMS.getInstance().obtenerCodigoDecanato(decanato));
-                coords = DBMS.getInstance().listarCoordinacionesAdscritas(decanato.getCodigo(), null);
-                session.setAttribute("codigoDecanatoActual", decanato.getCodigo());
-            }
-
-            decanatos = DBMS.getInstance().listarDecanatos();
-            request.setAttribute("decanatos", decanatos);
-        } else if (tipousuario.equals("decanato")) {
-
-            coords = DBMS.getInstance().listarCoordinacionesAdscritas(usuario.getUsbid(), "contar");
-        }
+        coords = DBMS.getInstance().listarCoordinacionesAdscritas(usuario.getUsbid(), null);
 
         /* Envio del listado de coordinaciones a la vista correspondiente */
         request.setAttribute("coordinaciones", coords);

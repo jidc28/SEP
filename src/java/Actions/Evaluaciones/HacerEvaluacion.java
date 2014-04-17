@@ -144,11 +144,23 @@ public class HacerEvaluacion extends Action {
 
                 /* Se obtienen los datos de la evaluacion que realizo la
                  * coordinacion */
-                rendimientoProf evaluado =
-                        DBMS.getInstance().listarEvaluacionesCoordinacion(id_coordinacion, ano, trimestre, d.getCodigoMateria(), d.getUsbidProfesor());
+                rendimientoProf evaluado = null;
+
+                /* Si no se ha realizado todavia la evaluacion del profesor por
+                 * parte del decanato */
+                if (d.getOpcion().equals("pendiente")) {
+                    evaluado =
+                            DBMS.getInstance().listarEvaluacionesCoordinacion(
+                            id_coordinacion, ano, trimestre, d.getCodigoMateria(), d.getUsbidProfesor());
+
+                    request.setAttribute("revisar", SUCCESS);
+                } else {
+                    evaluado =
+                            DBMS.getInstance().listarEvaluacionesEnviadasCoordinacion(
+                            id_coordinacion, ano, trimestre, d.getCodigoMateria(), d.getUsbidProfesor());
+                }
 
                 request.setAttribute("evaluado_coordinacion", evaluado);
-                request.setAttribute("revisar", SUCCESS);
             }
 
             /* Se envian a la vista los atributos correspondiente */

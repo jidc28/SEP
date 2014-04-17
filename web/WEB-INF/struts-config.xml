@@ -153,6 +153,15 @@
                 validate="false">
             <forward name="decanato" path="listar_coordinaciones_pagina"/>
         </action>
+
+        <action input="/vistaDecanato.jsp" 
+                path="/listarEvaluacionesEnviadasCoordinaciones" 
+                name="Coordinacion"
+                scope="request" 
+                type="Actions.Evaluaciones.ConsultaEvaluacionesEnviadasCoordinaciones" 
+                validate="false">
+            <forward name="decanato" path="listar_evaluaciones_enviadas_coordinaciones_pagina"/>
+        </action>
         
         <!--     COORDINACIONES     -->
         <action input="/AgregaCoordinacion.jsp" name="Coordinacion" path="/registrarCoordinacion" scope="request" type="Actions.Coordinacion.RegistrarCoordinacion" validate="false">
@@ -404,7 +413,7 @@
             path="/consultarProfesoresEvaluados"
             type="Actions.Profesor.ConsultaProfesoresEvaluados"
             scope="request"
-            name="Profesor"
+            name="Coordinacion"
             validate="false">
             <forward name="success" path="listar_evaluaciones_enviadas_profesor_pagina"/>
         </action>
