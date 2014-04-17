@@ -1722,6 +1722,50 @@ public class DBMS {
         return rendimiento;
     }
 
+    public ArrayList<rendimientoProf> obtenerPlanillasLlenas(String id_profesor, String id_departamento) {
+        PreparedStatement ps;
+        ArrayList<rendimientoProf> rendimiento = new ArrayList<rendimientoProf>(0);
+        try {
+            ps = conexion.prepareStatement("SELECT DISTINCT "
+                    + "r.usbid_profesor, trimestre, ano, r.codigo_materia, "
+                    + "total_estudiantes, nota_prom, nota1, nota2, "
+                    + "nota3, nota4, nota5, retirados, m.nombre "
+                    + "FROM rendimiento as r, oferta as o, dicta as d, materia as m "
+                    + "WHERE r.usbid_profesor = ? "
+                    + "AND o.codigo_departamento = ? "
+                    + "AND r.codigo_materia = d.codigo_materia "
+                    + "AND d.codigo_materia = o.codigo_materia "
+                    + "AND r.usbid_profesor = d.usbid_profesor "
+                    + "AND m.codigo = o.codigo_materia "
+                    + "AND r.evaluado = 'no';");
+            ps.setString(1, id_profesor);
+            ps.setString(2, id_departamento);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                rendimientoProf r = new rendimientoProf();
+                r.setUsbid_profesor(id_profesor);
+                r.setTrimestre(rs.getString("trimestre"));
+                r.setAno(rs.getInt("ano"));
+                r.setCodigo_materia(rs.getString("codigo_materia"));
+                r.setNombre_materia(rs.getString("nombre"));
+                r.setTotal_estudiantes(rs.getInt("total_estudiantes"));
+                r.setNota_prom(rs.getFloat("nota_prom"));
+                r.setNota1(rs.getInt("nota1"));
+                r.setNota2(rs.getInt("nota2"));
+                r.setNota3(rs.getInt("nota3"));
+                r.setNota4(rs.getInt("nota4"));
+                r.setNota5(rs.getInt("nota5"));
+                r.setRetirados(rs.getInt("retirados"));
+                r.setUsbid_profesor(id_profesor);
+                rendimiento.add(r);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return rendimiento;
+    }
+
     public ArrayList<Materia> obtenerSolicitudEvaluacionesProfesor(String id_profesor, String id_departamento) {
         PreparedStatement ps;
         ArrayList<Materia> materia = new ArrayList<Materia>(0);
