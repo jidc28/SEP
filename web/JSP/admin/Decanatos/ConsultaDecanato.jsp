@@ -46,6 +46,11 @@
             MODIFICAR
         </center>
         </th>
+        <th style="font-size: 14px;">
+        <center>
+            ELIMINAR
+        </center>
+        </th>
         </tr>
         </thead>
         <logic:iterate name="decanatos" id="Dec">
@@ -63,6 +68,17 @@
                         <html:submit styleClass="btn btn-primary"
                                      style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
                             Modificar
+                        </html:submit>
+                    </html:form>
+                </td>
+                <td width="20%" align="center">
+                    <html:form action="/eliminarDecanato" 
+                               onsubmit="return(this)" style="margin: 0px;">
+                        <html:hidden name="Dec" property="codigo"/>
+                        <html:submit styleClass="btn btn-danger"
+                                     style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;"
+                                     onclick="javascript: return confirm('¿Está seguro de que desea eliminar el Decanato ${Dec.getNombre()}?')">
+                            Eliminar
                         </html:submit>
                     </html:form>
                 </td>

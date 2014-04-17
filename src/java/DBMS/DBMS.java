@@ -3,16 +3,12 @@ package DBMS;
 import Clases.*;
 import Forms.CreateUserForm;
 import Forms.EliminarUserForm;
-import Sistemas.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.logging.Level;
@@ -505,6 +501,25 @@ public class DBMS {
         }
     }
 
+    public boolean eliminarDecanato(Decanato decanato) {
+
+        PreparedStatement ps0;
+
+        try {
+
+            ps0 = conexion.prepareStatement("DELETE FROM DECANATO "
+                    + "WHERE codigo = ?;");
+            ps0.setString(1, decanato.getCodigo());
+
+            Integer i = ps0.executeUpdate();
+            return i > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean registrarCoordinacion(Coordinacion c) {
         PreparedStatement psAgregar = null;
 
@@ -681,82 +696,6 @@ public class DBMS {
             ex.printStackTrace();
         }
         return u;
-    }
-
-    public ArrayList<SINAI> listarSINAI(String usbid) {
-
-        ArrayList<SINAI> sinai = new ArrayList<SINAI>(0);
-        PreparedStatement ps = null;
-        try {
-            ps = conexion.prepareStatement("SELECT * FROM SINAI WHERE usbid = ?");
-            ps.setString(1, usbid);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                SINAI u = new SINAI();
-                u.setNombre(rs.getString("nombre"));
-                u.setFecha_inic(rs.getString("Fecha_inic"));
-                u.setFecha_fin(rs.getString("Fecha_fin"));
-                sinai.add(u);
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return sinai;
-    }
-
-    public ArrayList<CCT> listarCCT(String usbid) {
-
-        ArrayList<CCT> cct = new ArrayList<CCT>(0);
-        PreparedStatement ps = null;
-        try {
-            ps = conexion.prepareStatement("SELECT * FROM CCT WHERE usbid = ?");
-            ps.setString(1, usbid);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                CCT u = new CCT();
-                u.setIdent(rs.getString("ident"));
-                u.setTitulo(rs.getString("titulo"));
-                u.setFecha_inic(rs.getString("Fecha_inic"));
-                u.setFecha_fin(rs.getString("Fecha_fin"));
-                u.setCarrera(rs.getString("carrera"));
-                u.setTipo(rs.getString("tipo"));
-                cct.add(u);
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return cct;
-    }
-
-    public ArrayList<DACE> listarDACE(String usbid, int ano, String trim) {
-
-        ArrayList<DACE> dace = new ArrayList<DACE>(0);
-        PreparedStatement ps = null;
-        try {
-            ps = conexion.prepareStatement("SELECT * FROM DACE WHERE usbid = ? AND ano = ? AND trimestre = ?");
-            ps.setString(1, usbid);
-            ps.setInt(2, ano);
-            ps.setString(3, trim);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                DACE u = new DACE();
-                u.setCodigo(rs.getString("codigo"));
-                u.setNombre(rs.getString("nombre"));
-                u.setUno(rs.getInt("uno"));
-                u.setDos(rs.getInt("dos"));
-                u.setTres(rs.getInt("tres"));
-                u.setCuatro(rs.getInt("cuatro"));
-                u.setCinco(rs.getInt("cinco"));
-                u.setRetirados(rs.getInt("retirados"));
-                dace.add(u);
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return dace;
     }
 
     public ArrayList<Materia> listarMateriasOfertadas(String id_departamento) {

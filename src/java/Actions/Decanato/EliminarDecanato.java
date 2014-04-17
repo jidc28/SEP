@@ -2,13 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sistemas;
+package Actions.Decanato;
 
+import Clases.*;
 import DBMS.DBMS;
-import Forms.ModificarInfoPForm;
-import Clases.Profesor;
-import Sistemas.CCT;
-import Sistemas.SINAI;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,12 +13,13 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+
 /**
  *
- * @author jidc28
+ * @author admin
  */
-public class DaceAction extends org.apache.struts.action.Action {
-     /* forward name="success" path="" */
+public class EliminarDecanato extends org.apache.struts.action.Action {
+
     private static final String SUCCESS = "success";
 
     /**
@@ -39,12 +37,18 @@ public class DaceAction extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
-        DACE u = (DACE) form;
         HttpSession session = request.getSession(true);
-        ArrayList<DACE> dace = DBMS.getInstance().listarDACE(u.getUsbid(),u.getAno(),u.getTrimestre());
+
+        /* Se obtienen los datos del decanato a eliminar*/
+        Decanato decanato = (Decanato) form;
         
-     
-        session.setAttribute("dace", dace);
+        /* Se elimina el decanato correspondiente. */
+        boolean eliminado = DBMS.getInstance().eliminarDecanato(decanato);
+        
+        /* Se obtiene el listado de decanatos registrados en el sistema */
+        ArrayList<Decanato> decanatos = DBMS.getInstance().listarDecanatos();
+
+        session.setAttribute("decanatos", decanatos);
         return mapping.findForward(SUCCESS);
     }
 }

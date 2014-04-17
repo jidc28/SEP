@@ -304,6 +304,15 @@
             <forward name="failure" path="modifica_status_apertura_pagina"/>
         </action>    
         
+        <action input="/ConsultaDecanatos.jsp" 
+                name="Decanato" 
+                path="/eliminarDecanato" 
+                scope="request" 
+                type="Actions.Decanato.EliminarDecanato" 
+                validate="false">
+            <forward name="success" path="consulta_decanato_pagina"/>
+        </action>     
+        
         <action input="/VistaProfesor.jsp" name="Profesor" path="/verPlanillasLlenas" scope="request" type="Actions.Departamento.verPlanillasLlenas" validate="false">
             <forward name="success" path="ver_planillas_llenas_pagina"/>
         </action>     
