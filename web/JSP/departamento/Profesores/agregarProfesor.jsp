@@ -33,24 +33,44 @@
                         <td>
                             <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" name="Profesor" property="usbid"/>
                         </td>
+                    <tr>
+                        <td colspan="2" style="color:firebrick">
+                            <html:errors property="usbid"/>
+                        </td>
+                    </tr>
                     </tr>
                     <tr style="height: 35px;">
                         <td style="font-size: 14px;"><strong>CÉDULA</strong></td>
                         <td>
                             <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" name="Profesor" property="cedula"/>
                         </td>
+                    <tr>
+                        <td colspan="2" style="color:firebrick">
+                            <html:errors property="cedula"/>
+                        </td>
+                    </tr>
                     </tr>
                     <tr style="height: 35px;">
                         <td style="font-size: 14px;"><strong>NOMBRE</strong></td>
                         <td>
                             <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" name="Profesor" property="nombre"/>
                         </td>
+                    <tr>
+                        <td colspan="2" style="color:firebrick">
+                            <html:errors property="nombre"/>
+                        </td>
+                    </tr>
                     </tr>
                     <tr style="height: 35px;">
                         <td style="font-size: 14px;"><strong> APELLIDO</strong> </td>
                         <td>
                             <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" name="Profesor" property="apellido"/>
                         </td>
+                    <tr>
+                        <td colspan="2" style="color:firebrick;">
+                            <html:errors property="apellido"/>
+                        </td>
+                    </tr>
                     </tr>
                     <tr style="height: 35px;">
                         <td style="font-size: 14px;"> <strong> GÉNERO</strong> </td>
@@ -67,13 +87,22 @@
                             <html:radio property="genero" value="F" style="margin: 0px;">
                                 Femenino
                             </html:radio><br>
-                        </td>                        
+                        </td>
+                    <tr>
+                        <td colspan="2" style="color:firebrick">
+                            <html:errors property="genero"/>
+                        </td>
                     </tr>
                     <tr style="height: 35px;">
                         <td style="font-size: 14px;"> <strong> CORREO ELECTRÓNICO <br> INSTITUCIONAL </strong> </td>
                         <td>
                             <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" name="Profesor" property="email"/>
                         </td>
+                    <tr>
+                        <td colspan="2" style="color:firebrick">
+                            <html:errors property="email"/>
+                        </td>
+                    </tr>
                     </tr>
                 </tbody>
             </table>

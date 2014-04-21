@@ -292,6 +292,7 @@
             name="Profesor"
             validate="false">
             <forward name="success" path="consultaProfesores"/>
+            <forward name="failure" path="agregarProfesor"/>
         </action>
 
         <action input="VistaDepartamento.jsp"
