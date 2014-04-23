@@ -10,10 +10,10 @@ import DBMS.DBMS;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMessage;
 
 /**
@@ -21,14 +21,16 @@ import org.apache.struts.action.ActionMessage;
  * @author Langtech
  */
 public class Inicio extends org.apache.struts.action.Action {
-    
+
     private static final String FAILURE = "failure";
+    private static final String SESION_EXPIRADA = "sesion_expirada";
     private static final String PROFESOR = "profesor";
     private static final String ADMINISTRADOR = "administrador";
     private static final String DECANATO = "decanato";
     private static final String COORDINACION = "coordinacion";
     private static final String DEPARTAMENTO = "departamento";
-/**
+
+    /**
      * This is the action called from the Struts framework.
      *
      * @param mapping The ActionMapping used to select this instance.
@@ -46,8 +48,11 @@ public class Inicio extends org.apache.struts.action.Action {
         //Usuario u = (Usuario) form;
         HttpSession session = request.getSession(true);
         Usuario u = (Usuario) request.getSession().getAttribute("usuario");
-        //System.out.println("--------------------> USUARIO: " + u.getUsbid() + "\n");
         
+        if (u == null) {
+            return mapping.findForward(SESION_EXPIRADA);
+        }
+
         ActionErrors error = new ActionErrors();
 
         //valido los campos de formulario
@@ -80,6 +85,10 @@ public class Inicio extends org.apache.struts.action.Action {
                     session.setAttribute("usbid", tmp.getUsbid());
                     return mapping.findForward(ADMINISTRADOR);
                 } else if (tmp.getTipousuario().equals("decanato")) {
+                    int evaluaciones_pendientes = DBMS.getInstance().contarSolicitudesPendientesDecanato(tmp.getUsbid());
+                    if (evaluaciones_pendientes != 0) {
+                        request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
+                    }
                     session.setAttribute("usuario", tmp);
                     session.setAttribute("usbid", tmp.getUsbid());
                     return mapping.findForward(DECANATO);
@@ -90,14 +99,18 @@ public class Inicio extends org.apache.struts.action.Action {
                     if (solicitudes_pendientes != 0) {
                         request.setAttribute("solicitud_apertura_materia", solicitudes_pendientes);
                     }
+                    int evaluaciones_pendientes =
+                            DBMS.getInstance().contarEvaluacionesPendientesDepartamento(tmp.getUsbid(), null);
+                    if (evaluaciones_pendientes != 0) {
+                        request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
+                    }
                     return mapping.findForward(DEPARTAMENTO);
                 } else if (tmp.getTipousuario().equals("coordinacion")) {
                     session.setAttribute("usuario", tmp);
                     session.setAttribute("usbid", tmp.getUsbid());
-                    int evaluaciones_pendientes = DBMS.getInstance().contarEvaluacionesPendientes(tmp.getUsbid());
-                    System.out.println(evaluaciones_pendientes);
+                    int evaluaciones_pendientes = DBMS.getInstance().contarEvaluacionesPendientesCoordinacion(tmp.getUsbid());
                     if (evaluaciones_pendientes != 0) {
-                        request.setAttribute("evaluaciones_pendientes",evaluaciones_pendientes);
+                        request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
                     }
                     return mapping.findForward(COORDINACION);
                 } else {

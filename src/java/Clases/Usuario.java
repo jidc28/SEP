@@ -5,7 +5,6 @@
 package Clases;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
@@ -20,6 +19,15 @@ public class Usuario extends org.apache.struts.action.ActionForm {
     private String tipousuario;
     private String contrasena;
     private String departamento;
+    private String opcion;
+
+    public String getOpcion() {
+        return opcion;
+    }
+
+    public void setOpcion(String opcion) {
+        this.opcion = opcion;
+    }
 
     public String getDepartamento() {
         return departamento;

@@ -6,13 +6,13 @@ package Actions.Departamento;
 
 import Clases.*;
 import DBMS.DBMS;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -44,13 +44,29 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
         HttpSession session = request.getSession(true);
         String id_departamento = (String) session.getAttribute("usbid");
         Profesor profesor = (Profesor) session.getAttribute("profesor");
+
         String id_profesor = profesor.getUsbid();
 
         rendimientoProf renMateria = (rendimientoProf) form;
 
-        System.out.println("periodo: " + renMateria.getTrimestre());
-
         renMateria.setUsbid_profesor(id_profesor);
+
+        /* Se obtiene el ano */
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        String fecha = dateFormat.format(date).toString();
+        String ano = fecha.substring(0, 4);
+
+        int[] anos = new int[4];
+        anos[3] = Integer.parseInt(ano);
+        int i = 2;
+        int tmp = anos[3];
+
+        while (i > -1) {
+            tmp--;
+            anos[i] = tmp;
+            i--;
+        }
 
         int _1 = renMateria.getNota1();
         int _2 = renMateria.getNota2();
@@ -60,24 +76,44 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
         int _r = renMateria.getRetirados();
         int _total = renMateria.getTotal_estudiantes();
 
+        /* Caso en que el total de estudiantes es cero */
         if (_total == 0) {
-            ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
+
+            ArrayList<Materia> materias =
+                    DBMS.getInstance().
+                    obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
+
+            request.setAttribute("anos", anos);
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
             request.setAttribute("agregar_informacion", renMateria);
             return mapping.findForward(SUCCESS);
         }
 
+        /* Caso en que el total de estudiantes no coincide con la suma de la 
+         * cantidad de retirados, sacaron 1, sacaron 2, sacaron 3, sacaron 4 
+         * y sacaron 5 */
         if (_total != _1 + _2 + _3 + _4 + _5 + _r) {
-            ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
+
+            ArrayList<Materia> materias =
+                    DBMS.getInstance().
+                    obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
+
+            request.setAttribute("anos", anos);
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
             request.setAttribute("error_num_estudiantes", renMateria);
             return mapping.findForward(SUCCESS);
         }
 
+        /* Caso en que alguno de los campos es menor que cero */
         if (_total < 0 || _1 < 0 || _2 < 0 || _3 < 0 || _4 < 0 || _5 < 0 || _r < 0) {
-            ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
+
+            ArrayList<Materia> materias =
+                    DBMS.getInstance().
+                    obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
+
+            request.setAttribute("anos", anos);
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
             request.setAttribute("numero_negativo", SUCCESS);
@@ -85,9 +121,11 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
         }
 
         float promedio = (float) (_1 + (2 * _2) + (3 * _3) + (4 * _4) + (5 * _5)) / (_total - _r);
+
         renMateria.setNota_prom(promedio);
 
         String periodo = renMateria.getTrimestre();
+
         if (periodo.equals("Septiembre-Diciembre")) {
             renMateria.setTrimestre("SD");
         } else if (periodo.equals("Enero-Marzo")) {
@@ -98,18 +136,25 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
             renMateria.setTrimestre("V");
         }
 
-        boolean agregar = DBMS.getInstance().agregarRendimientoProfesor(renMateria, id_departamento);
+        boolean agregar =
+                DBMS.getInstance().agregarRendimientoProfesor(renMateria, id_departamento);
 
-        ArrayList<rendimientoProf> rendimiento = DBMS.getInstance().obtenerRendimientoProfesor(id_profesor, id_departamento);
-        ArrayList<Materia> materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
+        ArrayList<rendimientoProf> rendimiento =
+                DBMS.getInstance().obtenerRendimientoProfesor(id_profesor, id_departamento);
+        
+        ArrayList<Materia> materias =
+                DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
 
         request.setAttribute("materias", materias);
         request.setAttribute("rendimiento", rendimiento);
+        
         if (agregar) {
             request.setAttribute("planilla_guardada", renMateria);
         } else {
             request.setAttribute("planilla_no_guardada", renMateria);
         }
+
+        request.setAttribute("anos", anos);
         request.setAttribute("rendimientoProf", new rendimientoProf());
         return mapping.findForward(SUCCESS);
     }

@@ -23,13 +23,14 @@ public class AsignarMateriaProfesor extends Action {
 
         HttpSession session = request.getSession(true);
         String id_departamento = (String) session.getAttribute("usbid");
+        Profesor profesor = (Profesor) session.getAttribute("profesor");
 
         MultiBox m = (MultiBox) form;
         String[] materias_seleccionadas = m.getItemsSeleccionados();
 
         if (materias_seleccionadas.length == 0) {
             MultiBox materias = new MultiBox();
-            materias.getMaterias(id_departamento);
+            materias.getMaterias(id_departamento,profesor.getUsbid());
             request.setAttribute("materias", materias);
             request.setAttribute("no_seleccionado", FAILURE);
             return mapping.findForward(FAILURE);

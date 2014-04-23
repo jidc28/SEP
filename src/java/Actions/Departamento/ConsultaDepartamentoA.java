@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Actions.Departamento;
 
 import Clases.*;
@@ -19,6 +15,9 @@ import org.apache.struts.action.ActionMapping;
  * @author jidc28
  */
 public class ConsultaDepartamentoA extends org.apache.struts.action.Action {
+
+    private static final String NO_AUTORIZADO = "no_autorizado";
+    private static final String SESION_EXPIRADA = "sesion_expirada";
 
     /**
      * This is the action called from the Struts framework.
@@ -38,13 +37,27 @@ public class ConsultaDepartamentoA extends org.apache.struts.action.Action {
         HttpSession session = request.getSession(true);
         ArrayList<Departamento> departamentos;
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-        String tipousuario = usuario.getTipousuario();
-        //obtengo una lista de departamentos registrados
-        //si existen departamentos registrados
 
-        departamentos = DBMS.getInstance().listarDepartamentos();
-        session.setAttribute("departamentos", departamentos);
-        //retorno a pagina de exito
-        return mapping.findForward(tipousuario);
+        /* En caso de haber expirado la sesion se direcciona a la vista que
+         * le indica al usuario que debe volver a iniciar sesion. */
+        if (usuario == null) {
+            return mapping.findForward(SESION_EXPIRADA);
+        }
+
+        String tipousuario = usuario.getTipousuario();
+
+        /* Si el tipo de usuario es coordinacion o administrador */
+        if (tipousuario.equals("coordinacion") || tipousuario.equals("administrador")) {
+
+            /* Se obtiene el listado de los departamentos */
+            departamentos = DBMS.getInstance().listarDepartamentos();
+            session.setAttribute("departamentos", departamentos);
+            return mapping.findForward(tipousuario);
+            /* En caso contrario */
+        } else {
+            /* se direccione a la vista que le comunica
+             * al usuario que no esta autorizado para realizar esta accion */
+            return mapping.findForward(NO_AUTORIZADO);
+        }
     }
 }

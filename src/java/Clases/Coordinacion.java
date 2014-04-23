@@ -4,10 +4,7 @@
  */
 package Clases;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
@@ -21,6 +18,24 @@ public class Coordinacion extends org.apache.struts.action.ActionForm {
     private String codigo;
     private String nombre;
     private String decanato;
+    private String evaluaciones;
+    private String opcion;
+
+    public String getOpcion() {
+        return opcion;
+    }
+
+    public void setOpcion(String opcion) {
+        this.opcion = opcion;
+    }
+
+    public String getEvaluaciones() {
+        return evaluaciones;
+    }
+
+    public void setEvaluaciones(String evaluaciones) {
+        this.evaluaciones = evaluaciones;
+    }
 
     public String getDecanato() {
         return decanato;

@@ -5,11 +5,6 @@
 package Clases;
 
 import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts.action.ActionErrors;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
 
 /**
  *
@@ -21,6 +16,24 @@ public class dicta extends org.apache.struts.action.ActionForm {
     private String numeroMateria;
     private ArrayList<Profesor> profesores = new ArrayList(0);
     private Profesor primerProfesor;
+    private String usbidProfesor;
+    private String opcion;
+
+    public String getOpcion() {
+        return opcion;
+    }
+
+    public void setOpcion(String opcion) {
+        this.opcion = opcion;
+    }
+
+    public String getUsbidProfesor() {
+        return usbidProfesor;
+    }
+
+    public void setUsbidProfesor(String usbidProfesor) {
+        this.usbidProfesor = usbidProfesor;
+    }
 
     public ArrayList<Profesor> getProfesores() {
         return profesores;

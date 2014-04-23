@@ -20,6 +20,7 @@ public class Profesor extends org.apache.struts.action.ActionForm {
 
     private static final String patronEmail = "^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private String usbid;
+    private String usbidViejo;
     private String nombre;
     private String apellido;
     private String cedula;
@@ -34,6 +35,14 @@ public class Profesor extends org.apache.struts.action.ActionForm {
     private Pattern patron;
     private Matcher match;
 
+    public String getUsbidViejo() {
+        return usbidViejo;
+    }
+
+    public void setUsbidViejo(String usbidViejo) {
+        this.usbidViejo = usbidViejo;
+    }
+    
     public String[] getNiveles() {
         return niveles;
     }
@@ -190,10 +199,6 @@ public class Profesor extends org.apache.struts.action.ActionForm {
         
         if (this.genero == null) {
             errors.add("genero", new ActionMessage("error.genero.required"));
-        }
-
-        if (!validarEmail(this.email)) {
-            errors.add("email", new ActionMessage("error.email.malformulado"));
         }
 
         return errors;

@@ -22,6 +22,7 @@ public class IrModificarMateria extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
+    private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -40,23 +41,30 @@ public class IrModificarMateria extends org.apache.struts.action.Action {
 
         HttpSession session = request.getSession(true);
         Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
 
-        Materia materia = (Materia) form;
+        if (tipousuario.equals("departamento")) {
 
-        materia = DBMS.getInstance().obtenerDatosMateria(materia);
-        materia.setViejoCodigo(materia.getCodigo());
+            Materia materia = (Materia) form;
 
-        String[] caracteres = materia.getCodigo().split("");
+            materia = DBMS.getInstance().obtenerDatosMateria(materia);
+            materia.setViejoCodigo(materia.getCodigo());
 
-        materia.setCod1(caracteres[1] + caracteres[2]);
-        
-        materia.setCod2(caracteres[3]);
-        materia.setNum2(caracteres[4]);
-        materia.setNum3(caracteres[5]);
-        materia.setNum4(caracteres[6]);
+            String[] caracteres = materia.getCodigo().split("");
 
-        request.setAttribute("modificar","modificar");
-        request.setAttribute("materia", materia);
-        return mapping.findForward(SUCCESS);
+            materia.setCod1(caracteres[1] + caracteres[2]);
+
+            materia.setCod2(caracteres[3]);
+            materia.setNum2(caracteres[4]);
+            materia.setNum3(caracteres[5]);
+            materia.setNum4(caracteres[6]);
+
+            request.setAttribute("modificar", "modificar");
+            request.setAttribute("materia", materia);
+            
+            return mapping.findForward(SUCCESS);
+        } else {
+            return mapping.findForward(FAILURE);
+        }
     }
 }

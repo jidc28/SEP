@@ -16,6 +16,7 @@ public class AsignarPeriodo extends Action {
     private static final String LLENAR_PERIODO = "llenar_periodo";
     private static final String SUCCESS = "success";
     private static final String FAILURE = "failure";
+    private static final String NO_AUTORIZADO = "no_autorizado";
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -24,67 +25,79 @@ public class AsignarPeriodo extends Action {
 
         HttpSession session = request.getSession(true);
         Profesor profesor = (Profesor) session.getAttribute("profesor");
-        String[] materias_seleccionadas =
-                (String[]) session.getAttribute("materias_seleccionadas");
+        String id_departamento = (String) session.getAttribute("usbid");
 
-        String[] materias_resultantes =
-                new String[materias_seleccionadas.length - 1];
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String tipousuario = usuario.getTipousuario();
 
-        Materia materia = (Materia) form;
+        if (tipousuario.equals("departamento")) {
+            String[] materias_seleccionadas =
+                    (String[]) session.getAttribute("materias_seleccionadas");
 
-        if (materia.getPeriodoSD() == null && materia.getPeriodoEM() == null
-                && materia.getPeriodoAJ() == null && materia.getPeriodoV() == null) {
-            
-            ArrayList<Materia> materias =
-                    DBMS.getInstance().consultarMateriasSeleccionadas(materias_seleccionadas);
+            String[] materias_resultantes =
+                    new String[materias_seleccionadas.length - 1];
 
-            request.setAttribute("materias", materias);
-            session.setAttribute("materias_seleccionadas", materias_seleccionadas);
-            request.setAttribute("periodo_vacio", materia);
-            System.out.println(materia.getCodigo());
-            return mapping.findForward(FAILURE);
-        }
+            Materia materia = (Materia) form;
 
-        if (materia.getPeriodoSD() != null) {
-            DBMS.getInstance().agregarDicta(profesor, materia.getCodigo(), "SD");
-        }
-        if (materia.getPeriodoEM() != null) {
-            DBMS.getInstance().agregarDicta(profesor, materia.getCodigo(), "EM");
-        }
-        if (materia.getPeriodoAJ() != null) {
-            DBMS.getInstance().agregarDicta(profesor, materia.getCodigo(), "AJ");
-        }
-        if (materia.getPeriodoV() != null) {
-            DBMS.getInstance().agregarDicta(profesor, materia.getCodigo(), "V");
-        }
+            if (materia.getPeriodoSD() == null && materia.getPeriodoEM() == null
+                    && materia.getPeriodoAJ() == null && materia.getPeriodoV() == null) {
 
-        System.out.println(materia.getCodigo());
-        String id_materia = materia.getCodigo();
+                ArrayList<Materia> materias =
+                        DBMS.getInstance().consultarMateriasSeleccionadas(materias_seleccionadas);
 
-        int j = 0;
-        for (int i = 0; i < materias_seleccionadas.length; i++) {
-            if (!id_materia.equals(materias_seleccionadas[i])) {
-//                System.out.println(materias_seleccionadas[i]);
-                materias_resultantes[j] = materias_seleccionadas[i];
-                j++;
+                request.setAttribute("materias", materias);
+                session.setAttribute("materias_seleccionadas", materias_seleccionadas);
+                request.setAttribute("periodo_vacio", materia);
+                System.out.println(materia.getCodigo());
+                return mapping.findForward(FAILURE);
             }
-        }
 
-        for (int i = 0; i < materias_resultantes.length; i++) {
-            System.out.println("materias_resultantes: " + materias_resultantes[i]);
-        }
+            if (materia.getPeriodoSD() != null) {
+                DBMS.getInstance().agregarDicta(profesor, materia.getCodigo(), "SD");
+            }
+            if (materia.getPeriodoEM() != null) {
+                DBMS.getInstance().agregarDicta(profesor, materia.getCodigo(), "EM");
+            }
+            if (materia.getPeriodoAJ() != null) {
+                DBMS.getInstance().agregarDicta(profesor, materia.getCodigo(), "AJ");
+            }
+            if (materia.getPeriodoV() != null) {
+                DBMS.getInstance().agregarDicta(profesor, materia.getCodigo(), "V");
+            }
 
-        if (materias_resultantes.length == 0) {
+            System.out.println(materia.getCodigo());
+            String id_materia = materia.getCodigo();
 
-            return mapping.findForward(SUCCESS);
+            int j = 0;
+            for (int i = 0; i < materias_seleccionadas.length; i++) {
+                if (!id_materia.equals(materias_seleccionadas[i])) {
+//                System.out.println(materias_seleccionadas[i]);
+                    materias_resultantes[j] = materias_seleccionadas[i];
+                    j++;
+                }
+            }
+
+            for (int i = 0; i < materias_resultantes.length; i++) {
+                System.out.println("materias_resultantes: " + materias_resultantes[i]);
+            }
+
+            if (materias_resultantes.length == 0) {
+                ArrayList<Profesor> profesores =
+                        DBMS.getInstance().listarProfesoresDepartamento(id_departamento);
+
+                request.setAttribute("profesores", profesores);
+                return mapping.findForward(SUCCESS);
+            } else {
+
+                ArrayList<Materia> materias =
+                        DBMS.getInstance().consultarMateriasSeleccionadas(materias_resultantes);
+
+                request.setAttribute("materias", materias);
+                session.setAttribute("materias_seleccionadas", materias_resultantes);
+                return mapping.findForward(LLENAR_PERIODO);
+            }
         } else {
-
-            ArrayList<Materia> materias =
-                    DBMS.getInstance().consultarMateriasSeleccionadas(materias_resultantes);
-
-            request.setAttribute("materias", materias);
-            session.setAttribute("materias_seleccionadas", materias_resultantes);
-            return mapping.findForward(LLENAR_PERIODO);
+            return mapping.findForward(NO_AUTORIZADO);
         }
     }
 }

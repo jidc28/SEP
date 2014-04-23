@@ -64,7 +64,8 @@ public class irLlenarPlanillas extends org.apache.struts.action.Action {
             i--;
         }
 
-        materias = DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(profesor.getUsbid(), id_departamento);
+        materias = 
+                DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(profesor.getUsbid(), id_departamento);
 
         session.setAttribute("profesor", profesor);
         request.setAttribute("materias", materias);

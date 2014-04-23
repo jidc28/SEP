@@ -53,6 +53,7 @@ public class AgregarProfesor extends org.apache.struts.action.Action {
             return mapping.findForward(FAILURE);
         } else {
 
+            profesor.setEmail(profesor.getUsbid() + "@usb.ve");
             boolean agregado = 
                     DBMS.getInstance().
                             agregarProfesor(profesor,id_departamento);
