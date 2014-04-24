@@ -164,6 +164,20 @@
                              onclick="javascript: return confirm('¿Está seguro que desea eliminar su información?')"/>
             </html:form>
         </td>
+        <td>
+            <html:form  action="/irCargarDocProfesor" >
+                <html:hidden name="usuario" property="usbid"/>
+                <html:submit style="margin: 2.5px;" styleClass="btn btn-info" 
+                             value="Cargar Documentos" />
+            </html:form>
+        </td>
+        <td>
+            <html:form  action="/irDescargarDocProfesor" >
+                <html:hidden name="usuario" property="usbid"/>
+                <html:submit style="margin: 2.5px;" styleClass="btn btn-info" 
+                             value="Descargar Documentos" />
+            </html:form>
+        </td>
         </tbody>
     </table>
 </div>

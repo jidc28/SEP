@@ -2443,6 +2443,27 @@ public class DBMS {
         }
         return false;
     }
+    
+    public ArrayList<String> listarArchivosProfesor(String usbid) {
+        PreparedStatement ps;
+        ArrayList<String> archivos = new ArrayList<String>(0);
+        try {
+            ps = conexion.prepareStatement("SELECT path FROM directorios "
+                    + "WHERE usbid_profesor = (?)");
+            ps.setString(1, usbid);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                archivos.add(rs.getString("path"));
+            }
+            
+            return archivos;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
     public ArrayList<Materia> consultarMateriasAsignadas(String usbid_profesor) {
 

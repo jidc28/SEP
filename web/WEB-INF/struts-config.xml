@@ -23,6 +23,7 @@
         <form-bean name="dicta" type="Clases.dicta"/>
         <form-bean name="rendimientoProf" type="Clases.rendimientoProf"/>
         <form-bean name="InformacionProfesorCoord" type="Clases.InformacionProfesorCoord"/>
+        <form-bean name="fileUploadForm" type="Clases.FileUpload"/>
     </form-beans>
     
     <global-exceptions>
@@ -573,9 +574,45 @@
             <forward name="failure" path="modificar_informacion_pagina"/> 
         </action>
         
+        <action input="/VistaProfesor.jsp"
+                name="Profesor" 
+                path="/irCargarDocProfesor" 
+                scope="request" 
+                type="Actions.Profesor.irCargarDocumentosProfesor" 
+                validate="false">
+            <forward name="success" path="cargar_documentos_profesor"/>
+        </action>
+        
+        <action input="/cargar_documentos_profesor.jsp"
+               name="fileUploadForm"
+               path="/fileUploadProfesor"
+               scope="request"
+               type="Actions.Profesor.cargarDocumentos"
+               validate = "false">
+            <forward name="success" path="vistaProfesor"/>
+       </action>
+        
+       <action input="/VistaProfesor.jsp"
+               name="Profesor"
+               path="/irDescargarDocProfesor"
+               scope="request"
+               type="Actions.Profesor.irDescargarDocumentosProfesor"
+               validate = "false">
+            <forward name="success" path="descargar_documentos_profesor"/>
+       </action>
+       
+       <action input="/descargar_documentos_profesor.jsp"
+               name="Profesor"
+               path="/descargarDocumentoSeleccionado"
+               scope="request"
+               type="Actions.Profesor.descargarDocumentos"
+               validate = "false">
+            <forward name="success" path="vistaProfesor"/>
+       </action>
+       
         <action input="/VistaProfesor.jsp" name="Profesor" path="/eliminarInfoP" scope="request" type="Actions.Profesor.EliminarInfoP" validate="false">
             <forward name="success" path="vistaProfesor"/>
-        </action>      
+        </action>   
           
         <action name="NoImplementado" path="/noImplementado" scope="request" type="Otros.noimplementadoAction" validate="false">
             <forward name="success" path="/noimplementado.jsp"/>
