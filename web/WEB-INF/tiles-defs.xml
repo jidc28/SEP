@@ -132,11 +132,11 @@
     </definition>
     
     <definition name="cargar_documentos_profesor" extends="generico">
-        <put name="vista" value="/JSP/profesor/Documentos/cargar_documentos_profesor.jsp"/>
+        <put name="vista" value="/JSP/profesor/Archivos/cargar_documentos_profesor.jsp"/>
     </definition>
     
     <definition name="descargar_documentos_profesor" extends="generico">
-        <put name="vista" value="/JSP/profesor/Documentos/descargar_documentos_profesor.jsp"/>
+        <put name="vista" value="/JSP/profesor/Archivos/descargar_documentos_profesor.jsp"/>
     </definition>
     
     <definition name="listar_evaluaciones_enviadas_profesor_pagina" extends="generico">
