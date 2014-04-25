@@ -22,162 +22,50 @@
     </div>
 </logic:present>
 
-
-<div align="center" >
-    <h4>Gestión de información del profesor</h4>
-    <table border="0">
-        <tbody>
-            <tr style="height: 35px;">
-                <td style="font-size: 14px;">
-                    <strong>USBID</strong>
-                </td>
-                <td>
-                    <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
-                               disabled="true" name="usuario" property="usbid"/>
-                </td>
-            </tr>
-            <tr style="height: 35px;">
-                <td style="font-size: 14px;">
-                    <strong>CÉDULA</strong>
-                </td>
-                <td>
-                    <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
-                               disabled="true" name="profesor" property="cedula"/>
-                </td>
-            </tr>
-            <tr style="height: 35px;">
-                <td style="font-size: 14px;">
-                    <strong>NOMBRE</strong>
-                </td>
-                <td>
-                    <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
-                               disabled="true" name="profesor" property="nombre"/>
-                </td>
-            </tr>
-            <tr style="height: 35px;">
-                <td style="font-size: 14px;">
-                    <strong> APELLIDO</strong> 
-                </td>
-                <td>
-                    <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
-                               disabled="true" name="profesor" property="apellido"/>
-                </td>
-            </tr>
-            <tr style="height: 35px;">
-                <td style="font-size: 14px;"> 
-                    <strong> GÉNERO</strong> 
-                </td>
-                <td>
-                    <logic:equal name="profesor" property="genero" value="F">
-                        <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
-                                   disabled="true" name="profesor" 
-                                   property="genero" value="Femenino"/>
-                    </logic:equal>
-                    <logic:equal name="profesor" property="genero" value="M">
-                        <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
-                                   disabled="true" name="profesor" 
-                                   property="genero" value="Masculino"/>
-                    </logic:equal>
-                </td>
-            </tr>
-            <tr style="height: 35px;">
-                <td style="font-size: 14px;"> 
-                    <strong> CORREO ELECTRÓNICO <br> INSTITUCIONAL </strong> 
-                </td>
-                <td>
-                    <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
-                               disabled="true" name="profesor" property="email"/>
-                </td>
-            </tr>
-            </tr>
-            <tr style="height: 35px;">
-                <td style="font-size: 14px;"> 
-                    <strong> CORREO ELECTRÓNICO <br> PERSONAL </strong> 
-                </td>
-                <td>
-                    <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
-                               disabled="true" name="profesor" property="email_personal"/>
-                </td>
-            </tr>
-            <tr style="height: 35px;">
-                <td style="font-size: 14px;"> 
-                    <strong> LAPSO CONTRACTUAL </strong> 
-                </td>
-                <td>
-                    <html:text style="width: 127px; margin-bottom: 0px;height: 30px;" 
-                               disabled="true" name="profesor" 
-                               property="lapso_contractual_inicio"/>
-                    <html:text style="width: 127px; margin-bottom: 0px;height: 30px;" 
-                               disabled="true" name="profesor" 
-                               property="lapso_contractual_fin"/>
-                </td>
-            </tr>
-            <tr style="height: 35px;">
-                <td style="font-size: 14px;"> 
-                    <strong> NIVEL </strong> 
-                </td>
-                <td>
-                    <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
-                               disabled="true" name="profesor" property="nivel"/>
-                </td>
-            </tr>
-            <tr style="height: 35px;">
-                <td style="font-size: 14px;"> 
-                    <strong> JUBILACIÓN </strong> 
-                </td>
-                <td>
-                    <logic:equal name="profesor" property="jubilado" value="S">
-                        <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
-                                   disabled="true" name="profesor" 
-                                   property="jubilado" value="Si"/>
-                    </logic:equal>
-                    <logic:equal name="profesor" property="jubilado" value="N">
-                        <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
-                                   disabled="true" name="profesor" 
-                                   property="jubilado" value="No"/>
-                    </logic:equal>
-                    <logic:equal name="profesor" property="jubilado" value="">
-                        <html:text style="width: 258px; margin-bottom: 0px;height: 30px;" 
-                                   disabled="true" name="profesor" 
-                                   property="jubilado" value=""/>
-                    </logic:equal>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <table style="margin-top: 5px;">
-        <tbody>
-        <td>
-            <html:form  action="/modificarInfoP" method="POST" 
-                        enctype="multipart/form-data" onsubmit="return(this)" >
-                <html:hidden name="usuario" property="usbid"/>
-                <html:submit style="margin: 2.5px;" styleClass="btn btn-info" 
-                             value="Modificar"/>
-            </html:form>
-        </td>
-        <td>
-            <html:form  action="/eliminarInfoP" >
-                <html:hidden name="usuario" property="usbid"/>
-                <html:submit style="margin: 2.5px;" styleClass="btn btn-danger" 
-                             value="Eliminar" 
-                             onclick="javascript: return confirm('¿Está seguro que desea eliminar su información?')"/>
-            </html:form>
-        </td>
-        <td>
-            <html:form  action="/irCargarDocProfesor" >
-                <html:hidden name="usuario" property="usbid"/>
-                <html:submit style="margin: 2.5px;" styleClass="btn btn-info" 
-                             value="Cargar Documentos" />
-            </html:form>
-        </td>
-        <td>
-            <html:form  action="/irDescargarDocProfesor" >
-                <html:hidden name="usuario" property="usbid"/>
-                <html:submit style="margin: 2.5px;" styleClass="btn btn-info" 
-                             value="Descargar Documentos" />
-            </html:form>
-        </td>
-        </tbody>
-    </table>
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 id="izquierda" class="panel-title">
+                <a id="link-dropdown" class="accordion-toggle" 
+                   data-toggle="collapse" 
+                   data-parent="#accordion" href="#collapseInformacion">
+                    Gestión de información
+                </a>
+                <a href="#" id="ayuda1" style="float: right" rel="popover"> 
+                    <span class="glyphicon glyphicon-question-sign"></span> 
+                </a>
+            </h4> 
+        </div>
+        <div id="collapseInformacion" class="panel-collapse collapse">
+            <div class="panel-body">
+                <html:link action="/gestionarInformacion">
+                    <h5 align ="center">Gestionar información personal</h5>
+                </html:link>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 id="izquierda" class="panel-title">
+                <a id="link-dropdown" class="accordion-toggle" 
+                   data-toggle="collapse" 
+                   data-parent="#accordion" href="#collapseMaterial">
+                    Gestión de material
+                </a>
+                <a href="#" id="ayuda3" style="float: right" rel="popover"> 
+                    <span class="glyphicon glyphicon-question-sign"></span> 
+                </a>
+            </h4>
+        </div>
+        <div id="collapseMaterial" class="panel-collapse collapse">
+            <div class="panel-body">
+                <html:link action="/irCargarDocProfesor">
+                    <h5 align ="center">Agregar material</h5>
+                </html:link>
+                <html:link action="/irDescargarDocProfesor">
+                    <h5 align ="center">Descargar material</h5>
+                </html:link>
+            </div>
+        </div>
+    </div>
 </div>

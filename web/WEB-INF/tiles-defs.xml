@@ -128,15 +128,19 @@
     </definition>
     
     <definition name="modificar_informacion_pagina" extends="generico">
-        <put name="vista" value="/JSP/profesor/modificar_informacion_pagina.jsp"/>
+        <put name="vista" value="/JSP/profesor/Informacion/modificar_informacion_pagina.jsp"/>
     </definition>
     
-    <definition name="cargar_documentos_profesor" extends="generico">
-        <put name="vista" value="/JSP/profesor/Archivos/cargar_documentos_profesor.jsp"/>
+    <definition name="cargar_documentos_profesor_pagina" extends="generico">
+        <put name="vista" value="/JSP/profesor/Archivos/cargar_documentos_profesor_pagina.jsp"/>
     </definition>
     
-    <definition name="descargar_documentos_profesor" extends="generico">
-        <put name="vista" value="/JSP/profesor/Archivos/descargar_documentos_profesor.jsp"/>
+    <definition name="descargar_documentos_profesor_pagina" extends="generico">
+        <put name="vista" value="/JSP/profesor/Archivos/descargar_documentos_profesor_pagina.jsp"/>
+    </definition>
+    
+    <definition name="gestionar_informacion_pagina" extends="generico">
+        <put name="vista" value="/JSP/profesor/Informacion/gestion_informacion_pagina.jsp"/>
     </definition>
     
     <definition name="listar_evaluaciones_enviadas_profesor_pagina" extends="generico">
@@ -298,13 +302,14 @@
 
     <!-- PROFESOR -->
     
-    <!-- Archivo base para el administrador -->
+    <!-- Archivo base para el profesor -->
     <definition name="baseProfesor" extends="base">
         <put name="sidebarL" value="/Plantilla/sidebarsL/sideLProfesor.jsp"/>
     </definition>
     
     <!-- Vista del profesor -->
     <definition name="vistaProfesor" extends="baseProfesor">
+        <put name="script" value="/JSP/profesor/scripts/vista-profesor-script.jsp"/>
         <put name="body" value="/JSP/profesor/VistaProfesor.jsp"/>
     </definition>
     
@@ -312,9 +317,29 @@
     <definition name="modificarInformacion" extends="baseProfesor">
         <put name="script" value="/JSP/profesor/scripts/modificar-informacion-script.jsp"/>
         <put name="css" value="/JSP/profesor/css/modificar-informacion-css.jsp"/>
-        <put name="body" value="/JSP/profesor/ModificarInformacion.jsp"/>
+        <put name="body" value="/JSP/profesor/Informacion/ModificarInformacion.jsp"/>
     </definition>
 
+    <!-- PROFESOR / INFORMACION -->
+
+    <!-- 1. Gestionar informacion del profesor -->
+    <definition name="gestionarInformacion" extends="baseProfesor">
+        <put name="body" value="/JSP/profesor/Informacion/GestionInformacion.jsp"/>
+    </definition>
+
+    <!-- PROFESOR / ARCHIVOS -->
+
+    <!-- 1. Cargar un archivo por parte del profesor -->
+    <definition name="cargarDocumentosProfesor" extends="baseProfesor">
+        <put name="body" value="/JSP/profesor/Archivos/CargarDocumentosProfesor.jsp"/>
+<!--        <put name="vista" value="/JSP/profesor/Archivos/CargarDocumentosProfesor.jsp"/>-->
+    </definition>
+    
+    <!-- 1. Descargar un archivo por parte del profesor -->
+    <definition name="descargarDocumentosProfesor" extends="baseProfesor">
+        <put name="body" value="/JSP/profesor/Archivos/DescargarDocumentosProfesor.jsp"/>
+<!--        <put name="vista" value="/JSP/profesor/Archivos/DescargarDocumentosProfesor.jsp"/>-->
+    </definition>
 
     <!-- DEPARTAMENTO --> 
     

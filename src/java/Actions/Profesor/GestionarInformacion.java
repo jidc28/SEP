@@ -1,28 +1,32 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Actions.Profesor;
 
 import Clases.*;
 import DBMS.DBMS;
-import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author jidc28
+ * @author Langtech
  */
-public class irDescargarDocumentosProfesor extends Action {
+public class GestionarInformacion extends org.apache.struts.action.Action {
 
     private static final String SUCCESS = "success";
 
+    /**
+     * This is the action called from the Struts framework.
+     *
+     * @param mapping The ActionMapping used to select this instance.
+     * @param form The optional ActionForm bean for this request.
+     * @param request The HTTP Request we are processing.
+     * @param response The HTTP Response we are processing.
+     * @throws java.lang.Exception
+     * @return
+     */
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
@@ -31,15 +35,10 @@ public class irDescargarDocumentosProfesor extends Action {
         HttpSession session = request.getSession(true);
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
-        Profesor profesor = 
+        Profesor profe = 
                 DBMS.getInstance().obtenerInfoProfesor(usuario.getUsbid());
-        profesor.setUsbidViejo(profesor.getUsbid());
-
-        ArrayList<String> paths = DBMS.getInstance().
-                listarArchivosProfesor(profesor.getUsbid());
-
-        request.setAttribute("paths", paths);
-        request.setAttribute("profesor", profesor);
+        
+        request.setAttribute("profesor", profe);
         return mapping.findForward(SUCCESS);
     }
 }
