@@ -12,7 +12,7 @@
 
 <link href="css/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link rel="stylesheet" type="text/css" href="css/estilo.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap2.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="estilo/bootstrap2.3.2/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="estilo/bootstrap2.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="css/css/bootstrap.min.css">

@@ -14,7 +14,6 @@
 
 <h4>Agregar material:</h4>
 
-
 <html:form action="/fileUploadProfesor" method="post" enctype="multipart/form-data">
     <div style="width:auto;height:auto;">
         <table id="dataTable" width="350px" cellspacing="14px">
@@ -24,10 +23,27 @@
                     <td>
                         <div class="jumbotron" 
                              style="font-size: 12px; padding: 20px; margin: 0px;
-                             padding-top: 30px;">
-                            <html:file value="cargar" onchange="Sumar()" 
-                                       property="archivo[0]" style="width: 100%;">                
-                            </html:file>
+                             padding-top: 30px; width: 600px;">
+                            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                <div class="form-control" data-trigger="fileinput">
+                                    <i class="glyphicon glyphicon-file fileinput-exists"></i> 
+                                    <span class="fileinput-filename"></span>
+                                </div>
+                                <span class="input-group-addon btn btn-default btn-file">
+                                    <span class="fileinput-new">
+                                        Select file
+                                    </span>
+                                    <span class="fileinput-exists">
+                                        Change
+                                    </span>
+                                    <html:file value="cargar" onchange="Sumar()" 
+                                               property="archivo[0]" style="width: 100%;">  
+                                    </html:file>
+                                </span>
+                                <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">
+                                    Remove
+                                </a>
+                            </div>
                         </div>
                     </td> 
                 </tr>

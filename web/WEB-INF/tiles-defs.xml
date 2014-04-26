@@ -331,14 +331,14 @@
 
     <!-- 1. Cargar un archivo por parte del profesor -->
     <definition name="cargarDocumentosProfesor" extends="baseProfesor">
+        <put name="css" value="/JSP/profesor/css/cargar-documentos-profesor-css.jsp"/>
+        <put name="script" value="/JSP/profesor/scripts/cargar-documentos-profesor-script.jsp"/>
         <put name="body" value="/JSP/profesor/Archivos/CargarDocumentosProfesor.jsp"/>
-<!--        <put name="vista" value="/JSP/profesor/Archivos/CargarDocumentosProfesor.jsp"/>-->
     </definition>
     
     <!-- 1. Descargar un archivo por parte del profesor -->
     <definition name="descargarDocumentosProfesor" extends="baseProfesor">
         <put name="body" value="/JSP/profesor/Archivos/DescargarDocumentosProfesor.jsp"/>
-<!--        <put name="vista" value="/JSP/profesor/Archivos/DescargarDocumentosProfesor.jsp"/>-->
     </definition>
 
     <!-- DEPARTAMENTO --> 
