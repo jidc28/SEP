@@ -14,69 +14,101 @@
 
 <h4> Descargar documentos:</h4>
 
-<div>
-    <table>
-        <tbody>
-            <tr>
-                <td>
-                    <select style="width: 100px;">
-                        <option>2009</option>
-                        <option>2010</option>
-                        <option>2011</option>
-                        <option>2012</option>
-                        <option>2013</option>
-                        <option>2014</option>
-                        <option>2015</option>
-                        <option>2016</option>
-                    </select>
-                </td>
-                <td>
-                    <select>
-                        <option>
-                            Septiembre-Diciembre
-                        </option>
-                        <option>
-                            Enero-Marzo
-                        </option>
-                        <option>
-                            Abril-Julio
-                        </option>
-                        <option>
-                            Intensivo
-                        </option>
-                    </select>
-                </td>
-                <td>
-                    <button class="btn btn-primary" 
-                            style="padding-top: 4px; padding-bottom: 3px;">
-                        Buscar
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<html:form action="/consultarDocumentos">
+    <div>
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <html:select name="Archivo" property="ano" style="width: 100px;">
+                            <logic:iterate name="anos" id="ano">
+                                <html:option value="${ano}">
+                                    <bean:write name="ano"/>
+                                </html:option>
+                            </logic:iterate>
+                        </html:select>
+                    </td>
+                    <td>
+                        <html:select name="Archivo" property="trimestre" style="width: 100%;">
+                            <html:option value="SD">
+                                Septiembre-Diciembre
+                            </html:option>
+                            <html:option value="EM">
+                                Enero-Marzo
+                            </html:option>
+                            <html:option value="AJ">
+                                Abril-Julio
+                            </html:option>
+                            <html:option value="V">
+                                Intensivo
+                            </html:option>
+                        </html:select>
+                    </td>
+                    <td>
+                        <html:submit styleClass="btn btn-primary"
+                                     style="padding-top: 4px; padding-bottom: 3px;">
+                            Buscar documentos
+                        </html:submit>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</html:form>
 
-<div id="tabla" class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th  style="font-size: 14px;">
-                    PATH
-                </th>
-            </tr>
-        </thead>
-        <logic:iterate name="paths" id="path">
-            <tr>
-                <td align="center">
-                    <bean:write name="path"/>
-                </td>
-            </tr>
-        </logic:iterate>
-    </table>
-    <html:form  action="/descargarDocumentoSeleccionado" >
-        <html:hidden name="usuario" property="usbid"/>
-        <html:submit style="margin: 2.5px;" styleClass="btn btn-info" 
-                     value="Descargar Documentos" />
-    </html:form>
-</div>
+<logic:empty name="archivos">
+    <div class="alert alert-warning alert-dismissable" 
+         id="alert-coord">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+            &times;
+        </button>
+        <p>
+            No existen archivos en este año y este trimestre.
+        </p>
+    </div>
+</logic:empty>
+
+<logic:notEmpty name="archivos">
+    <div id="tabla" class="table-responsive" style="width: 70%;">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th  style="font-size: 14px;">
+                        ARCHIVO
+                    </th>
+                    <th  style="font-size: 14px;">
+                        <center>
+                            <span class="glyphicon glyphicon-floppy-save"></span>
+                            DESCARGAR
+                        </center>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <logic:iterate name="archivos" id="archivo">
+                    <tr>
+                        <td style="font-size: 13px;">
+                            <span class="glyphicon glyphicon-file"></span>
+                            <bean:write name="archivo" property="nombre"/>
+                        </td>
+                        <td style="width: 30%;">
+                            <center>
+                            <html:form  action="/descargarDocumentoSeleccionado" 
+                                        style="margin:0px;">
+                                <html:hidden name="archivo" property="nombre"/>
+                                <html:hidden name="archivo" property="usbidProfesor"/>
+                                <html:hidden name="archivo" property="trimestre"/>
+                                <html:hidden name="archivo" property="ano"/>
+                                <html:submit styleClass="btn btn-info"
+                                             style="padding-top: 4px; padding-bottom: 3px;">
+                                    Descargar
+                                </html:submit>
+                            </html:form>
+                            </center>
+                        </td>
+                    </tr>
+                </logic:iterate>
+            </tbody>
+        </table>
+    </div>
+</logic:notEmpty>

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Actions.Profesor;
 
 import Clases.*;
@@ -19,7 +15,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author jidc28
  */
-public class irDescargarDocumentosProfesor extends Action {
+public class ConsultarDocumentos extends Action {
 
     private static final String SUCCESS = "success";
 
@@ -31,18 +27,26 @@ public class irDescargarDocumentosProfesor extends Action {
         HttpSession session = request.getSession(true);
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
-        Profesor profesor = 
+        Archivo archivo = (Archivo) form;
+        archivo.setUsbidProfesor(usuario.getUsbid());
+
+        Profesor profesor =
                 DBMS.getInstance().obtenerInfoProfesor(usuario.getUsbid());
+
         profesor.setUsbidViejo(profesor.getUsbid());
 
-        ArrayList<String> paths =
-                DBMS.getInstance().listarDirectoriosProfesor(profesor.getUsbid());
+        ArrayList<Archivo> archivos =
+                DBMS.getInstance().listarArchivosProfesor(archivo);
 
-        ArrayList<String> anos = 
+        ArrayList<String> anos =
                 DBMS.getInstance().listarAnosArchivos(usuario.getUsbid());
+
+        ArrayList<String> paths = 
+                DBMS.getInstance().listarDirectoriosProfesor(profesor.getUsbid());
         
         request.setAttribute("anos", anos);
         request.setAttribute("paths", paths);
+        request.setAttribute("archivos", archivos);
         request.setAttribute("profesor", profesor);
         return mapping.findForward(SUCCESS);
     }

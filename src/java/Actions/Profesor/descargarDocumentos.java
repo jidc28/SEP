@@ -1,29 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Actions.Profesor;
 
 import Clases.*;
-import DBMS.DBMS;
-
 import java.io.File;
-import java.util.ArrayList;
-import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
-import java.io.InputStream;
-import java.net.URL;
-
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.upload.FormFile;
 
 /**
  *
@@ -31,10 +17,8 @@ import org.apache.struts.upload.FormFile;
  */
 public class descargarDocumentos extends org.apache.struts.action.Action {
 
-    /* forward name="success" path="" */
     private static final String SUCCESS = "success";
     private static final String FAILURE = "failure";
-    
 
     /**
      * This is the action called from the Struts framework.
@@ -52,18 +36,24 @@ public class descargarDocumentos extends org.apache.struts.action.Action {
             throws Exception {
 
         HttpSession session = request.getSession(true);
-        String usuario = (String) session.getAttribute("usbid");
+        String id_usuario = (String) session.getAttribute("usbid");
+
+        Archivo archivo = (Archivo) form;
 
         String filePath =
                 getServlet().getServletContext().getRealPath("/")
-                + "Documentos/" + usuario;
-        String OUTPUTFILE = filePath + "/000_128298051.jpg";
+                + "Documentos/" + id_usuario;
+
+        String OUTPUTFILE = filePath + "/" + archivo.getNombre();
+        
+        System.out.println(OUTPUTFILE);
 
         /*Descarga de archivos obtenida de 
          * http://www.mkyong.com/struts/struts-download-file-from-website-example/
          */
         response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment;filename=000_128298051.jpg");
+
+        response.setHeader("Content-Disposition", "attachment;filename=" + archivo.getNombre());
 
         try {
             //Get it from file system

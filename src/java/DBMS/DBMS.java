@@ -2444,7 +2444,7 @@ public class DBMS {
         return false;
     }
     
-    public ArrayList<String> listarArchivosProfesor(String usbid) {
+    public ArrayList<String> listarDirectoriosProfesor(String usbid) {
         PreparedStatement ps;
         ArrayList<String> archivos = new ArrayList<String>(0);
         try {
@@ -2456,6 +2456,60 @@ public class DBMS {
 
             while (rs.next()) {
                 archivos.add(rs.getString("path"));
+            }
+            
+            return archivos;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    public ArrayList<Archivo> listarArchivosProfesor(Archivo archivo) {
+        PreparedStatement ps;
+        ArrayList<Archivo> archivos = new ArrayList<Archivo>(0);
+        try {
+            ps = conexion.prepareStatement("SELECT * "
+                    + "FROM archivos "
+                    + "WHERE usbid_profesor = ? "
+                    + "AND trimestre = ? "
+                    + "AND ano = ?;");
+            ps.setString(1, archivo.getUsbidProfesor());
+            ps.setString(2, archivo.getTrimestre());
+            ps.setInt(3, archivo.getAno());
+            
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Archivo archivo_tmp = new Archivo();
+                archivo_tmp.setUsbidProfesor(rs.getString("usbid_profesor"));
+                archivo_tmp.setTrimestre(rs.getString("trimestre"));
+                archivo_tmp.setNombre(rs.getString("nombre"));
+                archivo_tmp.setAno(rs.getInt("ano"));
+                archivos.add(archivo_tmp);
+            }
+            
+            return archivos;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    public ArrayList<String> listarAnosArchivos(String usbid_profesor) {
+        PreparedStatement ps;
+        ArrayList<String> archivos = new ArrayList<String>(0);
+        try {
+            ps = conexion.prepareStatement("SELECT ano "
+                    + "FROM archivos "
+                    + "WHERE usbid_profesor = ?"
+                    + "ORDER BY ano;");
+            ps.setString(1, usbid_profesor);
+            
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                archivos.add(rs.getString("ano"));
             }
             
             return archivos;

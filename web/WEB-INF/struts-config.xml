@@ -24,6 +24,7 @@
         <form-bean name="rendimientoProf" type="Clases.rendimientoProf"/>
         <form-bean name="InformacionProfesorCoord" type="Clases.InformacionProfesorCoord"/>
         <form-bean name="fileUploadForm" type="Clases.FileUpload"/>
+        <form-bean name="Archivo" type="Clases.Archivo"/>
     </form-beans>
     
     <global-exceptions>
@@ -593,6 +594,15 @@
             <forward name="success" path="cargar_documentos_profesor_pagina"/>
         </action>
         
+        <action input="/descargar_documentos_profesor_pagina.jsp"
+                name="Archivo"
+                path="/consultarDocumentos" 
+                scope="request" 
+                type="Actions.Profesor.ConsultarDocumentos" 
+                validate="false">
+            <forward name="success" path="descargar_documentos_profesor_pagina"/>
+        </action>
+        
         <action input="/cargar_documentos_profesor.jsp"
                name="fileUploadForm"
                path="/fileUploadProfesor"
@@ -612,7 +622,7 @@
        </action>
        
        <action input="/descargar_documentos_profesor.jsp"
-               name="Profesor"
+               name="Archivo"
                path="/descargarDocumentoSeleccionado"
                scope="request"
                type="Actions.Profesor.descargarDocumentos"
