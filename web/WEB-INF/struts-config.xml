@@ -123,7 +123,12 @@
             parameter="agrega_departamento_pagina">
         </action>
         
-        <action input="/AgregarDepartamento.jsp" name="Departamento" path="/agregarDepartamento" scope="request" type="Actions.Departamento.AgregarDepartamento" validate="false">
+        <action input="/AgregarDepartamento.jsp" 
+                name="Departamento" 
+                path="/agregarDepartamento" 
+                scope="request" 
+                type="Actions.Departamento.AgregarDepartamento" 
+                validate="false">
             <forward name="success" path="consulta_departamento_pagina"/>
             <forward name="yaregistrada" path="agrega_departamento_pagina"/>
             <forward name="failure" path="agrega_departamento_pagina"/>
@@ -166,7 +171,12 @@
         </action>
         
         <!--     COORDINACIONES     -->
-        <action input="/AgregaCoordinacion.jsp" name="Coordinacion" path="/registrarCoordinacion" scope="request" type="Actions.Coordinacion.RegistrarCoordinacion" validate="false">
+        <action input="/AgregaCoordinacion.jsp" 
+                name="Coordinacion" 
+                path="/registrarCoordinacion" 
+                scope="request" 
+                type="Actions.Coordinacion.RegistrarCoordinacion" 
+                validate="false">
             <forward name="administrador" path="consulta_coordinacion_pagina"/>
             <forward name="decanato" path="consulta_coordinacion_pagina"/>
             <forward name="failure_administrador" path="agrega_coordinacion_pagina"/>
