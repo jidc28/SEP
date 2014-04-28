@@ -551,6 +551,15 @@
             <forward name="departamento" path="listar_evaluaciones_pendientes_pagina"/>
         </action>
         
+        <action input="/VistaDepartamento.jsp" 
+                name="dicta" 
+                path="/listarEvaluacionesProfesor" 
+                scope="request" 
+                type="Actions.Profesor.ListarEvaluacionesProfesor"
+                validate="false">
+            <forward name="success" path="listar_evaluaciones_profesor_pagina"/>
+        </action>
+        
         <action input="/listarEvaluacionesPendientes.jsp" 
                 name="dicta" 
                 path="/hacerEvaluacion" 

@@ -123,7 +123,7 @@
                     <h5 align ="center">Evaluar profesores</h5>
                 </html:link>
                 <logic:present name="evaluaciones_pendientes">
-                    <html:link action="/listarEvaluacionesPendientes">
+                    <html:link action="/listarEvaluacionesProfesor">
                         <h5 align ="center">Listar Evaluaciones Pendientes
                             <span class="badge">
                                 <bean:write name="evaluaciones_pendientes"/>

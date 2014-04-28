@@ -729,6 +729,33 @@ public class DBMS {
         return materias;
     }
 
+    public ArrayList<Profesor> listarProfesoresAEvaluarDepartamento(String id_departamento) {
+
+        ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT DISTINCT usbid, nombre, apellido "
+                    + "FROM profesor, evaluar "
+                    + "WHERE codigo_departamento = ? "
+                    + "AND usbid_profesor = usbid;");
+            ps.setString(1, id_departamento);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Profesor p = new Profesor();
+                p.setUsbid(rs.getString("usbid"));
+                p.setNombre(rs.getString("nombre"));
+                p.setApellido(rs.getString("apellido"));
+
+                profesores.add(p);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return profesores;
+    }
+
     public ArrayList<Profesor> listarProfesoresAEvaluar(String id_departamento) {
 
         ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
@@ -3257,7 +3284,8 @@ public class DBMS {
         return false;
     }
 
-    public ArrayList<dicta> listarEvaluadosPorCoordinacion(String id_departamento) {
+    public ArrayList<dicta> listarEvaluadosPorCoordinacion(
+            String id_departamento, String id_profesor) {
 
         PreparedStatement ps, ps2;
         ArrayList<dicta> dicta_materia = new ArrayList(0);
@@ -3270,8 +3298,10 @@ public class DBMS {
                     + "WHERE codigo_departamento = ? "
                     + "AND evaluado_coordinacion = 'si' "
                     + "AND revisado_departamento = 'no' "
+                    + "AND usbid_profesor = ? "
                     + "ORDER BY usbid_profesor;");
             ps.setString(1, id_departamento);
+            ps.setString(2, id_profesor);
 
             ResultSet rs = ps.executeQuery();
 

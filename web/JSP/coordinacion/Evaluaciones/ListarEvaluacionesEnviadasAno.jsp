@@ -50,10 +50,7 @@
                         <html:hidden name="evaluacion" property="ano"/>
                         <html:submit styleClass="link2">
                             Evaluaciones de <bean:write name="evaluacion" property="trimestre"/> <bean:write name="evaluacion" property="ano"/>
-                        </html:submit>  
-                        <span style="color: #428bca;" 
-                              class="glyphicon glyphicon-arrow-right">
-                        </span>
+                        </html:submit>
                     </html:form>
                 </td>
             </tr>
