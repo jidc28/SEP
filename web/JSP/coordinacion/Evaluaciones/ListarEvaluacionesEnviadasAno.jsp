@@ -12,9 +12,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <h4>  
-    Evaluaciones del profesor:
-    <bean:write name="profesor" property="apellido"/>,
-    <bean:write name="profesor" property="nombre"/>
+    Listado de evaluaciones enviadas
+    <div style="font-size: 14px; color: grey;">
+        <bean:write name="profesor" property="apellido"/>,
+        <bean:write name="profesor" property="nombre"/>
+    </div>
 </h4>
 
 <table style="margin: 0px; margin-top: 20px; margin-left: 20px;" align="left">

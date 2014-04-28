@@ -17,9 +17,12 @@
     </div>
 </logic:present>
 
-<h4>Evaluación del profesor: 
-    <bean:write name="profesor" property="apellido"/>,
-    <bean:write name="profesor" property="nombre"/>
+<h4>    
+    Evaluación
+    <div style="font-size: 14px; color: grey;">
+        <bean:write name="profesor" property="apellido"/>,
+        <bean:write name="profesor" property="nombre"/>
+    </div>
 </h4>
 
 <div style="width: 95%">
@@ -74,24 +77,40 @@
 
 <div class="tab-content">
     <div class="tab-pane" id="profesor">
-        <logic:empty name="archivos">
-            <div class="alert alert-danger alert-dismissable" 
-                 id="alert-coord" style="text-align: left; margin-top: 30px;">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                    &times;
-                </button>
-                <p style="font-weight: normal;">
-                    <strong>Atención:</strong> <br> 
-                    El profesor no ha subido ningún archivo. Presione <em>
-                        Enviar notificación </em> si desea notificarle que debe 
-                    cargar el material realizado al <em>Sistema de Evaluación
-                        de Profesores</em>
-                </p>
-                <button class="btn btn-danger"style="margin-top: 5px;">
-                    Enviar notificación
-                </button>
-            </div>
-        </logic:empty>
+        <logic:present name="evaluar">
+            <logic:empty name="archivos">
+                <div class="alert alert-danger alert-dismissable" 
+                     id="alert-coord" style="text-align: left; margin-top: 30px;">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                        &times;
+                    </button>
+                    <p style="font-weight: normal;">
+                        <strong>Atención:</strong> <br> 
+                        El profesor no ha subido ningún archivo. Presione <em>
+                            Enviar notificación </em> si desea notificarle que debe 
+                        cargar el material realizado al <em>Sistema de Evaluación
+                            de Profesores</em>
+                    </p>
+                    <button class="btn btn-danger"style="margin-top: 5px;">
+                        Enviar notificación
+                    </button>
+                </div>
+            </logic:empty>
+        </logic:present>
+        <logic:notPresent name="evaluar">
+            <logic:empty name="archivos">
+                <div class="alert alert-danger alert-dismissable" 
+                     id="alert-coord" style="text-align: left; margin-top: 30px;">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                        &times;
+                    </button>
+                    <p style="font-weight: normal;">
+                        El profesor no subió ningún tipo de material para la 
+                        evaluación ocurrida en el año <bean:write name="ano"/>.
+                    </p>
+                </div>
+            </logic:empty>
+        </logic:notPresent>
         <logic:notEmpty name="archivos">
             <div id="tabla" class="table-responsive" style="width: 85%;">
                 <table class="table table-striped" style=" margin-top: 40px;">
@@ -568,3 +587,11 @@
         </html:submit>
     </html:form>
 </logic:present>
+            
+<div class="jumbotron" 
+     style="width: 200px; height: 80px; padding: 10px; padding-bottom: 0px; padding-top: 13px;">
+    <img src="imagenes/pdf.png" style="width: 60px; height: 60px;">
+    <button class="btn btn-danger">
+        Descargar
+    </button>
+</div>

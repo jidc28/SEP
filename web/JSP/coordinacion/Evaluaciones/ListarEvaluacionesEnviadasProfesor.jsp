@@ -11,7 +11,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <h4>  
-    Listado de evaluaciones enviadas por profesores
+    Listado de evaluaciones enviadas
 </h4>
 
 <table style="margin: 0px; margin-top: 20px; margin-left: 20px;" align="left">

@@ -5,7 +5,6 @@ import DBMS.DBMS;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +29,7 @@ public class HacerEvaluacion extends Action {
      * @return
      */
     @Override
+    @SuppressWarnings("empty-statement")
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -42,75 +42,15 @@ public class HacerEvaluacion extends Action {
         if (session.getAttribute("usuario") != null) {
 
             dicta d = (dicta) form;
+            Archivo[] archivos_considerados = null;
 
-            /* Se obtiene la fecha */
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            Date date = new Date();
-
-            /* Se extrae el ano y el trimestre actual */
-            String fecha = dateFormat.format(date).toString();
-            String fecha_ano = fecha.substring(0, 4);
-
-            /* Se transforman a enteros para ser procesados mas facilmente. */
-            int int_fecha_ano = Integer.parseInt(fecha_ano);
-            int fecha_mes = Integer.parseInt(fecha.substring(5, 7));
-
-            /* Se inicializan archivos (los que se van a considerar) */
-            Archivo a_1 = new Archivo();
-            Archivo a_2 = new Archivo();
-            Archivo a_3 = new Archivo();
-            Archivo a_4 = new Archivo();
-
-            /* Según el mes en que se esté realizando la evaluacion se revisarán 
-             * los archivos de profesor agregados por el ano y el trimestre */
-            if (1 <= fecha_mes && fecha_mes <= 3) {
-                /* El trimestre es ENERO-MARZO */
-                a_1.setAno(int_fecha_ano);
-                a_1.setTrimestre("EM");
-                a_2.setAno(int_fecha_ano - 1);
-                a_2.setTrimestre("SD");
-                a_3.setAno(int_fecha_ano - 1);
-                a_3.setTrimestre("V");
-                a_4.setAno(int_fecha_ano - 1);
-                a_4.setTrimestre("AJ");
-
-            } else if (4 <= fecha_mes && fecha_mes <= 7) {
-                /* El trimestre es ABRIL-JULIO */
-                a_1.setAno(int_fecha_ano);
-                a_1.setTrimestre("AJ");
-                a_2.setAno(int_fecha_ano);
-                a_2.setTrimestre("EM");
-                a_3.setAno(int_fecha_ano - 1);
-                a_3.setTrimestre("SD");
-                a_4.setAno(int_fecha_ano - 1);
-                a_4.setTrimestre("V");
-
-            } else if (9 <= fecha_mes && fecha_mes <= 12) {
-                /* El trimestre es SEPTIEMBRE-DICIEMBRE */
-                a_1.setAno(int_fecha_ano);
-                a_1.setTrimestre("SD");
-                a_2.setAno(int_fecha_ano);
-                a_2.setTrimestre("V");
-                a_3.setAno(int_fecha_ano);
-                a_3.setTrimestre("AJ");
-                a_4.setAno(int_fecha_ano);
-                a_4.setTrimestre("EM");
-
-            } else if (fecha_mes == 8) {
-                /* Período INTENSIVO */
-                a_1.setAno(int_fecha_ano);
-                a_1.setTrimestre("V");
-                a_2.setAno(int_fecha_ano);
-                a_2.setTrimestre("AJ");
-                a_3.setAno(int_fecha_ano);
-                a_3.setTrimestre("EM");
-                a_4.setAno(int_fecha_ano - 1);
-                a_4.setTrimestre("SD");
+            if (d.getOpcion().equals("pendiente")) {
+                archivos_considerados = obtenerArchivosConsiderados(-1, null, 1);
+            } else {
+                String trimestre = (String) session.getAttribute("trimestre");
+                int ano = (Integer) session.getAttribute("ano");
+                archivos_considerados = obtenerArchivosConsiderados(ano, trimestre, 2);
             }
-
-            /* Se agregan los archivos a un arreglo para ser procesados 
-             * posteriormente */
-            Archivo[] archivos_considerados = {a_1, a_2, a_3, a_4};
 
             /* Se obtiene el rendimiento del profesor determinado asociado con
              * la materia que maneja la coordinación */
@@ -121,7 +61,7 @@ public class HacerEvaluacion extends Action {
                     DBMS.getInstance().obtenerInfoProfesor(d.getUsbidProfesor());
 
             /* Se obtienen todos los archivos subidos por el profesor */
-            ArrayList<Archivo> archivos = 
+            ArrayList<Archivo> archivos =
                     DBMS.getInstance().
                     listarArchivosProfesor(profesor.getUsbid(), archivos_considerados);
 
@@ -274,5 +214,100 @@ public class HacerEvaluacion extends Action {
     public Float calcularPorcentaje(int total, int parte) {
         Float resultado = (float) (parte * 100) / total;
         return resultado;
+    }
+
+    public Archivo[] obtenerArchivosConsiderados(int ano, String mes, int opcion) {
+
+        int int_fecha_ano;
+        int fecha_mes = -1;
+        
+        /* Se obtiene la fecha */
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+
+        /* Se extrae el ano y el trimestre actual */
+        String fecha = dateFormat.format(date).toString();
+        String fecha_ano = fecha.substring(0, 4);
+
+
+        /* En el caso en que la evaluación todavía no se haya realizado
+         * (tenga el status "pendiente") */
+        if (opcion == 1) {
+            /* Se transforman a enteros para ser procesados mas facilmente. */
+            int_fecha_ano = Integer.parseInt(fecha_ano);
+            fecha_mes = Integer.parseInt(fecha.substring(5, 7));
+            
+            /* En el caso en que la evaluación ya se haya realizado */
+        } else {
+            int_fecha_ano = ano;
+
+            if (mes.equals("EM")) {
+                fecha_mes = 1;
+            } else if (mes.equals("AJ")) {
+                fecha_mes = 5;
+            } else if (mes.equals("SD")) {
+                fecha_mes = 10;
+            } else if (mes.equals("V")) {
+                fecha_mes = 8;
+            }
+        }
+
+        /* Se inicializan archivos (los que se van a considerar) */
+        Archivo a_1 = new Archivo();
+        Archivo a_2 = new Archivo();
+        Archivo a_3 = new Archivo();
+        Archivo a_4 = new Archivo();
+
+        /* Según el mes en que se esté realizando la evaluacion se revisarán 
+         * los archivos de profesor agregados por el ano y el trimestre */
+        if (1 <= fecha_mes && fecha_mes <= 3) {
+            /* El trimestre es ENERO-MARZO */
+            a_1.setAno(int_fecha_ano);
+            a_1.setTrimestre("EM");
+            a_2.setAno(int_fecha_ano - 1);
+            a_2.setTrimestre("SD");
+            a_3.setAno(int_fecha_ano - 1);
+            a_3.setTrimestre("V");
+            a_4.setAno(int_fecha_ano - 1);
+            a_4.setTrimestre("AJ");
+
+        } else if (4 <= fecha_mes && fecha_mes <= 7) {
+            /* El trimestre es ABRIL-JULIO */
+            a_1.setAno(int_fecha_ano);
+            a_1.setTrimestre("AJ");
+            a_2.setAno(int_fecha_ano);
+            a_2.setTrimestre("EM");
+            a_3.setAno(int_fecha_ano - 1);
+            a_3.setTrimestre("SD");
+            a_4.setAno(int_fecha_ano - 1);
+            a_4.setTrimestre("V");
+
+        } else if (9 <= fecha_mes && fecha_mes <= 12) {
+            /* El trimestre es SEPTIEMBRE-DICIEMBRE */
+            a_1.setAno(int_fecha_ano);
+            a_1.setTrimestre("SD");
+            a_2.setAno(int_fecha_ano);
+            a_2.setTrimestre("V");
+            a_3.setAno(int_fecha_ano);
+            a_3.setTrimestre("AJ");
+            a_4.setAno(int_fecha_ano);
+            a_4.setTrimestre("EM");
+
+        } else if (fecha_mes == 8) {
+            /* Período INTENSIVO */
+            a_1.setAno(int_fecha_ano);
+            a_1.setTrimestre("V");
+            a_2.setAno(int_fecha_ano);
+            a_2.setTrimestre("AJ");
+            a_3.setAno(int_fecha_ano);
+            a_3.setTrimestre("EM");
+            a_4.setAno(int_fecha_ano - 1);
+            a_4.setTrimestre("SD");
+        }
+
+        /* Se agregan los archivos a un arreglo para ser procesados 
+         * posteriormente */
+        Archivo[] archivos_considerados = {a_1, a_2, a_3, a_4};
+        return archivos_considerados;
     }
 }

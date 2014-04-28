@@ -10,7 +10,14 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>  
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 
-<h4>Evaluaciones Enviadas</h4>
+<h4>    
+    Listado de evaluaciones enviadas
+    <div style="font-size: 14px; color: grey;">
+        <bean:write name="profesor" property="apellido"/>,
+        <bean:write name="profesor" property="nombre"/>
+    </div>
+</h4>
+    
 <center>
     <logic:empty name="evaluaciones_enviadas">
         <div class="alert alert-warning alert-dismissable" 
