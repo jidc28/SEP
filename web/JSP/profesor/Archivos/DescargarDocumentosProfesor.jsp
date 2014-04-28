@@ -69,45 +69,36 @@
 </logic:empty>
 
 <logic:notEmpty name="archivos">
-    <div id="tabla" class="table-responsive" style="width: 70%;">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th  style="font-size: 14px;">
-                        ARCHIVO
-                    </th>
-                    <th  style="font-size: 14px;">
-            <center>
-                <span class="glyphicon glyphicon-floppy-save"></span>
-                DESCARGAR
-            </center>
-            </th>
-            </tr>
-            </thead>
+    <div id="tabla" class="table-responsive" style="width: 85%;">
+        <table class="table table-striped" style=" margin-top: 40px;">
             <tbody>
                 <logic:iterate name="archivos" id="archivo">
                     <tr>
-                        <td style="font-size: 13px;">
+                        <td style="font-size: 14px; font-weight: bold;">
                             <span class="glyphicon glyphicon-file"></span>
                             <bean:write name="archivo" property="nombre"/>
+                            <br>
+                            <blockquote style="margin: 0px;">
+                                <p style="font-size: 11px; color: gray;">
+                                    <bean:write name="archivo" property="descripcion"/>
+                                </p>
+                            </blockquote>
+                            <div style="text-align: right;">
+                                <html:form  action="/descargarDocumentoSeleccionado" 
+                                            style="margin:0px;">
+                                    <html:hidden name="archivo" property="nombre"/>
+                                    <html:hidden name="archivo" property="usbidProfesor"/>
+                                    <html:hidden name="archivo" property="trimestre"/>
+                                    <html:hidden name="archivo" property="ano"/>
+                                    <html:submit styleClass="btn btn-info"
+                                                 style="padding-top: 4px; padding-bottom: 3px;">
+                                        Descargar
+                                    </html:submit>
+                                </html:form>
+                            </div>
                         </td>
-                        <td style="width: 30%;">
-                <center>
-                    <html:form  action="/descargarDocumentoSeleccionado" 
-                                style="margin:0px;">
-                        <html:hidden name="archivo" property="nombre"/>
-                        <html:hidden name="archivo" property="usbidProfesor"/>
-                        <html:hidden name="archivo" property="trimestre"/>
-                        <html:hidden name="archivo" property="ano"/>
-                        <html:submit styleClass="btn btn-info"
-                                     style="padding-top: 4px; padding-bottom: 3px;">
-                            Descargar
-                        </html:submit>
-                    </html:form>
-                </center>
-                </td>
-                </tr>
-            </logic:iterate>
+                    </tr>
+                </logic:iterate>
             </tbody>
         </table>
     </div>

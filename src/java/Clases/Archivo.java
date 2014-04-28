@@ -9,6 +9,15 @@ public class Archivo extends org.apache.struts.action.ActionForm {
     private String nombre;
     private String trimestre;
     private int ano;
+    private String descripcion;
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
     public String getUsbidProfesor() {
         return usbidProfesor;

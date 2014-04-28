@@ -1594,11 +1594,11 @@ public class DBMS {
                     + "WHERE usbid_profesor = ?;");
             ps.setString(1, usbid_profesor);
 
-            System.out.println(ps.toString());
-
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                return true;
+                if (rs.getInt("count") != 0) {
+                    return true;
+                }
             }
             return false;
 
@@ -2508,6 +2508,7 @@ public class DBMS {
                 archivo_tmp.setUsbidProfesor(rs.getString("usbid_profesor"));
                 archivo_tmp.setTrimestre(rs.getString("trimestre"));
                 archivo_tmp.setNombre(rs.getString("nombre"));
+                archivo_tmp.setDescripcion(rs.getString("descripcion"));
                 archivo_tmp.setAno(rs.getInt("ano"));
                 archivos.add(archivo_tmp);
             }
@@ -3167,7 +3168,7 @@ public class DBMS {
 
                 int ano = archivos_considerados[i].getAno();
                 String trimestre = archivos_considerados[i].getTrimestre();
-                
+
                 /* Se hace la consulta en base a los anos y trimestres 
                  * determinados*/
                 ps.setString(1, usbid_profesor);
@@ -3178,12 +3179,13 @@ public class DBMS {
 
                 while (rs.next()) {
                     Archivo archivo = new Archivo();
-                    
+
+                    archivo.setDescripcion(rs.getString("descripcion"));
                     archivo.setNombre(rs.getString("nombre"));
+                    archivo.setUsbidProfesor(usbid_profesor);
                     archivo.setTrimestre(trimestre);
                     archivo.setAno(ano);
-                    archivo.setUsbidProfesor(usbid_profesor);
-                    
+
                     archivos.add(archivo);
                 }
             }
