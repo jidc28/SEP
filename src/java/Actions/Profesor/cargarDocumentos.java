@@ -5,7 +5,7 @@
 package Actions.Profesor;
 
 import Clases.*;
-import DBMS.DBMS;
+import DBMS.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,6 +27,7 @@ public class cargarDocumentos extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";
+    private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -47,6 +48,8 @@ public class cargarDocumentos extends org.apache.struts.action.Action {
         
         String usuario = (String) session.getAttribute("usbid");
         FileUpload fileUploadForm = (FileUpload) form;
+        String trimestre = fileUploadForm.getTrimestre();
+        int ano = fileUploadForm.getAno();
         Profesor user;
         
         File folder; 
@@ -73,13 +76,10 @@ public class cargarDocumentos extends org.apache.struts.action.Action {
         
         String filePath = 
                 getServlet().getServletContext().getRealPath("/") +
-                "Documentos/" + usuario;
+                "Documentos/" + usuario + "/" + ano + "/"
+                + trimestre;
         String documentos = getServlet().getServletContext().getRealPath("/") +
                 "Documentos/";
-        
-        // Guardamos el path de los archivos relacionados con un usuario en BD
-        if (!DBMS.getInstance().pathArchivos(usuario, filePath))
-            System.out.println("No funciona el insertar");
         
         folder = new File(documentos);
         if (!folder.exists()){
@@ -91,17 +91,22 @@ public class cargarDocumentos extends org.apache.struts.action.Action {
          */
         folder = new File(filePath);
         if (!folder.exists()){
-            folder.mkdir();
+            folder.mkdirs();
         }
         
         // Para cada archivo
         for (int i=0; i<archivos.size(); i++){
+            
             //obtenemos el archivo del form
+            String descripcion = fileUploadForm.getDescripcion();
             FormFile file = (FormFile) archivos.get(i);
             //obtenemos el nombre
             String fileName = file.getFileName();
             //obtenemos el arreglo de bytes del archivo
             byte[] fileData = file.getFileData();
+            
+            DBMS.getInstance().agregarEspecificacionesArchivo(usuario,trimestre,
+                    ano, fileName, descripcion);
             
             if (!fileName.equals("")){
                 //Crea el archivo

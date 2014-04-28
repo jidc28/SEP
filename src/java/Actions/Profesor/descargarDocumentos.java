@@ -42,8 +42,9 @@ public class descargarDocumentos extends org.apache.struts.action.Action {
 
         String filePath =
                 getServlet().getServletContext().getRealPath("/")
-                + "Documentos/" + archivo.getUsbidProfesor();
-
+                + "Documentos/" + archivo.getUsbidProfesor() + "/" 
+                + archivo.getAno() + "/" + archivo.getTrimestre();
+        
         String OUTPUTFILE = filePath + "/" + archivo.getNombre();
         
         System.out.println(OUTPUTFILE);

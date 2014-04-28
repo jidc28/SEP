@@ -16,9 +16,8 @@
 
 <html:form action="/fileUploadProfesor" method="post" enctype="multipart/form-data">
     <div style="width:auto;height:auto;">
-        <table id="dataTable" width="350px" cellspacing="14px">
-            <tbody id="dataBody">
-                <html:form action="/consultarDocumentos">
+        <table width="350px" cellspacing="14px">
+            <tbody>
                     <tr>
                         <td style="width: 40px;">
                             <strong style="font-size: 14px; width: 100%;">
@@ -26,7 +25,7 @@
                             </strong>
                         </td>
                         <td>
-                            <html:select name="Archivo" property="ano" style="width: 100%;">
+                            <html:select name="fileUploadForm" property="ano" style="width: 100%;">
                                 <logic:iterate name="anos" id="ano">
                                     <html:option value="${ano}">
                                         <bean:write name="ano"/>
@@ -40,7 +39,7 @@
                             </strong>
                         </td>
                         <td>
-                            <html:select name="Archivo" property="trimestre" style="width: 100%;">
+                            <html:select name="fileUploadForm" property="trimestre" style="width: 100%;">
                                 <html:option value="SD">
                                     Septiembre-Diciembre
                                 </html:option>
@@ -56,7 +55,6 @@
                             </html:select>
                         </td>
                     </tr>
-                </html:form>
                 <tr>
                     <td colspan="4" style="height: 30px;">
                         <strong style="font-size: 14px;">
@@ -101,7 +99,7 @@
                 </tr>
                 <tr>
                     <td colspan="4" style="height: 30px;">
-                        <textarea style="width: 100%;" rows="4"></textarea>
+                        <html:textarea name="fileUploadForm" property="descripcion" style="width: 100%;" rows="4"/>
                     </td>
                 </tr>
             </tbody>

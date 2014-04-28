@@ -26,6 +26,9 @@ public class FileUpload extends org.apache.struts.action.ActionForm {
     private ArrayList listArchivos;
     private Integer index;
     private String usbid;
+    private int ano;
+    private String trimestre;
+    private String descripcion;
     
     public FileUpload() {
         listArchivos = new ArrayList();
@@ -57,5 +60,30 @@ public class FileUpload extends org.apache.struts.action.ActionForm {
     public void setUsbid(String usbid) {
         this.usbid = usbid;
     }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+
+    public String getTrimestre() {
+        return trimestre;
+    }
+
+    public void setTrimestre(String trimestre) {
+        this.trimestre = trimestre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
     
 }

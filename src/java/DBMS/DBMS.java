@@ -2466,6 +2466,28 @@ public class DBMS {
         }
         return false;
     }
+    
+    public boolean agregarEspecificacionesArchivo (String usuario, String trimestre,
+                   int ano, String nombre, String descripcion){
+         PreparedStatement ps;
+        try {
+            ps = conexion.prepareStatement("INSERT INTO archivos "
+                    + "(usbid_profesor,trimestre,ano,nombre,descripcion) "
+                    + "VALUES (?,?,?,?,?)");
+            ps.setString(1, usuario);
+            ps.setString(2, trimestre);
+            ps.setInt(3, ano);
+            ps.setString(4, nombre);
+            ps.setString(5, descripcion);
+
+            Integer j = ps.executeUpdate();
+
+            return j > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 
     public ArrayList<String> listarDirectoriosProfesor(String usbid) {
         PreparedStatement ps;
@@ -2524,7 +2546,7 @@ public class DBMS {
         PreparedStatement ps;
         ArrayList<String> archivos = new ArrayList<String>(0);
         try {
-            ps = conexion.prepareStatement("SELECT ano "
+            ps = conexion.prepareStatement("SELECT DISTINCT ano "
                     + "FROM archivos "
                     + "WHERE usbid_profesor = ?"
                     + "ORDER BY ano;");
