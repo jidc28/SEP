@@ -69,7 +69,13 @@ public class LoginAction extends org.apache.struts.action.Action {
 
             if (tmp.getUsbid() != null) {
                 if (tmp.getTipousuario().equals("profesor")) {
-                    Profesor profe = DBMS.getInstance().obtenerInfoProfesor(tmp.getUsbid());
+                    Profesor profe = 
+                            DBMS.getInstance().obtenerInfoProfesor(tmp.getUsbid());
+                    boolean evaluando = 
+                            DBMS.getInstance().evaluacionIniciadaProfesor(tmp.getUsbid());
+                    if (evaluando){
+                        request.setAttribute("evaluando", evaluando);
+                    }
                     session.setAttribute("usuario", tmp);
                     session.setAttribute("profesor", profe);
                     session.setAttribute("autenticado", profe);

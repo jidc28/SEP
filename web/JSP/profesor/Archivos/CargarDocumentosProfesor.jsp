@@ -18,9 +18,54 @@
     <div style="width:auto;height:auto;">
         <table id="dataTable" width="350px" cellspacing="14px">
             <tbody id="dataBody">
+                <html:form action="/consultarDocumentos">
+                    <tr>
+                        <td style="width: 40px;">
+                            <strong style="font-size: 14px; width: 100%;">
+                                AÑO
+                            </strong>
+                        </td>
+                        <td>
+                            <html:select name="Archivo" property="ano" style="width: 100%;">
+                                <logic:iterate name="anos" id="ano">
+                                    <html:option value="${ano}">
+                                        <bean:write name="ano"/>
+                                    </html:option>
+                                </logic:iterate>
+                            </html:select>
+                        </td>
+                        <td style="padding-left: 10px; width: 100px;">
+                            <strong style="font-size: 14px;">
+                                TRIMESTRE
+                            </strong>
+                        </td>
+                        <td>
+                            <html:select name="Archivo" property="trimestre" style="width: 100%;">
+                                <html:option value="SD">
+                                    Septiembre-Diciembre
+                                </html:option>
+                                <html:option value="EM">
+                                    Enero-Marzo
+                                </html:option>
+                                <html:option value="AJ">
+                                    Abril-Julio
+                                </html:option>
+                                <html:option value="V">
+                                    Intensivo
+                                </html:option>
+                            </html:select>
+                        </td>
+                    </tr>
+                </html:form>
                 <tr>
-                    <td></td>
-                    <td>
+                    <td colspan="4" style="height: 30px;">
+                        <strong style="font-size: 14px;">
+                            ARCHIVO:
+                        </strong>  
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
                         <div class="jumbotron" 
                              style="font-size: 12px; padding: 20px; margin: 0px;
                              padding-top: 30px; width: 600px;">
@@ -46,6 +91,18 @@
                             </div>
                         </div>
                     </td> 
+                </tr>
+                <tr>
+                    <td style="height: 30px;" colspan="4">
+                        <strong style="font-size: 14px;">
+                            DESCRIPCIÓN:
+                        </strong>  
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="height: 30px;">
+                        <textarea style="width: 100%;" rows="4"></textarea>
+                    </td>
                 </tr>
             </tbody>
         </table>  

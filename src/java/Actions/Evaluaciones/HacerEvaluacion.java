@@ -2,7 +2,11 @@ package Actions.Evaluaciones;
 
 import Clases.*;
 import DBMS.DBMS;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -39,6 +43,75 @@ public class HacerEvaluacion extends Action {
 
             dicta d = (dicta) form;
 
+            /* Se obtiene la fecha */
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+
+            /* Se extrae el ano y el trimestre actual */
+            String fecha = dateFormat.format(date).toString();
+            String fecha_ano = fecha.substring(0, 4);
+
+            /* Se transforman a enteros para ser procesados mas facilmente. */
+            int int_fecha_ano = Integer.parseInt(fecha_ano);
+            int fecha_mes = Integer.parseInt(fecha.substring(5, 7));
+
+            /* Se inicializan archivos (los que se van a considerar) */
+            Archivo a_1 = new Archivo();
+            Archivo a_2 = new Archivo();
+            Archivo a_3 = new Archivo();
+            Archivo a_4 = new Archivo();
+
+            /* Según el mes en que se esté realizando la evaluacion se revisarán 
+             * los archivos de profesor agregados por el ano y el trimestre */
+            if (1 <= fecha_mes && fecha_mes <= 3) {
+                /* El trimestre es ENERO-MARZO */
+                a_1.setAno(int_fecha_ano);
+                a_1.setTrimestre("EM");
+                a_2.setAno(int_fecha_ano - 1);
+                a_2.setTrimestre("SD");
+                a_3.setAno(int_fecha_ano - 1);
+                a_3.setTrimestre("V");
+                a_4.setAno(int_fecha_ano - 1);
+                a_4.setTrimestre("AJ");
+
+            } else if (4 <= fecha_mes && fecha_mes <= 7) {
+                /* El trimestre es ABRIL-JULIO */
+                a_1.setAno(int_fecha_ano);
+                a_1.setTrimestre("AJ");
+                a_2.setAno(int_fecha_ano);
+                a_2.setTrimestre("EM");
+                a_3.setAno(int_fecha_ano - 1);
+                a_3.setTrimestre("SD");
+                a_4.setAno(int_fecha_ano - 1);
+                a_4.setTrimestre("V");
+
+            } else if (9 <= fecha_mes && fecha_mes <= 12) {
+                /* El trimestre es SEPTIEMBRE-DICIEMBRE */
+                a_1.setAno(int_fecha_ano);
+                a_1.setTrimestre("SD");
+                a_2.setAno(int_fecha_ano);
+                a_2.setTrimestre("V");
+                a_3.setAno(int_fecha_ano);
+                a_3.setTrimestre("AJ");
+                a_4.setAno(int_fecha_ano);
+                a_4.setTrimestre("EM");
+
+            } else if (fecha_mes == 8) {
+                /* Período INTENSIVO */
+                a_1.setAno(int_fecha_ano);
+                a_1.setTrimestre("V");
+                a_2.setAno(int_fecha_ano);
+                a_2.setTrimestre("AJ");
+                a_3.setAno(int_fecha_ano);
+                a_3.setTrimestre("EM");
+                a_4.setAno(int_fecha_ano - 1);
+                a_4.setTrimestre("SD");
+            }
+
+            /* Se agregan los archivos a un arreglo para ser procesados 
+             * posteriormente */
+            Archivo[] archivos_considerados = {a_1, a_2, a_3, a_4};
+
             /* Se obtiene el rendimiento del profesor determinado asociado con
              * la materia que maneja la coordinación */
             rendimientoProf evaluacion = DBMS.getInstance().obtenerEvaluacion(d);
@@ -46,6 +119,11 @@ public class HacerEvaluacion extends Action {
             /* Se obtiene toda la informacion del profesor */
             Profesor profesor =
                     DBMS.getInstance().obtenerInfoProfesor(d.getUsbidProfesor());
+
+            /* Se obtienen todos los archivos subidos por el profesor */
+            ArrayList<Archivo> archivos = 
+                    DBMS.getInstance().
+                    listarArchivosProfesor(profesor.getUsbid(), archivos_considerados);
 
             /* Se calcula la cantidad de aplazados y la cantidad de aprobados */
             int total = evaluacion.getTotal_estudiantes();
@@ -72,13 +150,16 @@ public class HacerEvaluacion extends Action {
                 /* Si existe una informacion previa se envia a la vista, sino, se crea
                  * una instancia vacia de la informacion */
                 InformacionProfesorCoord informacion =
-                        DBMS.getInstance().listarInformacionProfesorCoordinacion(id, profesor.getUsbid());
+                        DBMS.getInstance().
+                        listarInformacionProfesorCoordinacion(id, profesor.getUsbid());
 
                 if (informacion == null) {
                     boolean creada =
-                            DBMS.getInstance().crearInformacionProfesorCoordinacion(id, profesor.getUsbid(), new InformacionProfesorCoord());
+                            DBMS.getInstance().
+                            crearInformacionProfesorCoordinacion(id, profesor.getUsbid(), new InformacionProfesorCoord());
                     informacion =
-                            DBMS.getInstance().listarInformacionProfesorCoordinacion(id, profesor.getUsbid());
+                            DBMS.getInstance().
+                            listarInformacionProfesorCoordinacion(id, profesor.getUsbid());
                 }
 
                 session.setAttribute("informacion", informacion);
@@ -99,7 +180,8 @@ public class HacerEvaluacion extends Action {
 //            session.removeAttribute("trimestre");
 //            session.removeAttribute("ano");
                     rendimientoProf evaluado =
-                            DBMS.getInstance().listarEvaluacionesEnviadasMateria(id, ano, trimestre, d.getCodigoMateria());
+                            DBMS.getInstance().
+                            listarEvaluacionesEnviadasMateria(id, ano, trimestre, d.getCodigoMateria());
                     request.setAttribute("evaluado_coordinacion", evaluado);
                 }
 
@@ -112,7 +194,8 @@ public class HacerEvaluacion extends Action {
                 if (d.getOpcion().equals("pendiente")) {
 
                     ArrayList<rendimientoProf> evaluacion_coordinaciones =
-                            DBMS.getInstance().obtenerEvaluacionCoordinaciones(id, profesor.getUsbid(), d.getCodigoMateria());
+                            DBMS.getInstance().
+                            obtenerEvaluacionCoordinaciones(id, profesor.getUsbid(), d.getCodigoMateria());
 
                     session.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
                     request.setAttribute("revisar", SUCCESS);
@@ -135,7 +218,8 @@ public class HacerEvaluacion extends Action {
                 /* Si existe una informacion previa se envia a la vista, sino, se crea
                  * una instancia vacia de la informacion */
                 InformacionProfesorCoord informacion =
-                        DBMS.getInstance().listarInformacionProfesorCoordinacion(id_coordinacion, d.getUsbidProfesor());
+                        DBMS.getInstance().
+                        listarInformacionProfesorCoordinacion(id_coordinacion, d.getUsbidProfesor());
 
                 session.setAttribute("informacion", informacion);
 
@@ -164,6 +248,7 @@ public class HacerEvaluacion extends Action {
             }
 
             /* Se envian a la vista los atributos correspondiente */
+            request.setAttribute("archivos", archivos);
             session.setAttribute("profesor", profesor);
             session.setAttribute("evaluacion", evaluacion);
             session.setAttribute("porcentaje1", porcentaje1);

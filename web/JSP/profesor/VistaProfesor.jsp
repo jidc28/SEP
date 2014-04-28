@@ -22,6 +22,22 @@
     </div>
 </logic:present>
 
+<logic:present name="evaluando">
+    <div class="alert alert-info alert-dismissable" 
+         id="alert-coord">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+            &times;
+        </button>
+        <p>
+            <strong>Atención: </strong> <br> 
+            Se ha iniciado el proceso de su evaluación, es necesario
+            que ud. suba al sistema el material realizado por usted.
+            Seleccione
+            <em>Gestionar material. Agregar Material.</em>
+        </p>
+    </div>
+</logic:present>
+
 <div class="panel-group" id="accordion">
     <div class="panel panel-default">
         <div class="panel-heading">

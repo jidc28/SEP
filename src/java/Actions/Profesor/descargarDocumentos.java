@@ -36,13 +36,13 @@ public class descargarDocumentos extends org.apache.struts.action.Action {
             throws Exception {
 
         HttpSession session = request.getSession(true);
-        String id_usuario = (String) session.getAttribute("usbid");
+//        String id_usuario = (String) session.getAttribute("usbid");
 
         Archivo archivo = (Archivo) form;
 
         String filePath =
                 getServlet().getServletContext().getRealPath("/")
-                + "Documentos/" + id_usuario;
+                + "Documentos/" + archivo.getUsbidProfesor();
 
         String OUTPUTFILE = filePath + "/" + archivo.getNombre();
         

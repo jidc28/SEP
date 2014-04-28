@@ -48,7 +48,7 @@ public class Inicio extends org.apache.struts.action.Action {
         //Usuario u = (Usuario) form;
         HttpSession session = request.getSession(true);
         Usuario u = (Usuario) request.getSession().getAttribute("usuario");
-        
+
         if (u == null) {
             return mapping.findForward(SESION_EXPIRADA);
         }
@@ -79,6 +79,11 @@ public class Inicio extends org.apache.struts.action.Action {
                     session.setAttribute("usuario", tmp);
                     session.setAttribute("profesor", profe);
                     session.setAttribute("usbid", tmp.getUsbid());
+                    boolean evaluando =
+                            DBMS.getInstance().evaluacionIniciadaProfesor(tmp.getUsbid());
+                    if (evaluando) {
+                        request.setAttribute("evaluando", evaluando);
+                    }
                     return mapping.findForward(PROFESOR);
                 } else if (tmp.getTipousuario().equals("administrador")) {
                     session.setAttribute("usuario", tmp);

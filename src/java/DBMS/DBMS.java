@@ -1371,7 +1371,7 @@ public class DBMS {
             ps.setString(3, trimestre);
             ps.setString(4, usbid_profesor);
             ps.setString(5, codigo_materia);
-            
+
             System.out.println(ps.toString());
 
             ResultSet rs = ps.executeQuery();
@@ -1419,7 +1419,7 @@ public class DBMS {
             ps.setString(3, trimestre);
             ps.setString(4, usbid_profesor);
             ps.setString(5, codigo_materia);
-            
+
             System.out.println(ps.toString());
 
             ResultSet rs = ps.executeQuery();
@@ -1583,6 +1583,29 @@ public class DBMS {
             ex.printStackTrace();
         }
         return 0;
+    }
+
+    public boolean evaluacionIniciadaProfesor(String usbid_profesor) {
+
+        PreparedStatement ps;
+        try {
+            ps = conexion.prepareStatement("SELECT count(usbid_profesor) "
+                    + "FROM evaluar "
+                    + "WHERE usbid_profesor = ?;");
+            ps.setString(1, usbid_profesor);
+
+            System.out.println(ps.toString());
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+            return false;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 
     public boolean solicitudRegistrarMateria(Materia m, String id_departamento, String id_coordinacion) {
@@ -2443,7 +2466,7 @@ public class DBMS {
         }
         return false;
     }
-    
+
     public ArrayList<String> listarDirectoriosProfesor(String usbid) {
         PreparedStatement ps;
         ArrayList<String> archivos = new ArrayList<String>(0);
@@ -2457,14 +2480,14 @@ public class DBMS {
             while (rs.next()) {
                 archivos.add(rs.getString("path"));
             }
-            
+
             return archivos;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
     }
-    
+
     public ArrayList<Archivo> listarArchivosProfesor(Archivo archivo) {
         PreparedStatement ps;
         ArrayList<Archivo> archivos = new ArrayList<Archivo>(0);
@@ -2477,7 +2500,7 @@ public class DBMS {
             ps.setString(1, archivo.getUsbidProfesor());
             ps.setString(2, archivo.getTrimestre());
             ps.setInt(3, archivo.getAno());
-            
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -2488,14 +2511,14 @@ public class DBMS {
                 archivo_tmp.setAno(rs.getInt("ano"));
                 archivos.add(archivo_tmp);
             }
-            
+
             return archivos;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
     }
-    
+
     public ArrayList<String> listarAnosArchivos(String usbid_profesor) {
         PreparedStatement ps;
         ArrayList<String> archivos = new ArrayList<String>(0);
@@ -2505,13 +2528,13 @@ public class DBMS {
                     + "WHERE usbid_profesor = ?"
                     + "ORDER BY ano;");
             ps.setString(1, usbid_profesor);
-            
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 archivos.add(rs.getString("ano"));
             }
-            
+
             return archivos;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -3085,7 +3108,8 @@ public class DBMS {
         return null;
     }
 
-    public InformacionProfesorCoord listarInformacionProfesorCoordinacion(String id_coordinacion, String usbid_profesor) {
+    public InformacionProfesorCoord listarInformacionProfesorCoordinacion(
+            String id_coordinacion, String usbid_profesor) {
 
         PreparedStatement ps;
         InformacionProfesorCoord informacion = null;
@@ -3097,8 +3121,6 @@ public class DBMS {
             ps.setString(1, id_coordinacion);
             ps.setString(2, usbid_profesor);
 
-            System.out.println(ps.toString());
-            
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -3118,6 +3140,55 @@ public class DBMS {
             }
 
             return informacion;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    /* Lista los archivos subidos por un profesor en base a una lista 
+     * de archivos que contiene los anos y trimestres que deben
+     * ser consultados */
+    public ArrayList<Archivo> listarArchivosProfesor(
+            String usbid_profesor, Archivo[] archivos_considerados) {
+
+        PreparedStatement ps;
+        ArrayList<Archivo> archivos = new ArrayList<Archivo>();
+        try {
+
+            ps = conexion.prepareStatement("SELECT * "
+                    + "FROM archivos "
+                    + "WHERE usbid_profesor = ? "
+                    + "AND ano = ? "
+                    + "AND trimestre = ?");
+
+            for (int i = 0; i < archivos_considerados.length; i++) {
+
+                int ano = archivos_considerados[i].getAno();
+                String trimestre = archivos_considerados[i].getTrimestre();
+                
+                /* Se hace la consulta en base a los anos y trimestres 
+                 * determinados*/
+                ps.setString(1, usbid_profesor);
+                ps.setInt(2, ano);
+                ps.setString(3, trimestre);
+
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    Archivo archivo = new Archivo();
+                    
+                    archivo.setNombre(rs.getString("nombre"));
+                    archivo.setTrimestre(trimestre);
+                    archivo.setAno(ano);
+                    archivo.setUsbidProfesor(usbid_profesor);
+                    
+                    archivos.add(archivo);
+                }
+            }
+
+            return archivos;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -3305,7 +3376,7 @@ public class DBMS {
             ps.setString(3, codigo_materia);
 
             System.out.println(ps.toString());
-            
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {

@@ -77,12 +77,12 @@
                         ARCHIVO
                     </th>
                     <th  style="font-size: 14px;">
-                        <center>
-                            <span class="glyphicon glyphicon-floppy-save"></span>
-                            DESCARGAR
-                        </center>
-                    </th>
-                </tr>
+            <center>
+                <span class="glyphicon glyphicon-floppy-save"></span>
+                DESCARGAR
+            </center>
+            </th>
+            </tr>
             </thead>
             <tbody>
                 <logic:iterate name="archivos" id="archivo">
@@ -92,23 +92,29 @@
                             <bean:write name="archivo" property="nombre"/>
                         </td>
                         <td style="width: 30%;">
-                            <center>
-                            <html:form  action="/descargarDocumentoSeleccionado" 
-                                        style="margin:0px;">
-                                <html:hidden name="archivo" property="nombre"/>
-                                <html:hidden name="archivo" property="usbidProfesor"/>
-                                <html:hidden name="archivo" property="trimestre"/>
-                                <html:hidden name="archivo" property="ano"/>
-                                <html:submit styleClass="btn btn-info"
-                                             style="padding-top: 4px; padding-bottom: 3px;">
-                                    Descargar
-                                </html:submit>
-                            </html:form>
-                            </center>
-                        </td>
-                    </tr>
-                </logic:iterate>
+                <center>
+                    <html:form  action="/descargarDocumentoSeleccionado" 
+                                style="margin:0px;">
+                        <html:hidden name="archivo" property="nombre"/>
+                        <html:hidden name="archivo" property="usbidProfesor"/>
+                        <html:hidden name="archivo" property="trimestre"/>
+                        <html:hidden name="archivo" property="ano"/>
+                        <html:submit styleClass="btn btn-info"
+                                     style="padding-top: 4px; padding-bottom: 3px;">
+                            Descargar
+                        </html:submit>
+                    </html:form>
+                </center>
+                </td>
+                </tr>
+            </logic:iterate>
             </tbody>
         </table>
     </div>
 </logic:notEmpty>
+
+<!--SI QUEREMOS IMPLEMENTAR UN VIEWER -->
+<!--                    <iframe height="475" style="border: none;"
+                            src="http://online.verypdf.com/app/reader/?url=http://online.verypdf.com/examples/pdfeditor.pdf" 
+                            width="600">
+                    </iframe>-->

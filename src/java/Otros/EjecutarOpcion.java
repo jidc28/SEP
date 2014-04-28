@@ -70,6 +70,12 @@ public class EjecutarOpcion extends org.apache.struts.action.Action {
             if (evaluaciones_pendientes != 0) {
                 request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
             }
+        } else if (tipousuario.equals("profesor")) {
+            boolean evaluando =
+                    DBMS.getInstance().evaluacionIniciadaProfesor(u.getUsbid());
+            if (evaluando) {
+                request.setAttribute("evaluando", evaluando);
+            }
         }
         request.setAttribute(opcion, opcion);
         return mapping.findForward(tipousuario);
