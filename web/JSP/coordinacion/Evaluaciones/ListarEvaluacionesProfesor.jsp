@@ -1,8 +1,9 @@
 <%-- 
-    Document   : ListarEvaluacionesEnviadasProfesor
-    Created on : Mar 12, 2014, 11:53:01 AM
+    Document   : ListarEvaluacionesProfesor
+    Created on : Apr 28, 2014, 1:38:56 PM
     Author     : smaf
 --%>
+
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
@@ -11,7 +12,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <h4>  
-    Listado de evaluaciones enviadas
+    Listado de evaluaciones pendientes
 </h4>
 
 <table style="margin: 0px; margin-top: 20px; margin-left: 20px;" align="left">
@@ -22,8 +23,9 @@
                     <bean:write name="profesor" property="usbid"/>
                 </td>
                 <td style="padding: 5px;">
-                    <html:form action="/listarAnosEvaluados" style="margin: 0px;">
-                        <html:hidden name="profesor" property="usbid"/>
+                    <html:form action="/listarEvaluacionesPendientes" style="margin: 0px;">
+                        <html:hidden name="Coordinacion" property="codigo" 
+                                     value="${profesor.getUsbid()}"/>
                         <html:submit styleClass="link2">
                             <bean:write name="profesor" property="apellido"/>, <bean:write name="profesor" property="nombre"/>
                         </html:submit>  

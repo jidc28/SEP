@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Actions.Departamento;
 
-import DBMS.DBMS;
 import Clases.Departamento;
+import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +18,6 @@ import org.apache.struts.action.ActionMessage;
  */
 public class AgregarDepartamento extends org.apache.struts.action.Action {
 
-    /* forward name="success" path="" */
     private static final String SUCCESS = "success";
     private static final String FAILURE = "failure";
     private static final String YAREGISTRADA = "yaregistrada";
@@ -45,27 +40,30 @@ public class AgregarDepartamento extends org.apache.struts.action.Action {
         Departamento d = (Departamento) form;
         HttpSession session = request.getSession(true);
 
-        ActionErrors error = new ActionErrors();
+        ActionErrors error;
 
-        //valido los campos de formulario
+        /* Se validan los campos del formulario */
         error = d.validate(mapping, request);
 
-
-        if (error.size() != 0) {          
+        if (error.size() != 0) {
             saveErrors(request, error);
             return mapping.findForward(FAILURE);
         } else {
 
+            /* Se registra el nuevo departamento */
             boolean registro = DBMS.getInstance().registrarDepartamento(d);
 
             if (registro) {
 
-                ArrayList<Departamento> departamentos = DBMS.getInstance().listarDepartamentos();
+                /* Se obtiene el listado de los departamentos */
+                ArrayList<Departamento> departamentos =
+                        DBMS.getInstance().listarDepartamentos();
 
-       
                 session.setAttribute("departamentos", departamentos);
                 request.setAttribute("success", SUCCESS);
                 return mapping.findForward(SUCCESS);
+
+                /* En el caso que haya un error */
             } else {
                 error.add("registro", new ActionMessage("error.codigoDepartamento.existente"));
                 saveErrors(request, error);

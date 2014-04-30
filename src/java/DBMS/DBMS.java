@@ -102,6 +102,27 @@ public class DBMS {
         }
     }
 
+    public boolean agregarUsuario(String usbid, String tipousuario) {
+
+        PreparedStatement ps;
+
+        try {
+            ps = conexion.prepareStatement("INSERT INTO usuario "
+                    + "VALUES (?, ?, ?);");
+            ps.setString(1, usbid);
+            ps.setString(2, tipousuario);
+            ps.setString(3, usbid);
+
+            Integer i = ps.executeUpdate();
+
+            return i > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
     public ArrayList<Usuario> listarUsuarios() {
 
         ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
@@ -315,26 +336,39 @@ public class DBMS {
         return u;
     }
 
-    public boolean eliminarProfesor(Profesor p) {
-        PreparedStatement ps1, ps2;
+    public boolean eliminarUsuario(String id_usuario) {
+        PreparedStatement ps;
         try {
 
-            ps1 = conexion.prepareStatement("DELETE FROM usuario WHERE ( usbid = ? );");
-            ps1.setString(1, p.getUsbid());
+            ps = conexion.prepareStatement("DELETE FROM usuario WHERE ( usbid = ? );");
+            ps.setString(1, id_usuario);
 
-            ps2 = conexion.prepareStatement("DELETE FROM profesor WHERE ( usbid = ? );");
-            ps2.setString(1, p.getUsbid());
+            Integer s = ps.executeUpdate();
 
-            Integer r = ps2.executeUpdate();
-            Integer s = ps1.executeUpdate();
-
-            return s > 0 && r > 0;
+            return s > 0;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
         }
+    }
 
+    public boolean eliminarProfesor(Profesor p) {
+        PreparedStatement ps;
+        try {
+
+            ps = conexion.prepareStatement("DELETE FROM profesor WHERE ( usbid = ? );");
+            ps.setString(1, p.getUsbid());
+
+            Integer r = ps.executeUpdate();
+            boolean usuario_eliminado = eliminarUsuario(p.getUsbid());
+
+            return usuario_eliminado && r > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     public boolean actualizarInfoProfesor(Profesor u) {
@@ -430,7 +464,9 @@ public class DBMS {
         PreparedStatement ps = null;
         try {
 
-            ps = conexion.prepareStatement("UPDATE usuario SET tipousuario = ?, departamento = ? WHERE ( usbid = ? )");
+            ps = conexion.prepareStatement("UPDATE usuario "
+                    + "SET tipousuario = ?, departamento = ? "
+                    + "WHERE ( usbid = ? )");
 
             ps.setString(1, u.getTipousuario());
             ps.setString(2, u.getDepartamento());
@@ -451,12 +487,14 @@ public class DBMS {
 
         PreparedStatement psEliminar1 = null;
         try {
-            psEliminar1 = conexion.prepareStatement("DELETE FROM coordinacion AS c WHERE (c.codigo = ?);");
+            psEliminar1 = conexion.prepareStatement("DELETE FROM coordinacion AS c "
+                    + "WHERE (c.codigo = ?);");
             psEliminar1.setString(1, u.getCodigo());
 
             Integer i = psEliminar1.executeUpdate();
+            boolean usuario_eliminado = eliminarUsuario(u.getCodigo());
 
-            return i > 0;
+            return i > 0 && usuario_eliminado;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -483,16 +521,18 @@ public class DBMS {
      }*/
     public boolean registrarDecanato(Decanato u) {
 
-        PreparedStatement psAgregar1 = null;
+        PreparedStatement ps;
 
         try {
-            psAgregar1 = conexion.prepareStatement("INSERT INTO decanato(codigo, nombre) VALUES (?, ?);");
-            psAgregar1.setString(1, u.getCodigo());
-            psAgregar1.setString(2, u.getNombre());
+            ps = conexion.prepareStatement("INSERT INTO decanato(codigo, nombre) "
+                    + "VALUES (?, ?);");
+            ps.setString(1, u.getCodigo());
+            ps.setString(2, u.getNombre());
 
-            Integer i = psAgregar1.executeUpdate();
+            Integer i = ps.executeUpdate();
+            boolean usuario_agregado = agregarUsuario(u.getCodigo(), "decanato");
 
-            return i > 0;
+            return i > 0 && usuario_agregado;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -511,7 +551,9 @@ public class DBMS {
             ps0.setString(1, decanato.getCodigo());
 
             Integer i = ps0.executeUpdate();
-            return i > 0;
+            boolean usuario_eliminado = eliminarUsuario(decanato.getCodigo());
+
+            return i > 0 && usuario_eliminado;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -541,7 +583,8 @@ public class DBMS {
         PreparedStatement ps1, ps2;
 
         try {
-            ps1 = conexion.prepareStatement("INSERT INTO COORDINACION(codigo, nombre) VALUES (?, ?);");
+            ps1 = conexion.prepareStatement("INSERT INTO COORDINACION(codigo, nombre) "
+                    + "VALUES (?, ?);");
             ps1.setString(1, c.getCodigo());
             ps1.setString(2, c.getNombre());
 
@@ -567,7 +610,9 @@ public class DBMS {
             Integer i = ps1.executeUpdate();
             Integer j = ps2.executeUpdate();
 
-            return i > 0 && j > 0;
+            boolean usuario_agregado = agregarUsuario(c.getCodigo(), "coordinacion");
+
+            return i > 0 && j > 0 && usuario_agregado;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -727,6 +772,33 @@ public class DBMS {
             ex.printStackTrace();
         }
         return materias;
+    }
+
+    public ArrayList<Profesor> listarProfesoresAEvaluarDepartamento(String id_departamento) {
+
+        ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
+        PreparedStatement ps = null;
+        try {
+            ps = conexion.prepareStatement("SELECT DISTINCT usbid, nombre, apellido "
+                    + "FROM profesor, evaluar "
+                    + "WHERE codigo_departamento = ? "
+                    + "AND usbid_profesor = usbid;");
+            ps.setString(1, id_departamento);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Profesor p = new Profesor();
+                p.setUsbid(rs.getString("usbid"));
+                p.setNombre(rs.getString("nombre"));
+                p.setApellido(rs.getString("apellido"));
+
+                profesores.add(p);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return profesores;
     }
 
     public ArrayList<Profesor> listarProfesoresAEvaluar(String id_departamento) {
@@ -1174,6 +1246,60 @@ public class DBMS {
         return 0;
     }
 
+    public ArrayList<dicta> listarEvaluacionesPendientes(String id_coordinacion) {
+
+        PreparedStatement ps, ps2;
+        ArrayList<dicta> dicta_materia = new ArrayList(0);
+        String codigoMateria;
+        try {
+            ps = conexion.prepareStatement("SELECT DISTINCT codigo_materia, count(codigo_materia) "
+                    + "FROM evaluar "
+                    + "WHERE codigo_coordinacion = ? "
+                    + "AND evaluado_coordinacion = 'si' "
+                    + "AND revisado_decanato = 'no' "
+                    + "GROUP BY codigo_materia;");
+            ps.setString(1, id_coordinacion);
+
+            System.out.println(ps.toString());
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                dicta d = new dicta();
+                d.setNumeroMateria(rs.getString("count"));
+                codigoMateria = rs.getString("codigo_materia");
+                d.setCodigoMateria(codigoMateria);
+
+                ps2 = conexion.prepareStatement("SELECT codigo_materia, usbid, "
+                        + "nombre, apellido "
+                        + "FROM evaluar, profesor "
+                        + "WHERE codigo_coordinacion = ? "
+                        + "AND usbid = usbid_profesor "
+                        + "AND codigo_materia = ? "
+                        + "AND evaluado_coordinacion = 'si' "
+                        + "AND revisado_decanato = 'no';");
+                ps2.setString(1, id_coordinacion);
+                ps2.setString(2, codigoMateria);
+
+                ResultSet rs2 = ps2.executeQuery();
+
+                while (rs2.next()) {
+                    Profesor p = new Profesor();
+                    p.setUsbid(rs2.getString("usbid"));
+                    p.setNombre(rs2.getString("nombre"));
+                    p.setApellido(rs2.getString("apellido"));
+                    d.addProfesor(p);
+                }
+                d.setPrimerProfesor();
+                dicta_materia.add(d);
+            }
+            return dicta_materia;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public ArrayList<dicta> listarEvaluacionesPendientes(String id_coordinacion, String evaluado) {
 
         PreparedStatement ps, ps2;
@@ -1495,18 +1621,21 @@ public class DBMS {
         PreparedStatement ps;
 
         try {
-            ps = conexion.prepareStatement("INSERT INTO departamento VALUES (?,?,?)");
+            ps = conexion.prepareStatement("INSERT INTO departamento "
+                    + "VALUES (?,?,?)");
             ps.setString(1, d.getCodigo());
             ps.setString(2, d.getNombre());
             ps.setString(3, "activo");
-            Integer i = ps.executeUpdate();
 
-            return i > 0;
+            Integer i = ps.executeUpdate();
+            boolean usuario_agregado = agregarUsuario(d.getCodigo(), "departamento");
+
+            return i > 0 && usuario_agregado;
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return false;
-
     }
 
     public boolean cambiarStatusMateria(Materia m) {
@@ -1532,12 +1661,15 @@ public class DBMS {
         PreparedStatement ps;
 
         try {
-            ps = conexion.prepareStatement("UPDATE DEPARTAMENTO SET condicion = 'desactivado' WHERE (codigo = ?);");
+            ps = conexion.prepareStatement("UPDATE DEPARTAMENTO "
+                    + "SET condicion = 'desactivado' "
+                    + "WHERE (codigo = ?);");
             ps.setString(1, d.getCodigo());
 
             Integer i = ps.executeUpdate();
+            boolean usuario_eliminado = eliminarUsuario(d.getCodigo());
 
-            return i > 0;
+            return i > 0 && usuario_eliminado;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -1572,9 +1704,10 @@ public class DBMS {
                     + "FROM evaluar as ev, se_adscribe as se "
                     + "WHERE ev.codigo_coordinacion = se.codigo_coordinacion "
                     + "AND se.codigo_decanato = ? "
-                    + "AND ev.evaluado_coordinacion = 'si';");
+                    + "AND ev.evaluado_coordinacion = 'si' "
+                    + "AND ev.revisado_decanato = 'no';");
             ps.setString(1, id_decanato);
-
+            
             ResultSet rs = ps.executeQuery();
             rs.next();
             return Integer.parseInt(rs.getString("count"));
@@ -3279,6 +3412,80 @@ public class DBMS {
         return false;
     }
 
+    public ArrayList<dicta> listarEvaluadosPorCoordinacion(
+            String id_departamento, String id_profesor) {
+
+        PreparedStatement ps, ps2;
+        ArrayList<dicta> dicta_materia = new ArrayList(0);
+        String codigo_materia;
+        String usbid_profesor;
+        try {
+            ps = conexion.prepareStatement("SELECT DISTINCT codigo_materia, "
+                    + "usbid_profesor "
+                    + "FROM evaluar "
+                    + "WHERE codigo_departamento = ? "
+                    + "AND evaluado_coordinacion = 'si' "
+                    + "AND revisado_departamento = 'no' "
+                    + "AND usbid_profesor = ? "
+                    + "ORDER BY usbid_profesor;");
+            ps.setString(1, id_departamento);
+            ps.setString(2, id_profesor);
+
+            System.out.println(ps.toString());
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                usbid_profesor = rs.getString("usbid_profesor");
+
+                int pendientes = contarEvaluacionesPendientesDepartamento(id_departamento, usbid_profesor);
+                int total = contarEvaluacionesDepartamento(id_departamento, usbid_profesor);
+
+                System.out.println(pendientes + " " + total);
+
+//                if (pendientes == total) {
+
+                dicta d = new dicta();
+                codigo_materia = rs.getString("codigo_materia");
+                d.setCodigoMateria(codigo_materia);
+
+                ps2 = conexion.prepareStatement("SELECT DISTINCT codigo_materia, "
+                        + "usbid, nombre, apellido "
+                        + "FROM evaluar, profesor "
+                        + "WHERE codigo_departamento = ? "
+                        + "AND usbid = usbid_profesor "
+                        + "AND usbid = ?"
+                        + "AND codigo_materia = ? "
+                        + "AND evaluado_coordinacion = 'si' "
+                        + "AND revisado_departamento = 'no';");
+                ps2.setString(1, id_departamento);
+                ps2.setString(2, usbid_profesor);
+                ps2.setString(3, codigo_materia);
+
+                System.out.println(ps2.toString());
+
+                ResultSet rs2 = ps2.executeQuery();
+
+                while (rs2.next()) {
+                    Profesor p = new Profesor();
+                    p.setUsbid(rs2.getString("usbid"));
+                    p.setNombre(rs2.getString("nombre"));
+                    p.setApellido(rs2.getString("apellido"));
+                    d.addProfesor(p);
+                }
+                d.setPrimerProfesor();
+                dicta_materia.add(d);
+//                }
+            }
+            return dicta_materia;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public ArrayList<dicta> listarEvaluadosPorCoordinacion(String id_departamento) {
 
         PreparedStatement ps, ps2;
@@ -3317,7 +3524,8 @@ public class DBMS {
                             + "AND usbid = usbid_profesor "
                             + "AND usbid = ?"
                             + "AND codigo_materia = ? "
-                            + "AND evaluado_coordinacion = 'si';");
+                            + "AND evaluado_coordinacion = 'si' "
+                            + "AND revisado_departamento = 'no';");
                     ps2.setString(1, id_departamento);
                     ps2.setString(2, usbid_profesor);
                     ps2.setString(3, codigo_materia);

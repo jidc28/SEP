@@ -12,11 +12,6 @@
 
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
-<%
-    Usuario usuario = (Usuario) session.getAttribute("usuario");
-    String tipousuario = usuario.getTipousuario();
-    if (tipousuario.equals("administrador") || tipousuario.equals("decanato")){
-%>
 <h4>Registro de Coordinaciones</h4>
 
 <html:form action="/registrarCoordinacion" method="POST" 
@@ -100,10 +95,3 @@
         <html:reset styleClass="btn btn-default" value="Limpiar"/>
     </p>
 </html:form>
-<%
-    } else {
-%>
-    <tiles:insert definition="noAutorizado"/>
-<%
-    }
-%>
