@@ -54,10 +54,11 @@ public class ListarEvaluacionesPendientes extends org.apache.struts.action.Actio
             /* Se listan las evaluaciones pendientes por profesor */
             String id_profesor = ((Coordinacion) form).getCodigo();
             evaluaciones_pendientes = DBMS.getInstance().listarEvaluadosPorCoordinacion(id,id_profesor);
+            session.setAttribute("id_profesor", id_profesor);
         } else if (tipousuario.equals("decanato")) {
             /* Se listan las evaluaciones pendientes por coordinacion */
             Coordinacion coordinacion = (Coordinacion) form;
-            evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(coordinacion.getCodigo(), "si");
+            evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(coordinacion.getCodigo());
             session.setAttribute("coordinacion", coordinacion.getCodigo());
             request.setAttribute("solo_lectura", SUCCESS);
         }

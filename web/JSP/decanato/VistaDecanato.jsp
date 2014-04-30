@@ -50,22 +50,23 @@
             </div>
         </div>
     </div>
-    <logic:present name="evaluaciones_pendientes">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 id="izquierda" class="panel-title">
-                    <a id="link-dropdown" class="accordion-toggle" 
-                       data-toggle="collapse" 
-                       data-parent="#accordion" href="#collapseEvaluaciones">
-                        Gestión de evaluaciones
-                    </a>
-                    <a href="#" id="ayuda2" style="float: right" rel="popover" >
-                        <span class="glyphicon glyphicon-question-sign"></span> 
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseEvaluaciones" class="panel-collapse collapse">
-                <div class="panel-body">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 id="izquierda" class="panel-title">
+                <a id="link-dropdown" class="accordion-toggle" 
+                   data-toggle="collapse" 
+                   data-parent="#accordion" href="#collapseEvaluaciones">
+                    Gestión de evaluaciones
+                </a>
+                <a href="#" id="ayuda2" style="float: right" rel="popover" >
+                    <span class="glyphicon glyphicon-question-sign"></span> 
+                </a>
+            </h4>
+        </div>
+        <div id="collapseEvaluaciones" class="panel-collapse collapse">
+            <div class="panel-body">
+                <logic:present name="evaluaciones_pendientes">
                     <html:form action="/listarCoordinaciones" style="margin: 0px;">
                         <html:hidden name="Coordinacion" property="opcion"
                                      value="listar_numero"/>
@@ -76,15 +77,15 @@
                             <bean:write name="evaluaciones_pendientes"/>
                         </span>
                     </html:form>
-                    <html:form action="/listarEvaluacionesEnviadasCoordinaciones" style="margin: 0px;">
-                        <html:hidden name="Coordinacion" property="opcion"
-                                     value="no_listar"/>
-                        <html:submit styleClass="h5" style="margin: 0px;">
-                            Listar Evaluaciones Enviadas
-                        </html:submit>
-                    </html:form>
-                </div>
+                </logic:present>
+                <html:form action="/listarEvaluacionesEnviadasCoordinaciones" style="margin: 0px;">
+                    <html:hidden name="Coordinacion" property="opcion"
+                                 value="no_listar"/>
+                    <html:submit styleClass="h5" style="margin: 0px;">
+                        Listar Evaluaciones Enviadas
+                    </html:submit>
+                </html:form>
             </div>
         </div>
-    </logic:present>
+    </div>
 </div>

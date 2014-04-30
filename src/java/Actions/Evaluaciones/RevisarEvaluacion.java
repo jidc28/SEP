@@ -45,14 +45,15 @@ public class RevisarEvaluacion extends Action {
 
             revisado = DBMS.getInstance().revisadoDepartamento(rendimiento, id);
 
-            evaluaciones_pendientes = DBMS.getInstance().listarEvaluadosPorCoordinacion(id);
+            String id_profesor = (String) session.getAttribute("id_profesor");
+            evaluaciones_pendientes = DBMS.getInstance().listarEvaluadosPorCoordinacion(id,id_profesor);
 
             /* Si el usuario que accede a esta funcionalidad decano */
         } else if (tipousuario.equals("decanato")) {
             String coordinacion = (String) session.getAttribute("coordinacion");
             revisado = DBMS.getInstance().revisadoDecanato(rendimiento, coordinacion);
             evaluaciones_pendientes =
-                    DBMS.getInstance().listarEvaluacionesPendientes(coordinacion, "si");
+                    DBMS.getInstance().listarEvaluacionesPendientes(coordinacion);
             request.setAttribute("solo_lectura", SUCCESS);
         }
 
