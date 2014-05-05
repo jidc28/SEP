@@ -1261,7 +1261,7 @@ public class DBMS {
             ps.setString(1, id_coordinacion);
 
             System.out.println(ps.toString());
-            
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 dicta d = new dicta();
@@ -1707,7 +1707,7 @@ public class DBMS {
                     + "AND ev.evaluado_coordinacion = 'si' "
                     + "AND ev.revisado_decanato = 'no';");
             ps.setString(1, id_decanato);
-            
+
             ResultSet rs = ps.executeQuery();
             rs.next();
             return Integer.parseInt(rs.getString("count"));
@@ -2285,6 +2285,59 @@ public class DBMS {
         return null;
     }
 
+    public rendimientoProf obtenerEvaluacion(String usbid_profesor) {
+        PreparedStatement ps;
+        rendimientoProf evaluacion = new rendimientoProf();
+        try {
+            ps = conexion.prepareStatement("SELECT total_estudiantes as t, "
+                    + "nota_prom as np, nota1 as n1, nota2 as n2, "
+                    + "nota3 as n3, nota4 as n4, nota5 as n5, "
+                    + "retirados as r, ano, trimestre "
+                    + "FROM rendimiento "
+                    + "WHERE usbid_profesor = ? "
+                    + "AND evaluado = 'no';");
+
+            ps.setString(1, usbid_profesor);
+
+            ResultSet rs = ps.executeQuery();
+
+            int n_1 = 0;
+            int n_2 = 0;
+            int n_3 = 0;
+            int n_4 = 0;
+            int n_5 = 0;
+            int n_retirados = 0;
+            int n_total = 0;
+
+            while (rs.next()) {
+                n_1 += rs.getInt("n1");
+                n_2 += rs.getInt("n2");
+                n_3 += rs.getInt("n3");
+                n_4 += rs.getInt("n4");
+                n_5 += rs.getInt("n5");
+                n_retirados += rs.getInt("r");
+                n_total += rs.getInt("t");
+
+                evaluacion.setNota_prom(rs.getFloat("np"));
+                evaluacion.setAno(rs.getInt("ano"));
+                evaluacion.setTrimestre(rs.getString("trimestre"));
+            }
+
+            evaluacion.setTotal_estudiantes(n_total);
+            evaluacion.setRetirados(n_retirados);
+            evaluacion.setNota1(n_1);
+            evaluacion.setNota2(n_2);
+            evaluacion.setNota3(n_3);
+            evaluacion.setNota4(n_4);
+            evaluacion.setNota5(n_5);
+
+            return evaluacion;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public rendimientoProf obtenerEvaluacion(String codigo_materia,
             String usbid_profesor, int ano, String trimestre) {
         PreparedStatement ps;
@@ -2599,10 +2652,10 @@ public class DBMS {
         }
         return false;
     }
-    
-    public boolean agregarEspecificacionesArchivo (String usuario, String trimestre,
-                   int ano, String nombre, String descripcion){
-         PreparedStatement ps;
+
+    public boolean agregarEspecificacionesArchivo(String usuario, String trimestre,
+            int ano, String nombre, String descripcion) {
+        PreparedStatement ps;
         try {
             ps = conexion.prepareStatement("INSERT INTO archivos "
                     + "(usbid_profesor,trimestre,ano,nombre,descripcion) "
@@ -3562,7 +3615,8 @@ public class DBMS {
                     + "WHERE codigo_departamento = ? "
                     + "AND usbid_profesor = ? "
                     + "AND codigo_materia = ? "
-                    + "AND codigo = codigo_coordinacion;");
+                    + "AND codigo = codigo_coordinacion "
+                    + "AND evaluado_coordinacion = 'si';");
             ps.setString(1, id_departamento);
             ps.setString(2, usbid_profesor);
             ps.setString(3, codigo_materia);
@@ -3577,6 +3631,47 @@ public class DBMS {
                  * y no quiero embasurar mas la clase */
                 rendimiento.setObservaciones_d(nombre_coordinacion);
                 rendimiento.setCodigo_materia(codigo_coordinacion);
+                rendimiento.setObservaciones_c(rs.getString("observaciones_coordinacion"));
+                rendimiento.setRecomendado(rs.getString("recomendado_coordinacion"));
+                informacion.add(rendimiento);
+            }
+
+            return informacion;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<rendimientoProf> obtenerEvaluacionCoordinaciones(
+            String id_departamento, String usbid_profesor) {
+
+        PreparedStatement ps;
+        ArrayList<rendimientoProf> informacion = new ArrayList<rendimientoProf>(0);
+        try {
+            ps = conexion.prepareStatement("SELECT codigo, nombre, "
+                    + "recomendado_coordinacion, observaciones_coordinacion, "
+                    + "codigo_materia "
+                    + "FROM evaluar, coordinacion "
+                    + "WHERE codigo_departamento = ? "
+                    + "AND usbid_profesor = ? "
+                    + "AND codigo = codigo_coordinacion "
+                    + "AND evaluado_coordinacion = 'si';");
+            ps.setString(1, id_departamento);
+            ps.setString(2, usbid_profesor);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                rendimientoProf rendimiento = new rendimientoProf();
+                String nombre_coordinacion = rs.getString("nombre");
+                String codigo_coordinacion = rs.getString("codigo");
+                /* Uso estos setters porque de verdad necesito la informacion 
+                 * y no quiero embasurar mas la clase */
+                rendimiento.setObservaciones_d(nombre_coordinacion);
+                rendimiento.setCodigo_materia(codigo_coordinacion);
+                rendimiento.setCodigo_materia(rs.getString("codigo_materia"));
                 rendimiento.setObservaciones_c(rs.getString("observaciones_coordinacion"));
                 rendimiento.setRecomendado(rs.getString("recomendado_coordinacion"));
                 informacion.add(rendimiento);

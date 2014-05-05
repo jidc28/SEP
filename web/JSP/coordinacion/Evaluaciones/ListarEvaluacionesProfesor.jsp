@@ -22,13 +22,27 @@
                 <td style="padding: 0px; color: #999; font-size: 14px;">
                     <bean:write name="profesor" property="usbid"/>
                 </td>
-                <td style="padding: 5px;">
+                <td style="padding: 5px; font-size: 14px; padding-left: 15px;">
+                    <bean:write name="profesor" property="apellido"/>, <bean:write name="profesor" property="nombre"/>
+                </td>
+                <td>
+                    <html:form action="/listarEvaluacionesPendientesGeneral" style="margin: 0px;">
+                        <html:hidden name="dicta" property="usbidProfesor" 
+                                     value="${profesor.getUsbid()}"/>
+                        <html:hidden name="dicta" property="opcion" 
+                                     value="pendiente"/>
+                        <html:submit styleClass="link2" style="padding-left: 15px;">
+                            Evaluación General
+                        </html:submit>
+                    </html:form>
+                </td>
+                <td>
                     <html:form action="/listarEvaluacionesPendientes" style="margin: 0px;">
                         <html:hidden name="Coordinacion" property="codigo" 
                                      value="${profesor.getUsbid()}"/>
-                        <html:submit styleClass="link2">
-                            <bean:write name="profesor" property="apellido"/>, <bean:write name="profesor" property="nombre"/>
-                        </html:submit>  
+                        <html:submit styleClass="link2" style="padding-left: 15px;">
+                            Evaluación Específica
+                        </html:submit>
                     </html:form>
                 </td>
             </tr>
