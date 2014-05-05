@@ -9,7 +9,10 @@ import DBMS.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -71,6 +74,36 @@ public class cargarDocumentos extends org.apache.struts.action.Action {
                 cantArchivos++;
             }
         }
+
+                Profesor profesor =
+                DBMS.getInstance().obtenerInfoProfesor(usuario);
+        profesor.setUsbidViejo(profesor.getUsbid());
+
+        /*Se obtiene la fecha actual para calcular los anos. */    
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        String fecha = dateFormat.format(date).toString();
+        String fechaAno = fecha.substring(0, 4);
+
+        int[] anos = new int[4];
+        anos[3] = Integer.parseInt(fechaAno);
+        int j = 2;
+        int tmp = anos[3];
+
+        while (j > -1) {
+            tmp--;
+            anos[j] = tmp;
+            j--;
+        }
+
+        request.setAttribute("anos", anos);
+        request.setAttribute("profesor", profesor);
+
+        
+        if (cantArchivos == 0) {
+            request.setAttribute("sin_archivos", FAILURE);
+            return mapping.findForward(FAILURE);
+        }
         
         //podemos agregar condiciones de tamano..
         
@@ -120,6 +153,7 @@ public class cargarDocumentos extends org.apache.struts.action.Action {
             }
         }
         
+        request.setAttribute("archivo_cargado",SUCCESS);
         return mapping.findForward(SUCCESS);
     }
 }
