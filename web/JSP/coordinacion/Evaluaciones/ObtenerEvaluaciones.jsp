@@ -106,7 +106,7 @@
                     </button>
                     <p style="font-weight: normal;">
                         El profesor no subió ningún tipo de material para la 
-                        evaluación ocurrida en el año <bean:write name="ano"/>.
+                        evaluación.
                     </p>
                 </div>
             </logic:empty>

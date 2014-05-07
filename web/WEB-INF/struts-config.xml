@@ -628,7 +628,8 @@
                scope="request"
                type="Actions.Profesor.cargarDocumentos"
                validate = "false">
-            <forward name="success" path="vistaProfesor"/>
+            <forward name="success" path="cargar_documentos_profesor_pagina"/>
+            <forward name="failure" path="cargar_documentos_profesor_pagina"/>
        </action>
         
        <action input="/VistaProfesor.jsp"

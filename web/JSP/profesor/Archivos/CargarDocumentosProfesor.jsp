@@ -12,6 +12,24 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
+<logic:present name="sin_archivos">
+    <div class="alert alert-danger" id="alert">
+        Debe seleccionar un archivo.
+    </div>
+</logic:present>
+
+<logic:present name="archivo_invalido">
+    <div class="alert alert-danger" id="alert">
+        Extensión de archivo inválida. Solo se aceptan archivos pdf.
+    </div>
+</logic:present>
+
+<logic:present name="archivo_cargado">
+    <div class="alert alert-success" id="alert">
+        El archivo fue agregado exitosamente.
+    </div>
+</logic:present>
+
 <h4>Agregar material:</h4>
 
 <html:form action="/fileUploadProfesor" method="post" enctype="multipart/form-data">
@@ -99,7 +117,7 @@
                 </tr>
                 <tr>
                     <td colspan="4" style="height: 30px;">
-                        <html:textarea name="fileUploadForm" property="descripcion" style="width: 100%;" rows="4"/>
+                        <html:textarea name="fileUploadForm" property="descripcion" style="width: 100%;" rows="4" value=""/>
                     </td>
                 </tr>
             </tbody>
