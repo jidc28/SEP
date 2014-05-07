@@ -550,7 +550,7 @@
             validate="false">
             <forward name="success" path="graficarRendimiento"/>
         </action>
-        
+
         <action input="/VistaCoordinacion.jsp" 
                 name="Coordinacion" 
                 path="/listarEvaluacionesPendientes" 
@@ -559,6 +559,15 @@
                 validate="false">
             <forward name="success" path="listar_evaluaciones_pendientes_pagina"/>
             <forward name="departamento" path="listar_evaluaciones_pendientes_pagina"/>
+        </action>
+        
+        <action input="/VistaCoordinacion.jsp" 
+                name="dicta" 
+                path="/listarEvaluacionesPendientesGeneral" 
+                scope="request" 
+                type="Actions.Evaluaciones.ListarEvaluacionesPendientesGeneral" 
+                validate="false">
+            <forward name="success" path="obtener_evaluaciones_pagina"/>
         </action>
         
         <action input="/VistaDepartamento.jsp" 

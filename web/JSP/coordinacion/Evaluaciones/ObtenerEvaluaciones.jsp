@@ -404,6 +404,11 @@
                                                  value="no">
                                         no recomendó al profesor
                                     </logic:equal>
+                                    en la materia:
+                                    <strong>
+                                        <bean:write name="evaluacion_coordinacion" 
+                                                    property="codigo_materia"/>
+                                    </strong>
                                 </p>
                             </td>
                         </tr>
@@ -587,7 +592,7 @@
         </html:submit>
     </html:form>
 </logic:present>
-            
+
 <div class="jumbotron" 
      style="width: 200px; height: 80px; padding: 10px; padding-bottom: 0px; padding-top: 13px;">
     <img src="imagenes/pdf.png" style="width: 60px; height: 60px;">
