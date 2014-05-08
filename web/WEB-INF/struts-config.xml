@@ -594,6 +594,16 @@
                 scope="request" 
                 type="Actions.Evaluaciones.Evaluar"
                 validate="false">
+            <forward name="success" path="listar_evaluaciones_profesor_pagina"/>
+            <forward name="failure" path="obtener_evaluaciones_pagina"/>
+        </action>
+        
+        <action input="/ObtenerEvaluaciones.jsp" 
+                name="rendimientoProf"
+                path="/comentar" 
+                scope="request" 
+                type="Actions.Evaluaciones.Comentar"
+                validate="false">
             <forward name="success" path="listar_evaluaciones_pendientes_pagina"/>
             <forward name="failure" path="obtener_evaluaciones_pagina"/>
         </action>

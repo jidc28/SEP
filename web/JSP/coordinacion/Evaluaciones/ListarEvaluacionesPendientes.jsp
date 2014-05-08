@@ -21,7 +21,7 @@
                 </span> 
         </a>-->
         <p>
-            En este momento no existen evaluaciones pendientes.
+            En este momento no existen evaluaciones sin comentar.
         </p>
     </div>     
 </logic:empty>

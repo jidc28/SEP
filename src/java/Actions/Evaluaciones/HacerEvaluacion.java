@@ -109,7 +109,7 @@ public class HacerEvaluacion extends Action {
                 if (d.getOpcion().equals("pendiente")) {
 
                     request.setAttribute("evaluar_coordinacion", SUCCESS);
-                    request.setAttribute("evaluar", SUCCESS);
+                    request.setAttribute("comentarios", SUCCESS);
 
                     /* Si ya se realizo la evaluacion del profesor */
                 } else if (d.getOpcion().equals("enviada")) {

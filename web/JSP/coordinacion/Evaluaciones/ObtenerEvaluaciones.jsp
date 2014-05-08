@@ -537,6 +537,41 @@
     </div>
 </div>
 
+<logic:present name="comentarios">
+    <div class="recomendar">
+        <html:form action="/comentar">
+            <html:hidden name="evaluacion" property="usbid_profesor" value="${profesor.getUsbid()}"/>
+            <html:hidden name="evaluacion" property="codigo_materia"/>
+            <table class="table" style="border-top: none; margin: 0px;">
+                <tbody>
+                    <tr>
+                        <td style="font-size: 14px; font-weight: bold;">
+                            COMENTARIOS:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border: none;">
+                            <html:textarea name="evaluacion" property="observaciones_c"
+                                           styleClass="form-control" rows="5">
+                            </html:textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: none;">
+                <center>
+                    <html:submit onclick="guardar_informacion()" 
+                                 styleClass="btn btn-success">
+                        Guardar
+                    </html:submit>
+                </center>
+                </td>
+                </tr>
+                </tbody>
+            </table>
+        </html:form>
+    </div>
+</logic:present>
+                            
 <logic:present name="evaluar">
     <div class="recomendar">
         <html:form action="/evaluar">
@@ -559,6 +594,9 @@
                                            value="no"/>
                             No recomendado
                         </td>
+                    </tr>
+                    <td style="font-size: 14px; font-weight: bold; border: none;">
+                        COMENTARIOS:
                     </tr>
                     <tr>
                         <td colspan="2" style="border: none;">

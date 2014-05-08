@@ -15,6 +15,15 @@
     Listado de evaluaciones pendientes
 </h4>
 
+<logic:empty name="profesores">
+    <div class="alert alert-warning alert-dismissable" 
+         id="alert-coord">
+        <p>
+            En este momento no existen evaluaciones pendientes.
+        </p>
+    </div>  
+</logic:empty>
+
 <table style="margin: 0px; margin-top: 20px; margin-left: 20px;" align="left">
     <tbody>
         <logic:iterate id="profesor" name="profesores">

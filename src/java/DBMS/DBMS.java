@@ -1155,14 +1155,21 @@ public class DBMS {
 
     public int contarEvaluacionesPendientesCoordinacion(String id_coordinacion) {
 
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         try {
-            ps = conexion.prepareStatement("SELECT Count(usbid_profesor) "
+            ps = conexion.prepareStatement("SELECT count(usbid_profesor) "
                     + "FROM evaluar "
                     + "WHERE codigo_coordinacion = ? "
-                    + "AND evaluado_coordinacion = 'no';");
+                    + "AND usbid_profesor NOT IN ("
+                    + "SELECT usbid_profesor "
+                    + "FROM evaluacion_coordinacion "
+                    + "WHERE codigo_coordinacion = ?"
+                    + ");");
             ps.setString(1, id_coordinacion);
+            ps.setString(2, id_coordinacion);
 
+            System.out.println(ps.toString());
+            
             ResultSet rs = ps.executeQuery();
             rs.next();
             return Integer.parseInt(rs.getString("count"));
@@ -1307,12 +1314,21 @@ public class DBMS {
         String codigoMateria;
         try {
             ps = conexion.prepareStatement("SELECT DISTINCT codigo_materia, count(codigo_materia) "
-                    + "FROM evaluar "
+                    + "FROM evaluar as e "
+                    + "WHERE e.codigo_coordinacion = ? "
+                    + "AND e.comentado_coordinacion = ? "
+                    + "AND NOT EXISTS ("
+                    + "SELECT * "
+                    + "FROM evaluacion_coordinacion "
                     + "WHERE codigo_coordinacion = ? "
-                    + "AND evaluado_coordinacion = ? "
+                    + "AND usbid_profesor = e.usbid_profesor"
+                    + ") "
                     + "GROUP BY codigo_materia;");
             ps.setString(1, id_coordinacion);
             ps.setString(2, evaluado);
+            ps.setString(3, id_coordinacion);
+
+            System.out.println(ps.toString());
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -1327,7 +1343,7 @@ public class DBMS {
                         + "WHERE codigo_coordinacion = ? "
                         + "AND usbid = usbid_profesor "
                         + "AND codigo_materia = ? "
-                        + "AND evaluado_coordinacion = ?;");
+                        + "AND comentado_coordinacion = ?;");
                 ps2.setString(1, id_coordinacion);
                 ps2.setString(2, codigoMateria);
                 ps2.setString(3, evaluado);
@@ -2866,18 +2882,41 @@ public class DBMS {
 
         try {
 
+            ps0 = conexion.prepareStatement("INSERT INTO evaluacion_coordinacion "
+                    + "VALUES (?,?,?,?);");
+
+            ps0.setString(1, id_coordinacion);
+            ps0.setString(2, rendimiento.getUsbid_profesor());
+            ps0.setString(3, rendimiento.getRecomendado());
+            ps0.setString(4, rendimiento.getObservaciones_c());
+
+            Integer i = ps0.executeUpdate();
+
+            return i > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean comentarCoordinacion(rendimientoProf rendimiento, 
+            String id_coordinacion) {
+
+        PreparedStatement ps0;
+
+        try {
+
             ps0 = conexion.prepareStatement("UPDATE evaluar "
-                    + "SET evaluado_coordinacion = 'si', "
-                    + "recomendado_coordinacion = ?,"
+                    + "SET comentado_coordinacion = 'si', "
                     + "observaciones_coordinacion = ? "
                     + "WHERE usbid_profesor = ? "
                     + "AND codigo_materia = ? "
                     + "AND codigo_coordinacion = ?;");
-            ps0.setString(1, rendimiento.getRecomendado());
-            ps0.setString(2, rendimiento.getObservaciones_c());
-            ps0.setString(3, rendimiento.getUsbid_profesor());
-            ps0.setString(4, rendimiento.getCodigo_materia());
-            ps0.setString(5, id_coordinacion);
+            ps0.setString(1, rendimiento.getObservaciones_c());
+            ps0.setString(2, rendimiento.getUsbid_profesor());
+            ps0.setString(3, rendimiento.getCodigo_materia());
+            ps0.setString(4, id_coordinacion);
 
             Integer i = ps0.executeUpdate();
 
@@ -3249,10 +3288,18 @@ public class DBMS {
                     + "WHERE m.codigo_materia = d.codigo_materia "
                     + "AND p.usbid = e.usbid_profesor "
                     + "AND m.codigo_coordinacion = ? "
+                    + "AND e.usbid_profesor NOT IN ("
+                    + "SELECT ec.usbid_profesor "
+                    + "FROM evaluacion_coordinacion as ec "
+                    + "WHERE ec.codigo_coordinacion = ? "
+                    + ")"
                     + "ORDER BY p.usbid;");
 
             ps.setString(1, id_coordinacion);
+            ps.setString(2, id_coordinacion);
 
+            System.out.println(ps.toString());
+            
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {

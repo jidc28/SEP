@@ -31,6 +31,8 @@ public class Evaluar extends Action {
 
         rendimientoProf rendimiento = (rendimientoProf) form;
 
+        ArrayList<Profesor> profesores = null;
+
         /* Se trunca el mensaje en el caso que sea demasiado largo (mayor a 
          * 500 caracteres) */
         if (rendimiento.getObservaciones_c().length() > 500) {
@@ -51,9 +53,9 @@ public class Evaluar extends Action {
 
                 if (informacion == null) {
                     boolean creada =
-                            DBMS.getInstance().crearInformacionProfesorCoordinacion(id, 
+                            DBMS.getInstance().crearInformacionProfesorCoordinacion(id,
                             profesor.getUsbid(), new InformacionProfesorCoord());
-                    
+
                     informacion =
                             DBMS.getInstance().
                             listarInformacionProfesorCoordinacion(id, profesor.getUsbid());
@@ -87,6 +89,9 @@ public class Evaluar extends Action {
                 evaluaciones_pendientes =
                         DBMS.getInstance().listarEvaluacionesPendientes(id, "no");
 
+                profesores =
+                        DBMS.getInstance().listarProfesoresPorEvaluarCoordinacion(id);
+
                 /* En caso que la evaluación dla este realizando el departamento */
             } else if (tipousuario.equals("departamento")) {
 
@@ -101,6 +106,7 @@ public class Evaluar extends Action {
             }
 
             request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
+            request.setAttribute("profesores", profesores);
 
             /* Se eliminan los atributos utilizados en la evaluacion de la
              * sesion */
