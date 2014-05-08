@@ -14,7 +14,8 @@
 <%
     Usuario usuario = (Usuario) session.getAttribute("usuario");
     String tipousuario = usuario.getTipousuario();
-    if (tipousuario.equals("departamento")) {
+    if (tipousuario.equals("departamento") || 
+            tipousuario.equals("coordinacion")) {
 %>
     <tiles:insert definition="listarEvaluacionesProfesor"/>
 <%

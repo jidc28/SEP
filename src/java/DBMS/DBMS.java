@@ -3237,6 +3237,38 @@ public class DBMS {
         return profesores;
     }
 
+    public ArrayList<Profesor> listarProfesoresPorEvaluarCoordinacion(
+            String id_coordinacion) {
+
+        ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
+        PreparedStatement ps;
+        try {
+            ps = conexion.prepareStatement("SELECT DISTINCT p.usbid, p.nombre, "
+                    + "p.apellido "
+                    + "FROM maneja as m, dicta as d, profesor as p, evaluar as e "
+                    + "WHERE m.codigo_materia = d.codigo_materia "
+                    + "AND p.usbid = e.usbid_profesor "
+                    + "AND m.codigo_coordinacion = ? "
+                    + "ORDER BY p.usbid;");
+
+            ps.setString(1, id_coordinacion);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Profesor p = new Profesor();
+                p.setUsbid(rs.getString("usbid"));
+                p.setNombre(rs.getString("nombre"));
+                p.setApellido(rs.getString("apellido"));
+                profesores.add(p);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return profesores;
+    }
+
     public ArrayList<rendimientoProf> listarAnoEvaluacionesEnviadasCoordinacion(
             String id_coordinacion, String usbid_profesor) {
 
