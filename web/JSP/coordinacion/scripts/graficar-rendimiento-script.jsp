@@ -66,7 +66,7 @@
         ]);
 
         var options = {
-            title: 'Catidad de estudiantes con nota 1, 2, 3, 4 y 5',
+            title: 'Cantidad de estudiantes con nota 1, 2, 3, 4 y 5',
             vAxis: {title: "Cantidad de estudiantes"},
             hAxis: {title: "Nota"},
             seriesType: "bars",

@@ -49,7 +49,7 @@ public class ListarEvaluacionesProfesor extends org.apache.struts.action.Action 
                     DBMS.getInstance().listarProfesoresPorEvaluarCoordinacion(id);
         }
 
-        session.setAttribute("profesores", profesores);
+        request.setAttribute("profesores", profesores);
         return mapping.findForward(SUCCESS);
     }
 }

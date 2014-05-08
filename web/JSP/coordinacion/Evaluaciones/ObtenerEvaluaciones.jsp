@@ -346,7 +346,7 @@
         <div class="tab-pane" id="evaluacion_coordinacion">
             <table style="width: 80%; word-break: break-all;">
                 <tbody>
-                    <tr>
+<!--                    <tr>
                         <td style="width: 70%; font-size: 14px; height: 40px;">
                             <strong>
                                 <logic:equal name="evaluado_coordinacion" property="recomendado" value="no">
@@ -357,7 +357,7 @@
                                 </logic:equal>
                             </strong>
                         </td>
-                    </tr>
+                    </tr>-->
                     <tr>
                         <td style="width: 70%; font-size: 14px; height: 40px;">
                             <strong>

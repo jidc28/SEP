@@ -35,7 +35,7 @@ public class RevisarEvaluacion extends Action {
         String tipousuario = usuario.getTipousuario();
         String id = usuario.getUsbid();
 
-        ArrayList<dicta> evaluaciones_pendientes = null;
+        ArrayList<Profesor> profesores = null;
         rendimientoProf rendimiento = (rendimientoProf) form;
         boolean revisado = false;
 
@@ -46,18 +46,19 @@ public class RevisarEvaluacion extends Action {
             revisado = DBMS.getInstance().revisadoDepartamento(rendimiento, id);
 
             String id_profesor = (String) session.getAttribute("id_profesor");
-            evaluaciones_pendientes = DBMS.getInstance().listarEvaluadosPorCoordinacion(id,id_profesor);
+//            evaluaciones_pendientes = DBMS.getInstance().listarEvaluadosPorCoordinacion(id,id_profesor);
+            profesores = DBMS.getInstance().listarProfesoresAEvaluarDepartamento(id);
 
             /* Si el usuario que accede a esta funcionalidad decano */
         } else if (tipousuario.equals("decanato")) {
             String coordinacion = (String) session.getAttribute("coordinacion");
             revisado = DBMS.getInstance().revisadoDecanato(rendimiento, coordinacion);
-            evaluaciones_pendientes =
-                    DBMS.getInstance().listarEvaluacionesPendientes(coordinacion);
+//            evaluaciones_pendientes =
+//                    DBMS.getInstance().listarEvaluacionesPendientes(coordinacion);
             request.setAttribute("solo_lectura", SUCCESS);
         }
 
-        request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
+        request.setAttribute("profesores", profesores);
         return mapping.findForward(SUCCESS);
     }
 }

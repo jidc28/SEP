@@ -138,7 +138,6 @@ public class HacerEvaluacion extends Action {
                             obtenerEvaluacionCoordinaciones(id, profesor.getUsbid(), d.getCodigoMateria());
 
                     session.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
-                    request.setAttribute("revisar", SUCCESS);
 
                 } else {
                     /* Se consultan los resultados de las evaluaciones por parte de 
@@ -220,7 +219,7 @@ public class HacerEvaluacion extends Action {
 
         int int_fecha_ano;
         int fecha_mes = -1;
-        
+
         /* Se obtiene la fecha */
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
@@ -236,7 +235,7 @@ public class HacerEvaluacion extends Action {
             /* Se transforman a enteros para ser procesados mas facilmente. */
             int_fecha_ano = Integer.parseInt(fecha_ano);
             fecha_mes = Integer.parseInt(fecha.substring(5, 7));
-            
+
             /* En el caso en que la evaluación ya se haya realizado */
         } else {
             int_fecha_ano = ano;

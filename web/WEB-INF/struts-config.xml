@@ -419,7 +419,7 @@
             scope="request"
             name="rendimientoProf"
             validate="false">
-            <forward name="success" path="listar_evaluaciones_pendientes_pagina"/>
+            <forward name="success" path="listar_evaluaciones_profesor_pagina"/>
         </action>
         
         <action input="VistaDepartamento.jsp"
