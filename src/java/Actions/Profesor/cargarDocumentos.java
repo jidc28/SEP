@@ -138,6 +138,11 @@ public class cargarDocumentos extends org.apache.struts.action.Action {
             //obtenemos el arreglo de bytes del archivo
             byte[] fileData = file.getFileData();
             
+            if (!file.getContentType().contains("application/pdf")){
+                request.setAttribute("archivo_invalido", FAILURE);
+                return mapping.findForward(FAILURE);
+            }
+            
             DBMS.getInstance().agregarEspecificacionesArchivo(usuario,trimestre,
                     ano, fileName, descripcion);
             
