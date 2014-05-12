@@ -7,7 +7,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.logging.Level;
@@ -264,9 +267,13 @@ public class DBMS {
                 u.setNombre(rs.getString("nombre"));
                 if (opcion != null) {
                     ps1 = conexion.prepareStatement("SELECT count(codigo_coordinacion) "
-                            + "FROM evaluar "
-                            + "WHERE codigo_coordinacion = ? "
-                            + "AND evaluado_coordinacion = 'si';");
+                            + "FROM evaluar as e "
+                            + "WHERE e.codigo_coordinacion = ? "
+                            + "AND e.codigo_coordinacion IN ("
+                            + "SELECT codigo_coordinacion as ec "
+                            + "FROM evaluacion as ec "
+                            + "WHERE ec.usbid_profesor = e.usbid_profesor "
+                            + ");");
 
                     ps1.setString(1, codigo_coordinacion);
 
@@ -788,8 +795,6 @@ public class DBMS {
             ps.setString(1, id_departamento);
             ResultSet rs = ps.executeQuery();
 
-            System.out.println(ps.toString());
-            
             while (rs.next()) {
                 Profesor p = new Profesor();
                 p.setUsbid(rs.getString("usbid"));
@@ -1261,19 +1266,28 @@ public class DBMS {
         return 0;
     }
 
-    public ArrayList<dicta> listarEvaluacionesPendientes(String id_coordinacion) {
+    public ArrayList<dicta> listarEvaluacionesPendientes(Coordinacion coordinacion,
+            String usbid_profesor) {
 
         PreparedStatement ps, ps2;
         ArrayList<dicta> dicta_materia = new ArrayList(0);
         String codigoMateria;
+        String id_coordinacion = coordinacion.getCodigo();
         try {
             ps = conexion.prepareStatement("SELECT DISTINCT codigo_materia, count(codigo_materia) "
-                    + "FROM evaluar "
-                    + "WHERE codigo_coordinacion = ? "
-                    + "AND evaluado_coordinacion = 'si' "
-                    + "AND revisado_decanato = 'no' "
+                    + "FROM evaluar as e "
+                    + "WHERE e.codigo_coordinacion = ? "
+                    + "AND e.usbid_profesor = ? "
+                    + "AND e.usbid_profesor NOT IN ("
+                    + "SELECT ec.usbid_profesor "
+                    + "FROM evaluacion as ec "
+                    + "WHERE revisado_decanato = 'si' "
+                    + ") "
                     + "GROUP BY codigo_materia;");
             ps.setString(1, id_coordinacion);
+            ps.setString(2, usbid_profesor);
+
+            System.out.println(ps.toString());
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -1287,9 +1301,7 @@ public class DBMS {
                         + "FROM evaluar, profesor "
                         + "WHERE codigo_coordinacion = ? "
                         + "AND usbid = usbid_profesor "
-                        + "AND codigo_materia = ? "
-                        + "AND evaluado_coordinacion = 'si' "
-                        + "AND revisado_decanato = 'no';");
+                        + "AND codigo_materia = ?;");
                 ps2.setString(1, id_coordinacion);
                 ps2.setString(2, codigoMateria);
 
@@ -1500,9 +1512,8 @@ public class DBMS {
         rendimientoProf rendimiento = null;
 
         try {
-            ps = conexion.prepareStatement("SELECT m.codigo, "
-                    + "e.recomendado_coordinacion, e.observaciones_coordinacion, "
-                    + "m.nombre, e.usbid_profesor, r.ano, r.trimestre "
+            ps = conexion.prepareStatement("SELECT m.codigo, r.ano, r.trimestre, "
+                    + "e.observaciones_coordinacion, m.nombre, e.usbid_profesor "
                     + "FROM evaluar as e, materia as m, rendimiento as r "
                     + "WHERE e.codigo_coordinacion = ? "
                     + "AND r.ano = ? "
@@ -1511,7 +1522,8 @@ public class DBMS {
                     + "AND e.codigo_materia = r.codigo_materia "
                     + "AND r.usbid_profesor = e.usbid_profesor "
                     + "AND r.usbid_profesor = ? "
-                    + "AND e.codigo_materia = ?;");
+                    + "AND e.codigo_materia = ? "
+                    + "AND e.comentado_coordinacion = 'si';");
             ps.setString(1, id_coordinacion);
             ps.setInt(2, ano);
             ps.setString(3, trimestre);
@@ -1520,15 +1532,48 @@ public class DBMS {
 
             ResultSet rs = ps.executeQuery();
 
+            System.out.println(ps.toString());
+
             while (rs.next()) {
                 rendimiento = new rendimientoProf();
                 rendimiento.setCodigo_materia(rs.getString("codigo"));
-                rendimiento.setRecomendado(rs.getString("recomendado_coordinacion"));
                 rendimiento.setObservaciones_c(rs.getString("observaciones_coordinacion"));
                 rendimiento.setNombre_materia(rs.getString("nombre"));
                 rendimiento.setUsbid_profesor(rs.getString("usbid_profesor"));
                 rendimiento.setAno(rs.getInt("ano"));
                 rendimiento.setTrimestre(rs.getString("trimestre"));
+            }
+
+            return rendimiento;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public rendimientoProf listarEvaluacionesGeneralCoordinacion(
+            String id_coordinacion, String usbid_profesor) {
+
+        PreparedStatement ps, ps2;
+        rendimientoProf rendimiento = null;
+
+        try {
+            ps = conexion.prepareStatement("SELECT * "
+                    + "FROM evaluacion "
+                    + "WHERE usbid_profesor = ? "
+                    + "AND codigo_coordinacion = ?;");
+            ps.setString(1, usbid_profesor);
+            ps.setString(2, id_coordinacion);
+
+            ResultSet rs = ps.executeQuery();
+
+            System.out.println(ps.toString());
+
+            while (rs.next()) {
+                rendimiento = new rendimientoProf();
+                rendimiento.setObservaciones_c(rs.getString("observaciones_coordinacion"));
+                rendimiento.setUsbid_profesor(rs.getString("usbid_profesor"));
             }
 
             return rendimiento;
@@ -2997,14 +3042,11 @@ public class DBMS {
         try {
 
             ps0 = conexion.prepareStatement("SELECT revisado_departamento "
-                    + "FROM evaluar "
-                    + "WHERE evaluado_coordinacion = 'si' "
-                    + "AND codigo_materia = ? "
-                    + "AND usbid_profesor = ? "
+                    + "FROM evaluacion "
+                    + "WHERE usbid_profesor = ? "
                     + "AND codigo_coordinacion = ?;");
-            ps0.setString(1, rendimiento.getCodigo_materia());
-            ps0.setString(2, rendimiento.getUsbid_profesor());
-            ps0.setString(3, id_coordinacion);
+            ps0.setString(1, rendimiento.getUsbid_profesor());
+            ps0.setString(2, id_coordinacion);
 
             ResultSet rs = ps0.executeQuery();
 
@@ -3051,68 +3093,92 @@ public class DBMS {
         }
     }
 
+    public int[] obtenerAnoYTrimestre() {
+
+        int[] ano_y_trimestre = new int[2];
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+
+        /* Se extrae el ano y el trimestre actual */
+        String fecha = dateFormat.format(date).toString();
+        String fecha_ano = fecha.substring(0, 4);
+        ano_y_trimestre[0] = Integer.parseInt(fecha_ano);
+        ano_y_trimestre[1] = Integer.parseInt(fecha.substring(5, 7));
+
+        return ano_y_trimestre;
+    }
+
+    public String obtenerTrimestre(int fecha_mes) {
+
+        if (1 <= fecha_mes && fecha_mes <= 3) {
+            /* El trimestre es ENERO-MARZO */
+            return "EM";
+        } else if (4 <= fecha_mes && fecha_mes <= 7) {
+            /* El trimestre es ABRIL-JULIO */
+            return "AJ";
+        } else if (9 <= fecha_mes && fecha_mes <= 12) {
+            /* El trimestre es SEPTIEMBRE-DICIEMBRE */
+            return "SD";
+        } else if (fecha_mes == 8) {
+            /* Período INTENSIVO */
+            return "V";
+        }
+        return null;
+    }
+
     public void evaluar(rendimientoProf rendimiento, String id_departamento, String id_coordinacion) {
 
-        PreparedStatement ps0 = null;
-        PreparedStatement ps1 = null;
+        PreparedStatement ps0, ps1;
 
         try {
 
             String usbid = rendimiento.getUsbid_profesor();
             String materia = rendimiento.getCodigo_materia();
 
+            int[] ano_y_trimestre = obtenerAnoYTrimestre();
+            String trimestre = obtenerTrimestre(ano_y_trimestre[1]);
+
             if (id_coordinacion == null) {
-                ps0 = conexion.prepareStatement("SELECT codigo_coordinacion, "
+                ps0 = conexion.prepareStatement("SELECT DISTINCT codigo_coordinacion, "
                         + "trimestre, ano, recomendado_coordinacion, "
-                        + "observaciones_coordinacion "
-                        + "FROM evaluar AS ev, rendimiento AS r "
+                        + "ev.observaciones_coordinacion "
+                        + "FROM evaluacion AS ev, rendimiento AS r "
                         + "WHERE ev.usbid_profesor = ? "
                         + "AND ev.usbid_profesor = r.usbid_profesor "
-                        + "AND ev.codigo_materia = ? "
-                        + "AND ev.codigo_materia = r.codigo_materia "
-                        + "AND codigo_departamento = ? "
                         + "AND r.evaluado = 'no';");
                 ps0.setString(1, usbid);
-                ps0.setString(2, materia);
-                ps0.setString(3, id_departamento);
             } else {
-                ps0 = conexion.prepareStatement("SELECT codigo_coordinacion, "
+                ps0 = conexion.prepareStatement("SELECT DISTINCT codigo_coordinacion, "
                         + "trimestre, ano, recomendado_coordinacion, "
-                        + "observaciones_coordinacion, codigo_departamento "
-                        + "FROM evaluar AS ev, rendimiento AS r "
+                        + "ev.observaciones_coordinacion "
+                        + "FROM evaluacion AS ev, rendimiento AS r "
                         + "WHERE ev.usbid_profesor = ? "
                         + "AND ev.usbid_profesor = r.usbid_profesor "
-                        + "AND ev.codigo_materia = ? "
-                        + "AND ev.codigo_materia = r.codigo_materia "
-                        + "AND codigo_coordinacion = ? "
+                        + "AND ev.codigo_coordinacion = ? "
                         + "AND r.evaluado = 'no';");
                 ps0.setString(1, usbid);
-                ps0.setString(2, materia);
-                ps0.setString(3, id_coordinacion);
+                ps0.setString(2, id_coordinacion);
             }
+
+            System.out.println(ps0.toString());
 
             ResultSet rs = ps0.executeQuery();
 
             while (rs.next()) {
                 int ano = rs.getInt(3);
-                String trimestre = rs.getString(2);
+                String trimestre_rendimiento = rs.getString(2);
 
-                evaluarRendimiento(usbid, materia, ano, trimestre);
+                evaluarRendimiento(usbid, materia, ano, trimestre_rendimiento);
 
                 ps1 = conexion.prepareStatement("INSERT into evaluado "
-                        + "VALUES (?,?,?,?,?,?,?,?);");
+                        + "VALUES (?,?,?,?,?,?);");
                 ps1.setString(1, rs.getString(1));
                 ps1.setString(2, usbid);
-                ps1.setString(3, materia);
-                if (id_coordinacion == null) {
-                    ps1.setString(4, id_departamento);
-                } else {
-                    ps1.setString(4, rs.getString(6));
-                }
-                ps1.setInt(5, ano);
-                ps1.setString(6, trimestre);
-                ps1.setString(7, rs.getString(4));
-                ps1.setString(8, rs.getString(5));
+                ps1.setInt(3, ano_y_trimestre[0]);
+                ps1.setString(4, trimestre);
+                ps1.setString(5, rs.getString(4));
+                ps1.setString(6, rs.getString(5));
 
                 ps1.executeUpdate();
             }
@@ -3125,20 +3191,23 @@ public class DBMS {
     public boolean borrarEvaluadosDepartamento(rendimientoProf rendimiento, String id_departamento) {
 
 
-        PreparedStatement ps0;
+        PreparedStatement ps0, ps1;
 
         try {
 
             ps0 = conexion.prepareStatement("DELETE FROM evaluar "
                     + "WHERE usbid_profesor = ? "
-                    + "AND codigo_materia = ? "
                     + "AND codigo_departamento = ?;");
             ps0.setString(1, rendimiento.getUsbid_profesor());
-            ps0.setString(2, rendimiento.getCodigo_materia());
-            ps0.setString(3, id_departamento);
+            ps0.setString(2, id_departamento);
+
+            ps1 = conexion.prepareStatement("DELETE FROM evaluacion "
+                    + "WHERE usbid_profesor = ?;");
+            ps1.setString(1, rendimiento.getUsbid_profesor());
 
             Integer i = ps0.executeUpdate();
-            return i > 0;
+            Integer j = ps1.executeUpdate();
+            return i > 0 && j > 0;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -3149,20 +3218,25 @@ public class DBMS {
     public boolean borrarEvaluadosDecanato(rendimientoProf rendimiento, String id_coordinacion) {
 
 
-        PreparedStatement ps0;
+        PreparedStatement ps0, ps1;
 
         try {
 
             ps0 = conexion.prepareStatement("DELETE FROM evaluar "
                     + "WHERE usbid_profesor = ? "
-                    + "AND codigo_materia = ? "
                     + "AND codigo_coordinacion = ?;");
             ps0.setString(1, rendimiento.getUsbid_profesor());
-            ps0.setString(2, rendimiento.getCodigo_materia());
-            ps0.setString(3, id_coordinacion);
+            ps0.setString(2, id_coordinacion);
+
+            ps1 = conexion.prepareStatement("DELETE FROM evaluacion "
+                    + "WHERE usbid_profesor = ? "
+                    + "AND codigo_coordinacion = ?;");
+            ps1.setString(1, rendimiento.getUsbid_profesor());
+            ps1.setString(2, id_coordinacion);
 
             Integer i = ps0.executeUpdate();
-            return i > 0;
+            Integer j = ps1.executeUpdate();
+            return i > 0 && j > 0;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -3221,14 +3295,12 @@ public class DBMS {
             } else {
                 /* Si la evaluacion no fue revisada por el decanato colocar
                  * que fue revisada por el departamento correspondiente */
-                ps0 = conexion.prepareStatement("UPDATE evaluar "
+                ps0 = conexion.prepareStatement("UPDATE evaluacion "
                         + "SET revisado_decanato = 'si' "
                         + "WHERE usbid_profesor = ? "
-                        + "AND codigo_materia = ? "
                         + "AND codigo_coordinacion = ?;");
                 ps0.setString(1, rendimiento.getUsbid_profesor());
-                ps0.setString(2, rendimiento.getCodigo_materia());
-                ps0.setString(3, id_coordinacion);
+                ps0.setString(2, id_coordinacion);
 
                 Integer i = ps0.executeUpdate();
 
@@ -3292,6 +3364,35 @@ public class DBMS {
 
             ps.setString(1, id_coordinacion);
             ps.setString(2, id_coordinacion);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Profesor p = new Profesor();
+                p.setUsbid(rs.getString("usbid"));
+                p.setNombre(rs.getString("nombre"));
+                p.setApellido(rs.getString("apellido"));
+                profesores.add(p);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return profesores;
+    }
+
+    public ArrayList<Profesor> listarProfesoresPorEvaluarDecanato(
+            String id_coordinacion) {
+
+        ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
+        PreparedStatement ps;
+        try {
+            ps = conexion.prepareStatement("SELECT * "
+                    + "FROM profesor, evaluacion as ec "
+                    + "WHERE ec.usbid_profesor = usbid "
+                    + "AND ec.codigo_coordinacion = ? "
+                    + "AND ec.revisado_decanato = 'no';");
+            ps.setString(1, id_coordinacion);
 
             ResultSet rs = ps.executeQuery();
 
@@ -3552,7 +3653,7 @@ public class DBMS {
                     + "AND e.usbid_profesor NOT IN ("
                     + "SELECT ec.usbid_profesor "
                     + "FROM evaluacion as ec "
-                    + "WHERE ec.revisado_departamento = 'no' "
+                    + "WHERE ec.revisado_departamento = 'si' "
                     + "AND ec.usbid_profesor = e.usbid_profesor "
                     + ")"
                     + "AND usbid_profesor = ? "
@@ -3560,8 +3661,6 @@ public class DBMS {
             ps.setString(1, id_departamento);
             ps.setString(2, id_profesor);
 
-            System.out.println(ps.toString());
-            
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {

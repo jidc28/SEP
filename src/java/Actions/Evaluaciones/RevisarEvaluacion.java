@@ -53,6 +53,8 @@ public class RevisarEvaluacion extends Action {
         } else if (tipousuario.equals("decanato")) {
             String coordinacion = (String) session.getAttribute("coordinacion");
             revisado = DBMS.getInstance().revisadoDecanato(rendimiento, coordinacion);
+            profesores = 
+                    DBMS.getInstance().listarProfesoresPorEvaluarDecanato(coordinacion);
 //            evaluaciones_pendientes =
 //                    DBMS.getInstance().listarEvaluacionesPendientes(coordinacion);
             request.setAttribute("solo_lectura", SUCCESS);

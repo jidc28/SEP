@@ -248,10 +248,9 @@ insert into rendimiento values ('22-90457','CI6116','AJ','2006','20','3.2','7','
 insert into rendimiento values ('22-90457','CI6116','AJ','2007','20','3.2','7','2','4','4','3','0','si');
 insert into rendimiento values ('28-63146','CI6116','SD','2007','20','3.2','7','2','4','4','3','0','si');
 
-insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2008','AJ','no','irresponsable');
-insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2005','AJ','si','responsable');
-insert into evaluado values ('09-10020','22-90457','CI5311','09-10219','2005','AJ','si','responsable');
-insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2005','SD','si','responsable');
-insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2006','AJ','no','irresponsable');
-insert into evaluado values ('09-10020','22-90457','CI6116','09-10219','2007','AJ','si','responsable');
-insert into evaluado values ('09-10020','28-63146','CI6116','09-10219','2007','SD','si','responsable');
+insert into evaluado values ('09-10020','22-90457','2008','AJ','no','irresponsable');
+insert into evaluado values ('09-10020','22-90457','2005','AJ','si','responsable');
+insert into evaluado values ('09-10020','22-90457','2005','SD','si','responsable');
+insert into evaluado values ('09-10020','22-90457','2006','AJ','no','irresponsable');
+insert into evaluado values ('09-10020','22-90457','2007','AJ','si','responsable');
+insert into evaluado values ('09-10020','28-63146','2007','SD','si','responsable');

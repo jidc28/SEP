@@ -169,14 +169,14 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
 
                 /* Se obtienen los datos de la evaluacion que realizo la
                  * coordinacion */
-                rendimientoProf evaluado = null;
+                rendimientoProf evaluado;
 
                 /* Si no se ha realizado todavia la evaluacion del profesor por
                  * parte del decanato */
                 if (d.getOpcion().equals("pendiente")) {
                     evaluado =
-                            DBMS.getInstance().listarEvaluacionesCoordinacion(
-                            id_coordinacion, ano, trimestre, d.getCodigoMateria(), d.getUsbidProfesor());
+                            DBMS.getInstance().listarEvaluacionesGeneralCoordinacion(
+                            id_coordinacion, d.getUsbidProfesor());
 
                     request.setAttribute("revisar", SUCCESS);
                 } else {
@@ -189,6 +189,7 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
             }
 
             /* Se envian a la vista los atributos correspondiente */
+            request.setAttribute("listar_archivos", SUCCESS);
             request.setAttribute("archivos", archivos);
             session.setAttribute("profesor", profesor);
             session.setAttribute("evaluacion", evaluacion);
@@ -217,6 +218,13 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
         return resultado;
     }
 
+    /**
+     * Obtener archivos
+     * @param ano del cual se deben revisar los archivos
+     * @param mes en el cual se deben revisar loa archivos
+     * @param opcion 1 para pendiente.
+     * @return Archivo [] listado de archivos subidos por el profesor. 
+     */
     public Archivo[] obtenerArchivosConsiderados(int ano, String mes, int opcion) {
 
         int int_fecha_ano;

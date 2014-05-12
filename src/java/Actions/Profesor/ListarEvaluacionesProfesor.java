@@ -40,13 +40,19 @@ public class ListarEvaluacionesProfesor extends org.apache.struts.action.Action 
 
         ArrayList<Profesor> profesores = null;
 
+        /* Se obtiene el listado de profesores a evaluar. */
         if (tipousuario.equals("departamento")) {
-            /* Se obtiene el listado de profesores a evaluar. */
             profesores =
                     DBMS.getInstance().listarProfesoresAEvaluarDepartamento(id);
         } else if (tipousuario.equals("coordinacion")) {
             profesores =
                     DBMS.getInstance().listarProfesoresPorEvaluarCoordinacion(id);
+        } else if (tipousuario.equals("decanato")) {
+            Coordinacion coordinacion = (Coordinacion) form;
+            String id_coordinacion = coordinacion.getCodigo();
+            profesores = 
+                    DBMS.getInstance().listarProfesoresPorEvaluarDecanato(id_coordinacion);
+            session.setAttribute("coordinacion", id_coordinacion);
         }
 
         request.setAttribute("profesores", profesores);

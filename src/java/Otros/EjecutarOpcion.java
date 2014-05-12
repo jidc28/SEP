@@ -66,7 +66,7 @@ public class EjecutarOpcion extends org.apache.struts.action.Action {
             }
         } else if (tipousuario.equals("decanato")) {
             int evaluaciones_pendientes =
-                    DBMS.getInstance().contarSolicitudesPendientesDecanato(u.getUsbid());
+                    DBMS.getInstance().contarEvaluacionesPendientesDecanato(u.getUsbid());
             if (evaluaciones_pendientes != 0) {
                 request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
             }

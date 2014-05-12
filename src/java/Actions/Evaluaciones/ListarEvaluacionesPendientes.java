@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Actions.Evaluaciones;
 
 import Clases.*;
@@ -19,7 +15,6 @@ import org.apache.struts.action.ActionMapping;
  * @author smaf
  */
 public class ListarEvaluacionesPendientes extends org.apache.struts.action.Action {
-    /* forward name="success" path="" */
 
     private static final String SUCCESS = "success";
 
@@ -57,9 +52,10 @@ public class ListarEvaluacionesPendientes extends org.apache.struts.action.Actio
             session.setAttribute("id_profesor", id_profesor);
         } else if (tipousuario.equals("decanato")) {
             /* Se listan las evaluaciones pendientes por coordinacion */
-            Coordinacion coordinacion = (Coordinacion) form;
-            evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(coordinacion.getCodigo());
-            session.setAttribute("coordinacion", coordinacion.getCodigo());
+            Coordinacion coordinacion = new Coordinacion();
+            coordinacion.setCodigo((String) session.getAttribute("coordinacion"));
+            String usbid_profesor = ((Coordinacion) form).getCodigo();
+            evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(coordinacion,usbid_profesor);
             request.setAttribute("solo_lectura", SUCCESS);
         }
 
