@@ -70,84 +70,36 @@ public class HacerEvaluacion extends Action {
              * coordinador/coordinadora */
             if (tipousuario.equals("coordinacion")) {
 
-                /* Si no se ha realizado todavia la evaluacion del profesor por
-                 * parte de la coordinacion */
-                if (d.getOpcion().equals("pendiente")) {
-
-                    request.setAttribute("comentarios", SUCCESS);
-
-                    /* Si ya se realizo la evaluacion del profesor */
-                } else if (d.getOpcion().equals("enviada")) {
-
-                    String trimestre = (String) session.getAttribute("trimestre");
-                    int ano = (Integer) session.getAttribute("ano");
-                    /* Ojo eso debe estar */
-//            session.removeAttribute("trimestre");
-//            session.removeAttribute("ano");
-                    rendimientoProf evaluado =
-                            DBMS.getInstance().
-                            listarEvaluacionesEnviadasMateria(id, ano, trimestre, d.getCodigoMateria());
-                    request.setAttribute("evaluado_coordinacion", evaluado);
-                }
+                request.setAttribute("comentarios", SUCCESS);
 
                 /* Si el usuario que accede a esta funcionalidad es
                  * jefe de departamento */
             } else if (tipousuario.equals("departamento")) {
 
-                /* Si no se ha realizado todavia la evaluacion del profesor por
-                 * parte del departamento */
-                if (d.getOpcion().equals("pendiente")) {
+                ArrayList<rendimientoProf> evaluacion_coordinaciones =
+                        DBMS.getInstance().
+                        obtenerEvaluacionCoordinaciones(id, profesor.getUsbid(), d.getCodigoMateria());
 
-                    ArrayList<rendimientoProf> evaluacion_coordinaciones =
-                            DBMS.getInstance().
-                            obtenerEvaluacionCoordinaciones(id, profesor.getUsbid(), d.getCodigoMateria());
-
-                    session.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
-
-                } else {
-                    /* Se consultan los resultados de las evaluaciones por parte de 
-                     * las coordinaciones */
-                    ArrayList<rendimientoProf> evaluacion_coordinaciones =
-                            DBMS.getInstance().obtenerEvaluacionesEnviadasCoordinaciones(id,
-                            profesor.getUsbid(), d.getCodigoMateria());
-
-                    session.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
-                }
+                session.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
 
                 /* Si el usuario que accede a esta funcionalidad decano */
             } else if (tipousuario.equals("decanato")) {
 
+                /* Se obtiene la coordinacion que realizo la evaluacion. */
                 String id_coordinacion = (String) session.getAttribute("coordinacion");
 
-                /* Si existe una informacion previa se envia a la vista, sino, se crea
-                 * una instancia vacia de la informacion */
-                InformacionProfesorCoord informacion =
-                        DBMS.getInstance().
-                        listarInformacionProfesorCoordinacion(id_coordinacion, d.getUsbidProfesor());
-
-                session.setAttribute("informacion", informacion);
-
+                /* Se obtienen el trimestre y el ano de la evaluacion */
                 String trimestre = evaluacion.getTrimestre();
                 int ano = evaluacion.getAno();
 
                 /* Se obtienen los datos de la evaluacion que realizo la
                  * coordinacion */
-                rendimientoProf evaluado;
+                rendimientoProf evaluado =
+                        DBMS.getInstance().listarEvaluacionesCoordinacion(
+                        id_coordinacion, ano, trimestre, d.getCodigoMateria(),
+                        d.getUsbidProfesor());
 
-                /* Si no se ha realizado todavia la evaluacion del profesor por
-                 * parte del decanato */
-                if (d.getOpcion().equals("pendiente")) {
-                    evaluado =
-                            DBMS.getInstance().listarEvaluacionesCoordinacion(
-                            id_coordinacion, ano, trimestre, d.getCodigoMateria(), d.getUsbidProfesor());
-
-                    request.setAttribute("revisar", SUCCESS);
-                } else {
-                    evaluado =
-                            DBMS.getInstance().listarEvaluacionesEnviadasCoordinacion(
-                            id_coordinacion, ano, trimestre, d.getCodigoMateria(), d.getUsbidProfesor());
-                }
-
+                request.setAttribute("revisar", SUCCESS);
                 request.setAttribute("evaluado_coordinacion", evaluado);
             }
 

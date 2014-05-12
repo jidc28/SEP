@@ -455,7 +455,7 @@
             scope="request"
             name="rendimientoProf"
             validate="false">
-            <forward name="success" path="listar_evaluaciones_enviadas_pagina"/>
+            <forward name="success" path="obtener_evaluaciones_pagina"/>
         </action>
         
         <action input="ObtenerEvaluaciones.jsp"
