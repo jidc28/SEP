@@ -548,7 +548,7 @@
             type="Actions.Evaluaciones.Graficar" 
             scope="request"
             validate="false">
-            <forward name="success" path="graficarRendimiento"/>
+            <forward name="success" path="graficar_rendimiento_pagina"/>
         </action>
 
         <action input="/VistaCoordinacion.jsp" 

@@ -1,8 +1,9 @@
 <%-- 
-    Document   : obtener_evaluaciones_pagina
-    Created on : Feb 28, 2014, 10:22:32 AM
+    Document   : graficar_rendimiento_pagina
+    Created on : May 13, 2014, 11:24:49 AM
     Author     : smaf
 --%>
+
 <%@page import="Clases.Usuario"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
@@ -23,15 +24,15 @@
         String tipousuario = usuario.getTipousuario();
         if (tipousuario.equals("coordinacion")) {
 %>
-    <tiles:insert definition="obtenerEvaluacionCoordinacion"/>
+    <tiles:insert definition="graficarRendimientoCoordinacion"/>
 <%    
         } else if (tipousuario.equals("departamento")) {
 %>
-    <tiles:insert definition="obtenerEvaluacionDepartamento"/>
+    <tiles:insert definition="graficarRendimientoDepartamento"/>
 <%
        } else if (tipousuario.equals("decanato")) {
 %>
-    <tiles:insert definition="obtenerEvaluacionDecanato"/>
+    <tiles:insert definition="graficarRendimientoDecanato"/>
 <%
        } else {
 %>
@@ -40,3 +41,4 @@
         }
     }
 %>
+

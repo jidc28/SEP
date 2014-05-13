@@ -14,15 +14,22 @@
 <%
     Usuario usuario = (Usuario) session.getAttribute("usuario");
     String tipousuario = usuario.getTipousuario();
-    if (tipousuario.equals("departamento") || 
-            tipousuario.equals("coordinacion") || 
-            tipousuario.equals("decanato")) {
+    if (tipousuario.equals("coordinacion")) {
 %>
-    <tiles:insert definition="listarEvaluacionesProfesor"/>
+    <tiles:insert definition="listarEvaluacionesProfesorCoordinacion"/>
+    
+<% 
+    } else if (tipousuario.equals("departamento")) {
+%>
+    <tiles:insert definition="listarEvaluacionesProfesorDepartamento"/>
 <%
+    } else if (tipousuario.equals("decanato")) {
+%>
+    <tiles:insert definition="listarEvaluacionesProfesorDecanato"/>
+<% 
    } else {
 %>
     <tiles:insert definition="noAutorizado"/>
 <%
-   }
+    }
 %>
