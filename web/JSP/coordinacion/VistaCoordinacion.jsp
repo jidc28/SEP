@@ -81,7 +81,7 @@
                     <h5 align ="center">Listar evaluaciones enviadas</h5>
                 </html:link>
                 <logic:present name="evaluaciones_pendientes">
-                    <html:link action="/listarEvaluacionesPendientes">
+                    <html:link action="/listarEvaluacionesProfesor">
                         <h5 align ="center">Listar evaluaciones pendientes                                
                             <span class="badge">
                                 <bean:write name="evaluaciones_pendientes"/>

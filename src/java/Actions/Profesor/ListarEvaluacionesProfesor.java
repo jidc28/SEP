@@ -35,13 +35,27 @@ public class ListarEvaluacionesProfesor extends org.apache.struts.action.Action 
 
         HttpSession session = request.getSession(true);
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-        String id_departamento = usuario.getUsbid();
+        String id = usuario.getUsbid();
+        String tipousuario = usuario.getTipousuario();
+
+        ArrayList<Profesor> profesores = null;
 
         /* Se obtiene el listado de profesores a evaluar. */
-        ArrayList<Profesor> profesores = 
-                DBMS.getInstance().listarProfesoresAEvaluarDepartamento(id_departamento);
-        
-        session.setAttribute("profesores", profesores);
+        if (tipousuario.equals("departamento")) {
+            profesores =
+                    DBMS.getInstance().listarProfesoresAEvaluarDepartamento(id);
+        } else if (tipousuario.equals("coordinacion")) {
+            profesores =
+                    DBMS.getInstance().listarProfesoresPorEvaluarCoordinacion(id);
+        } else if (tipousuario.equals("decanato")) {
+            Coordinacion coordinacion = (Coordinacion) form;
+            String id_coordinacion = coordinacion.getCodigo();
+            profesores = 
+                    DBMS.getInstance().listarProfesoresPorEvaluarDecanato(id_coordinacion);
+            session.setAttribute("coordinacion", id_coordinacion);
+        }
+
+        request.setAttribute("profesores", profesores);
         return mapping.findForward(SUCCESS);
     }
 }

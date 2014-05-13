@@ -54,7 +54,7 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
 
             /* Se obtiene el rendimiento del profesor determinado asociado con
              * la materia que maneja la coordinación */
-            rendimientoProf evaluacion = 
+            rendimientoProf evaluacion =
                     DBMS.getInstance().obtenerEvaluacion(d.getUsbidProfesor());
 
             /* Se obtiene toda la informacion del profesor */
@@ -105,51 +105,20 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
 
                 session.setAttribute("informacion", informacion);
 
-                /* Si no se ha realizado todavia la evaluacion del profesor por
-                 * parte de la coordinacion */
-                if (d.getOpcion().equals("pendiente")) {
-
-                    request.setAttribute("evaluar_coordinacion", SUCCESS);
-                    request.setAttribute("evaluar", SUCCESS);
-
-                    /* Si ya se realizo la evaluacion del profesor */
-                } else if (d.getOpcion().equals("enviada")) {
-
-                    String trimestre = (String) session.getAttribute("trimestre");
-                    int ano = (Integer) session.getAttribute("ano");
-                    /* Ojo eso debe estar */
-//            session.removeAttribute("trimestre");
-//            session.removeAttribute("ano");
-                    rendimientoProf evaluado =
-                            DBMS.getInstance().
-                            listarEvaluacionesEnviadasMateria(id, ano, trimestre, d.getCodigoMateria());
-                    request.setAttribute("evaluado_coordinacion", evaluado);
-                }
+                request.setAttribute("evaluar_coordinacion", SUCCESS);
+                request.setAttribute("evaluar", SUCCESS);
 
                 /* Si el usuario que accede a esta funcionalidad es
                  * jefe de departamento */
             } else if (tipousuario.equals("departamento")) {
 
-                /* Si no se ha realizado todavia la evaluacion del profesor por
-                 * parte del departamento */
-                if (d.getOpcion().equals("pendiente")) {
+                ArrayList<rendimientoProf> evaluacion_coordinaciones =
+                        DBMS.getInstance().
+                        obtenerEvaluacionCoordinaciones(id, profesor.getUsbid());
 
-                    ArrayList<rendimientoProf> evaluacion_coordinaciones =
-                            DBMS.getInstance().
-                            obtenerEvaluacionCoordinaciones(id, profesor.getUsbid());
+                session.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
+                request.setAttribute("revisar", SUCCESS);
 
-                    session.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
-                    request.setAttribute("revisar", SUCCESS);
-
-                } else {
-                    /* Se consultan los resultados de las evaluaciones por parte de 
-                     * las coordinaciones */
-                    ArrayList<rendimientoProf> evaluacion_coordinaciones =
-                            DBMS.getInstance().obtenerEvaluacionesEnviadasCoordinaciones(id,
-                            profesor.getUsbid(), d.getCodigoMateria());
-
-                    session.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
-                }
 
                 /* Si el usuario que accede a esta funcionalidad decano */
             } else if (tipousuario.equals("decanato")) {
@@ -169,26 +138,19 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
 
                 /* Se obtienen los datos de la evaluacion que realizo la
                  * coordinacion */
-                rendimientoProf evaluado = null;
+                rendimientoProf evaluado;
 
-                /* Si no se ha realizado todavia la evaluacion del profesor por
-                 * parte del decanato */
-                if (d.getOpcion().equals("pendiente")) {
-                    evaluado =
-                            DBMS.getInstance().listarEvaluacionesCoordinacion(
-                            id_coordinacion, ano, trimestre, d.getCodigoMateria(), d.getUsbidProfesor());
+                evaluado =
+                        DBMS.getInstance().listarEvaluacionesGeneralCoordinacion(
+                        id_coordinacion, d.getUsbidProfesor());
 
-                    request.setAttribute("revisar", SUCCESS);
-                } else {
-                    evaluado =
-                            DBMS.getInstance().listarEvaluacionesEnviadasCoordinacion(
-                            id_coordinacion, ano, trimestre, d.getCodigoMateria(), d.getUsbidProfesor());
-                }
+                request.setAttribute("revisar", SUCCESS);
 
                 request.setAttribute("evaluado_coordinacion", evaluado);
             }
 
             /* Se envian a la vista los atributos correspondiente */
+            request.setAttribute("listar_archivos", SUCCESS);
             request.setAttribute("archivos", archivos);
             session.setAttribute("profesor", profesor);
             session.setAttribute("evaluacion", evaluacion);
@@ -217,6 +179,14 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
         return resultado;
     }
 
+    /**
+     * Obtener archivos
+     *
+     * @param ano del cual se deben revisar los archivos
+     * @param mes en el cual se deben revisar loa archivos
+     * @param opcion 1 para pendiente.
+     * @return Archivo [] listado de archivos subidos por el profesor.
+     */
     public Archivo[] obtenerArchivosConsiderados(int ano, String mes, int opcion) {
 
         int int_fecha_ano;

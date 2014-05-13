@@ -2,19 +2,19 @@ package Actions.Evaluaciones;
 
 import Clases.*;
 import DBMS.DBMS;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-/**
- *
- * @author smaf
- */
-public class ListarEvaluacionesEnviadas extends org.apache.struts.action.Action {
+public class ListarEvaluacionesEnviadas extends Action {
 
     private static final String SUCCESS = "success";
 
@@ -29,51 +29,242 @@ public class ListarEvaluacionesEnviadas extends org.apache.struts.action.Action 
      * @return
      */
     @Override
+    @SuppressWarnings("empty-statement")
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
         HttpSession session = request.getSession(true);
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-        String id = usuario.getUsbid();
         String tipousuario = usuario.getTipousuario();
+        String id = usuario.getUsbid();
 
-        /* Se obtienen los datos requeridos por la consulta */
-        rendimientoProf rendimiento = (rendimientoProf) form;
-        int ano = rendimiento.getAno();
-        String trimestre = rendimiento.getTrimestre();
+        if (session.getAttribute("usuario") != null) {
 
-        ArrayList<rendimientoProf> evaluaciones_enviadas = null;
+            rendimientoProf rendimiento = (rendimientoProf) form;
+            Archivo[] archivos_considerados;
 
-        /* Dependiendo del tipo de usuario se consultan las evaluaciones
-         * enviadas */
-        if (tipousuario.equals("coordinacion")) {
+            String trimestre = rendimiento.getTrimestre();
+            int ano = rendimiento.getAno();
+            archivos_considerados = obtenerArchivosConsiderados(ano, trimestre, 2);
 
-            evaluaciones_enviadas =
-                    DBMS.getInstance().listarEvaluacionesEnviadasCoordinacion(id, ano, trimestre);
+            /* Se obtiene el rendimiento del profesor determinado asociado con
+             * la materia que maneja la coordinación */
+            rendimientoProf evaluacion =
+                    DBMS.getInstance().obtenerEvaluacion(rendimiento.getUsbid_profesor());
 
-        } else if (tipousuario.equals("departamento")) {
+            /* Se obtiene toda la informacion del profesor */
+            Profesor profesor =
+                    DBMS.getInstance().obtenerInfoProfesor(rendimiento.getUsbid_profesor());
 
-            evaluaciones_enviadas =
-                    DBMS.getInstance().listarEvaluacionesEnviadasDepartamento(id, ano, trimestre);
+            /* Se obtienen todos los archivos subidos por el profesor */
+            ArrayList<Archivo> archivos =
+                    DBMS.getInstance().
+                    listarArchivosProfesor(profesor.getUsbid(), archivos_considerados);
 
-        } else if (tipousuario.equals("decanato")) {
-            
-            String id_coordinacion = (String) session.getAttribute("coordinacion");
+            /* Se calcula la cantidad de aplazados y la cantidad de aprobados */
+            int total = evaluacion.getTotal_estudiantes();
+            int aplazados = evaluacion.getNota1() + evaluacion.getNota2();
+            int aprobados = evaluacion.getNota3() + evaluacion.getNota4()
+                    + evaluacion.getNota5();
 
-            evaluaciones_enviadas =
-                    DBMS.getInstance().listarEvaluacionesEnviadasCoordinacion(id_coordinacion, ano, trimestre);
+            /* Se obtienen los porcentajes de cada rubro y se transforman a 
+             * dos decimales */
+            String porcentaje1 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota1()));
+            String porcentaje2 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota2()));
+            String porcentaje3 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota3()));
+            String porcentaje4 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota4()));
+            String porcentaje5 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota5()));
+            String porcentajeR = String.format("%.2f", calcularPorcentaje(total, evaluacion.getRetirados()));
+
+            String porcentajeApr = String.format("%.2f", calcularPorcentaje(total, aprobados));
+            String porcentajeApl = String.format("%.2f", calcularPorcentaje(total, aplazados));
+
+            /* Si el usuario que accede a esta funcionalidad es el/la 
+             * coordinador/coordinadora */
+            if (tipousuario.equals("coordinacion")) {
+
+                /* Si existe una informacion previa se envia a la vista, sino, se crea
+                 * una instancia vacia de la informacion */
+                InformacionProfesorCoord informacion =
+                        DBMS.getInstance().
+                        listarInformacionProfesorCoordinacion(id, profesor.getUsbid());
+
+                session.setAttribute("informacion", informacion);
+
+                /* Se listan las observaciones de la evaluacion previamente 
+                 * realizada por la coordinacion */
+                rendimientoProf evaluado =
+                        DBMS.getInstance().
+                        listarEvaluacionesEnviadasMateria(id, ano, trimestre);
+                request.setAttribute("evaluado_coordinacion", evaluado);
+
+                /* Si el usuario que accede a esta funcionalidad es
+                 * jefe de departamento */
+            } else if (tipousuario.equals("departamento")) {
+
+                /* Se consultan los resultados de las evaluaciones por parte de 
+                 * las coordinaciones */
+                ArrayList<rendimientoProf> evaluacion_coordinaciones =
+                        DBMS.getInstance().obtenerEvaluacionesEnviadasCoordinaciones(id,
+                        profesor.getUsbid(), ano, trimestre);
+
+                session.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
+
+                /* Si el usuario que accede a esta funcionalidad decano */
+            } else if (tipousuario.equals("decanato")) {
+
+                /* Se obtiene la coordinacion */
+                String id_coordinacion = (String) session.getAttribute("coordinacion");
+
+                /* Si existe una informacion previa se envia a la vista, sino, se crea
+                 * una instancia vacia de la informacion */
+                InformacionProfesorCoord informacion =
+                        DBMS.getInstance().
+                        listarInformacionProfesorCoordinacion(id_coordinacion,
+                        rendimiento.getUsbid_profesor());
+
+                session.setAttribute("informacion", informacion);
+
+                /* Se obtienen los datos de la evaluacion que realizo la
+                 * coordinacion */
+                rendimientoProf evaluado =
+                        DBMS.getInstance().listarEvaluacionesEnviadasCoordinacion(
+                        id_coordinacion, ano, trimestre, rendimiento.getUsbid_profesor());
+
+                request.setAttribute("evaluado_coordinacion", evaluado);
+            }
+
+            /* Se envian a la vista los atributos correspondiente */
+            request.setAttribute("listar_archivos", SUCCESS);
+            request.setAttribute("archivos", archivos);
+            session.setAttribute("profesor", profesor);
+            session.setAttribute("evaluacion", evaluacion);
+            session.setAttribute("porcentaje1", porcentaje1);
+            session.setAttribute("porcentaje2", porcentaje2);
+            session.setAttribute("porcentaje3", porcentaje3);
+            session.setAttribute("porcentaje4", porcentaje4);
+            session.setAttribute("porcentaje5", porcentaje5);
+            session.setAttribute("retirados", porcentajeR);
+            session.setAttribute("aplazados", porcentajeApl);
+            session.setAttribute("aprobados", porcentajeApr);
         }
 
-        /* En caso en el que no existan evaluaciones enviadas */
-        if (evaluaciones_enviadas.isEmpty()) {
-            request.setAttribute("vacio", SUCCESS);
-        }
-
-        /* Se envian los atributos a la vista */
-        session.setAttribute("ano", ano);
-        session.setAttribute("trimestre", trimestre);
-        request.setAttribute("evaluaciones_enviadas", evaluaciones_enviadas);
         return mapping.findForward(SUCCESS);
+    }
+
+    /**
+     * Calculo de porcentaje.
+     *
+     * @param total total de los estudiantes
+     * @param parte parte de los estudiantes
+     * @return entero con el valor del porcentaje
+     */
+    public Float calcularPorcentaje(int total, int parte) {
+        Float resultado = (float) (parte * 100) / total;
+        return resultado;
+    }
+
+    /**
+     * Obtener archivos
+     *
+     * @param ano del cual se deben revisar los archivos
+     * @param mes en el cual se deben revisar loa archivos
+     * @param opcion 1 para pendiente.
+     * @return Archivo [] listado de archivos subidos por el profesor.
+     */
+    public Archivo[] obtenerArchivosConsiderados(int ano, String mes, int opcion) {
+
+        int int_fecha_ano;
+        int fecha_mes = -1;
+
+        /* Se obtiene la fecha */
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+
+        /* Se extrae el ano y el trimestre actual */
+        String fecha = dateFormat.format(date).toString();
+        String fecha_ano = fecha.substring(0, 4);
+
+
+        /* En el caso en que la evaluación todavía no se haya realizado
+         * (tenga el status "pendiente") */
+        if (opcion == 1) {
+            /* Se transforman a enteros para ser procesados mas facilmente. */
+            int_fecha_ano = Integer.parseInt(fecha_ano);
+            fecha_mes = Integer.parseInt(fecha.substring(5, 7));
+
+            /* En el caso en que la evaluación ya se haya realizado */
+        } else {
+            int_fecha_ano = ano;
+
+            if (mes.equals("EM")) {
+                fecha_mes = 1;
+            } else if (mes.equals("AJ")) {
+                fecha_mes = 5;
+            } else if (mes.equals("SD")) {
+                fecha_mes = 10;
+            } else if (mes.equals("V")) {
+                fecha_mes = 8;
+            }
+        }
+
+        /* Se inicializan archivos (los que se van a considerar) */
+        Archivo a_1 = new Archivo();
+        Archivo a_2 = new Archivo();
+        Archivo a_3 = new Archivo();
+        Archivo a_4 = new Archivo();
+
+        /* Según el mes en que se esté realizando la evaluacion se revisarán 
+         * los archivos de profesor agregados por el ano y el trimestre */
+        if (1 <= fecha_mes && fecha_mes <= 3) {
+            /* El trimestre es ENERO-MARZO */
+            a_1.setAno(int_fecha_ano);
+            a_1.setTrimestre("EM");
+            a_2.setAno(int_fecha_ano - 1);
+            a_2.setTrimestre("SD");
+            a_3.setAno(int_fecha_ano - 1);
+            a_3.setTrimestre("V");
+            a_4.setAno(int_fecha_ano - 1);
+            a_4.setTrimestre("AJ");
+
+        } else if (4 <= fecha_mes && fecha_mes <= 7) {
+            /* El trimestre es ABRIL-JULIO */
+            a_1.setAno(int_fecha_ano);
+            a_1.setTrimestre("AJ");
+            a_2.setAno(int_fecha_ano);
+            a_2.setTrimestre("EM");
+            a_3.setAno(int_fecha_ano - 1);
+            a_3.setTrimestre("SD");
+            a_4.setAno(int_fecha_ano - 1);
+            a_4.setTrimestre("V");
+
+        } else if (9 <= fecha_mes && fecha_mes <= 12) {
+            /* El trimestre es SEPTIEMBRE-DICIEMBRE */
+            a_1.setAno(int_fecha_ano);
+            a_1.setTrimestre("SD");
+            a_2.setAno(int_fecha_ano);
+            a_2.setTrimestre("V");
+            a_3.setAno(int_fecha_ano);
+            a_3.setTrimestre("AJ");
+            a_4.setAno(int_fecha_ano);
+            a_4.setTrimestre("EM");
+
+        } else if (fecha_mes == 8) {
+            /* Período INTENSIVO */
+            a_1.setAno(int_fecha_ano);
+            a_1.setTrimestre("V");
+            a_2.setAno(int_fecha_ano);
+            a_2.setTrimestre("AJ");
+            a_3.setAno(int_fecha_ano);
+            a_3.setTrimestre("EM");
+            a_4.setAno(int_fecha_ano - 1);
+            a_4.setTrimestre("SD");
+        }
+
+        /* Se agregan los archivos a un arreglo para ser procesados 
+         * posteriormente */
+        Archivo[] archivos_considerados = {a_1, a_2, a_3, a_4};
+        return archivos_considerados;
     }
 }

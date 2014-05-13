@@ -23,7 +23,8 @@
                     <bean:write name="coordinacion" property="codigo"/>
                 </td>
                 <td>      
-                    <html:form action="/listarEvaluacionesPendientes" style="margin: 0px;">
+                    <%--                    <html:form action="/listarEvaluacionesPendientes" style="margin: 0px;"> --%>
+                    <html:form action="/listarEvaluacionesProfesor" style="margin: 0px;">
                         <logic:notEqual name="coordinacion" property="evaluaciones"
                                         value="0">
                             <html:hidden name="Coordinacion" property="codigo"

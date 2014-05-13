@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Session;
 
 import Clases.*;
@@ -9,10 +5,10 @@ import DBMS.DBMS;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMessage;
 
 /**
@@ -21,7 +17,6 @@ import org.apache.struts.action.ActionMessage;
  */
 public class LoginAction extends org.apache.struts.action.Action {
 
-    /* forward name="success" path="" */
     private static final String FAILURE = "failure";
     private static final String PROFESOR = "profesor";
     private static final String ADMINISTRADOR = "administrador";
@@ -91,7 +86,7 @@ public class LoginAction extends org.apache.struts.action.Action {
                 } else if (tmp.getTipousuario().equals("decanato")) {
                     Decanato decanato = new Decanato();
                     decanato.setCodigo(tmp.getUsbid());
-                    int evaluaciones_pendientes = DBMS.getInstance().contarSolicitudesPendientesDecanato(tmp.getUsbid());
+                    int evaluaciones_pendientes = DBMS.getInstance().contarEvaluacionesPendientesDecanato(tmp.getUsbid());
                     if (evaluaciones_pendientes != 0) {
                         request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
                     }

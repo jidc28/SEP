@@ -33,12 +33,14 @@
                 por el departamento
             </a>
         </li>
-        <li>
-            <a href="#profesor" data-toggle="tab" style="font-size: 12px; margin: 0px;">
-                Información proporcionada<br>
-                por el profesor
-            </a>
-        </li>
+        <logic:present name="listar_archivos">
+            <li>
+                <a href="#profesor" data-toggle="tab" style="font-size: 12px; margin: 0px;">
+                    Información proporcionada<br>
+                    por el profesor
+                </a>
+            </li>
+        </logic:present>
         <logic:present name="evaluar_coordinacion">
             <li>
                 <a href="#coordinacion" data-toggle="tab" style="font-size: 12px; margin: 0px;">
@@ -77,75 +79,77 @@
 
 <div class="tab-content">
     <div class="tab-pane" id="profesor">
-        <logic:present name="evaluar">
-            <logic:empty name="archivos">
-                <div class="alert alert-danger alert-dismissable" 
-                     id="alert-coord" style="text-align: left; margin-top: 30px;">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                        &times;
-                    </button>
-                    <p style="font-weight: normal;">
-                        <strong>Atención:</strong> <br> 
-                        El profesor no ha subido ningún archivo. Presione <em>
-                            Enviar notificación </em> si desea notificarle que debe 
-                        cargar el material realizado al <em>Sistema de Evaluación
-                            de Profesores</em>
-                    </p>
-                    <button class="btn btn-danger"style="margin-top: 5px;">
-                        Enviar notificación
-                    </button>
+        <logic:present name="listar_archivos">
+            <logic:present name="evaluar">
+                <logic:empty name="archivos">
+                    <div class="alert alert-danger alert-dismissable" 
+                         id="alert-coord" style="text-align: left; margin-top: 30px;">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                            &times;
+                        </button>
+                        <p style="font-weight: normal;">
+                            <strong>Atención:</strong> <br> 
+                            El profesor no ha subido ningún archivo. Presione <em>
+                                Enviar notificación </em> si desea notificarle que debe 
+                            cargar el material realizado al <em>Sistema de Evaluación
+                                de Profesores</em>
+                        </p>
+                        <button class="btn btn-danger"style="margin-top: 5px;">
+                            Enviar notificación
+                        </button>
+                    </div>
+                </logic:empty>
+            </logic:present>
+            <logic:notPresent name="evaluar">
+                <logic:empty name="archivos">
+                    <div class="alert alert-danger alert-dismissable" 
+                         id="alert-coord" style="text-align: left; margin-top: 30px;">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                            &times;
+                        </button>
+                        <p style="font-weight: normal;">
+                            El profesor no subió ningún tipo de material para la 
+                            evaluación.
+                        </p>
+                    </div>
+                </logic:empty>
+            </logic:notPresent>
+            <logic:notEmpty name="archivos">
+                <div id="tabla" class="table-responsive" style="width: 85%;">
+                    <table class="table table-striped" style=" margin-top: 40px;">
+                        <tbody>
+                            <logic:iterate name="archivos" id="archivo">
+                                <tr>
+                                    <td style="font-size: 14px; font-weight: bold;">
+                                        <span class="glyphicon glyphicon-file"></span>
+                                        <bean:write name="archivo" property="nombre"/>
+                                        <br>
+                                        <blockquote style="margin: 0px;">
+                                            <p style="font-size: 11px; color: gray;">
+                                                <bean:write name="archivo" property="descripcion"/>
+                                            </p>
+                                        </blockquote>
+                                        <div style="text-align: right;">
+                                            <html:form  action="/descargarDocumentoSeleccionado" 
+                                                        style="margin:0px;">
+                                                <html:hidden name="archivo" property="nombre"/>
+                                                <html:hidden name="archivo" property="usbidProfesor"/>
+                                                <html:hidden name="archivo" property="trimestre"/>
+                                                <html:hidden name="archivo" property="ano"/>
+                                                <html:submit styleClass="btn btn-info"
+                                                             style="padding-top: 4px; padding-bottom: 3px;">
+                                                    Descargar
+                                                </html:submit>
+                                            </html:form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </logic:iterate>
+                        </tbody>
+                    </table>
                 </div>
-            </logic:empty>
+            </logic:notEmpty>  
         </logic:present>
-        <logic:notPresent name="evaluar">
-            <logic:empty name="archivos">
-                <div class="alert alert-danger alert-dismissable" 
-                     id="alert-coord" style="text-align: left; margin-top: 30px;">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                        &times;
-                    </button>
-                    <p style="font-weight: normal;">
-                        El profesor no subió ningún tipo de material para la 
-                        evaluación.
-                    </p>
-                </div>
-            </logic:empty>
-        </logic:notPresent>
-        <logic:notEmpty name="archivos">
-            <div id="tabla" class="table-responsive" style="width: 85%;">
-                <table class="table table-striped" style=" margin-top: 40px;">
-                    <tbody>
-                        <logic:iterate name="archivos" id="archivo">
-                            <tr>
-                                <td style="font-size: 14px; font-weight: bold;">
-                                    <span class="glyphicon glyphicon-file"></span>
-                                    <bean:write name="archivo" property="nombre"/>
-                                    <br>
-                                    <blockquote style="margin: 0px;">
-                                        <p style="font-size: 11px; color: gray;">
-                                            <bean:write name="archivo" property="descripcion"/>
-                                        </p>
-                                    </blockquote>
-                                    <div style="text-align: right;">
-                                        <html:form  action="/descargarDocumentoSeleccionado" 
-                                                    style="margin:0px;">
-                                            <html:hidden name="archivo" property="nombre"/>
-                                            <html:hidden name="archivo" property="usbidProfesor"/>
-                                            <html:hidden name="archivo" property="trimestre"/>
-                                            <html:hidden name="archivo" property="ano"/>
-                                            <html:submit styleClass="btn btn-info"
-                                                         style="padding-top: 4px; padding-bottom: 3px;">
-                                                Descargar
-                                            </html:submit>
-                                        </html:form>
-                                    </div>
-                                </td>
-                            </tr>
-                        </logic:iterate>
-                    </tbody>
-                </table>
-            </div>
-        </logic:notEmpty>            
     </div>
 
     <logic:present name="evaluar_coordinacion">    
@@ -349,18 +353,6 @@
                     <tr>
                         <td style="width: 70%; font-size: 14px; height: 40px;">
                             <strong>
-                                <logic:equal name="evaluado_coordinacion" property="recomendado" value="no">
-                                    El profesor no fue recomendado.
-                                </logic:equal>
-                                <logic:equal name="evaluado_coordinacion" property="recomendado" value="si">
-                                    El profesor fue recomendado.
-                                </logic:equal>
-                            </strong>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 70%; font-size: 14px; height: 40px;">
-                            <strong>
                                 Observaciones
                             </strong>
                         </td>
@@ -404,11 +396,6 @@
                                                  value="no">
                                         no recomendó al profesor
                                     </logic:equal>
-                                    en la materia:
-                                    <strong>
-                                        <bean:write name="evaluacion_coordinacion" 
-                                                    property="codigo_materia"/>
-                                    </strong>
                                 </p>
                             </td>
                         </tr>
@@ -537,6 +524,41 @@
     </div>
 </div>
 
+<logic:present name="comentarios">
+    <div class="recomendar">
+        <html:form action="/comentar">
+            <html:hidden name="evaluacion" property="usbid_profesor" value="${profesor.getUsbid()}"/>
+            <html:hidden name="evaluacion" property="codigo_materia"/>
+            <table class="table" style="border-top: none; margin: 0px;">
+                <tbody>
+                    <tr>
+                        <td style="font-size: 14px; font-weight: bold;">
+                            COMENTARIOS:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border: none;">
+                            <html:textarea name="evaluacion" property="observaciones_c"
+                                           styleClass="form-control" rows="5">
+                            </html:textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: none;">
+                <center>
+                    <html:submit
+                                 styleClass="btn btn-success">
+                        Guardar
+                    </html:submit>
+                </center>
+                </td>
+                </tr>
+                </tbody>
+            </table>
+        </html:form>
+    </div>
+</logic:present>
+
 <logic:present name="evaluar">
     <div class="recomendar">
         <html:form action="/evaluar">
@@ -560,15 +582,18 @@
                             No recomendado
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="2" style="border: none;">
-                            <html:textarea name="evaluacion" property="observaciones_c"
-                                           styleClass="form-control" rows="5">
-                            </html:textarea>
-                        </td>
+                <td style="font-size: 14px; font-weight: bold; border: none;">
+                    COMENTARIOS:
                     </tr>
-                    <tr>
-                        <td style="border: none;">
+                <tr>
+                    <td colspan="2" style="border: none;">
+                        <html:textarea name="evaluacion" property="observaciones_c"
+                                       styleClass="form-control" rows="5">
+                        </html:textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: none;">
                 <center>
                     <html:submit onclick="guardar_informacion()" 
                                  styleClass="btn btn-success">
@@ -587,16 +612,9 @@
     <html:form action="/revisarEvaluacion">
         <html:hidden name="evaluacion" property="usbid_profesor" value="${profesor.getUsbid()}"/>
         <html:hidden name="evaluacion" property="codigo_materia"/>
-        <html:submit styleClass="btn btn-success">
+        <html:submit styleClass="btn btn-success"
+                     onclick="javascript: return confirm('¿Está seguro de haber revisado los datos?')">
             Revisado
         </html:submit>
     </html:form>
 </logic:present>
-
-<div class="jumbotron" 
-     style="width: 200px; height: 80px; padding: 10px; padding-bottom: 0px; padding-top: 13px;">
-    <img src="imagenes/pdf.png" style="width: 60px; height: 60px;">
-    <button class="btn btn-danger">
-        Descargar
-    </button>
-</div>
