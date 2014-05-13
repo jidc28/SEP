@@ -28,7 +28,8 @@ public class Comentar extends Action {
         String tipousuario = usuario.getTipousuario();
 
         Profesor profesor = (Profesor) session.getAttribute("profesor");
-
+        request.setAttribute("profesor", profesor);
+        
         rendimientoProf rendimiento = (rendimientoProf) form;
 
         ArrayList<Profesor> profesores = null;

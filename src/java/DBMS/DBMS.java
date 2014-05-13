@@ -1273,27 +1273,25 @@ public class DBMS {
         String codigoMateria;
         String id_coordinacion = coordinacion.getCodigo();
         try {
-            ps = conexion.prepareStatement("SELECT DISTINCT codigo_materia, count(codigo_materia) "
-                    + "FROM evaluar as e "
+            ps = conexion.prepareStatement("SELECT DISTINCT codigo_materia, nombre "
+                    + "FROM evaluar as e, materia as m "
                     + "WHERE e.codigo_coordinacion = ? "
                     + "AND e.usbid_profesor = ? "
+                    + "AND m.codigo = e.codigo_materia "
                     + "AND e.usbid_profesor NOT IN ("
                     + "SELECT ec.usbid_profesor "
                     + "FROM evaluacion as ec "
                     + "WHERE revisado_decanato = 'si' "
-                    + ") "
-                    + "GROUP BY codigo_materia;");
+                    + ");");
             ps.setString(1, id_coordinacion);
             ps.setString(2, usbid_profesor);
-
-            System.out.println(ps.toString());
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 dicta d = new dicta();
-                d.setNumeroMateria(rs.getString("count"));
                 codigoMateria = rs.getString("codigo_materia");
                 d.setCodigoMateria(codigoMateria);
+                d.setOpcion(rs.getString("nombre"));
 
                 ps2 = conexion.prepareStatement("SELECT codigo_materia, usbid, "
                         + "nombre, apellido "
@@ -1347,7 +1345,7 @@ public class DBMS {
             ps.setString(3, id_coordinacion);
 
             System.out.println(ps.toString());
-            
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 dicta d = new dicta();
@@ -3643,9 +3641,10 @@ public class DBMS {
         String usbid_profesor;
         try {
             ps = conexion.prepareStatement("SELECT DISTINCT e.codigo_materia, "
-                    + "e.usbid_profesor "
-                    + "FROM evaluar as e "
+                    + "e.usbid_profesor, m.nombre "
+                    + "FROM evaluar as e, materia as m "
                     + "WHERE e.codigo_departamento = ? "
+                    + "AND m.codigo = e.codigo_materia "
                     + "AND e.usbid_profesor NOT IN ("
                     + "SELECT ec.usbid_profesor "
                     + "FROM evaluacion as ec "
@@ -3666,11 +3665,10 @@ public class DBMS {
                 int pendientes = contarEvaluacionesPendientesDepartamento(id_departamento, usbid_profesor);
                 int total = contarEvaluacionesDepartamento(id_departamento, usbid_profesor);
 
-//                if (pendientes == total) {
-
                 dicta d = new dicta();
                 codigo_materia = rs.getString("codigo_materia");
                 d.setCodigoMateria(codigo_materia);
+                d.setOpcion(rs.getString("nombre"));
 
                 ps2 = conexion.prepareStatement("SELECT DISTINCT codigo_materia, "
                         + "usbid, nombre, apellido "
@@ -3694,7 +3692,6 @@ public class DBMS {
                 }
                 d.setPrimerProfesor();
                 dicta_materia.add(d);
-//                }
             }
             return dicta_materia;
 
