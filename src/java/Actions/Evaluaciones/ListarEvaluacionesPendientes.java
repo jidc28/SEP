@@ -41,21 +41,27 @@ public class ListarEvaluacionesPendientes extends org.apache.struts.action.Actio
 
         ArrayList<dicta> evaluaciones_pendientes = null;
 
+        /* Se obtiene el usbid del profesor del form */
+        String id_profesor = ((Coordinacion) form).getCodigo();
+        
+        /* Se obtienen los datos del profesor. */
+        Profesor profesor = DBMS.getInstance().obtenerInfoProfesor(id_profesor);
+        request.setAttribute("profesor", profesor);
+
         /* Dependiendo del tipo de usuario se realizan distintas operaciones */
         if (tipousuario.equals("coordinacion")) {
             /* Se listan las evaluaciones pendientes por materia */
-            evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(id, "no");
+            evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(id, id_profesor);
         } else if (tipousuario.equals("departamento")) {
             /* Se listan las evaluaciones pendientes por profesor */
-            String id_profesor = ((Coordinacion) form).getCodigo();
-            evaluaciones_pendientes = DBMS.getInstance().listarEvaluadosPorCoordinacion(id,id_profesor);
+            evaluaciones_pendientes = DBMS.getInstance().listarEvaluadosPorCoordinacion(id, id_profesor);
             session.setAttribute("id_profesor", id_profesor);
         } else if (tipousuario.equals("decanato")) {
             /* Se listan las evaluaciones pendientes por coordinacion */
             Coordinacion coordinacion = new Coordinacion();
             coordinacion.setCodigo((String) session.getAttribute("coordinacion"));
-            String usbid_profesor = ((Coordinacion) form).getCodigo();
-            evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(coordinacion,usbid_profesor);
+            
+            evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(coordinacion, id_profesor);
             request.setAttribute("solo_lectura", SUCCESS);
         }
 

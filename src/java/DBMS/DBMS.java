@@ -1188,17 +1188,17 @@ public class DBMS {
 
     public int contarEvaluacionesPendientesDepartamento(String id_departamento, String profesor) {
 
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         try {
 
             if (profesor == null) {
                 ps = conexion.prepareStatement("SELECT usbid_profesor, count(usbid_profesor) "
                         + "FROM evaluar e "
                         + "WHERE e.codigo_departamento = ? "
-                        + "AND e.usbid_profesor NOT IN ("
+                        + "AND e.usbid_profesor IN ("
                         + "SELECT ec.usbid_profesor "
                         + "FROM evaluacion as ec "
-                        + "WHERE ec.revisado_departamento = 'si'"
+                        + "WHERE ec.revisado_departamento <> 'si'"
                         + ")"
                         + "GROUP BY e.usbid_profesor;");
                 ps.setString(1, id_departamento);
@@ -1324,33 +1324,36 @@ public class DBMS {
         return null;
     }
 
-    public ArrayList<dicta> listarEvaluacionesPendientes(String id_coordinacion, String evaluado) {
+    public ArrayList<dicta> listarEvaluacionesPendientes(String id_coordinacion, String usbid_profesor) {
 
         PreparedStatement ps, ps2;
         ArrayList<dicta> dicta_materia = new ArrayList(0);
         String codigoMateria;
         try {
-            ps = conexion.prepareStatement("SELECT DISTINCT codigo_materia, count(codigo_materia) "
-                    + "FROM evaluar as e "
+            ps = conexion.prepareStatement("SELECT DISTINCT codigo_materia, nombre "
+                    + "FROM evaluar as e, materia as m "
                     + "WHERE e.codigo_coordinacion = ? "
-                    + "AND e.comentado_coordinacion = ? "
+                    + "AND e.comentado_coordinacion = 'no' "
+                    + "AND codigo_materia = codigo "
+                    + "AND e.usbid_profesor = ? "
                     + "AND NOT EXISTS ("
                     + "SELECT * "
                     + "FROM evaluacion "
                     + "WHERE codigo_coordinacion = ? "
                     + "AND usbid_profesor = e.usbid_profesor"
-                    + ") "
-                    + "GROUP BY codigo_materia;");
+                    + ");");
             ps.setString(1, id_coordinacion);
-            ps.setString(2, evaluado);
+            ps.setString(2, usbid_profesor);
             ps.setString(3, id_coordinacion);
 
+            System.out.println(ps.toString());
+            
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 dicta d = new dicta();
-                d.setNumeroMateria(rs.getString("count"));
                 codigoMateria = rs.getString("codigo_materia");
                 d.setCodigoMateria(codigoMateria);
+                d.setOpcion(rs.getString("nombre"));
 
                 ps2 = conexion.prepareStatement("SELECT codigo_materia, usbid, "
                         + "nombre, apellido "
@@ -1358,10 +1361,9 @@ public class DBMS {
                         + "WHERE codigo_coordinacion = ? "
                         + "AND usbid = usbid_profesor "
                         + "AND codigo_materia = ? "
-                        + "AND comentado_coordinacion = ?;");
+                        + "AND comentado_coordinacion = 'no';");
                 ps2.setString(1, id_coordinacion);
                 ps2.setString(2, codigoMateria);
-                ps2.setString(3, evaluado);
 
                 ResultSet rs2 = ps2.executeQuery();
 
@@ -1757,11 +1759,11 @@ public class DBMS {
                     + "FROM evaluar as ev, se_adscribe as se "
                     + "WHERE ev.codigo_coordinacion = se.codigo_coordinacion "
                     + "AND se.codigo_decanato = ? "
-                    + "AND ev.usbid_profesor NOT IN ("
+                    + "AND ev.usbid_profesor IN ("
                     + "SELECT ec.usbid_profesor "
                     + "FROM evaluacion as ec "
                     + "WHERE ec.usbid_profesor = ev.usbid_profesor "
-                    + "AND revisado_decanato = 'si'"
+                    + "AND revisado_decanato <> 'si'"
                     + ");");
             ps.setString(1, id_decanato);
 
