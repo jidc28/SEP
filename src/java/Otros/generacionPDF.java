@@ -35,13 +35,33 @@ import com.itextpdf.text.html.WebColors;
  * Gestión de Intercambio de la USB.
  */
 public class generacionPDF {
+    
+    public static Float calcularPorcentaje(int total, int parte) {
+        Float resultado = (float) (parte * 100) / total;
+        return resultado;
+    }
 
     public static Boolean generarRendimiento(String path, String usbid, String filepath) throws BadElementException, DocumentException {
 
         Profesor p = DBMS.getInstance().obtenerInfoProfesor(usbid);
         /* Se obtiene el rendimiento del profesor determinado asociado con
          * la materia que dicta el prof */
-        rendimientoProf evaluacion = DBMS.getInstance().obtenerEvaluacion(p.getUsbid());
+        rendimientoProf evaluacion = DBMS.getInstance().obtenerEvaluacionPDF(p.getUsbid());
+        InformacionProfesorCoord info = DBMS.getInstance().resumenInformacionProfesor(p.getUsbid());
+        
+        int total = evaluacion.getTotal_estudiantes();
+        String porcentaje1 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota1()));
+        String porcentaje2 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota2()));
+        String porcentaje3 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota3()));
+        String porcentaje4 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota4()));
+        String porcentaje5 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota5()));
+        String porcentajeR = String.format("%.2f", calcularPorcentaje(total, evaluacion.getRetirados()));
+
+        int aplazados = evaluacion.getNota1() + evaluacion.getNota2();
+        int aprobados = evaluacion.getNota3() + evaluacion.getNota4()
+                    + evaluacion.getNota5();
+        String porcentajeApr = String.format("%.2f", calcularPorcentaje(total, aprobados));
+        String porcentajeApl = String.format("%.2f", calcularPorcentaje(total, aplazados));
 
         Document document = new Document(PageSize.LETTER); // Pdf de tamano carta
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -204,60 +224,6 @@ public class generacionPDF {
             ct.setSimpleColumn(campo, 350, 550, 600, 560, 10, Element.ALIGN_LEFT);
             ct.go();
 
-            // Tlf. Habitación
-//            campo = new Phrase("  - Tlf. Habitación:  ", fontCampo2);
-//            ct.setSimpleColumn(campo, 320, 530, 600, 540, 10, Element.ALIGN_LEFT);
-//            campo = new Phrase("TELEFONO", fontCampo);
-//            ct.setSimpleColumn(campo, 320, 530, 600, 540, 10, Element.ALIGN_LEFT);
-//            ct.go();
-
-            // Domicilio
-//            campo = new Phrase("  - Domicilio Actual  ", fontCampo2);
-//            ct.setSimpleColumn(campo, 70, 510, 300, 520, 10, Element.ALIGN_LEFT);
-//            ct.go();
-
-//            // Calle
-//            campo = new Phrase("  * Calle:  ", fontCampo2);
-//            ct.setSimpleColumn(campo, 90, 470, 300, 480, 10, Element.ALIGN_LEFT);
-//            campo = new Phrase("CALLE", fontCampo);
-//            ct.setSimpleColumn(campo, 90, 470, 300, 480, 10, Element.ALIGN_LEFT);
-//            ct.go();
-//
-//            // Ciudad
-//            campo = new Phrase("  * Ciudad:  ", fontCampo2);
-//            ct.setSimpleColumn(campo, 90, 450, 300, 460, 10, Element.ALIGN_LEFT);
-//            campo = new Phrase("CIUDAD COLUMNA 2", fontCampo);
-//            ct.setSimpleColumn(campo, 90, 450, 300, 460, 10, Element.ALIGN_LEFT);
-//            ct.go();
-//
-//            // Codigo Postal
-//            campo = new Phrase("  * Código Postal:  ", fontCampo2);
-//            ct.setSimpleColumn(campo, 90, 430, 300, 440, 10, Element.ALIGN_LEFT);
-//            campo = new Phrase("CODIGO COLUMNA 2", fontCampo);
-//            ct.setSimpleColumn(campo, 90, 430, 300, 440, 10, Element.ALIGN_LEFT);
-//            ct.go();
-//
-//            // Edificio/NombreCasa
-//            campo = new Phrase("  * Nombre (Edificio|Casa): ", fontCampo2);
-//            ct.setSimpleColumn(campo, 320, 490, 600, 500, 10, Element.ALIGN_LEFT);
-//            campo = new Phrase("NOMBRE EDIF", fontCampo);
-//            ct.setSimpleColumn(campo, 320, 490, 600, 500, 10, Element.ALIGN_LEFT);
-//            ct.go();
-//
-//            // Apartamento/Nro.Casa
-//            campo = new Phrase("  * Apartamento/Nro.Casa:  ", fontCampo2);
-//            ct.setSimpleColumn(campo, 320, 470, 600, 480, 10, Element.ALIGN_LEFT);
-//            campo = new Phrase("APARTAMENTO", fontCampo);
-//            ct.setSimpleColumn(campo, 320, 470, 600, 480, 10, Element.ALIGN_LEFT);
-//            ct.go();
-//
-//            // Estado
-//            campo = new Phrase("  * Estado:  ", fontCampo2);
-//            ct.setSimpleColumn(campo, 320, 450, 600, 460, 10, Element.ALIGN_LEFT);
-//            campo = new Phrase("ESTADO", fontCampo);
-//            ct.setSimpleColumn(campo, 320, 450, 600, 460, 10, Element.ALIGN_LEFT);
-//            ct.go();
-
             // Cuadro Contenedor
             canvas.saveState();
             //canvas.roundRectangle(x, y, w, h, r);
@@ -288,7 +254,11 @@ public class generacionPDF {
 //          ct.setSimpleColumn(titulo, llx, lly, urx, ury, leading, alignment);
             ct.setSimpleColumn(campo, 70, 470, 360, 480, 10, Element.ALIGN_LEFT);
             ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
+            if (info.getConsejoAsesor().equals("si")){
+                campo = new Phrase("Si", fontCampo);
+            } else {
+                campo = new Phrase("No", fontCampo);
+            }
             ct.setSimpleColumn(campo, 360, 470, 450, 480, 10, Element.ALIGN_LEFT);
             ct.go();
             
@@ -299,7 +269,7 @@ public class generacionPDF {
             campo = new Phrase("  o tesis doctorales tutoreados  ", fontCampo2);
             ct.setSimpleColumn(campo, 70, 440, 360, 450, 10, Element.ALIGN_LEFT);
             ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
+            campo = new Phrase((info.getTesisTutoria()+info.getPasantiaLargaTutor())+"", fontCampo);
             ct.setSimpleColumn(campo, 360, 440, 450, 450, 10, Element.ALIGN_LEFT);
             ct.go();
 
@@ -310,7 +280,7 @@ public class generacionPDF {
             campo = new Phrase("  o tesis doctorales evaluadas como jurado  ", fontCampo2);
             ct.setSimpleColumn(campo, 70, 410, 360, 420, 10, Element.ALIGN_LEFT);
             ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
+            campo = new Phrase((info.getTesisJurado()+info.getPasantiaLargaJurado())+"", fontCampo);
             ct.setSimpleColumn(campo, 360, 410, 450, 420, 10, Element.ALIGN_LEFT);
             ct.go();
 
@@ -318,15 +288,15 @@ public class generacionPDF {
             campo = new Phrase("  Numero de pasantias cortas tutoreadas ", fontCampo2);
             ct.setSimpleColumn(campo, 70, 390, 360, 400, 10, Element.ALIGN_LEFT);
             ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
+            campo = new Phrase(info.getPasantiaCorta()+"", fontCampo);
             ct.setSimpleColumn(campo, 360, 390, 450, 400, 10, Element.ALIGN_LEFT);
             ct.go();
 
-            // Pasantias cortas tutoreadas.
+            // Pasantias largas tutoreadas.
             campo = new Phrase("  Numero de pasantias largas e intermedias tutoreadas ", fontCampo2);
             ct.setSimpleColumn(campo, 70, 370, 360, 380, 10, Element.ALIGN_LEFT);
             ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
+            campo = new Phrase(info.getPasantiaLargaTutor()+"", fontCampo);
             ct.setSimpleColumn(campo, 360, 370, 450, 380, 10, Element.ALIGN_LEFT);
             ct.go();
             
@@ -411,7 +381,7 @@ public class generacionPDF {
             campo = new Phrase("  Total estudiantes  ", fontCampo2);
             ct.setSimpleColumn(campo, 70, 660, 360, 670, 10, Element.ALIGN_LEFT);
             ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
+            campo = new Phrase(total+"", fontCampo);
             ct.setSimpleColumn(campo, 360, 660, 450, 670, 10, Element.ALIGN_LEFT);
             ct.go();
 
@@ -419,7 +389,7 @@ public class generacionPDF {
             campo = new Phrase("  Nota promedio  ", fontCampo2);
             ct.setSimpleColumn(campo, 70, 640, 360, 650, 10, Element.ALIGN_LEFT);
             ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
+            campo = new Phrase(evaluacion.getNota_prom()+"", fontCampo);
             ct.setSimpleColumn(campo, 360, 640, 450, 650, 10, Element.ALIGN_LEFT);
             ct.go();
 
@@ -427,7 +397,7 @@ public class generacionPDF {
             campo = new Phrase("  Porcentaje aplazados  ", fontCampo2);
             ct.setSimpleColumn(campo, 70, 620, 360, 630, 10, Element.ALIGN_LEFT);
             ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
+            campo = new Phrase(porcentajeApl+"%", fontCampo);
             ct.setSimpleColumn(campo, 360, 620, 450, 630, 10, Element.ALIGN_LEFT);
             ct.go();
 
@@ -435,7 +405,7 @@ public class generacionPDF {
             campo = new Phrase("  Porcentaje aprobados  ", fontCampo2);
             ct.setSimpleColumn(campo, 70, 600, 360, 610, 10, Element.ALIGN_LEFT);
             ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
+            campo = new Phrase(porcentajeApr+"%", fontCampo);
             ct.setSimpleColumn(campo, 360, 600, 450, 610, 10, Element.ALIGN_LEFT);
             ct.go();
             
@@ -443,7 +413,7 @@ public class generacionPDF {
             campo = new Phrase("  Porcentaje retirados  ", fontCampo2);
             ct.setSimpleColumn(campo, 70, 580, 360, 590, 10, Element.ALIGN_LEFT);
             ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
+            campo = new Phrase(porcentajeR+"%", fontCampo);
             ct.setSimpleColumn(campo, 360, 580, 450, 590, 10, Element.ALIGN_LEFT);
             ct.go();
             
@@ -461,7 +431,7 @@ public class generacionPDF {
             campo = new Phrase("  Porcentaje de estudiantes con 1  ", fontCampo2);
             ct.setSimpleColumn(campo, 70, 520, 360, 530, 10, Element.ALIGN_LEFT);
             ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
+            campo = new Phrase(porcentaje1+"%", fontCampo);
             ct.setSimpleColumn(campo, 360, 520, 450, 530, 10, Element.ALIGN_LEFT);
             ct.go();
             
@@ -469,7 +439,7 @@ public class generacionPDF {
             campo = new Phrase("  Porcentaje de estudiantes con 2  ", fontCampo2);
             ct.setSimpleColumn(campo, 70, 500, 360, 510, 10, Element.ALIGN_LEFT);
             ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
+            campo = new Phrase(porcentaje2+"%", fontCampo);
             ct.setSimpleColumn(campo, 360, 500, 450, 510, 10, Element.ALIGN_LEFT);
             ct.go();
             
@@ -477,7 +447,7 @@ public class generacionPDF {
             campo = new Phrase("  Porcentaje de estudiantes con 3  ", fontCampo2);
             ct.setSimpleColumn(campo, 70, 480, 360, 490, 10, Element.ALIGN_LEFT);
             ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
+            campo = new Phrase(porcentaje3+"%", fontCampo);
             ct.setSimpleColumn(campo, 360, 480, 450, 490, 10, Element.ALIGN_LEFT);
             ct.go();
             
@@ -485,7 +455,7 @@ public class generacionPDF {
             campo = new Phrase("  Porcentaje de estudiantes con 4  ", fontCampo2);
             ct.setSimpleColumn(campo, 70, 460, 360, 470, 10, Element.ALIGN_LEFT);
             ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
+            campo = new Phrase(porcentaje4+"%", fontCampo);
             ct.setSimpleColumn(campo, 360, 460, 450, 470, 10, Element.ALIGN_LEFT);
             ct.go();
             
@@ -493,7 +463,7 @@ public class generacionPDF {
             campo = new Phrase("  Porcentaje de estudiantes con 5  ", fontCampo2);
             ct.setSimpleColumn(campo, 70, 440, 360, 450, 10, Element.ALIGN_LEFT);
             ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
+            campo = new Phrase(porcentaje5+"%", fontCampo);
             ct.setSimpleColumn(campo, 360, 440, 450, 450, 10, Element.ALIGN_LEFT);
             ct.go();
             
@@ -508,7 +478,7 @@ public class generacionPDF {
              * # Comentarios Coordinacion#
              * ###########################*/
             //GENERACION DINÁMICA DE RECUADROS E INFORMACIÓN
-            //LOREM IPSUM OCUPA 60 COORDS
+            //LOREM IPSUM OCUPA 60 CORDS
             String lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing "
                     + "elit. Donec suscipit aliquam accumsan. Mauris sit amet "
                     + "ligula felis. Vestibulum ante ipsum primis in faucibus "

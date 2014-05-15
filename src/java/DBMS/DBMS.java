@@ -2384,6 +2384,59 @@ public class DBMS {
         }
         return null;
     }
+    
+    public rendimientoProf obtenerEvaluacionPDF(String usbid_profesor) {
+        PreparedStatement ps;
+        rendimientoProf evaluacion = new rendimientoProf();
+        try {
+            ps = conexion.prepareStatement("SELECT total_estudiantes as t, "
+                    + "nota_prom as np, nota1 as n1, nota2 as n2, "
+                    + "nota3 as n3, nota4 as n4, nota5 as n5, "
+                    + "retirados as r, ano, trimestre "
+                    + "FROM rendimiento "
+                    + "WHERE usbid_profesor = ? "
+                    + "AND evaluado = 'si';");
+
+            ps.setString(1, usbid_profesor);
+
+            ResultSet rs = ps.executeQuery();
+
+            int n_1 = 0;
+            int n_2 = 0;
+            int n_3 = 0;
+            int n_4 = 0;
+            int n_5 = 0;
+            int n_retirados = 0;
+            int n_total = 0;
+
+            while (rs.next()) {
+                n_1 += rs.getInt("n1");
+                n_2 += rs.getInt("n2");
+                n_3 += rs.getInt("n3");
+                n_4 += rs.getInt("n4");
+                n_5 += rs.getInt("n5");
+                n_retirados += rs.getInt("r");
+                n_total += rs.getInt("t");
+
+                evaluacion.setNota_prom(rs.getFloat("np"));
+                evaluacion.setAno(rs.getInt("ano"));
+                evaluacion.setTrimestre(rs.getString("trimestre"));
+            }
+
+            evaluacion.setTotal_estudiantes(n_total);
+            evaluacion.setRetirados(n_retirados);
+            evaluacion.setNota1(n_1);
+            evaluacion.setNota2(n_2);
+            evaluacion.setNota3(n_3);
+            evaluacion.setNota4(n_4);
+            evaluacion.setNota5(n_5);
+
+            return evaluacion;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
     public rendimientoProf obtenerEvaluacion(String codigo_materia,
             String usbid_profesor, int ano, String trimestre) {
