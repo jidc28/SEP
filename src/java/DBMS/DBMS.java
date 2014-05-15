@@ -1344,8 +1344,6 @@ public class DBMS {
             ps.setString(2, usbid_profesor);
             ps.setString(3, id_coordinacion);
 
-            System.out.println(ps.toString());
-
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 dicta d = new dicta();
@@ -1482,8 +1480,6 @@ public class DBMS {
             ps.setInt(2, ano);
             ps.setString(3, trimestre);
 
-            System.out.println(ps.toString());
-
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -1529,8 +1525,6 @@ public class DBMS {
 
             ResultSet rs = ps.executeQuery();
 
-            System.out.println(ps.toString());
-
             while (rs.next()) {
                 rendimiento = new rendimientoProf();
                 rendimiento.setCodigo_materia(rs.getString("codigo"));
@@ -1565,8 +1559,6 @@ public class DBMS {
 
             ResultSet rs = ps.executeQuery();
 
-            System.out.println(ps.toString());
-
             while (rs.next()) {
                 rendimiento = new rendimientoProf();
                 rendimiento.setObservaciones_c(rs.getString("observaciones_coordinacion"));
@@ -1600,8 +1592,6 @@ public class DBMS {
             ps.setInt(2, ano);
             ps.setString(3, trimestre);
             ps.setString(4, usbid_profesor);
-
-            System.out.println(ps.toString());
 
             ResultSet rs = ps.executeQuery();
 
@@ -2418,6 +2408,44 @@ public class DBMS {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 evaluacion.setCodigo_materia(codigo_materia);
+                evaluacion.setTotal_estudiantes(rs.getInt("t"));
+                evaluacion.setNota_prom(rs.getFloat("np"));
+                evaluacion.setNota1(rs.getInt("n1"));
+                evaluacion.setNota2(rs.getInt("n2"));
+                evaluacion.setNota3(rs.getInt("n3"));
+                evaluacion.setNota4(rs.getInt("n4"));
+                evaluacion.setNota5(rs.getInt("n5"));
+                evaluacion.setRetirados(rs.getInt("r"));
+
+            }
+            return evaluacion;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public rendimientoProf obtenerEvaluacion(
+            String usbid_profesor, int ano, String trimestre) {
+        PreparedStatement ps;
+        rendimientoProf evaluacion = new rendimientoProf();
+        try {
+            ps = conexion.prepareStatement("SELECT sum(total_estudiantes) as t, "
+                    + "avg(nota_prom) as np, sum(nota1) as n1, sum(nota2) as n2, "
+                    + "sum(nota3) as n3, sum(nota4) as n4, sum(nota5) as n5, "
+                    + "sum(retirados) as r "
+                    + "FROM rendimiento "
+                    + "WHERE usbid_profesor = ? "
+                    + "AND ano = ? "
+                    + "AND trimestre = ?;");
+
+            ps.setString(1, usbid_profesor);
+            ps.setInt(2, ano);
+            ps.setString(3, trimestre);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
                 evaluacion.setTotal_estudiantes(rs.getInt("t"));
                 evaluacion.setNota_prom(rs.getFloat("np"));
                 evaluacion.setNota1(rs.getInt("n1"));
@@ -3482,6 +3510,49 @@ public class DBMS {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    public InformacionProfesorCoord resumenInformacionProfesor(
+            String usbid_profesor) {
+
+        PreparedStatement ps;
+        InformacionProfesorCoord informacion = new InformacionProfesorCoord();
+        try {
+            ps = conexion.prepareStatement("SELECT * "
+                    + "FROM informacion_profesor_coordinacion "
+                    + "WHERE usbid_profesor = ?;");
+            ps.setString(1, usbid_profesor);
+
+            ResultSet rs = ps.executeQuery();
+
+            int tt = 0, tj = 0, pc = 0, plt = 0, plj = 0;
+            String ca = "no";
+
+            while (rs.next()) {
+                informacion.setUsbidProfesor(usbid_profesor);
+                if (rs.getString("consejo_asesor").equals("si")) {
+                    ca = "si";
+                }
+                tt += rs.getInt("tesis_tutoria");
+                tj += rs.getInt("tesis_jurado");
+                pc += rs.getInt("pasantia_corta");
+                plt += rs.getInt("pasantia_larga_tutor");
+                plj += rs.getInt("pasantia_larga_jurado");
+            }
+
+            informacion.setTesisTutoria(tt);
+            informacion.setTesisJurado(tj);
+            informacion.setPasantiaCorta(pc);
+            informacion.setPasantiaLargaTutor(plt);
+            informacion.setPasantiaLargaJurado(plj);
+            informacion.setConsejoAsesor(ca);
+
+            return informacion;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return informacion;
     }
 
     public InformacionProfesorCoord listarInformacionProfesorCoordinacion(

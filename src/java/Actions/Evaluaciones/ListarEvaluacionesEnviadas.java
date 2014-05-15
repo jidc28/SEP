@@ -43,7 +43,7 @@ public class ListarEvaluacionesEnviadas extends Action {
 
             rendimientoProf rendimiento = (rendimientoProf) form;
             Archivo[] archivos_considerados;
-
+            
             String trimestre = rendimiento.getTrimestre();
             int ano = rendimiento.getAno();
             archivos_considerados = obtenerArchivosConsiderados(ano, trimestre, 2);
@@ -51,7 +51,8 @@ public class ListarEvaluacionesEnviadas extends Action {
             /* Se obtiene el rendimiento del profesor determinado asociado con
              * la materia que maneja la coordinación */
             rendimientoProf evaluacion =
-                    DBMS.getInstance().obtenerEvaluacion(rendimiento.getUsbid_profesor());
+                    DBMS.getInstance().obtenerEvaluacion(
+                    rendimiento.getUsbid_profesor(), ano, trimestre);
 
             /* Se obtiene toda la informacion del profesor */
             Profesor profesor =
@@ -67,6 +68,12 @@ public class ListarEvaluacionesEnviadas extends Action {
             int aplazados = evaluacion.getNota1() + evaluacion.getNota2();
             int aprobados = evaluacion.getNota3() + evaluacion.getNota4()
                     + evaluacion.getNota5();
+
+            int total_nota = (evaluacion.getNota1() * 1) + (evaluacion.getNota2() * 2)
+                    + (evaluacion.getNota3() * 3) + (evaluacion.getNota4() * 4)
+                    + (evaluacion.getNota5() * 5);
+            float promedio = (float) total_nota / (total - evaluacion.getRetirados());
+            evaluacion.setNota_prom(promedio);
 
             /* Se obtienen los porcentajes de cada rubro y se transforman a 
              * dos decimales */
