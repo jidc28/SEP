@@ -104,15 +104,16 @@ public class cargarDocumentos extends org.apache.struts.action.Action {
             request.setAttribute("sin_archivos", FAILURE);
             return mapping.findForward(FAILURE);
         }
-        
-        //podemos agregar condiciones de tamano..
-        
+                
         String filePath = 
                 getServlet().getServletContext().getRealPath("/") +
                 "Documentos/" + usuario + "/" + ano + "/"
                 + trimestre;
         String documentos = getServlet().getServletContext().getRealPath("/") +
                 "Documentos/";
+        
+        System.out.println(filePath+ " FILEPATH");
+        System.out.println(documentos+ " Documentos");
         
         folder = new File(documentos);
         if (!folder.exists()){
@@ -137,6 +138,14 @@ public class cargarDocumentos extends org.apache.struts.action.Action {
             String fileName = file.getFileName();
             //obtenemos el arreglo de bytes del archivo
             byte[] fileData = file.getFileData();
+            
+            cant = file.getFileSize();
+            
+            if (cant > 3145728) {
+                request.setAttribute("archivo_muy_pesado", FAILURE);
+                return mapping.findForward(FAILURE);
+            }
+            
             
             if (!file.getContentType().contains("application/pdf")){
                 request.setAttribute("archivo_invalido", FAILURE);

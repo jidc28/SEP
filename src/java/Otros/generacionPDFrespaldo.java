@@ -34,14 +34,11 @@ import com.itextpdf.text.html.WebColors;
  * Bolívar, quienes estuvieron involucrados en la implementación del Sistema de
  * Gestión de Intercambio de la USB.
  */
-public class generacionPDF {
+public class generacionPDFrespaldo {
 
     public static Boolean generarRendimiento(String path, String usbid, String filepath) throws BadElementException, DocumentException {
 
         Profesor p = DBMS.getInstance().obtenerInfoProfesor(usbid);
-        /* Se obtiene el rendimiento del profesor determinado asociado con
-         * la materia que dicta el prof */
-        rendimientoProf evaluacion = DBMS.getInstance().obtenerEvaluacion(p.getUsbid());
 
         Document document = new Document(PageSize.LETTER); // Pdf de tamano carta
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -165,7 +162,7 @@ public class generacionPDF {
 
             //USBID 
             campo = new Phrase("    USBID:  ", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 590, 560, 600, 10, Element.ALIGN_LEFT);
+            ct.setSimpleColumn(campo, 350, 590, 560, 600, 10, Element.ALIGN_LEFT);
             campo = new Phrase(p.getUsbid(), fontCampo);
             ct.setSimpleColumn(campo, 70, 590, 350, 600, 10, Element.ALIGN_LEFT);
             ct.go();
@@ -261,6 +258,7 @@ public class generacionPDF {
             // Cuadro Contenedor
             canvas.saveState();
             //canvas.roundRectangle(x, y, w, h, r);
+            //canvas.roundRectangle(70, 425, 455, 225, 6);
             canvas.roundRectangle(70, 515, 455, 135, 6);
             canvas.stroke();
             canvas.restoreState();
@@ -279,283 +277,167 @@ public class generacionPDF {
             canvas.restoreState();
 
             // Titulo del area.
-            titulo = new Phrase(" INFORMACIÓN PROPORCIONADA POR LAS COORDINACIONES ", fontTitulos);
+            titulo = new Phrase("  EVALUACION GENERAL  ", fontTitulos);
             ct.setSimpleColumn(titulo, 70, 510, 450, 420, 20, Element.ALIGN_LEFT);
             ct.go();
 
-            // Miembro consejo asesor.
-            campo = new Phrase("  ¿Ha sido miembro del consejo asesor?  ", fontCampo2);
-//          ct.setSimpleColumn(titulo, llx, lly, urx, ury, leading, alignment);
-            ct.setSimpleColumn(campo, 70, 470, 360, 480, 10, Element.ALIGN_LEFT);
-            ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
-            ct.setSimpleColumn(campo, 360, 470, 450, 480, 10, Element.ALIGN_LEFT);
-            ct.go();
-            
-            // Proyectos de grado, trabajos de grado o tesis doctorales tutoreados.
-            campo = new Phrase("  Numero de proyectos de grado, trabajos de grado ", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 450, 360, 460, 10, Element.ALIGN_LEFT);
-            ct.go();
-            campo = new Phrase("  o tesis doctorales tutoreados  ", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 440, 360, 450, 10, Element.ALIGN_LEFT);
-            ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
-            ct.setSimpleColumn(campo, 360, 440, 450, 450, 10, Element.ALIGN_LEFT);
-            ct.go();
-
-            // Proyectos de grado, trabajos de grado o tesis doctorales como jurado.
-            campo = new Phrase("  Numero de proyectos de grado, trabajos de grado ", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 420, 360, 430, 10, Element.ALIGN_LEFT);
-            ct.go();
-            campo = new Phrase("  o tesis doctorales evaluadas como jurado  ", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 410, 360, 420, 10, Element.ALIGN_LEFT);
-            ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
-            ct.setSimpleColumn(campo, 360, 410, 450, 420, 10, Element.ALIGN_LEFT);
-            ct.go();
-
-            // Pasantias cortas tutoreadas.
-            campo = new Phrase("  Numero de pasantias cortas tutoreadas ", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 390, 360, 400, 10, Element.ALIGN_LEFT);
-            ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
-            ct.setSimpleColumn(campo, 360, 390, 450, 400, 10, Element.ALIGN_LEFT);
-            ct.go();
-
-            // Pasantias cortas tutoreadas.
-            campo = new Phrase("  Numero de pasantias largas e intermedias tutoreadas ", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 370, 360, 380, 10, Element.ALIGN_LEFT);
-            ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
-            ct.setSimpleColumn(campo, 360, 370, 450, 380, 10, Element.ALIGN_LEFT);
-            ct.go();
-            
-            // Cuadro Contenedor
-            canvas.saveState();
-            //canvas.roundRectangle(x, y, w, h, r);
-            canvas.roundRectangle(70, 360, 455, 145, 6);
-            canvas.stroke();
-            canvas.restoreState();
-            
-            /* ###########################
-             * #  Cargas Académicas      #
-             * ###########################*/
-            
-            // Background area
-            canvas.saveState();
-            canvas.roundRectangle(70, 330, 455, 20, 6);
-            canvas.setColorFill(color);
-            canvas.fill();
-            canvas.stroke();
-            canvas.restoreState();
-            
-            // Titulo del area.
-            titulo = new Phrase(" CARGA ACADÉMICA ", fontTitulos);
-            ct.setSimpleColumn(titulo, 70, 330, 560, 345, 10, Element.ALIGN_LEFT);
-            ct.go();
-            
-            // Pasantias cortas tutoreadas.
-            int i;
-            int limite = 4;
-            for (i=0; i<limite;i++) {
-                campo = new Phrase("  Numero de pasantias cortas tutoreadas ", fontCampo2);
-                ct.setSimpleColumn(campo, 70, 310-(i*20), 360, 320-(i*20), 10, Element.ALIGN_LEFT);
-                ct.go();
-                campo = new Phrase("RELLENO", fontCampo);
-                ct.setSimpleColumn(campo, 360, 310-(i*20), 450, 320-(i*20), 10, Element.ALIGN_LEFT);
-                ct.go();
-            }
-            
-            // Cuadro Contenedor
-            canvas.saveState();
-            //canvas.roundRectangle(x, y, w, h, r);
-            canvas.roundRectangle(70, 320-(i*20), 455, 30+(i*20), 6);
-            canvas.stroke();
-            canvas.restoreState();
-
-            /* ###########################
-             * # Informacion General     #
-             * ###########################*/
-            
-            document.newPage();
-
-            //Estampado de numero de planilla, fecha y hora de creacion
-            campo = new Phrase("Fecha Creación:  " + creacion, fontCampo);
-            ct.setSimpleColumn(campo, 200, 20, 580, 30, 10, Element.ALIGN_RIGHT);
-            ct.go();
-
-            //Background area
-            canvas.saveState();
-            canvas.roundRectangle(70, 715, 455, 20, 6);
-            canvas.setColorFill(color);
-            canvas.fill();
-            canvas.stroke();
-            canvas.restoreState();
-
-            // Titulo del area.
-            titulo = new Phrase("  INFORMACIÓN GENERAL  ", fontTitulos);
-            ct.setSimpleColumn(titulo, 70, 720, 450, 745, 25, Element.ALIGN_LEFT);
-            ct.go();
-            
-            //Subtitulo Area INFORMACION GENERAL
-            titulo = new Phrase(" Información General  ", fontTitulos);
-            ct.setSimpleColumn(titulo, 80, 680, 445, 700, 10, Element.ALIGN_LEFT);
-            ct.go();
-            // Linea Titulo
-            canvas.saveState();
-            canvas.rectangle(80, 685, 103, 0);
-            canvas.stroke();
-            canvas.restoreState();
-
-            //Total estudiantes.
-            campo = new Phrase("  Total estudiantes  ", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 660, 360, 670, 10, Element.ALIGN_LEFT);
-            ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
-            ct.setSimpleColumn(campo, 360, 660, 450, 670, 10, Element.ALIGN_LEFT);
-            ct.go();
-
-            //Nota Promedio.
-            campo = new Phrase("  Nota promedio  ", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 640, 360, 650, 10, Element.ALIGN_LEFT);
-            ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
-            ct.setSimpleColumn(campo, 360, 640, 450, 650, 10, Element.ALIGN_LEFT);
-            ct.go();
-
-            //Porcentaje Aplazados.
-            campo = new Phrase("  Porcentaje aplazados  ", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 620, 360, 630, 10, Element.ALIGN_LEFT);
-            ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
-            ct.setSimpleColumn(campo, 360, 620, 450, 630, 10, Element.ALIGN_LEFT);
-            ct.go();
-
-            //Porcentaje Aprobados.
-            campo = new Phrase("  Porcentaje aprobados  ", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 600, 360, 610, 10, Element.ALIGN_LEFT);
-            ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
-            ct.setSimpleColumn(campo, 360, 600, 450, 610, 10, Element.ALIGN_LEFT);
-            ct.go();
-            
-            //Porcentaje Retirados.
-            campo = new Phrase("  Porcentaje retirados  ", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 580, 360, 590, 10, Element.ALIGN_LEFT);
-            ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
-            ct.setSimpleColumn(campo, 360, 580, 450, 590, 10, Element.ALIGN_LEFT);
-            ct.go();
-            
-            //Subtitulo Area INFORMACION ESPECIFICA
-            titulo = new Phrase(" Información Específica  ", fontTitulos);
-            ct.setSimpleColumn(titulo, 80, 540, 445, 560, 10, Element.ALIGN_LEFT);
-            ct.go();
-            // Linea Titulo
-            canvas.saveState();
-            canvas.rectangle(80, 545, 115, 0);
-            canvas.stroke();
-            canvas.restoreState();
-            
-            //Porcentaje con 1.
-            campo = new Phrase("  Porcentaje de estudiantes con 1  ", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 520, 360, 530, 10, Element.ALIGN_LEFT);
-            ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
-            ct.setSimpleColumn(campo, 360, 520, 450, 530, 10, Element.ALIGN_LEFT);
-            ct.go();
-            
-            //Porcentaje con 2.
-            campo = new Phrase("  Porcentaje de estudiantes con 2  ", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 500, 360, 510, 10, Element.ALIGN_LEFT);
-            ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
-            ct.setSimpleColumn(campo, 360, 500, 450, 510, 10, Element.ALIGN_LEFT);
-            ct.go();
-            
-            //Porcentaje con 3.
-            campo = new Phrase("  Porcentaje de estudiantes con 3  ", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 480, 360, 490, 10, Element.ALIGN_LEFT);
-            ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
-            ct.setSimpleColumn(campo, 360, 480, 450, 490, 10, Element.ALIGN_LEFT);
-            ct.go();
-            
-            //Porcentaje con 4.
-            campo = new Phrase("  Porcentaje de estudiantes con 4  ", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 460, 360, 470, 10, Element.ALIGN_LEFT);
-            ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
-            ct.setSimpleColumn(campo, 360, 460, 450, 470, 10, Element.ALIGN_LEFT);
-            ct.go();
-            
-            //Porcentaje con 5.
-            campo = new Phrase("  Porcentaje de estudiantes con 5  ", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 440, 360, 450, 10, Element.ALIGN_LEFT);
-            ct.go();
-            campo = new Phrase("RELLENO", fontCampo);
-            ct.setSimpleColumn(campo, 360, 440, 450, 450, 10, Element.ALIGN_LEFT);
-            ct.go();
-            
-            // Cuadro Contenedor
-            canvas.saveState();
-            //canvas.roundRectangle(x, y, w, h, r);
-            canvas.roundRectangle(70, 430, 455, 305, 6);
-            canvas.stroke();
-            canvas.restoreState();
-            
-            /* ###########################
-             * # Comentarios Coordinacion#
-             * ###########################*/
-            //GENERACION DINÁMICA DE RECUADROS E INFORMACIÓN
-            //LOREM IPSUM OCUPA 60 COORDS
-            String lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing "
-                    + "elit. Donec suscipit aliquam accumsan. Mauris sit amet "
-                    + "ligula felis. Vestibulum ante ipsum primis in faucibus "
-                    + "orci luctus et ultrices posuere cubilia Curae; Maecenas "
-                    + "dapibus, odio vel ullamcorper ullamcorper, odio velit "
-                    + "suscipit ipsum, ac vehicula felis augue a quam. "
-                    + "Suspendisse potenti. Vivamus feugiat lacinia nunc quis "
-                    + "cursus. In sed luctus velit. Fusce non urna accumsan sem "
-                    + "hendrerit fermentum sed vel nibh. Vivamus adipiscing urna"
-                    + " quis metus.";
-            
-            //Background area
-            canvas.saveState();
-            canvas.roundRectangle(70, 400, 455, 20, 6);
-            canvas.setColorFill(color);
-            canvas.fill();
-            canvas.stroke();
-            canvas.restoreState();
-
-            // Titulo del area.
-            titulo = new Phrase("  COORDINACIONES  ", fontTitulos);
-            ct.setSimpleColumn(titulo, 70, 405, 450, 430, 25, Element.ALIGN_LEFT);
-            ct.go();
-
-            //DECLARACIONES DINAMICAS
-            int varY = 375;
-            
-            //Subtitulo Area NOMBRE COORDINACION
-            if (varY <= 20) {
-                document.newPage();
-            }
-            titulo = new Phrase(" Coordinacion de envios de Email con SPAM intenso para alargar titulo  ", fontTitulos);
-            ct.setSimpleColumn(titulo, 70, varY, 445, varY+20, 10, Element.ALIGN_LEFT);
-            ct.go();
-            
-            campo = new Phrase("  Recomendado: ", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 365, 450, 375, 10, Element.ALIGN_LEFT);
-            campo = new Phrase("NO SI LO QUE SEA", fontCampo);
-            ct.setSimpleColumn(campo, 70, 365, 450, 375, 10, Element.ALIGN_LEFT);
-            ct.go();
-            
-            campo = new Phrase("  Justificación :", fontCampo2);
-            ct.setSimpleColumn(campo, 70, 345, 450, 355, 10, Element.ALIGN_LEFT);
-            ct.go();
-            campo = new Phrase(lorem, fontCampo);
-            ct.setSimpleColumn(campo, 80, 285, 450, 345, 10, Element.ALIGN_LEFT);
-            ct.go();
+//
+//            //Subtitulo Area PRIMERA OPCION
+//            titulo = new Phrase(" Primera Opción  ", fontTitulos);
+//            ct.setSimpleColumn(titulo, 80, 370, 445, 380, 10, Element.ALIGN_LEFT);
+//            ct.go();
+//            // Linea Titulo
+//            canvas.saveState();
+//            canvas.rectangle(80, 365, 80, 0);
+//            canvas.stroke();
+//            canvas.restoreState();
+//
+//            // País de Destino
+//            campo = new Phrase("  - País de Destino:  ", fontCampo2);
+//            ct.setSimpleColumn(campo, 70, 350, 300, 360, 10, Element.ALIGN_LEFT);
+//            campo = new Phrase("RELLENO", fontCampo);
+//            ct.setSimpleColumn(campo, 70, 350, 300, 360, 10, Element.ALIGN_LEFT);
+//            ct.go();
+//
+//            // Tipo de Programa
+//            campo = new Phrase("  - Tipo de Programa: ", fontCampo2);
+//            ct.setSimpleColumn(campo, 70, 330, 600, 340, 10, Element.ALIGN_LEFT);
+//            campo = new Phrase("RELLENO", fontCampo);
+//            ct.setSimpleColumn(campo, 70, 330, 600, 340, 10, Element.ALIGN_LEFT);
+//            ct.go();
+//
+//            // Duracion
+//            campo = new Phrase("  - Duración del Programa: ", fontCampo2);
+//            ct.setSimpleColumn(campo, 280, 350, 600, 360, 10, Element.ALIGN_LEFT);
+//            campo = new Phrase("RELLENO", fontCampo);
+//            ct.setSimpleColumn(campo, 280, 350, 600, 360, 10, Element.ALIGN_LEFT);
+//            ct.go();
+//
+//            //Universidad Destino 1
+//            campo = new Phrase("  - Nombre de la Universidad de Destino: ", fontCampo2);
+//            ct.setSimpleColumn(campo, 70, 310, 600, 320, 10, Element.ALIGN_LEFT);
+//            campo = new Phrase("RELLENO", fontCampo);
+//            ct.setSimpleColumn(campo, 70, 310, 600, 320, 10, Element.ALIGN_LEFT);
+//            ct.go();
+//
+//            //Nombre Programa
+//            campo = new Phrase("  - Nombre del Programa: ", fontCampo2);
+//            ct.setSimpleColumn(campo, 70, 290, 600, 300, 10, Element.ALIGN_LEFT);
+//            campo = new Phrase("RELLENO", fontCampo);
+//            ct.setSimpleColumn(campo, 70, 290, 600, 300, 10, Element.ALIGN_LEFT);
+//            ct.go();
+//
+//            //Fechas Tentativas 1:
+//            campo = new Phrase("  - Fechas tentativas de Inicio y Fin(según calendario de la Universidad de Destino)", fontCampo2);
+//            ct.setSimpleColumn(campo, 70, 270, 600, 280, 10, Element.ALIGN_LEFT);
+//            ct.go();
+//
+//            campo = new Phrase("  * Inicio: " + "RELLENO" + "     " + "  * Fin: " + "RELLENO", fontCampo);
+//            //ct.setSimpleColumn(campo, 90, 250, 500, 260, 10, Element.ALIGN_CENTER);
+//            ct.setSimpleColumn(campo, 90, 250, 500, 260, 10, Element.ALIGN_LEFT);
+//            ct.go();
+//
+//
+//            //Subtitulo Area SEGUNDA OPCION
+//            titulo = new Phrase("  Segunda Opción  ", fontTitulos3);
+//            ct.setSimpleColumn(titulo, 80, 230, 445, 240, 10, Element.ALIGN_LEFT);
+//            ct.go();
+//            // Linea Subarea
+//            canvas.saveState();
+//            canvas.rectangle(80, 225, 85, 0);
+//            canvas.stroke();
+//            canvas.restoreState();
+//
+//            campo = new Phrase("En caso de no ser aceptado en la Universidad seleccionada favor indique una segunda opción  ", fontPequena);
+//            ct.setSimpleColumn(campo, 80, 215, 550, 225, 10, Element.ALIGN_LEFT);
+//            ct.go();
+//
+//            // País de Destino 2
+//            campo = new Phrase("  - País de Destino:  ", fontCampo2);
+//            ct.setSimpleColumn(campo, 70, 200, 300, 210, 10, Element.ALIGN_LEFT);
+//            campo = new Phrase("RELLENO", fontCampo);
+//            ct.setSimpleColumn(campo, 70, 200, 300, 210, 10, Element.ALIGN_LEFT);
+//            ct.go();
+//
+//            // Tipo de Programa
+//            campo = new Phrase("  - Tipo de Programa:  ", fontCampo2);
+//            ct.setSimpleColumn(campo, 70, 180, 600, 190, 10, Element.ALIGN_LEFT);
+//            campo = new Phrase("RELLENO", fontCampo);
+//            ct.setSimpleColumn(campo, 70, 180, 600, 190, 10, Element.ALIGN_LEFT);
+//            ct.go();
+//
+//            //Duracion del Programa
+//            campo = new Phrase("  - Duración del Programa:  ", fontCampo2);
+//            ct.setSimpleColumn(campo, 280, 200, 600, 210, 10, Element.ALIGN_LEFT);
+//            campo = new Phrase("RELLENO", fontCampo);
+//            ct.setSimpleColumn(campo, 280, 200, 600, 210, 10, Element.ALIGN_LEFT);
+//            ct.go();
+//
+//            // Universidad de Destino
+//            campo = new Phrase("  - Nombre Universidad de Destino: ", fontCampo2);
+//            ct.setSimpleColumn(campo, 70, 160, 600, 170, 10, Element.ALIGN_LEFT);
+//            campo = new Phrase("RELLENO", fontCampo);
+//            ct.setSimpleColumn(campo, 70, 160, 600, 170, 10, Element.ALIGN_LEFT);
+//            ct.go();
+//            //Nombre Programa
+//            campo = new Phrase("  - Nombre del Programa:  ", fontCampo2);
+//            ct.setSimpleColumn(campo, 70, 140, 600, 150, 10, Element.ALIGN_LEFT);
+//            campo = new Phrase("RELLENO", fontCampo);
+//            ct.setSimpleColumn(campo, 70, 140, 600, 150, 10, Element.ALIGN_LEFT);
+//            ct.go();
+//
+//            campo = new Phrase("  - Fechas tentativas de Inicio y Fin(Según calendario de la Universidad de Destino: ", fontCampo2);
+//            ct.setSimpleColumn(campo, 70, 120, 600, 130, 10, Element.ALIGN_LEFT);
+//            ct.go();
+//
+//            campo = new Phrase("  * Inicio: " + "RELLENO" + "     " + "  * Fin: " + "RELLENO", fontCampo);
+//            ct.setSimpleColumn(campo, 90, 100, 500, 110, 10, Element.ALIGN_LEFT);
+//            ct.go();
+//
+//            //cuadro contenedor Area:
+//            canvas.saveState();
+//            canvas.roundRectangle(70, 90, 455, 325, 6);
+//            canvas.stroke();
+//            canvas.restoreState();
+//
+//
+//            /* ###########################
+//             * #  Informacion Academica  #
+//             * ###########################*/
+//
+//            document.newPage();
+//
+//            //Estampado de numero de planilla, fecha y hora de creacion
+//            campo = new Phrase("Fecha Creación:  " + creacion, fontCampo);
+//            ct.setSimpleColumn(campo, 200, 20, 580, 30, 10, Element.ALIGN_RIGHT);
+//            ct.go();
+//
+//            //Background area
+//            canvas.saveState();
+//            canvas.roundRectangle(70, 715, 455, 20, 6);
+//            canvas.setColorFill(color);
+//            canvas.fill();
+//            canvas.stroke();
+//            canvas.restoreState();
+//
+//            // Titulo del area.
+//            titulo = new Phrase("  INFORMACIÓN ACADÉMICA:  ", fontTitulos);
+//            ct.setSimpleColumn(titulo, 70, 720, 450, 745, 25, Element.ALIGN_LEFT);
+//            ct.go();
+//
+//            //Decanato
+//            campo = new Phrase("  - Decanato: ", fontCampo2);
+//            ct.setSimpleColumn(campo, 310, 690, 600, 700, 10, Element.ALIGN_LEFT);
+//            campo = new Phrase("RELLENO", fontCampo);
+//            ct.setSimpleColumn(campo, 310, 690, 600, 700, 10, Element.ALIGN_LEFT);
+//            ct.go();
+//
+//            // Nro de Créditos Aprobados
+//            campo = new Phrase("  - Nro de Créditos Aprobados a la Fecha de Postulación:", fontCampo2);
+//            ct.setSimpleColumn(campo, 70, 690, 350, 700, 10, Element.ALIGN_LEFT);
+//            campo = new Phrase(" " + "RELLENO", fontCampo);
+//            ct.setSimpleColumn(campo, 70, 690, 350, 700, 10, Element.ALIGN_LEFT);
+//            ct.go();
 //
 //            //Carrera
 //            campo = new Phrase("  - Carrera que estudia en la USB: ", fontCampo2);
@@ -1098,7 +980,7 @@ public class generacionPDF {
             document.close();
 
         } catch (Exception ex) {
-            Logger.getLogger(generacionPDF.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(generacionPDFrespaldo.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
 
