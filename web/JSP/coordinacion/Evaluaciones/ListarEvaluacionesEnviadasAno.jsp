@@ -53,6 +53,36 @@
                         </html:submit>
                     </html:form>
                 </td>
+                <td style="padding: 5px;">
+                    <html:form action="/descargarPDF" style="margin: 0px;">
+                        <html:hidden name="evaluacion" property="usbid_profesor" 
+                                     value="${profesor.getUsbid()}"/>
+                        <logic:equal name="evaluacion" property="trimestre"
+                                     value="Septiembre-Diciembre">
+                            <html:hidden name="evaluacion" property="trimestre"
+                                         value="SD"/>
+                        </logic:equal>
+                        <logic:equal name="evaluacion" property="trimestre"
+                                     value="Enero-Marzo">
+                            <html:hidden name="evaluacion" property="trimestre"
+                                         value="EM"/>
+                        </logic:equal>
+                        <logic:equal name="evaluacion" property="trimestre"
+                                     value="Abril-Julio">
+                            <html:hidden name="evaluacion" property="trimestre"
+                                         value="AJ"/>
+                        </logic:equal>
+                        <logic:equal name="evaluacion" property="trimestre"
+                                     value="Intensivo">
+                            <html:hidden name="evaluacion" property="trimestre"
+                                         value="V"/>
+                        </logic:equal>
+                        <html:hidden name="evaluacion" property="ano"/>
+                        <html:submit styleClass="btn btn-danger">
+                            Descargar PDF
+                        </html:submit>
+                    </html:form>
+                </td>
             </tr>
         </logic:iterate>
     </tbody>

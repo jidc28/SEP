@@ -2964,6 +2964,40 @@ public class DBMS {
         return false;
     }
 
+    public ArrayList<Materia> listarMateriasDictadasTrimestrePDF(
+            String id_profesor, int ano, String trimestre) {
+
+        ArrayList<Materia> materias = new ArrayList<Materia>(0);
+        PreparedStatement ps;
+        try {
+            ps = conexion.prepareStatement("SELECT nombre, codigo "
+                    + "FROM rendimiento as r, materia as m "
+                    + "WHERE r.usbid_profesor = ? "
+                    + "AND r.codigo_materia = m.codigo "
+                    + "AND r.ano = ? "
+                    + "AND r.trimestre = ?;");
+
+            ps.setString(1, id_profesor);
+            ps.setInt(2, ano);
+            ps.setString(3, trimestre);
+            
+            System.out.println(ps.toString());
+            
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Materia m = new Materia();
+                m.setCodigo(rs.getString("codigo"));
+                m.setNombre(rs.getString("nombre"));
+                materias.add(m);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return materias;
+    }
+
     public ArrayList<Materia> listarMateriasNoDictadas(String id_departamento, String id_profesor) {
 
         ArrayList<Materia> materias = new ArrayList<Materia>(0);
@@ -3575,7 +3609,7 @@ public class DBMS {
                     + "FROM informacion_profesor_coordinacion "
                     + "WHERE usbid_profesor = ?;");
             ps.setString(1, usbid_profesor);
-
+            System.out.println(ps.toString());
             ResultSet rs = ps.executeQuery();
 
             int tt = 0, tj = 0, pc = 0, plt = 0, plj = 0;

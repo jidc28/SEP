@@ -81,7 +81,7 @@ public class generacionPDFrespaldo {
 
 
             /* ###########################################################
-             * #  Header del pdf, titulo, foto del aplicante y logo USB. #
+             * #  Header del pdf, titulo y logo USB. #
              * ###########################################################*/
             ColumnText ct = new ColumnText(canvas);
 
@@ -92,11 +92,9 @@ public class generacionPDFrespaldo {
 
             // TITULO PRINCIPAL
             Phrase titulo = new Phrase("RESUMEN DE RENDIMIENTO DE PROFESOR", fontTitulos1);
-            //ct.setSimpleColumn(titulo, 30, 660, 600, 690, 25, Element.ALIGN_CENTER);
             ct.setSimpleColumn(titulo, 68, 660, 600, 690, 25, Element.ALIGN_LEFT);
             ct.go();
 
-            //IMAGEN APLICANTE
             //Cambiar Path
             //CEBOLLA
             Image imagen = Image.getInstance(filepath + "cebollaUSB.jpg");
@@ -201,64 +199,8 @@ public class generacionPDFrespaldo {
             ct.setSimpleColumn(campo, 350, 550, 600, 560, 10, Element.ALIGN_LEFT);
             ct.go();
 
-            // Tlf. Habitación
-//            campo = new Phrase("  - Tlf. Habitación:  ", fontCampo2);
-//            ct.setSimpleColumn(campo, 320, 530, 600, 540, 10, Element.ALIGN_LEFT);
-//            campo = new Phrase("TELEFONO", fontCampo);
-//            ct.setSimpleColumn(campo, 320, 530, 600, 540, 10, Element.ALIGN_LEFT);
-//            ct.go();
-
-            // Domicilio
-//            campo = new Phrase("  - Domicilio Actual  ", fontCampo2);
-//            ct.setSimpleColumn(campo, 70, 510, 300, 520, 10, Element.ALIGN_LEFT);
-//            ct.go();
-
-//            // Calle
-//            campo = new Phrase("  * Calle:  ", fontCampo2);
-//            ct.setSimpleColumn(campo, 90, 470, 300, 480, 10, Element.ALIGN_LEFT);
-//            campo = new Phrase("CALLE", fontCampo);
-//            ct.setSimpleColumn(campo, 90, 470, 300, 480, 10, Element.ALIGN_LEFT);
-//            ct.go();
-//
-//            // Ciudad
-//            campo = new Phrase("  * Ciudad:  ", fontCampo2);
-//            ct.setSimpleColumn(campo, 90, 450, 300, 460, 10, Element.ALIGN_LEFT);
-//            campo = new Phrase("CIUDAD COLUMNA 2", fontCampo);
-//            ct.setSimpleColumn(campo, 90, 450, 300, 460, 10, Element.ALIGN_LEFT);
-//            ct.go();
-//
-//            // Codigo Postal
-//            campo = new Phrase("  * Código Postal:  ", fontCampo2);
-//            ct.setSimpleColumn(campo, 90, 430, 300, 440, 10, Element.ALIGN_LEFT);
-//            campo = new Phrase("CODIGO COLUMNA 2", fontCampo);
-//            ct.setSimpleColumn(campo, 90, 430, 300, 440, 10, Element.ALIGN_LEFT);
-//            ct.go();
-//
-//            // Edificio/NombreCasa
-//            campo = new Phrase("  * Nombre (Edificio|Casa): ", fontCampo2);
-//            ct.setSimpleColumn(campo, 320, 490, 600, 500, 10, Element.ALIGN_LEFT);
-//            campo = new Phrase("NOMBRE EDIF", fontCampo);
-//            ct.setSimpleColumn(campo, 320, 490, 600, 500, 10, Element.ALIGN_LEFT);
-//            ct.go();
-//
-//            // Apartamento/Nro.Casa
-//            campo = new Phrase("  * Apartamento/Nro.Casa:  ", fontCampo2);
-//            ct.setSimpleColumn(campo, 320, 470, 600, 480, 10, Element.ALIGN_LEFT);
-//            campo = new Phrase("APARTAMENTO", fontCampo);
-//            ct.setSimpleColumn(campo, 320, 470, 600, 480, 10, Element.ALIGN_LEFT);
-//            ct.go();
-//
-//            // Estado
-//            campo = new Phrase("  * Estado:  ", fontCampo2);
-//            ct.setSimpleColumn(campo, 320, 450, 600, 460, 10, Element.ALIGN_LEFT);
-//            campo = new Phrase("ESTADO", fontCampo);
-//            ct.setSimpleColumn(campo, 320, 450, 600, 460, 10, Element.ALIGN_LEFT);
-//            ct.go();
-
             // Cuadro Contenedor
             canvas.saveState();
-            //canvas.roundRectangle(x, y, w, h, r);
-            //canvas.roundRectangle(70, 425, 455, 225, 6);
             canvas.roundRectangle(70, 515, 455, 135, 6);
             canvas.stroke();
             canvas.restoreState();

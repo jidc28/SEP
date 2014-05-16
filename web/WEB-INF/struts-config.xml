@@ -459,6 +459,14 @@
         </action>
         
         <action input="ObtenerEvaluaciones.jsp"
+            path="/descargarPDF"
+            type="Actions.Evaluaciones.descargarPDF"
+            scope="request"
+            name="rendimientoProf"
+            validate="false">
+        </action>
+        
+        <action input="ObtenerEvaluaciones.jsp"
             path="/guardarInformacionCoordinacion"
             type="Actions.Coordinacion.GuardarInformacionCoordinacion"
             scope="request"
