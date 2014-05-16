@@ -19,7 +19,7 @@
     </div>
 </h4>
 
-<table style="margin: 0px; margin-top: 20px; margin-left: 20px;" align="left">
+<table style="margin: 0px; margin-top: 20px;" align="center">
     <tbody>
         <logic:iterate id="evaluacion" name="evaluaciones">
             <tr>
@@ -78,9 +78,12 @@
                                          value="V"/>
                         </logic:equal>
                         <html:hidden name="evaluacion" property="ano"/>
-                        <html:submit styleClass="btn btn-danger">
+                        <html:submit styleClass="link-danger">
                             Descargar PDF
                         </html:submit>
+                        <span class="glyphicon glyphicon-download"
+                              style="color: #d2322d">
+                        </span>
                     </html:form>
                 </td>
             </tr>

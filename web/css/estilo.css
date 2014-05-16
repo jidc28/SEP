@@ -438,7 +438,6 @@ seleccAll{
     font-family: sans-serif;   
 }
 
-
 /*Edits para BOOTSTRAP*/
 .panel-group {
     margin-top: 50px;
@@ -567,5 +566,18 @@ seleccAll{
 }
 
 .link2:hover {
-    text-decoration: underline;    
+    text-decoration: underline;
+    color: #126598;
+}
+
+.link-danger {
+    color: #d2322d;
+    border: 0;
+    background: transparent;
+    font-size: 14px;
+}
+
+.link-danger:hover {
+    text-decoration: underline;
+    color: #ac2925;
 }

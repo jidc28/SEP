@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Otros;
 
 import Clases.*;
@@ -30,8 +26,8 @@ import java.util.ArrayList;
 
 /**
  *
- * @author jidc28 Esta función fue desarrolada gracias a la ayuda de Andrea
- * Balbás y Gustavo Ortega, ambos estudiantes cohorte 09 de la Universidad Simón
+ * @author jidc28 Esta clase fue desarrolada gracias a la ayuda de Andrea Balbás
+ * y Gustavo Ortega, ambos estudiantes cohorte 09 de la Universidad Simón
  * Bolívar, quienes estuvieron involucrados en la implementación del Sistema de
  * Gestión de Intercambio de la USB.
  */
@@ -42,7 +38,7 @@ public class generacionPDF {
         return resultado;
     }
 
-    public static Boolean generarRendimiento(String path, String usbid, String filepath, 
+    public static Boolean generarRendimiento(String path, String usbid, String filepath,
             String dptoUsbid, int ano, String trimestre) throws BadElementException, DocumentException {
 
         Profesor p = DBMS.getInstance().obtenerInfoProfesor(usbid);
@@ -128,10 +124,9 @@ public class generacionPDF {
             imagen.setAbsolutePosition(125f, 730f);
             imagen.scalePercent(20f);
 
-
             campo = new Phrase("                                             \n"
                     + "Resumen del rendimiento del profesor \n"
-                    + "Año: " + ano + " Trimestre: " + trimestre, fontTitulos2);
+                    + "Año: " + ano + " Trimestre: " + obtenerTrimestre(trimestre), fontTitulos2);
             ct.setSimpleColumn(campo, 200, 625, 480, 730, 10, Element.ALIGN_RIGHT);
             ct.go();
 
@@ -333,21 +328,21 @@ public class generacionPDF {
 
             // Titulo del area.
             titulo = new Phrase(" CARGA ACADÉMICA ", fontTitulos);
-            ct.setSimpleColumn(titulo, 70, 300 ,560, 315, 10, Element.ALIGN_LEFT);
+            ct.setSimpleColumn(titulo, 70, 300, 560, 315, 10, Element.ALIGN_LEFT);
             ct.go();
-            
-            ArrayList<Materia> materias = DBMS.getInstance().listarMateriasDictadasTrimestrePDF(p.getUsbid(),ano,trimestre);
+
+            ArrayList<Materia> materias = DBMS.getInstance().listarMateriasDictadasTrimestrePDF(p.getUsbid(), ano, trimestre);
 
             // Pasantias cortas tutoreadas.
             int i;
-            for (i = 0; i < materias.size() ; i++) {
-                System.out.println(materias.size()+"SIZE");
+            for (i = 0; i < materias.size(); i++) {
+                System.out.println(materias.size() + "SIZE");
                 Materia materia = materias.get(i);
-                
-                campo = new Phrase("  "+materia.getNombre(), fontCampo2);
+
+                campo = new Phrase("  " + materia.getNombre(), fontCampo2);
                 ct.setSimpleColumn(campo, 70, 280 - (i * 20), 360, 290 - (i * 20), 10, Element.ALIGN_LEFT);
                 ct.go();
-                campo = new Phrase("  "+materia.getCodigo(), fontCampo);
+                campo = new Phrase("  " + materia.getCodigo(), fontCampo);
                 ct.setSimpleColumn(campo, 360, 280 - (i * 20), 450, 290 - (i * 20), 10, Element.ALIGN_LEFT);
                 ct.go();
             }
@@ -593,7 +588,7 @@ public class generacionPDF {
                 } else if (eval.getObservaciones_c().length() > 400) {
                     dez = 60;
                 }
-                
+
                 campo = new Phrase(eval.getObservaciones_c(), fontCampo);
                 ct.setSimpleColumn(campo, 80, varY - dez, 450, varY, 10, Element.ALIGN_LEFT);
                 ct.go();
@@ -625,4 +620,18 @@ public class generacionPDF {
 //        String usbid = "22-90457";
 //        System.out.println(generarRendimiento(path, usbid, filepath, "09-10219", 2005, "AJ"));
 //    }
+    
+    public static String obtenerTrimestre(String siglas) {
+
+        if (siglas.equals("EM")) {
+            return "Enero-Marzo";
+        } else if (siglas.equals("AJ")) {
+            return "Abril-Julio";
+        } else if (siglas.equals("SD")) {
+            return "Septiembre-Diciembre";
+        } else if (siglas.equals("V")) {
+            return "Intensivo";
+        }
+        return null;
+    }
 }
