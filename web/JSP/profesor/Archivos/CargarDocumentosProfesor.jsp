@@ -24,6 +24,12 @@
     </div>
 </logic:present>
 
+<logic:present name="archivo_muy_pesado">
+    <div class="alert alert-danger" id="alert">
+        El tamaño del archivo no puede ser mayor a 5MB.
+    </div>
+</logic:present>
+
 <logic:present name="archivo_cargado">
     <div class="alert alert-success" id="alert">
         El archivo fue agregado exitosamente.
