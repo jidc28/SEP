@@ -11,7 +11,15 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+
+<logic:present name="Profesor_existente">
+    <div class="alert alert-danger" id="alert">
+        Este usuario ya se encuentra registrado en el sistema.
+    </div>
+</logic:present>
+
 <h4> Planilla para agregar un profesor </h4>
+
 <html:form action="/agregarProfesor" acceptCharset="ISO-8859-1">
     <table border="0">
         <tbody>

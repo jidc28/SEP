@@ -45,6 +45,17 @@ public class ModificarProfesor extends Action {
             profesor.setEmail(profesor.getUsbid()+"@usb.ve");
 
             boolean modificado = DBMS.getInstance().modificarProfesor(profesor);
+            
+            if (!modificado) {
+                String USBID = profesor.getUsbidViejo();
+                profesor = new Profesor();
+                profesor = DBMS.getInstance().obtenerInfoProfesor(USBID);
+                profesor.setUsbidViejo(USBID);
+
+                request.setAttribute("profesor", profesor);
+                request.setAttribute("usbid_existente",FAILURE);
+                return mapping.findForward(FAILURE);
+            }
 
             ArrayList<Profesor> profesores =
                     DBMS.getInstance().listarProfesoresDepartamento(id_departamento);

@@ -57,6 +57,10 @@ public class AgregarProfesor extends org.apache.struts.action.Action {
             boolean agregado = 
                     DBMS.getInstance().
                             agregarProfesor(profesor,id_departamento);
+            if (!agregado) {
+                request.setAttribute("Profesor_existente",FAILURE);
+                return mapping.findForward(FAILURE);
+            }
 
             ArrayList<Profesor> profesores =
                     DBMS.getInstance().

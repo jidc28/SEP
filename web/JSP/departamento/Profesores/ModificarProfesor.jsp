@@ -11,7 +11,13 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h4> Planilla para agregar un profesor </h4>
+<logic:present name="usbid_existente">
+    <div class="alert alert-danger" id="alert">
+        El USBID ya se encuentra registrado en el sistema.
+    </div>
+</logic:present>
+
+<h4> Planilla para modificar un profesor </h4>
 <html:form action="/modificarProfesor" acceptCharset="ISO-8859-1">
     <table border="0">
         <tbody>
