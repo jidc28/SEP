@@ -36,49 +36,57 @@
     </div>
 </logic:present>
 
-<h4>Agregar material:</h4>
+<div class="alert alert-info" id="alert-coord">
+    <p>
+        <strong>Atención: </strong> <br> 
+        Los archivos cargados al  <em>Sistema de Evaluación de Profesores</em>
+        deben estar en formato PDF y su tamaño no debe exceder de los 5MB.
+    </p>
+</div>
+
+<h4 style="margin-top: 30px;">Agregar material:</h4>
 
 <html:form action="/fileUploadProfesor" method="post" enctype="multipart/form-data">
-    <div style="width:auto;height:auto;">
-        <table width="350px" cellspacing="14px">
+    <div style="height:auto;">
+        <table width="350px" cellspacing="14px" style="width:70%;">
             <tbody>
-                    <tr>
-                        <td style="width: 40px;">
-                            <strong style="font-size: 14px; width: 100%;">
-                                AÑO
-                            </strong>
-                        </td>
-                        <td>
-                            <html:select name="fileUploadForm" property="ano" style="width: 100%;">
-                                <logic:iterate name="anos" id="ano">
-                                    <html:option value="${ano}">
-                                        <bean:write name="ano"/>
-                                    </html:option>
-                                </logic:iterate>
-                            </html:select>
-                        </td>
-                        <td style="padding-left: 10px; width: 100px;">
-                            <strong style="font-size: 14px;">
-                                TRIMESTRE
-                            </strong>
-                        </td>
-                        <td>
-                            <html:select name="fileUploadForm" property="trimestre" style="width: 100%;">
-                                <html:option value="SD">
-                                    Septiembre-Diciembre
+                <tr>
+                    <td style="width: 20%;">
+                        <strong style="font-size: 14px; width: 100%;">
+                            AÑO
+                        </strong>
+                    </td>
+                    <td>
+                        <html:select name="fileUploadForm" property="ano" style="width: 100%;">
+                            <logic:iterate name="anos" id="ano">
+                                <html:option value="${ano}">
+                                    <bean:write name="ano"/>
                                 </html:option>
-                                <html:option value="EM">
-                                    Enero-Marzo
-                                </html:option>
-                                <html:option value="AJ">
-                                    Abril-Julio
-                                </html:option>
-                                <html:option value="V">
-                                    Intensivo
-                                </html:option>
-                            </html:select>
-                        </td>
-                    </tr>
+                            </logic:iterate>
+                        </html:select>
+                    </td>
+                    <td style="padding-left: 10px; width: 30%;">
+                        <strong style="font-size: 14px;">
+                            TRIMESTRE
+                        </strong>
+                    </td>
+                    <td>
+                        <html:select name="fileUploadForm" property="trimestre" style="width: 100%;">
+                            <html:option value="SD">
+                                Septiembre-Diciembre
+                            </html:option>
+                            <html:option value="EM">
+                                Enero-Marzo
+                            </html:option>
+                            <html:option value="AJ">
+                                Abril-Julio
+                            </html:option>
+                            <html:option value="V">
+                                Intensivo
+                            </html:option>
+                        </html:select>
+                    </td>
+                </tr>
                 <tr>
                     <td colspan="4" style="height: 30px;">
                         <strong style="font-size: 14px;">
@@ -90,7 +98,7 @@
                     <td colspan="4">
                         <div class="jumbotron" 
                              style="font-size: 12px; padding: 20px; margin: 0px;
-                             padding-top: 30px; width: 600px;">
+                             padding-top: 30px; width: 100%;">
                             <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                                 <div class="form-control" data-trigger="fileinput">
                                     <i class="glyphicon glyphicon-file fileinput-exists"></i> 
@@ -129,8 +137,7 @@
             </tbody>
         </table>  
     </div>
-    <!--<input type="button" value="Seleccionar Otro Documento" style="font-size:12px; padding:4px 6px" onclick="addRow('dataBody')">-->
-    <!--<input type="button" value="Eliminar Documentos Seleccionados" style="font-size:12px; padding:4px 6px" onclick="deleteRow('dataTable')"/>-->
+
     <html:submit styleClass="btn btn-info" style="margin-top: 20px;"> 
         Cargar Documentos 
     </html:submit>

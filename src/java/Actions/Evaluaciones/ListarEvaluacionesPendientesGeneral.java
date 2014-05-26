@@ -205,7 +205,7 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
      * @param opcion 1 para pendiente.
      * @return Archivo [] listado de archivos subidos por el profesor.
      */
-    public Archivo[] obtenerArchivosConsiderados(int ano, String mes, int opcion) {
+    public static Archivo[] obtenerArchivosConsiderados(int ano, String mes, int opcion) {
 
         int int_fecha_ano;
         int fecha_mes = -1;

@@ -53,18 +53,11 @@ public class irLlenarPlanillas extends org.apache.struts.action.Action {
         String fecha = dateFormat.format(date).toString();
         String ano = fecha.substring(0, 4);
 
-        int[] anos = new int[4];
-        anos[3] = Integer.parseInt(ano);
-        int i = 2;
-        int tmp = anos[3];
+        int[] anos = new int[2];
+        anos[1] = Integer.parseInt(ano);
+        anos[0] = anos[1] - 1;
 
-        while (i > -1) {
-            tmp--;
-            anos[i] = tmp;
-            i--;
-        }
-
-        materias = 
+        materias =
                 DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(profesor.getUsbid(), id_departamento);
 
         session.setAttribute("profesor", profesor);

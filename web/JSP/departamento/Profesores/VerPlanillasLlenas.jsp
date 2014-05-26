@@ -94,6 +94,10 @@
                                 <html:form action="/verPlanilla" style="margin: 0px;">
                                     <html:hidden name="RendimientoProf" 
                                                  property="codigo_materia"/>
+                                    <html:hidden name="RendimientoProf"
+                                                 property="ano"/>
+                                    <html:hidden name="RendimientoProf"
+                                                 property="trimestre"/>
                                     <html:submit styleClass="btn btn-info"
                                                  style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;">
                                         Ver detalles

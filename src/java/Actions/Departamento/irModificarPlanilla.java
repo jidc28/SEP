@@ -48,7 +48,9 @@ public class irModificarPlanilla extends org.apache.struts.action.Action {
 
         if (tipousuario.equals("departamento")) {
             rendimientoProf rendimiento = (rendimientoProf) form;
-            rendimiento = DBMS.getInstance().obtenerPlanillaEvaluacionProfesor(profesor.getUsbid(), rendimiento.getCodigo_materia());
+            rendimiento = DBMS.getInstance().obtenerPlanillaEvaluacionProfesor(
+                    profesor.getUsbid(), rendimiento.getCodigo_materia(),
+                    rendimiento.getAno(),rendimiento.getTrimestre());
 
             rendimiento.setViejoAno(rendimiento.getAno());
             rendimiento.setViejoTrimestre(rendimiento.getTrimestre());
@@ -59,16 +61,9 @@ public class irModificarPlanilla extends org.apache.struts.action.Action {
             String fecha = dateFormat.format(date).toString();
             String ano = fecha.substring(0, 4);
 
-            int[] anos = new int[4];
-            anos[3] = Integer.parseInt(ano);
-            int i = 2;
-            int tmp = anos[3];
-
-            while (i > -1) {
-                tmp--;
-                anos[i] = tmp;
-                i--;
-            }
+            int[] anos = new int[2];
+            anos[1] = Integer.parseInt(ano);
+            anos[0] = anos[1] -1;
 
             session.setAttribute("profesor", profesor);
             request.setAttribute("rendimientoProf", rendimiento);

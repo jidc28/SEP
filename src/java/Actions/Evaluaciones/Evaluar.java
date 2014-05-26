@@ -61,6 +61,19 @@ public class Evaluar extends Action {
                             listarInformacionProfesorCoordinacion(id, profesor.getUsbid());
                 }
 
+                Archivo[] archivos_considerados = 
+                        ListarEvaluacionesPendientesGeneral.obtenerArchivosConsiderados(-1, null, 1);
+
+                ArrayList<Archivo> archivos =
+                        DBMS.getInstance().
+                        listarArchivosProfesor(profesor.getUsbid(), archivos_considerados);
+
+                ArrayList<dicta> evaluaciones_pendientes =
+                        DBMS.getInstance().listarEvaluacionesPendientes(id, profesor.getUsbid());
+
+                request.setAttribute("listar_archivos", SUCCESS);
+                request.setAttribute("archivos", archivos);
+                request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
                 session.setAttribute("informacion", informacion);
                 request.setAttribute("evaluar_coordinacion", SUCCESS);
 
@@ -68,6 +81,7 @@ public class Evaluar extends Action {
 
             request.setAttribute("recomendar", FAILURE);
             request.setAttribute("evaluar", SUCCESS);
+            request.setAttribute("general", SUCCESS);
 
             return mapping.findForward(FAILURE);
 

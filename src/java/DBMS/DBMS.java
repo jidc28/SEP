@@ -2200,16 +2200,22 @@ public class DBMS {
         return -1;
     }
 
-    public rendimientoProf obtenerPlanillaEvaluacionProfesor(String id_profesor, String id_materia) {
+    public rendimientoProf obtenerPlanillaEvaluacionProfesor(String id_profesor,
+            String id_materia, int ano, String trimestre) {
         PreparedStatement ps;
         try {
             ps = conexion.prepareStatement("SELECT * "
                     + "FROM rendimiento, materia "
                     + "WHERE usbid_profesor = ? "
                     + "AND codigo_materia = ? "
-                    + "AND codigo_materia = codigo;");
+                    + "AND codigo_materia = codigo "
+                    + "AND evaluado = 'no' "
+                    + "AND trimestre = ? "
+                    + "AND ano = ?;");
             ps.setString(1, id_profesor);
             ps.setString(2, id_materia);
+            ps.setString(3, trimestre);
+            ps.setInt(4, ano);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

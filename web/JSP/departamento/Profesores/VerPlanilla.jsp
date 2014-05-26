@@ -94,7 +94,7 @@
                 </tr>
                 <tr>
                     <td style="text-align: right; width: 40%; font-size: 14px;">
-                        <strong style="color: red">TOTAL ESTUDIANTES</strong>
+                        <strong>TOTAL ESTUDIANTES</strong>
                     </td>
                     <td style="padding-left: 100px;">
                         <html:text name="rendimientoProf" property="total_estudiantes"

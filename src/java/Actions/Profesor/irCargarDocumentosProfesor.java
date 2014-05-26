@@ -40,16 +40,9 @@ public class irCargarDocumentosProfesor extends Action {
         String fecha = dateFormat.format(date).toString();
         String ano = fecha.substring(0, 4);
 
-        int[] anos = new int[4];
-        anos[3] = Integer.parseInt(ano);
-        int i = 2;
-        int tmp = anos[3];
-
-        while (i > -1) {
-            tmp--;
-            anos[i] = tmp;
-            i--;
-        }
+        int[] anos = new int[2];
+        anos[1] = Integer.parseInt(ano);
+        anos[0] = anos[1] - 1;
 
         request.setAttribute("anos", anos);
         request.setAttribute("profesor", profesor);

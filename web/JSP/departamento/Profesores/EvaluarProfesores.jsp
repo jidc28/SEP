@@ -80,14 +80,6 @@
                     <html:submit styleClass="btn btn-primary" style="type: button; data-loading-text: cargando;">
                         Evaluar profesores seleccionados
                     </html:submit>
-                    <button type="button" id="cargando" data-loading-text="Cargando..." class="btn btn-primary">
-                        <!--<html:submit styleClass="btn btn-primary" 
-                                     style="border-color: #428bca; type: button; data-loading-text: cargando;
-                                     padding: 0px;">
-                     Evaluar profesores seleccionados
-                        </html:submit>-->
-                        Boton de cargando
-                    </button>
                 </center>
             </html:form>
         </div>
