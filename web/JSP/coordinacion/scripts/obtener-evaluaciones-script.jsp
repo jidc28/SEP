@@ -16,7 +16,23 @@
 <script type="text/javascript" src="scripts/jquery-1.8.3.min.js"></script>
 <script src="css/js/bootstrap.min.js"></script>
 
-<logic:notPresent name="informacion_coordinacion">
+<%--<logic:notPresent name="informacion_coordinacion">
+    <script>
+        $(document).ready(function(){
+            $('a[href="#departamento"]').tab('show');
+        });
+    </script>
+</logic:notPresent>--%>
+
+<logic:present name="general">
+    <script>
+        $(document).ready(function(){
+            $('a[href="#departamento-general"]').tab('show');
+        });
+    </script>
+</logic:present>
+    
+<logic:notPresent name="general">
     <script>
         $(document).ready(function(){
             $('a[href="#departamento"]').tab('show');

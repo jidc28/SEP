@@ -14,7 +14,7 @@
     Listado de evaluaciones enviadas
 </h4>
 
-<table style="margin: 0px; margin-top: 20px; margin-left: 20px;" align="left">
+<table style="margin: 0px; margin-top: 20px; margin-left: 20px;">
     <tbody>
         <logic:iterate id="profesor" name="profesores">
             <tr>

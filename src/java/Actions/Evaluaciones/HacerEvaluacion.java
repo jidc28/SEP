@@ -76,11 +76,11 @@ public class HacerEvaluacion extends Action {
                  * jefe de departamento */
             } else if (tipousuario.equals("departamento")) {
 
-                ArrayList<rendimientoProf> evaluacion_coordinaciones =
-                        DBMS.getInstance().
-                        obtenerEvaluacionCoordinaciones(id, profesor.getUsbid(), d.getCodigoMateria());
-
-                session.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
+//                ArrayList<rendimientoProf> evaluacion_coordinaciones =
+//                        DBMS.getInstance().
+//                        obtenerEvaluacionCoordinaciones(id, profesor.getUsbid(), d.getCodigoMateria());
+//
+//                session.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
 
                 /* Si el usuario que accede a esta funcionalidad decano */
             } else if (tipousuario.equals("decanato")) {
@@ -104,6 +104,7 @@ public class HacerEvaluacion extends Action {
             }
 
             /* Se envian a la vista los atributos correspondiente */
+            request.setAttribute("materia_evaluar", d.getCodigoMateria());
             session.setAttribute("profesor", profesor);
             session.setAttribute("evaluacion", evaluacion);
             session.setAttribute("porcentaje1", porcentaje1);

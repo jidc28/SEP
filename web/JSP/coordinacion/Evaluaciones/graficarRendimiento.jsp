@@ -12,7 +12,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <h4>
-    Rendimiento de <bean:write name="profesor" property="apellido"/>, <bean:write name="profesor" property="nombre"/>
+    Rendimiento de la materia: <bean:write name="materia_evaluar"/>
+        <div style="font-size: 14px; color: grey;">
+        <bean:write name="profesor" property="apellido"/>,
+        <bean:write name="profesor" property="nombre"/>
+    </div>
 </h4>
 
 <div style="width: 95%">

@@ -24,7 +24,7 @@
     </div>  
 </logic:empty>
 
-<table style="margin: 0px; margin-top: 20px; margin-left: 20px;" align="left">
+<table style="margin: 0px; margin-top: 20px; margin-left: 20px;">
     <tbody>
         <logic:iterate id="profesor" name="profesores">
             <tr>
@@ -41,16 +41,7 @@
                         <html:hidden name="dicta" property="opcion" 
                                      value="pendiente"/>
                         <html:submit styleClass="link2" style="padding-left: 15px;">
-                            Evaluación General
-                        </html:submit>
-                    </html:form>
-                </td>
-                <td>
-                    <html:form action="/listarEvaluacionesPendientes" style="margin: 0px;">
-                        <html:hidden name="Coordinacion" property="codigo" 
-                                     value="${profesor.getUsbid()}"/>
-                        <html:submit styleClass="link2" style="padding-left: 15px;">
-                            Evaluación Específica
+                            Evaluar profesor
                         </html:submit>
                     </html:form>
                 </td>

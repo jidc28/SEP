@@ -47,7 +47,7 @@ public class Graficar extends Action {
             int ano = (Integer) session.getAttribute("ano");
             String trimestre = (String) session.getAttribute("trimestre");
             Profesor profesor = (Profesor) session.getAttribute("profesor");
-            
+
             /* Se obtiene la evaluación del profesor */
             evaluacion =
                     DBMS.getInstance().obtenerEvaluacion(d.getCodigoMateria(),
@@ -85,6 +85,7 @@ public class Graficar extends Action {
         request.setAttribute("aplazados_general", aplazados_general);
         request.setAttribute("aprobados_general", aprobados_general);
         request.setAttribute("nota_promedio_general", nota_promedio_general);
+        request.setAttribute("materia_evaluar", d.getCodigoMateria());
 
         return mapping.findForward(SUCCESS);
     }

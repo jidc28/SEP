@@ -19,6 +19,9 @@
 
 <h4>    
     Evaluación
+    <logic:notPresent name="general">
+        de la materia: <bean:write name="materia_evaluar"/>
+    </logic:notPresent>
     <div style="font-size: 14px; color: grey;">
         <bean:write name="profesor" property="apellido"/>,
         <bean:write name="profesor" property="nombre"/>
@@ -27,12 +30,22 @@
 
 <div style="width: 95%">
     <ul class="nav nav-tabs" style="height: 55px;">
-        <li>
-            <a href="#departamento" data-toggle="tab" style="font-size: 12px; margin: 0px;">
-                Información proporcionada <br> 
-                por el departamento
-            </a>
-        </li>
+        <logic:notPresent name="general">
+            <li>
+                <a href="#departamento" data-toggle="tab" style="font-size: 12px; margin: 0px;">
+                    Información proporcionada <br> 
+                    por el departamento
+                </a>
+            </li>
+        </logic:notPresent>
+        <logic:present name="general">
+            <li>
+                <a href="#departamento-general" data-toggle="tab" style="font-size: 12px; margin: 0px;">
+                    Información proporcionada <br> 
+                    por el departamento
+                </a>
+            </li>
+        </logic:present>
         <logic:present name="listar_archivos">
             <li>
                 <a href="#profesor" data-toggle="tab" style="font-size: 12px; margin: 0px;">
@@ -414,117 +427,186 @@
         </div>
     </logic:present>
 
-    <div class="tab-pane" id="departamento">
-        <h3 style="text-align: left; font-size: 18px; margin-left: 30px;">
-            Información general: 
-        </h3>
-        <div id="tabla" class="table-responsive" style="margin-top: 20px;">
-            <table class="table table-striped">
-                <tbody>
-                    <tr>
-                        <td style="text-align: right; width: 50%; font-size: 14px;">
-                            <strong>TOTAL ESTUDIANTES</strong>
-                        </td>
-                        <td>
-                            <bean:write name="evaluacion" property="total_estudiantes"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: right; width: 50%; font-size: 14px;">
-                            <strong>NOTA PROMEDIO</strong>
-                        </td>
-                        <td>
-                            <bean:write name="evaluacion" property="nota_prom"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: right; width: 50%; font-size: 14px;">
-                            <strong>PORCENTAJE APLAZADOS</strong>
-                        </td>
-                        <td>
-                            <bean:write name="aplazados"/>%
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: right; width: 50%; font-size: 14px;">
-                            <strong>PORCENTAJE APROBADOS</strong>
-                        </td>
-                        <td>
-                            <bean:write name="aprobados"/>%
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: right; width: 50%; font-size: 14px;">
-                            <strong>PORCENTAJE RETIRADOS  </strong>
-                        </td>
-                        <td>
-                            <bean:write name="retirados"/>%
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    <logic:present name="general">
+        <div class="tab-pane" id="departamento-general">
+            <h3 style="text-align: left; font-size: 18px; margin-left: 30px;">
+                Materias dictadas por el profesor: 
+            </h3>
+            <logic:empty name="evaluaciones_pendientes">
+                <div class="alert alert-warning alert-dismissable" 
+                     id="alert-coord">
+                    <p>
+                        En este momento no existen evaluaciones sin comentar.
+                    </p>
+                </div>     
+            </logic:empty>
+
+            <logic:notEmpty name="evaluaciones_pendientes">
+                    <div class="jumbotron" style="width: 80%; padding: 10px;">
+                        <table style="margin: 0px;">
+                            <tbody>
+                                <logic:iterate id="evaluaciones" name="evaluaciones_pendientes">
+                                    <tr>
+                                        <td style="padding: 0px; color: #999; font-size: 14px;">
+                                            <bean:write name="evaluaciones" property="codigoMateria"/>
+                                        </td>
+                                        <td style="padding: 5px; font-size: 14px; padding-left: 15px;">
+                                            <bean:write name="evaluaciones" property="opcion"/>
+                                        </td>
+                                        <td>
+                                            <html:form action="/graficarRendimiento"
+                                                       style="margin: 0px;">
+                                                <html:hidden name="dicta" property="usbidProfesor"
+                                                             value="${evaluaciones.getPrimerProfesor().getUsbid()}"/>
+                                                <html:hidden name="dicta" property="codigoMateria"
+                                                             value="${evaluaciones.getCodigoMateria()}"/>
+                                                <html:submit styleClass="link2"
+                                                             style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                                    Graficar
+                                                </html:submit>
+                                            </html:form>
+                                        </td>
+                                        <td>
+                                            <html:form action="/hacerEvaluacion" 
+                                                       onsubmit="return(this)"
+                                                       style="margin: 0px;">
+                                                <html:hidden name="dicta" 
+                                                             property="codigoMateria"
+                                                             value="${evaluaciones.getCodigoMateria()}"/>
+                                                <html:hidden name="dicta"
+                                                             property="usbidProfesor"
+                                                             value="${evaluaciones.getPrimerProfesor().getUsbid()}"/>
+                                                <html:hidden name="dicta"
+                                                             property="opcion"
+                                                             value="pendiente"/>
+                                                <html:submit styleClass="link2"
+                                                             style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                                    Ver rendimiento
+                                                </html:submit>
+                                            </html:form>
+                                        </td>
+                                    </tr>
+                                </logic:iterate>
+                            </tbody>
+                        </table>
+                    </div>
+            </logic:notEmpty>
         </div>
-        <h3 style="text-align: left; font-size: 18px; margin-left: 30px;">
-            Información específica: 
-        </h3>
-        <div id="tabla" class="table-responsive" style="margin-top: 20px;">
-            <table class="table table-striped">
-                <tbody>
-                    <tr>
-                        <td style="text-align: right; width: 50%; font-size: 14px;">
-                            <strong>PORCENTAJE ESTUDIANTES CON 1</strong>
-                        </td>
-                        <td>
-                            <bean:write name="porcentaje1"/>%
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: right; width: 50%; font-size: 14px;">
-                            <strong>PORCENTAJE ESTUDIANTES CON 2</strong>
-                        </td>
-                        <td>
-                            <bean:write name="porcentaje2"/>%
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: right; width: 40%; font-size: 14px;">
-                            <strong>PORCENTAJE ESTUDIANTES CON 3</strong>
-                        </td>
-                        <td>
-                            <bean:write name="porcentaje3"/>%
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: right; width: 50%; font-size: 14px;">
-                            <strong>PORCENTAJE ESTUDIANTES CON 4</strong>
-                        </td>
-                        <td>
-                            <bean:write name="porcentaje4"/>%
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: right; width: 50%; font-size: 14px;">
-                            <strong>PORCENTAJE ESTUDIANTES CON 5</strong>
-                        </td>
-                        <td>
-                            <bean:write name="porcentaje5"/>%
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: right; width: 50%; font-size: 14px;">
-                            <strong>PORCENTAJE ESTUDIANTES RETIRADOS</strong>
-                        </td>
-                        <td>
-                            <bean:write name="retirados"/>%
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    </logic:present>
+
+    <logic:notPresent name="general">
+        <div class="tab-pane" id="departamento">
+            <h3 style="text-align: left; font-size: 18px; margin-left: 30px;">
+                Información general: 
+            </h3>
+            <div id="tabla" class="table-responsive" style="margin-top: 20px; width: 90%">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td style="text-align: right; width: 50%; font-size: 14px;">
+                                <strong>TOTAL ESTUDIANTES</strong>
+                            </td>
+                            <td>
+                                <bean:write name="evaluacion" property="total_estudiantes"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; width: 50%; font-size: 14px;">
+                                <strong>NOTA PROMEDIO</strong>
+                            </td>
+                            <td>
+                                <bean:write name="evaluacion" property="nota_prom"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; width: 50%; font-size: 14px;">
+                                <strong>PORCENTAJE APLAZADOS</strong>
+                            </td>
+                            <td>
+                                <bean:write name="aplazados"/>%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; width: 50%; font-size: 14px;">
+                                <strong>PORCENTAJE APROBADOS</strong>
+                            </td>
+                            <td>
+                                <bean:write name="aprobados"/>%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; width: 50%; font-size: 14px;">
+                                <strong>PORCENTAJE RETIRADOS  </strong>
+                            </td>
+                            <td>
+                                <bean:write name="retirados"/>%
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3 style="text-align: left; font-size: 18px; margin-left: 30px;">
+                Información específica: 
+            </h3>
+            <div id="tabla" class="table-responsive" style="margin-top: 20px; width: 90%">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td style="text-align: right; width: 50%; font-size: 14px;">
+                                <strong>PORCENTAJE ESTUDIANTES CON 1</strong>
+                            </td>
+                            <td>
+                                <bean:write name="porcentaje1"/>%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; width: 50%; font-size: 14px;">
+                                <strong>PORCENTAJE ESTUDIANTES CON 2</strong>
+                            </td>
+                            <td>
+                                <bean:write name="porcentaje2"/>%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; width: 40%; font-size: 14px;">
+                                <strong>PORCENTAJE ESTUDIANTES CON 3</strong>
+                            </td>
+                            <td>
+                                <bean:write name="porcentaje3"/>%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; width: 50%; font-size: 14px;">
+                                <strong>PORCENTAJE ESTUDIANTES CON 4</strong>
+                            </td>
+                            <td>
+                                <bean:write name="porcentaje4"/>%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; width: 50%; font-size: 14px;">
+                                <strong>PORCENTAJE ESTUDIANTES CON 5</strong>
+                            </td>
+                            <td>
+                                <bean:write name="porcentaje5"/>%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; width: 50%; font-size: 14px;">
+                                <strong>PORCENTAJE ESTUDIANTES RETIRADOS</strong>
+                            </td>
+                            <td>
+                                <bean:write name="retirados"/>%
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+    </logic:notPresent>
 </div>
 
-<logic:present name="comentarios">
+<%--<logic:present name="comentarios">
     <div class="recomendar">
         <html:form action="/comentar">
             <html:hidden name="evaluacion" property="usbid_profesor" value="${profesor.getUsbid()}"/>
@@ -547,7 +629,7 @@
                         <td style="border: none;">
                 <center>
                     <html:submit
-                                 styleClass="btn btn-success">
+                        styleClass="btn btn-success">
                         Guardar
                     </html:submit>
                 </center>
@@ -557,7 +639,7 @@
             </table>
         </html:form>
     </div>
-</logic:present>
+</logic:present>--%>
 
 <logic:present name="evaluar">
     <div class="recomendar">

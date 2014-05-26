@@ -43,6 +43,7 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
 
             dicta d = (dicta) form;
             Archivo[] archivos_considerados = null;
+            ArrayList<dicta> evaluaciones_pendientes = null;
 
             if (d.getOpcion().equals("pendiente")) {
                 archivos_considerados = obtenerArchivosConsiderados(-1, null, 1);
@@ -71,10 +72,10 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
             int aplazados = evaluacion.getNota1() + evaluacion.getNota2();
             int aprobados = evaluacion.getNota3() + evaluacion.getNota4()
                     + evaluacion.getNota5();
-            
-            int total_nota = (evaluacion.getNota1() * 1) + (evaluacion.getNota2() * 2) +
-                    (evaluacion.getNota3() * 3) + (evaluacion.getNota4() * 4) +
-                    (evaluacion.getNota5() * 5);
+
+            int total_nota = (evaluacion.getNota1() * 1) + (evaluacion.getNota2() * 2)
+                    + (evaluacion.getNota3() * 3) + (evaluacion.getNota4() * 4)
+                    + (evaluacion.getNota5() * 5);
             float promedio = (float) total_nota / (total - evaluacion.getRetirados());
             evaluacion.setNota_prom(promedio);
 
@@ -114,6 +115,8 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
                 request.setAttribute("evaluar_coordinacion", SUCCESS);
                 request.setAttribute("evaluar", SUCCESS);
 
+                evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(id, profesor.getUsbid());
+
                 /* Si el usuario que accede a esta funcionalidad es
                  * jefe de departamento */
             } else if (tipousuario.equals("departamento")) {
@@ -122,9 +125,10 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
                         DBMS.getInstance().
                         obtenerEvaluacionCoordinaciones(id, profesor.getUsbid());
 
-                session.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
+                request.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
                 request.setAttribute("revisar", SUCCESS);
 
+                evaluaciones_pendientes = DBMS.getInstance().listarEvaluadosPorCoordinacion(id, profesor.getUsbid());
 
                 /* Si el usuario que accede a esta funcionalidad decano */
             } else if (tipousuario.equals("decanato")) {
@@ -153,9 +157,17 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
                 request.setAttribute("revisar", SUCCESS);
 
                 request.setAttribute("evaluado_coordinacion", evaluado);
+
+                Coordinacion coordinacion = new Coordinacion();
+                coordinacion.setCodigo((String) session.getAttribute("coordinacion"));
+
+                evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(coordinacion, d.getUsbidProfesor());
+
             }
 
             /* Se envian a la vista los atributos correspondiente */
+            request.setAttribute("general", SUCCESS);
+            request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
             request.setAttribute("listar_archivos", SUCCESS);
             request.setAttribute("archivos", archivos);
             session.setAttribute("profesor", profesor);
