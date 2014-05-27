@@ -25,7 +25,7 @@
     </div>
 </h4>
 
-<logic:notPresent name="general">
+<logic:present name="materia_evaluar">
     <h4 id="izquierda" style="margin-left: 20px; margin-top: 20px;">
         <div style="font-size: 14px;">
             <strong style="color: #333;">
@@ -50,7 +50,7 @@
             </strong>
         </div>
     </h4>
-</logic:notPresent>
+</logic:present>
 
 <div style="width: 95%">
     <ul class="nav nav-tabs" style="height: 55px;">

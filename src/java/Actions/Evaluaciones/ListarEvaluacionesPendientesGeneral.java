@@ -148,11 +148,9 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
 
                 /* Se obtienen los datos de la evaluacion que realizo la
                  * coordinacion */
-                rendimientoProf evaluado;
-
-                evaluado =
-                        DBMS.getInstance().listarEvaluacionesGeneralCoordinacion(
-                        id_coordinacion, d.getUsbidProfesor());
+                rendimientoProf evaluado =
+                            DBMS.getInstance().listarEvaluacionesGeneralCoordinacion(
+                            id_coordinacion, d.getUsbidProfesor());
 
                 request.setAttribute("revisar", SUCCESS);
 

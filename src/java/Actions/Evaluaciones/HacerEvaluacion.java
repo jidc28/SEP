@@ -2,7 +2,6 @@ package Actions.Evaluaciones;
 
 import Clases.*;
 import DBMS.DBMS;
-import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -36,8 +35,8 @@ public class HacerEvaluacion extends Action {
         String tipousuario = usuario.getTipousuario();
         String id = usuario.getUsbid();
 
-        Profesor profesor =  (Profesor) session.getAttribute("profesor");
-        
+        Profesor profesor = (Profesor) session.getAttribute("profesor");
+
         if (session.getAttribute("usuario") != null) {
 
             dicta d = (dicta) form;
@@ -46,10 +45,6 @@ public class HacerEvaluacion extends Action {
             /* Se obtiene el rendimiento del profesor determinado asociado con
              * la materia que maneja la coordinación */
             rendimientoProf evaluacion = DBMS.getInstance().obtenerEvaluacion(d);
-//
-//            /* Se obtiene toda la informacion del profesor */
-//            Profesor profesor =
-//                    DBMS.getInstance().obtenerInfoProfesor(d.getUsbidProfesor());
 
             /* Se calcula la cantidad de aplazados y la cantidad de aprobados */
             int total = evaluacion.getTotal_estudiantes();
@@ -77,15 +72,6 @@ public class HacerEvaluacion extends Action {
 
                 /* Si el usuario que accede a esta funcionalidad es
                  * jefe de departamento */
-            } else if (tipousuario.equals("departamento")) {
-
-//                ArrayList<rendimientoProf> evaluacion_coordinaciones =
-//                        DBMS.getInstance().
-//                        obtenerEvaluacionCoordinaciones(id, profesor.getUsbid(), d.getCodigoMateria());
-//
-//                session.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
-
-                /* Si el usuario que accede a esta funcionalidad decano */
             } else if (tipousuario.equals("decanato")) {
 
                 /* Se obtiene la coordinacion que realizo la evaluacion. */
@@ -103,7 +89,6 @@ public class HacerEvaluacion extends Action {
                         profesor.getUsbid());
 
                 request.setAttribute("revisar", SUCCESS);
-                request.setAttribute("evaluado_coordinacion", evaluado);
             }
 
             /* Se obtienen los datos de la materia que se quiere evaluar. */
@@ -111,10 +96,9 @@ public class HacerEvaluacion extends Action {
             materia_evaluar.setCodigo(d.getCodigoMateria());
             materia_evaluar = DBMS.getInstance().obtenerDatosMateria(materia_evaluar);
             materia_evaluar.setPeriodo(d.getPeriodo());
-            
+
             /* Se envian a la vista los atributos correspondiente */
             request.setAttribute("materia_evaluar", materia_evaluar);
-//            session.setAttribute("profesor", profesor);
             session.setAttribute("evaluacion", evaluacion);
             session.setAttribute("porcentaje1", porcentaje1);
             session.setAttribute("porcentaje2", porcentaje2);

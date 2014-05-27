@@ -37,7 +37,7 @@ public class RevisarEvaluacion extends Action {
 
         ArrayList<Profesor> profesores = null;
         rendimientoProf rendimiento = (rendimientoProf) form;
-        boolean revisado = false;
+        boolean revisado;
 
         /* Si el usuario que accede a esta funcionalidad es de tipo
          * departamento */
@@ -46,17 +46,14 @@ public class RevisarEvaluacion extends Action {
             revisado = DBMS.getInstance().revisadoDepartamento(rendimiento, id);
 
             String id_profesor = (String) session.getAttribute("id_profesor");
-//            evaluaciones_pendientes = DBMS.getInstance().listarEvaluadosPorCoordinacion(id,id_profesor);
             profesores = DBMS.getInstance().listarProfesoresAEvaluarDepartamento(id);
 
             /* Si el usuario que accede a esta funcionalidad decano */
         } else if (tipousuario.equals("decanato")) {
             String coordinacion = (String) session.getAttribute("coordinacion");
             revisado = DBMS.getInstance().revisadoDecanato(rendimiento, coordinacion);
-            profesores = 
+            profesores =
                     DBMS.getInstance().listarProfesoresPorEvaluarDecanato(coordinacion);
-//            evaluaciones_pendientes =
-//                    DBMS.getInstance().listarEvaluacionesPendientes(coordinacion);
             request.setAttribute("solo_lectura", SUCCESS);
         }
 

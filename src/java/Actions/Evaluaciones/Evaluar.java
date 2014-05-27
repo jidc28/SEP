@@ -107,16 +107,6 @@ public class Evaluar extends Action {
                         DBMS.getInstance().listarProfesoresPorEvaluarCoordinacion(id);
 
                 /* En caso que la evaluación dla este realizando el departamento */
-            } else if (tipousuario.equals("departamento")) {
-
-                /* Se guarda la evaluación */
-                evaluado =
-                        DBMS.getInstance().evaluarDepartamento(rendimiento, id);
-
-                /* Se consultan las evaluaciones que quedan pendientes del
-                 * departamento */
-                evaluaciones_pendientes =
-                        DBMS.getInstance().listarEvaluadosPorCoordinacion(id);
             }
 
             request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
