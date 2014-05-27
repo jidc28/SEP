@@ -606,16 +606,6 @@
             <forward name="failure" path="obtener_evaluaciones_pagina"/>
         </action>
         
-        <action input="/ObtenerEvaluaciones.jsp" 
-                name="rendimientoProf"
-                path="/comentar" 
-                scope="request" 
-                type="Actions.Evaluaciones.Comentar"
-                validate="false">
-            <forward name="success" path="listar_evaluaciones_pendientes_pagina"/>
-            <forward name="failure" path="obtener_evaluaciones_pagina"/>
-        </action>
-        
         <!--         OTROS       -->               
         <action scope="request" input="/" path="/cerrarSesion" type="Session.CerrarSesion" validate="false">
             <forward name="success" path="/Login.jsp"/>
