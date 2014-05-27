@@ -23,7 +23,10 @@ public class Graficar extends Action {
 
         rendimientoProf evaluacion, evaluaciones;
 
+        Profesor profesor = (Profesor) session.getAttribute("profesor");
+
         dicta d = (dicta) form;
+        d.setUsbidProfesor(profesor.getUsbid());
 
         /* En el caso ne que la evaluación no se haya realizado. */
         if (d.getOpcion() == null) {
@@ -34,11 +37,6 @@ public class Graficar extends Action {
             evaluaciones = DBMS.getInstance().obtenerEvaluaciones(d.getCodigoMateria(),
                     evaluacion.getAno(), evaluacion.getTrimestre());
 
-            /* Se obtienen los datos del profesor */
-            Profesor profesor = DBMS.getInstance().obtenerInfoProfesor(d.getUsbidProfesor());
-
-            request.setAttribute("profesor", profesor);
-
             /* En caso que la evaluación ya ha sido enviada. */
         } else {
 
@@ -46,7 +44,6 @@ public class Graficar extends Action {
              * revisar */
             int ano = (Integer) session.getAttribute("ano");
             String trimestre = (String) session.getAttribute("trimestre");
-            Profesor profesor = (Profesor) session.getAttribute("profesor");
 
             /* Se obtiene la evaluación del profesor */
             evaluacion =
@@ -77,6 +74,11 @@ public class Graficar extends Action {
                 + (evaluaciones.getNota4() * 4) + (evaluaciones.getNota5() * 5))
                 / (evaluaciones.getTotal_estudiantes() - evaluaciones.getRetirados());
 
+        Materia materia_evaluar = new Materia();
+        materia_evaluar.setCodigo(d.getCodigoMateria());
+        materia_evaluar = DBMS.getInstance().obtenerDatosMateria(materia_evaluar);
+        materia_evaluar.setPeriodo(d.getPeriodo());
+
         /* Se envian las variables importantes a la vista (graficos) */
         request.setAttribute("EP", evaluacion);
         request.setAttribute("EPS", evaluaciones);
@@ -85,7 +87,7 @@ public class Graficar extends Action {
         request.setAttribute("aplazados_general", aplazados_general);
         request.setAttribute("aprobados_general", aprobados_general);
         request.setAttribute("nota_promedio_general", nota_promedio_general);
-        request.setAttribute("materia_evaluar", d.getCodigoMateria());
+        request.setAttribute("materia_evaluar", materia_evaluar);
 
         return mapping.findForward(SUCCESS);
     }

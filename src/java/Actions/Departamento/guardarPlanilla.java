@@ -57,16 +57,9 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
         String fecha = dateFormat.format(date).toString();
         String ano = fecha.substring(0, 4);
 
-        int[] anos = new int[4];
-        anos[3] = Integer.parseInt(ano);
-        int i = 2;
-        int tmp = anos[3];
-
-        while (i > -1) {
-            tmp--;
-            anos[i] = tmp;
-            i--;
-        }
+        int[] anos = new int[2];
+        anos[1] = Integer.parseInt(ano);
+        anos[0] = anos[1] - 1;
 
         int _1 = renMateria.getNota1();
         int _2 = renMateria.getNota2();
@@ -141,13 +134,13 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
 
         ArrayList<rendimientoProf> rendimiento =
                 DBMS.getInstance().obtenerRendimientoProfesor(id_profesor, id_departamento);
-        
+
         ArrayList<Materia> materias =
                 DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
 
         request.setAttribute("materias", materias);
         request.setAttribute("rendimiento", rendimiento);
-        
+
         if (agregar) {
             request.setAttribute("planilla_guardada", renMateria);
         } else {

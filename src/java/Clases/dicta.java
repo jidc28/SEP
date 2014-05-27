@@ -18,6 +18,15 @@ public class dicta extends org.apache.struts.action.ActionForm {
     private Profesor primerProfesor;
     private String usbidProfesor;
     private String opcion;
+    private String periodo;
+
+    public String getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
+    }
 
     public String getOpcion() {
         return opcion;

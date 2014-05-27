@@ -1328,11 +1328,13 @@ public class DBMS {
         ArrayList<dicta> dicta_materia = new ArrayList(0);
         String codigoMateria;
         try {
-            ps = conexion.prepareStatement("SELECT DISTINCT codigo_materia, nombre "
-                    + "FROM evaluar as e, materia as m "
+            ps = conexion.prepareStatement("SELECT DISTINCT r.codigo_materia, trimestre, nombre "
+                    + "FROM evaluar as e, materia as m, rendimiento as r "
                     + "WHERE e.codigo_coordinacion = ? "
+                    + "AND r.codigo_materia = e.codigo_materia "
                     + "AND e.comentado_coordinacion = 'no' "
-                    + "AND codigo_materia = codigo "
+                    + "AND e.codigo_materia = codigo "
+                    + "AND e.usbid_profesor = r.usbid_profesor "
                     + "AND e.usbid_profesor = ? "
                     + "AND NOT EXISTS ("
                     + "SELECT * "
@@ -1350,6 +1352,8 @@ public class DBMS {
                 codigoMateria = rs.getString("codigo_materia");
                 d.setCodigoMateria(codigoMateria);
                 d.setOpcion(rs.getString("nombre"));
+
+                d.setPeriodo(obtenerTrimestrePorSiglas(rs.getString("trimestre")));
 
                 ps2 = conexion.prepareStatement("SELECT codigo_materia, usbid, "
                         + "nombre, apellido "
@@ -1957,6 +1961,9 @@ public class DBMS {
                     + "AND m.codigo = o.codigo_materia;");
             ps.setString(1, id_profesor);
             ps.setString(2, id_departamento);
+
+            System.out.println(ps.toString());
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 rendimientoProf r = new rendimientoProf();
@@ -2042,6 +2049,8 @@ public class DBMS {
             ps.setString(1, id_profesor);
             ps.setString(2, id_departamento);
 
+            System.out.println(ps.toString());
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Materia m = new Materia();
@@ -2093,9 +2102,11 @@ public class DBMS {
             ps2 = conexion.prepareStatement("UPDATE dicta "
                     + "SET planilla_llena = 'S' "
                     + "WHERE usbid_profesor = ? "
-                    + "AND codigo_materia = ?;");
+                    + "AND codigo_materia = ? "
+                    + "AND periodo = ?;");
             ps2.setString(1, u.getUsbid_profesor());
             ps2.setString(2, u.getCodigo_materia());
+            ps2.setString(3, u.getTrimestre());
 
             if (0 == cantidadPlanillaVacia(u.getUsbid_profesor(), null)) {
                 ps3 = conexion.prepareStatement("UPDATE pertenece "
@@ -2310,11 +2321,16 @@ public class DBMS {
                     + "retirados as r, ano, trimestre "
                     + "FROM rendimiento "
                     + "WHERE codigo_materia = ? "
-                    + "AND usbid_profesor = ?;");
+                    + "AND usbid_profesor = ? "
+                    + "AND trimestre = ?;");
 
             String codigo_materia = d.getCodigoMateria();
             ps.setString(1, codigo_materia);
             ps.setString(2, d.getUsbidProfesor());
+            ps.setString(3, obtenerTrimestrePorNombre(d.getPeriodo()));
+            
+            
+            System.out.println("aqui! " + ps.toString());
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -2390,7 +2406,7 @@ public class DBMS {
         }
         return null;
     }
-    
+
     public rendimientoProf obtenerEvaluacionPDF(String usbid_profesor) {
         PreparedStatement ps;
         rendimientoProf evaluacion = new rendimientoProf();
@@ -2986,9 +3002,9 @@ public class DBMS {
             ps.setString(1, id_profesor);
             ps.setInt(2, ano);
             ps.setString(3, trimestre);
-            
+
             System.out.println(ps.toString());
-            
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -3523,6 +3539,36 @@ public class DBMS {
         return profesores;
     }
 
+    public String obtenerTrimestrePorNombre(String periodo) {
+
+        if (periodo.equals("Septiembre-Diciembre")) {
+            return "SD";
+        } else if (periodo.equals("Ener-Marzo")) {
+            return "EM";
+        } else if (periodo.equals("Abril-Julio")) {
+            return "AJ";
+        } else if (periodo.equals("Intensivo")) {
+            return "V";
+        }
+
+        return null;
+    }
+
+    public String obtenerTrimestrePorSiglas(String periodo) {
+
+        if (periodo.equals("SD")) {
+            return "Septiembre-Diciembre";
+        } else if (periodo.equals("EM")) {
+            return "Ener-Marzo";
+        } else if (periodo.equals("AJ")) {
+            return "Abril-Julio";
+        } else if (periodo.equals("V")) {
+            return "Intensivo";
+        }
+
+        return null;
+    }
+
     public ArrayList<rendimientoProf> listarAnoEvaluacionesEnviadasCoordinacion(
             String id_coordinacion, String usbid_profesor) {
 
@@ -3543,15 +3589,8 @@ public class DBMS {
                 rendimientoProf r = new rendimientoProf();
                 r.setAno(rs.getInt("ano"));
                 String periodo = rs.getString("trimestre");
-                if (periodo.equals("SD")) {
-                    r.setTrimestre("Septiembre-Diciembre");
-                } else if (periodo.equals("EM")) {
-                    r.setTrimestre("Ener-Marzo");
-                } else if (periodo.equals("AJ")) {
-                    r.setTrimestre("Abril-Julio");
-                } else if (periodo.equals("V")) {
-                    r.setTrimestre("Intensivo");
-                }
+
+                r.setTrimestre(obtenerTrimestrePorSiglas(periodo));
                 rendimiento.add(r);
             }
 
@@ -3585,15 +3624,8 @@ public class DBMS {
                 rendimientoProf r = new rendimientoProf();
                 r.setAno(rs.getInt("ano"));
                 String periodo = rs.getString("trimestre");
-                if (periodo.equals("SD")) {
-                    r.setTrimestre("Septiembre-Diciembre");
-                } else if (periodo.equals("EM")) {
-                    r.setTrimestre("Ener-Marzo");
-                } else if (periodo.equals("AJ")) {
-                    r.setTrimestre("Abril-Julio");
-                } else if (periodo.equals("V")) {
-                    r.setTrimestre("Intensivo");
-                }
+
+                r.setTrimestre(obtenerTrimestrePorSiglas(periodo));
                 rendimiento.add(r);
             }
 
@@ -3731,7 +3763,7 @@ public class DBMS {
 
             return archivos;
 
-        } catch (SQLException ex) {            
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;

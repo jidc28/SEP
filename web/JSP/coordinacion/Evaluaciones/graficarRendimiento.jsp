@@ -12,10 +12,35 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <h4>
-    Rendimiento de la materia: <bean:write name="materia_evaluar"/>
-        <div style="font-size: 14px; color: grey;">
+    Estadísticas de evaluación
+    <div style="font-size: 14px; color: grey;">
         <bean:write name="profesor" property="apellido"/>,
         <bean:write name="profesor" property="nombre"/>
+    </div>
+</h4>
+
+<h4 id="izquierda" style="margin-left: 20px; margin-top: 20px;">
+    <div style="font-size: 14px;">
+        <strong style="color: #333;">
+            Materia a evaluar:
+        </strong> 
+        <strong style="color: gray;">
+            <bean:write name="materia_evaluar" property="nombre"/>
+        </strong>
+        <br>
+        <strong style="color: #333;">
+            Código:
+        </strong>
+        <strong style="color: gray;">
+            <bean:write name="materia_evaluar" property="codigo"/>
+        </strong>
+        <br>
+        <strong style="color: #333;">
+            Trimestre:
+        </strong>
+        <strong style="color: gray;">
+            <bean:write name="materia_evaluar" property="periodo"/>
+        </strong>
     </div>
 </h4>
 

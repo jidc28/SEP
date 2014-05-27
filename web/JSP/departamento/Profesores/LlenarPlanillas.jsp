@@ -41,7 +41,7 @@
 <logic:present name="planilla_no_guardada">
     <div class="alert alert-danger" id="alert">
         La planilla de la materia
-        <bean:write name="planilla_guardada" property="codigo_materia"/>
+        <bean:write name="planilla_no_guardada" property="codigo_materia"/>
         no se ha podido guardado correctamente.
     </div>  
 </logic:present> 

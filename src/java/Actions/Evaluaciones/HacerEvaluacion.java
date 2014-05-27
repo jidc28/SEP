@@ -36,17 +36,20 @@ public class HacerEvaluacion extends Action {
         String tipousuario = usuario.getTipousuario();
         String id = usuario.getUsbid();
 
+        Profesor profesor =  (Profesor) session.getAttribute("profesor");
+        
         if (session.getAttribute("usuario") != null) {
 
             dicta d = (dicta) form;
+            d.setUsbidProfesor(profesor.getUsbid());
 
             /* Se obtiene el rendimiento del profesor determinado asociado con
              * la materia que maneja la coordinación */
             rendimientoProf evaluacion = DBMS.getInstance().obtenerEvaluacion(d);
-
-            /* Se obtiene toda la informacion del profesor */
-            Profesor profesor =
-                    DBMS.getInstance().obtenerInfoProfesor(d.getUsbidProfesor());
+//
+//            /* Se obtiene toda la informacion del profesor */
+//            Profesor profesor =
+//                    DBMS.getInstance().obtenerInfoProfesor(d.getUsbidProfesor());
 
             /* Se calcula la cantidad de aplazados y la cantidad de aprobados */
             int total = evaluacion.getTotal_estudiantes();
@@ -97,15 +100,21 @@ public class HacerEvaluacion extends Action {
                 rendimientoProf evaluado =
                         DBMS.getInstance().listarEvaluacionesCoordinacion(
                         id_coordinacion, ano, trimestre, d.getCodigoMateria(),
-                        d.getUsbidProfesor());
+                        profesor.getUsbid());
 
                 request.setAttribute("revisar", SUCCESS);
                 request.setAttribute("evaluado_coordinacion", evaluado);
             }
 
+            /* Se obtienen los datos de la materia que se quiere evaluar. */
+            Materia materia_evaluar = new Materia();
+            materia_evaluar.setCodigo(d.getCodigoMateria());
+            materia_evaluar = DBMS.getInstance().obtenerDatosMateria(materia_evaluar);
+            materia_evaluar.setPeriodo(d.getPeriodo());
+            
             /* Se envian a la vista los atributos correspondiente */
-            request.setAttribute("materia_evaluar", d.getCodigoMateria());
-            session.setAttribute("profesor", profesor);
+            request.setAttribute("materia_evaluar", materia_evaluar);
+//            session.setAttribute("profesor", profesor);
             session.setAttribute("evaluacion", evaluacion);
             session.setAttribute("porcentaje1", porcentaje1);
             session.setAttribute("porcentaje2", porcentaje2);

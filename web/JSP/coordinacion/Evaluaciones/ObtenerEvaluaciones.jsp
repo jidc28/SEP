@@ -19,14 +19,38 @@
 
 <h4>    
     Evaluación
-    <logic:notPresent name="general">
-        de la materia: <bean:write name="materia_evaluar"/>
-    </logic:notPresent>
     <div style="font-size: 14px; color: grey;">
         <bean:write name="profesor" property="apellido"/>,
         <bean:write name="profesor" property="nombre"/>
     </div>
 </h4>
+
+<logic:notPresent name="general">
+    <h4 id="izquierda" style="margin-left: 20px; margin-top: 20px;">
+        <div style="font-size: 14px;">
+            <strong style="color: #333;">
+                Materia a evaluar:
+            </strong> 
+            <strong style="color: gray;">
+                <bean:write name="materia_evaluar" property="nombre"/>
+            </strong>
+            <br>
+            <strong style="color: #333;">
+                Código:
+            </strong>
+            <strong style="color: gray;">
+                <bean:write name="materia_evaluar" property="codigo"/>
+            </strong>
+            <br>
+            <strong style="color: #333;">
+                Trimestre:
+            </strong>
+            <strong style="color: gray;">
+                <bean:write name="materia_evaluar" property="periodo"/>
+            </strong>
+        </div>
+    </h4>
+</logic:notPresent>
 
 <div style="width: 95%">
     <ul class="nav nav-tabs" style="height: 55px;">
@@ -442,54 +466,65 @@
             </logic:empty>
 
             <logic:notEmpty name="evaluaciones_pendientes">
-                    <div class="jumbotron" style="width: 80%; padding: 10px;">
-                        <table style="margin: 0px;">
-                            <tbody>
-                                <logic:iterate id="evaluaciones" name="evaluaciones_pendientes">
-                                    <tr>
-                                        <td style="padding: 0px; color: #999; font-size: 14px;">
-                                            <bean:write name="evaluaciones" property="codigoMateria"/>
-                                        </td>
-                                        <td style="padding: 5px; font-size: 14px; padding-left: 15px;">
-                                            <bean:write name="evaluaciones" property="opcion"/>
-                                        </td>
-                                        <td>
-                                            <html:form action="/graficarRendimiento"
-                                                       style="margin: 0px;">
-                                                <html:hidden name="dicta" property="usbidProfesor"
-                                                             value="${evaluaciones.getPrimerProfesor().getUsbid()}"/>
-                                                <html:hidden name="dicta" property="codigoMateria"
-                                                             value="${evaluaciones.getCodigoMateria()}"/>
-                                                <html:submit styleClass="link2"
-                                                             style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
-                                                    Graficar
-                                                </html:submit>
-                                            </html:form>
-                                        </td>
-                                        <td>
-                                            <html:form action="/hacerEvaluacion" 
-                                                       onsubmit="return(this)"
-                                                       style="margin: 0px;">
-                                                <html:hidden name="dicta" 
-                                                             property="codigoMateria"
-                                                             value="${evaluaciones.getCodigoMateria()}"/>
-                                                <html:hidden name="dicta"
-                                                             property="usbidProfesor"
-                                                             value="${evaluaciones.getPrimerProfesor().getUsbid()}"/>
-                                                <html:hidden name="dicta"
-                                                             property="opcion"
-                                                             value="pendiente"/>
-                                                <html:submit styleClass="link2"
-                                                             style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
-                                                    Ver rendimiento
-                                                </html:submit>
-                                            </html:form>
-                                        </td>
-                                    </tr>
-                                </logic:iterate>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="jumbotron" style="width: 80%; padding: 10px;">
+                    <table style="margin: 0px;">
+                        <tbody>
+                            <logic:iterate id="evaluaciones" name="evaluaciones_pendientes">
+                                <tr>
+                                    <td style="padding: 0px; color: #999; font-size: 14px;">
+                                        <bean:write name="evaluaciones" property="codigoMateria"/>
+                                    </td>
+                                    <td style="padding: 5px; font-size: 14px; padding-left: 15px;">
+                                        <bean:write name="evaluaciones" property="opcion"/>
+                                    </td>
+                                    <td style="padding: 5px; font-size: 14px; padding-left: 15px;">
+                                        <bean:write name="evaluaciones" property="periodo"/>
+                                    </td>
+                                    <td>
+                                        <html:form action="/graficarRendimiento"
+                                                   style="margin: 0px;">
+                                            <html:hidden name="dicta" 
+                                                         property="usbidProfesor"
+                                                         value="${evaluaciones.getPrimerProfesor().getUsbid()}"/>
+                                            <html:hidden name="dicta" 
+                                                         property="codigoMateria"
+                                                         value="${evaluaciones.getCodigoMateria()}"/>
+                                            <html:hidden name="dicta" 
+                                                         property="periodo"
+                                                         value="${evaluaciones.getPeriodo()}"/>
+                                            <html:submit styleClass="link2"
+                                                         style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                                Graficar
+                                            </html:submit>
+                                        </html:form>
+                                    </td>
+                                    <td>
+                                        <html:form action="/hacerEvaluacion" 
+                                                   onsubmit="return(this)"
+                                                   style="margin: 0px;">
+                                            <html:hidden name="dicta" 
+                                                         property="codigoMateria"
+                                                         value="${evaluaciones.getCodigoMateria()}"/>
+                                            <html:hidden name="dicta"
+                                                         property="usbidProfesor"
+                                                         value="${evaluaciones.getPrimerProfesor().getUsbid()}"/>
+                                            <html:hidden name="dicta"
+                                                         property="opcion"
+                                                         value="pendiente"/>
+                                            <html:hidden name="dicta" 
+                                                         property="periodo"
+                                                         value="${evaluaciones.getPeriodo()}"/>
+                                            <html:submit styleClass="link2"
+                                                         style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                                Ver rendimiento
+                                            </html:submit>
+                                        </html:form>
+                                    </td>
+                                </tr>
+                            </logic:iterate>
+                        </tbody>
+                    </table>
+                </div>
             </logic:notEmpty>
         </div>
     </logic:present>
