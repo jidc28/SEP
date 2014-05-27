@@ -1577,38 +1577,41 @@ public class DBMS {
         return null;
     }
 
-    public rendimientoProf listarEvaluacionesEnviadasCoordinacion(
-            String id_coordinacion, int ano, String trimestre, String usbid_profesor) {
+    public ArrayList<rendimientoProf> listarEvaluacionesEnviadasCoordinacion(String id_coordinacion,
+            int ano, String trimestre, String usbid_profesor) {
 
-        PreparedStatement ps, ps2;
-        rendimientoProf rendimiento = null;
+        PreparedStatement ps;
+        ArrayList<rendimientoProf> rendimientos = new ArrayList(0);
 
         try {
-            ps = conexion.prepareStatement("SELECT recomendado, observaciones, "
-                    + "usbid_profesor, ano, trimestre "
-                    + "FROM evaluado as e "
-                    + "WHERE codigo_coordinacion = ? "
-                    + "AND ano = ? "
-                    + "AND trimestre = ? "
-                    + "AND usbid_profesor = e.usbid_profesor "
-                    + "AND usbid_profesor = ?;");
+            ps = conexion.prepareStatement("SELECT DISTINCT m.nombre, m.codigo, r.trimestre "
+                    + "FROM evaluado as e, materia as m, rendimiento as r "
+                    + "WHERE e.codigo_coordinacion = ? "
+                    + "AND r.codigo_materia = codigo "
+                    + "AND e.usbid_profesor = r.usbid_profesor "
+                    + "AND e.usbid_profesor = ? "
+                    + "AND r.ano = ? "
+                    + "AND r.trimestre = ?;");
             ps.setString(1, id_coordinacion);
-            ps.setInt(2, ano);
-            ps.setString(3, trimestre);
-            ps.setString(4, usbid_profesor);
+            ps.setString(2, usbid_profesor);
+            ps.setInt(3, ano);
+            ps.setString(4, trimestre);
+
+            System.out.println(ps.toString());
 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                rendimiento = new rendimientoProf();
-                rendimiento.setRecomendado(rs.getString("recomendado"));
-                rendimiento.setObservaciones_c(rs.getString("observaciones"));
-                rendimiento.setUsbid_profesor(rs.getString("usbid_profesor"));
-                rendimiento.setAno(rs.getInt("ano"));
-                rendimiento.setTrimestre(rs.getString("trimestre"));
+                rendimientoProf rendimiento = new rendimientoProf();
+                rendimiento.setCodigo_materia(rs.getString("codigo"));
+                rendimiento.setNombre_materia(rs.getString("nombre"));
+                rendimiento.setTrimestre(
+                        obtenerTrimestrePorSiglas(rs.getString("trimestre")));
+
+                rendimientos.add(rendimiento);
             }
 
-            return rendimiento;
+            return rendimientos;
 
         } catch (SQLException ex) {
             ex.printStackTrace();

@@ -49,7 +49,7 @@
                         </logic:equal>
                         <html:hidden name="evaluacion" property="ano"/>
                         <html:submit styleClass="link2">
-                            Evaluaciones de <bean:write name="evaluacion" property="trimestre"/> <bean:write name="evaluacion" property="ano"/>
+                            Evaluaciones realizadas en <bean:write name="evaluacion" property="trimestre"/> <bean:write name="evaluacion" property="ano"/>
                         </html:submit>
                     </html:form>
                 </td>
