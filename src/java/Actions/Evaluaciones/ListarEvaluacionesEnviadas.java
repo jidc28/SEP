@@ -66,20 +66,20 @@ public class ListarEvaluacionesEnviadas extends org.apache.struts.action.Action 
 
             System.out.println("DEPARTAMENTO");
             evaluaciones_enviadas =
-                    DBMS.getInstance().listarEvaluacionesEnviadasDepartamento(id, ano, trimestre);
+                    DBMS.getInstance().listarEvaluacionesEnviadasDepartamento(
+                    id, ano, trimestre, profesor.getUsbid());
 
         } else if (tipousuario.equals("decanato")) {
 
-            System.out.println("DECANATO");
             String id_coordinacion = (String) session.getAttribute("coordinacion");
 
             evaluaciones_enviadas =
-                    DBMS.getInstance().listarEvaluacionesEnviadasCoordinacion(id_coordinacion, ano, trimestre);
+                    DBMS.getInstance().listarEvaluacionesEnviadasCoordinacion(
+                    id_coordinacion, ano, trimestre, profesor.getUsbid());
         }
 
         /* En caso en el que no existan evaluaciones enviadas */
         if (evaluaciones_enviadas.isEmpty()) {
-            System.out.println("-------------------> Vacio");
             request.setAttribute("vacio", SUCCESS);
         }
 
