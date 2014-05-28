@@ -1728,35 +1728,38 @@ public class DBMS {
      * @return listado de evaluaciones
      */
     public ArrayList<rendimientoProf> listarEvaluacionesEnviadasDepartamento(String id_departamento,
-            int ano, String trimestre) {
+            int ano, String trimestre, String usbid_profesor) {
 
         PreparedStatement ps;
         ArrayList<rendimientoProf> rendimientos = new ArrayList(0);
 
         try {
-            ps = conexion.prepareStatement("SELECT codigo, recomendado, "
-                    + "observaciones, nombre, usbid_profesor, ano, trimestre "
-                    + "FROM evaluado, materia "
-                    + "WHERE codigo_departamento = ? "
-                    + "AND ano = ? "
-                    + "AND trimestre = ? "
-                    + "AND codigo_materia = codigo;");
+            ps = conexion.prepareStatement("SELECT DISTINCT m.nombre, "
+                    + "m.codigo, r.ano, r.trimestre "
+                    + "FROM pertenece as p, evaluado as e, rendimiento as r, "
+                    + "materia as m "
+                    + "WHERE p.codigo_departamento = ? "
+                    + "AND r.usbid_profesor = ? "
+                    + "AND p.usbid_profesor = e.usbid_profesor "
+                    + "AND r.ano_evaluacion = ?"
+                    + "AND r.trimestre_evaluacion = ? "
+                    + "AND m.codigo = r.codigo_materia;");
             ps.setString(1, id_departamento);
-            ps.setInt(2, ano);
-            ps.setString(3, trimestre);
+            ps.setString(2, usbid_profesor);
+            ps.setInt(3, ano);
+            ps.setString(4, trimestre);
+
+            System.out.println(ps.toString());
 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 rendimientoProf rendimiento = new rendimientoProf();
                 rendimiento.setCodigo_materia(rs.getString("codigo"));
-                rendimiento.setRecomendado(rs.getString("recomendado"));
-                rendimiento.setObservaciones_c(rs.getString("observaciones"));
                 rendimiento.setNombre_materia(rs.getString("nombre"));
-                rendimiento.setUsbid_profesor(rs.getString("usbid_profesor"));
                 rendimiento.setAno(rs.getInt("ano"));
-                rendimiento.setTrimestre(rs.getString("trimestre"));
-
+                rendimiento.setTrimestre(
+                        obtenerTrimestrePorSiglas(rs.getString("trimestre")));
                 rendimientos.add(rendimiento);
             }
 
