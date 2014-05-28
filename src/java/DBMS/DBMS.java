@@ -49,17 +49,26 @@ public class DBMS {
         return false;
     }
 
-    /* Esta funcion se utiliza cuando un usuario inicia sesion
-     * para verificar que su nombre y contrasena sean correctos
-     * 
+    /**
+     * verificarCas
+     *
+     * Este método es el que se encarga de auntenticar un usuario, es decir
+     * revisa que pertenece a la base de datos y luego revisa que la contraseña
+     * coincida.
+     *
+     * @param u: usuario que se quiere autenticar en el sistema.
+     * @return Usuario
+     *
      */
     public Usuario verificarCas(Usuario u) {
 
         PreparedStatement psConsultar = null;
         try {
 
-            psConsultar = conexion.prepareStatement("SELECT * FROM usuario"
-                    + " WHERE usbid = ? AND contrasena = ?");
+            psConsultar = conexion.prepareStatement("SELECT * "
+                    + "FROM usuario"
+                    + " WHERE usbid = ? "
+                    + "AND contrasena = ?");
 
             psConsultar.setString(1, u.getUsbid());
             psConsultar.setString(2, u.getContrasena());
@@ -81,18 +90,29 @@ public class DBMS {
         return u;
     }
 
+    /**
+     * agregarUsuario
+     *
+     * Agrega un usuario a la base de datos.
+     *
+     * @param u: usuario que se quiere agregar al sistema.
+     * @return boolean que indica si el usuario ha sido agregado exitosamente
+     */
     public boolean agregarUsuario(CreateUserForm u) {
 
-        PreparedStatement psAgregar1 = null;
-        PreparedStatement psAgregar2 = null;
+        PreparedStatement psAgregar1, psAgregar2;
 
         try {
-            psAgregar1 = conexion.prepareStatement("INSERT INTO usuario(usbid, contrasena) VALUES (?, ?);");
+            psAgregar1 = conexion.prepareStatement("INSERT "
+                    + "INTO usuario(usbid, contrasena) "
+                    + "VALUES (?, ?);");
             psAgregar1.setString(1, u.getUsbid());
             psAgregar1.setString(2, u.getContrasena1());
             Integer i = psAgregar1.executeUpdate();
 
-            psAgregar2 = conexion.prepareStatement("INSERT INTO profesor(usbid,email) VALUES (?, ?);");
+            psAgregar2 = conexion.prepareStatement("INSERT "
+                    + "INTO profesor(usbid,email) "
+                    + "VALUES (?, ?);");
             psAgregar2.setString(1, u.getUsbid());
             psAgregar2.setString(2, u.getUsbid() + "@usb.ve");
             Integer j = psAgregar2.executeUpdate();
@@ -105,6 +125,15 @@ public class DBMS {
         }
     }
 
+    /**
+     * agregarUsuario
+     *
+     * Agrega un usuario a la base de datos.
+     *
+     * @param usbid: identificador del usuario
+     * @param tipousuario: tipo del usuario
+     * @return boolean que indica si el usuario ha sido agregado exitosamente/
+     */
     public boolean agregarUsuario(String usbid, String tipousuario) {
 
         PreparedStatement ps;
@@ -126,71 +155,22 @@ public class DBMS {
         }
     }
 
-    public ArrayList<Usuario> listarUsuarios() {
-
-        ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
-        PreparedStatement ps = null;
-        try {
-            ps = conexion.prepareStatement("SELECT * FROM usuario ORDER BY usbid");
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Usuario u = new Usuario();
-                u.setUsbid(rs.getString("usbid"));
-                u.setTipousuario(rs.getString("tipousuario"));
-                u.setDepartamento(rs.getString("departamento"));
-                usrs.add(u);
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return usrs;
-    }
-
-    public ArrayList[] mostrarUsuarios() {
-
-        ArrayList[] total = new ArrayList[4];
-        ArrayList<Usuario> profesores = new ArrayList<Usuario>(0);
-        ArrayList<Usuario> decanatos = new ArrayList<Usuario>(0);
-        ArrayList<Usuario> departamentos = new ArrayList<Usuario>(0);
-        ArrayList<Usuario> coordinaciones = new ArrayList<Usuario>(0);
-        PreparedStatement ps = null;
-        try {
-            ps = conexion.prepareStatement("SELECT * FROM usuario ORDER BY usbid");
-            ResultSet rs = ps.executeQuery();
-            String tipousuario = null;
-            while (rs.next()) {
-                Usuario u = new Usuario();
-                u.setUsbid(rs.getString("usbid"));
-                u.setDepartamento(rs.getString("departamento"));
-                tipousuario = rs.getString("tipousuario");
-                if (tipousuario.equals("profesor")) {
-                    profesores.add(u);
-                } else if (tipousuario.equals("decanato")) {
-                    decanatos.add(u);
-                } else if (tipousuario.equals("departamento")) {
-                    departamentos.add(u);
-                } else if (tipousuario.equals("coordinacion")) {
-                    coordinaciones.add(u);
-                }
-            }
-            total[0] = profesores;
-            total[1] = decanatos;
-            total[2] = departamentos;
-            total[3] = coordinaciones;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return total;
-    }
-
+    /**
+     * listarProfesores
+     *
+     * Consulta profesores presentes en la base de datos.
+     *
+     * @return listado de profesores presentes en el sistema.
+     */
     public ArrayList<Usuario> listarProfesores() {
 
         ArrayList<Usuario> usrs = new ArrayList<Usuario>(0);
         PreparedStatement ps = null;
         try {
-            ps = conexion.prepareStatement("SELECT * FROM usuario WHERE TIPOUSUARIO = 'profesor' ORDER BY usbid");
+            ps = conexion.prepareStatement("SELECT * "
+                    + "FROM USUARIO "
+                    + "WHERE tipousuario = 'profesor' "
+                    + "ORDER BY usbid");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Usuario u = new Usuario();
@@ -206,12 +186,21 @@ public class DBMS {
         return usrs;
     }
 
+    /**
+     * listarDecanatos
+     *
+     * Consulta todos los decanatos del sistema
+     *
+     * @return listado de decanatos.
+     */
     public ArrayList<Decanato> listarDecanatos() {
 
         ArrayList<Decanato> dcnto = new ArrayList(0);
         PreparedStatement ps = null;
         try {
-            ps = conexion.prepareStatement("SELECT * FROM decanato ORDER BY codigo");
+            ps = conexion.prepareStatement("SELECT * "
+                    + "FROM DECANATO "
+                    + "ORDER BY codigo");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Decanato u = new Decanato();
@@ -226,12 +215,21 @@ public class DBMS {
         return dcnto;
     }
 
+    /**
+     * listarCoordinaciones
+     *
+     * Consulta las coordinaciones registradas en el sistema
+     *
+     * @return listado de coordinaciones
+     */
     public ArrayList<Coordinacion> listarCoordinaciones() {
 
         ArrayList<Coordinacion> coords = new ArrayList<Coordinacion>(0);
         PreparedStatement ps = null;
         try {
-            ps = conexion.prepareStatement("SELECT * FROM COORDINACION ORDER BY CODIGO");
+            ps = conexion.prepareStatement("SELECT * "
+                    + "FROM COORDINACION "
+                    + "ORDER BY codigo");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Coordinacion u = new Coordinacion();
@@ -245,6 +243,17 @@ public class DBMS {
         return coords;
     }
 
+    /**
+     * listarCoordinacionesAdscritas
+     *
+     * Consulta de las coordinaciones adscritas a un determinado departamento
+     * con sus respectivas evaluaciones pendientes (dado el caso)
+     *
+     * @param id_decanato: identificador del decanato
+     * @param opcion: parámetro que define si se deben contar las instancias de
+     * evaluaciones que se deben revisar en el sistema.
+     * @return listado de coordinaciones
+     */
     public ArrayList<Coordinacion> listarCoordinacionesAdscritas(String id_decanato, String opcion) {
 
         ArrayList<Coordinacion> coords = new ArrayList<Coordinacion>(0);
@@ -290,12 +299,20 @@ public class DBMS {
         return coords;
     }
 
+    /**
+     * listarDepartamentos
+     *
+     * Consulta el listado de departamentos activos en el sistema.
+     *
+     * @return listado de departamentos
+     */
     public ArrayList<Departamento> listarDepartamentos() {
 
         ArrayList<Departamento> dptos = new ArrayList<Departamento>(0);
         PreparedStatement ps = null;
         try {
-            ps = conexion.prepareStatement("SELECT * FROM departamento "
+            ps = conexion.prepareStatement("SELECT * "
+                    + "FROM DEPARTAMENTO "
                     + "WHERE condicion = 'activo' "
                     + "ORDER BY codigo");
             ResultSet rs = ps.executeQuery();
@@ -311,12 +328,22 @@ public class DBMS {
         return dptos;
     }
 
+    /**
+     * obtenerInfoProfesor
+     *
+     * Obtener la información completa de determinado profesor.
+     *
+     * @param usbid: identificador del profesor
+     * @return todos los datos del profesor
+     */
     public Profesor obtenerInfoProfesor(String usbid) {
 
         Profesor u = new Profesor();
         PreparedStatement ps = null;
         try {
-            ps = conexion.prepareStatement("SELECT * FROM profesor WHERE usbid = ?");
+            ps = conexion.prepareStatement("SELECT * "
+                    + "FROM PROFESOR "
+                    + "WHERE usbid = ?;");
             ps.setString(1, usbid);
 
             ResultSet rs = ps.executeQuery();
@@ -343,11 +370,21 @@ public class DBMS {
         return u;
     }
 
+    /**
+     * eliminarUsuario
+     *
+     * Eliminar un usuario del sistema.
+     *
+     * @param id_usuario: identificador del usuario que se quiere eliminar
+     * @return boolean que determina si el usuario fue o no eliminado
+     */
     public boolean eliminarUsuario(String id_usuario) {
         PreparedStatement ps;
         try {
 
-            ps = conexion.prepareStatement("DELETE FROM usuario WHERE ( usbid = ? );");
+            ps = conexion.prepareStatement("DELETE "
+                    + "FROM USUARIO "
+                    + "WHERE usbid = ?;");
             ps.setString(1, id_usuario);
 
             Integer s = ps.executeUpdate();
@@ -360,11 +397,21 @@ public class DBMS {
         }
     }
 
+    /**
+     * eliminarProfesor
+     *
+     * Eliminar un profesor del sistema.
+     *
+     * @param p: profesor que se quiere eliinar
+     * @return boolean que determina si el profesor fue o no eliminado
+     */
     public boolean eliminarProfesor(Profesor p) {
         PreparedStatement ps;
         try {
 
-            ps = conexion.prepareStatement("DELETE FROM profesor WHERE ( usbid = ? );");
+            ps = conexion.prepareStatement("DELETE "
+                    + "FROM PROFESOR "
+                    + "WHERE usbid = ?;");
             ps.setString(1, p.getUsbid());
 
             Integer r = ps.executeUpdate();
@@ -378,12 +425,20 @@ public class DBMS {
         }
     }
 
+    /**
+     * actualizarInfoProfesor
+     *
+     * Dado un profesor actualiza su infomación.
+     *
+     * @param u: profesor a actualizar
+     * @return
+     */
     public boolean actualizarInfoProfesor(Profesor u) {
 
         PreparedStatement psAgregar1 = null;
 
         try {
-            psAgregar1 = conexion.prepareStatement("UPDATE profesor "
+            psAgregar1 = conexion.prepareStatement("UPDATE PROFESOR "
                     + "SET email = ?, email_personal = ?, nivel = ?, "
                     + "jubilado = ?, lapso_contractual_inicio = ?, "
                     + "lapso_contractual_fin = ? "
@@ -407,12 +462,18 @@ public class DBMS {
         }
     }
 
+    /**
+     * modificarProfesor
+     *
+     * @param p: profesor a modificar
+     * @return booleano que determina si el profesor fue o no modificado
+     */
     public boolean modificarProfesor(Profesor p) {
 
         PreparedStatement ps0, ps1 = null;
 
         try {
-            ps0 = conexion.prepareStatement("UPDATE profesor "
+            ps0 = conexion.prepareStatement("UPDATE PROFESOR "
                     + "SET usbid = ?, cedula = ?, nombre = ?, apellido = ?,"
                     + "genero = ?, email = ?, nivel = ? "
                     + "WHERE usbid = ?;");
@@ -443,12 +504,24 @@ public class DBMS {
         }
     }
 
+    /**
+     * resetInfoProfesor
+     *
+     * Dado un profesor se elimina la información adicional proporcionada.
+     *
+     * @param u: identificador del profesor cuya información se quiere eliminar
+     * @return booleano que determina si la informacion del profesor fue
+     * eliminada
+     */
     public boolean resetInfoProfesor(Profesor u) {
 
         PreparedStatement psAgregar1 = null;
 
         try {
-            psAgregar1 = conexion.prepareStatement("UPDATE profesor SET email_personal = ?, nivel = ?, jubilado = ?, lapso_contractual_inicio = ?, lapso_contractual_fin = ? WHERE usbid = ? ");
+            psAgregar1 = conexion.prepareStatement("UPDATE PROFESOR "
+                    + "SET email_personal = ?, nivel = ?, jubilado = ?, "
+                    + "lapso_contractual_inicio = ?, lapso_contractual_fin = ? "
+                    + "WHERE usbid = ? ");
             psAgregar1.setString(1, "");
             psAgregar1.setString(2, "");
             psAgregar1.setString(3, "");
@@ -467,35 +540,21 @@ public class DBMS {
         }
     }
 
-    public boolean actualizarRolUsuario(EliminarUserForm u) {
-        PreparedStatement ps = null;
-        try {
-
-            ps = conexion.prepareStatement("UPDATE usuario "
-                    + "SET tipousuario = ?, departamento = ? "
-                    + "WHERE ( usbid = ? )");
-
-            ps.setString(1, u.getTipousuario());
-            ps.setString(2, u.getDepartamento());
-            ps.setString(3, u.getUsbid());
-
-            Integer s = ps.executeUpdate();
-
-            return s > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-
-    }
-
+    /**
+     * eliminarCoordinacion
+     *
+     * Elimina una coordinacion de la base de datos del sistema
+     *
+     * @param u: coordinacion a eliminar
+     * @return booleando que determina si la coordinacion fue o no eliminada.
+     */
     public boolean eliminarCoordinacion(Coordinacion u) {
 
         PreparedStatement psEliminar1 = null;
         try {
-            psEliminar1 = conexion.prepareStatement("DELETE FROM coordinacion AS c "
-                    + "WHERE (c.codigo = ?);");
+            psEliminar1 = conexion.prepareStatement("DELETE "
+                    + "FROM COORDINACION "
+                    + "WHERE codigo = ?;");
             psEliminar1.setString(1, u.getCodigo());
 
             Integer i = psEliminar1.executeUpdate();
@@ -526,12 +585,21 @@ public class DBMS {
      return false;
      }
      }*/
+    /**
+     * registrarDecanato
+     *
+     * Registra un decanato al sistema
+     *
+     * @param u: decanato a registrar
+     * @return booleano que determina si el decanato fue registrado.
+     */
     public boolean registrarDecanato(Decanato u) {
 
         PreparedStatement ps;
 
         try {
-            ps = conexion.prepareStatement("INSERT INTO decanato(codigo, nombre) "
+            ps = conexion.prepareStatement("INSERT "
+                    + "INTO DECANATO(codigo, nombre) "
                     + "VALUES (?, ?);");
             ps.setString(1, u.getCodigo());
             ps.setString(2, u.getNombre());
@@ -547,6 +615,14 @@ public class DBMS {
         }
     }
 
+    /**
+     * eliminarDecanato
+     *
+     * Elimina un decanato del sistema
+     *
+     * @param decanato: decanato a eliminar
+     * @return booleano que determina si el decanato fue eliminado.
+     */
     public boolean eliminarDecanato(Decanato decanato) {
 
         PreparedStatement ps0;
@@ -568,29 +644,25 @@ public class DBMS {
         }
     }
 
-    public boolean registrarCoordinacion(Coordinacion c) {
-        PreparedStatement psAgregar = null;
+    /**
+     * adscribirCoordinacion
+     *
+     * Adscribir una coordinación a un decanato determinado
+     *
+     * @param c: coordinacion a adscribir
+     * @param id_decanato: decanato al que debe estar adscrita
+     * @param decanato: en caso que el administrador sea quien adscriba la
+     * coordinacion se debe obtener el identificador del decanato
+     * correspondiente.
+     * @return booleano que determina si la coordinacion fue adscrita.
+     */
+    public boolean adscribirCoordinacion(Coordinacion c, String id_decanato,
+            boolean decanato) {
 
-        try {
-            psAgregar = conexion.prepareStatement("INSERT INTO COORDINACION(codigo, nombre) VALUES (?, ?);");
-            psAgregar.setString(1, c.getCodigo());
-            psAgregar.setString(2, c.getNombre());
-
-            Integer i = psAgregar.executeUpdate();
-
-            return i > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
-
-    public boolean adscribirCoordinacion(Coordinacion c, String id_decanato, boolean decanato) {
         PreparedStatement ps1, ps2;
-
         try {
-            ps1 = conexion.prepareStatement("INSERT INTO COORDINACION(codigo, nombre) "
+            ps1 = conexion.prepareStatement("INSERT "
+                    + "INTO COORDINACION(codigo, nombre) "
                     + "VALUES (?, ?);");
             ps1.setString(1, c.getCodigo());
             ps1.setString(2, c.getNombre());
@@ -609,7 +681,8 @@ public class DBMS {
                 }
             }
 
-            ps2 = conexion.prepareStatement("INSERT INTO se_adscribe(codigo_coordinacion, codigo_decanato) "
+            ps2 = conexion.prepareStatement("INSERT "
+                    + "INTO se_adscribe(codigo_coordinacion, codigo_decanato) "
                     + "VALUES (?, ?);");
             ps2.setString(1, c.getCodigo());
             ps2.setString(2, id_decanato);
@@ -627,11 +700,20 @@ public class DBMS {
         }
     }
 
+    /**
+     * actualizarNombreDecanato
+     * 
+     * Modificar el nombre de un decanato determinado
+     * @param u: decanato a actualizar
+     * @return booleano que determina si el decanato fue actualizado
+     */
     public boolean actualizarNombreDecanato(Decanato u) {
         PreparedStatement ps = null;
         try {
 
-            ps = conexion.prepareStatement("UPDATE decanato SET nombre = ? WHERE ( codigo = ? )");
+            ps = conexion.prepareStatement("UPDATE DECANATO "
+                    + "SET nombre = ? "
+                    + "WHERE codigo = ?;");
 
             ps.setString(1, u.getNombre());
             ps.setString(2, u.getCodigo());
