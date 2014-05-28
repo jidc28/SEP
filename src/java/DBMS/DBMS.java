@@ -1434,9 +1434,9 @@ public class DBMS {
      * Contar las evaluaciones pendientes.
      *
      * @param id_departamento: identificador del departamento
-     * @return
+     * @return número de evaluaciones pendientes
      */
-    public int contarEvaluacionesPendientesDepartamento(String id_departamento, 
+    public int contarEvaluacionesPendientesDepartamento(String id_departamento,
             String profesor) {
 
         PreparedStatement ps;
@@ -1495,9 +1495,16 @@ public class DBMS {
         return 0;
     }
 
+    /**
+     * contarEvaluacionesDepartamento
+     *
+     * @param id_departamento
+     * @param usbid_profesor
+     * @return número de evaluaciones pendientes
+     */
     public int contarEvaluacionesDepartamento(String id_departamento, String usbid_profesor) {
 
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         try {
             ps = conexion.prepareStatement("SELECT count(usbid_profesor) "
                     + "FROM evaluar "
@@ -1516,6 +1523,15 @@ public class DBMS {
         return 0;
     }
 
+    /**
+     * listarEvaluacionesPendientes
+     *
+     * Dada una coordinación y un profesor listar las evaluaciones pendientes.
+     *
+     * @param coordinacion
+     * @param usbid_profesor
+     * @return listado de rendimientos
+     */
     public ArrayList<dicta> listarEvaluacionesPendientes(Coordinacion coordinacion,
             String usbid_profesor) {
 
@@ -1577,7 +1593,17 @@ public class DBMS {
         return null;
     }
 
-    public ArrayList<dicta> listarEvaluacionesPendientes(String id_coordinacion, String usbid_profesor) {
+    /**
+     * listarEvaluacionesPendientes
+     *
+     * Dada una coordinación y un profesor listar las evaluaciones pendientes.
+     *
+     * @param id_coordinacion
+     * @param usbid_profesor
+     * @return listado de rendimientos
+     */
+    public ArrayList<dicta> listarEvaluacionesPendientes(String id_coordinacion,
+            String usbid_profesor) {
 
         PreparedStatement ps, ps2;
         ArrayList<dicta> dicta_materia = new ArrayList(0);
@@ -1638,10 +1664,21 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * listarEvaluacionesEnviadasCoordinacion
+     *
+     * Listar las evaluaciones enviadas de una coordinacion en determinado año y
+     * trimestre.
+     *
+     * @param id_coordinacion: identificador de la coordinacion
+     * @param ano: año de la evaluacion
+     * @param trimestre: trimestre de la evaluacion
+     * @return listado de evaluaciones
+     */
     public ArrayList<rendimientoProf> listarEvaluacionesEnviadasCoordinacion(String id_coordinacion,
             int ano, String trimestre) {
 
-        PreparedStatement ps, ps2;
+        PreparedStatement ps;
         ArrayList<rendimientoProf> rendimientos = new ArrayList(0);
 
         try {
@@ -1679,10 +1716,21 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * listarEvaluacionesEnviadasDepartamento
+     *
+     * Listar las evaluaciones enviadas de un departamento en determinado año y
+     * trimestre.
+     *
+     * @param id_departamento: identificador del departamento
+     * @param ano: año de la evaluación
+     * @param trimestre: trimestre de la evaluación
+     * @return listado de evaluaciones
+     */
     public ArrayList<rendimientoProf> listarEvaluacionesEnviadasDepartamento(String id_departamento,
             int ano, String trimestre) {
 
-        PreparedStatement ps, ps2;
+        PreparedStatement ps;
         ArrayList<rendimientoProf> rendimientos = new ArrayList(0);
 
         try {
@@ -1720,45 +1768,23 @@ public class DBMS {
         return null;
     }
 
-    public rendimientoProf listarEvaluacionesEnviadasMateria(
-            String id_coordinacion, int ano, String trimestre) {
+    /**
+     * listarEvaluacionesCoordinacion
+     *
+     * Listado de evaluaciones pendientes de un determinado profesor, materia,
+     * año y trimestre
+     *
+     * @param id_coordinacion: identificador de la coordinacion.
+     * @param ano: año de la evaluación
+     * @param trimestre: trimestre de la evaluación
+     * @param codigo_materia: codigo de la materia que está siendo evaluada
+     * @param usbid_profesor: usbid del profesor que está siedo evaluado.
+     * @return evaluación de la materia.
+     */
+    public rendimientoProf listarEvaluacionesCoordinacion(String id_coordinacion,
+            int ano, String trimestre, String codigo_materia, String usbid_profesor) {
 
-        PreparedStatement ps, ps2;
-        rendimientoProf rendimiento = null;
-
-        try {
-            ps = conexion.prepareStatement("SELECT recomendado, "
-                    + "observaciones, usbid_profesor, ano, trimestre "
-                    + "FROM evaluado "
-                    + "WHERE codigo_coordinacion = ? "
-                    + "AND ano = ? "
-                    + "AND trimestre = ?;");
-            ps.setString(1, id_coordinacion);
-            ps.setInt(2, ano);
-            ps.setString(3, trimestre);
-
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                rendimiento = new rendimientoProf();
-                rendimiento.setRecomendado(rs.getString("recomendado"));
-                rendimiento.setObservaciones_c(rs.getString("observaciones"));
-                rendimiento.setUsbid_profesor(rs.getString("usbid_profesor"));
-                rendimiento.setAno(rs.getInt("ano"));
-                rendimiento.setTrimestre(rs.getString("trimestre"));
-            }
-
-            return rendimiento;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
-    public rendimientoProf listarEvaluacionesCoordinacion(String id_coordinacion, int ano, String trimestre, String codigo_materia, String usbid_profesor) {
-
-        PreparedStatement ps, ps2;
+        PreparedStatement ps;
         rendimientoProf rendimiento = null;
 
         try {
@@ -1798,6 +1824,16 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * listarEvaluacionesGeneralCoordinacion
+     *
+     * Listado general que incluye las materias que dicto el profesor que está
+     * siendo evaluado
+     *
+     * @param id_coordinacion
+     * @param usbid_profesor
+     * @return
+     */
     public rendimientoProf listarEvaluacionesGeneralCoordinacion(
             String id_coordinacion, String usbid_profesor) {
 
@@ -1828,6 +1864,18 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * listarEvaluacionesEnviadasCoordinacion
+     *
+     * Listado de evaluaciones enviadas (por parte de la coordinación_ de
+     * determinado profesor, año y trimestre.
+     *
+     * @param id_coordinacion: identificador de la coordinacion
+     * @param ano: año de la evaluación
+     * @param trimestre: trimestre de la evaluación.
+     * @param usbid_profesor identificador del profesor.
+     * @return listado de evaluaciones
+     */
     public ArrayList<rendimientoProf> listarEvaluacionesEnviadasCoordinacion(String id_coordinacion,
             int ano, String trimestre, String usbid_profesor) {
 
@@ -1870,13 +1918,23 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * registrarMateria
+     *
+     * Registro de una materia
+     *
+     * @param m: materia a registrar
+     * @param id_departamento: identificador del departamento que va a realizar
+     * el registro.
+     * @return booleano que determina si la materia fue registrada.
+     */
     public boolean registrarMateria(Materia m, String id_departamento) {
 
-        PreparedStatement ps1;
-        PreparedStatement ps2;
+        PreparedStatement ps1, ps2;
 
         try {
-            ps1 = conexion.prepareStatement("INSERT INTO MATERIA(codigo, nombre, creditos) "
+            ps1 = conexion.prepareStatement("INSERT "
+                    + "INTO MATERIA(codigo, nombre, creditos) "
                     + "VALUES (?, ?, ?);");
             ps1.setString(1, m.getCodigo());
             ps1.setString(2, m.getNombre());
@@ -1900,11 +1958,21 @@ public class DBMS {
         }
     }
 
+    /**
+     * actualizarDepartamento
+     *
+     * Modificación de la información de un departamento
+     *
+     * @param d: departamento a ser modificado
+     * @return booleano que determina si el departamento fue modificado
+     */
     public boolean actualizarDepartamento(Departamento d) {
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         try {
 
-            ps = conexion.prepareStatement("UPDATE departamento SET nombre = ? WHERE ( codigo = ? )");
+            ps = conexion.prepareStatement("UPDATE DEPARTAMENTO "
+                    + "SET nombre = ? "
+                    + "WHERE codigo = ?;");
 
             ps.setString(1, d.getNombre());
             ps.setString(2, d.getCodigo());
@@ -1918,11 +1986,19 @@ public class DBMS {
         }
     }
 
+    /**
+     * registrarDepartamento
+     *
+     * Registro de un departamento
+     *
+     * @param d: departamento a ser registrado
+     * @return booleano que determina si el departamento fue registrado.
+     */
     public boolean registrarDepartamento(Departamento d) {
         PreparedStatement ps;
 
         try {
-            ps = conexion.prepareStatement("INSERT INTO departamento "
+            ps = conexion.prepareStatement("INSERT INTO DEPARTAMENTO "
                     + "VALUES (?,?,?)");
             ps.setString(1, d.getCodigo());
             ps.setString(2, d.getNombre());
@@ -1939,25 +2015,14 @@ public class DBMS {
         return false;
     }
 
-    public boolean cambiarStatusMateria(Materia m) {
-
-        PreparedStatement ps;
-        try {
-
-            ps = conexion.prepareStatement("UPDATE materia SET estado = ? WHERE ( codigo = ? )");
-
-            ps.setString(1, m.getEstado());
-            ps.setString(2, m.getCodigo());
-            Integer s = ps.executeUpdate();
-
-            return s > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
-
+    /**
+     * eliminarDepartamento
+     *
+     * Eliminar un departamento
+     *
+     * @param d: departamento a eliminar
+     * @return booleano que determina si el departamento fue eliminado.
+     */
     public boolean eliminarDepartamento(Departamento d) {
         PreparedStatement ps;
 
@@ -1978,6 +2043,35 @@ public class DBMS {
         return false;
     }
 
+    /* ESTO SE DEBE BORRAR */
+    public boolean cambiarStatusMateria(Materia m) {
+
+        PreparedStatement ps;
+        try {
+
+            ps = conexion.prepareStatement("UPDATE materia SET estado = ? WHERE ( codigo = ? )");
+
+            ps.setString(1, m.getEstado());
+            ps.setString(2, m.getCodigo());
+            Integer s = ps.executeUpdate();
+
+            return s > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * contarSolicitudesPendientesDepartamento
+     *
+     * Contar las solicitudes de apertura de una materia de un departamento.
+     *
+     * @param id_departamento: departamento sobre el cuel se listarán las
+     * solicitudes
+     * @return número de solicitudes pendientes
+     */
     public int contarSolicitudesPendientesDepartamento(String id_departamento) {
 
         PreparedStatement ps;
@@ -1997,6 +2091,14 @@ public class DBMS {
         return 0;
     }
 
+    /**
+     * contarEvaluacionesPendientesDecanato
+     *
+     * Contas las evaluaciones pendientes por parte del decanato.
+     *
+     * @param id_decanato: identificador del decanato
+     * @return número de evaluaciones pendientes
+     */
     public int contarEvaluacionesPendientesDecanato(String id_decanato) {
 
         PreparedStatement ps;
@@ -2023,6 +2125,14 @@ public class DBMS {
         return 0;
     }
 
+    /**
+     * evaluacionIniciadaProfesor
+     *
+     * Obtener si la evaluación de determinado profesor ya se ha iniciado
+     *
+     * @param usbid_profesor
+     * @return booleano que determina si se ha iniciado la evaluacion.
+     */
     public boolean evaluacionIniciadaProfesor(String usbid_profesor) {
 
         PreparedStatement ps;
@@ -2046,10 +2156,22 @@ public class DBMS {
         return false;
     }
 
-    public boolean solicitudRegistrarMateria(Materia m, String id_departamento, String id_coordinacion) {
+    /**
+     * solicitudRegistrarMateria
+     *
+     * Agregar una solicitud de registro de materia al sistema
+     *
+     * @param m: materia de la solicitud
+     * @param id_departamento: identificador del departamento al que se le hace
+     * la solicitud
+     * @param id_coordinacion: identificador de la coordinación que realiza la
+     * solicitud
+     * @return booleano que determina si la solicitud fue almacenada.
+     */
+    public boolean solicitudRegistrarMateria(Materia m, String id_departamento,
+            String id_coordinacion) {
 
-        PreparedStatement ps1;
-        PreparedStatement ps2;
+        PreparedStatement ps1, ps2;
 
         try {
             ps1 = conexion.prepareStatement("INSERT INTO MATERIA(codigo, nombre, creditos, solicitud) "
@@ -2079,10 +2201,20 @@ public class DBMS {
         }
     }
 
-    public ArrayList<Materia> listarMateriasSolicitadasDepartamento(String id_departamento) {
+    /**
+     * listarMateriasSolicitadasDepartamento
+     *
+     * Listar solicitudes de apertura de materias
+     *
+     * @param id_departamento: identificador del departamento al que está ligada
+     * la solicitud
+     * @return listado de materias
+     */
+    public ArrayList<Materia> listarMateriasSolicitadasDepartamento(
+            String id_departamento) {
 
         ArrayList<Materia> materias = new ArrayList<Materia>(0);
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         try {
             ps = conexion.prepareStatement("SELECT m.codigo, m.nombre, c.nombre, sa.mensaje "
                     + "FROM solicita_apertura AS sa, materia AS m, coordinacion AS c "
@@ -2108,6 +2240,15 @@ public class DBMS {
         return materias;
     }
 
+    /**
+     * obtenerMensaje
+     *
+     * Obtener mensaje de solicitud de apertura de materia
+     *
+     * @param id_departamento: identificador del departamento que revise las
+     * solicitudes
+     * @return solicitud de la materia
+     */
     public Materia obtenerMensaje(String id_departamento) {
 
         PreparedStatement ps;
@@ -2136,6 +2277,16 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * aprobarSolicitudMateria
+     *
+     * Aprobar solicitud de la materia
+     *
+     * @param m: solicitud de la materia
+     * @param id_departamento: identificador del departamento que aprueba la
+     * solicitud
+     * @return booleano que determina que la solicitud fue aprobada
+     */
     public boolean aprobarSolicitudMateria(Materia m, String id_departamento) {
 
         PreparedStatement ps0, ps1, ps3, ps4, ps5;
@@ -2143,25 +2294,31 @@ public class DBMS {
         try {
 
             ps0 = conexion.prepareStatement("UPDATE MATERIA "
-                    + "SET codigo = ?, creditos = ?, nombre = ?"
+                    + "SET codigo = ?, creditos = ?, nombre = ? "
                     + "WHERE codigo = ?;");
             ps0.setString(1, m.getCodigo());
             ps0.setString(2, m.getCreditos());
             ps0.setString(3, m.getNombre());
             ps0.setString(4, m.getViejoCodigo());
 
-            ps1 = conexion.prepareStatement("UPDATE MATERIA SET solicitud = 'no' WHERE codigo = ?;");
+            ps1 = conexion.prepareStatement("UPDATE "
+                    + "MATERIA SET solicitud = 'no' "
+                    + "WHERE codigo = ?;");
             ps1.setString(1, m.getCodigo());
 
-            ps3 = conexion.prepareStatement("INSERT INTO maneja (codigo_coordinacion, codigo_materia) "
+            ps3 = conexion.prepareStatement("INSERT "
+                    + "INTO maneja (codigo_coordinacion, codigo_materia) "
                     + "VALUES (?,?);");
             ps3.setString(1, m.getCoordinacion());
             ps3.setString(2, m.getCodigo());
 
-            ps4 = conexion.prepareStatement("DELETE FROM solicita_apertura WHERE codigo_materia = ?;");
+            ps4 = conexion.prepareStatement("DELETE "
+                    + "FROM solicita_apertura "
+                    + "WHERE codigo_materia = ?;");
             ps4.setString(1, m.getCodigo());
 
-            ps5 = conexion.prepareStatement("INSERT INTO oferta (codigo_materia, codigo_departamento) "
+            ps5 = conexion.prepareStatement("INSERT "
+                    + "INTO oferta (codigo_materia, codigo_departamento) "
                     + "VALUES (?,?);");
             ps5.setString(1, m.getCodigo());
             ps5.setString(2, id_departamento);
@@ -2180,12 +2337,24 @@ public class DBMS {
         return false;
     }
 
+    /**
+     * aprobarSolicitudMateria
+     *
+     * Negar solicitud de la materia
+     *
+     * @param m: solicitud de la materia
+     * @param id_departamento: identificador del departamento que niega la
+     * solicitud
+     * @return booleano que determina que la solicitud fue negada
+     */
     public boolean negarSolicitudMateria(Materia m) {
 
         PreparedStatement ps;
 
         try {
-            ps = conexion.prepareStatement("DELETE FROM MATERIA WHERE codigo = ?;");
+            ps = conexion.prepareStatement("DELETE "
+                    + "FROM MATERIA "
+                    + "WHERE codigo = ?;");
             ps.setString(1, m.getViejoCodigo());
 
             Integer i = ps.executeUpdate();
@@ -2198,7 +2367,18 @@ public class DBMS {
         return false;
     }
 
-    public ArrayList<rendimientoProf> obtenerRendimientoProfesor(String id_profesor, String id_departamento) {
+    /**
+     * obtenerRendimientoProfesor
+     *
+     * Obtener una planilla de determinado profesor
+     *
+     * @param id_profesor: identificador del profesor del cual se quiere obtener
+     * el rendimiento.
+     * @param id_departamento: identificador del departamento de
+     * @return listado de planillas
+     */
+    public ArrayList<rendimientoProf> obtenerRendimientoProfesor(String id_profesor,
+            String id_departamento) {
         PreparedStatement ps;
         ArrayList<rendimientoProf> rendimiento = new ArrayList<rendimientoProf>(0);
         try {
@@ -2244,7 +2424,17 @@ public class DBMS {
         return rendimiento;
     }
 
-    public ArrayList<rendimientoProf> obtenerPlanillasLlenas(String id_profesor, String id_departamento) {
+    /**
+     * obtenerPlanillasLlenas
+     *
+     * Obtener un listado de planillas llenas de un determinado profesor
+     *
+     * @param id_profesor: identificador del profesor.
+     * @param id_departamento: identificador del departamento
+     * @return listado de planillas llenas
+     */
+    public ArrayList<rendimientoProf> obtenerPlanillasLlenas(String id_profesor,
+            String id_departamento) {
         PreparedStatement ps;
         ArrayList<rendimientoProf> rendimiento = new ArrayList<rendimientoProf>(0);
         try {
