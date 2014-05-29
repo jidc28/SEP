@@ -287,7 +287,7 @@
     <!-- 1. Graficar el rendimiento del profesor -->
     <definition name="graficarRendimientoDecanato" extends="baseDecanato">
         <put name="script" value="/JSP/coordinacion/scripts/graficar-rendimiento-script.jsp"/>
-        <put name="body" value="/JSP/coordinacion/Evaluaciones/graficarRendimiento.jsp"/>
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/GraficarRendimiento.jsp"/>
     </definition>
     
     <!-- 2. Listar las coordinaciones adscritas -->

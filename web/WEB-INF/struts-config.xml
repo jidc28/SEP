@@ -71,7 +71,11 @@
             parameter="vistaDepartamento">
         </action>
         
-        <action name="Usuario" path="/irInicio" scope="request" type="Otros.Inicio" validate="false">
+        <action name="Usuario" 
+                path="/irInicio" 
+                scope="request" 
+                type="Otros.Inicio" 
+                validate="false">
             <forward name="profesor" path="vistaProfesor"/>
             <forward name="administrador" path="vistaAdmin"/>
             <forward name="decanato" path="vistaDecanato"/>
@@ -81,7 +85,12 @@
         </action>
         
         <!--       LOGIN         -->
-        <action input="/Login.jsp" name="Usuario" path="/login" scope="request" type="Session.LoginAction" validate="false">
+        <action input="/Login.jsp" 
+                name="Usuario" 
+                path="/login" 
+                scope="request" 
+                type="Session.LoginAction" 
+                validate="false">
             <forward name="profesor" path="vistaProfesor"/>
             <forward name="administrador" path="vistaAdmin"/>
             <forward name="decanato" path="vistaDecanato"/>
@@ -92,22 +101,37 @@
         
         <!-- VISTA ADMINISTRADOR -->
         
-        <action input="/VistaAdministrador.jsp" path="/agregaDecanatoA" scope="request" type="Actions.Decanato.AgregaDecanatoA">
+        <action input="/VistaAdministrador.jsp" 
+                path="/agregaDecanatoA" 
+                scope="request" 
+                type="Actions.Administrador.Decanato.AgregaDecanato">
             <forward name="success" path="agrega_decanato_pagina"/>
         </action>
         
-        <action input="/VistaAdministrador.jsp" path="/agregaCoordinacionA" scope="request" type="Actions.Coordinacion.AgregaCoordinacionA">
+        <action input="/VistaAdministrador.jsp" 
+                path="/agregaCoordinacionA" 
+                scope="request" 
+                type="Actions.Administrador.Coordinacion.AgregaCoordinacion">
             <forward name="administrador" path="agrega_coordinacion_pagina"/>
             <forward name="decanato" path="agrega_coordinacion_pagina"/>
             <forward name="failure" path="noAutorizado"/>
             <forward name="sesion_expirada" path="sesion_expirada"/>
         </action>
         
-        <action input="/VistaAdministrador.jsp" path="/consultaDecanatoA" scope="request" type="Actions.Decanato.ConsultaDecanatoA" validate="false">
+        <action input="/VistaAdministrador.jsp" 
+                path="/consultaDecanatoA" 
+                scope="request" 
+                type="Actions.Administrador.Decanato.ConsultaDecanato" 
+                validate="false">
             <forward name="success" path="consulta_decanato_pagina"/>
         </action>
         
-        <action input="/VistaAdministrador.jsp" path="/consultaCoordinacionA" name="Decanato" scope="request" type="Actions.Coordinacion.ConsultaCoordinacionA" validate="false">
+        <action input="/VistaAdministrador.jsp" 
+                path="/consultaCoordinacionA" 
+                name="Decanato" 
+                scope="request" 
+                type="Actions.Coordinacion.ConsultaCoordinacionA" 
+                validate="false">
             <forward name="administrador" path="consulta_coordinacion_pagina"/>
             <forward name="decanato" path="consulta_coordinacion_pagina"/>
             <forward name="failure" path="noAutorizado"/>
@@ -126,7 +150,7 @@
                 name="Departamento" 
                 path="/agregarDepartamento" 
                 scope="request" 
-                type="Actions.Departamento.AgregarDepartamento" 
+                type="Actions.Administrador.Departamento.AgregarDepartamento" 
                 validate="false">
             <forward name="success" path="consulta_departamento_pagina"/>
             <forward name="yaregistrada" path="agrega_departamento_pagina"/>
@@ -137,22 +161,38 @@
                 name="Departamento" 
                 path="/eliminarDepartamento" 
                 scope="request" 
-                type="Actions.Departamento.EliminarDepartamento" 
+                type="Actions.Administrador.Departamento.EliminarDepartamento" 
                 validate="false">
             <forward name="success" path="consulta_departamento_pagina"/>
         </action>
         
         <!--       DECANATOS        -->
-        <action input="/AgregaDecanato.jsp" name="Decanato" path="/registrarDecanato" scope="request" type="Actions.Decanato.RegistrarDecanato" validate="false">
+        <action input="/AgregaDecanato.jsp" 
+                name="Decanato" 
+                path="/registrarDecanato" 
+                scope="request" 
+                type="Actions.Administrador.Decanato.RegistrarDecanato" 
+                validate="false">
             <forward name="success" path="consulta_decanato_pagina"/>
             <forward name="failure" path="agrega_decanato_pagina"/> 
             <forward name="yaregistrada" path="agrega_decanato_pagina"/> 
         </action>
         
-        <action input="/ConsultaDecanato.jsp" name="Decanato" path="/editarNombreDecanato" scope="request" type="Actions.Decanato.EditarNombreDecanato" validate="false">
+        <action input="/ConsultaDecanato.jsp" 
+                name="Decanato" 
+                path="/editarNombreDecanato" 
+                scope="request" 
+                type="Actions.Administrador.Decanato.EditarNombreDecanato" 
+                validate="false">
             <forward name="success" path="edita_decanato_pagina"/>
         </action>
-        <action input="/EditarNombreDecanato.jsp" name="Decanato" path="/cambiarNombreDecanatoA" scope="request" type="Actions.Decanato.CambiarNombreDecanatoA" validate="false">
+        
+        <action input="/EditarNombreDecanato.jsp" 
+                name="Decanato" 
+                path="/cambiarNombreDecanatoA" 
+                scope="request" 
+                type="Actions.Administrador.Decanato.CambiarNombreDecanato" 
+                validate="false">
             <forward name="success" path="consulta_decanato_pagina"/>
             <forward name="failure" path="edita_decanato_pagina"/> 
         </action>
@@ -161,7 +201,7 @@
                 path="/listarCoordinaciones" 
                 name="Coordinacion"
                 scope="request" 
-                type="Actions.Coordinacion.ConsultaCoordinacionA" 
+                type="Actions.Administrador.Coordinacion.ConsultaCoordinacion" 
                 validate="false">
             <forward name="decanato" path="listar_coordinaciones_pagina"/>
         </action>
@@ -180,7 +220,7 @@
                 name="Coordinacion" 
                 path="/registrarCoordinacion" 
                 scope="request" 
-                type="Actions.Coordinacion.RegistrarCoordinacion" 
+                type="Actions.Administrador.Coordinacion.RegistrarCoordinacion" 
                 validate="false">
             <forward name="administrador" path="consulta_coordinacion_pagina"/>
             <forward name="decanato" path="consulta_coordinacion_pagina"/>
@@ -191,14 +231,24 @@
             <forward name="sesion_expirada" path="sesion_expirada"/>
         </action>
         
-        <action input="/ConsultaCoordinacion.jsp" name="Coordinacion" path="/editarNombreCoordinacion" scope="request" type="Actions.Coordinacion.EditarNombreCoordinacion" validate="false">
+        <action input="/ConsultaCoordinacion.jsp" 
+                name="Coordinacion" 
+                path="/editarNombreCoordinacion" 
+                scope="request" 
+                type="Actions.Administrador.Coordinacion.EditarNombreCoordinacion" 
+                validate="false">
             <forward name="administrador" path="editar_coordinacion_pagina"/>
             <forward name="decanato" path="editar_coordinacion_pagina"/>
             <forward name="failure" path="noAutorizado"/>
             <forward name="sesion_expirada" path="sesion_expirada"/>
         </action>
         
-        <action input="/EditarNombreCoordinacion.jsp" name="Coordinacion" path="/cambiarNombreCoordinacionA" scope="request" type="Actions.Coordinacion.CambiarNombreCoordinacionA" validate="false">
+        <action input="/EditarNombreCoordinacion.jsp" 
+                name="Coordinacion" 
+                path="/cambiarNombreCoordinacionA" 
+                scope="request" 
+                type="Actions.Administrador.Coordinacion.CambiarNombreCoordinacion" 
+                validate="false">
             <forward name="administrador" path="consulta_coordinacion_pagina"/>
             <forward name="decanato" path="consulta_coordinacion_pagina"/>
             <forward name="failure_administrador" path="editar_coordinacion_pagina"/>
@@ -206,12 +256,22 @@
             <forward name="sesion_expirada" path="sesion_expirada"/>
         </action>
         
-        <action input="/ConsultarCoordinacion.jsp" name="Coordinacion" path="/eliminaCoordinacionA" scope="request" type="Actions.Coordinacion.EliminaCoordinacionA" validate="false">
+        <action input="/ConsultarCoordinacion.jsp" 
+                name="Coordinacion" 
+                path="/eliminaCoordinacionA" 
+                scope="request" 
+                type="Actions.Administrador.Coordinacion.EliminaCoordinacion" 
+                validate="false">
             <forward name="success" path="consulta_coordinacion_pagina"/>
             <forward name="failure" path="consulta_coordinacion_pagina"/>
         </action>
         
-        <action input="/VistaCoordinacion.jsp" name="Departamento" path="/listarDepartamentos" scope="request" type="Actions.Departamento.ConsultaDepartamentoA" validate="false">
+        <action input="/VistaCoordinacion.jsp" 
+                name="Departamento" 
+                path="/listarDepartamentos" 
+                scope="request" 
+                type="Actions.Administrador.Departamento.ConsultaDepartamento" 
+                validate="false">
             <forward name="coordinacion" path="consulta_departamento_pagina"/>
             <forward name="administrador" path="consulta_departamento_pagina"/>
             <forward name="no_autorizado" path="noAutorizado"/>
@@ -227,12 +287,22 @@
             <forward name="success" path="consulta_materia_pagina"/>
         </action>
         
-        <action input="/ConsultaMateriasDepartamento.jsp" name="Materia" path="/vincularMateriaCoordinacion" scope="request" type="Actions.Materia.agregaMateria" validate="false">
+        <action input="/ConsultaMateriasDepartamento.jsp" 
+                name="Materia" 
+                path="/vincularMateriaCoordinacion" 
+                scope="request" 
+                type="Actions.Materia.agregaMateria" 
+                validate="false">
             <forward name="success" path="consulta_materia_pagina"/>
             <forward name="failure" path="consulta_materia_pagina"/>
         </action>
         
-        <action input="/ConsultaMaterias.jsp" name="Materia" path="/desvincularMateriaCoordinacion" scope="request" type="Actions.Materia.EliminaMateria" validate="false">
+        <action input="/ConsultaMaterias.jsp" 
+                name="Materia" 
+                path="/desvincularMateriaCoordinacion" 
+                scope="request" 
+                type="Actions.Materia.EliminaMateria" 
+                validate="false">
             <forward name="success" path="consulta_materia_pagina"/>
             <forward name="failure" path="consulta_materia_pagina"/>
         </action>
@@ -246,7 +316,12 @@
             <forward name="success" path="consulta_materia_pagina"/>
         </action>
         
-        <action input="VistaCoordinacion.jsp" path="/irSolicitarAperturaMateria" name="Materia" type="Actions.Materia.IrSolicitarAperturaMateria" scope="request" validate="false">
+        <action input="VistaCoordinacion.jsp" 
+                path="/irSolicitarAperturaMateria" 
+                name="Materia" 
+                type="Actions.Materia.IrSolicitarAperturaMateria" 
+                scope="request" 
+                validate="false">
             <forward name="success" path="solicitar_apertura_pagina"/>
         </action>
 
@@ -266,24 +341,38 @@
                 name="Departamento" 
                 path="/irEditarNombreDepartamento" 
                 scope="request" 
-                type="Actions.Departamento.IrEditarNombreDepartamento" 
+                type="Actions.Administrador.Departamento.IrEditarNombreDepartamento" 
                 validate="false">
             <forward name="success" path="edita_departamento_pagina"/>
         </action>
 
-        <action input="/EditarDepartamento.jsp" name="Departamento" path="/editarDepartamento" scope="request" type="Actions.Departamento.EditarDepartamento" validate="false">
+        <action input="/EditarDepartamento.jsp" 
+                name="Departamento" 
+                path="/editarDepartamento" 
+                scope="request" 
+                type="Actions.Administrador.Departamento.EditarDepartamento" 
+                validate="false">
             <forward name="success" path="consulta_departamento_pagina"/>
             <forward name="failure" path="edita_departamento_pagina"/>
             <forward name="yaregistrada" path="edita_departamento_pagina"/>
         </action>
                 
         <!-- ACCIONES JEFE DE DEPARTAMENTO -->
-        <action input="/VistaDepartamento.jsp" name="Departamento" path="/consultaMateria" scope="request" type="Actions.Materia.ConsultaMateria" validate="false">
+        <action input="/VistaDepartamento.jsp" name="Departamento" 
+                path="/consultaMateria" 
+                scope="request" 
+                type="Actions.Materia.ConsultaMateria" 
+                validate="false">
             <forward name="success" path="consulta_materia_pagina"/>
             <forward name="failure" path="consulta_materia_pagina"/>
         </action>
         
-        <action input="/VistaDepartamento.jsp" name="MultiBox" path="/irEvaluarProfesores" validate="false" scope="request" type="Actions.Profesor.IrEvaluarProfesores">
+        <action input="/VistaDepartamento.jsp" 
+                name="MultiBox" 
+                path="/irEvaluarProfesores" 
+                validate="false" 
+                scope="request" 
+                type="Actions.Departamento.Evaluaciones.IrEvaluarProfesores">
             <forward name="success" path="evaluar_profesores_pagina"/>
         </action>
         
@@ -292,11 +381,16 @@
                 path="/ConsultaEstadoPlanillas" 
                 validate="false" 
                 scope="request" 
-                type="Actions.Profesor.ConsultaProfesor">
+                type="Actions.Departamento.Profesor.ConsultaProfesor">
             <forward name="success" path="consulta_estado_planillas_pagina"/>
         </action>        
         
-        <action input="/ConsultaProfesores.jsp" name="MultiBox" path="/EvaluarProfesores" validate="false" scope="request" type="Actions.Profesor.EnviarMemoEvaluarProfesores">
+        <action input="/ConsultaProfesores.jsp" 
+                name="MultiBox" 
+                path="/EvaluarProfesores" 
+                validate="false" 
+                scope="request" 
+                type="Actions.Departamento.Evaluaciones.EnviarMemoEvaluarProfesores">
             <forward name="success" path="evaluar_profesores_pagina"/>
         </action>
         
@@ -305,7 +399,7 @@
                 path="/agregaMateria" 
                 validate="false" 
                 scope="request" 
-                type="Actions.Materia.AgregarMateria">
+                type="Actions.Departamento.Materia.AgregarMateria">
             <forward name="success" path="consulta_materia_pagina"/>
             <forward name="failure" path="agrega_materia_pagina"/>
         </action>
@@ -318,16 +412,31 @@
             parameter="agrega_materia_pagina">
         </action>
         
-        <action input="/ConsultaMateria.jsp" name="Materia" path="/eliminaMateria" scope="request" type="Actions.Materia.EliminaMateria" validate="false">
+        <action input="/ConsultaMateria.jsp" 
+                name="Materia" 
+                path="/eliminaMateria" 
+                scope="request" 
+                type="Actions.Departamento.Materia.EliminaMateria" 
+                validate="false">
             <forward name="success" path="consulta_materia_pagina"/>
         </action>
 
-        <action input="/ConsultaMateria.jsp" name="Materia" path="/irModificarMateria" scope="request" type="Actions.Materia.IrModificarMateria" validate="false">
+        <action input="/ConsultaMateria.jsp" 
+                name="Materia" 
+                path="/irModificarMateria" 
+                scope="request" 
+                type="Actions.Departamento.Materia.IrModificarMateria" 
+                validate="false">
             <forward name="success" path="modifica_materia_pagina"/>
             <forward name="failure" path="noAutorizado"/>
         </action>
 
-        <action input="/ConsultaMateria.jsp" name="Materia" path="/modificaMateria" scope="request" type="Actions.Materia.ModificaMateria" validate="false">
+        <action input="/ConsultaMateria.jsp" 
+                name="Materia" 
+                path="/modificaMateria" 
+                scope="request" 
+                type="Actions.Departamento.Materia.ModificaMateria" 
+                validate="false">
             <forward name="success" path="consulta_materia_pagina"/>
             <forward name="failure" path="modifica_materia_pagina"/>
         </action>
@@ -342,11 +451,21 @@
             <forward name="failure" path="noAutorizado"/>
         </action>
 
-        <action input="/VistaDepartamento.jsp" name="Materia" path="/consultaSolicitudesApertura" scope="request" type="Actions.Materia.ConsultarSolicitudesApertura" validate="false">
+        <action input="/VistaDepartamento.jsp" 
+                name="Materia" 
+                path="/consultaSolicitudesApertura" 
+                scope="request" 
+                type="Actions.Materia.ConsultarSolicitudesApertura" 
+                validate="false">
             <forward name="success" path="consulta_solicitud_apertura_pagina"/>
         </action>    
 
-        <action input="/ModificaMateria.jsp" name="Materia" path="/finalizarSolicitudApertura" scope="request" type="Actions.Materia.FinalizarSolicitudApertura" validate="false">
+        <action input="/ModificaMateria.jsp" 
+                name="Materia" 
+                path="/finalizarSolicitudApertura" 
+                scope="request" 
+                type="Actions.Materia.FinalizarSolicitudApertura" 
+                validate="false">
             <forward name="success" path="consulta_solicitud_apertura_pagina"/>
             <forward name="failure" path="modifica_status_apertura_pagina"/>
         </action>    
@@ -355,7 +474,7 @@
                 name="Decanato" 
                 path="/eliminarDecanato" 
                 scope="request" 
-                type="Actions.Decanato.EliminarDecanato" 
+                type="Actions.Administrador.Decanato.EliminarDecanato" 
                 validate="false">
             <forward name="success" path="consulta_decanato_pagina"/>
         </action>     
@@ -364,7 +483,7 @@
                 name="Profesor" 
                 path="/verPlanillasLlenas" 
                 scope="request" 
-                type="Actions.Departamento.VerPlanillasLlenas" 
+                type="Actions.Departamento.Planillas.VerPlanillasLlenas" 
                 validate="false">
             <forward name="success" path="ver_planillas_llenas_pagina"/>
         </action>     
@@ -373,7 +492,7 @@
                 name="rendimientoProf" 
                 path="/verPlanilla" 
                 scope="request" 
-                type="Actions.Departamento.IrModificarPlanilla" 
+                type="Actions.Departamento.Planillas.IrModificarPlanilla" 
                 validate="false">
             <forward name="success" path="ver_planilla_pagina"/>
             <forward name="no_autorizado" path="noAutorizado"/>
@@ -383,7 +502,7 @@
                 name="rendimientoProf" 
                 path="/guardarPlanilla" 
                 scope="request" 
-                type="Actions.Departamento.GuardarPlanilla" 
+                type="Actions.Departamento.Planillas.GuardarPlanilla" 
                 validate="false">
             <forward name="success" path="llenar_planillas_pagina"/>
         </action>    
@@ -392,7 +511,7 @@
                 name="rendimientoProf" 
                 path="/modificarPlanilla" 
                 scope="request" 
-                type="Actions.Departamento.ModificarPlanilla" 
+                type="Actions.Departamento.Planillas.ModificarPlanilla" 
                 validate="false">
             <forward name="success" path="ver_planillas_llenas_pagina"/>
             <forward name="failure" path="ver_planilla_pagina"/>
@@ -402,7 +521,7 @@
                 name="Profesor" 
                 path="/irLlenarPlanillas" 
                 scope="request"
-                type="Actions.Departamento.IrLlenarPlanillas" 
+                type="Actions.Departamento.Planillas.IrLlenarPlanillas" 
                 validate="false">
             <forward name="success" path="llenar_planillas_pagina"/>
         </action>
@@ -416,7 +535,7 @@
         
         <action input="agregarProfesor.jsp"
             path="/agregarProfesor"
-            type="Actions.Profesor.AgregarProfesor"
+            type="Actions.Departamento.Profesor.AgregarProfesor"
             scope="request"
             name="Profesor"
             validate="false">
@@ -438,7 +557,7 @@
 
         <action input="ConsultaProfesores.jsp"
             path="/irModificarProfesor"
-            type="Actions.Profesor.IrModificarProfesor"
+            type="Actions.Departamento.Profesor.IrModificarProfesor"
             scope="request"
             name="Profesor"
             validate="false">
@@ -447,7 +566,7 @@
 
         <action input="ConsultaProfesores.jsp"
             path="/gestionarInformacion"
-            type="Actions.Profesor.GestionarInformacion"
+            type="Actions.Profesor.Informacion.GestionarInformacion"
             scope="request"
             name="Profesor"
             validate="false">
@@ -456,7 +575,7 @@
 
         <action input="ModificarProfesor.jsp"
             path="/modificarProfesor"
-            type="Actions.Profesor.ModificarProfesor"
+            type="Actions.Departamento.Profesor.ModificarProfesor"
             scope="request"
             name="Profesor"
             validate="false">
@@ -493,7 +612,7 @@
 
         <action input="ListarEvaluacionesEnviadasProfesor.jsp"
             path="/listarAnosEvaluados"
-            type="Actions.Profesor.ListarAnosEvaluados"
+            type="Actions.Evaluaciones.ListarAnosEvaluados"
             scope="request"
             name="Profesor"
             validate="false">
@@ -519,7 +638,7 @@
         
         <action input="ObtenerEvaluaciones.jsp"
             path="/guardarInformacionCoordinacion"
-            type="Actions.Coordinacion.GuardarInformacionCoordinacion"
+            type="Actions.Administrador.Coordinacion.GuardarInformacionCoordinacion"
             scope="request"
             name="InformacionProfesorCoord"
             validate="false">
@@ -529,7 +648,7 @@
         
         <action input="ConsultaProfesores.jsp"
             path="/eliminarProfesor"
-            type="Actions.Profesor.EliminarProfesor"
+            type="Actions.Departamento.Profesor.EliminarProfesor"
             scope="request"
             name="Profesor"
             validate="false">
@@ -540,7 +659,7 @@
              una o mas materias a un profesor-->
         <action input="ConsultaProfesores.jsp"
             path="/irAsignarMateriaProfesor"
-            type="Actions.Profesor.IrAsignarMateriaProfesor"
+            type="Actions.Departamento.CargaAcademica.IrAsignarMateriaProfesor"
             scope="request"
             name="Profesor"
             validate="false">
@@ -549,7 +668,7 @@
 
         <action input="ConsultaProfesores.jsp"
             path="/listarMateriasAsignadas"
-            type="Actions.Profesor.ListarMateriasAsignadas"
+            type="Actions.Departamento.CargaAcademica.ListarMateriasAsignadas"
             scope="request"
             name="Profesor"
             validate="false">
@@ -558,7 +677,7 @@
         
         <action input="ListarMateriasAsignadas.jsp"
             path="/modificarPeriodo"
-            type="Actions.Profesor.ModificarPeriodo"
+            type="Actions.Departamento.CargaAcademica.ModificarPeriodo"
             scope="request"
             name="Materia"
             validate="false">
@@ -567,7 +686,7 @@
         
         <action input="ListarMateriasAsignadas.jsp"
             path="/eliminarPeriodo"
-            type="Actions.Profesor.EliminarPeriodo"
+            type="Actions.Departamento.CargaAcademica.EliminarPeriodo"
             scope="request"
             name="Materia"
             validate="false">
@@ -578,7 +697,7 @@
         seleccionar el periodo en que dara la materia el profesor-->
         <action input="asignarMateriaProfesor.jsp"
             path="/asignarMateriaProfesor"
-            type="Actions.Profesor.AsignarMateriaProfesor"
+            type="Actions.Departamento.CargaAcademica.AsignarMateriaProfesor"
             scope="request"
             name="MultiBox"
             validate="false">
@@ -590,7 +709,7 @@
             el periodo en que las dicta-->
         <action input="asignarPeriodo.jsp"
             path="/asignarPeriodo"
-            type="Actions.Profesor.AsignarPeriodo"
+            type="Actions.Departamento.CargaAcademica.AsignarPeriodo"
             scope="request"
             name="Materia"
             validate="false">
@@ -633,7 +752,7 @@
                 name="Coordinacion" 
                 path="/listarEvaluacionesProfesor" 
                 scope="request" 
-                type="Actions.Profesor.ListarEvaluacionesProfesor"
+                type="Actions.Evaluaciones.ListarEvaluacionesProfesor"
                 validate="false">
             <forward name="success" path="listar_evaluaciones_profesor_pagina"/>
         </action>
@@ -658,7 +777,11 @@
         </action>
         
         <!--         OTROS       -->               
-        <action scope="request" input="/" path="/cerrarSesion" type="Session.CerrarSesion" validate="false">
+        <action scope="request" 
+                input="/" 
+                path="/cerrarSesion" 
+                type="Session.CerrarSesion" 
+                validate="false">
             <forward name="success" path="/Login.jsp"/>
         </action>
         
@@ -666,13 +789,18 @@
                 name="ModificarInfoPForm" 
                 path="/modificarInfoP" 
                 scope="request" 
-                type="Actions.Profesor.ModificarInformacionProfesor" 
+                type="Actions.Profesor.Informacion.ModificarInformacionProfesor" 
                 validate="false">
             <forward name="success" path="modificar_informacion_pagina"/>
             <forward name="no_autorizado" path="noAutorizado"/>
         </action>
         
-        <action input="/ModificarInfoP.jsp" name="Profesor" path="/guardarModificarInfoP" scope="request" type="Actions.Profesor.GuardarModificarInfoP" validate="false">
+        <action input="/ModificarInfoP.jsp" 
+                name="Profesor" 
+                path="/guardarModificarInfoP" 
+                scope="request" 
+                type="Actions.Profesor.Informacion.GuardarInformacion" 
+                validate="false">
             <forward name="success" path="gestionar_informacion_pagina"/>
             <forward name="failure" path="modificar_informacion_pagina"/> 
         </action>
@@ -681,7 +809,7 @@
                 name="Profesor" 
                 path="/irCargarDocProfesor" 
                 scope="request" 
-                type="Actions.Profesor.IrCargarDocumentosProfesor" 
+                type="Actions.Profesor.Archivos.IrCargarDocumentosProfesor" 
                 validate="false">
             <forward name="success" path="cargar_documentos_profesor_pagina"/>
         </action>
@@ -690,7 +818,7 @@
                 name="Archivo"
                 path="/consultarDocumentos" 
                 scope="request" 
-                type="Actions.Profesor.ConsultarDocumentos" 
+                type="Actions.Profesor.Archivos.ConsultarDocumentos" 
                 validate="false">
             <forward name="success" path="descargar_documentos_profesor_pagina"/>
         </action>
@@ -699,7 +827,7 @@
                name="fileUploadForm"
                path="/fileUploadProfesor"
                scope="request"
-               type="Actions.Profesor.CargarDocumentos"
+               type="Actions.Profesor.Archivos.CargarDocumentos"
                validate = "false">
             <forward name="success" path="cargar_documentos_profesor_pagina"/>
             <forward name="failure" path="cargar_documentos_profesor_pagina"/>
@@ -709,7 +837,7 @@
                name="Profesor"
                path="/irDescargarDocProfesor"
                scope="request"
-               type="Actions.Profesor.IrDescargarDocumentosProfesor"
+               type="Actions.Profesor.Archivos.IrDescargarDocumentosProfesor"
                validate = "false">
             <forward name="success" path="descargar_documentos_profesor_pagina"/>
        </action>
@@ -718,16 +846,25 @@
                name="Archivo"
                path="/descargarDocumentoSeleccionado"
                scope="request"
-               type="Actions.Profesor.DescargarDocumentos"
+               type="Actions.Profesor.Archivos.DescargarDocumentos"
                validate = "false">
             <forward name="success" path="vistaProfesor"/>
        </action>
        
-        <action input="/VistaProfesor.jsp" name="Profesor" path="/eliminarInfoP" scope="request" type="Actions.Profesor.EliminarInfoP" validate="false">
+        <action input="/VistaProfesor.jsp" 
+                name="Profesor" 
+                path="/eliminarInfoP" 
+                scope="request" 
+                type="Actions.Profesor.Informacion.EliminarInformacion" 
+                validate="false">
             <forward name="success" path="gestionar_informacion_pagina"/>
         </action>   
           
-        <action name="NoImplementado" path="/noImplementado" scope="request" type="Otros.noimplementadoAction" validate="false">
+        <action name="NoImplementado" 
+                path="/noImplementado" 
+                scope="request" 
+                type="Otros.noimplementadoAction" 
+                validate="false">
             <forward name="success" path="/noimplementado.jsp"/>
         </action>
         
