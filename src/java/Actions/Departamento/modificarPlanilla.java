@@ -68,7 +68,7 @@ public class modificarPlanilla extends org.apache.struts.action.Action {
         /* En caso que se ingrese 0 estudiantes */
         if (_total == 0) {
             ArrayList<Materia> materias =
-                    DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
+                    DBMS.getInstance().obtenerPlanillasVacias(id_profesor, id_departamento);
 
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
@@ -82,7 +82,7 @@ public class modificarPlanilla extends org.apache.struts.action.Action {
          * que la suma de todas las notas y retirados */
         if (_total != _1 + _2 + _3 + _4 + _5 + _r) {
             ArrayList<Materia> materias =
-                    DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
+                    DBMS.getInstance().obtenerPlanillasVacias(id_profesor, id_departamento);
 
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
@@ -95,7 +95,7 @@ public class modificarPlanilla extends org.apache.struts.action.Action {
         /* En caso que se ingresen valores negativos */
         if (_total < 0 || _1 < 0 || _2 < 0 || _3 < 0 || _4 < 0 || _5 < 0 || _r < 0) {
             ArrayList<Materia> materias =
-                    DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
+                    DBMS.getInstance().obtenerPlanillasVacias(id_profesor, id_departamento);
 
             request.setAttribute("materias", materias);
             request.setAttribute("rendimientoProf", renMateria);
@@ -116,7 +116,7 @@ public class modificarPlanilla extends org.apache.struts.action.Action {
                 DBMS.getInstance().obtenerPlanillasLlenas(id_profesor, id_departamento);
 
         ArrayList<Materia> materias =
-                DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
+                DBMS.getInstance().obtenerPlanillasVacias(id_profesor, id_departamento);
 
         request.setAttribute("materias", materias);
         request.setAttribute("rendimiento", rendimiento);

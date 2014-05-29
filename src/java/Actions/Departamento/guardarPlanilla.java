@@ -74,7 +74,7 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
 
             ArrayList<Materia> materias =
                     DBMS.getInstance().
-                    obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
+                    obtenerPlanillasVacias(id_profesor, id_departamento);
 
             request.setAttribute("anos", anos);
             request.setAttribute("materias", materias);
@@ -90,7 +90,7 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
 
             ArrayList<Materia> materias =
                     DBMS.getInstance().
-                    obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
+                    obtenerPlanillasVacias(id_profesor, id_departamento);
 
             request.setAttribute("anos", anos);
             request.setAttribute("materias", materias);
@@ -104,7 +104,7 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
 
             ArrayList<Materia> materias =
                     DBMS.getInstance().
-                    obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
+                    obtenerPlanillasVacias(id_profesor, id_departamento);
 
             request.setAttribute("anos", anos);
             request.setAttribute("materias", materias);
@@ -130,13 +130,13 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
         }
 
         boolean agregar =
-                DBMS.getInstance().agregarRendimientoProfesor(renMateria, id_departamento);
+                DBMS.getInstance().guardarPlanilla(renMateria, id_departamento);
 
         ArrayList<rendimientoProf> rendimiento =
                 DBMS.getInstance().obtenerRendimientoProfesor(id_profesor, id_departamento);
 
         ArrayList<Materia> materias =
-                DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(id_profesor, id_departamento);
+                DBMS.getInstance().obtenerPlanillasVacias(id_profesor, id_departamento);
 
         request.setAttribute("materias", materias);
         request.setAttribute("rendimiento", rendimiento);

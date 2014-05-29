@@ -58,7 +58,7 @@ public class irLlenarPlanillas extends org.apache.struts.action.Action {
         anos[0] = anos[1] - 1;
 
         materias =
-                DBMS.getInstance().obtenerSolicitudEvaluacionesProfesor(profesor.getUsbid(), id_departamento);
+                DBMS.getInstance().obtenerPlanillasVacias(profesor.getUsbid(), id_departamento);
 
         session.setAttribute("profesor", profesor);
         request.setAttribute("materias", materias);

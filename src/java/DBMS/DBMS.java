@@ -2481,7 +2481,18 @@ public class DBMS {
         return rendimiento;
     }
 
-    public ArrayList<Materia> obtenerSolicitudEvaluacionesProfesor(String id_profesor, String id_departamento) {
+    /**
+     * obtenerPlanillasVacias
+     *
+     * Obtiene las planillas vacías de un determinado profesor y departamento
+     *
+     * @param id_profesor: identificador del profesor del cual se quieren
+     * obtener las planillas
+     * @param id_departamento: identificador del departamento que hace la
+     * consulta.
+     * @return listado de materias cuya planilla está vacía.
+     */
+    public ArrayList<Materia> obtenerPlanillasVacias(String id_profesor, String id_departamento) {
         PreparedStatement ps;
         ArrayList<Materia> materia = new ArrayList<Materia>(0);
         try {
@@ -2527,7 +2538,17 @@ public class DBMS {
         return materia;
     }
 
-    public boolean agregarRendimientoProfesor(rendimientoProf u, String id_departamento) {
+    /**
+     * guardarPlanilla
+     *
+     * Guarda la planilla de un determinado profesor en la base de datos.
+     *
+     * @param u: planilla del profesor
+     * @param id_departamento: identificador del departamento que se encargó de
+     * llenar la planilla.
+     * @return booleano que indica si la planilla fue guardada.
+     */
+    public boolean guardarPlanilla(rendimientoProf u, String id_departamento) {
 
         PreparedStatement ps1, ps2, ps3;
 
@@ -2577,6 +2598,18 @@ public class DBMS {
         }
     }
 
+    /**
+     * cantidadPlanillaLlena
+     *
+     * Obtener la cantidad de planillas que llenó un departamento de un
+     * profesor.
+     *
+     * @param id_profesor: profesor sobre el cual se quieren saber cuántas
+     * planillas llenas hay
+     * @param id_departamento: identificador del departamento que llenó las
+     * planillas
+     * @return número de planillas llenas
+     */
     public int cantidadPlanillaLlena(String id_profesor, String id_departamento) {
 
         PreparedStatement ps1;
@@ -2605,6 +2638,17 @@ public class DBMS {
         return -1;
     }
 
+    /**
+     * cantidadPlanillaVacia
+     *
+     * Obtener la cantidad de planillas vacías de un profesor.
+     *
+     * @param id_profesor: profesor sobre el cual se quieren saber cuántas
+     * planillas llenas hay
+     * @param id_departamento: identificador del departamento que llenó las
+     * planillas
+     * @return número de planillas vacías
+     */
     public int cantidadPlanillaVacia(String id_profesor, String id_departamento) {
 
         PreparedStatement ps1;
@@ -2631,6 +2675,16 @@ public class DBMS {
         return -1;
     }
 
+    /**
+     * cantidadMateriasQueDicta
+     *
+     * Obtiene la cantidad de materias que dicta determinado profesor
+     *
+     * @param id_profesor: profesor del que se quiere obtener la cantidad de
+     * materias que dicta
+     * @param id_departamento: identificador del departamento al que pertenece.
+     * @return número de materias que dicta
+     */
     public int cantidadMateriasQueDicta(String id_profesor, String id_departamento) {
 
         PreparedStatement ps1;
@@ -2658,6 +2712,17 @@ public class DBMS {
         return -1;
     }
 
+    /**
+     * obtenerPlanillaEvaluacionProfesor
+     *
+     * Obtener los datos de determinada planilla llena de un profesor
+     *
+     * @param id_profesor: identificador del profesor
+     * @param id_materia: materia sobre la cual se lleno la planilla
+     * @param ano: año en el cual se dictó la materia
+     * @param trimestre: trimestre en el cual se dictó la materia
+     * @return planilla de evaluación
+     */
     public rendimientoProf obtenerPlanillaEvaluacionProfesor(String id_profesor,
             String id_materia, int ano, String trimestre) {
         PreparedStatement ps;
@@ -2698,6 +2763,16 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * modificarRendimientoProfesor
+     *
+     * Modificar la planilla previamente llenada de un profesor
+     *
+     * @param r: planilla
+     * @param id_departamento: identificador del departamento que llenó la
+     * planilla
+     * @return booleano que determina si la planilla fue modificada
+     */
     public boolean modificarRendimientoProfesor(rendimientoProf r, String id_departamento) {
         PreparedStatement ps1, ps2;
 
@@ -2715,7 +2790,7 @@ public class DBMS {
 
             Integer i = ps1.executeUpdate();
 
-            boolean agregado = agregarRendimientoProfesor(r, id_departamento);
+            boolean agregado = guardarPlanilla(r, id_departamento);
 
             return i > 0 && agregado;
 
@@ -2725,39 +2800,15 @@ public class DBMS {
         return false;
     }
 
-    public rendimientoProf obtenerEvaluacionGeneral(dicta d) {
-        PreparedStatement ps;
-        rendimientoProf evaluacion = null;
-        try {
-            ps = conexion.prepareStatement("SELECT sum(total_estudiantes), "
-                    + "avg(nota_prom) as np, sum(nota1) as n1, sum(nota2) as n2, "
-                    + "sum(nota3) as n3, sum(nota4) as n4, sum(nota5) as n5, "
-                    + "sum(retirados) as r "
-                    + "FROM rendimiento "
-                    + "WHERE codigo_materia = ?;");
-            String codigo_materia = d.getCodigoMateria();
-            ps.setString(1, codigo_materia);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                evaluacion = new rendimientoProf();
-                evaluacion.setCodigo_materia(codigo_materia);
-                evaluacion.setTotal_estudiantes(rs.getInt("sum"));
-                evaluacion.setNota_prom(rs.getFloat("np"));
-                evaluacion.setNota1(rs.getInt("n1"));
-                evaluacion.setNota2(rs.getInt("n2"));
-                evaluacion.setNota3(rs.getInt("n3"));
-                evaluacion.setNota4(rs.getInt("n4"));
-                evaluacion.setNota5(rs.getInt("n5"));
-                evaluacion.setRetirados(rs.getInt("r"));
-
-            }
-            return evaluacion;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
+    /**
+     * obtenerEvaluacion
+     *
+     * Obtener la evaluación de un profesor en un año y trimestre determinados.
+     *
+     * @param d: relación que contiene el usbid del profesor, la materia, el año
+     * y el trimestre
+     * @return rendimiento del profesor
+     */
     public rendimientoProf obtenerEvaluacion(dicta d) {
         PreparedStatement ps;
         rendimientoProf evaluacion = new rendimientoProf();
@@ -2798,6 +2849,15 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * obtenerEvaluacion
+     *
+     * Obtener la evaluación de un profesor.
+     *
+     * @param usbid_profesor: identificador del profesor del cual que se quiere
+     * obtener la evaluación
+     * @return rendimiento del profesor
+     */
     public rendimientoProf obtenerEvaluacion(String usbid_profesor) {
         PreparedStatement ps;
         rendimientoProf evaluacion = new rendimientoProf();
@@ -2851,6 +2911,16 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * obtenerEvaluacionPDF
+     *
+     * Obtener evaluación en función del PDF generado por el Sistema de
+     * Evaluacion de Profesores
+     *
+     * @param usbid_profesor: identificador del profesor del cual se quiere
+     * obtener la evaluación.
+     * @return rendimiento del profesor
+     */
     public rendimientoProf obtenerEvaluacionPDF(String usbid_profesor) {
         PreparedStatement ps;
         rendimientoProf evaluacion = new rendimientoProf();
@@ -2904,6 +2974,20 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * obtenerEvaluacion
+     *
+     * Obtener evaluación en función de la generación de estadísticas de
+     * evaluación del sistema.
+     *
+     * @param codigo_materia código de la materia de la cual se quiere obtener
+     * la evaluación
+     * @param usbid_profesor: identificador del profesor del cual se quiere
+     * obtener la evaluación.
+     * @param ano: año de la evaluación
+     * @param trimestre: trimestre de la evaluación
+     * @return rendimiento del profesor
+     */
     public rendimientoProf obtenerEvaluacion(String codigo_materia,
             String usbid_profesor, int ano, String trimestre) {
         PreparedStatement ps;
@@ -2944,79 +3028,18 @@ public class DBMS {
         return null;
     }
 
-    public rendimientoProf obtenerEvaluacion(
-            String usbid_profesor, int ano, String trimestre) {
-        PreparedStatement ps;
-        rendimientoProf evaluacion = new rendimientoProf();
-        try {
-            ps = conexion.prepareStatement("SELECT sum(total_estudiantes) as t, "
-                    + "avg(nota_prom) as np, sum(nota1) as n1, sum(nota2) as n2, "
-                    + "sum(nota3) as n3, sum(nota4) as n4, sum(nota5) as n5, "
-                    + "sum(retirados) as r "
-                    + "FROM rendimiento "
-                    + "WHERE usbid_profesor = ? "
-                    + "AND ano = ? "
-                    + "AND trimestre = ?;");
-
-            ps.setString(1, usbid_profesor);
-            ps.setInt(2, ano);
-            ps.setString(3, trimestre);
-
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                evaluacion.setTotal_estudiantes(rs.getInt("t"));
-                evaluacion.setNota_prom(rs.getFloat("np"));
-                evaluacion.setNota1(rs.getInt("n1"));
-                evaluacion.setNota2(rs.getInt("n2"));
-                evaluacion.setNota3(rs.getInt("n3"));
-                evaluacion.setNota4(rs.getInt("n4"));
-                evaluacion.setNota5(rs.getInt("n5"));
-                evaluacion.setRetirados(rs.getInt("r"));
-
-            }
-            return evaluacion;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
-    public rendimientoProf obtenerEvaluaciones(dicta d) {
-        PreparedStatement ps;
-        rendimientoProf evaluacion = new rendimientoProf();
-        try {
-            ps = conexion.prepareStatement("SELECT sum(total_estudiantes) as t, "
-                    + "sum(nota_prom) as np, sum(nota1) as n1, sum(nota2) as n2, "
-                    + "sum(nota3) as n3, sum(nota4) as n4, sum(nota5) as n5, "
-                    + "sum(retirados) as r "
-                    + "FROM rendimiento "
-                    + "WHERE codigo_materia = ?;");
-
-            String codigo_materia = d.getCodigoMateria();
-            ps.setString(1, codigo_materia);
-
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                evaluacion.setCodigo_materia(codigo_materia);
-                evaluacion.setTotal_estudiantes(rs.getInt("t"));
-                evaluacion.setNota_prom(rs.getFloat("np"));
-                evaluacion.setNota1(rs.getInt("n1"));
-                evaluacion.setNota2(rs.getInt("n2"));
-                evaluacion.setNota3(rs.getInt("n3"));
-                evaluacion.setNota4(rs.getInt("n4"));
-                evaluacion.setNota5(rs.getInt("n5"));
-                evaluacion.setRetirados(rs.getInt("r"));
-            }
-
-            return evaluacion;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
+    /**
+     * obtenerEvaluaciones
+     *
+     * Obtener evaluación en función de la generación de estadísticas de
+     * evaluación del sistema
+     *
+     * @param codigo_materia: código de la materia de la cual se quiere obtener
+     * la evaluación
+     * @param ano: año de la evaluación
+     * @param trimestre: trimestre de la evaluación
+     * @return rendimiento de todos los profesores en ese año y este trimestre
+     */
     public rendimientoProf obtenerEvaluaciones(String codigo_materia, int ano,
             String trimestre) {
         PreparedStatement ps;
@@ -3056,90 +3079,16 @@ public class DBMS {
         return null;
     }
 
-    public rendimientoProf obtenerEvaluacionEnviada(String usbid_profesor,
-            int ano, String trimestre) {
-
-        PreparedStatement ps;
-        rendimientoProf evaluacion = null;
-        try {
-            ps = conexion.prepareStatement("SELECT sum(total_estudiantes), "
-                    + "avg(nota_prom) as np, sum(nota1) as n1, sum(nota2) as n2, "
-                    + "sum(nota3) as n3, sum(nota4) as n4, sum(nota5) as n5, "
-                    + "sum(retirados) as r "
-                    + "FROM rendimiento "
-                    + "WHERE trimestre = ? "
-                    + "AND ano = ? "
-                    + "AND usbid_profesor = ?;");
-
-            ps.setString(1, trimestre);
-            ps.setInt(2, ano);
-            ps.setString(3, usbid_profesor);
-
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                evaluacion = new rendimientoProf();
-                evaluacion.setTotal_estudiantes(rs.getInt("sum"));
-                evaluacion.setNota_prom(rs.getFloat("np"));
-                evaluacion.setNota1(rs.getInt("n1"));
-                evaluacion.setNota2(rs.getInt("n2"));
-                evaluacion.setNota3(rs.getInt("n3"));
-                evaluacion.setNota4(rs.getInt("n4"));
-                evaluacion.setNota5(rs.getInt("n5"));
-                evaluacion.setRetirados(rs.getInt("r"));
-
-            }
-
-            return evaluacion;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
-    public int cantidadEvaluados(String codigo_materia, String codigo_coordinacion) {
-        PreparedStatement ps;
-        int cantidad = 0;
-        try {
-            ps = conexion.prepareStatement("SELECT count(usbid_profesor) "
-                    + "FROM evaluar "
-                    + "WHERE codigo_materia = ? "
-                    + "AND codigo_coordinacion = ?;");
-            ps.setString(1, codigo_materia);
-            ps.setString(2, codigo_coordinacion);
-
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                cantidad = rs.getInt("count");
-            }
-            return cantidad;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return -1;
-    }
-
-    public int cantidadProfesoresDictanMateria(String codigo_materia) {
-        PreparedStatement ps;
-        int cantidad = 0;
-        try {
-            ps = conexion.prepareStatement("SELECT count(usbid_profesor) "
-                    + "FROM dicta "
-                    + "WHERE codigo_materia = ?;");
-            ps.setString(1, codigo_materia);
-
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                cantidad = rs.getInt("count");
-            }
-            return cantidad;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return -1;
-    }
-
+    /**
+     * agregarProfesor
+     *
+     * Agregar un profesor al sistema
+     *
+     * @param p: profesor a agregar al sistema
+     * @param id_departamento: identificador del departamento que agrega un
+     * profesor al sistema
+     * @return booleano que determina si el profesor fue agregado.
+     */
     public boolean agregarProfesor(Profesor p, String id_departamento) {
         PreparedStatement ps1, ps2, ps3;
 
@@ -3181,6 +3130,15 @@ public class DBMS {
         return false;
     }
 
+    /**
+     * consultarMateriasSeleccionadas
+     *
+     * Consulta las materias seleccionadas por un departamento para asignarlas a
+     * un profesor que las dicte
+     *
+     * @param materias_seleccionadas: lista de materias seleccionadas.
+     * @return lista de materias.
+     */
     public ArrayList<Materia> consultarMateriasSeleccionadas(String[] materias_seleccionadas) {
         PreparedStatement ps1;
         ArrayList<Materia> materias = new ArrayList<Materia>(0);
@@ -3219,6 +3177,16 @@ public class DBMS {
         return materias;
     }
 
+    /**
+     * agregarDicta
+     *
+     * Agrega la interrelación "dicta" a la base de datos.
+     *
+     * @param profesor: profesor que dicta.
+     * @param id_materia: materia que dicta
+     * @param periodo: período en el cual dicta la materia
+     * @return
+     */
     public boolean agregarDicta(Profesor profesor, String id_materia, String periodo) {
         PreparedStatement ps1;
         try {
@@ -3240,23 +3208,18 @@ public class DBMS {
         return false;
     }
 
-    public boolean pathArchivos(String usbid, String path) {
-        PreparedStatement ps;
-        try {
-            ps = conexion.prepareStatement("INSERT INTO directorios "
-                    + "(usbid_profesor,path) VALUES (?,?)");
-            ps.setString(1, usbid);
-            ps.setString(2, path);
-
-            Integer j = ps.executeUpdate();
-
-            return j > 0;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return false;
-    }
-
+    /**
+     * agregarEspecificacionesArchivo
+     *
+     * Agregar especificaciones a un archivo.
+     *
+     * @param usuario: usuario que carga el documento
+     * @param trimestre: trimestre en el que se subió el archivo
+     * @param ano: año en el que se cargo el archivo
+     * @param nombre: nombre del archivo
+     * @param descripcion: descripcion del archivo
+     * @return booleano que determina si se cargó el archivo
+     */
     public boolean agregarEspecificacionesArchivo(String usuario, String trimestre,
             int ano, String nombre, String descripcion) {
         PreparedStatement ps;
@@ -3279,12 +3242,22 @@ public class DBMS {
         return false;
     }
 
+    /**
+     * listarDirectoriosProfesor
+     *
+     * Listar los path de los directorios de un determinado profesor
+     *
+     * @param usbid: identificador del profesor del que se quieren obtener los
+     * path
+     * @return listado de paths
+     */
     public ArrayList<String> listarDirectoriosProfesor(String usbid) {
         PreparedStatement ps;
         ArrayList<String> archivos = new ArrayList<String>(0);
         try {
-            ps = conexion.prepareStatement("SELECT path FROM directorios "
-                    + "WHERE usbid_profesor = (?)");
+            ps = conexion.prepareStatement("SELECT path "
+                    + "FROM directorios "
+                    + "WHERE usbid_profesor = ?;");
             ps.setString(1, usbid);
 
             ResultSet rs = ps.executeQuery();
@@ -3300,6 +3273,15 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * listarArchivosProfesor
+     *
+     * Listar los archivos subidos por un profesor
+     *
+     * @param archivo: objeto que contiene el nombre, año y trimestre en el que
+     * se subió el archivo
+     * @return listado de archivos
+     */
     public ArrayList<Archivo> listarArchivosProfesor(Archivo archivo) {
         PreparedStatement ps;
         ArrayList<Archivo> archivos = new ArrayList<Archivo>(0);
@@ -3332,6 +3314,16 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * listarAnosArchivos
+     *
+     * Obtiene el listado de los años en los cuales existen archivos subidos por
+     * el profesor
+     *
+     * @param usbid_profesor: identificador del profesor del cual se quieren
+     * obtener los archivos
+     * @return listado de nombres de archivos
+     */
     public ArrayList<String> listarAnosArchivos(String usbid_profesor) {
         PreparedStatement ps;
         ArrayList<String> archivos = new ArrayList<String>(0);
@@ -3355,6 +3347,15 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * consultarMateriasAsignadas
+     *
+     * Consultar las materias asignadas a determinado profesor
+     *
+     * @param usbid_profesor: profesor al cual se quieren consultar las materias
+     * dictadas
+     * @return listado de materias
+     */
     public ArrayList<Materia> consultarMateriasAsignadas(String usbid_profesor) {
 
         PreparedStatement ps1, ps2;
@@ -3410,8 +3411,18 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * eliminarPeriodos
+     *
+     * Eliminar períodos en los que determinado profesor dicta las materias.
+     *
+     * @param id_profesor: profesor al cual se eliminará la carga académica
+     * @param codigo_materia: código de la materia a la cual se eliminará la
+     * carga académica
+     * @return booleano que determina si se elimino el período determinado
+     */
     public boolean eliminarPeriodos(String id_profesor, String codigo_materia) {
-        PreparedStatement ps1, ps2;
+        PreparedStatement ps1;
         try {
 
             ps1 = conexion.prepareStatement("DELETE FROM dicta "
@@ -3430,6 +3441,7 @@ public class DBMS {
         return false;
     }
 
+    /* ESTO SE DEBE ELIMINAR */
     public ArrayList<Materia> listarMateriasDictadasTrimestrePDF(
             String id_profesor, int ano, String trimestre) {
 
@@ -3464,7 +3476,18 @@ public class DBMS {
         return materias;
     }
 
-    public ArrayList<Materia> listarMateriasNoDictadas(String id_departamento, String id_profesor) {
+    /**
+     * listarMateriasNoDictadas
+     *
+     * Obtiene el listado de materias que un determinado profesor no dicta
+     *
+     * @param id_departamento: identificador del departamento
+     * @param id_profesor: identificador del profesor sobre el cual se realizará
+     * el listado
+     * @return listado de materias.
+     */
+    public ArrayList<Materia> listarMateriasNoDictadas(String id_departamento,
+            String id_profesor) {
 
         ArrayList<Materia> materias = new ArrayList<Materia>(0);
         PreparedStatement ps;
@@ -3498,7 +3521,17 @@ public class DBMS {
         return materias;
     }
 
-    public boolean evaluarCoordinacion(rendimientoProf rendimiento, String id_coordinacion) {
+    /**
+     * evaluarCoordinacion
+     *
+     * La coordinación evalúa a determinado profesor
+     *
+     * @param rendimiento: objeto que contiene la información para la evaluación
+     * @param id_coordinacion: identificador de la coordinación que evalúa
+     * @return booleano que determina que se evaluó
+     */
+    public boolean evaluarCoordinacion(rendimientoProf rendimiento,
+            String id_coordinacion) {
 
         PreparedStatement ps0;
 
@@ -3522,7 +3555,18 @@ public class DBMS {
         }
     }
 
-    public boolean revisadoPorDecanato(rendimientoProf rendimiento, String id_departamento) {
+    /**
+     * revisadoPorDecanato
+     *
+     * Determina si una evaluación fue revisada por el decanato
+     *
+     * @param rendimiento: objeto que contiene la información de la evaluación
+     * @param id_departamento: identificador del decanato que se revisó.
+     * @return booleano que determina si la revisión fue realizada por el
+     * decanato
+     */
+    public boolean revisadoPorDecanato(rendimientoProf rendimiento,
+            String id_departamento) {
 
         PreparedStatement ps0;
 
@@ -3551,7 +3595,19 @@ public class DBMS {
 
     }
 
-    public boolean revisadoPorDepartamento(rendimientoProf rendimiento, String id_coordinacion) {
+    /**
+     * revisadoPorDepartamento
+     *
+     * Determina si una evaluación fue revisada por el departamento
+     *
+     * @param rendimiento: objeto que contiene la información de la evaluación
+     * @param id_coordinacion: identificador de la coordinación que realizó la
+     * evaluación
+     * @return booleano que determina si la revisión fue realizada por el
+     * departamento
+     */
+    public boolean revisadoPorDepartamento(rendimientoProf rendimiento,
+            String id_coordinacion) {
 
         PreparedStatement ps0;
 
@@ -3582,6 +3638,19 @@ public class DBMS {
 
     }
 
+    /**
+     * iterarEvaluarRendimientoDecanato
+     *
+     * Función que permite evaluar cada rendimiento por trimestre de determinado
+     * profesor
+     *
+     * @param id_coordinacion: identificador de la coordinación que realizó la
+     * evaluación
+     * @param usbid_profesor: identificador del profesor a evaluar
+     * @param ano: año de la evaluación
+     * @param trimestre: trimestre de la evaluación
+     * @return booleano que determina que se actualizaron todos los rendimientos
+     */
     public boolean iterarEvaluarRendimientoDecanato(String id_coordinacion,
             String usbid_profesor, int ano, String trimestre) {
         PreparedStatement ps0;
@@ -3607,7 +3676,6 @@ public class DBMS {
                         rs.getString("usbid_profesor"),
                         rs.getString("codigo_materia"),
                         ano, trimestre);
-
             }
 
             return true;
@@ -3618,6 +3686,19 @@ public class DBMS {
         }
     }
 
+    /**
+     * iterarEvaluarRendimientoDepartamento
+     *
+     * Función que permite evaluar cada rendimiento por trimestre de determinado
+     * profesor
+     *
+     * @param id_coordinacion: identificador de la coordinación que realizó la
+     * evaluación
+     * @param usbid_profesor: identificador del profesor a evaluar
+     * @param ano: año de la evaluación
+     * @param trimestre: trimestre de la evaluación
+     * @return booleano que determina que se actualizaron todos los rendimientos
+     */
     public boolean iterarEvaluarRendimientoDepartamento(String id_departamento,
             String usbid_profesor, int ano, String trimestre) {
         PreparedStatement ps0;
@@ -3656,7 +3737,19 @@ public class DBMS {
         }
     }
 
-    public boolean evaluarRendimiento(String usbid, String materia, int ano, String trimestre) {
+    /**
+     * evaluarRendimiento
+     *
+     * Evaluar un rendimiento determinado
+     *
+     * @param usbid: identificador del profesor a evaluar
+     * @param materia: materia sobre la cual se evaluará
+     * @param ano: año en el cual se realiza la evaluación
+     * @param trimestre: trimestre en el cual se realiza la evaluación
+     * @return booleano que determina si se evaluó el rendimiento
+     */
+    public boolean evaluarRendimiento(String usbid, String materia, int ano,
+            String trimestre) {
 
         PreparedStatement ps0, ps1;
 
@@ -3695,6 +3788,13 @@ public class DBMS {
         }
     }
 
+    /**
+     * obtenerAnoYTrimestre
+     *
+     * Obtiene el año y el trimestre actual
+     *
+     * @return arreglo que contiene el año y el trimestre.
+     */
     public int[] obtenerAnoYTrimestre() {
 
         int[] ano_y_trimestre = new int[2];
@@ -3711,6 +3811,14 @@ public class DBMS {
         return ano_y_trimestre;
     }
 
+    /**
+     * obtenerTrimestre
+     *
+     * Obtiene el trimestre dado el número de mes en el que se encuentra
+     *
+     * @param fecha_mes: número del mes
+     * @return String que contiene las siglas del trimestre.
+     */
     public String obtenerTrimestre(int fecha_mes) {
 
         if (1 <= fecha_mes && fecha_mes <= 3) {
@@ -3729,7 +3837,19 @@ public class DBMS {
         return null;
     }
 
-    public void evaluar(rendimientoProf rendimiento, String id_departamento, String id_coordinacion) {
+    /**
+     * evaluar
+     *
+     * Procedimiento que finaliza la evaluación de profesores
+     *
+     * @param rendimiento: objeto que contiene la información correspondiente a
+     * la evaluación
+     * @param id_departamento: identificador del departamento que evalua
+     * @param id_coordinacion: identificador de la coordinación sobre la cual el
+     * departamento revisará la evaluación.
+     */
+    public void evaluar(rendimientoProf rendimiento, String id_departamento,
+            String id_coordinacion) {
 
         PreparedStatement ps0, ps1;
 
@@ -3791,7 +3911,20 @@ public class DBMS {
         }
     }
 
-    public boolean borrarEvaluadosDepartamento(rendimientoProf rendimiento, String id_departamento) {
+    /**
+     * borrarEvaluadosDepartamento
+     *
+     * Borra aquellos profesores que han sido evaluados por la coordinación y
+     * revisados por el decanato
+     *
+     * @param rendimiento: objeto que contiene la información sobre la
+     * evaluación
+     * @param id_departamento: identificador del departamento
+     * @return booleano que determina se si borraron los evaluados por el
+     * departamento
+     */
+    public boolean borrarEvaluadosDepartamento(rendimientoProf rendimiento,
+            String id_departamento) {
 
 
         PreparedStatement ps0, ps1;
@@ -3818,7 +3951,20 @@ public class DBMS {
         }
     }
 
-    public boolean borrarEvaluadosDecanato(rendimientoProf rendimiento, String id_coordinacion) {
+    /**
+     * borrarEvaluadosDecanato
+     *
+     * Borra aquellos profesores que han sido evaluados por la coordinación y
+     * revisados por el departamento
+     *
+     * @param rendimiento: objeto que contiene la información sobre la
+     * evaluación
+     * @param id_coordinacion: identificador de la coordinacion
+     * @return booleano que determina se si borraron los evaluados por el
+     * departamento
+     */
+    public boolean borrarEvaluadosDecanato(rendimientoProf rendimiento,
+            String id_coordinacion) {
 
 
         PreparedStatement ps0, ps1;
@@ -3847,7 +3993,19 @@ public class DBMS {
         }
     }
 
-    public boolean revisadoDepartamento(rendimientoProf rendimiento, String id_departamento) {
+    /**
+     * revisadoDepartamento
+     *
+     * Marca como revisado la evaluación del profesor por parte del departamento
+     *
+     * @param rendimiento: objeto que contiene la información correspondiente a
+     * la evaluación
+     * @param id_departamento: identificador del departamento que revisa la
+     * evaluación
+     * @return booleano que determina si la evaluación fue revisada
+     */
+    public boolean revisadoDepartamento(rendimientoProf rendimiento,
+            String id_departamento) {
 
         PreparedStatement ps0;
 
@@ -3880,7 +4038,18 @@ public class DBMS {
         }
     }
 
-    public boolean revisadoDecanato(rendimientoProf rendimiento, String id_coordinacion) {
+    /**
+     * revisadoDecanato
+     *
+     * Marca como revisado la evaluación del profesor por parte del decanato
+     *
+     * @param rendimiento: objeto que contiene la información correspondiente a
+     * la evaluación
+     * @param id_coordinacion: identificador de la coordinación.
+     * @return booleano que determina si la evaluación fue revisada
+     */
+    public boolean revisadoDecanato(rendimientoProf rendimiento,
+            String id_coordinacion) {
 
         PreparedStatement ps0;
 
@@ -3915,7 +4084,16 @@ public class DBMS {
         }
     }
 
-    public ArrayList<Profesor> listarProfesoresEvaluadosCoordinacion(String id_coordinacion) {
+    /**
+     * listarProfesoresEvaluadosCoordinacion
+     *
+     * Lista los profesores evaluados por una determinada coordinacion
+     *
+     * @param id_coordinacion: identificador de la coordinacion
+     * @return listado de profesores evaluados
+     */
+    public ArrayList<Profesor> listarProfesoresEvaluadosCoordinacion(
+            String id_coordinacion) {
 
         ArrayList<Profesor> profesores = new ArrayList<Profesor>(0);
         PreparedStatement ps;
@@ -3946,6 +4124,14 @@ public class DBMS {
         return profesores;
     }
 
+    /**
+     * listarProfesoresPorEvaluarCoordinacion
+     *
+     * Listado de profesores por evaluar por parte de la coordinacion
+     *
+     * @param id_coordinacion: identificación de la coordinacion
+     * @return listado de profesores por evaluar
+     */
     public ArrayList<Profesor> listarProfesoresPorEvaluarCoordinacion(
             String id_coordinacion) {
 
@@ -3984,6 +4170,14 @@ public class DBMS {
         return profesores;
     }
 
+    /**
+     * listarProfesoresPorEvaluarDecanato
+     *
+     * Listado de profesores por evaluar por parte del decanato
+     *
+     * @param id_coordinacion: identificador de la coordinacion
+     * @return listado de profesores por evaluar
+     */
     public ArrayList<Profesor> listarProfesoresPorEvaluarDecanato(
             String id_coordinacion) {
 
@@ -4013,6 +4207,14 @@ public class DBMS {
         return profesores;
     }
 
+    /**
+     * obtenerTrimestrePorNombre
+     *
+     * Obtener las siglas correspondientes al nombre del trimestre
+     *
+     * @param periodo
+     * @return string con las siglas correspondientes al trimestre
+     */
     public String obtenerTrimestrePorNombre(String periodo) {
 
         if (periodo.equals("Septiembre-Diciembre")) {
@@ -4028,6 +4230,14 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * obtenerTrimestrePorSiglas
+     *
+     * Obtener el nombre del trimestre por sus siglas
+     *
+     * @param periodo
+     * @return string con el nombre del trimestre
+     */
     public String obtenerTrimestrePorSiglas(String periodo) {
 
         if (periodo.equals("SD")) {
@@ -4043,6 +4253,16 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * listarAnoEvaluacionesEnviadasCoordinacion
+     *
+     * Listar los años de las evaluaciones enviadas por parte de la coordinación
+     *
+     * @param id_coordinacion: identificador de la coordinacion
+     * @param usbid_profesor: identificador del profesor cuyas evaluaciones
+     * enviadas se van a consultar
+     * @return listado de evaluaciones
+     */
     public ArrayList<rendimientoProf> listarAnoEvaluacionesEnviadasCoordinacion(
             String id_coordinacion, String usbid_profesor) {
 
@@ -4076,6 +4296,17 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * listarAnoEvaluacionesEnviadasDepartamento
+     *
+     * Listar los años de las evaluaciones enviadas por parte del departamento
+     *
+     * @param id_departamento: identificador del departamento que realiza la
+     * consulta
+     * @param usbid_profesor: identificador del profesor cuyas evaluaciones
+     * enviadas se van a consultar.
+     * @return listado de evaluaciones
+     */
     public ArrayList<rendimientoProf> listarAnoEvaluacionesEnviadasDepartamento(
             String id_departamento, String usbid_profesor) {
 
@@ -4111,6 +4342,17 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * resumenInformacionProfesor
+     *
+     * Se obtiene las informaciones de los profesores presentadas por las
+     * coordinaciones
+     *
+     * @param usbid_profesor: identificador del profesor del cual se va a
+     * obtener el resumen
+     * @return recopilación de la información del profesor proporcionada por las
+     * coordinaciones correspondientes
+     */
     public InformacionProfesorCoord resumenInformacionProfesor(
             String usbid_profesor) {
 
@@ -4154,6 +4396,16 @@ public class DBMS {
         return informacion;
     }
 
+    /**
+     * listarInformacionProfesorCoordinacion
+     *
+     * Obtiene la información del profesor proporcionada por la coordinación
+     *
+     * @param id_coordinacion: identificador de la coordinación que proporcionó
+     * la infromación
+     * @param usbid_profesor: identificador del profesor
+     * @return información del profesor proporcionada por la coordinación.
+     */
     public InformacionProfesorCoord listarInformacionProfesorCoordinacion(
             String id_coordinacion, String usbid_profesor) {
 
@@ -4193,9 +4445,16 @@ public class DBMS {
         return null;
     }
 
-    /* Lista los archivos subidos por un profesor en base a una lista 
-     * de archivos que contiene los anos y trimestres que deben
-     * ser consultados */
+    /**
+     * listarArchivosProfesor
+     *
+     * Lista los archivos subidos por un profesor en base a una lista de
+     * archivos que contiene los anos y trimestres que deben ser consultados.
+     *
+     * @param usbid_profesor: identificador del profesor
+     * @param archivos_considerados: archivos que se deben consultar
+     * @return listado de archivos
+     */
     public ArrayList<Archivo> listarArchivosProfesor(
             String usbid_profesor, Archivo[] archivos_considerados) {
 
@@ -4243,6 +4502,17 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * crearInformacionProfesorCoordinacion
+     *
+     * Crea la infromación que proporciona la coordinación en la evaluación del
+     * profesor
+     *
+     * @param id_coordinacion: identificador de la coordinación
+     * @param usbid_profesor: identificador del profesor
+     * @param informacion: instancia de la informacion del profesor
+     * @return booleano que determina si la informacion fue creada
+     */
     public boolean crearInformacionProfesorCoordinacion(String id_coordinacion, String usbid_profesor,
             InformacionProfesorCoord informacion) {
 
@@ -4269,6 +4539,18 @@ public class DBMS {
         return false;
     }
 
+    /**
+     * actualizarInformacionProfesorCoordinacion
+     *
+     * Actualiza la información de determinado profesor
+     *
+     * @param id_coordinacion: identificador de la coordinacion que actualiza la
+     * información del profesor
+     * @param usbid_profesor: identificador de profesor cuya información es
+     * actualizada
+     * @param informacion: instancia de la información del profesor
+     * @return booleano que determina si la informacion fue actualizada
+     */
     public boolean actualizarInformacionProfesorCoordinacion(String id_coordinacion, String usbid_profesor,
             InformacionProfesorCoord informacion) {
 
@@ -4302,6 +4584,16 @@ public class DBMS {
         return false;
     }
 
+    /**
+     * listarEvaluadosPorCoordinacion
+     *
+     * Listado de los profesores evaluados pro la coordinacion por parte del
+     * departamento
+     *
+     * @param id_departamento
+     * @param id_profesor
+     * @return
+     */
     public ArrayList<dicta> listarEvaluadosPorCoordinacion(
             String id_departamento, String id_profesor) {
 
@@ -4374,6 +4666,16 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * listarEvaluadosPorCoordinacion
+     *
+     * Listado de los profesores evaluados pro la coordinacion por parte del
+     * departamento
+     *
+     * @param id_departamento
+     * @param id_profesor
+     * @return
+     */
     public ArrayList<dicta> listarEvaluadosPorCoordinacion(String id_departamento) {
 
         PreparedStatement ps, ps2;
@@ -4439,6 +4741,16 @@ public class DBMS {
         return null;
     }
 
+    /**
+     * obtenerEvaluacionCoordinaciones
+     *
+     * Obtiene el resultado de las evaluaciones realizadas por las
+     * coordinaciones
+     *
+     * @param id_departamento
+     * @param usbid_profesor
+     * @return
+     */
     public ArrayList<rendimientoProf> obtenerEvaluacionCoordinaciones(
             String id_departamento, String usbid_profesor) {
 
@@ -4464,51 +4776,6 @@ public class DBMS {
                 rendimiento.setCodigo_materia(codigo_coordinacion);
                 rendimiento.setObservaciones_c(rs.getString("observaciones_coordinacion"));
                 rendimiento.setRecomendado(rs.getString("recomendado_coordinacion"));
-                informacion.add(rendimiento);
-            }
-
-            return informacion;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
-    public ArrayList<rendimientoProf> obtenerEvaluacionesEnviadasCoordinaciones(
-            String id_departamento, String usbid_profesor, int ano, String trimestre) {
-
-        PreparedStatement ps;
-        ArrayList<rendimientoProf> informacion = new ArrayList<rendimientoProf>(0);
-        try {
-            ps = conexion.prepareStatement("SELECT DISTINCT codigo, c.nombre, "
-                    + "recomendado, observaciones "
-                    + "FROM evaluado as ev, coordinacion as c, profesor as pr, "
-                    + "pertenece as p "
-                    + "WHERE p.codigo_departamento = ? "
-                    + "AND usbid = p.usbid_profesor "
-                    + "AND ev.usbid_profesor = usbid "
-                    + "AND ev.usbid_profesor = ? "
-                    + "AND codigo = codigo_coordinacion "
-                    + "AND ev.ano = ? "
-                    + "AND ev.trimestre = ?;");
-            ps.setString(1, id_departamento);
-            ps.setString(2, usbid_profesor);
-            ps.setInt(3, ano);
-            ps.setString(4, trimestre);
-
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                rendimientoProf rendimiento = new rendimientoProf();
-                String nombre_coordinacion = rs.getString("nombre");
-                String codigo_coordinacion = rs.getString("codigo");
-                /* Uso estos setters porque de verdad necesito la informacion 
-                 * y no quiero embasurar mas la clase */
-                rendimiento.setObservaciones_d(nombre_coordinacion);
-                rendimiento.setCodigo_materia(codigo_coordinacion);
-                rendimiento.setObservaciones_c(rs.getString("observaciones"));
-                rendimiento.setRecomendado(rs.getString("recomendado"));
                 informacion.add(rendimiento);
             }
 
