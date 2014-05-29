@@ -134,7 +134,12 @@
             <forward name="failure" path="agrega_departamento_pagina"/>
         </action>
         
-        <action input="/ConsultaDepartamento.jsp" name="Departamento" path="/desactivarDepartamento" scope="request" type="Actions.Departamento.DesactivarDepartamento" validate="false">
+        <action input="/ConsultaDepartamento.jsp" 
+                name="Departamento" 
+                path="/eliminarDepartamento" 
+                scope="request" 
+                type="Actions.Departamento.EliminarDepartamento" 
+                validate="false">
             <forward name="success" path="consulta_departamento_pagina"/>
         </action>
         
@@ -144,6 +149,7 @@
             <forward name="failure" path="agrega_decanato_pagina"/> 
             <forward name="yaregistrada" path="agrega_decanato_pagina"/> 
         </action>
+        
         <action input="/ConsultaDecanato.jsp" name="Decanato" path="/editarNombreDecanato" scope="request" type="Actions.Decanato.EditarNombreDecanato" validate="false">
             <forward name="success" path="edita_decanato_pagina"/>
         </action>
@@ -206,7 +212,7 @@
             <forward name="failure" path="consulta_coordinacion_pagina"/>
         </action>
         
-        <action input="/VistaCoordinacion.jsp" name="Departamentos" path="/listarDepartamentos" scope="request" type="Actions.Departamento.ConsultaDepartamentoA" validate="false">
+        <action input="/VistaCoordinacion.jsp" name="Departamento" path="/listarDepartamentos" scope="request" type="Actions.Departamento.ConsultaDepartamentoA" validate="false">
             <forward name="coordinacion" path="consulta_departamento_pagina"/>
             <forward name="administrador" path="consulta_departamento_pagina"/>
             <forward name="no_autorizado" path="noAutorizado"/>

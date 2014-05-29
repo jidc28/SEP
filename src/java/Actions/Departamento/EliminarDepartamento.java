@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Actions.Departamento;
 
 import Clases.*;
@@ -18,7 +14,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author jidc28
  */
-public class DesactivarDepartamento extends org.apache.struts.action.Action {
+public class EliminarDepartamento extends org.apache.struts.action.Action {
 
     private static final String SUCCESS = "success";
 
@@ -41,20 +37,20 @@ public class DesactivarDepartamento extends org.apache.struts.action.Action {
         ArrayList<Departamento> departamentos;
         Departamento departamento = (Departamento) form;
 
-        //obtengo una lista de departamentos registrados
-        //si existen departamentos registrados
-
         boolean desactivado = DBMS.getInstance().eliminarDepartamento(departamento);
 
+        /**
+         * Dependiendo si el departamento fue o no eliminado exitosamente se
+         * envían diferentes atributos a la vista de consultar departamento.
+         */
         if (desactivado) {
             request.setAttribute("departamento_desactivado", SUCCESS);
         } else {
             request.setAttribute("departamento_no_desactivado", SUCCESS);
         }
-        
+
         departamentos = DBMS.getInstance().listarDepartamentos();
         request.setAttribute("departamentos", departamentos);
-        //retorno a pagina de exito
         return mapping.findForward(SUCCESS);
     }
 }

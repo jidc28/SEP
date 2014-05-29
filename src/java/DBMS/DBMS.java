@@ -2067,9 +2067,8 @@ public class DBMS {
         PreparedStatement ps;
 
         try {
-            ps = conexion.prepareStatement("UPDATE DEPARTAMENTO "
-                    + "SET condicion = 'desactivado' "
-                    + "WHERE (codigo = ?);");
+            ps = conexion.prepareStatement("DELETE FROM DEPARTAMENTO "
+                    + "WHERE codigo = ?;");
             ps.setString(1, d.getCodigo());
 
             Integer i = ps.executeUpdate();

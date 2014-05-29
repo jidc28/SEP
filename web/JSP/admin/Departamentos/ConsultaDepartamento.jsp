@@ -28,12 +28,12 @@
 </logic:present>
 <logic:present name="departamento_desactivado">
     <div class="alert alert-success" id="alert">
-        Departamento desactivado exitosamente.
+        Departamento eliminado exitosamente.
     </div>
 </logic:present>
 <logic:present name="departamento_no_desactivado">
     <div class="alert alert-danger" id="alert">
-        El departamento no fue desactivado exitosamente. Intente mas tarde.
+        El departamento no fue eliminado exitosamente. Intente mas tarde.
     </div>
 </logic:present>
 
@@ -50,7 +50,7 @@
                 <th style="font-size: 14px;">
                     <center>USBID</center>
                 </th>
-                <th width='30%' style="font-size: 14px;">
+                <th style="font-size: 14px;">
                     <center>NOMBRE</center>
                 </th>
                 <th style="font-size: 14px;">
@@ -64,37 +64,37 @@
         <tbody>
             <logic:iterate name="departamentos" id="Dep">
                 <tr>
-                    <td width="20%" align="center">
+                    <td style="width: 15%;"align="center">
                         <bean:write name="Dep" property="codigo"/>
                     </td>
-                    <td width="20%" align="center">
+                    <td>
                         <bean:write name="Dep" property="nombre"/>
                     </td>
                     <td>
                         <html:form  action="/irEditarNombreDepartamento" 
                                     onsubmit="return(this)" style="margin: 0px;">
                             <html:hidden name="Dep" property="codigo" />
-                <center>
-                    <html:submit styleClass="btn btn-primary" 
-                                 style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;">
-                        Modificar
-                    </html:submit>
-                </center>
-            </html:form>
-            </td>
-            <td>
-                <html:form action="/desactivarDepartamento" 
-                           onsubmit="return(this)" style="margin: 0px;">
-                    <html:hidden name="Dep" property="codigo"/>
-                <center>
-                    <html:submit styleClass="btn btn-danger" 
-                                 style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
-                                 onclick="javascript: return confirm('¿Está seguro de que desea desactivar el Departamento ${Dep.getNombre()} ?')">
-                        Desactivar
-                    </html:submit>
-                </center>
-            </html:form>
-            </td>
+                            <center>
+                                <html:submit styleClass="btn btn-primary" 
+                                             style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;">
+                                    Modificar
+                                </html:submit>
+                            </center>
+                        </html:form>
+                    </td>
+                    <td>
+                        <html:form action="/eliminarDepartamento" 
+                                   onsubmit="return(this)" style="margin: 0px;">
+                            <html:hidden name="Dep" property="codigo"/>
+                            <center>
+                                <html:submit styleClass="btn btn-danger" 
+                                             style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                             onclick="javascript: return confirm('¿Está seguro de que desea desactivar el Departamento ${Dep.getNombre()} ?')">
+                                    Eliminar
+                                </html:submit>
+                            </center>
+                        </html:form>
+                    </td>
             </tr>
         </logic:iterate>
         </tbody>
