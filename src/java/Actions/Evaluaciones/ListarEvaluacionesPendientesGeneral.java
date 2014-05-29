@@ -41,9 +41,9 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
 
         if (session.getAttribute("usuario") != null) {
 
-            dicta d = (dicta) form;
+            Dicta d = (Dicta) form;
             Archivo[] archivos_considerados = null;
-            ArrayList<dicta> evaluaciones_pendientes = null;
+            ArrayList<Dicta> evaluaciones_pendientes = null;
 
             if (d.getOpcion().equals("pendiente")) {
                 archivos_considerados = obtenerArchivosConsiderados(-1, null, 1);
@@ -55,7 +55,7 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
 
             /* Se obtiene el rendimiento del profesor determinado asociado con
              * la materia que maneja la coordinación */
-            rendimientoProf evaluacion =
+            Rendimiento evaluacion =
                     DBMS.getInstance().obtenerEvaluacion(d.getUsbidProfesor());
 
             /* Se obtiene toda la informacion del profesor */
@@ -121,7 +121,7 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
                  * jefe de departamento */
             } else if (tipousuario.equals("departamento")) {
 
-                ArrayList<rendimientoProf> evaluacion_coordinaciones =
+                ArrayList<Rendimiento> evaluacion_coordinaciones =
                         DBMS.getInstance().
                         obtenerEvaluacionCoordinaciones(id, profesor.getUsbid());
 
@@ -148,7 +148,7 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
 
                 /* Se obtienen los datos de la evaluacion que realizo la
                  * coordinacion */
-                rendimientoProf evaluado =
+                Rendimiento evaluado =
                             DBMS.getInstance().listarEvaluacionesGeneralCoordinacion(
                             id_coordinacion, d.getUsbidProfesor());
 

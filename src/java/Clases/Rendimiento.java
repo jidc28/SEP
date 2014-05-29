@@ -8,7 +8,7 @@ package Clases;
  *
  * @author jidc28
  */
-public class rendimientoProf extends org.apache.struts.action.ActionForm {
+public class Rendimiento extends org.apache.struts.action.ActionForm {
     private String usbid_profesor;
     private String codigo_materia;
     private String nombre_materia;

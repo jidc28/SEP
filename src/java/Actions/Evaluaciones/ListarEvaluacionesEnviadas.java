@@ -40,11 +40,11 @@ public class ListarEvaluacionesEnviadas extends org.apache.struts.action.Action 
         Profesor profesor = (Profesor) session.getAttribute("profesor");
 
         /* Se obtienen los datos requeridos por la consulta */
-        rendimientoProf rendimiento = (rendimientoProf) form;
+        Rendimiento rendimiento = (Rendimiento) form;
         int ano = rendimiento.getAno();
         String trimestre = rendimiento.getTrimestre();
 
-        ArrayList<rendimientoProf> evaluaciones_enviadas = null;
+        ArrayList<Rendimiento> evaluaciones_enviadas = null;
 
         Archivo[] archivos_considerados =
                 ListarEvaluacionesPendientesGeneral.obtenerArchivosConsiderados(ano, trimestre, 2);

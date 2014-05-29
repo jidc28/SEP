@@ -14,9 +14,13 @@
 <html:form action="/editarDepartamento" acceptCharset="ISO-8859-1" 
            onsubmit="return(this)">
     <html:hidden name="departamento" property="codigo"/>
-    <h4><bean:write name="departamento" property="nombre"/></h4>
-    <h4>(<bean:write name="departamento" property="codigo"/>)</h4>
-    <br>
+    <h4>
+        Modificar Departamento
+        <div style="font-size: 14px; color: grey;">
+            <bean:write name="departamento" property="codigo"/> -
+            <bean:write name="departamento" property="nombre"/>
+        </div>
+    </h4>
     <table border="0" style="margin-top: 0px;">
         <tbody>
             <tr style="height: 35px;">

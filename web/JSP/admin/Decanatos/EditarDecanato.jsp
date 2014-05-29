@@ -20,8 +20,13 @@
 <html:form action="/cambiarNombreDecanatoA" acceptCharset="ISO-8859-1" 
            onsubmit="return(this)">
     <html:hidden name="Decanato" property="codigo"/>
-    <h4><bean:write name="Decanato" property="nombre"/></h4>
-    <h4>(<bean:write name="Decanato" property="codigo"/>)</h4>
+    <h4>
+        Modificar Decanato
+        <div style="font-size: 14px; color: grey;">
+            <bean:write name="Decanato" property="codigo"/> -
+            <bean:write name="Decanato" property="nombre"/>
+        </div>
+    </h4>
     <br>
     <table border="0" style="margin-top: 0px;">
         <tbody>

@@ -39,7 +39,7 @@ public class ListarEvaluacionesPendientes extends org.apache.struts.action.Actio
         String id = usuario.getUsbid();
         String tipousuario = usuario.getTipousuario();
 
-        ArrayList<dicta> evaluaciones_pendientes = null;
+        ArrayList<Dicta> evaluaciones_pendientes = null;
 
         /* Se obtiene el usbid del profesor del form */
         String id_profesor = ((Coordinacion) form).getCodigo();

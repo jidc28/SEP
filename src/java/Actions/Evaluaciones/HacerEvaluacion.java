@@ -39,12 +39,12 @@ public class HacerEvaluacion extends Action {
 
         if (session.getAttribute("usuario") != null) {
 
-            dicta d = (dicta) form;
+            Dicta d = (Dicta) form;
             d.setUsbidProfesor(profesor.getUsbid());
 
             /* Se obtiene el rendimiento del profesor determinado asociado con
              * la materia que maneja la coordinación */
-            rendimientoProf evaluacion = DBMS.getInstance().obtenerEvaluacion(d);
+            Rendimiento evaluacion = DBMS.getInstance().obtenerEvaluacion(d);
 
             /* Se calcula la cantidad de aplazados y la cantidad de aprobados */
             int total = evaluacion.getTotal_estudiantes();
@@ -83,7 +83,7 @@ public class HacerEvaluacion extends Action {
 
                 /* Se obtienen los datos de la evaluacion que realizo la
                  * coordinacion */
-                rendimientoProf evaluado =
+                Rendimiento evaluado =
                         DBMS.getInstance().listarEvaluacionesCoordinacion(
                         id_coordinacion, ano, trimestre, d.getCodigoMateria(),
                         profesor.getUsbid());

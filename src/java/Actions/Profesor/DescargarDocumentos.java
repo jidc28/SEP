@@ -15,7 +15,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Langtech
  */
-public class descargarDocumentos extends org.apache.struts.action.Action {
+public class DescargarDocumentos extends org.apache.struts.action.Action {
 
     private static final String SUCCESS = "success";
     private static final String FAILURE = "failure";

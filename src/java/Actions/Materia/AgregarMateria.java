@@ -18,7 +18,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author smaf
  */
-public class agregaMateria extends org.apache.struts.action.Action {
+public class AgregarMateria extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";

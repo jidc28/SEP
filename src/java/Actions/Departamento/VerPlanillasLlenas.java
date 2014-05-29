@@ -17,7 +17,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author jidc28
  */
-public class verPlanillasLlenas extends org.apache.struts.action.Action {
+public class VerPlanillasLlenas extends org.apache.struts.action.Action {
     /* forward name="success" path="" */
 
     private static final String SUCCESS = "success";
@@ -46,7 +46,7 @@ public class verPlanillasLlenas extends org.apache.struts.action.Action {
 
         /* Se obtiene el listado de las planillas llenas no evaluadas por la 
          * coordinacion */
-        ArrayList<rendimientoProf> rendimiento =
+        ArrayList<Rendimiento> rendimiento =
                 DBMS.getInstance().obtenerPlanillasLlenas(id_profesor, id_departamento);
 
         session.setAttribute("profesor", profesor);

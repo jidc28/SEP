@@ -21,11 +21,11 @@ public class Graficar extends Action {
 
         HttpSession session = request.getSession(true);
 
-        rendimientoProf evaluacion, evaluaciones;
+        Rendimiento evaluacion, evaluaciones;
 
         Profesor profesor = (Profesor) session.getAttribute("profesor");
 
-        dicta d = (dicta) form;
+        Dicta d = (Dicta) form;
         d.setUsbidProfesor(profesor.getUsbid());
 
         /* En el caso ne que la evaluación no se haya realizado. */

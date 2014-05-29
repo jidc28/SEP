@@ -40,7 +40,7 @@ public class ListarAnosEvaluados extends org.apache.struts.action.Action {
 
         Profesor profesor = (Profesor) form;
 
-        ArrayList<rendimientoProf> evaluaciones = null;
+        ArrayList<Rendimiento> evaluaciones = null;
         /* Se obtiene la informacion del profesor */
         profesor = DBMS.getInstance().obtenerInfoProfesor(profesor.getUsbid());
 

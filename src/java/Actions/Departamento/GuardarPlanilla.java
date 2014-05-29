@@ -21,7 +21,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author jidc28
  */
-public class guardarPlanilla extends org.apache.struts.action.Action {
+public class GuardarPlanilla extends org.apache.struts.action.Action {
     /* forward name="success" path="" */
 
     private static final String SUCCESS = "success";
@@ -47,7 +47,7 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
 
         String id_profesor = profesor.getUsbid();
 
-        rendimientoProf renMateria = (rendimientoProf) form;
+        Rendimiento renMateria = (Rendimiento) form;
 
         renMateria.setUsbid_profesor(id_profesor);
 
@@ -132,7 +132,7 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
         boolean agregar =
                 DBMS.getInstance().guardarPlanilla(renMateria, id_departamento);
 
-        ArrayList<rendimientoProf> rendimiento =
+        ArrayList<Rendimiento> rendimiento =
                 DBMS.getInstance().obtenerRendimientoProfesor(id_profesor, id_departamento);
 
         ArrayList<Materia> materias =
@@ -148,7 +148,7 @@ public class guardarPlanilla extends org.apache.struts.action.Action {
         }
 
         request.setAttribute("anos", anos);
-        request.setAttribute("rendimientoProf", new rendimientoProf());
+        request.setAttribute("rendimientoProf", new Rendimiento());
         return mapping.findForward(SUCCESS);
     }
 }

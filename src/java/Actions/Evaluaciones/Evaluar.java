@@ -29,7 +29,7 @@ public class Evaluar extends Action {
 
         Profesor profesor = (Profesor) session.getAttribute("profesor");
 
-        rendimientoProf rendimiento = (rendimientoProf) form;
+        Rendimiento rendimiento = (Rendimiento) form;
 
         ArrayList<Profesor> profesores = null;
 
@@ -68,7 +68,7 @@ public class Evaluar extends Action {
                         DBMS.getInstance().
                         listarArchivosProfesor(profesor.getUsbid(), archivos_considerados);
 
-                ArrayList<dicta> evaluaciones_pendientes =
+                ArrayList<Dicta> evaluaciones_pendientes =
                         DBMS.getInstance().listarEvaluacionesPendientes(id, profesor.getUsbid());
 
                 request.setAttribute("listar_archivos", SUCCESS);
@@ -88,7 +88,7 @@ public class Evaluar extends Action {
             /* La coordinacion selecciono si recomienda o no al profesor */
         } else {
 
-            ArrayList<dicta> evaluaciones_pendientes = null;
+            ArrayList<Dicta> evaluaciones_pendientes = null;
             boolean evaluado = false;
 
             /* En caso que la evaluación dla este realizando la coordinacion */

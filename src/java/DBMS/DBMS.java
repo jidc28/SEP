@@ -1569,11 +1569,11 @@ public class DBMS {
      * @param usbid_profesor
      * @return listado de rendimientos
      */
-    public ArrayList<dicta> listarEvaluacionesPendientes(Coordinacion coordinacion,
+    public ArrayList<Dicta> listarEvaluacionesPendientes(Coordinacion coordinacion,
             String usbid_profesor) {
 
         PreparedStatement ps, ps2;
-        ArrayList<dicta> dicta_materia = new ArrayList(0);
+        ArrayList<Dicta> dicta_materia = new ArrayList(0);
         String codigoMateria;
         String id_coordinacion = coordinacion.getCodigo();
         try {
@@ -1595,7 +1595,7 @@ public class DBMS {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                dicta d = new dicta();
+                Dicta d = new Dicta();
                 codigoMateria = rs.getString("codigo_materia");
                 d.setCodigoMateria(codigoMateria);
                 d.setOpcion(rs.getString("nombre"));
@@ -1639,11 +1639,11 @@ public class DBMS {
      * @param usbid_profesor
      * @return listado de rendimientos
      */
-    public ArrayList<dicta> listarEvaluacionesPendientes(String id_coordinacion,
+    public ArrayList<Dicta> listarEvaluacionesPendientes(String id_coordinacion,
             String usbid_profesor) {
 
         PreparedStatement ps, ps2;
-        ArrayList<dicta> dicta_materia = new ArrayList(0);
+        ArrayList<Dicta> dicta_materia = new ArrayList(0);
         String codigoMateria;
         try {
             ps = conexion.prepareStatement("SELECT DISTINCT r.codigo_materia, trimestre, nombre "
@@ -1665,7 +1665,7 @@ public class DBMS {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                dicta d = new dicta();
+                Dicta d = new Dicta();
                 codigoMateria = rs.getString("codigo_materia");
                 d.setCodigoMateria(codigoMateria);
                 d.setOpcion(rs.getString("nombre"));
@@ -1712,11 +1712,11 @@ public class DBMS {
      * @param trimestre: trimestre de la evaluacion
      * @return listado de evaluaciones
      */
-    public ArrayList<rendimientoProf> listarEvaluacionesEnviadasCoordinacion(String id_coordinacion,
+    public ArrayList<Rendimiento> listarEvaluacionesEnviadasCoordinacion(String id_coordinacion,
             int ano, String trimestre) {
 
         PreparedStatement ps;
-        ArrayList<rendimientoProf> rendimientos = new ArrayList(0);
+        ArrayList<Rendimiento> rendimientos = new ArrayList(0);
 
         try {
             ps = conexion.prepareStatement("SELECT codigo, recomendado, "
@@ -1733,7 +1733,7 @@ public class DBMS {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                rendimientoProf rendimiento = new rendimientoProf();
+                Rendimiento rendimiento = new Rendimiento();
                 rendimiento.setCodigo_materia(rs.getString("codigo"));
                 rendimiento.setRecomendado(rs.getString("recomendado"));
                 rendimiento.setObservaciones_c(rs.getString("observaciones"));
@@ -1764,11 +1764,11 @@ public class DBMS {
      * @param trimestre: trimestre de la evaluación
      * @return listado de evaluaciones
      */
-    public ArrayList<rendimientoProf> listarEvaluacionesEnviadasDepartamento(String id_departamento,
+    public ArrayList<Rendimiento> listarEvaluacionesEnviadasDepartamento(String id_departamento,
             int ano, String trimestre, String usbid_profesor) {
 
         PreparedStatement ps;
-        ArrayList<rendimientoProf> rendimientos = new ArrayList(0);
+        ArrayList<Rendimiento> rendimientos = new ArrayList(0);
 
         try {
             ps = conexion.prepareStatement("SELECT DISTINCT m.nombre, "
@@ -1791,7 +1791,7 @@ public class DBMS {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                rendimientoProf rendimiento = new rendimientoProf();
+                Rendimiento rendimiento = new Rendimiento();
                 rendimiento.setCodigo_materia(rs.getString("codigo"));
                 rendimiento.setNombre_materia(rs.getString("nombre"));
                 rendimiento.setAno(rs.getInt("ano"));
@@ -1821,11 +1821,11 @@ public class DBMS {
      * @param usbid_profesor: usbid del profesor que está siedo evaluado.
      * @return evaluación de la materia.
      */
-    public rendimientoProf listarEvaluacionesCoordinacion(String id_coordinacion,
+    public Rendimiento listarEvaluacionesCoordinacion(String id_coordinacion,
             int ano, String trimestre, String codigo_materia, String usbid_profesor) {
 
         PreparedStatement ps;
-        rendimientoProf rendimiento = null;
+        Rendimiento rendimiento = null;
 
         try {
             ps = conexion.prepareStatement("SELECT m.codigo, r.ano, r.trimestre, "
@@ -1848,7 +1848,7 @@ public class DBMS {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                rendimiento = new rendimientoProf();
+                rendimiento = new Rendimiento();
                 rendimiento.setCodigo_materia(rs.getString("codigo"));
                 rendimiento.setNombre_materia(rs.getString("nombre"));
                 rendimiento.setUsbid_profesor(rs.getString("usbid_profesor"));
@@ -1874,11 +1874,11 @@ public class DBMS {
      * @param usbid_profesor
      * @return
      */
-    public rendimientoProf listarEvaluacionesGeneralCoordinacion(
+    public Rendimiento listarEvaluacionesGeneralCoordinacion(
             String id_coordinacion, String usbid_profesor) {
 
         PreparedStatement ps, ps2;
-        rendimientoProf rendimiento = null;
+        Rendimiento rendimiento = null;
 
         try {
             ps = conexion.prepareStatement("SELECT * "
@@ -1891,7 +1891,7 @@ public class DBMS {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                rendimiento = new rendimientoProf();
+                rendimiento = new Rendimiento();
                 rendimiento.setObservaciones_c(rs.getString("observaciones_coordinacion"));
                 rendimiento.setUsbid_profesor(rs.getString("usbid_profesor"));
             }
@@ -1916,11 +1916,11 @@ public class DBMS {
      * @param usbid_profesor identificador del profesor.
      * @return listado de evaluaciones
      */
-    public ArrayList<rendimientoProf> listarEvaluacionesEnviadasCoordinacion(String id_coordinacion,
+    public ArrayList<Rendimiento> listarEvaluacionesEnviadasCoordinacion(String id_coordinacion,
             int ano, String trimestre, String usbid_profesor) {
 
         PreparedStatement ps;
-        ArrayList<rendimientoProf> rendimientos = new ArrayList(0);
+        ArrayList<Rendimiento> rendimientos = new ArrayList(0);
 
         try {
             ps = conexion.prepareStatement("SELECT DISTINCT m.nombre, m.codigo, r.trimestre "
@@ -1941,7 +1941,7 @@ public class DBMS {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                rendimientoProf rendimiento = new rendimientoProf();
+                Rendimiento rendimiento = new Rendimiento();
                 rendimiento.setCodigo_materia(rs.getString("codigo"));
                 rendimiento.setNombre_materia(rs.getString("nombre"));
                 rendimiento.setTrimestre(
@@ -2396,10 +2396,10 @@ public class DBMS {
      * @param id_departamento: identificador del departamento de
      * @return listado de planillas
      */
-    public ArrayList<rendimientoProf> obtenerRendimientoProfesor(String id_profesor,
+    public ArrayList<Rendimiento> obtenerRendimientoProfesor(String id_profesor,
             String id_departamento) {
         PreparedStatement ps;
-        ArrayList<rendimientoProf> rendimiento = new ArrayList<rendimientoProf>(0);
+        ArrayList<Rendimiento> rendimiento = new ArrayList<Rendimiento>(0);
         try {
             ps = conexion.prepareStatement("SELECT DISTINCT "
                     + "r.usbid_profesor, trimestre, ano, r.codigo_materia, "
@@ -2419,7 +2419,7 @@ public class DBMS {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                rendimientoProf r = new rendimientoProf();
+                Rendimiento r = new Rendimiento();
                 r.setUsbid_profesor(id_profesor);
                 r.setTrimestre(rs.getString("trimestre"));
                 r.setAno(rs.getInt("ano"));
@@ -2452,10 +2452,10 @@ public class DBMS {
      * @param id_departamento: identificador del departamento
      * @return listado de planillas llenas
      */
-    public ArrayList<rendimientoProf> obtenerPlanillasLlenas(String id_profesor,
+    public ArrayList<Rendimiento> obtenerPlanillasLlenas(String id_profesor,
             String id_departamento) {
         PreparedStatement ps;
-        ArrayList<rendimientoProf> rendimiento = new ArrayList<rendimientoProf>(0);
+        ArrayList<Rendimiento> rendimiento = new ArrayList<Rendimiento>(0);
         try {
             ps = conexion.prepareStatement("SELECT DISTINCT "
                     + "r.usbid_profesor, trimestre, ano, r.codigo_materia, "
@@ -2473,7 +2473,7 @@ public class DBMS {
             ps.setString(2, id_departamento);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                rendimientoProf r = new rendimientoProf();
+                Rendimiento r = new Rendimiento();
                 r.setUsbid_profesor(id_profesor);
                 r.setTrimestre(rs.getString("trimestre"));
                 r.setAno(rs.getInt("ano"));
@@ -2563,7 +2563,7 @@ public class DBMS {
      * llenar la planilla.
      * @return booleano que indica si la planilla fue guardada.
      */
-    public boolean guardarPlanilla(rendimientoProf u, String id_departamento) {
+    public boolean guardarPlanilla(Rendimiento u, String id_departamento) {
 
         PreparedStatement ps1, ps2, ps3;
 
@@ -2692,12 +2692,12 @@ public class DBMS {
     /**
      * cantidadMateriasQueDicta
      *
-     * Obtiene la cantidad de materias que dicta determinado profesor
+     * Obtiene la cantidad de materias que Dicta determinado profesor
      *
      * @param id_profesor: profesor del que se quiere obtener la cantidad de
-     * materias que dicta
+     * materias que Dicta
      * @param id_departamento: identificador del departamento al que pertenece.
-     * @return número de materias que dicta
+     * @return número de materias que Dicta
      */
     public int cantidadMateriasQueDicta(String id_profesor, String id_departamento) {
 
@@ -2736,7 +2736,7 @@ public class DBMS {
      * @param trimestre: trimestre en el cual se dictó la materia
      * @return planilla de evaluación
      */
-    public rendimientoProf obtenerPlanillaEvaluacionProfesor(String id_profesor,
+    public Rendimiento obtenerPlanillaEvaluacionProfesor(String id_profesor,
             String id_materia, int ano, String trimestre) {
         PreparedStatement ps;
         try {
@@ -2755,7 +2755,7 @@ public class DBMS {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                rendimientoProf r = new rendimientoProf();
+                Rendimiento r = new Rendimiento();
                 r.setCodigo_materia(rs.getString("codigo_materia"));
                 r.setTrimestre(rs.getString("trimestre"));
                 r.setAno(rs.getInt("ano"));
@@ -2786,7 +2786,7 @@ public class DBMS {
      * planilla
      * @return booleano que determina si la planilla fue modificada
      */
-    public boolean modificarRendimientoProfesor(rendimientoProf r, String id_departamento) {
+    public boolean modificarRendimientoProfesor(Rendimiento r, String id_departamento) {
         PreparedStatement ps1, ps2;
 
         try {
@@ -2822,9 +2822,9 @@ public class DBMS {
      * y el trimestre
      * @return rendimiento del profesor
      */
-    public rendimientoProf obtenerEvaluacion(dicta d) {
+    public Rendimiento obtenerEvaluacion(Dicta d) {
         PreparedStatement ps;
-        rendimientoProf evaluacion = new rendimientoProf();
+        Rendimiento evaluacion = new Rendimiento();
         try {
             ps = conexion.prepareStatement("SELECT total_estudiantes as t, "
                     + "nota_prom as np, nota1 as n1, nota2 as n2, "
@@ -2871,9 +2871,9 @@ public class DBMS {
      * obtener la evaluación
      * @return rendimiento del profesor
      */
-    public rendimientoProf obtenerEvaluacion(String usbid_profesor) {
+    public Rendimiento obtenerEvaluacion(String usbid_profesor) {
         PreparedStatement ps;
-        rendimientoProf evaluacion = new rendimientoProf();
+        Rendimiento evaluacion = new Rendimiento();
         try {
             ps = conexion.prepareStatement("SELECT total_estudiantes as t, "
                     + "nota_prom as np, nota1 as n1, nota2 as n2, "
@@ -2934,9 +2934,9 @@ public class DBMS {
      * obtener la evaluación.
      * @return rendimiento del profesor
      */
-    public rendimientoProf obtenerEvaluacionPDF(String usbid_profesor) {
+    public Rendimiento obtenerEvaluacionPDF(String usbid_profesor) {
         PreparedStatement ps;
-        rendimientoProf evaluacion = new rendimientoProf();
+        Rendimiento evaluacion = new Rendimiento();
         try {
             ps = conexion.prepareStatement("SELECT total_estudiantes as t, "
                     + "nota_prom as np, nota1 as n1, nota2 as n2, "
@@ -3001,10 +3001,10 @@ public class DBMS {
      * @param trimestre: trimestre de la evaluación
      * @return rendimiento del profesor
      */
-    public rendimientoProf obtenerEvaluacion(String codigo_materia,
+    public Rendimiento obtenerEvaluacion(String codigo_materia,
             String usbid_profesor, int ano, String trimestre) {
         PreparedStatement ps;
-        rendimientoProf evaluacion = new rendimientoProf();
+        Rendimiento evaluacion = new Rendimiento();
         try {
             ps = conexion.prepareStatement("SELECT total_estudiantes as t, "
                     + "nota_prom as np, nota1 as n1, nota2 as n2, "
@@ -3053,10 +3053,10 @@ public class DBMS {
      * @param trimestre: trimestre de la evaluación
      * @return rendimiento de todos los profesores en ese año y este trimestre
      */
-    public rendimientoProf obtenerEvaluaciones(String codigo_materia, int ano,
+    public Rendimiento obtenerEvaluaciones(String codigo_materia, int ano,
             String trimestre) {
         PreparedStatement ps;
-        rendimientoProf evaluacion = new rendimientoProf();
+        Rendimiento evaluacion = new Rendimiento();
         try {
             ps = conexion.prepareStatement("SELECT sum(total_estudiantes) as t, "
                     + "sum(nota_prom) as np, sum(nota1) as n1, sum(nota2) as n2, "
@@ -3193,11 +3193,11 @@ public class DBMS {
     /**
      * agregarDicta
      *
-     * Agrega la interrelación "dicta" a la base de datos.
+     * Agrega la interrelación "Dicta" a la base de datos.
      *
-     * @param profesor: profesor que dicta.
-     * @param id_materia: materia que dicta
-     * @param periodo: período en el cual dicta la materia
+     * @param profesor: profesor que Dicta.
+     * @param id_materia: materia que Dicta
+     * @param periodo: período en el cual Dicta la materia
      * @return
      */
     public boolean agregarDicta(Profesor profesor, String id_materia, String periodo) {
@@ -3427,7 +3427,7 @@ public class DBMS {
     /**
      * eliminarPeriodos
      *
-     * Eliminar períodos en los que determinado profesor dicta las materias.
+     * Eliminar períodos en los que determinado profesor Dicta las materias.
      *
      * @param id_profesor: profesor al cual se eliminará la carga académica
      * @param codigo_materia: código de la materia a la cual se eliminará la
@@ -3492,7 +3492,7 @@ public class DBMS {
     /**
      * listarMateriasNoDictadas
      *
-     * Obtiene el listado de materias que un determinado profesor no dicta
+     * Obtiene el listado de materias que un determinado profesor no Dicta
      *
      * @param id_departamento: identificador del departamento
      * @param id_profesor: identificador del profesor sobre el cual se realizará
@@ -3542,7 +3542,7 @@ public class DBMS {
      * @param id_coordinacion: identificador de la coordinación que evalúa
      * @return booleano que determina que se evaluó
      */
-    public boolean evaluarCoordinacion(rendimientoProf rendimiento,
+    public boolean evaluarCoordinacion(Rendimiento rendimiento,
             String id_coordinacion) {
 
         PreparedStatement ps0;
@@ -3577,7 +3577,7 @@ public class DBMS {
      * @return booleano que determina si la revisión fue realizada por el
      * decanato
      */
-    public boolean revisadoPorDecanato(rendimientoProf rendimiento,
+    public boolean revisadoPorDecanato(Rendimiento rendimiento,
             String id_departamento) {
 
         PreparedStatement ps0;
@@ -3618,7 +3618,7 @@ public class DBMS {
      * @return booleano que determina si la revisión fue realizada por el
      * departamento
      */
-    public boolean revisadoPorDepartamento(rendimientoProf rendimiento,
+    public boolean revisadoPorDepartamento(Rendimiento rendimiento,
             String id_coordinacion) {
 
         PreparedStatement ps0;
@@ -3860,7 +3860,7 @@ public class DBMS {
      * @param id_coordinacion: identificador de la coordinación sobre la cual el
      * departamento revisará la evaluación.
      */
-    public void evaluar(rendimientoProf rendimiento, String id_departamento,
+    public void evaluar(Rendimiento rendimiento, String id_departamento,
             String id_coordinacion) {
 
         PreparedStatement ps0, ps1;
@@ -3935,7 +3935,7 @@ public class DBMS {
      * @return booleano que determina se si borraron los evaluados por el
      * departamento
      */
-    public boolean borrarEvaluadosDepartamento(rendimientoProf rendimiento,
+    public boolean borrarEvaluadosDepartamento(Rendimiento rendimiento,
             String id_departamento) {
 
 
@@ -3975,7 +3975,7 @@ public class DBMS {
      * @return booleano que determina se si borraron los evaluados por el
      * departamento
      */
-    public boolean borrarEvaluadosDecanato(rendimientoProf rendimiento,
+    public boolean borrarEvaluadosDecanato(Rendimiento rendimiento,
             String id_coordinacion) {
 
 
@@ -4016,7 +4016,7 @@ public class DBMS {
      * evaluación
      * @return booleano que determina si la evaluación fue revisada
      */
-    public boolean revisadoDepartamento(rendimientoProf rendimiento,
+    public boolean revisadoDepartamento(Rendimiento rendimiento,
             String id_departamento) {
 
         PreparedStatement ps0;
@@ -4060,7 +4060,7 @@ public class DBMS {
      * @param id_coordinacion: identificador de la coordinación.
      * @return booleano que determina si la evaluación fue revisada
      */
-    public boolean revisadoDecanato(rendimientoProf rendimiento,
+    public boolean revisadoDecanato(Rendimiento rendimiento,
             String id_coordinacion) {
 
         PreparedStatement ps0;
@@ -4275,11 +4275,11 @@ public class DBMS {
      * enviadas se van a consultar
      * @return listado de evaluaciones
      */
-    public ArrayList<rendimientoProf> listarAnoEvaluacionesEnviadasCoordinacion(
+    public ArrayList<Rendimiento> listarAnoEvaluacionesEnviadasCoordinacion(
             String id_coordinacion, String usbid_profesor) {
 
         PreparedStatement ps;
-        ArrayList<rendimientoProf> rendimiento = new ArrayList(0);
+        ArrayList<Rendimiento> rendimiento = new ArrayList(0);
         try {
             ps = conexion.prepareStatement("SELECT DISTINCT ano, trimestre "
                     + "FROM evaluado "
@@ -4292,7 +4292,7 @@ public class DBMS {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                rendimientoProf r = new rendimientoProf();
+                Rendimiento r = new Rendimiento();
                 r.setAno(rs.getInt("ano"));
                 String periodo = rs.getString("trimestre");
 
@@ -4319,11 +4319,11 @@ public class DBMS {
      * enviadas se van a consultar.
      * @return listado de evaluaciones
      */
-    public ArrayList<rendimientoProf> listarAnoEvaluacionesEnviadasDepartamento(
+    public ArrayList<Rendimiento> listarAnoEvaluacionesEnviadasDepartamento(
             String id_departamento, String usbid_profesor) {
 
         PreparedStatement ps;
-        ArrayList<rendimientoProf> rendimiento = new ArrayList(0);
+        ArrayList<Rendimiento> rendimiento = new ArrayList(0);
         try {
             ps = conexion.prepareStatement("SELECT DISTINCT ano, trimestre "
                     + "FROM pertenece AS pe, profesor AS pr, evaluado AS ev "
@@ -4338,7 +4338,7 @@ public class DBMS {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                rendimientoProf r = new rendimientoProf();
+                Rendimiento r = new Rendimiento();
                 r.setAno(rs.getInt("ano"));
                 String periodo = rs.getString("trimestre");
 
@@ -4606,11 +4606,11 @@ public class DBMS {
      * @param id_profesor
      * @return
      */
-    public ArrayList<dicta> listarEvaluadosPorCoordinacion(
+    public ArrayList<Dicta> listarEvaluadosPorCoordinacion(
             String id_departamento, String id_profesor) {
 
         PreparedStatement ps, ps2;
-        ArrayList<dicta> dicta_materia = new ArrayList(0);
+        ArrayList<Dicta> dicta_materia = new ArrayList(0);
         String codigo_materia;
         String usbid_profesor;
         try {
@@ -4641,7 +4641,7 @@ public class DBMS {
                 int pendientes = contarEvaluacionesPendientesDepartamento(id_departamento, usbid_profesor);
                 int total = contarEvaluacionesDepartamento(id_departamento, usbid_profesor);
 
-                dicta d = new dicta();
+                Dicta d = new Dicta();
                 codigo_materia = rs.getString("codigo_materia");
                 d.setCodigoMateria(codigo_materia);
                 d.setOpcion(rs.getString("nombre"));
@@ -4688,10 +4688,10 @@ public class DBMS {
      * @param id_profesor
      * @return
      */
-    public ArrayList<dicta> listarEvaluadosPorCoordinacion(String id_departamento) {
+    public ArrayList<Dicta> listarEvaluadosPorCoordinacion(String id_departamento) {
 
         PreparedStatement ps, ps2;
-        ArrayList<dicta> dicta_materia = new ArrayList(0);
+        ArrayList<Dicta> dicta_materia = new ArrayList(0);
         String codigo_materia;
         String usbid_profesor;
         try {
@@ -4715,7 +4715,7 @@ public class DBMS {
 
                 if (pendientes == total) {
 
-                    dicta d = new dicta();
+                    Dicta d = new Dicta();
                     codigo_materia = rs.getString("codigo_materia");
                     d.setCodigoMateria(codigo_materia);
 
@@ -4763,11 +4763,11 @@ public class DBMS {
      * @param usbid_profesor
      * @return
      */
-    public ArrayList<rendimientoProf> obtenerEvaluacionCoordinaciones(
+    public ArrayList<Rendimiento> obtenerEvaluacionCoordinaciones(
             String id_departamento, String usbid_profesor) {
 
         PreparedStatement ps;
-        ArrayList<rendimientoProf> informacion = new ArrayList<rendimientoProf>(0);
+        ArrayList<Rendimiento> informacion = new ArrayList<Rendimiento>(0);
         try {
             ps = conexion.prepareStatement("SELECT codigo, nombre, "
                     + "recomendado_coordinacion, observaciones_coordinacion "
@@ -4779,7 +4779,7 @@ public class DBMS {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                rendimientoProf rendimiento = new rendimientoProf();
+                Rendimiento rendimiento = new Rendimiento();
                 String nombre_coordinacion = rs.getString("nombre");
                 String codigo_coordinacion = rs.getString("codigo");
                 /* Uso estos setters porque de verdad necesito la informacion 

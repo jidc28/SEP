@@ -7,22 +7,22 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
-import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.html.WebColors;
 import com.itextpdf.text.pdf.ColumnText;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.itextpdf.text.html.WebColors;
-import java.util.ArrayList;
 
 /**
  *
@@ -45,7 +45,7 @@ public class generacionPDF {
         Profesor p = DBMS.getInstance().obtenerInfoProfesor(usbid);
         /* Se obtiene el rendimiento del profesor determinado asociado con
          * la materia que dicta el prof */
-        rendimientoProf evaluacion = DBMS.getInstance().obtenerEvaluacionPDF(p.getUsbid());
+        Rendimiento evaluacion = DBMS.getInstance().obtenerEvaluacionPDF(p.getUsbid());
         InformacionProfesorCoord info = DBMS.getInstance().resumenInformacionProfesor(p.getUsbid());
 
         int total = evaluacion.getTotal_estudiantes();
@@ -526,7 +526,7 @@ public class generacionPDF {
             int inicio = 375;
 
 //            for (int iterador = 0; iterador < evaluaciones.size(); iterador++) {
-//                rendimientoProf eval = evaluaciones.get(iterador);
+//                Rendimiento eval = evaluaciones.get(iterador);
 //                if (varY <= 130) {
 //
 //                    // Cuadro Contenedor
@@ -621,7 +621,7 @@ public class generacionPDF {
         Profesor p = DBMS.getInstance().obtenerInfoProfesor(usbid);
         /* Se obtiene el rendimiento del profesor determinado asociado con
          * la materia que dicta el prof */
-        rendimientoProf evaluacion = DBMS.getInstance().obtenerEvaluacionPDF(p.getUsbid());
+        Rendimiento evaluacion = DBMS.getInstance().obtenerEvaluacionPDF(p.getUsbid());
         InformacionProfesorCoord info = DBMS.getInstance().resumenInformacionProfesor(p.getUsbid());
 
         int total = evaluacion.getTotal_estudiantes();
@@ -928,7 +928,7 @@ public class generacionPDF {
                         + "cursus. In sed luctus velit. Fusce non urna accumsan sem "
                         + "hendrerit fermentum sed vel nibh. Vivamus adipiscing urna"
                         + " quis metus.";
-                ArrayList<rendimientoProf> evaluaciones =
+                ArrayList<Rendimiento> evaluaciones =
                         DBMS.getInstance().obtenerEvaluacionesEnviadasCoordinaciones(idOficina, p.getUsbid(), ano, trimestre);
 
                 // Titulo del area.
@@ -940,7 +940,7 @@ public class generacionPDF {
 
 
                 for (int iterador = 0; iterador < evaluaciones.size(); iterador++) {
-                    rendimientoProf eval = evaluaciones.get(iterador);
+                    Rendimiento eval = evaluaciones.get(iterador);
                     if (varY <= 130) {
 
                         // Cuadro Contenedor
@@ -1023,7 +1023,7 @@ public class generacionPDF {
              * # Rendimiento por materia #
              * ###########################*/
 
-            ArrayList<rendimientoProf> evaluaciones_enviadas =
+            ArrayList<Rendimiento> evaluaciones_enviadas =
                     DBMS.getInstance().listarEvaluacionesEnviadasDepartamento(idOficina, ano, trimestre);
             if (varY > 130) {
                 varY -= 30;

@@ -36,7 +36,7 @@ public class RevisarEvaluacion extends Action {
         String id = usuario.getUsbid();
 
         ArrayList<Profesor> profesores = null;
-        rendimientoProf rendimiento = (rendimientoProf) form;
+        Rendimiento rendimiento = (Rendimiento) form;
         boolean revisado;
 
         /* Si el usuario que accede a esta funcionalidad es de tipo

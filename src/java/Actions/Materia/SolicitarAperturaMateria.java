@@ -18,7 +18,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author smaf
  */
-public class solicitarAperturaMateria extends org.apache.struts.action.Action {
+public class SolicitarAperturaMateria extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";

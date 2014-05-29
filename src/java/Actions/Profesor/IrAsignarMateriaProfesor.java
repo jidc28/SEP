@@ -10,7 +10,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-public class irAsignarMateriaProfesor extends Action {
+public class IrAsignarMateriaProfesor extends Action {
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,

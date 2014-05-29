@@ -4,15 +4,12 @@
  */
 package Actions.Departamento;
 
-import Clases.*;
+import Clases.Departamento;
 import DBMS.DBMS;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -21,11 +18,10 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author jidc28
  */
-public class irLlenarPlanillas extends org.apache.struts.action.Action {
-    /* forward name="success" path="" */
+public class IrEditarNombreDepartamento extends org.apache.struts.action.Action {
 
+    /* forward name="success" path="" */
     private static final String SUCCESS = "success";
-    private static final String FAILURE = "failure";
 
     /**
      * This is the action called from the Struts framework.
@@ -42,28 +38,18 @@ public class irLlenarPlanillas extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
+        Departamento u = (Departamento) form;
         HttpSession session = request.getSession(true);
-        String id_departamento = (String) session.getAttribute("usbid");
-        ArrayList<Materia> materias;
 
-        Profesor profesor = (Profesor) form;
+        ActionErrors error = new ActionErrors();
+        
+        Departamento d = DBMS.getInstance().obtenerNombreDepartamento(u);
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = new Date();
-        String fecha = dateFormat.format(date).toString();
-        String ano = fecha.substring(0, 4);
+        //si existen usuarios registrados
 
-        int[] anos = new int[2];
-        anos[1] = Integer.parseInt(ano);
-        anos[0] = anos[1] - 1;
-
-        materias =
-                DBMS.getInstance().obtenerPlanillasVacias(profesor.getUsbid(), id_departamento);
-
-        session.setAttribute("profesor", profesor);
-        request.setAttribute("materias", materias);
-        request.setAttribute("anos", anos);
+        //retorno a pagina de exito
+        session.setAttribute("departamento", d);
         return mapping.findForward(SUCCESS);
-
     }
 }
+

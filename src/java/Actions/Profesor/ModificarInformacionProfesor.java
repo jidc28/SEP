@@ -18,7 +18,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author admin
  */
-public class modificarInfoP extends org.apache.struts.action.Action {
+public class ModificarInformacionProfesor extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";

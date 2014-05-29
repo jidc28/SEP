@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author smaf
  */
-public class dicta extends org.apache.struts.action.ActionForm {
+public class Dicta extends org.apache.struts.action.ActionForm {
     
     private String codigoMateria;
     private String numeroMateria;

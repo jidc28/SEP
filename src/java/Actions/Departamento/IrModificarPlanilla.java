@@ -20,7 +20,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author jidc28
  */
-public class irModificarPlanilla extends org.apache.struts.action.Action {
+public class IrModificarPlanilla extends org.apache.struts.action.Action {
     /* forward name="success" path="" */
 
     private static final String SUCCESS = "success";
@@ -47,7 +47,7 @@ public class irModificarPlanilla extends org.apache.struts.action.Action {
         String tipousuario = usuario.getTipousuario();
 
         if (tipousuario.equals("departamento")) {
-            rendimientoProf rendimiento = (rendimientoProf) form;
+            Rendimiento rendimiento = (Rendimiento) form;
             rendimiento = DBMS.getInstance().obtenerPlanillaEvaluacionProfesor(
                     profesor.getUsbid(), rendimiento.getCodigo_materia(),
                     rendimiento.getAno(),rendimiento.getTrimestre());

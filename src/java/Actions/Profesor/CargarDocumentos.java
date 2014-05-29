@@ -26,7 +26,7 @@ import org.apache.struts.upload.FormFile;
  *
  * @author Langtech
  */
-public class cargarDocumentos extends org.apache.struts.action.Action {
+public class CargarDocumentos extends org.apache.struts.action.Action {
 
     /* forward name="success" path="" */
     private static final String SUCCESS = "success";

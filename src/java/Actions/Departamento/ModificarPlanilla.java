@@ -17,7 +17,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author jidc28
  */
-public class modificarPlanilla extends org.apache.struts.action.Action {
+public class ModificarPlanilla extends org.apache.struts.action.Action {
     /* forward name="success" path="" */
 
     private static final String SUCCESS = "success";
@@ -43,7 +43,7 @@ public class modificarPlanilla extends org.apache.struts.action.Action {
         Profesor profesor = (Profesor) session.getAttribute("profesor");
         String id_profesor = profesor.getUsbid();
 
-        rendimientoProf renMateria = (rendimientoProf) form;
+        Rendimiento renMateria = (Rendimiento) form;
 
         renMateria.setUsbid_profesor(id_profesor);
 
@@ -112,7 +112,7 @@ public class modificarPlanilla extends org.apache.struts.action.Action {
         boolean agregar = DBMS.getInstance().modificarRendimientoProfesor(renMateria, id_departamento);
 
         /* Se obtiene el listado de planillas llenas */
-        ArrayList<rendimientoProf> rendimiento =
+        ArrayList<Rendimiento> rendimiento =
                 DBMS.getInstance().obtenerPlanillasLlenas(id_profesor, id_departamento);
 
         ArrayList<Materia> materias =

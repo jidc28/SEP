@@ -15,13 +15,12 @@
         <form-bean name="EliminarUserForm" type="Forms.EliminarUserForm"/>
         <form-bean name="Materia" type="Clases.Materia"/>
         <form-bean name="ModificarInfoPForm" type="Forms.ModificarInfoPForm"/>
-        <form-bean name="NucleoUniversitario" type="Clases.NucleoUniversitario"/>
         <form-bean name="Profesor" type="Clases.Profesor"/>
         <form-bean name="Usuario" type="Clases.Usuario"/>
         <form-bean name="DACE" type="Sistemas.DACE"/>
         <form-bean name="MultiBox" type="Clases.MultiBox"/>
-        <form-bean name="dicta" type="Clases.dicta"/>
-        <form-bean name="rendimientoProf" type="Clases.rendimientoProf"/>
+        <form-bean name="dicta" type="Clases.Dicta"/>
+        <form-bean name="rendimientoProf" type="Clases.Rendimiento"/>
         <form-bean name="InformacionProfesorCoord" type="Clases.InformacionProfesorCoord"/>
         <form-bean name="fileUploadForm" type="Clases.FileUpload"/>
         <form-bean name="Archivo" type="Clases.Archivo"/>
@@ -251,14 +250,24 @@
             <forward name="success" path="solicitar_apertura_pagina"/>
         </action>
 
-        <action input="solicitarApertura.jsp" path="/solicitarAperturaMateria" name="Materia" type="Actions.Materia.solicitarAperturaMateria" scope="request" validate="false">
+        <action input="solicitarApertura.jsp" 
+                path="/solicitarAperturaMateria" 
+                name="Materia" 
+                type="Actions.Materia.SolicitarAperturaMateria" 
+                scope="request" 
+                validate="false">
             <forward name="failure" path="solicitar_apertura_pagina"/>
             <forward name="success" path="vistaCoordinacion"/>
         </action>
                 
         <!--     DEPARTAMENTOS      --> 
         
-        <action input="/ConsultaDepartamento.jsp" name="Departamento" path="/irEditarNombreDepartamento" scope="request" type="Actions.Departamento.irEditarNombreDepartamento" validate="false">
+        <action input="/ConsultaDepartamento.jsp" 
+                name="Departamento" 
+                path="/irEditarNombreDepartamento" 
+                scope="request" 
+                type="Actions.Departamento.IrEditarNombreDepartamento" 
+                validate="false">
             <forward name="success" path="edita_departamento_pagina"/>
         </action>
 
@@ -291,7 +300,12 @@
             <forward name="success" path="evaluar_profesores_pagina"/>
         </action>
         
-        <action input="/AgregaMateria.jsp" name="Materia" path="/agregaMateria" validate="false" scope="request" type="Actions.Materia.agregaMateria">
+        <action input="/AgregaMateria.jsp" 
+                name="Materia" 
+                path="/agregaMateria" 
+                validate="false" 
+                scope="request" 
+                type="Actions.Materia.AgregarMateria">
             <forward name="success" path="consulta_materia_pagina"/>
             <forward name="failure" path="agrega_materia_pagina"/>
         </action>
@@ -346,25 +360,50 @@
             <forward name="success" path="consulta_decanato_pagina"/>
         </action>     
         
-        <action input="/VistaProfesor.jsp" name="Profesor" path="/verPlanillasLlenas" scope="request" type="Actions.Departamento.verPlanillasLlenas" validate="false">
+        <action input="/VistaProfesor.jsp" 
+                name="Profesor" 
+                path="/verPlanillasLlenas" 
+                scope="request" 
+                type="Actions.Departamento.VerPlanillasLlenas" 
+                validate="false">
             <forward name="success" path="ver_planillas_llenas_pagina"/>
         </action>     
         
-        <action input="/verPlanillasLlenas.jsp" name="rendimientoProf" path="/verPlanilla" scope="request" type="Actions.Departamento.irModificarPlanilla" validate="false">
+        <action input="/verPlanillasLlenas.jsp" 
+                name="rendimientoProf" 
+                path="/verPlanilla" 
+                scope="request" 
+                type="Actions.Departamento.IrModificarPlanilla" 
+                validate="false">
             <forward name="success" path="ver_planilla_pagina"/>
             <forward name="no_autorizado" path="noAutorizado"/>
         </action>   
 
-        <action input="/llenarPlanillas.jsp" name="rendimientoProf" path="/guardarPlanilla" scope="request" type="Actions.Departamento.guardarPlanilla" validate="false">
+        <action input="/llenarPlanillas.jsp" 
+                name="rendimientoProf" 
+                path="/guardarPlanilla" 
+                scope="request" 
+                type="Actions.Departamento.GuardarPlanilla" 
+                validate="false">
             <forward name="success" path="llenar_planillas_pagina"/>
         </action>    
 
-        <action input="/verPlanillasLlenas.jsp" name="rendimientoProf" path="/modificarPlanilla" scope="request" type="Actions.Departamento.modificarPlanilla" validate="false">
+        <action input="/verPlanillasLlenas.jsp" 
+                name="rendimientoProf" 
+                path="/modificarPlanilla" 
+                scope="request" 
+                type="Actions.Departamento.ModificarPlanilla" 
+                validate="false">
             <forward name="success" path="ver_planillas_llenas_pagina"/>
             <forward name="failure" path="ver_planilla_pagina"/>
         </action>
 
-        <action input="/verPlanillasLlenas.jsp" name="Profesor" path="/irLlenarPlanillas" scope="request" type="Actions.Departamento.irLlenarPlanillas" validate="false">
+        <action input="/verPlanillasLlenas.jsp" 
+                name="Profesor" 
+                path="/irLlenarPlanillas" 
+                scope="request"
+                type="Actions.Departamento.IrLlenarPlanillas" 
+                validate="false">
             <forward name="success" path="llenar_planillas_pagina"/>
         </action>
         
@@ -501,7 +540,7 @@
              una o mas materias a un profesor-->
         <action input="ConsultaProfesores.jsp"
             path="/irAsignarMateriaProfesor"
-            type="Actions.Profesor.irAsignarMateriaProfesor"
+            type="Actions.Profesor.IrAsignarMateriaProfesor"
             scope="request"
             name="Profesor"
             validate="false">
@@ -623,7 +662,12 @@
             <forward name="success" path="/Login.jsp"/>
         </action>
         
-        <action input="/VistaProfesor.jsp" name="ModificarInfoPForm" path="/modificarInfoP" scope="request" type="Actions.Profesor.modificarInfoP" validate="false">
+        <action input="/VistaProfesor.jsp" 
+                name="ModificarInfoPForm" 
+                path="/modificarInfoP" 
+                scope="request" 
+                type="Actions.Profesor.ModificarInformacionProfesor" 
+                validate="false">
             <forward name="success" path="modificar_informacion_pagina"/>
             <forward name="no_autorizado" path="noAutorizado"/>
         </action>
@@ -637,7 +681,7 @@
                 name="Profesor" 
                 path="/irCargarDocProfesor" 
                 scope="request" 
-                type="Actions.Profesor.irCargarDocumentosProfesor" 
+                type="Actions.Profesor.IrCargarDocumentosProfesor" 
                 validate="false">
             <forward name="success" path="cargar_documentos_profesor_pagina"/>
         </action>
@@ -655,7 +699,7 @@
                name="fileUploadForm"
                path="/fileUploadProfesor"
                scope="request"
-               type="Actions.Profesor.cargarDocumentos"
+               type="Actions.Profesor.CargarDocumentos"
                validate = "false">
             <forward name="success" path="cargar_documentos_profesor_pagina"/>
             <forward name="failure" path="cargar_documentos_profesor_pagina"/>
@@ -665,7 +709,7 @@
                name="Profesor"
                path="/irDescargarDocProfesor"
                scope="request"
-               type="Actions.Profesor.irDescargarDocumentosProfesor"
+               type="Actions.Profesor.IrDescargarDocumentosProfesor"
                validate = "false">
             <forward name="success" path="descargar_documentos_profesor_pagina"/>
        </action>
@@ -674,7 +718,7 @@
                name="Archivo"
                path="/descargarDocumentoSeleccionado"
                scope="request"
-               type="Actions.Profesor.descargarDocumentos"
+               type="Actions.Profesor.DescargarDocumentos"
                validate = "false">
             <forward name="success" path="vistaProfesor"/>
        </action>
