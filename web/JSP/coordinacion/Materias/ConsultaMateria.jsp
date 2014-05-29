@@ -32,14 +32,16 @@
     </div>
 </logic:present>
 
-<h4> Lista de Materias  
-    <logic:present name="dpto_seleccionado">
-        <br> 
-        <bean:write name="dpto_seleccionado" property="nombre"/>
-    </logic:present>
+<h4> Lista de Materias 
     <logic:notPresent name="dpto_seleccionado">
         Vinculadas:
     </logic:notPresent>
+    <logic:present name="dpto_seleccionado">
+        <div style="font-size: 14px; color: grey;">
+            <bean:write name="dpto_seleccionado" property="nombre"/>
+        </div>
+        <br> 
+    </logic:present>
 </h4>
 
 <logic:notPresent name="vacio">
@@ -49,21 +51,21 @@
                 <thead>
                     <tr>
                         <th style="font-size: 14px;">
-                            <center>
-                                CODIGO
-                            </center>
-                        </th>
-                        <th style="font-size: 14px;">
-                            <center>
-                                NOMBRE
-                            </center>
-                        </th>
-                        <th style="font-size: 14px;">
-                            <center>
-                                VINCULAR
-                            </center>
-                        </th>
-                    </tr>
+                <center>
+                    CODIGO
+                </center>
+                </th>
+                <th style="font-size: 14px;">
+                <center>
+                    NOMBRE
+                </center>
+                </th>
+                <th style="font-size: 14px;">
+                <center>
+                    VINCULAR
+                </center>
+                </th>
+                </tr>
                 </thead>
                 <tbody>
                     <logic:iterate name="materias" id="mat">
@@ -76,16 +78,16 @@
                             </td>
                             <td>
                                 <html:form action="/vincularMateriaCoordinacion" onsubmit="return(this)" style="margin: 0px;">
-                                <html:hidden name="mat" property="codigo" />
-                                <center>
-                                    <html:submit styleClass="btn btn-success" 
-                                                 style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
-                                                 onclick="javascript: return confirm('¿Está seguro de que desea vincular la materia: ${mat.getNombre()}?')">
-                                            Vincular
-                                    </html:submit>
-                                </center>
-                                </html:form>
-                            </td>
+                                    <html:hidden name="mat" property="codigo" />
+                        <center>
+                            <html:submit styleClass="btn btn-success" 
+                                         style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                         onclick="javascript: return confirm('¿Está seguro de que desea vincular la materia: ${mat.getNombre()}?')">
+                                Vincular
+                            </html:submit>
+                        </center>
+                    </html:form>
+                    </td>
                     </tr>
                 </logic:iterate>
                 </tbody>
@@ -94,21 +96,21 @@
                 <thead>
                     <tr>
                         <th style="font-size: 14px;">
-                            <center>
-                                CODIGO
-                            </center>
-                        </th>
-                        <th width="30%" style="font-size: 14px;">
-                            <center>    
-                                NOMBRE
-                            </center>
-                        </th>
-                        <th style="font-size: 14px;">
-                            <center>
-                                DESVINCULAR
-                            </center>
-                        </th>
-                    </tr>
+                <center>
+                    CODIGO
+                </center>
+                </th>
+                <th width="30%" style="font-size: 14px;">
+                <center>    
+                    NOMBRE
+                </center>
+                </th>
+                <th style="font-size: 14px;">
+                <center>
+                    DESVINCULAR
+                </center>
+                </th>
+                </tr>
                 </thead>
                 <tbody>
                     <logic:iterate name="materias" id="mat">
@@ -123,15 +125,15 @@
                                 <html:form action="/desvincularMateriaCoordinacion" 
                                            onsubmit="return(this)" style="margin: 0px;">
                                     <html:hidden name="mat" property="codigo" />
-                                    <center>
-                                        <html:submit styleClass="btn btn-danger" 
-                                                     style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
-                                                     onclick="javascript: return confirm('¿Está seguro de que desea desvincular la materia: ${mat.getNombre()}?')">
-                                            Desvincular
-                                        </html:submit>
-                                    </center>
-                                </html:form>
-                            </td>
+                        <center>
+                            <html:submit styleClass="btn btn-danger" 
+                                         style="margin: 5px; padding: 3px; padding-left: 5px; padding-right: 5px;"
+                                         onclick="javascript: return confirm('¿Está seguro de que desea desvincular la materia: ${mat.getNombre()}?')">
+                                Desvincular
+                            </html:submit>
+                        </center>
+                    </html:form>
+                    </td>
                     </tr>
                 </logic:iterate>
                 </tbody>
@@ -144,11 +146,12 @@
     <logic:notPresent name="materias_vinculadas">
         <div class="alert alert-warning" id="alert" style="width: 60%">
             <p>
-                No existen materias ofertadas por el departamento en este momento.
+                No existen materias ofertadas por el departamento que no estén
+                vinculadas a la coordinación.
             </p>
         </div>
     </logic:notPresent>
-    
+
     <logic:present name="materias_vinculadas">
         <div class="alert alert-warning" id="alert" style="width: 60%">
             <p>

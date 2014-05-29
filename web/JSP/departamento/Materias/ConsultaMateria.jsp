@@ -42,7 +42,7 @@
     </div>
 </logic:present>
 
-<h4> Lista de Materias en el sistema:</h4>
+<h4> Lista de Materias:</h4>
 <logic:notPresent name="vacio">
     <div id="tabla" class="table-responsive">
         <table class="table table-striped">
@@ -65,12 +65,7 @@
                     </th>
                     <th  style="font-size: 14px;">
                         <center>
-                            CAMBIAR ESTADO
-                        </center>
-                    </th>
-                    <th  style="font-size: 14px;">
-                        <center>
-                            DESACTIVAR
+                            ELIMINAR
                         </center>   
                     </th>
                 </tr>
@@ -93,37 +88,12 @@
                         </html:form>
                     </td>
                     <td align="center">
-                        <logic:equal name="Mat" property="estado" value="visible">
-                            <html:form action="/modificaStatusMateria" style="margin: 0px;">
-                                <html:hidden name="Mat" property="estado" value="oculto"/>
-                                <html:hidden name="Mat" property="codigo"/>
-                                <html:submit styleClass="btn btn-warning"
-                                             style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;"
-                                             onclick="javascript: return confirm('¿Está seguro de que desea ocultar la materia: ${Mat.getNombre()}?')">
-                                    Ocultar
-                                </html:submit>
-                            </html:form>
-                        </logic:equal>
-
-                        <logic:equal name="Mat" property="estado" value="oculto">
-                            <html:form action="/modificaStatusMateria" style="margin: 0px;">
-                                <html:hidden name="Mat" property="estado" value="visible"/>
-                                <html:hidden name="Mat" property="codigo"/>
-                                <html:submit styleClass="btn btn-success"
-                                             style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;"
-                                             onclick="javascript: return confirm('¿Está seguro de que desea mostrar la materia: ${Mat.getNombre()}?')">
-                                    Mostrar
-                                </html:submit>
-                            </html:form>
-                        </logic:equal>
-                    </td>
-                    <td align="center">
                         <html:form action="/eliminaMateria" style="margin: 0px;">
                             <html:hidden name="Mat" property="codigo"/>
                             <html:submit styleClass="btn btn-danger"
                                          style="padding-bottom: 2px; padding-top: 3px; padding-left: 3px; padding-right: 3px;"
                                          onclick="javascript: return confirm('¿Está seguro de que desea desactivar la materia: ${Mat.getNombre()}?')">
-                                Desactivar
+                                Eliminar
                             </html:submit>
                         </html:form>
                     </td>

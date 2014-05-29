@@ -18,6 +18,10 @@
 %>
     <tiles:insert definition="consultaMateria"/>
 <%
+   } else if (tipousuario.equals("coordinacion")) {
+%>
+    <tiles:insert definition="consultaMateriaCoordinacion"/>
+<% 
    } else {
 %>
     <tiles:insert definition="noAutorizado"/>

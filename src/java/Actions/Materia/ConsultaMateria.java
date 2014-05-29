@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Actions.Materia;
 
-import DBMS.DBMS;
 import Clases.*;
+import DBMS.DBMS;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,15 +38,19 @@ public class ConsultaMateria extends org.apache.struts.action.Action {
         HttpSession session = request.getSession(true);
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         String tipousuario = usuario.getTipousuario();
-        String id_departamento = (String) session.getAttribute("usbid");
+        String id = (String) session.getAttribute("usbid");
         ArrayList<Materia> materias = null;
 
+        /**
+         * Dependiendo del tipo del usuario se realizan diferentes consultas.
+         */
         if (tipousuario.equals("departamento")) {
-            materias = DBMS.getInstance().listarMateriasOfertadas(id_departamento);
+            materias = DBMS.getInstance().listarMateriasOfertadas(id);
 
         } else if (tipousuario.equals("coordinacion")) {
             Departamento dpto = (Departamento) form;
-            materias = DBMS.getInstance().listarMateriasOfertadas(dpto.getCodigo());
+            materias = DBMS.getInstance().listarMateriasOfertadas(
+                    dpto.getCodigo(), id);
             request.setAttribute("dpto_seleccionado", dpto);
             session.removeAttribute("materias_vinculadas");
         }

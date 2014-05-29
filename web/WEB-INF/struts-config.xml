@@ -213,7 +213,12 @@
             <forward name="sesion_expirada" path="sesion_expirada"/>
         </action>
         
-        <action input="/ConsultaDepartamento.jsp" name="Departamento" path="/listarMateriasDepto" scope="request" type="Actions.Materia.ConsultaMateria" validate="false">
+        <action input="/ConsultaDepartamento.jsp" 
+                name="Departamento" 
+                path="/listarMateriasDepto" 
+                scope="request" 
+                type="Actions.Materia.ConsultaMateria" 
+                validate="false">
             <forward name="success" path="consulta_materia_pagina"/>
         </action>
         
@@ -233,7 +238,7 @@
                 scope="request" 
                 type="Actions.Materia.ConsultaMateriasCoordinacion" 
                 validate="false">
-            <forward name="success" path="consulta_materia_coordinacion_pagina"/>
+            <forward name="success" path="consulta_materia_pagina"/>
         </action>
         
         <action input="VistaCoordinacion.jsp" path="/irSolicitarAperturaMateria" name="Materia" type="Actions.Materia.IrSolicitarAperturaMateria" scope="request" validate="false">
@@ -307,14 +312,15 @@
             <forward name="failure" path="modifica_materia_pagina"/>
         </action>
 
-        <action input="/ConsultaMateria.jsp" name="Materia" path="/verSolicitudApertura" scope="request" type="Actions.Materia.VerMateria" validate="false">
+        <action input="/ConsultaMateria.jsp" 
+                name="Materia" 
+                path="/verSolicitudApertura" 
+                scope="request" 
+                type="Actions.Materia.VerMateria" 
+                validate="false">
             <forward name="success" path="modifica_status_apertura_pagina"/>
             <forward name="failure" path="noAutorizado"/>
-        </action>        
-        
-        <action input="/ConsultaMateria.jsp" name="Materia" path="/modificaStatusMateria" scope="request" type="Actions.Materia.ModificaStatusMateria" validate="false">
-            <forward name="success" path="consulta_materia_pagina"/>
-        </action>        
+        </action>
 
         <action input="/VistaDepartamento.jsp" name="Materia" path="/consultaSolicitudesApertura" scope="request" type="Actions.Materia.ConsultarSolicitudesApertura" validate="false">
             <forward name="success" path="consulta_solicitud_apertura_pagina"/>

@@ -888,14 +888,11 @@ public class DBMS {
         ArrayList<Materia> materias = new ArrayList<Materia>(0);
         PreparedStatement ps;
         try {
-            ps = conexion.prepareStatement("SELECT codigo, nombre, condicion, "
-                    + "estado, creditos "
+            ps = conexion.prepareStatement("SELECT codigo, nombre, creditos "
                     + "FROM oferta, MATERIA "
                     + "WHERE codigo_departamento = ? "
                     + "AND codigo_materia = codigo "
-                    + "AND condicion = 'activo' "
-                    + "AND solicitud = 'no' "
-                    + "ORDER BY estado;");
+                    + "AND solicitud = 'no';");
 
             ps.setString(1, id_departamento);
             ResultSet rs = ps.executeQuery();
@@ -904,8 +901,51 @@ public class DBMS {
                 Materia m = new Materia();
                 m.setCodigo(rs.getString("codigo"));
                 m.setNombre(rs.getString("nombre"));
-                m.setCondicion(rs.getString("condicion"));
-                m.setEstado(rs.getString("estado"));
+                m.setCreditos(rs.getString("creditos"));
+                materias.add(m);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return materias;
+    }
+
+    /**
+     * listarMateriasOfertadas
+     *
+     * Listar las materias ofertadas por un departamento determinado que no
+     * maneja la coordinación que solicita el listado
+     *
+     * @param id_departamento: departamento del que se quieren listar las
+     * materias ofertadas.
+     * @return listado de materias.
+     */
+    public ArrayList<Materia> listarMateriasOfertadas(String id_departamento,
+            String id_coordinacion) {
+
+        ArrayList<Materia> materias = new ArrayList<Materia>(0);
+        PreparedStatement ps;
+        try {
+            ps = conexion.prepareStatement("SELECT codigo, nombre, creditos "
+                    + "FROM oferta, MATERIA "
+                    + "WHERE codigo_departamento = ? "
+                    + "AND codigo_materia = codigo "
+                    + "AND solicitud = 'no' "
+                    + "AND codigo NOT IN ("
+                    + "SELECT codigo_materia "
+                    + "FROM maneja "
+                    + "WHERE codigo_coordinacion = ?"
+                    + ");");
+
+            ps.setString(1, id_departamento);
+            ps.setString(2, id_coordinacion);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Materia m = new Materia();
+                m.setCodigo(rs.getString("codigo"));
+                m.setNombre(rs.getString("nombre"));
                 m.setCreditos(rs.getString("creditos"));
                 materias.add(m);
             }
@@ -1190,11 +1230,10 @@ public class DBMS {
      * @return booleano que determina si la materia fue o no desactivada.
      */
     public boolean eliminarMateria(String id_materia) {
-        PreparedStatement ps = null;
+        PreparedStatement ps;
 
         try {
-            ps = conexion.prepareStatement("UPDATE MATERIA "
-                    + "SET condicion = 'desactivado' "
+            ps = conexion.prepareStatement("DELETE FROM MATERIA "
                     + "WHERE codigo = ?;");
             ps.setString(1, id_materia);
 
@@ -1369,16 +1408,14 @@ public class DBMS {
      * @return listado de las materias.
      */
     public ArrayList<Materia> listarMateriasCoordinacion(String cod_coord) {
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         ArrayList<Materia> materias = new ArrayList<Materia>(0);
 
         try {
             ps = conexion.prepareStatement("SELECT DISTINCT codigo, nombre "
                     + "FROM maneja, materia, oferta "
                     + "WHERE maneja.codigo_coordinacion = ? "
-                    + "AND maneja.codigo_materia = codigo "
-                    + "AND condicion = 'activo' "
-                    + "AND estado = 'visible'");
+                    + "AND maneja.codigo_materia = codigo;");
             ps.setString(1, cod_coord);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -2046,26 +2083,6 @@ public class DBMS {
         return false;
     }
 
-    /* ESTO SE DEBE BORRAR */
-    public boolean cambiarStatusMateria(Materia m) {
-
-        PreparedStatement ps;
-        try {
-
-            ps = conexion.prepareStatement("UPDATE materia SET estado = ? WHERE ( codigo = ? )");
-
-            ps.setString(1, m.getEstado());
-            ps.setString(2, m.getCodigo());
-            Integer s = ps.executeUpdate();
-
-            return s > 0;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
-
     /**
      * contarSolicitudesPendientesDepartamento
      *
@@ -2502,8 +2519,7 @@ public class DBMS {
                     + "AND o.codigo_departamento = ? "
                     + "AND o.codigo_materia = d.codigo_materia "
                     + "AND d.planilla_llena = 'N' "
-                    + "AND m.codigo = o.codigo_materia "
-                    + "AND m.condicion = 'activo';");
+                    + "AND m.codigo = o.codigo_materia;");
             ps.setString(1, id_profesor);
             ps.setString(2, id_departamento);
 
@@ -2621,7 +2637,6 @@ public class DBMS {
                     + "AND o.codigo_departamento = ? "
                     + "AND o.codigo_materia = d.codigo_materia "
                     + "AND o.codigo_materia = m.codigo "
-                    + "AND m.condicion = 'activo' "
                     + "AND d.planilla_llena = 'S';");
             ps1.setString(1, id_profesor);
             ps1.setString(2, id_departamento);
@@ -2695,8 +2710,7 @@ public class DBMS {
                     + "WHERE d.usbid_profesor = ? "
                     + "AND o.codigo_departamento = ? "
                     + "AND o.codigo_materia = d.codigo_materia "
-                    + "AND m.codigo = o.codigo_materia "
-                    + "AND m.condicion = 'activo';");
+                    + "AND m.codigo = o.codigo_materia;");
             ps1.setString(1, id_profesor);
             ps1.setString(2, id_departamento);
 
@@ -3494,9 +3508,8 @@ public class DBMS {
         try {
             ps = conexion.prepareStatement("SELECT * "
                     + "FROM oferta as o, materia "
-                    + "WHERE o.codigo_departamento = ? AND "
-                    + "o.codigo_materia = codigo AND "
-                    + "condicion = 'activo' "
+                    + "WHERE o.codigo_departamento = ? "
+                    + "AND o.codigo_materia = codigo "
                     + "AND solicitud = 'no' "
                     + "and o.codigo_materia NOT IN "
                     + "(SELECT d.codigo_materia "
