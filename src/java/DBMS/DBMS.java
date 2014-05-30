@@ -72,7 +72,6 @@ public class DBMS {
 
             psConsultar.setString(1, u.getUsbid());
             psConsultar.setString(2, u.getContrasena());
-            System.out.println(psConsultar.toString());
             ResultSet rs = psConsultar.executeQuery();
 
             while (rs.next()) {
@@ -568,23 +567,6 @@ public class DBMS {
         }
     }
 
-    /*public boolean eliminarDepartamento(Departamento u) {
-
-     PreparedStatement psEliminar1 = null;
-     try {
-     psEliminar1 = conexion.prepareStatement("DELETE FROM DEPARTAMENTO AS d WHERE (d.codigo = ?);");
-     psEliminar1.setString(1, u.getCodigo());
-
-     Integer i = psEliminar1.executeUpdate();
-
-     System.out.println("retorna: " + (i > 0));
-     return i > 0;
-
-     } catch (SQLException ex) {
-     ex.printStackTrace();
-     return false;
-     }
-     }*/
     /**
      * registrarDecanato
      *
@@ -1585,6 +1567,7 @@ public class DBMS {
                     + "AND e.codigo_materia = r.codigo_materia "
                     + "AND e.usbid_profesor = ? "
                     + "AND m.codigo = e.codigo_materia "
+                    + "AND r.evaluado = 'no' "
                     + "AND e.usbid_profesor NOT IN ("
                     + "SELECT ec.usbid_profesor "
                     + "FROM evaluacion as ec "
@@ -1653,6 +1636,7 @@ public class DBMS {
                     + "AND e.codigo_materia = codigo "
                     + "AND e.usbid_profesor = r.usbid_profesor "
                     + "AND e.usbid_profesor = ? "
+                    + "AND r.evaluado = 'no' "
                     + "AND NOT EXISTS ("
                     + "SELECT * "
                     + "FROM evaluacion "
@@ -1785,8 +1769,6 @@ public class DBMS {
             ps.setString(2, usbid_profesor);
             ps.setInt(3, ano);
             ps.setString(4, trimestre);
-
-            System.out.println(ps.toString());
 
             ResultSet rs = ps.executeQuery();
 
@@ -1929,14 +1911,12 @@ public class DBMS {
                     + "AND r.codigo_materia = codigo "
                     + "AND e.usbid_profesor = r.usbid_profesor "
                     + "AND e.usbid_profesor = ? "
-                    + "AND r.ano = ? "
-                    + "AND r.trimestre = ?;");
+                    + "AND r.ano_evaluacion = ? "
+                    + "AND r.trimestre_evaluacion = ?;");
             ps.setString(1, id_coordinacion);
             ps.setString(2, usbid_profesor);
             ps.setInt(3, ano);
             ps.setString(4, trimestre);
-
-            System.out.println(ps.toString());
 
             ResultSet rs = ps.executeQuery();
 
@@ -2415,8 +2395,6 @@ public class DBMS {
             ps.setString(1, id_profesor);
             ps.setString(2, id_departamento);
 
-            System.out.println(ps.toString());
-
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Rendimiento r = new Rendimiento();
@@ -2521,8 +2499,6 @@ public class DBMS {
                     + "AND m.codigo = o.codigo_materia;");
             ps.setString(1, id_profesor);
             ps.setString(2, id_departamento);
-
-            System.out.println(ps.toString());
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -3472,8 +3448,6 @@ public class DBMS {
             ps.setInt(2, ano);
             ps.setString(3, trimestre);
 
-            System.out.println(ps.toString());
-
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -4375,7 +4349,6 @@ public class DBMS {
                     + "FROM informacion_profesor_coordinacion "
                     + "WHERE usbid_profesor = ?;");
             ps.setString(1, usbid_profesor);
-            System.out.println(ps.toString());
             ResultSet rs = ps.executeQuery();
 
             int tt = 0, tj = 0, pc = 0, plt = 0, plj = 0;
@@ -4621,6 +4594,7 @@ public class DBMS {
                     + "AND m.codigo = e.codigo_materia "
                     + "AND e.codigo_materia = r.codigo_materia "
                     + "AND e.usbid_profesor = r.usbid_profesor "
+                    + "AND r.evaluado = 'no' "
                     + "AND e.usbid_profesor NOT IN ("
                     + "SELECT ec.usbid_profesor "
                     + "FROM evaluacion as ec "

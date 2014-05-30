@@ -472,7 +472,7 @@
     <!-- 1. Graficar el rendimiento del profesor -->
     <definition name="graficarRendimientoDepartamento" extends="baseDepartamento">
         <put name="script" value="/JSP/coordinacion/scripts/graficar-rendimiento-script.jsp"/>
-        <put name="body" value="/JSP/coordinacion/Evaluaciones/graficarRendimiento.jsp"/>
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/GraficarRendimiento.jsp"/>
     </definition>
 
     <!-- 2. Listar las evaluaciones prendientes de materias -->
@@ -546,7 +546,7 @@
     <!-- 7. Graficar el rendimiento del profesor -->
     <definition name="graficarRendimientoCoordinacion" extends="baseCoordinacion">
         <put name="script" value="/JSP/coordinacion/scripts/graficar-rendimiento-script.jsp"/>
-        <put name="body" value="/JSP/coordinacion/Evaluaciones/graficarRendimiento.jsp"/>
+        <put name="body" value="/JSP/coordinacion/Evaluaciones/GraficarRendimiento.jsp"/>
     </definition>
   
     <!-- COORDINACION / MATERIAS -->
