@@ -123,8 +123,7 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
 
                 ArrayList<Rendimiento> evaluacion_coordinaciones =
                         DBMS.getInstance().
-                        obtenerEvaluacionCoordinaciones(id, profesor.getUsbid(),
-                        "evaluacion");
+                        obtenerEvaluacionCoordinaciones(id, profesor.getUsbid());
 
                 request.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
                 request.setAttribute("revisar", SUCCESS);
@@ -152,7 +151,7 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
                 Rendimiento[] evaluacion_coordinaciones = new Rendimiento[1];
                 evaluacion_coordinaciones[0] =
                         DBMS.getInstance().listarEvaluacionesGeneralCoordinacion(
-                        id_coordinacion, d.getUsbidProfesor(), "evaluacion");
+                        id_coordinacion, d.getUsbidProfesor());
 
                 Coordinacion coordinacion = new Coordinacion();
                 coordinacion.setCodigo(id_coordinacion);
