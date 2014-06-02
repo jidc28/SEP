@@ -123,7 +123,8 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
 
                 ArrayList<Rendimiento> evaluacion_coordinaciones =
                         DBMS.getInstance().
-                        obtenerEvaluacionCoordinaciones(id, profesor.getUsbid());
+                        obtenerEvaluacionCoordinaciones(id, profesor.getUsbid(),
+                        "evaluacion");
 
                 request.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
                 request.setAttribute("revisar", SUCCESS);
@@ -148,16 +149,18 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
 
                 /* Se obtienen los datos de la evaluacion que realizo la
                  * coordinacion */
-                Rendimiento evaluado =
-                            DBMS.getInstance().listarEvaluacionesGeneralCoordinacion(
-                            id_coordinacion, d.getUsbidProfesor());
-
-                request.setAttribute("revisar", SUCCESS);
-
-                request.setAttribute("evaluado_coordinacion", evaluado);
+                Rendimiento[] evaluacion_coordinaciones = new Rendimiento[1];
+                evaluacion_coordinaciones[0] =
+                        DBMS.getInstance().listarEvaluacionesGeneralCoordinacion(
+                        id_coordinacion, d.getUsbidProfesor(), "evaluacion");
 
                 Coordinacion coordinacion = new Coordinacion();
-                coordinacion.setCodigo((String) session.getAttribute("coordinacion"));
+                coordinacion.setCodigo(id_coordinacion);
+                coordinacion = DBMS.getInstance().obtenerNombreCoordinacion(coordinacion);
+                evaluacion_coordinaciones[0].setObservaciones_d(coordinacion.getNombre());
+                request.setAttribute("revisar", SUCCESS);
+
+                request.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
 
                 evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(coordinacion, d.getUsbidProfesor());
 
