@@ -1857,14 +1857,22 @@ public class DBMS {
      * @return
      */
     public Rendimiento listarEvaluacionesGeneralCoordinacion(
-            String id_coordinacion, String usbid_profesor) {
+            String id_coordinacion, String usbid_profesor, String tabla) {
 
         PreparedStatement ps, ps2;
         Rendimiento rendimiento = null;
 
         try {
+            String recomendado = "recomendado";
+            String observaciones = "observaciones";
+
+            if (tabla.equals("evaluacion")) {
+                recomendado += "_coordinacion";
+                observaciones += "_coordinacion";
+            }
+            
             ps = conexion.prepareStatement("SELECT * "
-                    + "FROM evaluacion "
+                    + "FROM " + tabla + " " 
                     + "WHERE usbid_profesor = ? "
                     + "AND codigo_coordinacion = ?;");
             ps.setString(1, usbid_profesor);
@@ -1874,8 +1882,9 @@ public class DBMS {
 
             while (rs.next()) {
                 rendimiento = new Rendimiento();
-                rendimiento.setObservaciones_c(rs.getString("observaciones_coordinacion"));
+                rendimiento.setObservaciones_c(rs.getString(observaciones));
                 rendimiento.setUsbid_profesor(rs.getString("usbid_profesor"));
+                rendimiento.setRecomendado(rs.getString(recomendado));
             }
 
             return rendimiento;
@@ -4738,14 +4747,22 @@ public class DBMS {
      * @return
      */
     public ArrayList<Rendimiento> obtenerEvaluacionCoordinaciones(
-            String id_departamento, String usbid_profesor) {
+            String id_departamento, String usbid_profesor, String tabla) {
 
         PreparedStatement ps;
         ArrayList<Rendimiento> informacion = new ArrayList<Rendimiento>(0);
         try {
+            String recomendado = "recomendado";
+            String observaciones = "observaciones";
+
+            if (tabla.equals("evaluacion")) {
+                recomendado += "_coordinacion";
+                observaciones += "_coordinacion";
+            }
+
             ps = conexion.prepareStatement("SELECT codigo, nombre, "
-                    + "recomendado_coordinacion, observaciones_coordinacion "
-                    + "FROM evaluacion, coordinacion "
+                    + recomendado + ", " + observaciones + " "
+                    + "FROM " + tabla + ", coordinacion "
                     + "WHERE usbid_profesor = ? "
                     + "AND codigo = codigo_coordinacion;");
             ps.setString(1, usbid_profesor);

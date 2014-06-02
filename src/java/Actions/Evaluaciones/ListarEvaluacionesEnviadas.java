@@ -54,6 +54,11 @@ public class ListarEvaluacionesEnviadas extends org.apache.struts.action.Action 
                 DBMS.getInstance().
                 listarArchivosProfesor(profesor.getUsbid(), archivos_considerados);
 
+        ArrayList<Rendimiento> evaluacion_coordinaciones =
+                DBMS.getInstance().
+                obtenerEvaluacionCoordinaciones(id, profesor.getUsbid(),
+                "evaluacion");
+
         /* Dependiendo del tipo de usuario se consultan las evaluaciones
          * enviadas */
         if (tipousuario.equals("coordinacion")) {
