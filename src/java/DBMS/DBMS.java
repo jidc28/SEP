@@ -2798,7 +2798,7 @@ public class DBMS {
      * y el trimestre
      * @return rendimiento del profesor
      */
-    public Rendimiento obtenerEvaluacion(Dicta d) {
+    public Rendimiento obtenerEvaluacion(Rendimiento d) {
         PreparedStatement ps;
         Rendimiento evaluacion = new Rendimiento();
         try {
@@ -2811,10 +2811,10 @@ public class DBMS {
                     + "AND usbid_profesor = ? "
                     + "AND trimestre = ?;");
 
-            String codigo_materia = d.getCodigoMateria();
+            String codigo_materia = d.getCodigo_materia();
             ps.setString(1, codigo_materia);
-            ps.setString(2, d.getUsbidProfesor());
-            ps.setString(3, obtenerTrimestrePorNombre(d.getPeriodo()));
+            ps.setString(2, d.getUsbid_profesor());
+            ps.setString(3, obtenerTrimestrePorNombre(d.getTrimestre()));
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

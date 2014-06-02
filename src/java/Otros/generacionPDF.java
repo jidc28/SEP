@@ -928,9 +928,19 @@ public class generacionPDF {
                         + "cursus. In sed luctus velit. Fusce non urna accumsan sem "
                         + "hendrerit fermentum sed vel nibh. Vivamus adipiscing urna"
                         + " quis metus.";
-                ArrayList<Rendimiento> evaluaciones =
-                        DBMS.getInstance().obtenerEvaluacionesEnviadasCoordinaciones(idOficina, p.getUsbid(), ano, trimestre);
-
+                ArrayList<Rendimiento> materias =
+                        DBMS.getInstance().listarEvaluacionesEnviadasDepartamento(
+                            idOficina, ano, trimestre, p.getUsbid());
+                
+                ArrayList<Rendimiento> out = new ArrayList<Rendimiento>();
+                for (int z = 0; z < materias.size(); z++) {
+                    Rendimiento elem = new Rendimiento();
+                    elem.setUsbid_profesor(materias.get(z).getUsbid_profesor());
+                    elem.setCodigo_materia(materias.get(z).getCodigo_materia());
+                    elem.setTrimestre(materias.get(z).getTrimestre());
+                    elem.setAno(ano);
+                    out.add(elem);
+                }
                 // Titulo del area.
                 titulo = new Phrase(" EVALUACIÓN DE COORDINACIONES  ", fontTitulos);
                 ct.setSimpleColumn(titulo, 70, 745, 450, 430, 25, Element.ALIGN_LEFT);
@@ -939,8 +949,8 @@ public class generacionPDF {
                 //DECLARACIONES DINAMICAS
 
 
-                for (int iterador = 0; iterador < evaluaciones.size(); iterador++) {
-                    Rendimiento eval = evaluaciones.get(iterador);
+                for (int iterador = 0; iterador < out.size(); iterador++) {
+                    Rendimiento eval = out.get(iterador);
                     if (varY <= 130) {
 
                         // Cuadro Contenedor
@@ -979,12 +989,12 @@ public class generacionPDF {
                     varY = varY - 10; //365
                     campo = new Phrase("      Recomendado: ", fontCampo2);
                     ct.setSimpleColumn(campo, 70, varY, 450, varY + 10, 10, Element.ALIGN_LEFT);
-                    if (eval.getRecomendado().equals("si")) {
-                        campo = new Phrase("  Si", fontCampo);
-                    } else {
-                        campo = new Phrase("  No", fontCampo);
-                    }
-                    ct.setSimpleColumn(campo, 70, varY, 450, varY + 10, 10, Element.ALIGN_LEFT);
+//                    if (eval.getRecomendado().equals("si")) {
+//                        campo = new Phrase("  Si", fontCampo);
+//                    } else {
+//                        campo = new Phrase("  No", fontCampo);
+//                    }
+//                    ct.setSimpleColumn(campo, 70, varY, 450, varY + 10, 10, Element.ALIGN_LEFT);
                     ct.go();
 
                     varY = varY - 20; //345
@@ -992,17 +1002,17 @@ public class generacionPDF {
                     ct.setSimpleColumn(campo, 70, varY, 450, varY + 10, 10, Element.ALIGN_LEFT);
                     ct.go();
                     int dez = 0;
-                    if (eval.getObservaciones_c().length() <= 100) {
-                        dez = 20;
-                    } else if (eval.getObservaciones_c().length() <= 200) {
-                        dez = 30;
-                    } else if (eval.getObservaciones_c().length() <= 300) {
-                        dez = 40;
-                    } else if (eval.getObservaciones_c().length() <= 400) {
-                        dez = 50;
-                    } else if (eval.getObservaciones_c().length() > 400) {
-                        dez = 60;
-                    }
+//                    if (eval.getObservaciones_c().length() <= 100) {
+//                        dez = 20;
+//                    } else if (eval.getObservaciones_c().length() <= 200) {
+//                        dez = 30;
+//                    } else if (eval.getObservaciones_c().length() <= 300) {
+//                        dez = 40;
+//                    } else if (eval.getObservaciones_c().length() <= 400) {
+//                        dez = 50;
+//                    } else if (eval.getObservaciones_c().length() > 400) {
+//                        dez = 60;
+//                    }
 
                     campo = new Phrase(eval.getObservaciones_c(), fontCampo);
                     ct.setSimpleColumn(campo, 80, varY - dez, 450, varY, 10, Element.ALIGN_LEFT);
@@ -1023,8 +1033,6 @@ public class generacionPDF {
              * # Rendimiento por materia #
              * ###########################*/
 
-            ArrayList<Rendimiento> evaluaciones_enviadas =
-                    DBMS.getInstance().listarEvaluacionesEnviadasDepartamento(idOficina, ano, trimestre);
             if (varY > 130) {
                 varY -= 30;
                 inicio -= 30;
