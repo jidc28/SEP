@@ -3842,6 +3842,26 @@ public class DBMS {
         return null;
     }
 
+    public boolean resetearProceso(String usbid_profesor) {
+
+        PreparedStatement ps;
+        try {
+
+            ps = conexion.prepareStatement("UPDATE dicta "
+                    + "SET planilla_llena = 'N' "
+                    + "WHERE usbid_profesor = ?;");
+            ps.setString(1, usbid_profesor);
+
+            Integer s = ps.executeUpdate();
+
+            return s > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
     /**
      * evaluar
      *
@@ -4024,6 +4044,7 @@ public class DBMS {
                 /* Si ya fue revisada completamente, borrar de la tabla
                  * de profesores por evaluar */
                 borrarEvaluadosDepartamento(rendimiento, id_departamento);
+                resetearProceso(rendimiento.getUsbid_profesor());
                 return true;
             } else {
                 /* Si la evaluacion no fue revisada por el decanato colocar
