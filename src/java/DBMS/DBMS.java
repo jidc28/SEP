@@ -1551,16 +1551,15 @@ public class DBMS {
      * @param usbid_profesor
      * @return listado de rendimientos
      */
-    public ArrayList<Dicta> listarEvaluacionesPendientes(Coordinacion coordinacion,
+    public ArrayList<Rendimiento> listarEvaluacionesPendientes(Coordinacion coordinacion,
             String usbid_profesor) {
 
-        PreparedStatement ps, ps2;
-        ArrayList<Dicta> dicta_materia = new ArrayList(0);
-        String codigoMateria;
+        PreparedStatement ps;
+        ArrayList<Rendimiento> dicta_materia = new ArrayList(0);
         String id_coordinacion = coordinacion.getCodigo();
         try {
             ps = conexion.prepareStatement("SELECT DISTINCT e.codigo_materia, "
-                    + "nombre, trimestre "
+                    + "nombre, trimestre, ano "
                     + "FROM evaluar as e, materia as m, rendimiento as r "
                     + "WHERE e.codigo_coordinacion = ? "
                     + "AND e.usbid_profesor = r.usbid_profesor "
@@ -1578,32 +1577,14 @@ public class DBMS {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Dicta d = new Dicta();
-                codigoMateria = rs.getString("codigo_materia");
-                d.setCodigoMateria(codigoMateria);
-                d.setOpcion(rs.getString("nombre"));
-                d.setPeriodo(obtenerTrimestrePorSiglas(rs.getString("trimestre")));
+                Rendimiento r = new Rendimiento();
+                r.setCodigo_materia(rs.getString("codigo_materia"));
+                r.setObservaciones_d(rs.getString("nombre"));
+                r.setAno(rs.getInt("ano"));
+                r.setTrimestre(obtenerTrimestrePorSiglas(rs.getString("trimestre")));
 
-                ps2 = conexion.prepareStatement("SELECT codigo_materia, usbid, "
-                        + "nombre, apellido "
-                        + "FROM evaluar, profesor "
-                        + "WHERE codigo_coordinacion = ? "
-                        + "AND usbid = usbid_profesor "
-                        + "AND codigo_materia = ?;");
-                ps2.setString(1, id_coordinacion);
-                ps2.setString(2, codigoMateria);
-
-                ResultSet rs2 = ps2.executeQuery();
-
-                while (rs2.next()) {
-                    Profesor p = new Profesor();
-                    p.setUsbid(rs2.getString("usbid"));
-                    p.setNombre(rs2.getString("nombre"));
-                    p.setApellido(rs2.getString("apellido"));
-                    d.addProfesor(p);
-                }
-                d.setPrimerProfesor();
-                dicta_materia.add(d);
+                r.setUsbid_profesor(usbid_profesor);
+                dicta_materia.add(r);
             }
             return dicta_materia;
 
@@ -1622,14 +1603,15 @@ public class DBMS {
      * @param usbid_profesor
      * @return listado de rendimientos
      */
-    public ArrayList<Dicta> listarEvaluacionesPendientes(String id_coordinacion,
+    public ArrayList<Rendimiento> listarEvaluacionesPendientes(String id_coordinacion,
             String usbid_profesor) {
 
         PreparedStatement ps, ps2;
-        ArrayList<Dicta> dicta_materia = new ArrayList(0);
+        ArrayList<Rendimiento> dicta_materia = new ArrayList(0);
         String codigoMateria;
         try {
-            ps = conexion.prepareStatement("SELECT DISTINCT r.codigo_materia, trimestre, nombre "
+            ps = conexion.prepareStatement("SELECT DISTINCT r.codigo_materia, "
+                    + "trimestre, nombre, ano, e.usbid_profesor "
                     + "FROM evaluar as e, materia as m, rendimiento as r "
                     + "WHERE e.codigo_coordinacion = ? "
                     + "AND r.codigo_materia = e.codigo_materia "
@@ -1649,33 +1631,16 @@ public class DBMS {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Dicta d = new Dicta();
+                Rendimiento r = new Rendimiento();
                 codigoMateria = rs.getString("codigo_materia");
-                d.setCodigoMateria(codigoMateria);
-                d.setOpcion(rs.getString("nombre"));
+                r.setCodigo_materia(codigoMateria);
+                r.setAno(rs.getInt("ano"));
+                r.setObservaciones_d(rs.getString("nombre"));
 
-                d.setPeriodo(obtenerTrimestrePorSiglas(rs.getString("trimestre")));
+                r.setTrimestre(obtenerTrimestrePorSiglas(rs.getString("trimestre")));
 
-                ps2 = conexion.prepareStatement("SELECT codigo_materia, usbid, "
-                        + "nombre, apellido "
-                        + "FROM evaluar, profesor "
-                        + "WHERE codigo_coordinacion = ? "
-                        + "AND usbid = usbid_profesor "
-                        + "AND codigo_materia = ? ");
-                ps2.setString(1, id_coordinacion);
-                ps2.setString(2, codigoMateria);
-
-                ResultSet rs2 = ps2.executeQuery();
-
-                while (rs2.next()) {
-                    Profesor p = new Profesor();
-                    p.setUsbid(rs2.getString("usbid"));
-                    p.setNombre(rs2.getString("nombre"));
-                    p.setApellido(rs2.getString("apellido"));
-                    d.addProfesor(p);
-                }
-                d.setPrimerProfesor();
-                dicta_materia.add(d);
+                r.setUsbid_profesor(rs.getString("usbid_profesor"));
+                dicta_materia.add(r);
             }
             return dicta_materia;
 
@@ -1953,7 +1918,8 @@ public class DBMS {
         ArrayList<Rendimiento> rendimientos = new ArrayList(0);
 
         try {
-            ps = conexion.prepareStatement("SELECT DISTINCT m.nombre, m.codigo, r.trimestre "
+            ps = conexion.prepareStatement("SELECT DISTINCT m.nombre, m.codigo, "
+                    + "r.trimestre, r.ano "
                     + "FROM evaluado as e, materia as m, rendimiento as r "
                     + "WHERE e.codigo_coordinacion = ? "
                     + "AND r.codigo_materia = codigo "
@@ -1974,6 +1940,7 @@ public class DBMS {
                 rendimiento.setNombre_materia(rs.getString("nombre"));
                 rendimiento.setTrimestre(
                         obtenerTrimestrePorSiglas(rs.getString("trimestre")));
+                rendimiento.setAno(rs.getInt("ano"));
 
                 rendimientos.add(rendimiento);
             }
@@ -2857,12 +2824,16 @@ public class DBMS {
                     + "FROM rendimiento "
                     + "WHERE codigo_materia = ? "
                     + "AND usbid_profesor = ? "
-                    + "AND trimestre = ?;");
+                    + "AND trimestre = ? "
+                    + "AND ano = ?;");
 
             String codigo_materia = d.getCodigo_materia();
             ps.setString(1, codigo_materia);
             ps.setString(2, d.getUsbid_profesor());
             ps.setString(3, obtenerTrimestrePorNombre(d.getTrimestre()));
+            ps.setInt(4, d.getAno());
+
+            System.out.println(ps.toString());
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -4627,16 +4598,16 @@ public class DBMS {
      * @param id_profesor
      * @return
      */
-    public ArrayList<Dicta> listarEvaluadosPorCoordinacion(
+    public ArrayList<Rendimiento> listarEvaluadosPorCoordinacion(
             String id_departamento, String id_profesor) {
 
         PreparedStatement ps, ps2;
-        ArrayList<Dicta> dicta_materia = new ArrayList(0);
+        ArrayList<Rendimiento> dicta_materia = new ArrayList(0);
         String codigo_materia;
         String usbid_profesor;
         try {
             ps = conexion.prepareStatement("SELECT DISTINCT e.codigo_materia, "
-                    + "e.usbid_profesor, m.nombre, r.trimestre "
+                    + "e.usbid_profesor, m.nombre, r.trimestre, r.ano "
                     + "FROM evaluar as e, materia as m, rendimiento as r "
                     + "WHERE e.codigo_departamento = ? "
                     + "AND m.codigo = e.codigo_materia "
@@ -4663,34 +4634,14 @@ public class DBMS {
                 int pendientes = contarEvaluacionesPendientesDepartamento(id_departamento, usbid_profesor);
                 int total = contarEvaluacionesDepartamento(id_departamento, usbid_profesor);
 
-                Dicta d = new Dicta();
-                codigo_materia = rs.getString("codigo_materia");
-                d.setCodigoMateria(codigo_materia);
-                d.setOpcion(rs.getString("nombre"));
-                d.setPeriodo(obtenerTrimestrePorSiglas(rs.getString("trimestre")));
+                Rendimiento r = new Rendimiento();
+                r.setCodigo_materia(rs.getString("codigo_materia"));
+                r.setObservaciones_d(rs.getString("nombre"));
+                r.setAno(rs.getInt("ano"));
+                r.setTrimestre(obtenerTrimestrePorSiglas(rs.getString("trimestre")));
 
-                ps2 = conexion.prepareStatement("SELECT DISTINCT codigo_materia, "
-                        + "usbid, nombre, apellido "
-                        + "FROM evaluar, profesor "
-                        + "WHERE codigo_departamento = ? "
-                        + "AND usbid = usbid_profesor "
-                        + "AND usbid = ?"
-                        + "AND codigo_materia = ?;");
-                ps2.setString(1, id_departamento);
-                ps2.setString(2, usbid_profesor);
-                ps2.setString(3, codigo_materia);
-
-                ResultSet rs2 = ps2.executeQuery();
-
-                while (rs2.next()) {
-                    Profesor p = new Profesor();
-                    p.setUsbid(rs2.getString("usbid"));
-                    p.setNombre(rs2.getString("nombre"));
-                    p.setApellido(rs2.getString("apellido"));
-                    d.addProfesor(p);
-                }
-                d.setPrimerProfesor();
-                dicta_materia.add(d);
+                r.setUsbid_profesor(usbid_profesor);
+                dicta_materia.add(r);
             }
             return dicta_materia;
 

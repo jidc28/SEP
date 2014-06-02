@@ -39,12 +39,12 @@ public class HacerEvaluacion extends Action {
 
         if (session.getAttribute("usuario") != null) {
 
-            Dicta d = (Dicta) form;
-            d.setUsbidProfesor(profesor.getUsbid());
+            Rendimiento r = (Rendimiento) form;
+            r.setUsbid_profesor(profesor.getUsbid());
 
             /* Se obtiene el rendimiento del profesor determinado asociado con
              * la materia que maneja la coordinación */
-            Rendimiento evaluacion = DBMS.getInstance().obtenerEvaluacion(d);
+            Rendimiento evaluacion = DBMS.getInstance().obtenerEvaluacion(r);
 
             /* Se calcula la cantidad de aplazados y la cantidad de aprobados */
             int total = evaluacion.getTotal_estudiantes();
@@ -85,7 +85,7 @@ public class HacerEvaluacion extends Action {
                  * coordinacion */
                 Rendimiento evaluado =
                         DBMS.getInstance().listarEvaluacionesCoordinacion(
-                        id_coordinacion, ano, trimestre, d.getCodigoMateria(),
+                        id_coordinacion, ano, trimestre, r.getCodigo_materia(),
                         profesor.getUsbid());
 
                 request.setAttribute("revisar", SUCCESS);
@@ -93,9 +93,9 @@ public class HacerEvaluacion extends Action {
 
             /* Se obtienen los datos de la materia que se quiere evaluar. */
             Materia materia_evaluar = new Materia();
-            materia_evaluar.setCodigo(d.getCodigoMateria());
+            materia_evaluar.setCodigo(r.getCodigo_materia());
             materia_evaluar = DBMS.getInstance().obtenerDatosMateria(materia_evaluar);
-            materia_evaluar.setPeriodo(d.getPeriodo());
+            materia_evaluar.setPeriodo(r.getTrimestre());
 
             /* Se envian a la vista los atributos correspondiente */
             request.setAttribute("materia_evaluar", materia_evaluar);

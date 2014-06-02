@@ -68,7 +68,7 @@ public class Evaluar extends Action {
                         DBMS.getInstance().
                         listarArchivosProfesor(profesor.getUsbid(), archivos_considerados);
 
-                ArrayList<Dicta> evaluaciones_pendientes =
+                ArrayList<Rendimiento> evaluaciones_pendientes =
                         DBMS.getInstance().listarEvaluacionesPendientes(id, profesor.getUsbid());
 
                 request.setAttribute("listar_archivos", SUCCESS);
@@ -88,7 +88,7 @@ public class Evaluar extends Action {
             /* La coordinacion selecciono si recomienda o no al profesor */
         } else {
 
-            ArrayList<Dicta> evaluaciones_pendientes = null;
+            ArrayList<Rendimiento> evaluaciones_pendientes = null;
             boolean evaluado = false;
 
             /* En caso que la evaluación dla este realizando la coordinacion */

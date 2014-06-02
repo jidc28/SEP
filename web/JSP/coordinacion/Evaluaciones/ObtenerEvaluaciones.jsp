@@ -473,26 +473,32 @@
                                 <logic:iterate id="evaluaciones" name="evaluaciones_pendientes">
                                     <tr>
                                         <td style="padding: 0px; color: #999; font-size: 14px;">
-                                            <bean:write name="evaluaciones" property="codigoMateria"/>
+                                            <bean:write name="evaluaciones" property="codigo_materia"/>
                                         </td>
                                         <td style="padding: 5px; font-size: 14px; padding-left: 15px;">
-                                            <bean:write name="evaluaciones" property="opcion"/>
+                                            <bean:write name="evaluaciones" property="observaciones_d"/>
                                         </td>
                                         <td style="padding: 5px; font-size: 14px; padding-left: 15px;">
-                                            <bean:write name="evaluaciones" property="periodo"/>
+                                            <bean:write name="evaluaciones" property="trimestre"/>
                                         </td>
                                         <td>
                                             <html:form action="/graficarRendimiento"
                                                        style="margin: 0px;">
-                                                <html:hidden name="dicta" 
-                                                             property="usbidProfesor"
-                                                             value="${evaluaciones.getPrimerProfesor().getUsbid()}"/>
-                                                <html:hidden name="dicta" 
-                                                             property="codigoMateria"
-                                                             value="${evaluaciones.getCodigoMateria()}"/>
-                                                <html:hidden name="dicta" 
-                                                             property="periodo"
-                                                             value="${evaluaciones.getPeriodo()}"/>
+                                                <html:hidden name="rendimientoProf" 
+                                                             property="codigo_materia"
+                                                             value="${evaluaciones.getCodigo_materia()}"/>
+                                                <html:hidden name="rendimientoProf"
+                                                             property="usbid_profesor"
+                                                             value="${evaluaciones.getUsbid_profesor()}"/>
+                                                <html:hidden name="rendimientoProf"
+                                                             property="observaciones_d"
+                                                             value="pendiente"/>
+                                                <html:hidden name="rendimientoProf" 
+                                                             property="trimestre"
+                                                             value="${evaluaciones.getTrimestre()}"/>
+                                                <html:hidden name="rendimientoProf"
+                                                             property="ano"
+                                                             value="${evaluaciones.getAno()}"/>
                                                 <html:submit styleClass="link2"
                                                              style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
                                                     Graficar
@@ -503,18 +509,21 @@
                                             <html:form action="/hacerEvaluacion" 
                                                        onsubmit="return(this)"
                                                        style="margin: 0px;">
-                                                <html:hidden name="dicta" 
-                                                             property="codigoMateria"
-                                                             value="${evaluaciones.getCodigoMateria()}"/>
-                                                <html:hidden name="dicta"
-                                                             property="usbidProfesor"
-                                                             value="${evaluaciones.getPrimerProfesor().getUsbid()}"/>
-                                                <html:hidden name="dicta"
-                                                             property="opcion"
+                                                <html:hidden name="rendimientoProf" 
+                                                             property="codigo_materia"
+                                                             value="${evaluaciones.getCodigo_materia()}"/>
+                                                <html:hidden name="rendimientoProf"
+                                                             property="usbid_profesor"
+                                                             value="${evaluaciones.getUsbid_profesor()}"/>
+                                                <html:hidden name="rendimientoProf"
+                                                             property="observaciones_d"
                                                              value="pendiente"/>
-                                                <html:hidden name="dicta" 
-                                                             property="periodo"
-                                                             value="${evaluaciones.getPeriodo()}"/>
+                                                <html:hidden name="rendimientoProf" 
+                                                             property="trimestre"
+                                                             value="${evaluaciones.getTrimestre()}"/>
+                                                <html:hidden name="rendimientoProf"
+                                                             property="ano"
+                                                             value="${evaluaciones.getAno()}"/>
                                                 <html:submit styleClass="link2"
                                                              style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
                                                     Ver rendimiento
@@ -563,15 +572,18 @@
                                     <td>
                                         <html:form action="/graficarRendimiento"
                                                    style="margin: 0px;">
-                                            <%--                                            <html:hidden name="dicta" 
-                                                         property="usbidProfesor"
-                                                         value="${evaluaciones.getPrimerProfesor().getUsbid()}"/>--%>
-                                            <html:hidden name="dicta" 
-                                                         property="codigoMateria"
+                                            <html:hidden name="rendimientoProf" 
+                                                         property="codigo_materia"
                                                          value="${evaluaciones.getCodigo_materia()}"/>
-                                            <html:hidden name="dicta" 
-                                                         property="periodo"
+                                            <html:hidden name="rendimientoProf"
+                                                         property="usbid_profesor"
+                                                         value="${evaluaciones.getUsbid_profesor()}"/>
+                                            <html:hidden name="rendimientoProf" 
+                                                         property="trimestre"
                                                          value="${evaluaciones.getTrimestre()}"/>
+                                            <html:hidden name="rendimientoProf"
+                                                         property="ano"
+                                                         value="${evaluaciones.getAno()}"/>
                                             <html:submit styleClass="link2"
                                                          style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
                                                 Graficar
@@ -582,18 +594,18 @@
                                         <html:form action="/hacerEvaluacion" 
                                                    onsubmit="return(this)"
                                                    style="margin: 0px;">
-                                            <html:hidden name="dicta" 
-                                                         property="codigoMateria"
+                                            <html:hidden name="rendimientoProf" 
+                                                         property="codigo_materia"
                                                          value="${evaluaciones.getCodigo_materia()}"/>
-                                            <html:hidden name="dicta"
-                                                         property="usbidProfesor"
-                                                         value="${profesor.getUsbid()}"/>
-                                            <html:hidden name="dicta"
-                                                         property="opcion"
-                                                         value="enviadas"/>
-                                            <html:hidden name="dicta" 
-                                                         property="periodo"
+                                            <html:hidden name="rendimientoProf"
+                                                         property="usbid_profesor"
+                                                         value="${evaluaciones.getUsbid_profesor()}"/>
+                                            <html:hidden name="rendimientoProf" 
+                                                         property="trimestre"
                                                          value="${evaluaciones.getTrimestre()}"/>
+                                            <html:hidden name="rendimientoProf"
+                                                         property="ano"
+                                                         value="${evaluaciones.getAno()}"/>
                                             <html:submit styleClass="link2"
                                                          style="margin: 0px; padding: 3px; padding-left: 5px; padding-right: 5px;">
                                                 Ver rendimiento
