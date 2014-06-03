@@ -1770,6 +1770,7 @@ public class DBMS {
             ps.setInt(3, ano);
             ps.setString(4, trimestre);
 
+            System.out.println(ps.toString());
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
