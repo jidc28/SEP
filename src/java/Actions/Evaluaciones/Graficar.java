@@ -25,20 +25,11 @@ public class Graficar extends Action {
 
         Profesor profesor = (Profesor) session.getAttribute("profesor");
 
-        Dicta d = (Dicta) form;
-        d.setUsbidProfesor(profesor.getUsbid());
+        Rendimiento r = (Rendimiento) form;
+        r.setUsbid_profesor(profesor.getUsbid());
 
         /* En el caso ne que la evaluación no se haya realizado. */
-        if (d.getOpcion() == null) {
-
-            /* Se obtiene la evaluación del profesor */
-            evaluacion = DBMS.getInstance().obtenerEvaluacion(d);
-            /* Se obtiene la evaluacion general */
-            evaluaciones = DBMS.getInstance().obtenerEvaluaciones(d.getCodigoMateria(),
-                    evaluacion.getAno(), evaluacion.getTrimestre());
-
-            /* En caso que la evaluación ya ha sido enviada. */
-        } else {
+        if (r.getObservaciones_d() == null) {
 
             /* Se obtienen los datos sobre la evaluación que se quiere
              * revisar */
@@ -47,13 +38,21 @@ public class Graficar extends Action {
 
             /* Se obtiene la evaluación del profesor */
             evaluacion =
-                    DBMS.getInstance().obtenerEvaluacion(d.getCodigoMateria(),
+                    DBMS.getInstance().obtenerEvaluacion(r.getCodigo_materia(),
                     profesor.getUsbid(), ano, trimestre);
             /* Se obtiene la evaluacion general */
             evaluaciones =
-                    DBMS.getInstance().obtenerEvaluaciones(d.getCodigoMateria(),
+                    DBMS.getInstance().obtenerEvaluaciones(r.getCodigo_materia(),
                     ano, trimestre);
 
+            /* En caso que la evaluación ya ha sido enviada. */
+        } else {
+
+            /* Se obtiene la evaluación del profesor */
+            evaluacion = DBMS.getInstance().obtenerEvaluacion(r);
+            /* Se obtiene la evaluacion general */
+            evaluaciones = DBMS.getInstance().obtenerEvaluaciones(r.getCodigo_materia(),
+                    evaluacion.getAno(), evaluacion.getTrimestre());
         }
 
         /* Se calcula la cantidad de aplazados y aprobados del profesor 
@@ -75,9 +74,9 @@ public class Graficar extends Action {
                 / (evaluaciones.getTotal_estudiantes() - evaluaciones.getRetirados());
 
         Materia materia_evaluar = new Materia();
-        materia_evaluar.setCodigo(d.getCodigoMateria());
+        materia_evaluar.setCodigo(r.getCodigo_materia());
         materia_evaluar = DBMS.getInstance().obtenerDatosMateria(materia_evaluar);
-        materia_evaluar.setPeriodo(d.getPeriodo());
+        materia_evaluar.setPeriodo(r.getTrimestre());
 
         /* Se envian las variables importantes a la vista (graficos) */
         request.setAttribute("EP", evaluacion);

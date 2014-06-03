@@ -722,7 +722,7 @@
         <!-- ACCIONES COORDINADOR -->
         
         <action path="/graficarRendimiento"
-            name="dicta" 
+            name="rendimientoProf" 
             type="Actions.Evaluaciones.Graficar" 
             scope="request"
             validate="false">
@@ -758,7 +758,7 @@
         </action>
         
         <action input="/listarEvaluacionesPendientes.jsp" 
-                name="dicta" 
+                name="rendimientoProf" 
                 path="/hacerEvaluacion" 
                 scope="request" 
                 type="Actions.Evaluaciones.HacerEvaluacion"

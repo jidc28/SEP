@@ -43,7 +43,7 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
 
             Dicta d = (Dicta) form;
             Archivo[] archivos_considerados = null;
-            ArrayList<Dicta> evaluaciones_pendientes = null;
+            ArrayList<Rendimiento> evaluaciones_pendientes = null;
 
             if (d.getOpcion().equals("pendiente")) {
                 archivos_considerados = obtenerArchivosConsiderados(-1, null, 1);
@@ -115,7 +115,8 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
                 request.setAttribute("evaluar_coordinacion", SUCCESS);
                 request.setAttribute("evaluar", SUCCESS);
 
-                evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(id, profesor.getUsbid());
+                evaluaciones_pendientes =
+                        DBMS.getInstance().listarEvaluacionesPendientes(id, profesor.getUsbid());
 
                 /* Si el usuario que accede a esta funcionalidad es
                  * jefe de departamento */
@@ -128,7 +129,8 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
                 request.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
                 request.setAttribute("revisar", SUCCESS);
 
-                evaluaciones_pendientes = DBMS.getInstance().listarEvaluadosPorCoordinacion(id, profesor.getUsbid());
+                evaluaciones_pendientes = 
+                        DBMS.getInstance().listarEvaluadosPorCoordinacion(id, profesor.getUsbid());
 
                 /* Si el usuario que accede a esta funcionalidad decano */
             } else if (tipousuario.equals("decanato")) {
@@ -161,7 +163,8 @@ public class ListarEvaluacionesPendientesGeneral extends Action {
 
                 request.setAttribute("evaluacion_departamento", evaluacion_coordinaciones);
 
-                evaluaciones_pendientes = DBMS.getInstance().listarEvaluacionesPendientes(coordinacion, d.getUsbidProfesor());
+                evaluaciones_pendientes = 
+                        DBMS.getInstance().listarEvaluacionesPendientes(coordinacion, d.getUsbidProfesor());
 
             }
 
