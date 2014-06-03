@@ -1882,7 +1882,7 @@ public class DBMS {
             ps.setString(2, id_coordinacion);
             ps.setInt(3, ano);
             ps.setString(4, trimestre);
-
+            System.out.println(ps);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {

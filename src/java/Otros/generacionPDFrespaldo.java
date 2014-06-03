@@ -31,7 +31,7 @@ import java.util.logging.Logger;
  * Bolívar, quienes estuvieron involucrados en la implementación del Sistema de
  * Gestión de Intercambio de la USB.
  */
-public class generacionPDF {
+public class generacionPDFrespaldo {
 
     public static Float calcularPorcentaje(int total, int parte) {
         Float resultado = (float) (parte * 100) / total;
@@ -607,7 +607,7 @@ public class generacionPDF {
             document.close();
 
         } catch (Exception ex) {
-            Logger.getLogger(generacionPDF.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(generacionPDFrespaldo.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
 
@@ -624,19 +624,6 @@ public class generacionPDF {
         Rendimiento evaluacion = DBMS.getInstance().obtenerEvaluacionPDF(p.getUsbid());
         InformacionProfesorCoord info = DBMS.getInstance().resumenInformacionProfesor(p.getUsbid());
 
-        int total = evaluacion.getTotal_estudiantes();
-        String porcentaje1 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota1()));
-        String porcentaje2 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota2()));
-        String porcentaje3 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota3()));
-        String porcentaje4 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota4()));
-        String porcentaje5 = String.format("%.2f", calcularPorcentaje(total, evaluacion.getNota5()));
-        String porcentajeR = String.format("%.2f", calcularPorcentaje(total, evaluacion.getRetirados()));
-
-        int aplazados = evaluacion.getNota1() + evaluacion.getNota2();
-        int aprobados = evaluacion.getNota3() + evaluacion.getNota4()
-                + evaluacion.getNota5();
-        String porcentajeApr = String.format("%.2f", calcularPorcentaje(total, aprobados));
-        String porcentajeApl = String.format("%.2f", calcularPorcentaje(total, aplazados));
 
         Document document = new Document(PageSize.LETTER); // Pdf de tamano carta
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -928,19 +915,10 @@ public class generacionPDF {
                         + "cursus. In sed luctus velit. Fusce non urna accumsan sem "
                         + "hendrerit fermentum sed vel nibh. Vivamus adipiscing urna"
                         + " quis metus.";
-                ArrayList<Rendimiento> materias =
-                        DBMS.getInstance().listarEvaluacionesEnviadasDepartamento(
-                            idOficina, ano, trimestre, p.getUsbid());
-                
-                ArrayList<Rendimiento> out = new ArrayList<Rendimiento>();
-                for (int z = 0; z < materias.size(); z++) {
-                    Rendimiento elem = new Rendimiento();
-                    elem.setUsbid_profesor(materias.get(z).getUsbid_profesor());
-                    elem.setCodigo_materia(materias.get(z).getCodigo_materia());
-                    elem.setTrimestre(materias.get(z).getTrimestre());
-                    elem.setAno(ano);
-                    out.add(elem);
-                }
+
+
+                ArrayList<Rendimiento> eval_coords = DBMS.getInstance().
+                        obtenerEvaluacionCoordinaciones(idOficina, p.getUsbid(), trimestre, ano);
                 // Titulo del area.
                 titulo = new Phrase(" EVALUACIÓN DE COORDINACIONES  ", fontTitulos);
                 ct.setSimpleColumn(titulo, 70, 745, 450, 430, 25, Element.ALIGN_LEFT);
@@ -949,8 +927,8 @@ public class generacionPDF {
                 //DECLARACIONES DINAMICAS
 
 
-                for (int iterador = 0; iterador < out.size(); iterador++) {
-                    Rendimiento eval = out.get(iterador);
+                for (int iterador = 0; iterador < eval_coords.size(); iterador++) {
+                    Rendimiento eval = eval_coords.get(iterador);
                     if (varY <= 130) {
 
                         // Cuadro Contenedor
@@ -989,12 +967,12 @@ public class generacionPDF {
                     varY = varY - 10; //365
                     campo = new Phrase("      Recomendado: ", fontCampo2);
                     ct.setSimpleColumn(campo, 70, varY, 450, varY + 10, 10, Element.ALIGN_LEFT);
-//                    if (eval.getRecomendado().equals("si")) {
-//                        campo = new Phrase("  Si", fontCampo);
-//                    } else {
-//                        campo = new Phrase("  No", fontCampo);
-//                    }
-//                    ct.setSimpleColumn(campo, 70, varY, 450, varY + 10, 10, Element.ALIGN_LEFT);
+                    if (eval.getRecomendado().equals("si")) {
+                        campo = new Phrase("  Si", fontCampo);
+                    } else {
+                        campo = new Phrase("  No", fontCampo);
+                    }
+                    ct.setSimpleColumn(campo, 70, varY, 450, varY + 10, 10, Element.ALIGN_LEFT);
                     ct.go();
 
                     varY = varY - 20; //345
@@ -1002,17 +980,17 @@ public class generacionPDF {
                     ct.setSimpleColumn(campo, 70, varY, 450, varY + 10, 10, Element.ALIGN_LEFT);
                     ct.go();
                     int dez = 0;
-//                    if (eval.getObservaciones_c().length() <= 100) {
-//                        dez = 20;
-//                    } else if (eval.getObservaciones_c().length() <= 200) {
-//                        dez = 30;
-//                    } else if (eval.getObservaciones_c().length() <= 300) {
-//                        dez = 40;
-//                    } else if (eval.getObservaciones_c().length() <= 400) {
-//                        dez = 50;
-//                    } else if (eval.getObservaciones_c().length() > 400) {
-//                        dez = 60;
-//                    }
+                    if (eval.getObservaciones_c().length() <= 100) {
+                        dez = 20;
+                    } else if (eval.getObservaciones_c().length() <= 200) {
+                        dez = 30;
+                    } else if (eval.getObservaciones_c().length() <= 300) {
+                        dez = 40;
+                    } else if (eval.getObservaciones_c().length() <= 400) {
+                        dez = 50;
+                    } else if (eval.getObservaciones_c().length() > 400) {
+                        dez = 60;
+                    }
 
                     campo = new Phrase(eval.getObservaciones_c(), fontCampo);
                     ct.setSimpleColumn(campo, 80, varY - dez, 450, varY, 10, Element.ALIGN_LEFT);
@@ -1033,9 +1011,24 @@ public class generacionPDF {
              * # Rendimiento por materia #
              * ###########################*/
 
+            ArrayList<Rendimiento> materias =
+                    DBMS.getInstance().listarEvaluacionesEnviadasDepartamento(
+                    idOficina, ano, trimestre, p.getUsbid());
+
+            ArrayList<Rendimiento> out = new ArrayList<Rendimiento>();
+            for (int z = 0; z < materias.size(); z++) {
+                Rendimiento elem = new Rendimiento();
+                elem.setUsbid_profesor(p.getUsbid());
+                elem.setCodigo_materia(materias.get(z).getCodigo_materia());
+                elem.setTrimestre(materias.get(z).getTrimestre());
+                elem.setAno(ano);
+                out.add(elem);
+            }
+
+
             if (varY > 130) {
+                inicio = varY;
                 varY -= 30;
-                inicio -= 30;
 
                 if (tipoUser.equals("departamento")) {
                     //Background area
@@ -1050,6 +1043,7 @@ public class generacionPDF {
                     titulo = new Phrase("  RENDIMIENTO POR MATERIA  ", fontTitulos);
                     ct.setSimpleColumn(titulo, 70, varY + 5, 450, varY + 30, 25, Element.ALIGN_LEFT);
                     ct.go();
+                    varY -= 30;
                 } else {
                     titulo = new Phrase("  RENDIMIENTO POR MATERIA  ", fontTitulos);
                     ct.setSimpleColumn(titulo, 70, 715, 450, 745, 25, Element.ALIGN_LEFT);
@@ -1085,26 +1079,164 @@ public class generacionPDF {
                 ct.go();
             }
             
-            //HACER LOOP DE AQUI EN ADELANTE 
+            inicio = varY;
+            for (int z = 0; z < out.size(); z++) {
+                Rendimiento evaluacion_materia = DBMS.getInstance().obtenerEvaluacion(out.get(z));
+                Materia mat = new Materia();
+                mat.setCodigo(evaluacion_materia.getCodigo_materia());
+                mat = DBMS.getInstance().obtenerDatosMateria(mat);
+                int total = evaluacion_materia.getTotal_estudiantes();
 
+                String porcentaje1 = String.format("%.2f", calcularPorcentaje(total, evaluacion_materia.getNota1()));
+                String porcentaje2 = String.format("%.2f", calcularPorcentaje(total, evaluacion_materia.getNota2()));
+                String porcentaje3 = String.format("%.2f", calcularPorcentaje(total, evaluacion_materia.getNota3()));
+                String porcentaje4 = String.format("%.2f", calcularPorcentaje(total, evaluacion_materia.getNota4()));
+                String porcentaje5 = String.format("%.2f", calcularPorcentaje(total, evaluacion_materia.getNota5()));
+                String porcentajeR = String.format("%.2f", calcularPorcentaje(total, evaluacion_materia.getRetirados()));
+                int aplazados = evaluacion_materia.getNota1() + evaluacion_materia.getNota2();
+                int aprobados = evaluacion_materia.getNota3() + evaluacion_materia.getNota4()
+                        + evaluacion_materia.getNota5();
+                String porcentajeApr = String.format("%.2f", calcularPorcentaje(total, aprobados));
+                String porcentajeApl = String.format("%.2f", calcularPorcentaje(total, aplazados));
+
+                if (varY < 230) {
+                    canvas.saveState();
+                    //canvas.roundRectangle(x, y, w, h, r);
+                    canvas.roundRectangle(70, varY+30, 455, inicio - varY + 20, 6);
+                    canvas.stroke();
+                    canvas.restoreState();
+
+                    document.newPage();
+                    varY = 710;
+                    inicio = 690;
+                    //Estampado de numero de planilla, fecha y hora de creacion
+                    campo = new Phrase("Fecha Creación:  " + creacion, fontCampo);
+                    ct.setSimpleColumn(campo, 200, 20, 580, 30, 10, Element.ALIGN_RIGHT);
+                    ct.go();
+                }
+
+                titulo = new Phrase("  " + mat.getNombre(), fontTitulos);
+                ct.setSimpleColumn(titulo, 70, varY, 445, varY + 20, 10, Element.ALIGN_LEFT);
+                ct.go();
+                varY -= 10;
+
+                //Total estudiantes.
+                campo = new Phrase("    Total estudiantes", fontCampo2);
+                ct.setSimpleColumn(campo, 70, varY, 360, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                campo = new Phrase(total + "", fontCampo);
+                ct.setSimpleColumn(campo, 360, varY, 450, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                varY -= 20;
+
+                //Nota Promedio.
+                campo = new Phrase("    Nota promedio", fontCampo2);
+                ct.setSimpleColumn(campo, 70, varY, 360, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                campo = new Phrase(evaluacion.getNota_prom() + "", fontCampo);
+                ct.setSimpleColumn(campo, 360, varY, 450, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                varY -= 20;
+
+                //Porcentaje Aplazados.
+                campo = new Phrase("    Porcentaje aplazados", fontCampo2);
+                ct.setSimpleColumn(campo, 70, varY, 360, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                campo = new Phrase(porcentajeApl + "%", fontCampo);
+                ct.setSimpleColumn(campo, 360, varY, 450, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                varY -= 20;
+
+                //Porcentaje Aprobados.
+                campo = new Phrase("    Porcentaje aprobados", fontCampo2);
+                ct.setSimpleColumn(campo, 70, varY, 360, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                campo = new Phrase(porcentajeApr + "%", fontCampo);
+                ct.setSimpleColumn(campo, 360, varY, 450, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                varY -= 20;
+
+                //Porcentaje Retirados.
+                campo = new Phrase("    Porcentaje retirados", fontCampo2);
+                ct.setSimpleColumn(campo, 70, varY, 360, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                campo = new Phrase(porcentajeR + "%", fontCampo);
+                ct.setSimpleColumn(campo, 360, varY, 450, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                varY -= 20;
+
+                //Porcentaje con 1.
+                campo = new Phrase("    Porcentaje de estudiantes con 1", fontCampo2);
+                ct.setSimpleColumn(campo, 70, varY, 360, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                campo = new Phrase(porcentaje1 + "%", fontCampo);
+                ct.setSimpleColumn(campo, 360, varY, 450, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                varY -= 20;
+
+                //Porcentaje con 2.
+                campo = new Phrase("    Porcentaje de estudiantes con 2", fontCampo2);
+                ct.setSimpleColumn(campo, 70, varY, 360, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                campo = new Phrase(porcentaje2 + "%", fontCampo);
+                ct.setSimpleColumn(campo, 360, varY, 450, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                varY -= 20;
+
+                //Porcentaje con 3.
+                campo = new Phrase("    Porcentaje de estudiantes con 3", fontCampo2);
+                ct.setSimpleColumn(campo, 70, varY, 360, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                campo = new Phrase(porcentaje3 + "%", fontCampo);
+                ct.setSimpleColumn(campo, 360, varY, 450, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                varY -= 20;
+
+                //Porcentaje con 4.
+                campo = new Phrase("    Porcentaje de estudiantes con 4", fontCampo2);
+                ct.setSimpleColumn(campo, 70, varY, 360, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                campo = new Phrase(porcentaje4 + "%", fontCampo);
+                ct.setSimpleColumn(campo, 360, varY, 450, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                varY -= 20;
+
+                //Porcentaje con 5.
+                campo = new Phrase("    Porcentaje de estudiantes con 5", fontCampo2);
+                ct.setSimpleColumn(campo, 70, varY, 360, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                campo = new Phrase(porcentaje5 + "%", fontCampo);
+                ct.setSimpleColumn(campo, 360, varY, 450, varY + 10, 10, Element.ALIGN_LEFT);
+                ct.go();
+                varY -= 40;
+
+            }
+
+            // Cuadro Contenedor
+            canvas.saveState();
+            //canvas.roundRectangle(x, y, w, h, r);
+            canvas.roundRectangle(70, varY+30, 455, inicio - varY + 20, 6);
+            canvas.stroke();
+            canvas.restoreState();
 
             document.close();
 
         } catch (Exception ex) {
-            Logger.getLogger(generacionPDF.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(generacionPDFrespaldo.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
 
         return true;
     }
 
-//    public static void main(String[] args) throws BadElementException, DocumentException {
-//
-//        String path = "/home/jidc28/NetBeansProjects/SEP/build/web/Documentos/22-90457";
-//        String filepath = "/home/jidc28/NetBeansProjects/SEP/web/imagenes/";
-//        String usbid = "22-90457";
-//        System.out.println(generarRendimiento(path, usbid, filepath, "09-10219", 2005, "AJ"));
-//    }
+    public static void main(String[] args) throws BadElementException, DocumentException {
+
+        String path = "/home/jidc28/NetBeansProjects/SEP/build/web/Documentos/22-90457";
+        String filepath = "/home/jidc28/NetBeansProjects/SEP/web/imagenes/";
+        String usbid = "22-90457";
+        System.out.println(generarRendimientoFinal(path, usbid, filepath, "09-10219", 2005, "AJ", "departamento"));
+    }
+
     public static String obtenerTrimestre(String siglas) {
 
         if (siglas.equals("EM")) {
