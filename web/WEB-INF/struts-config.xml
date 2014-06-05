@@ -130,7 +130,7 @@
                 path="/consultaCoordinacionA" 
                 name="Decanato" 
                 scope="request" 
-                type="Actions.Coordinacion.ConsultaCoordinacionA" 
+                type="Actions.Administrador.Coordinacion.ConsultaCoordinacion" 
                 validate="false">
             <forward name="administrador" path="consulta_coordinacion_pagina"/>
             <forward name="decanato" path="consulta_coordinacion_pagina"/>

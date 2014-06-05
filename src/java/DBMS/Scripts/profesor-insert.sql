@@ -1,0 +1,4 @@
+INSERT INTO PROFESOR VALUES ('22-90457','Rebecca','Bolaffi','2530218','M','RebeccaBolaffi@usb.ve','RebeccaBolaffi@gmail.com','Ayudante Academico','N','11/11/2011','11/11/2013');
+INSERT INTO PROFESOR VALUES ('28-63146','Martin','Torino','9501558','F','MartinTorino@usb.ve','MartinTorino@gmail.com','Asociado','N','11/11/2011','11/11/2013');
+INSERT INTO PROFESOR VALUES ('84-73618','Alberto','Riera','5370644','F','AlbertoRiera@usb.ve','AlbertoRiera@gmail.com','Titular','N','11/11/2011','11/11/2013');
+INSERT INTO PROFESOR VALUES ('43-62893','Alejandra','Tovar','15326570','F','AlejandraTovar@usb.ve','AlejandraTovar@gmail.com','Asistente','N','11/11/2011','11/11/2013');

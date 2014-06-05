@@ -105,7 +105,7 @@ public class LoginAction extends org.apache.struts.action.Action {
                         request.setAttribute("solicitud_apertura_materia", solicitudes_pendientes);
                     }
                     int evaluaciones_pendientes =
-                            DBMS.getInstance().contarEvaluacionesPendientesDepartamento(tmp.getUsbid(), null);
+                            DBMS.getInstance().contarEvaluacionesPendientesDepartamento(tmp.getUsbid());
                     if (evaluaciones_pendientes != 0) {
                         request.setAttribute("evaluaciones_pendientes", evaluaciones_pendientes);
                     }
