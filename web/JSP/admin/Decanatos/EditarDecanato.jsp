@@ -16,6 +16,11 @@
         El nombre de decanato ya existe
     </div>
 </logic:present>
+<logic:present name="campo_vacio">
+    <div class="alert alert-danger" id="alert">
+        El nombre del decanato no puede ser vacío.
+    </div>
+</logic:present>
 
 <html:form action="/cambiarNombreDecanatoA" acceptCharset="ISO-8859-1" 
            onsubmit="return(this)">

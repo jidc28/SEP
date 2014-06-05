@@ -50,11 +50,13 @@ public class FinalizarSolicitudApertura extends org.apache.struts.action.Action 
         if (materia.getNombre() == null || materia.getCreditos() == null
                 || materia.getNombre().equals("") || materia.getCreditos().equals("")) {
             request.setAttribute("campos_vacios", FAILURE);
+            request.setAttribute("materia", materia);
             return mapping.findForward(FAILURE);
         }
 
         if (!materia.getCreditos().matches("\\d+(.\\d+)?")) {
             request.setAttribute("creditos_incorrecto", materia.getCreditos());
+            request.setAttribute("materia", materia);
             return mapping.findForward(FAILURE);
         }
 
@@ -88,6 +90,7 @@ public class FinalizarSolicitudApertura extends org.apache.struts.action.Action 
             materia.setNum2(null);
             materia.setNum3(null);
             materia.setNum4(null);
+            request.setAttribute("materia", materia);
             return mapping.findForward(FAILURE);
 
         } else {
@@ -111,6 +114,7 @@ public class FinalizarSolicitudApertura extends org.apache.struts.action.Action 
             if (finalizada) {
                 request.setAttribute("solicitud_procesada", SUCCESS);
             } else {
+                request.setAttribute("materia", materia);
                 request.setAttribute("solicitud_no_procesada", FAILURE);
             }
             

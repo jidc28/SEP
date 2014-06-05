@@ -57,6 +57,11 @@ public class CambiarNombreDecanato extends org.apache.struts.action.Action {
 
         //si los campos no son validos
         if (huboError) {
+            request.setAttribute("campo_vacio",FAILURE);
+            Decanato c = DBMS.getInstance().obtenerNombreDecanato(u);
+            session.setAttribute("decanato",c);
+            session.setAttribute("codigo", c.getCodigo());
+            session.setAttribute("nombre", c.getNombre());
             return mapping.findForward(FAILURE);
             //si los campos son validos
         } else {
