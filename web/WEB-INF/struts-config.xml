@@ -291,7 +291,7 @@
                 name="Materia" 
                 path="/vincularMateriaCoordinacion" 
                 scope="request" 
-                type="Actions.Materia.agregaMateria" 
+                type="Actions.Departamento.Materia.AgregarMateria" 
                 validate="false">
             <forward name="success" path="consulta_materia_pagina"/>
             <forward name="failure" path="consulta_materia_pagina"/>
@@ -301,7 +301,7 @@
                 name="Materia" 
                 path="/desvincularMateriaCoordinacion" 
                 scope="request" 
-                type="Actions.Materia.EliminaMateria" 
+                type="Actions.Departamento.Materia.EliminaMateria" 
                 validate="false">
             <forward name="success" path="consulta_materia_pagina"/>
             <forward name="failure" path="consulta_materia_pagina"/>
