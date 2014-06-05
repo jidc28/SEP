@@ -88,7 +88,6 @@ public class HacerEvaluacion extends Action {
                         id_coordinacion, ano, trimestre, r.getCodigo_materia(),
                         profesor.getUsbid());
 
-                request.setAttribute("revisar", SUCCESS);
             }
 
             /* Se obtienen los datos de la materia que se quiere evaluar. */
