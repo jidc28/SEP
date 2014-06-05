@@ -1,4 +1,4 @@
-package Actions.Coordinacion;
+package Actions.Administrador.Coordinacion;
 
 import Clases.*;
 import DBMS.DBMS;
