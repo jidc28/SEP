@@ -4,22 +4,37 @@
     Author     : Langtech
 --%>
 
+
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css/Login.css">
         <title>Bienvenidos a Sistema de Evaluacion</title>
+        <%
+           String ua = request.getHeader( "User-Agent" );
+           boolean isMSIE = ( ua != null && (ua.indexOf( "MSIE" ) != -1 || ua.indexOf("Trident/7.0") != -1 ));
+           response.setHeader( "Vary", "User-Agent" );
+           System.out.println("Version Explorer: "+ua);
+           System.out.println(isMSIE);
+        %>
     </head>
     <body>     
+        <% if( !isMSIE ){ %>
+            <p>El Sistema de Evaluación de Profesores utiliza herramientas que no están disponibles en Internet Explorer.</p>
+            <p>Por favor, utilice otro navegador web.</p>
+        <% } else { %>
         <div>
             <img id="encabezado" src="imagenes/CAS-img.png" alt="Inicio">
         </div>
 
     <center>
+
         <div id="contenido">
             <table style="margin-right: 310px;">
                 <tbody>
@@ -135,5 +150,6 @@
             </p>
         </div>
     </div>
+    <% } %>
 </body>
 </html>

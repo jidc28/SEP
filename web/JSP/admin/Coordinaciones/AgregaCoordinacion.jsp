@@ -10,12 +10,12 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>  
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 
-<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <h4>Registro de Coordinaciones</h4>
 
 <html:form action="/registrarCoordinacion" method="POST" 
-           acceptCharset="ISO-8859-1" enctype="multipart/form-data" 
+           acceptCharset="UTF-8" enctype="multipart/form-data" 
            onsubmit="return(this)">
     <table border="0" style="margin-top: 30px;">
         <tbody>
@@ -42,7 +42,7 @@
             </logic:present>
                 <tr style="height: 35px;">
                     <td style="color: black; font-size: 14px; font-weight: bold;">
-                        CÓDIGO DE LA COORDINACIÓN
+                        CÃ“DIGO DE LA COORDINACIÃ“N
                     </td>
                 </tr>
                 <tr>
@@ -63,7 +63,7 @@
                 </tr>
                 <tr style="height: 35px;">
                     <td style="color: black; font-size: 14px; font-weight: bold;">
-                        NOMBRE DE LA COORDINACIÓN
+                        NOMBRE DE LA COORDINACIÃ“N
                     </td>
                 </tr>
                 <tr>
@@ -89,7 +89,7 @@
     </table>
     <p style="text-align: center; margin-top: 10px;">
         <html:submit styleClass="btn btn-success"
-                     onclick="javascript: return confirm('¿Está seguro de que los datos son correctos?')">
+                     onclick="javascript: return confirm('Â¿EstÃ¡ seguro de que los datos son correctos?')">
             Agregar
         </html:submit>
         <html:reset styleClass="btn btn-default" value="Limpiar"/>

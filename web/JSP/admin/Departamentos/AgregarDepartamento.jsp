@@ -14,7 +14,7 @@
 <h4>Registro de Departamentos</h4>
 
 <html:form action="/agregarDepartamento" method="POST" 
-           acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
+           acceptCharset="UTF-8" enctype="multipart/form-data" onsubmit="return(this)">
     <table border="0">
         <tbody>
             <tr style="height: 35px;">
