@@ -17,6 +17,12 @@
     </div>
 </logic:present>
 
+<logic:present name="campos_vacios">
+    <div class="alert alert-danger" id="alert">
+        Debe insertar el nombre de la asignatura.
+    </div>
+</logic:present>
+
 
 <h4>Procesar solicitud de apertura: </h4>
 <html:form action="/finalizarSolicitudApertura" method="POST" acceptCharset="ISO-8859-1" enctype="multipart/form-data" onsubmit="return(this)">
@@ -525,6 +531,7 @@
         </tbody>
     </table>
     <html:hidden name="materia" property="viejoCodigo"/>
+    <html:hidden name="materia" property="mensaje"/>
     <html:submit styleClass="btn btn-info">
         Finalizar
     </html:submit>

@@ -1275,12 +1275,11 @@ public class DBMS {
                     + "FROM MATERIA "
                     + "WHERE codigo = ?;");
             ps.setString(1, materia.getCodigo());
-
+            
             ResultSet rs = ps.executeQuery();
-            Materia m = null;
+            Materia m = new Materia();
 
             while (rs.next()) {
-                m = new Materia();
                 m.setCodigo(rs.getString("codigo"));
                 m.setNombre(rs.getString("nombre"));
                 m.setCreditos(rs.getString("creditos"));
@@ -1510,8 +1509,6 @@ public class DBMS {
                     + "));");
             ps.setString(1, id_departamento);
 
-            System.out.println(ps.toString());
-
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -1590,7 +1587,6 @@ public class DBMS {
 //        }
 //        return 0;
 //    }
-
     /**
      * contarEvaluacionesDepartamento
      *
@@ -1812,7 +1808,6 @@ public class DBMS {
             ps.setInt(3, ano);
             ps.setString(4, trimestre);
 
-            System.out.println(ps.toString());
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -1959,7 +1954,7 @@ public class DBMS {
             ps.setString(2, id_coordinacion);
             ps.setInt(3, ano);
             ps.setString(4, trimestre);
-            System.out.println(ps);
+            
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -2910,8 +2905,6 @@ public class DBMS {
             ps.setString(2, d.getUsbid_profesor());
             ps.setString(3, obtenerTrimestrePorNombre(d.getTrimestre()));
             ps.setInt(4, d.getAno());
-
-            System.out.println(ps.toString());
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
