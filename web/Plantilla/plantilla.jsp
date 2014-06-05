@@ -14,6 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Sistema de Evaluación de Profesores</title>
         <tiles:insert attribute="css"/>
         <tiles:insert attribute="script"/>
     </head>

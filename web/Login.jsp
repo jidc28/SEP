@@ -25,7 +25,7 @@
         %>
     </head>
     <body>     
-        <% if( !isMSIE ){ %>
+        <% if( isMSIE ){ %>
             <p>El Sistema de Evaluación de Profesores utiliza herramientas que no están disponibles en Internet Explorer.</p>
             <p>Por favor, utilice otro navegador web.</p>
         <% } else { %>
