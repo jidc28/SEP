@@ -1154,6 +1154,7 @@ public class DBMS {
     public void enviarMemoEvaluarProfesor(String[] id_profesores, String id_departamento) {
         PreparedStatement ps, ps2;
         Set<String> coords = new TreeSet<String>();
+        Correo email = new Correo();
 
         try {
             for (int A = 0; A < id_profesores.length; A++) {
@@ -1184,19 +1185,19 @@ public class DBMS {
                 }
             }
 
-//            String[] arregloCoords = coords.toArray(new String[0]);
-//
-//            email.setAsunto("SEP - Evaluación de Profesores");
-//            email.setMensaje("Se ha solicitado la evaluacion de uno o más profesores a través del"
-//                    + "\n Sistema de Evaluación de Profesores de la Universidad Simón Bolívar."
-//                    + "\n\n Por favor, ingrese al sistema mediante el siguiente link:"
-//                    + "\n\n LINK \n\n");
-//            System.out.println(arregloCoords.length);
-//            for (int i = 0; i < arregloCoords.length; i++) {
-//                email.enviarNotificacion(arregloCoords[i] + "@usb.ve");
-//                System.out.println(arregloCoords[i] + " " + i);
-//
-//            }
+            String[] arregloCoords = coords.toArray(new String[0]);
+
+            email.setAsunto("SEP - Evaluación de Profesores");
+            email.setMensaje("Se ha solicitado la evaluacion de uno o más profesores a través del"
+                    + "\n Sistema de Evaluación de Profesores de la Universidad Simón Bolívar."
+                    + "\n\n Por favor, ingrese al sistema mediante el siguiente link:"
+                    + "\n\n LINK \n\n");
+            System.out.println(arregloCoords.length);
+            for (int i = 0; i < arregloCoords.length; i++) {
+                email.enviarNotificacion(arregloCoords[i] + "@usb.ve");
+                System.out.println(arregloCoords[i] + " " + i);
+
+            }
 
         } catch (SQLException ex) {
             ex.printStackTrace();

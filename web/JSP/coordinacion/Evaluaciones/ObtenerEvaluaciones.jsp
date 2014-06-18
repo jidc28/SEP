@@ -126,14 +126,8 @@
                         </button>
                         <p style="font-weight: normal;">
                             <strong>Atención:</strong> <br> 
-                            El profesor no ha subido ningún archivo. Presione <em>
-                                Enviar notificación </em> si desea notificarle que debe 
-                            cargar el material realizado al <em>Sistema de Evaluación
-                                de Profesores</em>
+                            El profesor no ha subido ningún archivo. 
                         </p>
-                        <button class="btn btn-danger"style="margin-top: 5px;">
-                            Enviar notificación
-                        </button>
                     </div>
                 </logic:empty>
             </logic:present>
