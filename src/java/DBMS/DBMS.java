@@ -1196,7 +1196,7 @@ public class DBMS {
                     + "\n\n Por favor, ingrese al sistema mediante el siguiente link:"
                     + "\n\n LINK \n\n");
             for (int i = 0; i < arregloCoords.length; i++) {
-                email.enviarNotificacion(arregloCoords[i] + "@usb.ve");
+//                email.enviarNotificacion(arregloCoords[i] + "@usb.ve");
 
             }
 
