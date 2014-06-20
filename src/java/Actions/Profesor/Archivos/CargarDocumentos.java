@@ -112,9 +112,6 @@ public class CargarDocumentos extends org.apache.struts.action.Action {
         String documentos = getServlet().getServletContext().getRealPath("/") +
                 "Documentos/";
         
-        System.out.println(filePath+ " FILEPATH");
-        System.out.println(documentos+ " Documentos");
-        
         folder = new File(documentos);
         if (!folder.exists()){
             folder.mkdir();
