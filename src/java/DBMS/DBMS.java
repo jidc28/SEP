@@ -277,14 +277,15 @@ public class DBMS {
                     ps1 = conexion.prepareStatement("SELECT count(DISTINCT codigo_coordinacion) "
                             + "FROM evaluar as e "
                             + "WHERE e.codigo_coordinacion = ? "
-                            + "AND e.codigo_coordinacion IN ("
+                            + "AND e.codigo_coordinacion NOT IN ("
                             + "SELECT codigo_coordinacion as ec "
                             + "FROM evaluacion as ec "
                             + "WHERE ec.usbid_profesor = e.usbid_profesor "
+                            + "AND revisado_decanato = 'si'"
                             + ");");
 
                     ps1.setString(1, codigo_coordinacion);
-
+                    
                     ResultSet rs1 = ps1.executeQuery();
 
                     rs1.next();
@@ -1194,10 +1195,8 @@ public class DBMS {
                     + "\n Sistema de Evaluación de Profesores de la Universidad Simón Bolívar."
                     + "\n\n Por favor, ingrese al sistema mediante el siguiente link:"
                     + "\n\n LINK \n\n");
-            System.out.println(arregloCoords.length);
             for (int i = 0; i < arregloCoords.length; i++) {
                 email.enviarNotificacion(arregloCoords[i] + "@usb.ve");
-                System.out.println(arregloCoords[i] + " " + i);
 
             }
 
@@ -1647,9 +1646,11 @@ public class DBMS {
                     + "SELECT ec.usbid_profesor "
                     + "FROM evaluacion as ec "
                     + "WHERE revisado_decanato = 'si' "
+                    + "AND codigo_coordinacion = ? "
                     + ");");
             ps.setString(1, id_coordinacion);
             ps.setString(2, usbid_profesor);
+            ps.setString(3, id_coordinacion);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

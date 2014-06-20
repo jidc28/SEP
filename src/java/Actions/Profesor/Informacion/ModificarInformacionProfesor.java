@@ -91,7 +91,6 @@ public class ModificarInformacionProfesor extends org.apache.struts.action.Actio
             if (!nivel.equals("")) {
                 for (int i = 0; i < 5; i++) {
                     if (!nivel.equals(niveles_existentes[i])) {
-                        System.out.println("entro");
                         niveles[j] = niveles_existentes[i];
                         j++;
                     }

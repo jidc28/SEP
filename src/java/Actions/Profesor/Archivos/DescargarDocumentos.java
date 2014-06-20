@@ -47,8 +47,6 @@ public class DescargarDocumentos extends org.apache.struts.action.Action {
         
         String OUTPUTFILE = filePath + "/" + archivo.getNombre();
         
-        System.out.println(OUTPUTFILE);
-
         /*Descarga de archivos obtenida de 
          * http://www.mkyong.com/struts/struts-download-file-from-website-example/
          */

@@ -51,7 +51,6 @@ public class GuardarInformacion extends org.apache.struts.action.Action {
 
         for (int i = 0; i < 5; i++) {
             if (!nivel.equals(niveles_existentes[i])) {
-                System.out.println("entro");
                 niveles[j] = niveles_existentes[i];
                 j++;
             }
@@ -88,10 +87,8 @@ public class GuardarInformacion extends org.apache.struts.action.Action {
 
             if (actualizar) {
                 request.setAttribute("actualizacion", SUCCESS);
-                System.out.println("SUCESS!");
                 return mapping.findForward(SUCCESS);
             } else {
-                System.out.println("FAILURE!");
                 request.setAttribute("usuario", u);
                 return mapping.findForward(FAILURE);
             }

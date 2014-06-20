@@ -48,7 +48,6 @@ public class AsignarPeriodo extends Action {
                 request.setAttribute("materias", materias);
                 session.setAttribute("materias_seleccionadas", materias_seleccionadas);
                 request.setAttribute("periodo_vacio", materia);
-                System.out.println(materia.getCodigo());
                 return mapping.findForward(FAILURE);
             }
 
@@ -65,20 +64,14 @@ public class AsignarPeriodo extends Action {
                 DBMS.getInstance().agregarDicta(profesor, materia.getCodigo(), "V");
             }
 
-            System.out.println(materia.getCodigo());
             String id_materia = materia.getCodigo();
 
             int j = 0;
             for (int i = 0; i < materias_seleccionadas.length; i++) {
                 if (!id_materia.equals(materias_seleccionadas[i])) {
-//                System.out.println(materias_seleccionadas[i]);
                     materias_resultantes[j] = materias_seleccionadas[i];
                     j++;
                 }
-            }
-
-            for (int i = 0; i < materias_resultantes.length; i++) {
-                System.out.println("materias_resultantes: " + materias_resultantes[i]);
             }
 
             if (materias_resultantes.length == 0) {

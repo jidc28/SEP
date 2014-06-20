@@ -18,6 +18,7 @@ public class EnviarMemoEvaluarProfesores extends Action {
     private static final String SUCCESS = "success";
     private static final String FAILURE = "failure";
 
+    @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -27,11 +28,6 @@ public class EnviarMemoEvaluarProfesores extends Action {
 
         MultiBox m = (MultiBox) form;
         String[] profesores_seleccionados = m.getItemsSeleccionados();
-        
-        /*System.out.println("Ahora vienen los profs");
-        for (int i = 0; i < profesores_seleccionados.length; i++) {
-            System.out.println("usbid: " + profesores_seleccionados[i]);
-        }*/
         
         if (profesores_seleccionados.length == 0) {
             request.setAttribute("no_seleccionado", FAILURE);
