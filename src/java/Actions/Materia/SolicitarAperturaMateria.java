@@ -100,7 +100,7 @@ public class SolicitarAperturaMateria extends org.apache.struts.action.Action {
                     + "\n Sistema de Evaluación de Profesores de la Universidad Simón Bolívar."
                     + "\n\n Por favor, ingrese al sistema mediante el siguiente link:"
                     + "\n\n LINK \n\n");
-                //email.enviarNotificacion(id_departamento+"usb.ve");
+                email.enviarNotificacion(id_departamento+"@usb.ve");
                 
                 return mapping.findForward(SUCCESS);
             } else {

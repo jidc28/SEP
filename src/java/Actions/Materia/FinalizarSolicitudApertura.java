@@ -130,7 +130,7 @@ public class FinalizarSolicitudApertura extends org.apache.struts.action.Action 
                 request.setAttribute("solicitud_no_procesada", FAILURE);
             }
 
-            //email.enviarNotificacion(usuario.getUsbid()+"usb.ve");
+            email.enviarNotificacion(usuario.getUsbid()+"usb.ve");
             materias = DBMS.getInstance().listarMateriasSolicitadasDepartamento(usuario.getUsbid());
 
             if (materias.isEmpty()) {

@@ -146,8 +146,7 @@ public class Correo extends org.apache.struts.action.ActionForm{
                     InternetAddress.parse(destinatario));
             message.setSubject(getAsunto());
             
-            String contenido = "Nombre del remitente: " + getNombreRemitente() + 
-                               "\nMensaje: " + getMensaje() + getFirma();
+            String contenido = getMensaje() + getFirma();
                     
             
             message.setText(contenido);
