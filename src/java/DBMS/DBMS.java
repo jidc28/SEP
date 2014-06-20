@@ -4161,6 +4161,7 @@ public class DBMS {
                 /* Si ya fue revisada completamente, borrar de la tabla
                  * de profesores por evaluar */
                 borrarEvaluadosDecanato(rendimiento, id_coordinacion);
+                resetearProceso(rendimiento.getUsbid_profesor());
                 return true;
             } else {
                 /* Si la evaluacion no fue revisada por el decanato colocar
