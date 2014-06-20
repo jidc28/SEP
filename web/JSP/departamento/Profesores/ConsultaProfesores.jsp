@@ -10,7 +10,13 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>  
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<logic:present name="modificado">
+        <div class="alert alert-success" id="alert" style="width: 60%">
+            <p>
+                El profesor fue modificado con éxito.
+            </p>
+        </div>
+    </logic:present>
 <h4>  
         <a href="#" id="ayuda1" style="text-decoration: none;" rel="popover" > 
             <span class="glyphicon glyphicon-question-sign">     

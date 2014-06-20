@@ -61,6 +61,7 @@ public class ModificarProfesor extends Action {
                     DBMS.getInstance().listarProfesoresDepartamento(id_departamento);
 
             request.setAttribute("profesores", profesores);
+            request.setAttribute("modificado",SUCCESS);
             return mapping.findForward(SUCCESS);
         }
     }

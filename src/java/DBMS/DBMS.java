@@ -39,7 +39,7 @@ public class DBMS {
         try {
             Class.forName("org.postgresql.Driver");
             conexion = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/evalprof",
+                    "jdbc:postgresql://localhost:5432/temporal",
                     "langtech",
                     "evalprof");
             return true;
@@ -473,27 +473,29 @@ public class DBMS {
 
         try {
             ps0 = conexion.prepareStatement("UPDATE PROFESOR "
-                    + "SET usbid = ?, cedula = ?, nombre = ?, apellido = ?,"
+                    + "SET cedula = ?, nombre = ?, apellido = ?,"
                     + "genero = ?, email = ?, nivel = ? "
                     + "WHERE usbid = ?;");
-            ps0.setString(1, p.getUsbid());
-            ps0.setString(2, p.getCedula());
-            ps0.setString(3, p.getNombre());
-            ps0.setString(4, p.getApellido());
-            ps0.setString(5, p.getGenero());
-            ps0.setString(6, p.getEmail());
-            ps0.setString(7, p.getNivel());
-            ps0.setString(8, p.getUsbidViejo());
+            ps0.setString(1, p.getCedula());
+            ps0.setString(2, p.getNombre());
+            ps0.setString(3, p.getApellido());
+            ps0.setString(4, p.getGenero());
+            ps0.setString(5, p.getEmail());
+            ps0.setString(6, p.getNivel());
+            ps0.setString(7, p.getUsbid());
 
             ps1 = conexion.prepareStatement("UPDATE usuario "
-                    + "SET usbid = ?, contrasena = ? "
+                    + "SET usbid = ? "
                     + "WHERE usbid = ?;");
             ps1.setString(1, p.getUsbid());
-            ps1.setString(2, p.getUsbid());
-            ps1.setString(3, p.getUsbidViejo());
-
+            ps1.setString(2, p.getUsbidViejo());
+            
+            
             Integer j = ps1.executeUpdate();
             Integer i = ps0.executeUpdate();
+            
+            System.out.println(j.toString() + ps1);
+            System.out.println(i.toString() + ps0);
 
             return i > 0 && j > 0;
 
