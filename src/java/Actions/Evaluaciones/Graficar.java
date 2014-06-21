@@ -39,11 +39,11 @@ public class Graficar extends Action {
             /* Se obtiene la evaluación del profesor */
             evaluacion =
                     DBMS.getInstance().obtenerEvaluacion(r.getCodigo_materia(),
-                    profesor.getUsbid(), ano, trimestre);
+                    profesor.getUsbid(), r.getAno(), r.getTrimestre());
             /* Se obtiene la evaluacion general */
             evaluaciones =
                     DBMS.getInstance().obtenerEvaluaciones(r.getCodigo_materia(),
-                    ano, trimestre);
+                    r.getAno(), r.getTrimestre());
 
             /* En caso que la evaluación ya ha sido enviada. */
         } else {

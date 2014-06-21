@@ -285,7 +285,7 @@ public class DBMS {
                             + ");");
 
                     ps1.setString(1, codigo_coordinacion);
-                    
+
                     ResultSet rs1 = ps1.executeQuery();
 
                     rs1.next();
@@ -1155,7 +1155,7 @@ public class DBMS {
     public void enviarMemoEvaluarProfesor(String[] id_profesores, String id_departamento) {
         PreparedStatement ps, ps2;
         Set<String> coords = new TreeSet<String>();
-        Correo email = new Correo();
+//        Correo email = new Correo();
 
         try {
             for (int A = 0; A < id_profesores.length; A++) {
@@ -1188,15 +1188,15 @@ public class DBMS {
 
             String[] arregloCoords = coords.toArray(new String[0]);
 
-            email.setAsunto("SEP - Evaluación de Profesores");
-            email.setMensaje("Se ha solicitado la evaluacion de uno o más profesores a través del"
-                    + "\n Sistema de Evaluación de Profesores de la Universidad Simón Bolívar."
-                    + "\n\n Por favor, ingrese al sistema mediante el siguiente link:"
-                    + "\n\n LINK \n\n");
-            for (int i = 0; i < arregloCoords.length; i++) {
-                email.enviarNotificacion(arregloCoords[i] + "@usb.ve");
-
-            }
+//            email.setAsunto("SEP - Evaluación de Profesores");
+//            email.setMensaje("Se ha solicitado la evaluacion de uno o más profesores a través del"
+//                    + "\n Sistema de Evaluación de Profesores de la Universidad Simón Bolívar."
+//                    + "\n\n Por favor, ingrese al sistema mediante el siguiente link:"
+//                    + "\n\n LINK \n\n");
+//            for (int i = 0; i < arregloCoords.length; i++) {
+//                email.enviarNotificacion(arregloCoords[i] + "@usb.ve");
+//
+//            }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -1275,7 +1275,7 @@ public class DBMS {
                     + "FROM MATERIA "
                     + "WHERE codigo = ?;");
             ps.setString(1, materia.getCodigo());
-            
+
             ResultSet rs = ps.executeQuery();
             Materia m = new Materia();
 
@@ -1956,7 +1956,7 @@ public class DBMS {
             ps.setString(2, id_coordinacion);
             ps.setInt(3, ano);
             ps.setString(4, trimestre);
-            
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -3087,7 +3087,7 @@ public class DBMS {
             ps.setString(1, codigo_materia);
             ps.setString(2, usbid_profesor);
             ps.setInt(3, ano);
-            ps.setString(4, trimestre);
+            ps.setString(4, obtenerTrimestrePorNombre(trimestre));
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -3137,7 +3137,7 @@ public class DBMS {
 
             ps.setString(1, codigo_materia);
             ps.setInt(2, ano);
-            ps.setString(3, trimestre);
+            ps.setString(3, obtenerTrimestrePorNombre(trimestre));
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
