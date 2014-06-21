@@ -30,7 +30,7 @@ public class Correo extends org.apache.struts.action.ActionForm{
     private Session session;
     Message msg;
     
-    private final String correoDRIC = "intercambio.dri@gmail.com";
+    private final String correoDRIC = "evalprof@gmail.com";
     private final String firma = "\n\nEste correo fue enviado gracias al servicio de envio de notificaciones"
                                  + " del Sistema de Gestión de Evaluación de Profesores"
                                  + " de la Universidad Simón Bolívar";
